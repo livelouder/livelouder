@@ -819,6 +819,7 @@ weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm
 social_post = social.build(OUT, SITE, TODAY.date(), {
     "tours": tours, "shows": shows, "artists": artists, "news": news, "stories": stories, "rels": rels, "rel_dg": REL_DG,
     "pick": pick, "upcoming_sales": upcoming_sales, "gotw": gotw, "wanted": wanted, "slug": slug, "curated": curated,
-    "main_cities": MAIN_CITIES, "wk_days": wk_days})
+    "main_cities": MAIN_CITIES, "wk_days": wk_days,
+    "social_queue": json.loads((ROOT / "data/social_queue.json").read_text()) if (ROOT / "data/social_queue.json").exists() else []})
 players = sum(1 for a in artists.values() if a.get("deezer"))
 print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}, alerts={len(alert_mail)}, social={(social_post or {}).get('kind', 'none')}")

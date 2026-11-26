@@ -33,3 +33,8 @@ Every push to `main` publishes automatically.
 - `/this-weekend.html` and `/gigs/<city>-this-weekend.html`: rebuilt daily for the coming Fri–Sun.
 - Venue guides: data/venue_guides.json keyed by venue slug (see site/data/venues.json for slugs, ranked by upcoming shows). Filled by the weekly venue-guide task.
 - All heathenrecords.com.au links get utm_source=livelouder (utm_medium=referral on the site, email in emails).
+
+## Social posts
+- `src/social.py` makes one post a day (images + caption) at the 7am build → site/social/today.json; Make.com publishes it to Instagram and Facebook at 6:30pm.
+- Posts are built for shares, saves and comments: hook slide, a question, and a "send this to a mate" / "save this" slide.
+- `data/social_queue.json`: hand-written posts for a given date (written weekly by the social writer task) replace the automatic one for that day.
