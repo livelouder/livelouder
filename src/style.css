@@ -1,0 +1,104 @@
+/*
+VOICE: a gig poster pasted up outside the venue: loud, direct, Australian.
+IDEA: the site behaves like a street poster wall and a fistful of ticket stubs.
+PICTURE: a red hero wall with a giant wordmark and a row of torn ticket stubs for the next shows.
+COLOUR and TYPE: signal red fields, near-black ink, electric blue accent; Anton for headlines, Archivo for text.
+LAYOUT: full-bleed bands, stubs that scroll sideways, lists with big hanging dates.
+*/
+:root{color-scheme:light dark;
+--bg:light-dark(#f6f5f2,#121110);--ink:light-dark(#141414,#f1eee8);--muted:light-dark(#5b5853,#a9a49c);
+--card:light-dark(#ffffff,#1c1b19);--line:light-dark(#e2ded6,#2e2c29);
+--red:#e2391f;--red-ink:#fff;--blue:light-dark(#1d47e6,#7f9bff)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 "Archivo",system-ui,sans-serif;overflow-x:clip}
+a{color:var(--blue)}a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+h1,h2,h3,.wm{font-family:"Anton",Impact,"Arial Narrow",sans-serif;font-weight:400;line-height:1.05;text-wrap:balance;letter-spacing:.01em}
+h2{font-size:clamp(30px,4.2vw,46px);margin:0 0 18px}
+h3{font-size:24px;margin:0}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(32px,5vw,72px) max(5vw,16px)}
+/* header */
+.top{position:sticky;top:0;z-index:5;background:#141414;color:#f6f5f2}
+.top .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:10px max(5vw,16px)}
+.top .wm{font-size:28px;color:#f6f5f2;text-decoration:none;margin-right:auto}
+.top .wm span{color:var(--red)}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{color:#f6f5f2;text-decoration:none;font-weight:600;padding:10px 12px;border-radius:4px}
+.top nav a:hover,.top nav a[aria-current]{background:var(--red);color:#fff}
+/* hero */
+.hero{background:var(--red);color:var(--red-ink);padding:clamp(28px,5vw,64px) max(5vw,16px) 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 90px);pointer-events:none}
+.hero .wrap{position:relative}
+.disc{position:absolute;right:-6vw;top:clamp(20px,3vw,48px);width:min(46vw,560px);height:auto}
+@media(prefers-reduced-motion:no-preference){.disc{animation:spin 18s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}}
+@media(max-width:760px){.disc{display:none}}
+.hero .big{font-size:clamp(76px,15vw,200px);margin:0;line-height:.88;color:#fff}
+.hero .big span{display:block;color:#141414}
+.hero p.lede{font-size:clamp(18px,2vw,22px);max-width:34ch;margin:18px 0 28px;font-weight:600}
+.stubs-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.stubs-head h2{font-size:26px;margin:0;color:#141414}
+.arrows{position:relative;z-index:2}.arrows button{width:44px;height:44px;border:2px solid #141414;background:#fff;color:#141414;font-size:20px;border-radius:50%;cursor:pointer}
+.arrows button:hover{background:#141414;color:#fff}
+.stubs{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:thin}
+.stub{flex:0 0 260px;scroll-snap-align:start;display:grid;grid-template-columns:72px 1fr;background:#fff;color:#141414;border-radius:6px;box-shadow:0 8px 0 rgba(0,0,0,.18);text-decoration:none;position:relative}
+.stub .d{background:#141414;color:#fff;display:grid;place-content:center;text-align:center;border-radius:6px 0 0 6px;border-right:3px dashed #fff;padding:10px 4px}
+.stub .d b{font:400 34px/1 "Anton",Impact,sans-serif;display:block}
+.stub .d small{font-size:13px;font-weight:700;text-transform:uppercase}
+.stub .i{padding:12px 14px}
+.stub .i strong{display:block;font:400 21px/1.1 "Anton",Impact,sans-serif}
+.stub .i span{font-size:14px;color:#4d4a45;display:block;margin-top:4px}
+/* sections */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px}
+.card .meta{color:var(--muted);font-size:14px}
+.card .first{font-weight:700}
+.more{display:inline-block;margin-top:18px;font-weight:700}
+.rel{list-style:none;margin:0;padding:0}
+.rel li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.rel .when{font:400 22px/1.1 "Anton",Impact,sans-serif;color:var(--red);white-space:nowrap}
+.rel .what strong{font-size:18px}.rel .what span{display:block;color:var(--muted);font-size:15px}
+.note{color:var(--muted);font-size:14px;margin-top:14px}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px)}
+.storycard{text-decoration:none;color:inherit;display:block;border-top:6px solid var(--ink);padding-top:14px;margin-bottom:24px}
+.storycard h3{font-size:26px}.storycard p{margin:8px 0 0;color:var(--muted)}
+.storycard:hover h3{color:var(--red)}
+/* tours page */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.filters button{min-height:44px;padding:0 16px;border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;font:600 15px "Archivo",sans-serif;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.tour{background:var(--card);border:1px solid var(--line);border-radius:8px;margin-bottom:20px;overflow:hidden}
+.tour header{padding:20px 22px 12px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline}
+.tour header h3{font-size:clamp(26px,3vw,34px)}
+.tour header .tn{color:var(--muted);font-weight:600}
+.tour .sup,.tour .tnote{padding:0 22px;margin:0 0 10px;color:var(--muted);font-size:15px}
+.tour table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:15.5px}
+.tour td{padding:10px 22px;border-top:1px solid var(--line);vertical-align:top}
+.tour td:first-child{white-space:nowrap;font-weight:700;width:170px}.tour td:nth-child(2){width:170px}
+.tour tr[hidden]{display:none}
+.tour footer{display:flex;flex-wrap:wrap;gap:10px 22px;padding:14px 22px 18px;border-top:1px solid var(--line)}
+.tour footer a{font-weight:700}
+.tour footer a.rec{color:var(--red)}
+.past td{opacity:.45;text-decoration:line-through}
+/* article */
+.article{max-width:720px;margin:0 auto}
+.article h1{font-size:clamp(36px,5vw,52px);margin:0 0 14px}
+.article .dek{font-size:20px;color:var(--muted);margin:0 0 8px}
+.article h2{font-size:28px;margin:34px 0 8px}
+.article p{margin:0 0 16px}
+/* footer */
+.foot{background:#141414;color:#f6f5f2;padding:40px max(5vw,16px)}
+.foot .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px}
+.foot .wm{font-size:40px;color:#f6f5f2}.foot .wm span{color:var(--red)}
+.foot a{color:#f6f5f2}
+.foot p{margin:6px 0;opacity:.85;font-size:15px}
+.page-title{background:var(--red);color:#fff;padding:clamp(28px,4vw,52px) max(5vw,16px)}
+.page-title h1{font-size:clamp(44px,8vw,96px);margin:0;color:#fff}
+.page-title p{margin:10px 0 0;font-size:18px;font-weight:600;max-width:60ch}
+@media(max-width:760px){.split,.foot .wrap{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.rel li{grid-template-columns:84px 1fr;gap:10px}.rel .when{font-size:18px}
+.tour td{display:block;padding:2px 18px;border:0}.tour tr{display:block;padding:8px 0;border-top:1px solid var(--line)}.tour td:first-child{width:auto}
+.tour header,.tour footer{padding-inline:18px}.tour .sup,.tour .tnote{padding-inline:18px}
+.top nav a{padding:10px 8px}}
+@media(prefers-reduced-motion:no-preference){.stub{transition:transform .15s}.stub:hover{transform:translateY(-4px) rotate(-1deg)}}
