@@ -771,5 +771,71 @@
     "Suncorp Stadium"
    ]
   ]
+ },
+ {
+  "artist": "Faster Pussycat",
+  "tour": "Sunset Strip Oz Rock Tour",
+  "support": "Gilby Clarke, Heaven, plus local supports",
+  "note": "With former Guns N' Roses guitarist Gilby Clarke. VIP packages available.",
+  "source": "https://www.noise11.com/news/faster-pussycat-gilby-clarke-australia-tour-20261126",
+  "genre": "Rock",
+  "added": "2026-11-27",
+  "dates": [
+   [
+    "2027-02-24",
+    "Perth",
+    "Rosemount Hotel"
+   ],
+   [
+    "2027-02-25",
+    "Adelaide",
+    "Lion Arts Factory"
+   ],
+   [
+    "2027-02-26",
+    "Melbourne",
+    "The Croxton"
+   ],
+   [
+    "2027-02-27",
+    "Sydney",
+    "Metro Social"
+   ],
+   [
+    "2027-02-28",
+    "Brisbane",
+    "Soapbox Beer"
+   ]
+  ],
+  "onsale": "2026-11-26T11:00",
+  "presales": [],
+  "tickets": "https://xmusic.au/tours/"
+ },
+ {
+  "artist": "Survive Said The Prophet",
+  "tour": "First Australian headline tour",
+  "support": "Heartline, Outloved",
+  "note": "All shows 18+.",
+  "source": "https://www.noise11.com/news/survive-said-prophet-australian-tour-20261125",
+  "genre": "Rock",
+  "added": "2026-11-27",
+  "dates": [
+   [
+    "2027-02-25",
+    "Melbourne",
+    "Corner Hotel"
+   ],
+   [
+    "2027-02-26",
+    "Sydney",
+    "Oxford Art Factory"
+   ],
+   [
+    "2027-02-27",
+    "Brisbane",
+    "Crowbar"
+   ]
+  ],
+  "tickets": "https://www.destroyalllines.com"
  }
 ]

@@ -1,14 +1,155 @@
 [
- {"slug":"laneway-2027","name":"Laneway Festival 2027","when":"February 2027","intro":"Laneway is back for 2027 with a smaller, four-city run. For the first time, Sydney opens the festival, and Brisbane returns after a year on the Gold Coast. Adelaide and Perth miss out this time, though Fontaines D.C. are playing their own headline shows in both cities.",
-  "dates":[["2027-02-12","Sydney","Centennial Park","16+"],["2027-02-13","Brisbane","Brisbane Showgrounds","16+"],["2027-02-19","Melbourne","Flemington Park",""],["2027-02-21","Auckland","Western Springs",""]],
-  "headliners":["Fontaines D.C.","Hayley Williams"],
-  "lineup":["Slayyyter","ADÉLA","Ninajirachi","Kim Petras","Balu Brigada","DIIV","Horsegiirl","Jane Remover","MUNA","Rachel Chinouriri","Rico Nasty","1TBSP","Automatic","Bleech 9:3","daine","Danny L Harle","DJ_Dave","Ecca Vandal","Florence Road","Gurriers","Rommulas","Tiffany Day","Violet Grohl"],
-  "tips":["Hayley Williams' own Sydney and Melbourne shows sold out, so Laneway is the only other way to see her solo set this trip.","Some local acts play individual cities only. Check the festival site for each city's bill.","Set times usually drop in the week before. We'll add them here when they're out."],
-  "source":"https://www.russh.com/laneway-festival-2027-lineup/"},
- {"slug":"golden-plains-2027","name":"Golden Plains 2027","when":"6–8 March 2027","intro":"Golden Plains returns to the Meredith Supernatural Amphitheatre in country Victoria for the Labour Day long weekend, with Geese and Underworld at the top of the bill. It's a camping festival with one stage, so everyone sees the same shows.",
-  "dates":[["2027-03-06","Meredith","Meredith Supernatural Amphitheatre","3 days, camping"]],
-  "headliners":["Geese","Underworld"],
-  "lineup":["Angine de Poitrine","Peter Garrett & The Alter Egos","Miss Kaninna","Tinariwen","Haute & Freddy","Maria Arnal","Westside Cowboy","Peach","Dove Ellis","daine","iKeda","Orcutt Shelley Miller","Swapmeet","Maurice Fulton","Station Model Violence","Salimata","Intermood","Shock Corridor","Immy Owusu","Rydeen & SOVBLKPSSY","Tongue Dissolver","Nono Gigsta","Storytelling with Uncle Barry"],
-  "tips":["It's a one-stage festival, so there are no clashes.","Bring a camping set-up that can handle hot days and cold nights. Meredith in March can swing a long way.","Golden Plains runs a no-dickhead policy. Look after each other."],
-  "source":"https://tixel.com/au/news/2026/10/14/golden-plains-2027-lineup-announced-geese-and"}
+ {
+  "slug": "laneway-2027",
+  "name": "Laneway Festival 2027",
+  "when": "February 2027",
+  "intro": "Laneway is back for 2027 with a smaller, four-city run. For the first time, Sydney opens the festival, and Brisbane returns after a year on the Gold Coast. Adelaide and Perth miss out this time, though Fontaines D.C. are playing their own headline shows in both cities.",
+  "dates": [
+   [
+    "2027-02-12",
+    "Sydney",
+    "Centennial Park",
+    "16+"
+   ],
+   [
+    "2027-02-13",
+    "Brisbane",
+    "Brisbane Showgrounds",
+    "16+"
+   ],
+   [
+    "2027-02-19",
+    "Melbourne",
+    "Flemington Park",
+    ""
+   ],
+   [
+    "2027-02-21",
+    "Auckland",
+    "Western Springs",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Fontaines D.C.",
+   "Hayley Williams"
+  ],
+  "lineup": [
+   "Slayyyter",
+   "ADÉLA",
+   "Ninajirachi",
+   "Kim Petras",
+   "Balu Brigada",
+   "DIIV",
+   "Horsegiirl",
+   "Jane Remover",
+   "MUNA",
+   "Rachel Chinouriri",
+   "Rico Nasty",
+   "1TBSP",
+   "Automatic",
+   "Bleech 9:3",
+   "daine",
+   "Danny L Harle",
+   "DJ_Dave",
+   "Ecca Vandal",
+   "Florence Road",
+   "Gurriers",
+   "Rommulas",
+   "Tiffany Day",
+   "Violet Grohl"
+  ],
+  "tips": [
+   "Hayley Williams' own Sydney and Melbourne shows sold out, so Laneway is the only other way to see her solo set this trip.",
+   "Some local acts play individual cities only. Check the festival site for each city's bill.",
+   "Set times usually drop in the week before. We'll add them here when they're out."
+  ],
+  "source": "https://www.russh.com/laneway-festival-2027-lineup/"
+ },
+ {
+  "slug": "golden-plains-2027",
+  "name": "Golden Plains 2027",
+  "when": "6–8 March 2027",
+  "intro": "Golden Plains returns to the Meredith Supernatural Amphitheatre in country Victoria for the Labour Day long weekend, with Geese and Underworld at the top of the bill. It's a camping festival with one stage, so everyone sees the same shows.",
+  "dates": [
+   [
+    "2027-03-06",
+    "Meredith",
+    "Meredith Supernatural Amphitheatre",
+    "3 days, camping"
+   ]
+  ],
+  "headliners": [
+   "Geese",
+   "Underworld"
+  ],
+  "lineup": [
+   "Angine de Poitrine",
+   "Peter Garrett & The Alter Egos",
+   "Miss Kaninna",
+   "Tinariwen",
+   "Haute & Freddy",
+   "Maria Arnal",
+   "Westside Cowboy",
+   "Peach",
+   "Dove Ellis",
+   "daine",
+   "iKeda",
+   "Orcutt Shelley Miller",
+   "Swapmeet",
+   "Maurice Fulton",
+   "Station Model Violence",
+   "Salimata",
+   "Intermood",
+   "Shock Corridor",
+   "Immy Owusu",
+   "Rydeen & SOVBLKPSSY",
+   "Tongue Dissolver",
+   "Nono Gigsta",
+   "Storytelling with Uncle Barry"
+  ],
+  "tips": [
+   "It's a one-stage festival, so there are no clashes.",
+   "Bring a camping set-up that can handle hot days and cold nights. Meredith in March can swing a long way.",
+   "Golden Plains runs a no-dickhead policy. Look after each other."
+  ],
+  "source": "https://tixel.com/au/news/2026/10/14/golden-plains-2027-lineup-announced-geese-and"
+ },
+ {
+  "slug": "castaway-2027",
+  "name": "Castaway Festival 2027",
+  "when": "March–May 2027",
+  "intro": "Castaway is a one-day festival of big Australian acts, with Hilltop Hoods, Violent Soho and Amy Shark leading the 2027 bill. After Wollongong on 20 March (already on sale), it heads to Torquay in April and Sandstone Point in May.",
+  "dates": [
+   [
+    "2027-04-17",
+    "Torquay",
+    "Torquay Common",
+    "All ages"
+   ],
+   [
+    "2027-05-22",
+    "Sandstone Point",
+    "Sandstone Point Hotel",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Hilltop Hoods",
+   "Violent Soho",
+   "Amy Shark"
+  ],
+  "lineup": [
+   "Playlunch",
+   "Trials",
+   "Lyric",
+   "Birdland"
+  ],
+  "tips": [
+   "The Torquay and Sandstone Point presale runs from 11am local time on Monday 30 November to 11am on Tuesday 1 December.",
+   "General tickets go on sale at 12pm local time on Tuesday 1 December, through the festival website only.",
+   "Torquay is an all-ages show."
+  ],
+  "source": "https://www.noise11.com/news/castaway-festival-torquay-sandstone-20261125"
+ }
 ]
