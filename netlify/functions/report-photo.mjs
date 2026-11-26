@@ -8,7 +8,7 @@ const REASONS = { nudity: "Nudity or sexual", violence: "Violence or gore", hate
 export default async (req) => {
   if (req.method !== "POST") return json({ error: "POST only" }, 405);
   const sb = admin();
-  const user = await userFrom(req, sb);
+  const user = await userFrom(req);
   if (!user) return json({ error: "Please sign in to report a photo." }, 401);
   let body = {};
   try { body = await req.json(); } catch (e) {}

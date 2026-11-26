@@ -34,7 +34,7 @@ export default async (req) => {
   const kind = new URL(req.url).searchParams.get("kind");
   if (!["avatar", "banner"].includes(kind)) return json({ error: "Unknown photo type" }, 400);
   const sb = admin();
-  const user = await userFrom(req, sb);
+  const user = await userFrom(req);
   if (!user) return json({ error: "Please sign in again." }, 401);
 
   const [{ data: blocked }, { count }, { data: prof }] = await Promise.all([
@@ -54,11 +54,11 @@ export default async (req) => {
   if (check.verdict === "reject") return json({ error: "That photo can't be used on Live Louder. Please choose a different one." }, 422);
 
   const up = await sb.storage.from("profile").upload(path, buf, { contentType: "image/jpeg", cacheControl: "31536000" });
-  if (up.error) return json({ error: "Couldn't upload that photo. Try again." }, 500);
+  if (up.error) { console.log("upload failed", up.error.message); return json({ error: "Couldn't upload that photo. Try again." }, 500); }
   const url = PUBLIC_PREFIX + path;
   const status = check.verdict === "ok" ? "ok" : "pending";
   const { error } = await sb.from("profiles").update({ [`${kind}_url`]: url, [`${kind}_status`]: status, updated_at: new Date().toISOString() }).eq("id", user.id);
-  if (error) { await sb.storage.from("profile").remove([path]); return json({ error: "Couldn't save that photo. Try again." }, 500); }
+  if (error) { console.log("profile update failed", error.message); await sb.storage.from("profile").remove([path]); return json({ error: "Couldn't save that photo. Try again." }, 500); }
   const old = prof && prof[`${kind}_url`];
   if (old && old.startsWith(PUBLIC_PREFIX)) await sb.storage.from("profile").remove([old.slice(PUBLIC_PREFIX.length)]);
   if (status === "pending") await emailReview({ uid: user.id, kind, path, url, username: prof && prof.username, why: check.why });

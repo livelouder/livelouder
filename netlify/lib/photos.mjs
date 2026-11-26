@@ -13,11 +13,17 @@ export const json = (o, status = 200) => new Response(JSON.stringify(o), { statu
 export const admin = () => createClient(SB_URL, process.env.SUPABASE_SECRET_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 export const KINDS = { avatar: "profile photo", banner: "cover photo" };
 
-export async function userFrom(req, sb) {
+// Check the person's sign-in token directly with Supabase Auth (uses the public key; the token itself proves who they are).
+const PUBLISHABLE = "sb_publishable_pL0ygBPAPtoIXzMi3e1lsQ_ytrBXiNY";
+export async function userFrom(req) {
   const token = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
   if (!token) return null;
-  const { data } = await sb.auth.getUser(token);
-  return (data && data.user) || null;
+  try {
+    const r = await fetch(`${SB_URL}/auth/v1/user`, { headers: { apikey: PUBLISHABLE, authorization: `Bearer ${token}` } });
+    if (!r.ok) { console.log("auth check failed", r.status); return null; }
+    const u = await r.json();
+    return u && u.id ? u : null;
+  } catch (e) { console.log("auth check error", e.message); return null; }
 }
 
 // Review links are signed, so only someone with the email can act on them. Each link is for one exact photo.
