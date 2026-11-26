@@ -53,3 +53,7 @@ Every push to `main` publishes automatically.
 - Emails: Supabase sends sign-in links through Resend SMTP (hello@livelouder.com.au); `netlify/functions/reminders.mjs` sends one daily email (8:30am Sydney) per person with saved gigs in the next 3 days, presales/on-sales in the next 36 hours and new tours for followed artists, using `site/data/alerts-feed.json`. Each item is sent once (`sent_reminders`).
 - Netlify env: `SUPABASE_SECRET_KEY`, `RESEND_API_KEY`. Google sign-in: Google Cloud project "Live Louder" (OAuth client "Live Louder website").
 - Privacy policy: `privacy.html`.
+
+## My gigs profile and venue gig finder (Nov 2026)
+- `my-gigs.html` + `src/profile.js`: profile header with stats, tabs (Overview, Gigs, Artists, Records, Wantlist, Settings). Gigs you marked "going" stay after the date as "Been to". Records and wantlist come from Discogs (`discogs-user` function, `?u=` for shelves, `?release=` for the record view). Artist photos and next shows from `site/data/artists.json`.
+- Venue gig finder: `data/venue_sources.json` (venues to watch; a daily scheduled task fills in each venue's gig page, checks ~15 venues a run, and adds new venues over time) writes `data/gigs_found.json`, which build.py merges into the guide (`src: "found"`).

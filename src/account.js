@@ -12,7 +12,7 @@
 
   // Only load the sign-in library when it's needed: on My gigs, when coming back from a sign-in link,
   // or when this browser has signed in before.
-  const needed = document.getElementById('mygigs') || /access_token|error_description|type=magiclink/.test(location.hash + location.search) || lsGet('llSignedIn');
+  const needed = document.getElementById('profile') || /access_token|error_description|type=magiclink/.test(location.hash + location.search) || lsGet('llSignedIn');
   let readyP = null;
   function ready() {
     if (!readyP) readyP = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm').then(m => {
@@ -46,7 +46,7 @@
       profile = p.data || {};
       if (!profile.discogs && st.discogs) { await sb.from('profiles').update({discogs: st.discogs}).eq('id', user.id); profile.discogs = st.discogs; }
       const next = {gigs: {}, artists: {}, discogs: profile.discogs || st.discogs || ''};
-      (g.data || []).forEach(r => { if (r.gig && r.gig.d >= MY.today) next.gigs[r.gig_id] = Object.assign({}, r.gig, {id: r.gig_id, going: r.going}); });
+      (g.data || []).forEach(r => { if (r.gig && (r.gig.d >= MY.today || r.going)) next.gigs[r.gig_id] = Object.assign({}, r.gig, {id: r.gig_id, going: r.going}); });
       (a.data || []).forEach(r => { next.artists[r.slug] = r.name; });
       MY.replace(next);
     } catch (e) { console.log('account sync', e); }
@@ -132,28 +132,14 @@
     await sb.from('profiles').update({[field]: val, updated_at: new Date().toISOString()}).eq('id', user.id);
   }
 
-  // Account panel on My gigs, and the header link.
+  // Header dot, and tell the My gigs page to redraw.
   function ui() {
     document.querySelectorAll('.mylink').forEach(a => a.classList.toggle('in', !!user));
-    const box = document.getElementById('acct');
-    if (!box) return;
-    if (!user) {
-      box.innerHTML = `<div class="card acct out"><h3>Keep your gigs everywhere</h3><p>Sign in and your saved gigs, artists and records follow you to every device. We'll also send a reminder before the show and when presales start for artists you follow.</p>
-        <button type="button" class="btn" data-signin>Sign in or create an account</button><p class="note">Free. No password needed.</p></div>`;
-      return;
-    }
-    const p = profile || {};
-    box.innerHTML = `<div class="card acct"><h3>Your account</h3><p class="note" style="margin-top:0">Signed in as <b>${esc(user.email || '')}</b></p>
-      <h4>Emails</h4>
-      <label class="tog"><input type="checkbox" data-pref="remind_gigs" ${p.remind_gigs !== false ? 'checked' : ''}> A reminder a few days before gigs I've saved</label>
-      <label class="tog"><input type="checkbox" data-pref="remind_presales" ${p.remind_presales !== false ? 'checked' : ''}> Presales, on-sales and new dates for artists I follow</label>
-      <p class="acts"><button type="button" class="linkish" id="acOut">Sign out</button> · <button type="button" class="linkish" id="acDel">Delete my account</button></p></div>`;
-    box.querySelectorAll('[data-pref]').forEach(i => i.addEventListener('change', () => setPref(i.dataset.pref, i.checked)));
-    box.querySelector('#acOut').addEventListener('click', signOut);
-    box.querySelector('#acDel').addEventListener('click', deleteAccount);
+    document.dispatchEvent(new CustomEvent('acc'));
   }
 
-  window.ACC = {push, user: () => user, open: openSignIn};
+  window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
+                syncing: () => merging, ready: () => !!sb};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }

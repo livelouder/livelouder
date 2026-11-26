@@ -99,6 +99,27 @@ tm_keys = {(slug(s["artist"]), s["date"], s["city"]) for s in tm}
 shows = [s for s in shows if (slug(s["artist"]), s["date"], s["city"]) not in tm_keys] + tm
 have_keys = {(slug(s["artist"]), s["date"], s["city"]) for s in shows}
 shows += [s for s in sub_ok if (slug(s["artist"]), s["date"], s["city"]) not in have_keys]
+# Gigs found on venue and ticketing pages by the daily venue gig finder task (data/gigs_found.json).
+found = json.loads((ROOT / "data/gigs_found.json").read_text()) if (ROOT / "data/gigs_found.json").exists() else []
+have_keys = {(slug(s["artist"]), s["date"], s["city"]) for s in shows}
+n_found = 0
+for x in found:
+    try:
+        if not (x.get("artist") and x.get("venue") and x.get("city") and x.get("url", "").startswith("https://")
+                and re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.get("date", "")) and x["date"] >= TODAY_S):
+            continue
+        k = (slug(x["artist"]), x["date"], x["city"])
+        if k in have_keys:
+            continue
+        have_keys.add(k)
+        shows.append({"id": f"f-{slug(x['artist'])}-{x['date']}-{slug(x['city'])}", "artist": x["artist"].strip(), "event": "",
+                      "support": [x["support"].strip()] if x.get("support", "").strip() else [], "date": x["date"],
+                      "time": x.get("time", "") if re.fullmatch(r"\d{2}:\d{2}", x.get("time", "")) else "", "venue": x["venue"].strip(),
+                      "suburb": x.get("suburb") or x["city"], "city": x["city"], "state": x.get("state") or CITY_STATE.get(x["city"], ""),
+                      "url": x["url"], "image": "", "genre": x.get("genre", ""), "onsale": "", "presales": [], "status": "", "src": "found"})
+        n_found += 1
+    except Exception as ex:
+        print("gigs_found: skipped a row", ex)
 shows = [s for s in shows if s["date"] >= TODAY_S]
 shows.sort(key=lambda s: (s["date"], s["time"] or "99", s["artist"].lower()))
 
@@ -297,7 +318,7 @@ def gig_row(s, show_artist=True, show_city=True):
     sale = ""
     if s["onsale"] and s["onsale"][:10] > TODAY_S:
         sale = f'<span class="tag">On sale {fmt(s["onsale"][:10], False, False)}</span>'
-    label = "Tickets" if s["src"] in ("ticketmaster", "submitted") else "Details"
+    label = "Tickets" if s["src"] in ("ticketmaster", "submitted", "found") else "Details"
     snap = json.dumps({"id": s["id"], "d": s["date"], "tm": s["time"], "a": s["artist"], "s": slug(s["artist"]), "v": s["venue"],
                        "c": s["city"], "u": s["url"], "vs": venue_slug(s)}, separators=(",", ":"))
     save = f'<button class="save" type="button" data-gig="{e(snap)}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button>'
@@ -864,22 +885,21 @@ page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Austra
      "When tickets go on sale for concerts and tours in Australia: presale and general on-sale dates and times, with calendar reminders.", osp, "on-sale.html")
 
 # ---------------------------------------------------------------- my gigs (saved on the visitor's device)
-mg = """<section class="page-title"><div class="wrap"><h1>My gigs</h1><p>Your saved gigs, the artists you follow, and what's touring from your record collection.</p></div></section>
-<section class="band" id="mygigs"><div class="wrap">
-<div id="acct"></div>
-<div class="mygrid"><div>
-<h2>Going</h2><div id="myGoing"><p class="note">Nothing yet. Save a gig, then tap "I'm going".</p></div>
-<h2 style="margin-top:36px">Saved gigs</h2><div id="mySaved"><p class="note">Tap <b>♡ Save</b> on any gig in the <a href="/gigs/index.html">gig guide</a> and it lands here.</p></div>
-<h2 style="margin-top:36px">Artists you follow</h2><div id="myArtists"><p class="note">Tap <b>♡ Follow</b> on an artist page to keep an eye on their dates.</p></div>
-</div><aside>
-<div class="card discogs"><h3>Your records</h3><p>Link your Discogs collection and we'll show you which artists you own are touring, and what's coming out on vinyl from them.</p>
-<form id="dgForm" class="dgform"><input id="dgUser" placeholder="Your Discogs username" aria-label="Discogs username" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn">Link</button></form>
-<p class="note" id="dgNote">Your collection needs to be public on Discogs (it is by default). We only read it, and nothing is stored on our side.</p>
-<div id="dgOut"></div></div>
-<p class="note">Not signed in? Your saves are kept on this device only. <button type="button" class="linkish" data-signin>Sign in</button> to keep them everywhere.</p>
-</aside></div></div></section>"""
+mg = """<div id="profile">
+<section class="phero"><div class="wrap phero-in"><div class="pav" id="pAv" aria-hidden="true">♥</div>
+<div class="pwho"><h1 id="pName">My gigs</h1><p id="pSub">Your gigs, your artists and your records, all in one place.</p></div>
+<div id="pCta"></div></div><div class="wrap"><div class="pstats" id="pStats"></div></div></section>
+<nav class="ptabs" aria-label="My gigs sections"><div class="wrap">
+<a href="#overview" data-tab="overview">Overview</a><a href="#gigs" data-tab="gigs">Gigs</a><a href="#artists" data-tab="artists">Artists</a>
+<a href="#records" data-tab="records">Records</a><a href="#wantlist" data-tab="wantlist">Wantlist</a><a href="#settings" data-tab="settings">Settings</a></div></nav>
+<section class="band pbody"><div class="wrap" id="pBody"><p class="note">Loading…</p></div></section>
+<dialog id="recDlg" aria-label="Record details"><form method="dialog" class="sclose"><button aria-label="Close">×</button></form><div id="recBody"></div></dialog>
+</div>
+<script src="/profile.js" defer></script>"""
 page("my-gigs.html", "My gigs | Live Louder", "Your saved gigs, followed artists and record collection on Live Louder.", mg)
 (OUT / "data").mkdir(exist_ok=True)
+(OUT / "data" / "artists.json").write_text(json.dumps({a["slug"]: [a["name"], a.get("photo", ""), a["gb"],
+    a["shows"][0]["date"] if a["shows"] else "", a["shows"][0]["city"] if a["shows"] else "", len(a["shows"])] for a in artists.values()}, separators=(",", ":")))
 (OUT / "data" / "releases.json").write_text(json.dumps([i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S], separators=(",", ":")))
 
 # ---------------------------------------------------------------- submit a gig
@@ -1002,6 +1022,7 @@ page("404.html", "Page not found | Live Louder", "Page not found.",
 shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
 shutil.copy(ROOT / "src/account.js", OUT / "account.js")
+shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
 for icon in (ROOT / "src/icons").iterdir():
     shutil.copy(icon, OUT / icon.name)
 (OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",
@@ -1022,5 +1043,5 @@ social_post = social.build(OUT, SITE, TODAY.date(), {
     "main_cities": MAIN_CITIES, "wk_days": wk_days,
     "social_queue": json.loads((ROOT / "data/social_queue.json").read_text()) if (ROOT / "data/social_queue.json").exists() else []})
 players = sum(1 for a in artists.values() if a.get("deezer"))
-print(f"gig submissions: {len(sub_ok)} live, {len(sub_held)} held back")
+print(f"gig submissions: {len(sub_ok)} live, {len(sub_held)} held back; venue finder gigs: {n_found}")
 print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}, alerts={len(alert_mail)}, social={(social_post or {}).get('kind', 'none')}")
