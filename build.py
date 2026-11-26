@@ -745,8 +745,11 @@ for a in artists.values():
         for r in dg["records"]:
             hq = HEATHEN + quote_plus(f'{a["name"]} {r["title"]}')
             img = f'<img src="{e(r["thumb"])}" alt="{e(r["title"])} cover" loading="lazy" width="150" height="150">' if r.get("thumb") else '<span class="rec-blank"></span>'
+            rj = e(json.dumps({"rid": f'm{r["master"]}', "a": a["name"], "t": r["title"], "y": r["year"], "img": r.get("thumb", "")}, separators=(",", ":"))) if r.get("master") else ""
+            addb = (f'<span class="radd sm"><button type="button" class="addbtn" data-addrec="{rj}" data-list="records">+ Collection</button>'
+                    f'<button type="button" class="addbtn" data-addrec="{rj}" data-list="wants">+ Wantlist</button></span>') if rj else ""
             cards += (f'<div class="rec">{img}<strong>{e(r["title"])}</strong><span class="meta">{r["year"]}</span>'
-                      f'<a href="{hq}" rel="noopener">Find on vinyl ↗</a></div>')
+                      f'<a href="{hq}" rel="noopener">Find on vinyl ↗</a>{addb}</div>')
         records_html = (f'<h2>Essential records</h2><div class="recs">{cards}</div>'
                         f'<p class="note">Record data from <a href="{e(dg.get("url") or "https://www.discogs.com")}" rel="noopener">Discogs ↗</a></p>')
     follow = (f'<form class="card follow" name="follow" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">'

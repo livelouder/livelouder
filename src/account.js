@@ -40,12 +40,22 @@
       const arts = Object.entries(st.artists).map(([slug, name]) => ({user_id: user.id, slug, name}));
       if (gigs.length) await sb.from('saved_gigs').upsert(gigs, {onConflict: 'user_id,gig_id', ignoreDuplicates: true});
       if (arts.length) await sb.from('followed_artists').upsert(arts, {onConflict: 'user_id,slug', ignoreDuplicates: true});
+      const recs = [...Object.values(st.records || {}).map(r => ({user_id: user.id, list: 'collection', rid: r.rid, rec: r})),
+                    ...Object.values(st.wants || {}).map(r => ({user_id: user.id, list: 'wantlist', rid: r.rid, rec: r}))];
+      for (let i = 0; i < recs.length; i += 500) await sb.from('user_records').upsert(recs.slice(i, i + 500), {onConflict: 'user_id,list,rid', ignoreDuplicates: true});
       await sb.from('profiles').upsert({id: user.id}, {onConflict: 'id', ignoreDuplicates: true});
       const [g, a, p] = await Promise.all([sb.from('saved_gigs').select('gig_id,gig,going'), sb.from('followed_artists').select('slug,name'),
                                            sb.from('profiles').select('*').eq('id', user.id).maybeSingle()]);
+      const recRows = [];
+      for (let from = 0; ; from += 1000) {
+        const {data} = await sb.from('user_records').select('list,rid,rec').range(from, from + 999);
+        if (!data || !data.length) break;
+        recRows.push(...data); if (data.length < 1000) break;
+      }
       profile = p.data || {};
       if (!profile.discogs && st.discogs) { await sb.from('profiles').update({discogs: st.discogs}).eq('id', user.id); profile.discogs = st.discogs; }
-      const next = {gigs: {}, artists: {}, discogs: profile.discogs || st.discogs || ''};
+      const next = {gigs: {}, artists: {}, discogs: profile.discogs || st.discogs || '', records: {}, wants: {}};
+      recRows.forEach(r => { next[r.list === 'collection' ? 'records' : 'wants'][r.rid] = r.rec; });
       (g.data || []).forEach(r => { if (r.gig && (r.gig.d >= MY.today || r.going)) next.gigs[r.gig_id] = Object.assign({}, r.gig, {id: r.gig_id, going: r.going}); });
       (a.data || []).forEach(r => { next.artists[r.slug] = r.name; });
       MY.replace(next);
@@ -64,6 +74,11 @@
       if (kind === 'artist' && op === 'add') await sb.from('followed_artists').upsert({user_id: user.id, slug: item.slug, name: item.name});
       if (kind === 'artist' && op === 'remove') await sb.from('followed_artists').delete().eq('slug', item.slug);
       if (kind === 'discogs') await sb.from('profiles').update({discogs: item || null}).eq('id', user.id);
+      if (kind === 'rec' && op === 'add') await sb.from('user_records').upsert({user_id: user.id, list: item.list === 'records' ? 'collection' : 'wantlist', rid: item.rec.rid, rec: item.rec});
+      if (kind === 'rec' && op === 'remove') await sb.from('user_records').delete().eq('list', item.list === 'records' ? 'collection' : 'wantlist').eq('rid', item.rec.rid);
+      if (kind === 'recs' && op === 'bulk') {
+        for (let i = 0; i < item.rows.length; i += 500) await sb.from('user_records').upsert(item.rows.slice(i, i + 500).map(x => ({user_id: user.id, list: x.list, rid: x.rec.rid, rec: x.rec})), {onConflict: 'user_id,list,rid', ignoreDuplicates: true});
+      }
     } catch (e) { console.log('account save', e); }
   }
 
@@ -122,7 +137,7 @@
     if (error) { alert("Sorry, that didn't work. Email hello@livelouder.com.au and we'll delete it for you."); return; }
     await c.auth.signOut();
     try { localStorage.removeItem('llSignedIn'); localStorage.removeItem('llMy'); } catch (e) {}
-    MY.replace({gigs: {}, artists: {}, discogs: ''});
+    MY.replace({});
     alert('Your account and everything in it has been deleted.');
     ui();
   }

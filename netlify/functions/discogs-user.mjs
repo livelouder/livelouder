@@ -2,6 +2,8 @@
 // or one release's details for the record view. Nothing is stored.
 //   /.netlify/functions/discogs-user?u=<discogs username>
 //   /.netlify/functions/discogs-user?release=<release id>
+//   /.netlify/functions/discogs-user?master=<master id>        (an album: all its pressings share one master)
+//   /.netlify/functions/discogs-user?q=<search>                 (find records to add to a Live Louder collection)
 const UA = "LiveLouder/1.0 +https://livelouder.com.au";
 const headers = () => ({ "User-Agent": UA, ...(process.env.DISCOGS_TOKEN ? { Authorization: `Discogs token=${process.env.DISCOGS_TOKEN}` } : {}) });
 const clean = (n) => (n || "").replace(/\s\(\d+\)$/, "").replace(/\*$/, "");
@@ -20,7 +22,7 @@ async function pages(path, max) {
         a: (b.artists || []).map((a) => clean(a.name)).join(" & "),
         t: b.title || "", y: b.year || 0,
         img: b.cover_image || b.thumb || "", th: b.thumb || "",
-        id: b.id || it.id,
+        id: b.id || it.id, rid: "r" + (b.id || it.id),
         l: ((b.labels || [])[0] || {}).name || "",
         f: [...new Set((b.formats || []).map((f) => f.name))].join(", "),
         fd: ((b.formats || [])[0] || {}).descriptions?.slice(0, 3).join(", ") || "",
@@ -38,6 +40,36 @@ const json = (body, code = 200, cache = "public, max-age=1800") =>
 
 export default async (req) => {
   const q = new URL(req.url).searchParams;
+  const search = (q.get("q") || "").trim().slice(0, 100);
+  if (search) {
+    const params = new URLSearchParams({ q: search, type: "master", per_page: "30" });
+    const r = await fetch(`https://api.discogs.com/database/search?${params}`, { headers: headers() });
+    if (!r.ok) return json({ error: "Search isn't working right now. Try again in a minute." }, 502, "no-store");
+    const j = await r.json();
+    const seen = new Set();
+    const results = (j.results || []).map((x) => {
+      const [artist, ...rest] = (x.title || "").split(" - ");
+      return { rid: "m" + x.id, a: clean(artist), t: rest.join(" - ") || x.title, y: +x.year || 0, img: x.cover_image || x.thumb || "",
+               g: [...(x.style || []), ...(x.genre || [])].slice(0, 2).join(", "), f: (x.format || []).slice(0, 2).join(", "),
+               have: x.community?.have || 0 };
+    }).filter((x) => { const k = (x.a + "|" + x.t).toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; })
+      .sort((a, b) => b.have - a.have);
+    return json({ results }, 200, "public, max-age=3600");
+  }
+  const mid = (q.get("master") || "").trim();
+  if (mid) {
+    if (!/^\d{1,12}$/.test(mid)) return json({ error: "Bad master" }, 400, "no-store");
+    const r = await fetch(`https://api.discogs.com/masters/${mid}`, { headers: headers() });
+    if (!r.ok) return json({ error: "Couldn't load that record from Discogs." }, r.status, "no-store");
+    const j = await r.json();
+    return json({
+      id: j.id, title: j.title, artist: (j.artists || []).map((a) => clean(a.name)).join(" & "), year: j.year || 0, country: "", released: "",
+      labels: [], formats: [], genres: [...(j.genres || []), ...(j.styles || [])].slice(0, 5),
+      image: ((j.images || []).find((i) => i.type === "primary") || (j.images || [])[0] || {}).uri || "",
+      tracks: (j.tracklist || []).filter((t) => t.type_ !== "heading").map((t) => [t.position || "", t.title || "", t.duration || ""]).slice(0, 40),
+      have: 0, want: 0, url: j.uri || `https://www.discogs.com/master/${j.id}`, versions: j.num_for_sale || 0,
+    }, 200, "public, max-age=86400");
+  }
   const rel = (q.get("release") || "").trim();
   if (rel) {
     if (!/^\d{1,12}$/.test(rel)) return json({ error: "Bad release" }, 400, "no-store");

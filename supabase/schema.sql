@@ -85,3 +85,27 @@ begin
 end $$;
 revoke all on function public.delete_my_account() from public, anon;
 grant execute on function public.delete_my_account() to authenticated;
+
+-- Record collection and wantlist kept on Live Louder (added 26 Nov 2026).
+create table if not exists public.user_records (
+  user_id uuid not null references auth.users(id) on delete cascade,
+  list text not null check (list in ('collection', 'wantlist')),
+  rid text not null,            -- "m123" (Discogs master) or "r456" (Discogs release)
+  rec jsonb not null,           -- artist, title, year, cover, label, format
+  created_at timestamptz not null default now(),
+  primary key (user_id, list, rid)
+);
+alter table public.user_records enable row level security;
+drop policy if exists "own records" on public.user_records;
+create policy "own records" on public.user_records for all to authenticated
+  using ((select auth.uid()) = user_id) with check ((select auth.uid()) = user_id);
+grant select, insert, update, delete on public.user_records to authenticated;
+create or replace function public.limit_records() returns trigger language plpgsql security definer set search_path = '' as $$
+begin
+  if (select count(*) from public.user_records where user_id = new.user_id) >= 6000 then
+    raise exception 'Too many records';
+  end if;
+  return new;
+end $$;
+drop trigger if exists limit_records on public.user_records;
+create trigger limit_records before insert on public.user_records for each row execute function public.limit_records();

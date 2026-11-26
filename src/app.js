@@ -170,7 +170,8 @@ document.addEventListener("click", function (ev) {
 // ---------------------------------------------------------------- My gigs (saved on this device only)
 window.MY = (function () {
   const KEY = 'llMy';
-  const load = () => { try { return Object.assign({gigs: {}, artists: {}, discogs: ''}, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { return {gigs: {}, artists: {}, discogs: ''}; } };
+  const blank = () => ({gigs: {}, artists: {}, discogs: '', records: {}, wants: {}});
+  const load = () => { try { return Object.assign(blank(), JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { return blank(); } };
   let st = load();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} badge(); };
   const pad = n => String(n).padStart(2, '0'), t = new Date();
@@ -209,8 +210,31 @@ window.MY = (function () {
   // Changes go to the visitor's account too, when they're signed in (account.js).
   function push(kind, op, item) { if (window.ACC) ACC.push(kind, op, item); else if (op === 'add') nudge(); }
   function nudge() {}
-  function replace(next) { st = Object.assign({gigs: {}, artists: {}, discogs: ''}, next); save(); paint(); if (window.MYPAGE) MYPAGE(); }
-  badge(); paint();
-  return {get: () => st, save: save, paint: paint, today: today, replace: replace, push: push};
+  function replace(next) { st = Object.assign(blank(), next); save(); paint(); if (window.MYPAGE) MYPAGE(); }
+  // Records: Live Louder's own collection and wantlist. Buttons anywhere with data-addrec='{"rid","a","t","y","img",...}' data-list="records|wants".
+  function toggleRec(list, rec, force) {
+    const had = !!st[list][rec.rid];
+    const add = force === undefined ? !had : force;
+    if (add === had) return false;
+    if (add) st[list][rec.rid] = Object.assign({}, rec, {add: rec.add || new Date().toISOString().slice(0, 10)}); else delete st[list][rec.rid];
+    if (add && list === 'records' && st.wants[rec.rid]) { delete st.wants[rec.rid]; push('rec', 'remove', {list: 'wants', rec}); }
+    save(); push('rec', add ? 'add' : 'remove', {list, rec: add ? st[list][rec.rid] : rec});
+    return true;
+  }
+  function paintRecs() {
+    document.querySelectorAll('[data-addrec]').forEach(b => {
+      let r; try { r = JSON.parse(b.dataset.addrec); } catch (e) { return; }
+      const on = !!st[b.dataset.list][r.rid];
+      b.setAttribute('aria-pressed', on);
+      b.textContent = b.dataset.list === 'records' ? (on ? '✓ In my collection' : '+ Collection') : (on ? '✓ On wantlist' : '+ Wantlist');
+    });
+  }
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-addrec]'); if (!b) return;
+    ev.preventDefault(); ev.stopPropagation();
+    toggleRec(b.dataset.list, JSON.parse(b.dataset.addrec)); paintRecs(); if (window.MYPAGE) MYPAGE();
+  }, true);
+  badge(); paint(); paintRecs();
+  return {get: () => st, save: save, paint: () => { paint(); paintRecs(); }, today: today, replace: replace, push: push, toggleRec: toggleRec};
 })();
 
