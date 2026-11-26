@@ -148,6 +148,19 @@ def signup_band(r):
             f'<select name="city" aria-label="Your city"><option value="">Your city (optional)</option>{opts}</select>'
             f'<button>Sign me up</button></form></div></section>')
 
+# Links to other websites open in a new tab; links within Live Louder stay in the same tab.
+EXT_LINK = re.compile(r'<a ([^>]*?)href="(https?://[^"]+)"([^>]*)>')
+def _new_tab(m):
+    before, url, after = m.groups()
+    if url.startswith(SITE) or "target=" in before + after:
+        return m.group(0)
+    attrs = before + 'href="' + url + '"' + after
+    if "rel=" in attrs:
+        attrs = re.sub(r'rel="([^"]*)"', lambda r: 'rel="' + " ".join(dict.fromkeys(r.group(1).split() + ["noopener"])) + '"', attrs)
+    else:
+        attrs += ' rel="noopener"'
+    return f'<a {attrs} target="_blank">'
+
 def page(path, title, desc, body, active=None, extra_head="", image=""):
     r = "../" * path.count("/")
     nav = "".join(f'<a href="{r}{h}"{" aria-current=page" if h == active else ""}>{n}</a>' for n, h in NAV)
@@ -176,6 +189,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <p>Records for the drive to the show: our friends at <a href="https://heathenrecords.com.au">Heathen Records</a>.</p>
 <p>© {TODAY.year} Live Louder</p></div></div></footer>
 <script src="{r}app.js" defer></script></body></html>"""
+    doc = EXT_LINK.sub(_new_tab, doc)
     p = OUT / path
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(doc)

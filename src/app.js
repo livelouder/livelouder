@@ -90,3 +90,13 @@
     else el.remove();
   });
 }
+
+// Links to other websites (including ones added by the gig guide) open in a new tab.
+document.addEventListener("click", function (ev) {
+  var a = ev.target.closest && ev.target.closest("a[href]");
+  if (!a || a.target || ev.defaultPrevented) return;
+  if (a.host && a.host !== location.host && /^https?:/.test(a.protocol)) {
+    a.target = "_blank";
+    a.rel = (a.rel ? a.rel + " " : "") + "noopener";
+  }
+});
