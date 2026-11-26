@@ -46,3 +46,10 @@ Every push to `main` publishes automatically.
 - **Mobile menu**: the header collapses into a Menu button under 760px.
 - **Submit a gig** (`submit-a-gig.html`): the "gig" form is saved to Netlify Blobs by `submission-created`; the keep-cache plugin pulls submissions into `data/gig_submissions.json` (emails replaced by a hash) and build.py publishes those with a ticket link on a trusted ticketing site (`TRUSTED_TICKETS`). Past ones are deleted automatically.
 - **My gigs** (`my-gigs.html`): ♡ save on gig rows, Follow on artist pages, "I'm going". Stored in the visitor's browser (`localStorage` key `llMy`). Discogs username → `/.netlify/functions/discogs-user` reads their public collection and wantlist; the page matches them to touring artists (`gigs.json`) and upcoming vinyl (`data/releases.json`).
+
+## Accounts (Supabase, Nov 2026)
+- Supabase project `livelouder` (Sydney), ref `qoqdouthyyaebmreavgz`. Schema in `supabase/schema.sql` (profiles, saved_gigs, followed_artists, sent_reminders; row level security so people only see their own rows; `delete_my_account()`).
+- Browser: `src/account.js` (publishable key is public by design). Sign in with Google or an emailed link; first sign-in merges this device's saves into the account. Signed-out saves still live in `localStorage`.
+- Emails: Supabase sends sign-in links through Resend SMTP (hello@livelouder.com.au); `netlify/functions/reminders.mjs` sends one daily email (8:30am Sydney) per person with saved gigs in the next 3 days, presales/on-sales in the next 36 hours and new tours for followed artists, using `site/data/alerts-feed.json`. Each item is sent once (`sent_reminders`).
+- Netlify env: `SUPABASE_SECRET_KEY`, `RESEND_API_KEY`. Google sign-in: Google Cloud project "Live Louder" (OAuth client "Live Louder website").
+- Privacy policy: `privacy.html`.

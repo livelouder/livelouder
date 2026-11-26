@@ -336,3 +336,22 @@ background:linear-gradient(135deg,hsl(var(--h) 55% 32%),hsl(calc(var(--h) + 40) 
 #mygigs .ga .save{width:auto;height:auto;border-radius:999px}
 @media(min-width:761px) and (max-width:1440px){.top .hsearch{display:none}}
 @media(max-width:760px){.top .wrap{gap:10px}.top .wm{font-size:24px}.menu{padding:0 12px}}
+/* accounts */
+.mylink.in::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#3ccf6e;margin-left:6px;vertical-align:middle}
+#acct{margin-bottom:28px}
+#acct .card{display:block;text-align:left;min-height:0;height:auto;max-width:none}
+.acct.out{border-left:6px solid var(--red)}.acct.out p{margin:6px 0 14px;max-width:720px}.acct.out .note{margin:8px 0 0}
+.acct h4{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:20px;margin:14px 0 6px}
+.tog{display:flex;gap:10px;align-items:flex-start;margin:8px 0;cursor:pointer}.tog input{width:20px;height:20px;margin-top:2px;accent-color:var(--red)}
+.acts{margin-top:14px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,120px);max-width:min(560px,calc(100vw - 24px));background:#141414;color:#f6f5f2;padding:14px 18px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:20;transition:transform .3s;font-size:15px}
+.toast.on{transform:translate(-50%,0)}.toast a,.toast .linkish{color:#fff;font-weight:700}
+#signin{border:0;border-radius:14px;padding:28px;max-width:440px;width:calc(100vw - 32px);background:var(--bg);color:var(--ink)}
+#signin::backdrop{background:rgba(0,0,0,.6)}
+#signin h2{font-size:34px;margin:0 30px 8px 0}
+#signin .sclose{position:absolute;right:14px;top:10px}#signin .sclose button{border:0;background:none;font-size:30px;cursor:pointer;color:var(--ink)}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;margin-top:18px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:#141414;font:700 16px "Archivo",sans-serif;cursor:pointer}
+.or{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--muted)}.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--line)}
+#siEmail label{display:block;font-weight:700}#siEmail input{display:block;width:100%;margin:6px 0 12px;min-height:46px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;font:16px "Archivo",sans-serif}
+#siEmail .btn{width:100%;border:0;cursor:pointer;font:700 16px "Archivo",sans-serif}
+button.btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}

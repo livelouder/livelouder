@@ -195,11 +195,23 @@ window.MY = (function () {
   }
   document.addEventListener('click', ev => {
     const g = ev.target.closest('button.save[data-gig]'), a = ev.target.closest('button.saveartist');
-    if (g) { const x = JSON.parse(g.dataset.gig); if (st.gigs[x.id]) delete st.gigs[x.id]; else st.gigs[x.id] = Object.assign(x, {going: false}); save(); paint(); if (window.MYPAGE) MYPAGE(); }
-    if (a) { if (st.artists[a.dataset.artist]) delete st.artists[a.dataset.artist]; else st.artists[a.dataset.artist] = a.dataset.name; save(); paint(); if (window.MYPAGE) MYPAGE(); }
+    if (g) {
+      const x = JSON.parse(g.dataset.gig), had = !!st.gigs[x.id];
+      if (had) delete st.gigs[x.id]; else st.gigs[x.id] = Object.assign(x, {going: false});
+      save(); paint(); if (window.MYPAGE) MYPAGE(); push('gig', had ? 'remove' : 'add', had ? x : st.gigs[x.id]);
+    }
+    if (a) {
+      const had = !!st.artists[a.dataset.artist];
+      if (had) delete st.artists[a.dataset.artist]; else st.artists[a.dataset.artist] = a.dataset.name;
+      save(); paint(); if (window.MYPAGE) MYPAGE(); push('artist', had ? 'remove' : 'add', {slug: a.dataset.artist, name: a.dataset.name});
+    }
   });
+  // Changes go to the visitor's account too, when they're signed in (account.js).
+  function push(kind, op, item) { if (window.ACC) ACC.push(kind, op, item); else if (op === 'add') nudge(); }
+  function nudge() {}
+  function replace(next) { st = Object.assign({gigs: {}, artists: {}, discogs: ''}, next); save(); paint(); if (window.MYPAGE) MYPAGE(); }
   badge(); paint();
-  return {get: () => st, save: save, paint: paint, today: today};
+  return {get: () => st, save: save, paint: paint, today: today, replace: replace, push: push};
 })();
 
 // The My gigs page itself.
@@ -265,18 +277,18 @@ window.MY = (function () {
         `<li><span class="gname">${esc(r[1])} – ${esc(r[2])}</span><span class="gw">${r[0] === '2027' ? 'Coming 2027' : new Date(r[0] + 'T00:00').toLocaleDateString('en-AU', {day: 'numeric', month: 'short'})}</span><a class="act" href="${heathen(r[1] + ' ' + r[2])}" rel="noopener">Pre-order ↗</a></li>`).join('') + '</ul>';
       out.innerHTML = h;
       const un = document.getElementById('dgUnlink');
-      if (un) un.addEventListener('click', () => { const st = MY.get(); st.discogs = ''; MY.save(); dg = null; document.getElementById('dgUser').value = ''; renderDiscogs(); });
+      if (un) un.addEventListener('click', () => { const st = MY.get(); st.discogs = ''; MY.save(); MY.push('discogs', 'set', ''); dg = null; document.getElementById('dgUser').value = ''; renderDiscogs(); });
       MY.paint();
     }
     function loadDiscogs(u) {
       document.getElementById('dgOut').innerHTML = '<p class="note">Loading your records…</p>';
       fetch('/.netlify/functions/discogs-user?u=' + encodeURIComponent(u)).then(r => r.json()).then(j => {
-        dg = j; if (!j.error) { MY.get().discogs = u; MY.save(); } renderDiscogs();
+        dg = j; if (!j.error) { MY.get().discogs = u; MY.save(); MY.push('discogs', 'set', u); } renderDiscogs();
       }).catch(() => { dg = {error: "Couldn't reach Discogs. Try again in a minute."}; renderDiscogs(); });
     }
     box.addEventListener('click', ev => {
       const b = ev.target.closest('button.going');
-      if (b) { const st = MY.get(); const g = st.gigs[b.dataset.id]; if (g) { g.going = !g.going; MY.save(); render(); } }
+      if (b) { const st = MY.get(); const g = st.gigs[b.dataset.id]; if (g) { g.going = !g.going; MY.save(); MY.push('gig', 'going', g); render(); } }
     });
     document.getElementById('dgForm').addEventListener('submit', ev => {
       ev.preventDefault(); const u = document.getElementById('dgUser').value.trim(); if (u) loadDiscogs(u);

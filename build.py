@@ -263,11 +263,11 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <footer class="foot"><div class="wrap"><div><div class="wm">LIVE <span>LOUDER</span></div>
 <p>An independent Australian music site: news, gigs, tours, festivals, new vinyl and stories, made in the Blue Mountains, NSW.</p>
 <p>Dates change. Always check with the official ticket seller before you buy. Updated {UPDATED}.</p><p>{credit}</p></div>
-<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}submit-a-gig.html">Submit a gig</a> · <a href="{r}about.html">About</a></p>
+<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}submit-a-gig.html">Submit a gig</a> · <a href="{r}about.html">About</a> · <a href="{r}privacy.html">Privacy</a></p>
 <p>Gigs by city: {cities}</p>
 <p>Records for the drive to the show: our friends at <a href="https://heathenrecords.com.au">Heathen Records</a>.</p>
 <p>© {TODAY.year} Live Louder</p></div></div></footer>
-<script src="{r}app.js" defer></script></body></html>"""
+<script src="{r}app.js" defer></script><script src="{r}account.js" defer></script></body></html>"""
     doc = HEATHEN_LINK.sub(lambda m: _utm(m, "site"), doc)
     doc = EXT_LINK.sub(_new_tab, doc)
     p = OUT / path
@@ -866,6 +866,7 @@ page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Austra
 # ---------------------------------------------------------------- my gigs (saved on the visitor's device)
 mg = """<section class="page-title"><div class="wrap"><h1>My gigs</h1><p>Your saved gigs, the artists you follow, and what's touring from your record collection.</p></div></section>
 <section class="band" id="mygigs"><div class="wrap">
+<div id="acct"></div>
 <div class="mygrid"><div>
 <h2>Going</h2><div id="myGoing"><p class="note">Nothing yet. Save a gig, then tap "I'm going".</p></div>
 <h2 style="margin-top:36px">Saved gigs</h2><div id="mySaved"><p class="note">Tap <b>♡ Save</b> on any gig in the <a href="/gigs/index.html">gig guide</a> and it lands here.</p></div>
@@ -875,7 +876,7 @@ mg = """<section class="page-title"><div class="wrap"><h1>My gigs</h1><p>Your sa
 <form id="dgForm" class="dgform"><input id="dgUser" placeholder="Your Discogs username" aria-label="Discogs username" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn">Link</button></form>
 <p class="note" id="dgNote">Your collection needs to be public on Discogs (it is by default). We only read it, and nothing is stored on our side.</p>
 <div id="dgOut"></div></div>
-<p class="note">Your saves are kept on this device. Clearing your browser data will clear them too.</p>
+<p class="note">Not signed in? Your saves are kept on this device only. <button type="button" class="linkish" data-signin>Sign in</button> to keep them everywhere.</p>
 </aside></div></div></section>"""
 page("my-gigs.html", "My gigs | Live Louder", "Your saved gigs, followed artists and record collection on Live Louder.", mg)
 (OUT / "data").mkdir(exist_ok=True)
@@ -950,6 +951,41 @@ for s in stories:
 <p class="note"><a href="{vinyl}" rel="noopener">Find {e(s.get('artist', ''))} on vinyl at Heathen Records ↗</a></p></article></section>"""
     page(f"stories/{s['slug']}.html", f"{s['title']} | Live Louder", s["dek"], body, "stories/index.html", "", (a or {}).get("photo", ""))
 
+# ---------------------------------------------------------------- privacy
+pv = """<section class="page-title"><div class="wrap"><h1>Privacy</h1><p>What we keep, why, and how to get rid of it.</p></div></section>
+<section class="band"><div class="article">
+<p>Live Louder is run by Mick Wells in the Blue Mountains, NSW. This page explains what we collect when you use the site and what we do with it. The short version: we keep as little as we can, we never sell it, and you can delete it any time.</p>
+<h2>If you just browse</h2>
+<p>You don't need an account to use Live Louder. If you save gigs or follow artists without signing in, that list is kept in your own browser on your device. It isn't sent to us.</p>
+<p>Like every website, our host (Netlify) keeps standard server logs, such as IP addresses and the pages requested, to keep the site running and secure.</p>
+<h2>If you create an account</h2>
+<p>When you sign in (with an email link or with Google) we keep:</p>
+<ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
+<p>We use these only to run your account: showing your gigs on every device and sending the reminder emails you've switched on. Accounts are stored with Supabase in their Sydney data centre.</p>
+<p>If you link Discogs, we read your public collection and wantlist from Discogs each time you open My gigs, to show which artists you own are touring. We don't store your collection.</p>
+<h2>Emails</h2>
+<p>Sign-in links and reminder emails are sent through Resend. If you sign up to the Live Louder Weekly newsletter or to artist alerts, your email (and the city or artists you picked) is kept by Kit, our newsletter service. Every newsletter has an unsubscribe link, and reminder emails can be switched off on the My gigs page.</p>
+<h2>Gig submissions</h2>
+<p>If you send in a gig, we keep the gig details to publish them, and your email in case we need to check something. Your email is never shown on the site, and we don't add you to any mailing list. Submissions are deleted after the gig has happened.</p>
+<h2>Links and tracking</h2>
+<p>Links to Heathen Records (Mick's record shop) include a tag so the shop can see visits came from Live Louder. We don't use advertising trackers on this site.</p>
+<h2>Who we share it with</h2>
+<p>Only the services that run the site: Netlify (hosting), Supabase (accounts), Resend (account emails), Kit (newsletter) and Google (if you choose to sign in with Google). We don't sell or rent your details to anyone.</p>
+<h2>Deleting your data</h2>
+<p>Signed in? Go to <a href="/my-gigs.html">My gigs</a> and choose "Delete my account". Your account and everything saved in it is deleted straight away. Newsletter subscribers can unsubscribe from any email. For anything else, or a copy of what we hold about you, email <a href="mailto:hello@livelouder.com.au">hello@livelouder.com.au</a>.</p>
+<p class="note">Last updated 26 November 2026.</p></div></section>"""
+page("privacy.html", "Privacy | Live Louder", "What Live Louder collects, why, and how to delete it.", pv)
+
+# Data for the daily reminder emails (netlify/functions/reminders.mjs): presales and on-sales, and newly announced tours.
+(OUT / "data").mkdir(parents=True, exist_ok=True)
+(OUT / "data" / "alerts-feed.json").write_text(json.dumps({
+    "built": TODAY_S,
+    "sales": [{"artist": x["artist"], "slug": slug(x["artist"]), "kind": x["kind"], "name": x["name"], "when": x["when"].isoformat(),
+               "cities": x["cities"][:6], "url": x["url"]} for x in upcoming_sales],
+    "tours": [{"artist": t["artist"], "slug": slug(t["artist"]), "tour": t["tour"], "added": t.get("added", ""),
+               "cities": sorted({x[1] for x in t["dates"]}), "first": t["dates"][0][0] if t["dates"] else ""}
+              for t in tours if t.get("added", "") >= (TODAY.date() - dt.timedelta(days=3)).isoformat()]}, separators=(",", ":")))
+
 # ---------------------------------------------------------------- about, thanks, 404, assets, sitemap
 ab = """<section class="page-title"><div class="wrap"><h1>About</h1></div></section><section class="band"><div class="article">
 <p>Live Louder is an independent Australian music site. We keep track of who's playing where, the big tours heading our way, the festivals worth the trip, what's coming out on vinyl, and the stories behind the records worth owning.</p>
@@ -965,12 +1001,13 @@ page("404.html", "Page not found | Live Louder", "Page not found.",
      '<section class="page-title"><div class="wrap"><h1>Wrong stage</h1><p>That page isn\'t here. Try the <a style="color:#fff" href="/gigs/index.html">gig guide</a>, <a style="color:#fff" href="/news/index.html">news</a> or <a style="color:#fff" href="/tours.html">tours</a>.</p></div></section>')
 shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
+shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 for icon in (ROOT / "src/icons").iterdir():
     shutil.copy(icon, OUT / icon.name)
 (OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",
     "background_color": "#141414", "theme_color": "#141414",
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
-urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "submit-a-gig.html", "about.html"] \
+urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "submit-a-gig.html", "about.html", "privacy.html"] \
     + [f"genres/{slug(g)}.html" for g in GENRE_LIST] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \

@@ -2,6 +2,7 @@
   "private": true,
   "description": "Live Louder: only used for the Netlify functions and build plugin (gig submissions are stored in Netlify Blobs)",
   "dependencies": {
-    "@netlify/blobs": "*"
+    "@netlify/blobs": "*",
+    "@supabase/supabase-js": "^2"
   }
 }
