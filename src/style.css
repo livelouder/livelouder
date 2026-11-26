@@ -145,3 +145,74 @@ h3.month{font-size:22px;margin:26px 0 6px;color:var(--red)}
 @media(max-width:900px){.hsearch{order:3;width:100%}.hsearch input{width:100%}}
 @media(max-width:600px){.gig{grid-template-columns:50px minmax(0,1fr)}.ga{grid-column:2;flex-direction:row;align-items:center;gap:16px}}
 @media(max-width:600px){.hsearch{display:none}}
+/* section heads */
+.shead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}.shead a{font-weight:700}
+/* artist art: photo or poster card */
+.art{position:relative;overflow:hidden;border-radius:8px;background:#222;flex:none}
+.art img{width:100%;height:100%;object-fit:cover;display:block}
+.art.poster{background:linear-gradient(135deg,hsl(var(--h) 70% 45%),hsl(calc(var(--h) + 40) 75% 22%));display:grid;place-items:center}
+.art.poster span{font:400 clamp(28px,6vw,64px)/1 "Anton",Impact,sans-serif;color:rgba(255,255,255,.92);letter-spacing:.02em}
+.art.poster::after{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 120% 120%,rgba(0,0,0,.18) 0 2px,transparent 2px 9px)}
+.hart{width:min(420px,100%);aspect-ratio:1;box-shadow:0 10px 0 rgba(0,0,0,.2)}
+.nart{aspect-ratio:16/10;width:100%}.ncard:not(.big) .nart{width:110px;aspect-ratio:1}.ncard:not(.big) .art.poster span{font-size:28px}
+.tart{aspect-ratio:16/9;width:100%}.gart{width:min(320px,100%);aspect-ratio:1}.sart{aspect-ratio:1;width:100%}
+.mini{width:48px;height:48px;border-radius:6px;align-self:center}.mini.poster span{font-size:18px}
+/* news */
+.newsband{padding-bottom:0}
+.newsgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px}
+.ncard{display:flex;gap:14px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;align-items:center}
+.ncard.big{flex-direction:column;align-items:stretch;padding:0;overflow:hidden}
+.ncard.big .nbody{padding:16px 20px 20px}.ncard.big h3{font-size:clamp(24px,2.6vw,32px)}
+.ncard h3{font-size:19px;margin:6px 0 4px}.ncard p{color:var(--muted);margin:6px 0}
+.ncard:hover h3{color:var(--red)}
+.nlist{display:flex;flex-direction:column;gap:12px}.nlist.cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+.ngrid{margin-top:24px}
+.ntag{display:inline-block;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;background:var(--red);border-radius:4px;padding:3px 8px}
+.ntag.light{background:#fff;color:#141414}
+.ndate{font-size:13.5px;color:var(--muted)}
+/* gig of the week */
+.gotw{background:#141414;color:#f6f5f2;margin-top:clamp(32px,5vw,72px)}
+.gotwrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(20px,4vw,48px);align-items:center}
+.gotw h2{font-size:clamp(40px,6vw,72px);margin:10px 0 6px}.gotw h2 a{color:#fff;text-decoration:none}.gotw h2 a:hover{color:var(--red)}
+.gotw-where{font-weight:700;color:#ffb3a6}.gotw p{max-width:52ch}
+/* countdown */
+.count-box{display:inline-flex;flex-direction:column;align-items:center;background:var(--red);color:#fff;border-radius:10px;padding:14px 22px;min-width:150px;box-shadow:0 8px 0 rgba(0,0,0,.2);margin-top:14px}
+.cd-num{font:400 64px/1 "Anton",Impact,sans-serif}.cd-lab{font-weight:700;text-transform:uppercase;font-size:13px;letter-spacing:.08em}
+.count-box small{opacity:.85;margin-top:4px;font-size:13px;text-align:center}
+.page-title .count-box{background:#141414}
+/* map */
+.map{margin:28px 0 0;max-width:460px}
+.map svg{width:100%;height:auto;display:block}
+.map .land{fill:var(--card);stroke:var(--ink);stroke-width:1.5}
+.map .dot{fill:var(--red)}.map .pulse{fill:var(--red);opacity:.25}
+.map text{font:700 12px "Archivo",sans-serif;fill:var(--ink)}
+@media(prefers-reduced-motion:no-preference){.map .pulse{animation:pulse 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pulse{0%{transform:scale(.6);opacity:.5}100%{transform:scale(1.8);opacity:0}}}
+/* listen + follow */
+.listen iframe{border:0;border-radius:8px;background:#000}
+.lrow{display:flex;flex-wrap:wrap;gap:8px 16px;font-weight:700}
+.setl{font-size:14.5px;margin:0}
+.follow input,.sform input,.sform select{min-height:46px;border:2px solid var(--ink);border-radius:8px;background:var(--card);color:var(--ink);font:16px "Archivo",sans-serif;padding:0 14px;width:100%}
+.follow button{border:0;cursor:pointer;font:700 16px "Archivo",sans-serif}
+/* festivals */
+.fcard{display:block;text-decoration:none;color:var(--ink);border:2px solid var(--ink);border-radius:8px;padding:16px 18px;margin-bottom:14px;background:var(--card)}
+.fcard h3{font-size:26px;margin:8px 0 4px}.fcard p{margin:4px 0}.fcard:hover h3{color:var(--red)}
+.page-title.fest{background:#141414}
+.lead{font-size:19px}
+.ftable{width:100%;border-collapse:collapse}.ftable td{padding:10px 8px;border-top:1px solid var(--line)}.ftable td:first-child{font-weight:700;white-space:nowrap}
+.headliners{font:400 30px/1.2 "Anton",Impact,sans-serif}.headliners a,.lineup a{color:inherit}
+.lineup{font-size:18px;line-height:1.8}
+.tips li{margin-bottom:8px}
+/* newsletter */
+.signup{background:var(--red);color:#fff}
+.signwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.signup h2{color:#fff;margin-bottom:6px}.signup p{margin:0;font-weight:600;max-width:46ch}
+.sform{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto;gap:10px}
+.sform input,.sform select{border-color:#141414;background:#fff;color:#141414}
+.sform button{border:0;border-radius:8px;background:#141414;color:#fff;font:700 16px "Archivo",sans-serif;padding:0 20px;min-height:46px;cursor:pointer}
+.chips.small a{min-height:36px;font-size:14.5px;padding:0 12px}
+.vlink{color:inherit;text-decoration:none}.vlink:hover{color:var(--red);text-decoration:underline}
+.tour header .mini{margin-right:4px}
+.tcard{padding:0;overflow:hidden;text-decoration:none;color:var(--ink)}.tcard .tc{padding:14px 18px 18px;display:flex;flex-direction:column;gap:8px}
+.tcard:hover h3{color:var(--red)}
+@media(max-width:900px){.newsgrid,.signwrap{grid-template-columns:minmax(0,1fr)}.gotwrap{grid-template-columns:minmax(0,1fr)}.gart{width:100%;aspect-ratio:16/9}}
+@media(max-width:600px){.sform{grid-template-columns:minmax(0,1fr)}}

@@ -58,7 +58,7 @@
         if (mk !== month) { html += (month ? '</ul>' : '') + `<h3 class="month">${mk}</h3><ul class="gigs">`; month = mk; }
         const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
         html += `<li class="gig"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div><div class="gi"><a class="gname" href="${root}artists/${esc(s[3])}.html">${esc(s[2])}</a>` +
-          (s[8] ? `<span class="gsup">with ${esc(s[8])}</span>` : '') + `<span class="gw">${esc(s[4])}, ${esc(s[6])} · ${day}${s[1] ? ' ' + esc(s[1]) : ''}</span></div>` +
+          (s[8] ? `<span class="gsup">with ${esc(s[8])}</span>` : '') + `<span class="gw"><a class="vlink" href="${root}venues/${esc(s[11])}.html">${esc(s[4])}</a>, ${esc(s[6])} · ${day}${s[1] ? ' ' + esc(s[1]) : ''}</span></div>` +
           `<div class="ga"><a href="${esc(s[7])}" rel="noopener">${s[9] === 'ticketmaster' ? 'Tickets' : 'Details'} ↗</a><a class="cal" href="${esc(s[10])}" rel="noopener">+ Calendar</a></div></li>`;
       }
       out.innerHTML = html + (month ? '</ul>' : '');
@@ -75,4 +75,18 @@
     fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); })
       .catch(() => { count.textContent = 'Could not load the gig list. Try refreshing the page.'; });
   }
+}
+{
+  // Countdowns to the next show / festival.
+  const pad = n => String(n).padStart(2, '0');
+  const t = new Date(); const today = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  document.querySelectorAll('[data-countdown]').forEach(el => {
+    const [y, m, dd] = el.dataset.countdown.split('-').map(Number);
+    const days = Math.round((new Date(y, m - 1, dd) - today) / 86400000);
+    const num = el.querySelector('.cd-num'), lab = el.querySelector('.cd-lab');
+    if (days > 1) { num.textContent = days; lab.textContent = 'days to go'; }
+    else if (days === 1) { num.textContent = '1'; lab.textContent = 'day to go'; }
+    else if (days === 0) { num.textContent = 'Tonight'; lab.textContent = ''; num.style.fontSize = '44px'; }
+    else el.remove();
+  });
 }

@@ -129,3 +129,30 @@ def fetch(root):
     except Exception as e:  # network or API problem: fall back to last good copy
         print("feed: fetch failed:", e)
         return json.loads(cache.read_text()) if cache.exists() else []
+
+
+def deezer_lookup(names, root, limit=120):
+    """Finds Deezer artist ids and photos for the given artist names (for the
+    'Hear them before you go' player). Results are cached in data/deezer.json.
+    Missing or failed lookups just mean no player for that artist."""
+    cache_p = Path(root) / "data" / "deezer.json"
+    cache = json.loads(cache_p.read_text()) if cache_p.exists() else {}
+    todo = [n for n in names if n not in cache][:limit]
+    for n in todo:
+        try:
+            url = "https://api.deezer.com/search/artist?" + urllib.parse.urlencode({"q": n, "limit": 3})
+            req = urllib.request.Request(url, headers={"User-Agent": "livelouder.com.au build"})
+            with urllib.request.urlopen(req, timeout=15) as r:
+                data = json.loads(r.read().decode()).get("data", [])
+            norm = lambda s: "".join(c for c in s.lower() if c.isalnum())
+            hit = next((a for a in data if norm(a.get("name", "")) == norm(n)), None)
+            cache[n] = {"id": hit["id"], "picture": hit.get("picture_xl") or hit.get("picture_big", ""), "fans": hit.get("nb_fan", 0)} if hit else None
+            time.sleep(0.12)
+        except Exception as e:
+            print("deezer: lookup failed for", n, e)
+            break  # probably no network; try again next build
+    try:
+        cache_p.write_text(json.dumps(cache))
+    except OSError:
+        pass
+    return cache
