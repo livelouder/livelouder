@@ -27,3 +27,9 @@ Every push to `main` publishes automatically.
 ## Deploys (Netlify Personal plan, 15 credits per deploy)
 - One deploy a day: the 7am rebuild (`daily-rebuild.mjs`). Scheduled content tasks push with `[skip netlify]` in the commit message, so their changes go live with the next rebuild.
 - `/out-soon.html` uses Discogs for covers, labels and pressing details; `/most-wanted.html` and `/data/most-wanted.json` rank touring artists' records by Discogs wantlists.
+
+## On sale, weekends, venues, tracking
+- `/on-sale.html`: presales and general on-sales for the next 3 weeks (Ticketmaster data, plus `onsale` / `presales` / `tickets` fields on tours in data/tours.json; curated times are Sydney local "YYYY-MM-DDTHH:MM").
+- `/this-weekend.html` and `/gigs/<city>-this-weekend.html`: rebuilt daily for the coming Fri–Sun.
+- Venue guides: data/venue_guides.json keyed by venue slug (see site/data/venues.json for slugs, ranked by upcoming shows). Filled by the weekly venue-guide task.
+- All heathenrecords.com.au links get utm_source=livelouder (utm_medium=referral on the site, email in emails).

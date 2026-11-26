@@ -8,7 +8,7 @@ Writes two files into the site:
 The functions only send each key once, so a rebuild never sends the same email twice.
 Layout uses tables and inline styles because email apps (Gmail, Outlook) ignore most CSS.
 """
-import json, html, hashlib, colorsys, datetime as dt
+import json, html, hashlib, colorsys, re, datetime as dt
 from urllib.parse import quote_plus
 
 e = lambda s: html.escape(str(s), quote=True)
@@ -85,6 +85,16 @@ def _button(text, href, dark=False):
     return (f'<table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:{bg};border-radius:999px">'
             f'<a href="{href}" style="{FONT};display:inline-block;padding:14px 26px;font-size:15px;font-weight:bold;color:#fff;text-decoration:none">{e(text)}</a>'
             f'</td></tr></table>')
+
+
+def _track(h, campaign):
+    """Adds tracking tags to Heathen Records links so Shopify can attribute visits and sales to Live Louder emails."""
+    def add(m):
+        url = m.group(1)
+        if "utm_source=" in url:
+            return m.group(0)
+        return f'href="{url}{"&" if "?" in url else "?"}utm_source=livelouder&utm_medium=email&utm_campaign={campaign}"'
+    return re.sub(r'href="(https://(?:www\.)?heathenrecords\.com\.au[^"]*)"', add, h)
 
 
 def _wrap(rows, preview, site, kicker):
@@ -211,7 +221,7 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
     iso = today.isocalendar()
     kicker = f"Week of {today.day} {today.strftime('%b')}"
     weekly = {"key": f"weekly-{iso[0]}-W{iso[1]:02d}", "subject": subject, "preview": preview,
-              "html": _wrap(rows, preview, site, kicker), "built": today_s}
+              "html": _track(_wrap(rows, preview, site, kicker), "weekly"), "built": today_s}
 
     # ------------------------------------------------ artist alerts
     alerts = {}
@@ -249,7 +259,7 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
                 + "".join(a["rows"][:6])
                 + f'<tr><td style="padding:24px 32px 4px">{_button(f"See {name} dates and tickets", link(f"artists/{slug(name)}.html"))}</td></tr>')
         alert_list.append({"artist": name, "tag": a["tag"], "items": a["items"],
-                           "subject": f"{name}: new on Live Louder", "preview": pv, "html": _wrap(rows, pv, site, "Artist alert")})
+                           "subject": f"{name}: new on Live Louder", "preview": pv, "html": _track(_wrap(rows, pv, site, "Artist alert"), "artist-alert")})
 
     d = out / "email"
     d.mkdir(parents=True, exist_ok=True)
