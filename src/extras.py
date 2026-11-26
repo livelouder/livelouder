@@ -100,7 +100,7 @@ def discogs(names, root, limit=40):
     for n in names:
         if done >= limit:
             break
-        if _fresh(cache.get(n), today) and cache[n].get("v") == 2:
+        if _fresh(cache.get(n), today) and cache[n].get("v") == 3:
             continue
         done += 1
         try:
@@ -112,18 +112,21 @@ def discogs(names, root, limit=40):
                 fmts = {f.lower() for f in (r.get("format") or [])}
                 if _norm(artist) != _norm(n) or not r.get("year") or not title:
                     continue
-                if fmts & {"single", "compilation", "ep", "mini-album", "promo", "maxi-single"}:
+                if fmts & {"single", "compilation", "ep", "mini-album", "promo", "maxi-single", "unofficial release"}:
                     continue
-                if _norm(title) in seen or re.search(r"\b(live|remix|demo|bootleg|greatest hits|best of)\b", title, re.I):
+                if _norm(title) in seen or re.search(r"\b(live|remix|demo|bootleg|greatest hits|best of|broadcast|sessions|unreleased)\b", title, re.I):
                     continue
                 seen.add(_norm(title))
                 c = r.get("community") or {}
                 records.append({"title": title.strip(), "year": int(r["year"]), "thumb": r.get("cover_image") or r.get("thumb", ""),
                                 "url": "https://www.discogs.com" + r.get("uri", ""), "have": c.get("have", 0) + c.get("want", 0)})
             records.sort(key=lambda x: -x["have"])
+            if records and records[0]["have"]:
+                top = records[0]["have"]
+                records = [x for x in records if x["have"] >= top * 0.04]  # drops obscure bootlegs
             records = sorted(records[:8], key=lambda x: x["year"])
             artist_url = "https://www.discogs.com/search/?" + urllib.parse.urlencode({"q": n, "type": "artist"})
-            cache[n] = {"checked": today.isoformat(), "v": 2, "url": artist_url, "records": records}
+            cache[n] = {"checked": today.isoformat(), "v": 3, "url": artist_url, "records": records}
             time.sleep(1.1)  # Discogs allows 60 requests a minute with a token
         except Exception as e:
             print("discogs: stopped at", n, e)
