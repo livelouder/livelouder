@@ -100,34 +100,30 @@ def discogs(names, root, limit=40):
     for n in names:
         if done >= limit:
             break
-        if _fresh(cache.get(n), today):
+        if _fresh(cache.get(n), today) and cache[n].get("v") == 2:
             continue
         done += 1
         try:
-            q = urllib.parse.urlencode({"q": n, "type": "artist", "per_page": 10})
+            q = urllib.parse.urlencode({"artist": n, "type": "master", "format": "album", "per_page": 100})
             res = _get("https://api.discogs.com/database/search?" + q, auth).get("results", [])
-            art = next((r for r in res if _norm(r.get("title")) == _norm(n)), None)
-            records = []
-            if art:
-                time.sleep(1.1)
-                rel = _get(f"https://api.discogs.com/artists/{art['id']}/releases?sort=year&sort_order=asc&per_page=100", auth)
-                seen = set()
-                for r in rel.get("releases", []):
-                    if r.get("role") != "Main" or r.get("type") != "master" or not r.get("year"):
-                        continue
-                    t = r.get("title", "")
-                    if _norm(t) in seen or re.search(r"\b(live|remix|single|edit|demo|bootleg)\b", t, re.I):
-                        continue
-                    seen.add(_norm(t))
-                    st = (r.get("stats") or {}).get("community") or {}
-                    records.append({"title": t, "year": r["year"], "thumb": r.get("thumb", ""),
-                                    "url": f"https://www.discogs.com/master/{r['id']}",
-                                    "have": st.get("in_collection", 0) + st.get("in_wantlist", 0)})
-                if any(x["have"] for x in records):
-                    records.sort(key=lambda x: -x["have"])
-                records = sorted(records[:8], key=lambda x: x["year"])
-            cache[n] = {"checked": today.isoformat(), "id": art["id"] if art else None,
-                        "url": f"https://www.discogs.com/artist/{art['id']}" if art else "", "records": records}
+            records, seen = [], set()
+            for r in res:
+                artist, _, title = (r.get("title") or "").partition(" - ")
+                fmts = {f.lower() for f in (r.get("format") or [])}
+                if _norm(artist) != _norm(n) or not r.get("year") or not title:
+                    continue
+                if fmts & {"single", "compilation", "ep", "mini-album", "promo", "maxi-single"}:
+                    continue
+                if _norm(title) in seen or re.search(r"\b(live|remix|demo|bootleg|greatest hits|best of)\b", title, re.I):
+                    continue
+                seen.add(_norm(title))
+                c = r.get("community") or {}
+                records.append({"title": title.strip(), "year": int(r["year"]), "thumb": r.get("cover_image") or r.get("thumb", ""),
+                                "url": "https://www.discogs.com" + r.get("uri", ""), "have": c.get("have", 0) + c.get("want", 0)})
+            records.sort(key=lambda x: -x["have"])
+            records = sorted(records[:8], key=lambda x: x["year"])
+            artist_url = "https://www.discogs.com/search/?" + urllib.parse.urlencode({"q": n, "type": "artist"})
+            cache[n] = {"checked": today.isoformat(), "v": 2, "url": artist_url, "records": records}
             time.sleep(1.1)  # Discogs allows 60 requests a minute with a token
         except Exception as e:
             print("discogs: stopped at", n, e)
