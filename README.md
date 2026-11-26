@@ -11,3 +11,10 @@ Independent Australian gig guide, tours, new vinyl and stories.
 - `netlify/functions/daily-rebuild.mjs` – triggers a rebuild every morning (needs `BUILD_HOOK_URL`)
 
 Every push to `main` publishes automatically.
+
+## Emails (Kit)
+- `netlify/functions/submission-created.mjs` adds every site signup to Kit with tags.
+- `netlify/functions/weekly-email.mjs` sends the Live Louder Weekly on Thursday mornings.
+- `netlify/functions/artist-alerts.mjs` emails artist followers about new tours, news and on-sales.
+- Content comes from `site/email/weekly.json` and `site/email/alerts.json`, built by `src/emails.py`.
+- Needs `KIT_API_KEY` in Netlify. Emails stay as Kit drafts until `KIT_AUTO_SEND` is set to `yes`.

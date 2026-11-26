@@ -18,6 +18,7 @@ from urllib.parse import quote_plus, quote
 ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT / "src"))
 import feed  # noqa: E402
+import emails  # noqa: E402
 
 OUT = ROOT / "site"
 SITE = "https://livelouder.com.au"
@@ -549,5 +550,6 @@ urls = ["", "news/", "gigs/", "tours.html", "festivals/", "out-soon.html", "stor
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                                  + "".join(f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY_S}</lastmod></url>" for u in urls) + "</urlset>")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
+weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug)
 players = sum(1 for a in artists.values() if a.get("deezer"))
-print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}")
+print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}, alerts={len(alert_mail)}")
