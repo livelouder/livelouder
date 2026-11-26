@@ -1,7 +1,7 @@
 /*
 VOICE: a gig poster pasted up outside the venue: loud, direct, Australian.
 IDEA: the site behaves like a street poster wall and a fistful of ticket stubs.
-PICTURE: a red hero wall with a giant wordmark and a row of torn ticket stubs for the next shows.
+PICTURE: a dark hero wall with a red-edged with a giant wordmark and a row of torn ticket stubs for the next shows.
 COLOUR and TYPE: signal red fields, near-black ink, electric blue accent; Anton for headlines, Archivo for text.
 LAYOUT: full-bleed bands, stubs that scroll sideways, lists with big hanging dates.
 */
@@ -28,19 +28,19 @@ h3{font-size:24px;margin:0}
 .top nav a{color:#f6f5f2;text-decoration:none;font-weight:600;padding:10px 12px;border-radius:4px}
 .top nav a:hover,.top nav a[aria-current]{background:var(--red);color:#fff}
 /* hero */
-.hero{background:var(--red);color:var(--red-ink);padding:clamp(28px,5vw,64px) max(5vw,16px) 40px;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 90px);pointer-events:none}
+.hero{background:radial-gradient(ellipse at 85% 30%,#2a1512 0,#141414 55%);color:#f6f5f2;border-bottom:6px solid var(--red);padding:clamp(28px,5vw,64px) max(5vw,16px) 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 90px);pointer-events:none}
 .hero .wrap{position:relative}
 .disc{position:absolute;right:-6vw;top:clamp(20px,3vw,48px);width:min(46vw,560px);height:auto}
 @media(prefers-reduced-motion:no-preference){.disc{animation:spin 18s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}}
 @media(max-width:760px){.disc{display:none}}
 .hero .big{font-size:clamp(76px,15vw,200px);margin:0;line-height:.88;color:#fff}
-.hero .big span{display:block;color:#141414}
+.hero .big span{display:block;color:var(--red)}
 .hero p.lede{font-size:clamp(18px,2vw,22px);max-width:34ch;margin:18px 0 28px;font-weight:600}
 .stubs-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
-.stubs-head h2{font-size:26px;margin:0;color:#141414}
-.arrows{position:relative;z-index:2}.arrows button{width:44px;height:44px;border:2px solid #141414;background:#fff;color:#141414;font-size:20px;border-radius:50%;cursor:pointer}
-.arrows button:hover{background:#141414;color:#fff}
+.stubs-head h2{font-size:26px;margin:0;color:#f6f5f2}
+.arrows{position:relative;z-index:2}.arrows button{width:44px;height:44px;border:2px solid #f6f5f2;background:transparent;color:#f6f5f2;font-size:20px;border-radius:50%;cursor:pointer}
+.arrows button:hover{background:var(--red);border-color:var(--red);color:#fff}
 .stubs{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:thin}
 .stub{flex:0 0 260px;scroll-snap-align:start;display:grid;grid-template-columns:72px 1fr;background:#fff;color:#141414;border-radius:6px;box-shadow:0 8px 0 rgba(0,0,0,.18);text-decoration:none;position:relative}
 .stub .d{background:#141414;color:#fff;display:grid;place-content:center;text-align:center;border-radius:6px 0 0 6px;border-right:3px dashed #fff;padding:10px 4px}
@@ -107,8 +107,8 @@ h3{font-size:24px;margin:0}
 .hsearch input::placeholder{color:#a9a49c}
 .bigsearch{display:flex;max-width:560px;margin:0 0 30px;background:#fff;border-radius:999px;padding:5px;box-shadow:0 6px 0 rgba(0,0,0,.18)}
 .bigsearch input{flex:1;border:0;background:transparent;font:16px "Archivo",sans-serif;padding:0 16px;color:#141414;min-height:44px}
-.bigsearch input:focus{outline:none}.bigsearch:focus-within{outline:3px solid #141414}
-.bigsearch button{border:0;border-radius:999px;background:#141414;color:#fff;font:600 15px "Archivo",sans-serif;padding:0 22px;min-height:44px;cursor:pointer}
+.bigsearch input:focus{outline:none}.bigsearch:focus-within{outline:3px solid var(--red)}
+.bigsearch button{border:0;border-radius:999px;background:var(--red);color:#fff;font:600 15px "Archivo",sans-serif;padding:0 22px;min-height:44px;cursor:pointer}
 /* chips */
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips a{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:2px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600}
@@ -155,7 +155,7 @@ h3.month{font-size:22px;margin:26px 0 6px;color:var(--red)}
 .art.poster::after{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 120% 120%,rgba(0,0,0,.18) 0 2px,transparent 2px 9px)}
 .hart{width:min(420px,100%);aspect-ratio:1;box-shadow:0 10px 0 rgba(0,0,0,.2)}
 .nart{aspect-ratio:16/10;width:100%}.ncard:not(.big) .nart{width:110px;aspect-ratio:1}.ncard:not(.big) .art.poster span{font-size:28px}
-.tart{aspect-ratio:16/9;width:100%}.gart{width:min(320px,100%);aspect-ratio:1}.sart{aspect-ratio:1;width:100%}
+.tart{aspect-ratio:16/9;width:100%}.gart{width:100%;aspect-ratio:1}.sart{aspect-ratio:1;width:100%}
 .mini{width:48px;height:48px;border-radius:6px;align-self:center}.mini.poster span{font-size:18px}
 /* news */
 .newsband{padding-bottom:0}
@@ -172,7 +172,7 @@ h3.month{font-size:22px;margin:26px 0 6px;color:var(--red)}
 .ndate{font-size:13.5px;color:var(--muted)}
 /* gig of the week */
 .gotw{background:#141414;color:#f6f5f2;margin-top:clamp(32px,5vw,72px)}
-.gotwrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(20px,4vw,48px);align-items:center}
+.gotwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr) auto;gap:clamp(20px,4vw,48px);align-items:center}
 .gotw h2{font-size:clamp(40px,6vw,72px);margin:10px 0 6px}.gotw h2 a{color:#fff;text-decoration:none}.gotw h2 a:hover{color:var(--red)}
 .gotw-where{font-weight:700;color:#ffb3a6}.gotw p{max-width:52ch}
 /* countdown */

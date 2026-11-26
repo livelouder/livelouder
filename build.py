@@ -303,7 +303,7 @@ def fest_card(f):
     return (f'<a class="fcard" href="/festivals/{f["slug"]}.html"><span class="ntag">Festival guide</span><h3>{e(f["name"])}</h3>'
             f'<p>{e(f["when"])} · {e(places)}</p><p class="meta">{e(", ".join(f["headliners"]))} and more</p></a>')
 
-disc = "".join(f'<circle r="{r}" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>' for r in range(96, 238, 9))
+disc = "".join(f'<circle r="{r}" fill="none" stroke="#333" stroke-width="1.2"/>' for r in range(96, 238, 9))
 news_html = ""
 if news:
     news_html = (f'<section class="band newsband"><div class="wrap"><div class="shead"><h2>Latest news</h2><a href="/news/index.html">All news →</a></div>'
@@ -325,10 +325,10 @@ fest_html = "".join(fest_card(f) for f in fests)
 rel_items = [i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S][:8]
 rel_html = "".join(f'<li><div class="when">{"TBC" if a == "2027" else d(a).strftime("%-d %b")}</div><div class="what"><strong>{e(b)} – {e(c)}</strong><span>{e(fm)}</span></div></li>' for a, b, c, fm in rel_items)
 fest_h = '<h2 style="margin-top:36px">Festival guides</h2>' if onsale else "<h2>Festival guides</h2>"
-home = f"""<section class="hero"><svg class="disc" viewBox="-250 -250 500 500" aria-hidden="true"><circle r="248" fill="#141414"/>{disc}
-<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.18)" stroke-width="22" fill="none"/>
-<circle r="86" fill="#f6f5f2"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#e2391f">LIVE</text>
-<text y="34" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#141414">LOUDER</text><circle r="7" fill="#e2391f"/></svg><div class="wrap">
+home = f"""<section class="hero"><svg class="disc" viewBox="-250 -250 500 500" aria-hidden="true"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}
+<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>
+<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>
+<text y="34" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#141414">LOUDER</text><circle r="7" fill="#141414"/></svg><div class="wrap">
 <h1 class="big wm">LIVE<span>LOUDER</span></h1>
 <p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p>
 <form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form>
