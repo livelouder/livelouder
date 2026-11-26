@@ -106,7 +106,7 @@
         <div class="or"><span>or</span></div>
         <form id="siEmail"><label>Your email <input type="email" required autocomplete="email" id="siAddr"></label><button class="btn">Email me a sign-in link</button></form>
         <p class="note" id="siMsg">No password needed. We'll email you a link that signs you in.</p>
-        <p class="note">By signing in you agree to our <a href="${root}privacy.html">privacy policy</a>.</p>`;
+        <p class="note">New accounts get a public profile that friends can follow, showing your gigs and records (never your email). You can make it private any time in Settings. By signing in you agree to our <a href="${root}privacy.html">privacy policy</a>.</p>`;
       document.body.appendChild(d);
       d.querySelector('#siGoogle').addEventListener('click', async () => {
         const c = await ready(); if (!c) return;
@@ -184,20 +184,36 @@
     });
   }
   const pathOf = u => u && u.split('/object/public/profile/')[1];
-  async function setPhoto(kind, file) {
+  async function token() {
     const c = await ready();
-    if (!c || !user) return {error: 'Sign in first'};
+    const r = c && await c.auth.getSession();
+    return r && r.data && r.data.session && r.data.session.access_token;
+  }
+  // Uploads go through the site's server code, which checks the photo before it goes live (netlify/functions/profile-photo.mjs).
+  async function setPhoto(kind, file) {
+    if (!user) return {error: 'Sign in first'};
     let blob;
     try { blob = await shrink(file, kind); } catch (e) { return {error: e.message === 'blob' ? "Couldn't read that photo." : e.message}; }
-    const path = `${user.id}/${kind}-${Date.now()}.jpg`;
-    const up = await c.storage.from('profile').upload(path, blob, {contentType: 'image/jpeg', cacheControl: '31536000'});
-    if (up.error) return {error: "Couldn't upload that photo. Try again."};
-    const url = c.storage.from('profile').getPublicUrl(path).data.publicUrl;
-    const old = pathOf((profile || {})[kind + '_url']);
-    const r = await saveProfile({[kind + '_url']: url});
-    if (r.error) return r;
-    if (old) c.storage.from('profile').remove([old]);
-    return {url};
+    const t = await token();
+    if (!t) return {error: 'Please sign in again.'};
+    let r, j = {};
+    try {
+      r = await fetch('/.netlify/functions/profile-photo?kind=' + kind, {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'image/jpeg'}, body: blob});
+      j = await r.json();
+    } catch (e) { return {error: "Couldn't upload that photo. Check your connection and try again."}; }
+    if (!r.ok) return {error: j.error || "Couldn't upload that photo. Try again."};
+    profile = Object.assign(profile || {}, {[kind + '_url']: j.url, [kind + '_status']: j.status});
+    ui();
+    return j;
+  }
+  async function reportPhoto(username, kind, reason) {
+    const t = await token();
+    if (!t) return {error: 'Please sign in to report a photo.'};
+    try {
+      const r = await fetch('/.netlify/functions/report-photo', {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'application/json'}, body: JSON.stringify({username, kind, reason})});
+      const j = await r.json().catch(() => ({}));
+      return r.ok ? {} : {error: j.error || "Couldn't send that. Try again."};
+    } catch (e) { return {error: "Couldn't send that. Try again."}; }
   }
   async function removePhoto(kind) {
     const c = await ready();
@@ -219,7 +235,7 @@
   }
 
   window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
-                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto};
+                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto, reportPhoto};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }

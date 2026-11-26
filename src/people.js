@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
     $('uSub').innerHTML = `@${esc(P.username)}${P.since ? ` · On Live Louder since ${new Date(P.since).toLocaleDateString('en-AU', {month: 'long', year: 'numeric'})}` : ''}${P.follows_you ? ' · <b>Follows you</b>' : ''}`;
     const signedIn = window.ACC && ACC.user();
     $('uCta').innerHTML = P.me ? `<a class="btn" href="${root}my-gigs.html#settings">Edit my profile</a>`
-      : `<button type="button" class="followbtn big${P.following ? ' on' : ''}" data-ufollow>${P.following ? 'Following' : signedIn ? 'Follow' : 'Follow ' + esc(first())}</button>`;
+      : `<button type="button" class="followbtn big${P.following ? ' on' : ''}" data-ufollow>${P.following ? 'Following' : signedIn ? 'Follow' : 'Follow ' + esc(first())}</button>`
+        + (P.avatar || P.banner ? '<button type="button" class="linkish small reportlink" data-ureport>Report a photo</button>' : '');
     const going = P.gigs.filter(g => g.going).length;
     const stat = (n, l, t) => `<a class="stat" href="#${t}" data-utab="${t}"><b>${Number(n).toLocaleString()}</b><span>${l}</span></a>`;
     $('uStats').innerHTML = stat(going, 'Going', 'gigs') + stat(P.gigs.length - going, 'Interested', 'gigs') + stat(P.been.length, 'Been to', 'gigs')
@@ -150,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
     if (ev.target.closest('[data-umore]')) { shown += 60; render(); }
+    if (ev.target.closest('[data-ureport]')) { if (!ACC.user()) { ACC.open(); return; } openReport(); }
   });
   let typing;
   box.addEventListener('input', ev => {
@@ -157,5 +159,30 @@ document.addEventListener('DOMContentLoaded', function () {
     clearTimeout(typing); const pos = ev.target.selectionStart;
     typing = setTimeout(() => { q = ev.target.value; shown = 60; render(); const i = box.querySelector('[data-uq]'); if (i) { i.focus(); i.setSelectionRange(pos, pos); } }, 200);
   });
+  // Report a profile photo or cover photo (netlify/functions/report-photo.mjs).
+  function openReport() {
+    let d = document.getElementById('reportDlg');
+    if (!d) { d = document.createElement('dialog'); d.id = 'reportDlg'; d.className = 'reportdlg'; document.body.appendChild(d); }
+    const which = [P.avatar && ['avatar', 'Profile photo'], P.banner && ['banner', 'Cover photo']].filter(Boolean);
+    d.innerHTML = `<form method="dialog" class="sclose"><button aria-label="Close">×</button></form>
+      <h2>Report a photo</h2><p>Thanks for helping keep Live Louder friendly. The photo is hidden straight away while we take a look.</p>
+      <form id="repForm">
+        ${which.length > 1 ? `<fieldset><legend>Which photo?</legend>${which.map(([k, n], i) => `<label class="tog"><input type="radio" name="kind" value="${k}" ${i ? '' : 'checked'}> ${n}</label>`).join('')}</fieldset>` : `<input type="hidden" name="kind" value="${which[0][0]}">`}
+        <label>What's wrong with it?<select name="reason">
+          <option value="nudity">Nudity or sexual</option><option value="violence">Violence or gore</option><option value="hate">Hateful or offensive</option>
+          <option value="notmine">It's not their photo (it's mine, or someone else's)</option><option value="other">Something else</option></select></label>
+        <button class="btn">Send report</button><p class="note" id="repMsg"></p></form>`;
+    d.querySelector('#repForm').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      const f = ev.target, kind = f.kind.value, msg = d.querySelector('#repMsg'), b = f.querySelector('button');
+      b.disabled = true; msg.textContent = 'Sending…';
+      const r = await ACC.reportPhoto(P.username, kind, f.reason.value);
+      if (r.error) { msg.textContent = r.error; b.disabled = false; return; }
+      msg.textContent = "Thanks. It's hidden while we take a look.";
+      P[kind] = null; render();
+      setTimeout(() => d.close(), 1600);
+    });
+    d.showModal();
+  }
   load();
 });

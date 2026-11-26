@@ -118,6 +118,8 @@ alter table public.profiles add column if not exists display_name text;
 alter table public.profiles add column if not exists share boolean not null default false;
 alter table public.profiles add column if not exists avatar_url text;
 alter table public.profiles add column if not exists banner_url text;
+alter table public.profiles add column if not exists avatar_status text not null default 'ok';
+alter table public.profiles add column if not exists banner_status text not null default 'ok';
 create unique index if not exists profiles_username_key on public.profiles (lower(username));
 alter table public.profiles drop constraint if exists username_ok;
 alter table public.profiles add constraint username_ok check (username is null or username ~ '^[a-z0-9_]{3,24}$');
@@ -146,8 +148,8 @@ create or replace function public.person_card(pid uuid) returns jsonb language s
   select jsonb_build_object(
     'username', p.username,
     'name', case when p.share then coalesce(nullif(p.display_name, ''), u.raw_user_meta_data->>'full_name', p.username) else p.username end,
-    'avatar', case when p.share then coalesce(p.avatar_url, u.raw_user_meta_data->>'avatar_url') end,
-    'banner', case when p.share then p.banner_url end,
+    'avatar', case when p.share and p.avatar_status in ('ok', 'approved') then coalesce(p.avatar_url, u.raw_user_meta_data->>'avatar_url') end,
+    'banner', case when p.share and p.banner_status in ('ok', 'approved') then p.banner_url end,
     'shared', p.share and p.username is not null,
     'records', case when p.share then (select count(*) from public.user_records r where r.user_id = p.id and r.list = 'collection') else 0 end,
     'going', case when p.share then coalesce((select jsonb_agg(g.gig || jsonb_build_object('id', g.gig_id) order by g.gig->>'d')
@@ -253,4 +255,73 @@ create policy "profile pics: remove own" on storage.objects for delete to authen
 drop policy if exists "profile pics: list own" on storage.objects;
 create policy "profile pics: list own" on storage.objects for select to authenticated
   using (bucket_id = 'profile' and (storage.foldername(name))[1] = (select auth.uid())::text);
+
+
+-- Sharing on by default for NEW accounts (27 Nov 2026). Accounts made before this keep their own setting.
+-- New accounts get a username made from their name (never from their email), e.g. "mickwells" or "gigfan4821".
+alter table public.profiles alter column share set default true;
+create or replace function public.handle_new_user() returns trigger language plpgsql security definer set search_path = '' as $$
+declare base text; cand text; n int := 0;
+begin
+  base := left(lower(regexp_replace(coalesce(new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'name', ''), '[^a-zA-Z0-9]+', '', 'g')), 18);
+  if char_length(base) < 3 then base := 'gigfan'; end if;
+  cand := base;
+  while base = 'gigfan' and n = 0 or exists (select 1 from public.profiles where lower(username) = cand) loop
+    n := n + 1;
+    cand := base || (1000 + floor(random() * 9000))::int;
+    if n > 25 then cand := 'fan' || substr(replace(new.id::text, '-', ''), 1, 12); exit; end if;
+  end loop;
+  insert into public.profiles (id, username, share) values (new.id, cand, true) on conflict do nothing;
+  return new;
+end $$;
+
+-- Photo safety (27 Nov 2026). Photos are uploaded through the site's own server code (netlify/functions/profile-photo.mjs),
+-- which runs Google's SafeSearch check first. Status: ok (checked), approved (Mick kept it after a review),
+-- pending (waiting for Mick), hidden (reported, waiting for Mick). Only ok/approved photos are shown to other people.
+alter table public.profiles add column if not exists avatar_status text not null default 'ok';
+alter table public.profiles add column if not exists banner_status text not null default 'ok';
+alter table public.profiles drop constraint if exists photo_status_ok;
+alter table public.profiles add constraint photo_status_ok check (avatar_status in ('ok', 'approved', 'pending', 'hidden') and banner_status in ('ok', 'approved', 'pending', 'hidden'));
+
+create table if not exists public.photo_log (
+  id bigint generated always as identity primary key,
+  user_id uuid references auth.users(id) on delete cascade,
+  kind text, path text, result text, scores jsonb,
+  created_at timestamptz not null default now());
+create table if not exists public.photo_reports (
+  id bigint generated always as identity primary key,
+  reporter uuid references auth.users(id) on delete set null,
+  owner uuid references auth.users(id) on delete cascade,
+  kind text, reason text,
+  created_at timestamptz not null default now());
+create table if not exists public.photo_blocks (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now());
+-- Server-only tables: row level security on, and no policies, so the public keys can't read or change them.
+alter table public.photo_log enable row level security;
+alter table public.photo_reports enable row level security;
+alter table public.photo_blocks enable row level security;
+
+-- People can remove their own photo, but only the server can set a photo or its status.
+create or replace function public.guard_profile_photos() returns trigger language plpgsql set search_path = '' as $$
+begin
+  if coalesce(auth.role(), '') in ('authenticated', 'anon') then
+    if tg_op = 'INSERT' then
+      if new.avatar_url is not null or new.banner_url is not null or new.avatar_status <> 'ok' or new.banner_status <> 'ok' then
+        raise exception 'Photos are uploaded through the site'; end if;
+    else
+      if (new.avatar_url is distinct from old.avatar_url and new.avatar_url is not null)
+         or (new.banner_url is distinct from old.banner_url and new.banner_url is not null)
+         or new.avatar_status is distinct from old.avatar_status or new.banner_status is distinct from old.banner_status then
+        raise exception 'Photos are uploaded through the site'; end if;
+    end if;
+  end if;
+  return new;
+end $$;
+drop trigger if exists guard_profile_photos on public.profiles;
+create trigger guard_profile_photos before insert or update on public.profiles for each row execute function public.guard_profile_photos();
+
+-- Uploads now go through the server, so people can no longer add files to storage directly (they can still remove their own).
+drop policy if exists "profile pics: add own" on storage.objects;
+drop policy if exists "profile pics: change own" on storage.objects;
 

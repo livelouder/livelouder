@@ -262,14 +262,15 @@ document.addEventListener('DOMContentLoaded', function () {
         <div><b>Profile photo</b><div class="pbtns"><button type="button" class="btn ghost sm" data-pickphoto="avatar">${uploading === 'avatar' ? 'Uploading…' : p.avatar_url ? 'Change' : 'Upload'}</button>${p.avatar_url ? '<button type="button" class="linkish small" data-rmphoto="avatar">Remove</button>' : ''}</div></div></div>
       <div class="phbox"><span class="phban"${p.banner_url ? ` style="background-image:url('${esc(p.banner_url)}')"` : ''}></span>
         <div><b>Cover photo</b><div class="pbtns"><button type="button" class="btn ghost sm" data-pickphoto="banner">${uploading === 'banner' ? 'Uploading…' : p.banner_url ? 'Change' : 'Upload'}</button>${p.banner_url ? '<button type="button" class="linkish small" data-rmphoto="banner">Remove</button>' : ''}</div></div></div></div>
-      ${photoMsg ? `<p class="note impmsg">${photoMsg}</p>` : ''}<p class="note">A wide photo works best for the cover, like a crowd shot or your favourite venue. Only post photos you took or have permission to use.</p>`;
+      ${photoMsg ? `<p class="note impmsg">${photoMsg}</p>` : ''}${['avatar', 'banner'].map(k => ({pending: `Your ${k === 'avatar' ? 'profile' : 'cover'} photo is waiting for a quick check. Only you can see it until then, usually within a day.`, hidden: `Your ${k === 'avatar' ? 'profile' : 'cover'} photo has been reported and is hidden while we take a look.`})[p[k + '_status']]).filter(Boolean).map(t => `<p class="note phstat">${t}</p>`).join('')}
+      <p class="note rules"><b>Photo rules:</b> keep it friendly. No nudity, hate or violence, and only photos you took or have permission to use. Photos are checked automatically, and ones that break the rules are removed. A wide photo works best for the cover, like a crowd shot or your favourite venue.</p>`;
     return `<div class="card wide" id="sharing"><h3>Your profile and friends</h3>${photos}
       <form data-shareform class="shareform">
       <label>Username<span class="uname"><i>livelouder.com.au/u/</i><input name="username" value="${esc(p.username || suggestName())}" maxlength="24" autocapitalize="off" autocomplete="off" spellcheck="false" pattern="[a-z0-9_]{3,24}" required></span></label>
       <label>Name people see<input name="display_name" value="${esc(p.display_name || md.full_name || '')}" maxlength="40" placeholder="Your name or a nickname"></label>
-      <label class="tog"><input type="checkbox" name="share" ${p.share ? 'checked' : ''}> <span><b>Share my profile.</b> Anyone with your link, and people who follow you, can see the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown.</span></label>
+      <label class="tog"><input type="checkbox" name="share" ${p.share ? 'checked' : ''}> <span><b>Share my profile.</b> Anyone with your link, and people who follow you, can see your photos, the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown. Untick to make your profile private.</span></label>
       <button class="btn">Save</button>${shareMsg ? `<p class="note impmsg">${shareMsg}</p>` : ''}</form>
-      <p class="note">Switch sharing off any time and your profile goes private straight away.</p></div>`;
+      <p class="note">Private profiles can't be seen or followed, and don't show up in search.</p></div>`;
   }
   function settings() {
     const u = window.ACC && ACC.user(), p = (window.ACC && ACC.profile()) || {}, st = MY.get();
@@ -422,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const f = fileIn.files && fileIn.files[0]; if (!f) return;
     if (f.size > 25 * 1024 * 1024) { photoMsg = 'That photo is too big. Try one under 25 MB.'; render(); return; }
     uploading = pickKind; photoMsg = ''; render();
-    ACC.setPhoto(pickKind, f).then(r => { uploading = ''; photoMsg = r.error ? esc(r.error) : ''; render(); });
+    ACC.setPhoto(pickKind, f).then(r => { uploading = ''; photoMsg = r.error ? esc(r.error) : r.status === 'pending' ? 'Thanks. Your photo is waiting for a quick check, and only you can see it until then.' : ''; if (r.error || r.status === 'pending') location.hash = '#settings'; render(); });
   });
 
   // ------------------------------------------------ start
