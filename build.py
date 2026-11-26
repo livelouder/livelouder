@@ -621,6 +621,6 @@ urls = ["", "news/", "gigs/", "tours.html", "festivals/", "out-soon.html", "most
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                                  + "".join(f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY_S}</lastmod></url>" for u in urls) + "</urlset>")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
-weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug)
+weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug, REL_DG)
 players = sum(1 for a in artists.values() if a.get("deezer"))
 print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}, alerts={len(alert_mail)}")

@@ -3,14 +3,19 @@
 Writes two files into the site:
   site/email/weekly.json  - this week's Live Louder Weekly (subject, preview, html, key)
   site/email/alerts.json  - artist alerts for followers (one entry per artist with news)
+  site/email/weekly-preview.html - the weekly email as a web page, for checking the design
 
 The functions only send each key once, so a rebuild never sends the same email twice.
+Layout uses tables and inline styles because email apps (Gmail, Outlook) ignore most CSS.
 """
-import json, html, hashlib, datetime as dt
+import json, html, hashlib, colorsys, datetime as dt
+from urllib.parse import quote_plus
 
 e = lambda s: html.escape(str(s), quote=True)
-RED, INK, MUTED = "#e2391f", "#141414", "#6b6b6b"
+RED, INK, MUTED, PAPER, LINE = "#e2391f", "#141414", "#6b6b6b", "#f2f0ec", "#e6e2dc"
 FONT = "font-family:Helvetica,Arial,sans-serif"
+HEAD = "font-family:Anton,Impact,'Arial Narrow Bold','Helvetica Neue',Arial,sans-serif;font-weight:400"
+HEATHEN = "https://heathenrecords.com.au/search?type=product&q="
 
 
 def _short(s):
@@ -22,29 +27,87 @@ def _fmt(s):
     return x.strftime("%a ") + f"{x.day} {x.strftime('%b')}"
 
 
-def _h2(t):
-    return (f'<h2 style="{FONT};font-size:20px;letter-spacing:.5px;text-transform:uppercase;color:{INK};'
-            f'border-top:3px solid {RED};padding-top:14px;margin:28px 0 10px">{e(t)}</h2>')
+def _hue(name):
+    return int(hashlib.md5(name.encode()).hexdigest()[:4], 16) % 360
 
 
-def _item(title, href, sub=""):
-    s = f'<br><span style="color:{MUTED};font-size:14px">{e(sub)}</span>' if sub else ""
-    return (f'<p style="{FONT};font-size:16px;line-height:1.45;margin:0 0 12px">'
-            f'<a href="{href}" style="color:{INK};font-weight:bold;text-decoration:none">{e(title)}</a>{s}</p>')
+def _hex(h, s, l):
+    r, g, b = colorsys.hls_to_rgb(h / 360, l, s)
+    return "#%02x%02x%02x" % (round(r * 255), round(g * 255), round(b * 255))
 
 
-def _button(text, href):
-    return (f'<p style="margin:28px 0"><a href="{href}" style="{FONT};background:{RED};color:#fff;font-weight:bold;'
-            f'padding:14px 22px;text-decoration:none;display:inline-block;letter-spacing:.5px">{e(text)}</a></p>')
+def _img(src, alt, w, h, name=""):
+    if src:
+        return (f'<img src="{e(src)}" alt="{e(alt)}" width="{w}" height="{h}" '
+                f'style="display:block;width:{w}px;height:{h}px;object-fit:cover;border-radius:6px;border:0">')
+    hue = _hue(name or alt)
+    initials = "".join(x[0] for x in (name or alt).split()[:2]).upper()
+    return (f'<table role="presentation" width="{w}" height="{h}" cellpadding="0" cellspacing="0" '
+            f'style="width:{w}px;height:{h}px;border-radius:6px;background:{_hex(hue, .55, .35)}"><tr>'
+            f'<td align="center" valign="middle" style="{HEAD};font-size:{max(18, w // 3)}px;color:#fff">{e(initials)}</td></tr></table>')
 
 
-def _wrap(inner, preview):
-    return (f'<div style="display:none;max-height:0;overflow:hidden">{e(preview)}</div>'
-            f'<div style="{FONT};color:{INK};max-width:600px;margin:0 auto">'
-            f'<p style="{FONT};font-size:28px;font-weight:900;letter-spacing:1px;margin:0 0 4px">'
-            f'<span style="color:{RED}">LIVE</span> LOUDER</p>{inner}'
-            f'<p style="{FONT};font-size:12px;color:{MUTED};margin-top:36px">You signed up at livelouder.com.au. '
-            f'<a href="{{{{ unsubscribe_url }}}}" style="color:{MUTED}">Unsubscribe</a></p></div>')
+def _section(label, title):
+    return (f'<tr><td style="padding:34px 32px 6px">'
+            f'<div style="{FONT};font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:{RED}">{e(label)}</div>'
+            f'<div style="{HEAD};font-size:30px;line-height:1.1;color:{INK};text-transform:uppercase;margin-top:4px">{e(title)}</div>'
+            f'</td></tr>')
+
+
+def _feature(img, title, href, line1="", line2="", cta="Dates & tickets"):
+    """Picture on the left, text on the right."""
+    l1 = f'<div style="{FONT};font-size:14px;color:{INK};margin-top:3px">{e(line1)}</div>' if line1 else ""
+    l2 = f'<div style="{FONT};font-size:13px;color:{MUTED};margin-top:3px">{e(line2)}</div>' if line2 else ""
+    return (f'<tr><td style="padding:10px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
+            f'<td width="96" valign="top" style="width:96px;padding-right:16px"><a href="{href}">{img}</a></td>'
+            f'<td valign="middle" style="border-bottom:1px solid {LINE};padding-bottom:12px">'
+            f'<a href="{href}" style="{HEAD};font-size:21px;line-height:1.15;color:{INK};text-decoration:none;text-transform:uppercase">{e(title)}</a>{l1}{l2}'
+            f'<div style="margin-top:6px"><a href="{href}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">{e(cta)} →</a></div>'
+            f'</td></tr></table></td></tr>')
+
+
+def _datelist(rows):
+    """Ticket-stub style list: date block + name + where."""
+    out = ""
+    for day, mon, title, where, href in rows:
+        out += (f'<tr><td style="padding:5px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+                f'style="border:1px solid {LINE};border-radius:6px"><tr>'
+                f'<td width="64" align="center" valign="middle" style="width:64px;background:{INK};border-radius:6px 0 0 6px;padding:8px 0">'
+                f'<div style="{HEAD};font-size:26px;line-height:1;color:#fff">{e(day)}</div>'
+                f'<div style="{FONT};font-size:11px;font-weight:bold;letter-spacing:1px;color:{RED};text-transform:uppercase">{e(mon)}</div></td>'
+                f'<td valign="middle" style="padding:8px 14px"><a href="{href}" style="{FONT};font-size:16px;font-weight:bold;color:{INK};text-decoration:none">{e(title)}</a>'
+                f'<div style="{FONT};font-size:13px;color:{MUTED};margin-top:2px">{e(where)}</div></td></tr></table></td></tr>')
+    return out
+
+
+def _button(text, href, dark=False):
+    bg = INK if dark else RED
+    return (f'<table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:{bg};border-radius:999px">'
+            f'<a href="{href}" style="{FONT};display:inline-block;padding:14px 26px;font-size:15px;font-weight:bold;color:#fff;text-decoration:none">{e(text)}</a>'
+            f'</td></tr></table>')
+
+
+def _wrap(rows, preview, site, kicker):
+    return (f'<div style="display:none;max-height:0;overflow:hidden;opacity:0">{e(preview)}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{PAPER}"><tr><td align="center" style="padding:18px 8px">'
+            f'<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#fff;border-radius:10px;overflow:hidden">'
+            # header
+            f'<tr><td style="background:{INK};padding:22px 32px;border-bottom:5px solid {RED}">'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
+            f'<td><a href="{site}" style="{HEAD};font-size:34px;line-height:1;text-decoration:none;letter-spacing:1px"><span style="color:#fff">LIVE</span> <span style="color:{RED}">LOUDER</span></a></td>'
+            f'<td align="right" style="{FONT};font-size:12px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#bdbdbd">{e(kicker)}</td>'
+            f'</tr></table></td></tr>'
+            + rows +
+            # footer
+            f'<tr><td style="padding:34px 32px 0"></td></tr>'
+            f'<tr><td style="background:{INK};padding:26px 32px">'
+            f'<div style="{HEAD};font-size:22px;letter-spacing:1px"><span style="color:#fff">LIVE</span> <span style="color:{RED}">LOUDER</span></div>'
+            f'<div style="{FONT};font-size:13px;line-height:1.6;color:#bdbdbd;margin-top:8px">Australian music news, gigs, tours, festivals and new vinyl.<br>'
+            f'<a href="{site}/gigs/index.html" style="color:#fff">Gig guide</a> · <a href="{site}/tours.html" style="color:#fff">Tours</a> · '
+            f'<a href="{site}/out-soon.html" style="color:#fff">Vinyl</a> · <a href="{site}/news/index.html" style="color:#fff">News</a></div>'
+            f'<div style="{FONT};font-size:12px;color:#8a8a8a;margin-top:14px">You signed up at livelouder.com.au. '
+            f'<a href="{{{{ unsubscribe_url }}}}" style="color:#8a8a8a">Unsubscribe</a></div>'
+            f'</td></tr></table></td></tr></table>')
 
 
 def _names(xs):
@@ -54,96 +117,145 @@ def _names(xs):
     return xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
 
 
-def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rels, slug):
+def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rels, slug, rel_dg=None):
+    rel_dg = rel_dg or {}
     today_s = today.isoformat()
     week_ago = (today - dt.timedelta(days=7)).isoformat()
     week_end = (today + dt.timedelta(days=7)).isoformat()
     link = lambda p: f"{site}/{p}"
+    photo = lambda name: (artists.get(slug(name)) or {}).get("photo", "")
 
     # ------------------------------------------------ weekly
     fresh = [t for t in tours if t.get("added", "") >= week_ago]
     fresh = sorted(fresh or tours, key=lambda t: t.get("added", ""), reverse=True)[:5]
     week = []
-    for s in shows:
-        if s["date"] < week_end and s["artist"] not in [w["artist"] for w in week]:
-            week.append(s)
+    for s_ in shows:
+        if s_["date"] < week_end and s_["artist"] not in [w["artist"] for w in week]:
+            week.append(s_)
     week = week[:8]
     onsale = {}
-    for s in tm:
-        if s.get("onsale") and today_s < s["onsale"][:10] <= week_end:
-            onsale.setdefault(s["artist"], s)
+    for s_ in tm:
+        if s_.get("onsale") and today_s < s_["onsale"][:10] <= week_end:
+            onsale.setdefault(s_["artist"], s_)
     recent_news = [n for n in news if n["date"] >= week_ago][:4] or news[:3]
     rel_end = (today + dt.timedelta(days=10)).isoformat()
     vinyl = [i for i in rels["items"] if today_s <= i[0] <= rel_end][:6]
-    read = sorted(stories, key=lambda s: s["date"], reverse=True)[:1]
+    read = sorted(stories, key=lambda s_: s_["date"], reverse=True)[:1]
 
-    parts = []
+    rows = (f'<tr><td style="padding:28px 32px 0;{FONT};font-size:17px;line-height:1.55;color:{INK}">'
+            f'Here\'s your week in live music: the tours just announced, the gigs worth leaving the house for, and the records worth owning.</td></tr>')
     if fresh:
-        parts.append(_h2("Just announced") + "".join(
-            _item(t["artist"], link(f"artists/{slug(t['artist'])}.html"),
-                  t["tour"] + (" · " + ", ".join(sorted({x[1] for x in t["dates"]})) if t["dates"] else "")) for t in fresh))
+        rows += _section("Just announced", "New tours")
+        for t in fresh:
+            cities = ", ".join(sorted({x[1] for x in t["dates"]}))
+            first = f"From {_fmt(t['dates'][0][0])}" if t["dates"] else ""
+            rows += _feature(_img(photo(t["artist"]), t["artist"], 96, 96, t["artist"]), t["artist"],
+                             link(f"artists/{slug(t['artist'])}.html"), t["tour"], " · ".join(x for x in (first, cities) if x))
     if recent_news:
-        parts.append(_h2("In the news") + "".join(_item(n["title"], link(f"news/{n['slug']}.html")) for n in recent_news))
+        rows += _section("In the news", "What you missed")
+        for n in recent_news:
+            rows += (f'<tr><td style="padding:8px 32px"><span style="{FONT};display:inline-block;background:{RED};color:#fff;font-size:10px;font-weight:bold;'
+                     f'letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:3px">{e(n.get("tag", "News"))}</span>'
+                     f'<div style="margin-top:5px"><a href="{link("news/" + n["slug"] + ".html")}" style="{FONT};font-size:16px;font-weight:bold;line-height:1.35;color:{INK};text-decoration:none">{e(n["title"])}</a></div></td></tr>')
     if week:
-        parts.append(_h2("On this week") + "".join(
-            _item(s["artist"], link(f"artists/{slug(s['artist'])}.html"), f"{_fmt(s['date'])} · {s['venue']}, {s['city']}") for s in week))
+        rows += _section("On this week", "Gigs worth leaving the house for")
+        rows += _datelist([(str(dt.date.fromisoformat(s_["date"]).day), dt.date.fromisoformat(s_["date"]).strftime("%b"), s_["artist"],
+                            f"{s_['venue']}, {s_['city']}", link(f"artists/{slug(s_['artist'])}.html")) for s_ in week])
     if onsale:
-        parts.append(_h2("Tickets on sale this week") + "".join(
-            _item(s["artist"], link(f"artists/{slug(s['artist'])}.html"), f"On sale {_fmt(s['onsale'])} · {s['city']}")
-            for s in sorted(onsale.values(), key=lambda s: s["onsale"])[:6]))
+        rows += _section("Set a reminder", "Tickets on sale this week")
+        rows += _datelist([(str(dt.date.fromisoformat(s_["onsale"][:10]).day), dt.date.fromisoformat(s_["onsale"][:10]).strftime("%b"), s_["artist"],
+                            f"{s_['city']} · show {_fmt(s_['date'])}", link(f"artists/{slug(s_['artist'])}.html"))
+                           for s_ in sorted(onsale.values(), key=lambda x: x["onsale"])[:6]])
     if fests:
-        parts.append(_h2("Festival watch") + "".join(
-            _item(f["name"], link(f"festivals/{f['slug']}.html"), f"{f['when']} · " + ", ".join(f["headliners"][:3]) + " and more") for f in fests))
+        rows += _section("Festival watch", "Plan ahead")
+        for f in fests:
+            places = ", ".join(x[1] for x in f["dates"])
+            rows += (f'<tr><td style="padding:6px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{INK};border-radius:8px"><tr>'
+                     f'<td style="padding:16px 18px"><a href="{link("festivals/" + f["slug"] + ".html")}" style="{HEAD};font-size:22px;color:#fff;text-decoration:none;text-transform:uppercase">{e(f["name"])}</a>'
+                     f'<div style="{FONT};font-size:13px;color:#ffb3a6;margin-top:4px;font-weight:bold">{e(f["when"])} · {e(places)}</div>'
+                     f'<div style="{FONT};font-size:13px;color:#d6d6d6;margin-top:4px">{e(", ".join(f["headliners"][:4]))} and more</div></td></tr></table></td></tr>')
     if vinyl:
-        parts.append(_h2("Out on vinyl soon") + "".join(
-            f'<p style="{FONT};font-size:16px;margin:0 0 10px"><strong>{e(a)}</strong> – {e(t)}'
-            f'<br><span style="color:{MUTED};font-size:14px">{e(_fmt(dd))} · {e(fm)}</span></p>' for dd, a, t, fm in vinyl))
+        rows += _section("Out on vinyl", "New records coming")
+        cells = []
+        for dd, a, t, fm in vinyl:
+            hit = (rel_dg.get(f"{a}|{t}") or {}).get("hit") or {}
+            href = HEATHEN + quote_plus(f"{a} {t}")
+            cells.append(f'<td width="33%" valign="top" style="padding:6px"><a href="{href}">{_img(hit.get("cover", ""), a + " " + t, 164, 164, a)}</a>'
+                         f'<div style="{FONT};font-size:11px;font-weight:bold;color:{RED};text-transform:uppercase;letter-spacing:1px;margin-top:8px">{e(_fmt(dd))}</div>'
+                         f'<div style="{FONT};font-size:14px;font-weight:bold;color:{INK};margin-top:2px">{e(a)}</div>'
+                         f'<div style="{FONT};font-size:13px;color:{MUTED}">{e(t)}</div></td>')
+        grid = ""
+        for i in range(0, len(cells), 3):
+            row = cells[i:i + 3] + ['<td width="33%"></td>'] * (3 - len(cells[i:i + 3]))
+            grid += "<tr>" + "".join(row) + "</tr>"
+        rows += f'<tr><td style="padding:4px 26px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">{grid}</table></td></tr>'
+        rows += f'<tr><td style="padding:6px 32px"><a href="{link("out-soon.html")}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">All upcoming vinyl →</a></td></tr>'
     if read:
-        parts.append(_h2("One good read") + _item(read[0]["title"], link(f"stories/{read[0]['slug']}.html"), read[0]["dek"]))
+        r = read[0]
+        rows += _section("One good read", "This week's story")
+        pic = photo(r.get("artist", ""))
+        img = (f'<a href="{link("stories/" + r["slug"] + ".html")}"><img src="{e(pic)}" alt="" width="536" style="display:block;width:100%;max-width:536px;height:auto;border-radius:8px;border:0"></a>'
+               if pic else "")
+        rows += (f'<tr><td style="padding:8px 32px">{img}'
+                 f'<div style="margin-top:12px"><a href="{link("stories/" + r["slug"] + ".html")}" style="{HEAD};font-size:24px;line-height:1.15;color:{INK};text-decoration:none;text-transform:uppercase">{e(r["title"])}</a></div>'
+                 f'<div style="{FONT};font-size:15px;line-height:1.5;color:{MUTED};margin-top:6px">{e(r["dek"])}</div>'
+                 f'<div style="margin-top:8px"><a href="{link("stories/" + r["slug"] + ".html")}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">Read it →</a></div></td></tr>')
+    rows += (f'<tr><td align="center" style="padding:34px 32px 6px;background:#fff">'
+             f'<div style="{HEAD};font-size:28px;color:{INK};text-transform:uppercase;margin-bottom:14px">What\'s on near you?</div>'
+             f'{_button("Find a gig near you", link("gigs/index.html"))}</td></tr>')
 
-    headline = [t["artist"] for t in fresh] or [s["artist"] for s in week]
+    headline = [t["artist"] for t in fresh] or [s_["artist"] for s_ in week]
     subject = f"This week: {_names(headline)} hit the road" if headline else "This week on Live Louder"
     preview = "New tours, the week's big gigs, festival news and what's out on vinyl."
-    intro = (f'<p style="{FONT};font-size:17px;line-height:1.5">Here\'s your week in live music: the tours just announced, '
-             f'the gigs worth leaving the house for, and the records worth owning.</p>')
-    body = intro + "".join(parts) + _button("Find a gig near you", link("gigs/index.html"))
     iso = today.isocalendar()
+    kicker = f"Week of {today.day} {today.strftime('%b')}"
     weekly = {"key": f"weekly-{iso[0]}-W{iso[1]:02d}", "subject": subject, "preview": preview,
-              "html": _wrap(body, preview), "built": today_s}
+              "html": _wrap(rows, preview, site, kicker), "built": today_s}
 
     # ------------------------------------------------ artist alerts
     alerts = {}
     soon = (today - dt.timedelta(days=3)).isoformat()
 
-    def add(name, item_id, line):
-        a = alerts.setdefault(name, {"artist": name, "tag": f"Artist: {name}", "items": [], "lines": []})
+    def add(name, item_id, row):
+        a = alerts.setdefault(name, {"artist": name, "tag": f"Artist: {name}", "items": [], "rows": []})
         a["items"].append(_short(item_id))
-        a["lines"].append(line)
+        a["rows"].append(row)
 
     for t in tours:
         if t.get("added", "") >= soon and t["dates"]:
             where = ", ".join(sorted({x[1] for x in t["dates"]}))
             add(t["artist"], f"tour:{slug(t['artist'])}:{t['added']}",
-                _item(f"{t['tour']} announced", link(f"artists/{slug(t['artist'])}.html"), f"From {_fmt(t['dates'][0][0])} · {where}"))
+                _datelist([(str(dt.date.fromisoformat(x[0]).day), dt.date.fromisoformat(x[0]).strftime("%b"), x[2], x[1],
+                            link(f"artists/{slug(t['artist'])}.html")) for x in t["dates"][:10]]))
     for n in news:
         if n["date"] >= soon and n.get("artist"):
-            add(n["artist"], f"news:{n['slug']}", _item(n["title"], link(f"news/{n['slug']}.html")))
-    for s in tm:
-        if s.get("onsale") and today_s <= s["onsale"][:10] <= (today + dt.timedelta(days=3)).isoformat():
-            add(s["artist"], f"onsale:{s['id']}",
-                _item(f"{s['city']}: tickets on sale {_fmt(s['onsale'])}", s["url"] or link(f"artists/{slug(s['artist'])}.html"),
-                      f"{_fmt(s['date'])} · {s['venue']}"))
+            add(n["artist"], f"news:{n['slug']}",
+                f'<tr><td style="padding:8px 32px"><a href="{link("news/" + n["slug"] + ".html")}" style="{FONT};font-size:16px;font-weight:bold;color:{INK};text-decoration:none">{e(n["title"])}</a>'
+                f'<div style="margin-top:4px"><a href="{link("news/" + n["slug"] + ".html")}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">Read more →</a></div></td></tr>')
+    for s_ in tm:
+        if s_.get("onsale") and today_s <= s_["onsale"][:10] <= (today + dt.timedelta(days=3)).isoformat():
+            add(s_["artist"], f"onsale:{s_['id']}",
+                _datelist([(str(dt.date.fromisoformat(s_["onsale"][:10]).day), dt.date.fromisoformat(s_["onsale"][:10]).strftime("%b"),
+                            f"Tickets on sale: {s_['city']}", f"Show {_fmt(s_['date'])} · {s_['venue']}", s_["url"] or link(f"artists/{slug(s_['artist'])}.html"))]))
     alert_list = []
     for name, a in alerts.items():
         pv = f"New {name} news on Live Louder."
-        inner = (f'<p style="{FONT};font-size:17px;line-height:1.5">You asked us to tell you when there\'s news about '
-                 f'<strong>{e(name)}</strong>. Here it is.</p>' + "".join(a["lines"][:8])
-                 + _button(f"See {name} tour dates", link(f"artists/{slug(name)}.html")))
+        pic = photo(name)
+        hero = (f'<tr><td style="padding:0"><img src="{e(pic)}" alt="{e(name)}" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0"></td></tr>' if pic else "")
+        rows = (hero + f'<tr><td style="padding:26px 32px 4px"><div style="{FONT};font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:{RED}">You follow</div>'
+                f'<div style="{HEAD};font-size:40px;line-height:1.05;color:{INK};text-transform:uppercase">{e(name)}</div>'
+                f'<div style="{FONT};font-size:16px;line-height:1.5;color:{INK};margin-top:8px">There\'s news. Here\'s what\'s new:</div></td></tr>'
+                + "".join(a["rows"][:6])
+                + f'<tr><td style="padding:24px 32px 4px">{_button(f"See {name} dates and tickets", link(f"artists/{slug(name)}.html"))}</td></tr>')
         alert_list.append({"artist": name, "tag": a["tag"], "items": a["items"],
-                           "subject": f"{name}: new on Live Louder", "preview": pv, "html": _wrap(inner, pv)})
+                           "subject": f"{name}: new on Live Louder", "preview": pv, "html": _wrap(rows, pv, site, "Artist alert")})
 
     d = out / "email"
     d.mkdir(parents=True, exist_ok=True)
     (d / "weekly.json").write_text(json.dumps(weekly))
     (d / "alerts.json").write_text(json.dumps({"built": today_s, "alerts": alert_list}))
+    page = lambda h: f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Email preview</title></head><body style="margin:0">{h}</body></html>'
+    (d / "weekly-preview.html").write_text(page(weekly["html"]))
+    if alert_list:
+        (d / "alert-preview.html").write_text(page(alert_list[0]["html"]))
     return weekly, alert_list
