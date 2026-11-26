@@ -14,7 +14,7 @@ from urllib.parse import quote_plus
 e = lambda s: html.escape(str(s), quote=True)
 RED, INK, MUTED, PAPER, LINE = "#e2391f", "#141414", "#6b6b6b", "#f2f0ec", "#e6e2dc"
 FONT = "font-family:Helvetica,Arial,sans-serif"
-HEAD = "font-family:Anton,Impact,'Arial Narrow Bold','Helvetica Neue',Arial,sans-serif;font-weight:400"
+HEAD = "font-family:Anton,Impact,Arial Narrow Bold,Helvetica Neue,Arial,sans-serif;font-weight:400"
 HEATHEN = "https://heathenrecords.com.au/search?type=product&q="
 
 
