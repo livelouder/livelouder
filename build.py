@@ -91,6 +91,7 @@ for a in artists.values():
 extra_names = ranked[:80]
 SETS = extras.setlists(extra_names, ROOT)
 DISCOGS = extras.discogs(extra_names, ROOT)
+REL_DG = extras.discogs_releases([i for i in rels["items"] if i[0] == "2027" or i[0] >= (TODAY.date() - dt.timedelta(days=28)).isoformat()], ROOT)
 for a in artists.values():
     a["setlist"] = (SETS.get(a["name"]) or {}).get("set")
     a["discogs"] = DISCOGS.get(a["name"]) or {}
@@ -535,18 +536,58 @@ page("tours.html", "Australian tours: every artist touring Australia | Live Loud
      "The biggest tours coming to Australia, with dates, venues and tickets, plus every artist with Australian shows booked.", tp, "tours.html")
 
 # ---------------------------------------------------------------- releases
+def rel_card(a, b, c, fm):
+    hit = (REL_DG.get(f"{b}|{c}") or {}).get("hit") or {}
+    cover = (f'<img src="{e(hit["cover"])}" alt="{e(b)} – {e(c)} cover" loading="lazy">' if hit.get("cover")
+             else f'<span class="vc-blank" style="--h:{hue(b + c)}"><b>{e(b)}</b></span>')
+    when = "Date TBC" if a == "2027" else ("Out now" if a < TODAY_S else d(a).strftime("%a %-d %b"))
+    details = " · ".join(x for x in (fm, hit.get("formats", ""), hit.get("label", "")) if x)
+    links = f'<a href="{HEATHEN + quote_plus(b + " " + c)}" rel="noopener">Find it on vinyl ↗</a>'
+    if hit.get("url"):
+        links += f' <a class="dg" href="{e(hit["url"])}" rel="noopener">Discogs ↗</a>'
+    return (f'<div class="vcard">{cover}<div class="vtext"><span class="vwhen">{e(when)}</span><strong>{e(b)}</strong>'
+            f'<span class="vtitle">{e(c)}</span><span class="meta">{e(details)}</span><span class="vlinks">{links}</span></div></div>')
+
 groups = {}
 for a, b, c, fm in rels["items"]:
-    groups.setdefault(a, []).append((b, c, fm))
-rp = '<section class="page-title"><div class="wrap"><h1>Out soon on vinyl</h1><p>New albums, reissues and box sets coming out on vinyl.</p></div></section><section class="band"><div class="wrap" style="max-width:860px">'
+    groups.setdefault(a, []).append((a, b, c, fm))
+rp = ('<section class="page-title"><div class="wrap"><h1>Out soon on vinyl</h1><p>New albums, reissues and box sets coming out on vinyl. '
+      'Also: <a style="color:#fff" href="/most-wanted.html">the most-wanted records from artists touring Australia →</a></p></div></section><section class="band"><div class="wrap">')
 for k in sorted(groups, key=lambda k: "9999" if len(k) == 4 else k):
     past = len(k) > 4 and k < TODAY_S
     head = "Coming in 2027, date to be confirmed" if len(k) == 4 else ("Out now · " if past else "") + d(k).strftime("%A %-d %B %Y")
-    lis = "".join(f'<li><div class="when">{"TBC" if len(k) == 4 else d(k).strftime("%-d %b")}</div><div class="what"><strong>{e(b)} – {e(c)}</strong><span>{e(fm)}</span></div></li>' for b, c, fm in groups[k])
-    rp += f'<h2 style="font-size:28px;margin-top:28px">{e(head)}</h2><ul class="rel">{lis}</ul>'
-rp += f'<p class="note">International release dates. Australian stock often lands a week or two later. Updated {UPDATED}.</p></div></section>'
+    rp += f'<h2 style="font-size:28px;margin-top:28px">{e(head)}</h2><div class="vgrid">{"".join(rel_card(*x) for x in groups[k])}</div>'
+rp += f'<p class="note">International release dates. Australian stock often lands a week or two later. Pressing details from Discogs where listed. Updated {UPDATED}.</p></div></section>'
 page("out-soon.html", "New vinyl releases: what's coming out soon | Live Louder",
-     "Upcoming vinyl releases, reissues and box sets, with formats and release dates.", rp, "out-soon.html")
+     "Upcoming vinyl releases, reissues and box sets, with covers, formats, labels and release dates.", rp, "out-soon.html")
+
+# ---------------------------------------------------------------- most wanted (Discogs want counts, artists touring Australia)
+wanted = []
+for a in artists.values():
+    if not a["shows"]:
+        continue
+    recs = sorted([r for r in (a.get("discogs") or {}).get("records", []) if r.get("want")], key=lambda r: -r["want"])[:2]
+    for r in recs:
+        wanted.append(dict(r, artist=a["name"], slug=a["slug"], first=a["shows"][0]["date"], cities=a["cities"]))
+wanted.sort(key=lambda r: -r["want"])
+wanted = wanted[:30]
+(OUT / "data").mkdir(parents=True, exist_ok=True)
+(OUT / "data" / "most-wanted.json").write_text(json.dumps({"updated": TODAY_S, "records": wanted}))
+if wanted:
+    rows = ""
+    for i, r in enumerate(wanted, 1):
+        img = f'<img src="{e(r["thumb"])}" alt="{e(r["title"])} cover" loading="lazy">' if r.get("thumb") else f'<span class="vc-blank" style="--h:{hue(r["title"])}"></span>'
+        rows += (f'<li><span class="mw-n">{i}</span>{img}<div><strong>{e(r["title"])}</strong> <span class="meta">({r["year"]})</span><br>'
+                 f'<a href="/artists/{r["slug"]}.html">{e(r["artist"])}</a> <span class="meta">· touring from {e(fmt(r["first"], False, False))}: {e(", ".join(r["cities"][:4]))}</span><br>'
+                 f'<span class="meta">{r["want"]:,} collectors want it · {r["owned"]:,} own it</span> · '
+                 f'<a href="{HEATHEN + quote_plus(r["artist"] + " " + r["title"])}" rel="noopener">Find it on vinyl ↗</a></div></li>')
+    mw = (f'<section class="page-title"><div class="wrap"><h1>Most wanted</h1><p>The records collectors want most, from artists playing Australia soon. Ranked by Discogs wantlists. Updated {UPDATED}.</p></div></section>'
+          f'<section class="band"><div class="wrap" style="max-width:860px"><ol class="mw">{rows}</ol>'
+          f'<p class="note">"Want" counts are how many Discogs users have the record on their wantlist. Data from <a href="https://www.discogs.com" rel="noopener">Discogs</a>.</p></div></section>')
+else:
+    mw = '<section class="page-title"><div class="wrap"><h1>Most wanted</h1><p>Check back soon: we\'re pulling in collector data.</p></div></section>'
+page("most-wanted.html", "Most wanted records from artists touring Australia | Live Louder",
+     "The vinyl records collectors want most from artists playing Australia soon, ranked by Discogs wantlists.", mw, "out-soon.html")
 
 # ---------------------------------------------------------------- stories
 si = '<section class="page-title"><div class="wrap"><h1>Stories</h1><p>Albums, artists and the shows worth catching.</p></div></section><section class="band"><div class="wrap" style="max-width:860px">'
@@ -573,7 +614,7 @@ page("404.html", "Page not found | Live Louder", "Page not found.",
      '<section class="page-title"><div class="wrap"><h1>Wrong stage</h1><p>That page isn\'t here. Try the <a style="color:#fff" href="/gigs/index.html">gig guide</a>, <a style="color:#fff" href="/news/index.html">news</a> or <a style="color:#fff" href="/tours.html">tours</a>.</p></div></section>')
 shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
-urls = ["", "news/", "gigs/", "tours.html", "festivals/", "out-soon.html", "stories/", "about.html"] \
+urls = ["", "news/", "gigs/", "tours.html", "festivals/", "out-soon.html", "most-wanted.html", "stories/", "about.html"] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
     + [f"venues/{k}.html" for k in venues] + [f"stories/{s['slug']}.html" for s in stories]

@@ -20,5 +20,5 @@ export default async () => {
   return new Response(log.join("\n") || "no alerts today");
 };
 
-// 20:30 UTC = 7:30am in Sydney during daylight saving, after the 6am rebuild
-export const config = { schedule: "30 20 * * *" };
+// 20:45 UTC = 7:45am in Sydney during daylight saving, after the 7am rebuild
+export const config = { schedule: "45 20 * * *" };
