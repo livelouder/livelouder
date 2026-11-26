@@ -12,7 +12,7 @@
 
   // Only load the sign-in library when it's needed: on My gigs, when coming back from a sign-in link,
   // or when this browser has signed in before.
-  const needed = document.getElementById('profile') || /access_token|error_description|type=magiclink/.test(location.hash + location.search) || lsGet('llSignedIn');
+  const needed = document.getElementById('profile') || document.getElementById('pub') || /access_token|error_description|type=magiclink/.test(location.hash + location.search) || lsGet('llSignedIn');
   let readyP = null;
   function ready() {
     if (!readyP) readyP = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm').then(m => {
@@ -110,14 +110,14 @@
       document.body.appendChild(d);
       d.querySelector('#siGoogle').addEventListener('click', async () => {
         const c = await ready(); if (!c) return;
-        await c.auth.signInWithOAuth({provider: 'google', options: {redirectTo: location.origin + '/my-gigs.html'}});
+        await c.auth.signInWithOAuth({provider: 'google', options: {redirectTo: document.getElementById('pub') ? location.href.split('#')[0] : location.origin + '/my-gigs.html'}});
       });
       d.querySelector('#siEmail').addEventListener('submit', async ev => {
         ev.preventDefault();
         const msg = d.querySelector('#siMsg'), email = d.querySelector('#siAddr').value.trim();
         msg.textContent = 'Sending…';
         const c = await ready(); if (!c) { msg.textContent = "Couldn't connect. Try again in a minute."; return; }
-        const {error} = await c.auth.signInWithOtp({email, options: {emailRedirectTo: location.origin + '/my-gigs.html'}});
+        const {error} = await c.auth.signInWithOtp({email, options: {emailRedirectTo: document.getElementById('pub') ? location.href.split('#')[0] : location.origin + '/my-gigs.html'}});
         msg.innerHTML = error ? esc(error.message.includes('rate') ? 'Too many tries. Wait a few minutes and try again.' : error.message)
                               : `<b>Check your email.</b> We've sent a sign-in link to ${esc(email)}. It can take a minute to arrive, and might land in spam.`;
       });
@@ -147,6 +147,26 @@
     await sb.from('profiles').update({[field]: val, updated_at: new Date().toISOString()}).eq('id', user.id);
   }
 
+  // Friends: profile details (username, display name, sharing) and the database functions in supabase/schema.sql.
+  async function saveProfile(fields) {
+    const c = await ready();
+    if (!c || !user) return {error: 'Sign in first'};
+    const {error} = await c.from('profiles').update(Object.assign({}, fields, {updated_at: new Date().toISOString()})).eq('id', user.id);
+    if (error) return {error: /profiles_username_key|duplicate/.test(error.message) ? 'That username is taken. Try another.' : /username_ok/.test(error.message) ? 'Usernames are 3 to 24 letters, numbers or underscores.' : "Couldn't save that. Try again."};
+    profile = Object.assign(profile || {}, fields);
+    ui();
+    return {};
+  }
+  async function rpc(fn, args) {
+    const c = await ready();
+    if (!c) return {error: 'offline'};
+    const {data, error} = await c.rpc(fn, args || {});
+    return error ? {error: error.message} : {data};
+  }
+  // Wait until we know whether this visitor is signed in.
+  let sessionP = null;
+  const session = () => sessionP || (sessionP = ready().then(c => c && c.auth.getSession()).then(r => { if (r && r.data && r.data.session && !user) user = r.data.session.user; return user; }).catch(() => null));
+
   // Header dot, and tell the My gigs page to redraw.
   function ui() {
     document.querySelectorAll('.mylink').forEach(a => a.classList.toggle('in', !!user));
@@ -154,7 +174,7 @@
   }
 
   window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
-                syncing: () => merging, ready: () => !!sb};
+                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }

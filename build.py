@@ -1024,12 +1024,24 @@ mg = """<div id="profile">
 <div id="pCta"></div></div><div class="wrap"><div class="pstats" id="pStats"></div></div></section>
 <nav class="ptabs" aria-label="My gigs sections"><div class="wrap">
 <a href="#overview" data-tab="overview">Overview</a><a href="#gigs" data-tab="gigs">Gigs</a><a href="#artists" data-tab="artists">Artists</a>
-<a href="#records" data-tab="records">Records</a><a href="#wantlist" data-tab="wantlist">Wantlist</a><a href="#settings" data-tab="settings">Settings</a></div></nav>
+<a href="#records" data-tab="records">Records</a><a href="#wantlist" data-tab="wantlist">Wantlist</a><a href="#friends" data-tab="friends">Friends</a><a href="#settings" data-tab="settings">Settings</a></div></nav>
 <section class="band pbody"><div class="wrap" id="pBody"><p class="note">Loading…</p></div></section>
 <dialog id="recDlg" aria-label="Record details"><form method="dialog" class="sclose"><button aria-label="Close">×</button></form><div id="recBody"></div></dialog>
 </div>
 <script src="/profile.js" defer></script>"""
 page("my-gigs.html", "My gigs | Live Louder", "Your saved gigs, followed artists and record collection on Live Louder.", mg)
+
+# ---------------------------------------------------------------- shared profiles (/u/<username>, filled in by people.js)
+pub = """<div id="pub">
+<section class="phero"><div class="wrap phero-in"><div class="pav" id="uAv" aria-hidden="true">♥</div>
+<div class="pwho"><h1 id="uName">Loading…</h1><p id="uSub"></p></div><div id="uCta" class="pbtns"></div></div>
+<div class="wrap"><div class="pstats" id="uStats"></div></div></section>
+<nav class="ptabs" aria-label="Profile sections"><div class="wrap" id="uTabs"></div></nav>
+<section class="band pbody"><div class="wrap" id="uBody"><p class="note">Loading…</p></div></section>
+</div>
+<script src="/people.js" defer></script>"""
+page("u/index.html", "A Live Louder profile | Live Louder", "Gigs they're going to and their record collection, on Live Louder.", pub,
+     extra_head='<meta name="robots" content="noindex">')
 (OUT / "data").mkdir(exist_ok=True)
 (OUT / "data" / "artists.json").write_text(json.dumps({a["slug"]: [a["name"], a.get("photo", ""), a["gb"],
     a["shows"][0]["date"] if a["shows"] else "", a["shows"][0]["city"] if a["shows"] else "", len(a["shows"])] for a in artists.values()}, separators=(",", ":")))
@@ -1156,6 +1168,7 @@ shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
 shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
+shutil.copy(ROOT / "src/people.js", OUT / "people.js")
 for icon in (ROOT / "src/icons").iterdir():
     shutil.copy(icon, OUT / icon.name)
 (OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",

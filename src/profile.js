@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const recs = list => Object.values(MY.get()[list] || {});
   let recQ = '', recSort = 'added', recTouring = false, recShown = 60, wantShown = 60;
   const touring = {};
+  let people = null, peopleLoading = false, find = {q: '', results: null, loading: false}, shareMsg = '', copied = false;
   const tour = name => touring[norm(name)];
 
   // ------------------------------------------------ pieces
@@ -174,9 +175,92 @@ document.addEventListener('DOMContentLoaded', function () {
       ${!items.length ? '<p class="note">Nothing matches that filter.</p>' : ''}`;
     return h;
   }
+
+  // ------------------------------------------------ friends
+  const me = () => (window.ACC && ACC.user()) || null;
+  const prof = () => (window.ACC && ACC.profile()) || {};
+  const shareUrl = u => `https://livelouder.com.au/u/${encodeURIComponent(u)}`;
+  const purl = u => `${root}u/?u=${encodeURIComponent(u)}`;
+  function avatar(p, cls) {
+    return p.avatar ? `<span class="${cls}"><img src="${esc(p.avatar)}" alt="" referrerpolicy="no-referrer" loading="lazy"></span>`
+      : `<span class="${cls}" style="--h:${hue(p.username || '?')}"><b>${esc((p.name || p.username || '?')[0].toUpperCase())}</b></span>`;
+  }
+  function personTile(p, kind) {
+    const going = (p.going || []).length;
+    const line = !p.shared ? 'Profile is private now' : [going ? `Going to ${going}${going === 6 ? '+' : ''} ${going === 1 ? 'gig' : 'gigs'}` : '', p.records ? `${Number(p.records).toLocaleString()} ${p.records === 1 ? 'record' : 'records'}` : ''].filter(Boolean).join(' · ') || 'Nothing shared yet';
+    const btn = kind === 'following' ? `<button type="button" class="followbtn on" data-unfollow="${esc(p.username)}">Following</button>`
+      : kind === 'follower' ? (p.following ? `<button type="button" class="followbtn on" data-unfollow="${esc(p.username)}">Following</button>` : `<button type="button" class="followbtn" data-follow="${esc(p.username)}">Follow back</button>`)
+        + `<button type="button" class="linkish small" data-removefollower="${esc(p.username)}">Remove</button>`
+      : p.following ? `<button type="button" class="followbtn on" data-unfollow="${esc(p.username)}">Following</button>` : `<button type="button" class="followbtn" data-follow="${esc(p.username)}">Follow</button>`;
+    return `<div class="ptile">${p.shared ? `<a href="${purl(p.username)}">` : '<div>'}${avatar(p, 'fav')}<strong>${esc(p.name || p.username)}</strong><span class="handle">@${esc(p.username)}</span>${p.shared ? '</a>' : '</div>'}
+      <span class="anext">${esc(line)}</span><div class="pbtns">${btn}</div></div>`;
+  }
+  function loadPeople(force) {
+    if (!me() || peopleLoading || (people && !force)) return;
+    peopleLoading = true;
+    ACC.rpc('my_people').then(r => { people = r.data || {following: [], followers: [], private_followers: 0}; peopleLoading = false; render(); });
+  }
+  function shareBox() {
+    const p = prof();
+    if (p.share && p.username) {
+      return `<div class="sharebox on"><div><span class="ntag">Your profile is shared</span><p class="shareurl">${esc(shareUrl(p.username).replace('https://', ''))}</p>
+        <p class="note">Send this link to your mates so they can follow you. Change what's shared in <a href="#settings">Settings</a>.</p></div>
+        <div class="pbtns"><button type="button" class="btn" data-sharelink>${copied ? 'Link copied ✓' : navigator.share ? 'Share my profile' : 'Copy my link'}</button><a class="btn ghost" href="${purl(p.username)}">View my profile</a></div></div>`;
+    }
+    return `<div class="sharebox"><div><span class="ntag">Your profile is private</span><h3>Let your friends follow you</h3>
+      <p>Switch sharing on and your friends can see the gigs you're going to and your records. You can still follow people while yours is private.</p></div>
+      <div class="pbtns"><a class="btn" href="#settings">Set up sharing</a></div></div>`;
+  }
+  function friendsGoing() {
+    const by = {};
+    ((people && people.following) || []).filter(p => p.shared).forEach(p => (p.going || []).forEach(g => {
+      if (g.d < today) return;
+      (by[g.id] = by[g.id] || {g, who: []}).who.push(p);
+    }));
+    return Object.values(by).sort((a, b) => a.g.d.localeCompare(b.g.d)).slice(0, 12);
+  }
+  function friendsTab() {
+    if (!me()) return empty('👋', 'Follow your friends', 'Sign in, then follow your friends to see which gigs they\'re going to and what\'s in their record collection.', '<button type="button" class="btn" data-signin>Sign in or create an account</button>');
+    loadPeople();
+    let h = shareBox();
+    h += `<form class="recsearch findform" data-findpeople role="search"><input name="q" type="search" placeholder="Find friends by name or username" aria-label="Find friends" value="${esc(find.q)}" autocomplete="off"><button class="btn">Search</button></form>`;
+    if (find.loading) h += '<p class="note">Searching…</p>';
+    else if (find.results) h += find.results.length ? `<div class="shead"><h3>People matching "${esc(find.q)}"</h3><button type="button" class="linkish" data-clearfind>Clear</button></div><div class="pgrid">${find.results.map(p => personTile(p, 'search')).join('')}</div>`
+      : `<p class="note">No one found for "${esc(find.q)}". Only people who share their profile show up. Ask your friend for their Live Louder link.</p>`;
+    if (!people) return h + '<p class="note">Loading your friends…</p>';
+    const fg = friendsGoing();
+    if (fg.length) h += head('Your friends are going') + `<ul class="fgoing">${fg.map(({g, who}) => { const p = dparts(g.d);
+      return `<li><span class="fgd"><b>${p.d}</b>${MON[p.m - 1]}</span><div class="fgtext"><a class="gname" href="${esc(gp(g))}">${esc(g.a)}</a><span class="gwhere">${esc(g.v)}, ${esc(g.c)}</span>
+        <span class="fgwho">${who.slice(0, 4).map(x => avatar(x, 'fav xs')).join('')}${esc(who.length === 1 ? who[0].name + ' is going' : who[0].name + ' and ' + (who.length - 1) + (who.length === 2 ? ' other' : ' others') + ' are going')}</span></div>
+        <button class="save" type="button" data-gig="${esc(JSON.stringify({id: g.id, d: g.d, tm: g.tm, a: g.a, s: g.s, v: g.v, c: g.c, u: g.u, vs: g.vs, p: g.p}))}" aria-pressed="false" aria-label="Save">♡</button></li>`; }).join('')}</ul>`;
+    h += head('Following', people.following.length ? `<span class="note">${people.following.length}</span>` : '');
+    h += people.following.length ? `<div class="pgrid">${people.following.map(p => personTile(p, 'following')).join('')}</div>` : '<p class="note">You\'re not following anyone yet. Search for a friend above, or open a friend\'s Live Louder link and tap Follow.</p>';
+    const fl = people.followers || [];
+    h += head('Followers', fl.length + people.private_followers ? `<span class="note">${fl.length + people.private_followers}</span>` : '');
+    h += fl.length ? `<div class="pgrid">${fl.map(p => personTile(p, 'follower')).join('')}</div>` : '';
+    if (people.private_followers) h += `<p class="note">${fl.length ? 'Plus ' : ''}${people.private_followers} ${people.private_followers === 1 ? 'person' : 'people'} with a private profile ${people.private_followers === 1 ? 'follows' : 'follow'} you.</p>`;
+    if (!fl.length && !people.private_followers) h += '<p class="note">No followers yet. Share your link and they\'ll show up here.</p>';
+    return h;
+  }
+  function suggestName() {
+    const u = me(), md = (u && u.user_metadata) || {};
+    return String(md.full_name || (u && u.email || '').split('@')[0] || '').toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 20);
+  }
+  function shareCard() {
+    const u = me(), p = prof();
+    if (!u) return '';
+    const md = u.user_metadata || {};
+    return `<div class="card wide" id="sharing"><h3>Your profile and friends</h3>
+      <form data-shareform class="shareform">
+      <label>Username<span class="uname"><i>livelouder.com.au/u/</i><input name="username" value="${esc(p.username || suggestName())}" maxlength="24" autocapitalize="off" autocomplete="off" spellcheck="false" pattern="[a-z0-9_]{3,24}" required></span></label>
+      <label>Name people see<input name="display_name" value="${esc(p.display_name || md.full_name || '')}" maxlength="40" placeholder="Your name or a nickname"></label>
+      <label class="tog"><input type="checkbox" name="share" ${p.share ? 'checked' : ''}> <span><b>Share my profile.</b> Anyone with your link, and people who follow you, can see the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown.</span></label>
+      <button class="btn">Save</button>${shareMsg ? `<p class="note impmsg">${shareMsg}</p>` : ''}</form>
+      <p class="note">Switch sharing off any time and your profile goes private straight away.</p></div>`;
+  }
   function settings() {
     const u = window.ACC && ACC.user(), p = (window.ACC && ACC.profile()) || {}, st = MY.get();
-    let h = '<div class="sgrid">';
+    let h = '<div class="sgrid">' + shareCard();
     h += `<div class="card"><h3>Your account</h3>${u ? `<p>Signed in as <b>${esc(u.email || '')}</b></p><p class="acts"><button type="button" class="linkish" data-act="out">Sign out</button></p>`
       : `<p>You're not signed in, so everything here is saved on this device only.</p><button type="button" class="btn" data-signin>Sign in or create an account</button><p class="note">Free. No password needed.</p>`}</div>`;
     h += `<div class="card"><h3>Emails</h3>${u ? `<label class="tog"><input type="checkbox" data-pref="remind_gigs" ${p.remind_gigs !== false ? 'checked' : ''}> A reminder a few days before gigs I've saved</label>
@@ -192,13 +276,13 @@ document.addEventListener('DOMContentLoaded', function () {
     hero();
     document.querySelectorAll('.ptabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === tab ? 'page' : 'false'));
     const body = document.getElementById('pBody');
-    body.innerHTML = tab === 'gigs' ? gigsTab() : tab === 'artists' ? artistsTab() : tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wants') : tab === 'settings' ? settings() : overview();
+    body.innerHTML = tab === 'gigs' ? gigsTab() : tab === 'artists' ? artistsTab() : tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wants') : tab === 'settings' ? settings() : tab === 'friends' ? friendsTab() : overview();
     const sel = body.querySelector('[data-rsort]'); if (sel) sel.value = recSort;
     MY.paint();
   }
   window.MYPAGE = render;
   document.addEventListener('acc', render);
-  function setTab() { const t = (location.hash || '#overview').slice(1); tab = ['overview', 'gigs', 'artists', 'records', 'wantlist', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
+  function setTab() { const t = (location.hash || '#overview').slice(1); tab = ['overview', 'gigs', 'artists', 'records', 'wantlist', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
   window.addEventListener('hashchange', () => { setTab(); document.querySelector('.ptabs').scrollIntoView({block: 'nearest'}); });
 
   // ------------------------------------------------ search, import, record view
@@ -258,6 +342,20 @@ document.addEventListener('DOMContentLoaded', function () {
   box.addEventListener('click', ev => {
     const g = ev.target.closest('button.going');
     if (g) { const st = MY.get(), x = st.gigs[g.dataset.id]; if (x) { x.going = !x.going; MY.save(); MY.push('gig', 'going', x); render(); } return; }
+    const fo = ev.target.closest('[data-follow]'), uf = ev.target.closest('[data-unfollow]'), rf = ev.target.closest('[data-removefollower]');
+    if (fo || uf || rf) {
+      const b = fo || uf || rf; b.disabled = true;
+      const call = fo ? ACC.rpc('follow_user', {uname: fo.dataset.follow}) : ACC.rpc('unfollow_user', {uname: (uf || rf).dataset.unfollow || rf.dataset.removefollower, remove_follower: !!rf});
+      call.then(() => { if (find.results) find.results.forEach(p => { if (p.username === b.dataset.follow) p.following = true; if (p.username === b.dataset.unfollow) p.following = false; }); loadPeople(true); });
+      return;
+    }
+    if (ev.target.closest('[data-clearfind]')) { find = {q: '', results: null, loading: false}; render(); return; }
+    if (ev.target.closest('[data-sharelink]')) {
+      const url = shareUrl(prof().username);
+      if (navigator.share) navigator.share({title: 'My gigs and records on Live Louder', url}).catch(() => {});
+      else navigator.clipboard.writeText(url).then(() => { copied = true; render(); setTimeout(() => { copied = false; render(); }, 2500); });
+      return;
+    }
     const rc = ev.target.closest('[data-rec]');
     if (rc) { openRecord(rc.dataset.rec, rc.dataset.from); return; }
     if (ev.target.closest('[data-clearsearch]')) { srch = {q: '', loading: false, results: null, error: ''}; render(); return; }
@@ -275,6 +373,16 @@ document.addEventListener('DOMContentLoaded', function () {
   box.addEventListener('submit', ev => {
     const f = ev.target.closest('[data-dgform]');
     if (f) { ev.preventDefault(); const u = f.u.value.trim(); if (u && !imp.loading) importDiscogs(u); return; }
+    const pf = ev.target.closest('[data-findpeople]');
+    if (pf) { ev.preventDefault(); const q = pf.q.value.trim(); if (q.length < 2) return; find = {q, results: null, loading: true}; render();
+      ACC.rpc('find_people', {q}).then(r => { find = {q, results: r.data || [], loading: false}; render(); }); return; }
+    const shf = ev.target.closest('[data-shareform]');
+    if (shf) { ev.preventDefault();
+      const username = shf.username.value.trim().toLowerCase(), display_name = shf.display_name.value.trim(), share = shf.share.checked;
+      if (!/^[a-z0-9_]{3,24}$/.test(username)) { shareMsg = 'Usernames are 3 to 24 lowercase letters, numbers or underscores.'; render(); return; }
+      shareMsg = 'Saving…'; render();
+      ACC.saveProfile({username, display_name: display_name || null, share}).then(r => { shareMsg = r.error ? esc(r.error) : share ? `Saved. Your profile is shared at <a href="${purl(username)}">livelouder.com.au/u/${esc(username)}</a>.` : 'Saved. Your profile is private.'; render(); });
+      return; }
     const sf = ev.target.closest('[data-recsearch]');
     if (sf) { ev.preventDefault(); const q = sf.q.value.trim(); if (q) doSearch(q); }
   });

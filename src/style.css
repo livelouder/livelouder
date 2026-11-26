@@ -523,3 +523,46 @@ button.btn.ghost{border:2px solid var(--ink);background:transparent;color:var(--
 .distout{font-size:15px}
 .vphoto{margin:0}.vphoto img{display:block;width:100%;max-height:380px;object-fit:cover}.vphoto figcaption{font-size:12px;color:var(--muted);padding:6px 14px 0}
 a.gd{text-decoration:none;color:inherit}
+
+/* ---------------------------------------------------------------- Friends */
+.pbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.followbtn{min-height:40px;padding:0 18px;border-radius:999px;border:2px solid var(--red);background:var(--red);color:#fff;font:700 14px "Archivo",sans-serif;cursor:pointer}
+.followbtn.on{background:transparent;color:var(--ink);border-color:var(--line)}
+.followbtn.on:hover{border-color:var(--red);color:var(--red)}
+.followbtn.big{min-height:48px;padding:0 26px;font-size:16px}
+.phero .followbtn.on{color:#f6f5f2;border-color:#555}
+.linkish.small{font-size:13px}
+.sharebox{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between;background:var(--card);color:var(--ink);border-radius:14px;padding:22px 24px;box-shadow:0 1px 0 var(--line),0 6px 18px rgba(0,0,0,.06);margin-bottom:24px;border-left:6px solid var(--muted)}
+.sharebox.on{border-left-color:var(--red)}
+.sharebox>div:first-child{flex:1 1 320px}.sharebox h3{font-size:24px;margin:6px 0}.sharebox p{color:var(--muted);margin-top:4px}
+.shareurl{font:700 18px "Archivo",sans-serif;color:var(--ink)!important;word-break:break-all;margin-top:6px}
+.findform{margin-bottom:8px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
+.ptile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:var(--card);color:var(--ink);border-radius:12px;padding:20px 12px 16px;box-shadow:0 1px 0 var(--line)}
+.ptile>a,.ptile>div:first-child{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:var(--ink)}
+.ptile strong{margin-top:6px}.handle{font-size:13px;color:var(--muted)}
+.ptile .pbtns{justify-content:center;margin-top:6px}
+.fav{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;overflow:hidden;flex:none;background:linear-gradient(135deg,hsl(var(--h,0) 55% 42%),hsl(calc(var(--h,0) + 40) 60% 22%))}
+.fav img{width:100%;height:100%;object-fit:cover}.fav b{font:400 36px "Anton",Impact,sans-serif;color:#fff}
+.fav.xs{width:26px;height:26px;border:2px solid var(--card);margin-right:-6px}.fav.xs b{font-size:13px}
+.fgoing{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.fgoing li{display:flex;align-items:center;gap:16px;background:var(--card);color:var(--ink);border-radius:12px;padding:12px 16px;box-shadow:0 1px 0 var(--line)}
+.fgoing .fgd{flex:none;width:54px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red)}
+.fgoing .fgd b{display:block;font:400 28px/1 "Anton",Impact,sans-serif;color:var(--ink);letter-spacing:0}
+.fgtext{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}.fgtext .gname{font-weight:700;color:var(--ink);text-decoration:none;font-size:17px}
+.fgwho{display:flex;align-items:center;gap:0;font-size:14px;font-weight:700;margin-top:4px}.fgwho .fav.xs:last-of-type{margin-right:8px}
+.fgoing .save{width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-size:16px;flex:none}
+.fgoing .save[aria-pressed=true],#pub .gact .save[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+#pub .gact .save{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;font-size:16px;padding:0}
+.card.wide{grid-column:1/-1}
+.shareform{display:grid;gap:14px;max-width:640px}
+.shareform label{display:block;font-weight:700}
+.shareform input[type=text],.shareform input:not([type]),.shareform .uname{display:flex;align-items:center;width:100%;min-height:46px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;margin-top:6px;font:16px "Archivo",sans-serif;background:var(--card);color:var(--ink)}
+.shareform .uname input{border:0;padding:0;margin:0;min-height:42px;flex:1;min-width:80px;outline:none;background:transparent;color:var(--ink);font:16px "Archivo",sans-serif}
+.shareform .uname i{font-style:normal;color:var(--muted);white-space:nowrap}
+.shareform .tog{font-weight:400}.shareform .btn{justify-self:start}
+.incommon{background:#141414;color:#f6f5f2;border-radius:14px;padding:20px 24px;margin-bottom:8px}
+.incommon ul{margin:8px 0 0;padding-left:20px;line-height:1.7}.incommon b{color:#fff}
+.gbadge.you{right:auto;left:12px;top:auto;bottom:12px;background:#f6f5f2;color:#141414}
+#pub .rres .rcard{text-decoration:none}
+@media (max-width:600px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.fav{width:64px;height:64px}.fgoing li{gap:10px;padding:10px 12px}}
