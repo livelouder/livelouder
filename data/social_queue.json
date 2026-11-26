@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "date": "2026-11-29",
+    "kind": "rank-these",
+    "kicker": "Rank these",
+    "caption": "Powderfinger are coming back. So settle it: rank these albums, best to worst 👇\n\nParables for Wooden Ears (1994), Double Allergic (1996), Internationalist (1998), Odyssey Number Five (2000), Vulture Street (2003), Dream Days at the Hotel Existence (2007), Golden Rule (2009).\n\nSend this to the mate who'll fight you on it. Tour news at livelouder.com.au (link in bio).\n\n#powderfinger #australianmusic #vinyl #90smusic",
+    "slides": [
+      {"type": "hook", "text": "Rank every Powderfinger album", "sub": "Best to worst. Go.", "red": true},
+      {"type": "list", "title": "The contenders", "rows": [["Parables for Wooden Ears", "1994"], ["Double Allergic", "1996"], ["Internationalist", "1998"], ["Odyssey Number Five", "2000"], ["Vulture Street", "2003"], ["Dream Days / Golden Rule", "2007 / 2009"]]},
+      {"type": "text", "label": "The big debate", "title": "Internationalist or Odyssey?", "body": "Ask ten fans and most will land on one of these two. Odyssey Number Five has the hits. Internationalist has the edge. Where do you land?"},
+      {"type": "cta", "text": "Drop your ranking in the comments", "sub": "Then send this to the mate who'll argue with you."}
+    ]
+  },
+  {
+    "date": "2026-12-01",
+    "kind": "name-a-better",
+    "kicker": "Name a better one",
+    "caption": "Best Aussie album of the 90s. One pick only 👇\n\nYou Am I – Hi Fi Way (1995)\nsilverchair – Frogstomp (1995)\nSpiderbait – Ivy and the Big Apples (1996)\nRegurgitator – Unit (1997)\nPowderfinger – Internationalist (1998)\nThe Living End – The Living End (1998)\n\nOr name a better one. Send this to your 90s gig crew.\n\nlivelouder.com.au (link in bio)\n\n#australianmusic #90smusic #vinyl #ozrock",
+    "slides": [
+      {"type": "hook", "text": "Best Aussie album of the 90s?", "sub": "You only get one pick.", "red": true},
+      {"type": "list", "title": "The shortlist", "rows": [["Hi Fi Way", "You Am I · 1995"], ["Frogstomp", "silverchair · 1995"], ["Ivy and the Big Apples", "Spiderbait · 1996"], ["Unit", "Regurgitator · 1997"], ["Internationalist", "Powderfinger · 1998"], ["The Living End", "The Living End · 1998"]]},
+      {"type": "cta", "text": "Pick one. Or name a better one.", "sub": "Send this to your 90s gig crew and settle it in the comments."}
+    ]
+  }
+]
