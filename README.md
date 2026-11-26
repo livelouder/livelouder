@@ -1,8 +1,13 @@
-Live Louder website (livelouder.com.au)
+# Live Louder (livelouder.com.au)
 
-site/      The finished website. This is the folder you drag into Netlify.
-data/      The content: tours.json, releases.json, stories.json.
-src/       The design (style.css).
-build.py   Rebuilds site/ from data/ and src/ (python3 build.py).
+Independent Australian gig guide, tours, new vinyl and stories.
 
-To update the site, ask Claude to add tours, releases or stories. It edits data/, rebuilds site/, and you re-upload site/ to Netlify.
+- `data/tours.json` – hand-picked big tours (artist, tour, support, note, source, dates, added)
+- `data/releases.json` – upcoming vinyl releases
+- `data/stories.json` – stories (HTML body)
+- `src/feed.py` – Ticketmaster Discovery API feed (needs `TICKETMASTER_KEY` env var in Netlify)
+- `src/style.css`, `src/app.js` – design and page scripts
+- `build.py` – builds everything into `site/` (Netlify runs it on each deploy)
+- `netlify/functions/daily-rebuild.mjs` – triggers a rebuild every morning (needs `BUILD_HOOK_URL`)
+
+Every push to `main` publishes automatically.
