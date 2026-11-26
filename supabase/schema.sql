@@ -116,6 +116,8 @@ create trigger limit_records before insert on public.user_records for each row e
 alter table public.profiles add column if not exists username text;
 alter table public.profiles add column if not exists display_name text;
 alter table public.profiles add column if not exists share boolean not null default false;
+alter table public.profiles add column if not exists avatar_url text;
+alter table public.profiles add column if not exists banner_url text;
 create unique index if not exists profiles_username_key on public.profiles (lower(username));
 alter table public.profiles drop constraint if exists username_ok;
 alter table public.profiles add constraint username_ok check (username is null or username ~ '^[a-z0-9_]{3,24}$');
@@ -144,7 +146,8 @@ create or replace function public.person_card(pid uuid) returns jsonb language s
   select jsonb_build_object(
     'username', p.username,
     'name', case when p.share then coalesce(nullif(p.display_name, ''), u.raw_user_meta_data->>'full_name', p.username) else p.username end,
-    'avatar', case when p.share then u.raw_user_meta_data->>'avatar_url' end,
+    'avatar', case when p.share then coalesce(p.avatar_url, u.raw_user_meta_data->>'avatar_url') end,
+    'banner', case when p.share then p.banner_url end,
     'shared', p.share and p.username is not null,
     'records', case when p.share then (select count(*) from public.user_records r where r.user_id = p.id and r.list = 'collection') else 0 end,
     'going', case when p.share then coalesce((select jsonb_agg(g.gig || jsonb_build_object('id', g.gig_id) order by g.gig->>'d')
@@ -224,3 +227,30 @@ revoke all on function public.follow_user(text) from public, anon;
 revoke all on function public.unfollow_user(text, boolean) from public, anon;
 grant execute on function public.follow_user(text) to authenticated;
 grant execute on function public.unfollow_user(text, boolean) to authenticated;
+
+-- Profile photo and cover banner (added 27 Nov 2026). Pictures are stored in Supabase Storage, in a folder
+-- named after the person's account. People can only add, change or remove files in their own folder.
+alter table public.profiles add column if not exists avatar_url text;
+alter table public.profiles add column if not exists banner_url text;
+alter table public.profiles drop constraint if exists photo_urls_ok;
+alter table public.profiles add constraint photo_urls_ok check (
+  (avatar_url is null or avatar_url like 'https://qoqdouthyyaebmreavgz.supabase.co/storage/v1/object/public/profile/%')
+  and (banner_url is null or banner_url like 'https://qoqdouthyyaebmreavgz.supabase.co/storage/v1/object/public/profile/%'));
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('profile', 'profile', true, 3145728, array['image/jpeg', 'image/webp', 'image/png'])
+on conflict (id) do update set public = true, file_size_limit = 3145728, allowed_mime_types = array['image/jpeg', 'image/webp', 'image/png'];
+
+drop policy if exists "profile pics: add own" on storage.objects;
+create policy "profile pics: add own" on storage.objects for insert to authenticated
+  with check (bucket_id = 'profile' and (storage.foldername(name))[1] = (select auth.uid())::text);
+drop policy if exists "profile pics: change own" on storage.objects;
+create policy "profile pics: change own" on storage.objects for update to authenticated
+  using (bucket_id = 'profile' and (storage.foldername(name))[1] = (select auth.uid())::text);
+drop policy if exists "profile pics: remove own" on storage.objects;
+create policy "profile pics: remove own" on storage.objects for delete to authenticated
+  using (bucket_id = 'profile' and (storage.foldername(name))[1] = (select auth.uid())::text);
+drop policy if exists "profile pics: list own" on storage.objects;
+create policy "profile pics: list own" on storage.objects for select to authenticated
+  using (bucket_id = 'profile' and (storage.foldername(name))[1] = (select auth.uid())::text);
+

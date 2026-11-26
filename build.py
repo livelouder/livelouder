@@ -1019,7 +1019,9 @@ page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Austra
 
 # ---------------------------------------------------------------- my gigs (saved on the visitor's device)
 mg = """<div id="profile">
-<section class="phero"><div class="wrap phero-in"><div class="pav" id="pAv" aria-hidden="true">♥</div>
+<section class="phero" id="pHero"><button type="button" class="pcover" id="pCover" hidden>📷 Add a cover photo</button>
+<input type="file" accept="image/*" id="pFile" hidden>
+<div class="wrap phero-in"><div class="pavwrap"><div class="pav" id="pAv" aria-hidden="true">♥</div><button type="button" class="pcam" id="pCam" hidden aria-label="Change profile photo">📷</button></div>
 <div class="pwho"><h1 id="pName">My gigs</h1><p id="pSub">Your gigs, your artists and your records, all in one place.</p></div>
 <div id="pCta"></div></div><div class="wrap"><div class="pstats" id="pStats"></div></div></section>
 <nav class="ptabs" aria-label="My gigs sections"><div class="wrap">
@@ -1033,7 +1035,7 @@ page("my-gigs.html", "My gigs | Live Louder", "Your saved gigs, followed artists
 
 # ---------------------------------------------------------------- shared profiles (/u/<username>, filled in by people.js)
 pub = """<div id="pub">
-<section class="phero"><div class="wrap phero-in"><div class="pav" id="uAv" aria-hidden="true">♥</div>
+<section class="phero" id="uHero"><div class="wrap phero-in"><div class="pav" id="uAv" aria-hidden="true">♥</div>
 <div class="pwho"><h1 id="uName">Loading…</h1><p id="uSub"></p></div><div id="uCta" class="pbtns"></div></div>
 <div class="wrap"><div class="pstats" id="uStats"></div></div></section>
 <nav class="ptabs" aria-label="Profile sections"><div class="wrap" id="uTabs"></div></nav>
@@ -1125,9 +1127,9 @@ pv = """<section class="page-title"><div class="wrap"><h1>Privacy</h1><p>What we
 <p>Like every website, our host (Netlify) keeps standard server logs, such as IP addresses and the pages requested, to keep the site running and secure.</p>
 <h2>If you create an account</h2>
 <p>When you sign in (with an email link or with Google) we keep:</p>
-<ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
+<ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>the records in your collection and wantlist</li><li>your username, the name you choose to show, and the profile and cover photos you upload, if you add them</li><li>the people you follow and who follows you</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
 <p>We use these only to run your account: showing your gigs on every device and sending the reminder emails you've switched on. Accounts are stored with Supabase in their Sydney data centre.</p>
-<p>If you link Discogs, we read your public collection and wantlist from Discogs each time you open My gigs, to show which artists you own are touring. We don't store your collection.</p>
+<p>If you import from Discogs, we copy your public collection and wantlist into your Live Louder collection. You can remove records any time.</p><h2>Sharing your profile</h2><p>Your profile is private until you switch on "Share my profile" in My gigs. When it's on, anyone with your link (livelouder.com.au/u/your-username) and people who follow you can see your name, username, photos, the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown. Switch sharing off and your profile goes private straight away. Photos you upload are stored at a web address that isn't listed anywhere, and are deleted when you remove them or delete your account.</p>
 <h2>Emails</h2>
 <p>Sign-in links and reminder emails are sent through Resend. If you sign up to the Live Louder Weekly newsletter or to artist alerts, your email (and the city or artists you picked) is kept by Kit, our newsletter service. Every newsletter has an unsubscribe link, and reminder emails can be switched off on the My gigs page.</p>
 <h2>Gig submissions</h2>

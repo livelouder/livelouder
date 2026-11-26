@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const recs = list => Object.values(MY.get()[list] || {});
   let recQ = '', recSort = 'added', recTouring = false, recShown = 60, wantShown = 60;
   const touring = {};
-  let people = null, peopleLoading = false, find = {q: '', results: null, loading: false}, shareMsg = '', copied = false;
+  let uploading = '', photoMsg = '', people = null, peopleLoading = false, find = {q: '', results: null, loading: false}, shareMsg = '', copied = false;
   const tour = name => touring[norm(name)];
 
   // ------------------------------------------------ pieces
@@ -77,10 +77,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   function hero() {
     const u = window.ACC && ACC.user(), md = (u && u.user_metadata) || {}, L = lists(), st = MY.get();
-    const av = document.getElementById('pAv');
-    if (md.avatar_url) av.innerHTML = `<img src="${esc(md.avatar_url)}" alt="" referrerpolicy="no-referrer">`;
-    else av.textContent = u ? (md.full_name || u.email || '?')[0].toUpperCase() : '♥';
-    document.getElementById('pName').textContent = u ? (md.full_name || (u.email || '').split('@')[0]) : 'My gigs';
+    const av = document.getElementById('pAv'), pr = prof(), pic = pr.avatar_url || md.avatar_url;
+    if (pic) av.innerHTML = `<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">`;
+    else av.textContent = u ? (pr.display_name || md.full_name || u.email || '?')[0].toUpperCase() : '♥';
+    const heroEl = document.getElementById('pHero');
+    heroEl.classList.toggle('hasbanner', !!pr.banner_url);
+    heroEl.style.backgroundImage = pr.banner_url ? `linear-gradient(180deg,rgba(20,20,20,.15) 0,rgba(20,20,20,.55) 45%,rgba(20,20,20,.96) 100%),url('${pr.banner_url.replace(/'/g, '%27')}')` : '';
+    const cam = document.getElementById('pCam'), cov = document.getElementById('pCover');
+    cam.hidden = cov.hidden = !u;
+    cam.textContent = uploading === 'avatar' ? '…' : '📷';
+    cov.textContent = uploading === 'banner' ? 'Uploading…' : pr.banner_url ? '📷 Change cover' : '📷 Add a cover photo';
+    document.getElementById('pName').textContent = u ? (pr.display_name || md.full_name || (u.email || '').split('@')[0]) : 'My gigs';
     document.getElementById('pSub').innerHTML = u ? `Member since ${new Date(u.created_at).toLocaleDateString('en-AU', {month: 'long', year: 'numeric'})}`
       : 'Saved on this device. Sign in to keep it everywhere and get reminders before the show.';
     document.getElementById('pCta').innerHTML = u ? '' : '<button type="button" class="btn" data-signin>Sign in</button>';
@@ -250,7 +257,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const u = me(), p = prof();
     if (!u) return '';
     const md = u.user_metadata || {};
-    return `<div class="card wide" id="sharing"><h3>Your profile and friends</h3>
+    const pic = p.avatar_url || md.avatar_url;
+    const photos = `<div class="photorow"><div class="phbox"><span class="phav">${pic ? `<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">` : esc((p.display_name || md.full_name || u.email || '?')[0].toUpperCase())}</span>
+        <div><b>Profile photo</b><div class="pbtns"><button type="button" class="btn ghost sm" data-pickphoto="avatar">${uploading === 'avatar' ? 'Uploading…' : p.avatar_url ? 'Change' : 'Upload'}</button>${p.avatar_url ? '<button type="button" class="linkish small" data-rmphoto="avatar">Remove</button>' : ''}</div></div></div>
+      <div class="phbox"><span class="phban"${p.banner_url ? ` style="background-image:url('${esc(p.banner_url)}')"` : ''}></span>
+        <div><b>Cover photo</b><div class="pbtns"><button type="button" class="btn ghost sm" data-pickphoto="banner">${uploading === 'banner' ? 'Uploading…' : p.banner_url ? 'Change' : 'Upload'}</button>${p.banner_url ? '<button type="button" class="linkish small" data-rmphoto="banner">Remove</button>' : ''}</div></div></div></div>
+      ${photoMsg ? `<p class="note impmsg">${photoMsg}</p>` : ''}<p class="note">A wide photo works best for the cover, like a crowd shot or your favourite venue. Only post photos you took or have permission to use.</p>`;
+    return `<div class="card wide" id="sharing"><h3>Your profile and friends</h3>${photos}
       <form data-shareform class="shareform">
       <label>Username<span class="uname"><i>livelouder.com.au/u/</i><input name="username" value="${esc(p.username || suggestName())}" maxlength="24" autocapitalize="off" autocomplete="off" spellcheck="false" pattern="[a-z0-9_]{3,24}" required></span></label>
       <label>Name people see<input name="display_name" value="${esc(p.display_name || md.full_name || '')}" maxlength="40" placeholder="Your name or a nickname"></label>
@@ -349,6 +362,12 @@ document.addEventListener('DOMContentLoaded', function () {
       call.then(() => { if (find.results) find.results.forEach(p => { if (p.username === b.dataset.follow) p.following = true; if (p.username === b.dataset.unfollow) p.following = false; }); loadPeople(true); });
       return;
     }
+    const pk = ev.target.closest('[data-pickphoto]');
+    if (pk) { pickPhoto(pk.dataset.pickphoto); return; }
+    const rm = ev.target.closest('[data-rmphoto]');
+    if (rm) { if (confirm('Remove this photo?')) ACC.removePhoto(rm.dataset.rmphoto).then(() => { photoMsg = ''; render(); }); return; }
+    if (ev.target.closest('#pCam')) { pickPhoto('avatar'); return; }
+    if (ev.target.closest('#pCover')) { pickPhoto('banner'); return; }
     if (ev.target.closest('[data-clearfind]')) { find = {q: '', results: null, loading: false}; render(); return; }
     if (ev.target.closest('[data-sharelink]')) {
       const url = shareUrl(prof().username);
@@ -393,6 +412,17 @@ document.addEventListener('DOMContentLoaded', function () {
   box.addEventListener('change', ev => {
     if (ev.target.matches('[data-rsort]')) { recSort = ev.target.value; render(); }
     if (ev.target.matches('[data-pref]') && window.ACC) ACC.setPref(ev.target.dataset.pref, ev.target.checked);
+  });
+
+  // ------------------------------------------------ photos
+  let pickKind = '';
+  const fileIn = document.getElementById('pFile');
+  function pickPhoto(kind) { if (!me()) { ACC.open(); return; } if (uploading) return; pickKind = kind; fileIn.value = ''; fileIn.click(); }
+  fileIn.addEventListener('change', () => {
+    const f = fileIn.files && fileIn.files[0]; if (!f) return;
+    if (f.size > 25 * 1024 * 1024) { photoMsg = 'That photo is too big. Try one under 25 MB.'; render(); return; }
+    uploading = pickKind; photoMsg = ''; render();
+    ACC.setPhoto(pickKind, f).then(r => { uploading = ''; photoMsg = r.error ? esc(r.error) : ''; render(); });
   });
 
   // ------------------------------------------------ start

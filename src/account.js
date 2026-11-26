@@ -133,6 +133,7 @@
   async function deleteAccount() {
     if (!confirm('Delete your Live Louder account and everything saved in it? This can\'t be undone.')) return;
     const c = await ready(); if (!c) return;
+    try { const {data} = await c.storage.from('profile').list(user.id); if (data && data.length) await c.storage.from('profile').remove(data.map(f => `${user.id}/${f.name}`)); } catch (e) {}
     const {error} = await c.rpc('delete_my_account');
     if (error) { alert("Sorry, that didn't work. Email hello@livelouder.com.au and we'll delete it for you."); return; }
     await c.auth.signOut();
@@ -163,6 +164,50 @@
     const {data, error} = await c.rpc(fn, args || {});
     return error ? {error: error.message} : {data};
   }
+  // Profile photo and cover banner. Pictures are cropped and shrunk in the browser, then stored in the
+  // "profile" bucket in a folder named after the account (only the owner can change it).
+  const SIZES = {avatar: [480, 480], banner: [1800, 600]};
+  function shrink(file, kind) {
+    return new Promise((res, rej) => {
+      const img = new Image(), url = URL.createObjectURL(file);
+      img.onload = () => {
+        const [W, H] = SIZES[kind], r = Math.max(W / img.width, H / img.height);
+        const w = Math.min(W, Math.round(img.width * r)), h = Math.min(H, Math.round(img.height * r));
+        const sw = w / r, sh = h / r, c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        c.toBlob(b => b ? res(b) : rej(new Error('blob')), 'image/jpeg', 0.85);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('That file isn\'t a photo we can read. Try a JPG or PNG.')); };
+      img.src = url;
+    });
+  }
+  const pathOf = u => u && u.split('/object/public/profile/')[1];
+  async function setPhoto(kind, file) {
+    const c = await ready();
+    if (!c || !user) return {error: 'Sign in first'};
+    let blob;
+    try { blob = await shrink(file, kind); } catch (e) { return {error: e.message === 'blob' ? "Couldn't read that photo." : e.message}; }
+    const path = `${user.id}/${kind}-${Date.now()}.jpg`;
+    const up = await c.storage.from('profile').upload(path, blob, {contentType: 'image/jpeg', cacheControl: '31536000'});
+    if (up.error) return {error: "Couldn't upload that photo. Try again."};
+    const url = c.storage.from('profile').getPublicUrl(path).data.publicUrl;
+    const old = pathOf((profile || {})[kind + '_url']);
+    const r = await saveProfile({[kind + '_url']: url});
+    if (r.error) return r;
+    if (old) c.storage.from('profile').remove([old]);
+    return {url};
+  }
+  async function removePhoto(kind) {
+    const c = await ready();
+    if (!c || !user) return {};
+    const old = pathOf((profile || {})[kind + '_url']);
+    const r = await saveProfile({[kind + '_url']: null});
+    if (!r.error && old) await c.storage.from('profile').remove([old]);
+    return r;
+  }
+
   // Wait until we know whether this visitor is signed in.
   let sessionP = null;
   const session = () => sessionP || (sessionP = ready().then(c => c && c.auth.getSession()).then(r => { if (r && r.data && r.data.session && !user) user = r.data.session.user; return user; }).catch(() => null));
@@ -174,7 +219,7 @@
   }
 
   window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
-                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session};
+                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }
