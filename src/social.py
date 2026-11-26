@@ -335,7 +335,12 @@ def build(out, site, today, ctx):
         name = f"{key}-{kind}-{i}.jpg"
         im.save(d / name, "JPEG", quality=88, optimize=True)
         urls.append(f"{site}/social/{name}")
-    post = {"date": key, "kind": kind, "caption": caption[:2100], "images": urls}
+    fb_message = caption.replace(" (link in bio)", "").replace("livelouder.com.au", "https://livelouder.com.au", 1)
+    post = {"date": key, "kind": kind, "caption": caption[:2100], "images": urls,
+            # ready-made lists in the shapes Make's Instagram carousel and Facebook photo modules expect
+            "ig_files": [{"media_type": "IMAGE", "image_url": u} for u in urls],
+            "fb_photos": [{"type": "url", "url": u} for u in urls],
+            "fb_message": fb_message[:5000]}
     (d / "today.json").write_text(json.dumps(post))
     imgs = "".join(f'<img src="{u}" alt="" style="width:100%;max-width:420px;border-radius:8px;margin:0 8px 8px 0">' for u in urls)
     (d / "index.html").write_text(
