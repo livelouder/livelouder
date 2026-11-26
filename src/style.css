@@ -296,3 +296,14 @@ background:linear-gradient(135deg,hsl(var(--h) 55% 32%),hsl(calc(var(--h) + 40) 
 .glink{color:inherit}
 @media(max-width:600px){.shead{flex-wrap:wrap;gap:10px}.citypick{width:100%}.citypick select{flex:1}}
 @media(min-width:761px) and (max-width:1280px){.top nav a{padding:10px 7px;font-size:15px}.hsearch input{width:150px}}
+/* submit a gig */
+.gigform fieldset{border:0;border-top:4px solid var(--ink);padding:18px 0 10px;margin:0 0 18px}
+.gigform legend{font-family:"Anton",Impact,sans-serif;font-size:26px;padding-right:10px}
+.gigform label{display:block;font-weight:700;margin:12px 0}
+.gigform label small{font-weight:400;color:var(--muted)}
+.gigform input,.gigform select,.gigform textarea{display:block;width:100%;margin-top:6px;min-height:46px;border:2px solid var(--ink);border-radius:8px;background:#fff;color:var(--ink);font:16px "Archivo",sans-serif;padding:8px 12px}
+.gigform .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gigform .btn{border:0;font:700 17px "Archivo",sans-serif;cursor:pointer;padding:0 28px}
+.steps{padding-left:20px}.steps li{margin:8px 0}
+.addgig{margin:0 0 6px}
+@media(max-width:600px){.gigform .two{grid-template-columns:1fr}}

@@ -64,8 +64,41 @@ for t in tours:
                       "support": [t["support"]] if t.get("support") else [], "date": dd, "time": "", "venue": v,
                       "suburb": c, "city": c, "state": CITY_STATE.get(c, ""), "url": t["source"], "image": "",
                       "genre": t.get("genre", ""), "onsale": "", "presales": [], "status": "", "src": "curated"})
+# Gigs sent in through the "Submit a gig" form (pulled from Netlify Blobs by the keep-cache plugin).
+# They go live automatically when the ticket link is on a real ticketing site and the details check out;
+# anything else is held back.
+TRUSTED_TICKETS = ("oztix.com.au", "moshtix.com.au", "ticketmaster.com.au", "ticketek.com.au", "humanitix.com", "eventbrite.com",
+                   "eventbrite.com.au", "trybooking.com", "megatix.com.au", "dice.fm", "ticketebo.com.au", "stickytickets.com.au",
+                   "eventfinda.com.au", "ticketfairy.com", "showclix.com", "tix.com.au", "livenation.com.au", "frontiertouring.com",
+                   "teglive.com.au", "chuggentertainment.com", "secretsounds.com", "destroyalllines.com", "handsometours.com",
+                   "premier.ticketek.com.au", "qtix.com.au", "ticketsearch.com", "venuetix.com.au", "tickets.oztix.com.au")
+subs = json.loads((ROOT / "data/gig_submissions.json").read_text()) if (ROOT / "data/gig_submissions.json").exists() else []
+sub_ok, sub_held, per_sender = [], [], {}
+limit_day = (TODAY.date() + dt.timedelta(days=550)).isoformat()
+for x in sorted(subs, key=lambda x: x.get("received", "")):
+    url = x.get("ticket_url", "")
+    host = re.sub(r"^www\.", "", (re.match(r"https://([^/]+)", url) or [None, ""])[1].lower())
+    city = x.get("city", "")
+    if city not in CITY_STATE:
+        city = x.get("town", "").strip().title()
+    state = CITY_STATE.get(city) or x.get("state", "")
+    per_sender[x.get("email_hash", "")] = per_sender.get(x.get("email_hash", ""), 0) + 1
+    ok = (re.fullmatch(r"\d{4}-\d{2}-\d{2}", x.get("date", "")) and TODAY_S <= x["date"] <= limit_day
+          and any(host == h or host.endswith("." + h) for h in TRUSTED_TICKETS)
+          and 1 < len(x.get("artist", "")) < 80 and 1 < len(x.get("venue", "")) < 100 and city and state
+          and per_sender[x.get("email_hash", "")] <= 30 and not re.search(r"https?://|<|>", x["artist"] + x["venue"]))
+    if not ok:
+        sub_held.append(x)
+        continue
+    tm_time = x.get("time", "") if re.fullmatch(r"\d{2}:\d{2}", x.get("time", "")) else ""
+    sub_ok.append({"id": f"s-{slug(x['artist'])}-{x['date']}-{slug(city)}", "artist": x["artist"].strip(), "event": "",
+                   "support": [x["support"].strip()] if x.get("support", "").strip() else [], "date": x["date"], "time": tm_time,
+                   "venue": x["venue"].strip(), "suburb": city, "city": city, "state": state, "url": url, "image": "",
+                   "genre": x.get("genre", ""), "onsale": "", "presales": [], "status": "", "src": "submitted"})
 tm_keys = {(slug(s["artist"]), s["date"], s["city"]) for s in tm}
 shows = [s for s in shows if (slug(s["artist"]), s["date"], s["city"]) not in tm_keys] + tm
+have_keys = {(slug(s["artist"]), s["date"], s["city"]) for s in shows}
+shows += [s for s in sub_ok if (slug(s["artist"]), s["date"], s["city"]) not in have_keys]
 shows = [s for s in shows if s["date"] >= TODAY_S]
 shows.sort(key=lambda s: (s["date"], s["time"] or "99", s["artist"].lower()))
 
@@ -229,7 +262,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <footer class="foot"><div class="wrap"><div><div class="wm">LIVE <span>LOUDER</span></div>
 <p>An independent Australian music site: news, gigs, tours, festivals, new vinyl and stories, made in the Blue Mountains, NSW.</p>
 <p>Dates change. Always check with the official ticket seller before you buy. Updated {UPDATED}.</p><p>{credit}</p></div>
-<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}about.html">About</a></p>
+<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}submit-a-gig.html">Submit a gig</a> · <a href="{r}about.html">About</a></p>
 <p>Gigs by city: {cities}</p>
 <p>Records for the drive to the show: our friends at <a href="https://heathenrecords.com.au">Heathen Records</a>.</p>
 <p>© {TODAY.year} Live Louder</p></div></div></footer>
@@ -263,7 +296,7 @@ def gig_row(s, show_artist=True, show_city=True):
     sale = ""
     if s["onsale"] and s["onsale"][:10] > TODAY_S:
         sale = f'<span class="tag">On sale {fmt(s["onsale"][:10], False, False)}</span>'
-    label = "Tickets" if s["src"] == "ticketmaster" else "Details"
+    label = "Tickets" if s["src"] in ("ticketmaster", "submitted") else "Details"
     return (f'<li class="gig" data-date="{s["date"]}" data-city="{e(s["city"])}"><div class="gd"><b>{d(s["date"]).day}</b>'
             f'<small>{d(s["date"]).strftime("%b")}</small></div><div class="gi">{who}{sup}<span class="gw">{where}{t}</span>{sale}</div>'
             f'<div class="ga"><a href="{e(s["url"])}" rel="noopener">{label} ↗</a><a class="cal" href="{e(gcal(s, s["artist"]))}" rel="noopener">+ Calendar</a></div></li>')
@@ -544,6 +577,7 @@ gg = f"""<section class="page-title"><div class="wrap"><h1>Gig guide</h1><p>Ever
 <select id="city" aria-label="City"><option value="">All cities</option>{city_opts}</select>
 <select id="genre" aria-label="Genre"><option value="">All genres</option>{"".join(f'<option value="{slug(g)}">{e(g)}</option>' for g in GENRE_LIST)}</select>
 <div class="filters" role="group" aria-label="When"><button data-when="all" aria-pressed="true">Any time</button><button data-when="week" aria-pressed="false">This week</button><button data-when="weekend" aria-pressed="false">This weekend</button><button data-when="month" aria-pressed="false">Next 30 days</button></div></div>
+<p class="note addgig">Know a gig we're missing? <a href="/submit-a-gig.html">Add it to the guide →</a></p>
 <p class="count" id="count" aria-live="polite">Loading shows…</p><div id="results"></div><button id="moreBtn" class="morebtn" hidden>Show more</button>
 <noscript>{gig_list(shows[:300])}</noscript></div></section>"""
 page("gigs/index.html", "Gig guide: concerts and gigs in Australia | Live Louder",
@@ -561,7 +595,7 @@ for c in MAIN_CITIES:
     vchips = ('<h2 style="margin-top:28px;font-size:26px">Venues</h2><nav class="chips small">' + "".join(f'<a href="/venues/{k}.html">{e(v[0])}</a>' for k, v in cv) + "</nav>") if cv else ""
     more_link = f'<p class="note">Showing the next 400. <a href="/gigs/index.html?city={quote_plus(c)}">See them all in the gig guide</a>.</p>' if len(cs) > 400 else ""
     body = f"""<section class="page-title"><div class="wrap"><h1>Gigs in {e(c)}</h1><p>{len(cs):,} upcoming shows in and around {e(c)}, soonest first.</p></div></section>
-<section class="band"><div class="wrap"><p><a class="btn" href="/gigs/{slug(c)}-this-weekend.html">What\'s on in {e(c)} this weekend →</a></p>{chips(c)}{vchips}<div style="height:10px"></div>{gig_list(cs[:400], show_city=False)}{more_link}</div></section>"""
+<section class="band"><div class="wrap"><p><a class="btn" href="/gigs/{slug(c)}-this-weekend.html">What\'s on in {e(c)} this weekend →</a></p>{chips(c)}{vchips}<div style="height:10px"></div>{gig_list(cs[:400], show_city=False)}{more_link}<p class="note">Playing in {e(c)}? <a href="/submit-a-gig.html">Add your gig →</a></p></div></section>"""
     page(f"gigs/{slug(c)}.html", f"Gigs in {c}: concerts and live music | Live Louder",
          f"Upcoming gigs and concerts in {c}, updated daily: dates, venues and tickets.", body, "gigs/index.html")
 
@@ -825,6 +859,38 @@ osp = (f'<section class="page-title"><div class="wrap"><h1>On sale soon</h1><p>E
 page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Australia | Live Louder",
      "When tickets go on sale for concerts and tours in Australia: presale and general on-sale dates and times, with calendar reminders.", osp, "on-sale.html")
 
+# ---------------------------------------------------------------- submit a gig
+metro_opts = "".join(f"<option>{e(m[0])}</option>" for m in feed.METROS)
+state_opts = "".join(f"<option>{x}</option>" for x in ("NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"))
+genre_opts = "".join(f"<option>{e(g)}</option>" for g, _ in GENRES)
+sg = f"""<section class="page-title"><div class="wrap"><h1>Submit a gig</h1><p>Playing a show, running a venue or putting on a night? Add it to the Live Louder gig guide. It's free.</p></div></section>
+<section class="band"><div class="wrap split"><form class="gigform" name="gig" method="POST" action="/gig-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="gig"><p hidden><label>Leave this empty <input name="bot-field"></label></p>
+<fieldset><legend>The show</legend>
+<label>Artist or band <input name="artist" required maxlength="80" autocomplete="off"></label>
+<label>Support acts <small>(optional)</small> <input name="support" maxlength="160"></label>
+<div class="two"><label>Date <input type="date" name="date" required min="{TODAY_S}"></label><label>Start time <small>(optional)</small> <input type="time" name="time"></label></div>
+<label>Genre <select name="genre"><option value="">Pick one</option>{genre_opts}</select></label></fieldset>
+<fieldset><legend>Where</legend>
+<label>Venue <input name="venue" required maxlength="100"></label>
+<label>City <select name="city" id="gcity" required><option value="">Pick a city</option>{metro_opts}<option value="other">Somewhere else</option></select></label>
+<div class="two" id="gother" hidden><label>Town or suburb <input name="town" maxlength="60"></label><label>State <select name="state"><option value="">State</option>{state_opts}</select></label></div></fieldset>
+<fieldset><legend>Tickets</legend>
+<label>Ticket or event link <input type="url" name="ticket_url" required placeholder="https://" maxlength="300"></label>
+<p class="note" style="margin-top:4px">Use the link from your ticketing site: Oztix, Moshtix, Ticketmaster, Ticketek, Humanitix, Eventbrite, TryBooking, DICE and the like. That's how we know the gig is real. Free gig? A free ticket page on Humanitix, Eventbrite or TryBooking works too.</p></fieldset>
+<fieldset><legend>About you</legend>
+<label>You are <select name="role"><option>In the band</option><option>From the venue</option><option>The promoter</option><option>A fan</option></select></label>
+<label>Your email <input type="email" name="email" required autocomplete="email"></label>
+<p class="note" style="margin-top:4px">Only used if we need to check something. It's never shown on the site and we won't add you to any lists.</p>
+<label>Anything else? <small>(optional)</small> <textarea name="notes" rows="3" maxlength="600"></textarea></label></fieldset>
+<button class="btn">Add my gig</button></form>
+<aside class="side"><div class="card"><h3>How it works</h3><ol class="steps"><li>Fill in the show details and a ticket link.</li><li>It gets checked overnight.</li><li>It goes up in the gig guide, the city page and the artist page, usually by 7am the next morning.</li></ol></div>
+<div class="card"><h3>Got a whole tour?</h3><p>Send each date separately. It only takes a minute each, and every show gets its own spot in the right city.</p></div></aside></div></section>"""
+page("submit-a-gig.html", "Submit a gig: add your show to the gig guide | Live Louder",
+     "Add your gig to the Live Louder gig guide for free. Bands, venues and promoters across Australia.", sg, "gigs/index.html")
+page("gig-thanks.html", "Thanks for your gig | Live Louder", "Thanks for sending in your gig.",
+     '<section class="page-title"><div class="wrap"><h1>Got it, thanks</h1><p>We\'ll check your gig overnight and it should be in the gig guide by 7am tomorrow. Got another date? <a style="color:#fff" href="/submit-a-gig.html">Add another gig</a>.</p></div></section>')
+
 # ---------------------------------------------------------------- genres
 def genre_tiles(gs):
     return '<div class="gtiles">' + "".join(
@@ -882,7 +948,7 @@ for icon in (ROOT / "src/icons").iterdir():
 (OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",
     "background_color": "#141414", "theme_color": "#141414",
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
-urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "about.html"] \
+urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "submit-a-gig.html", "about.html"] \
     + [f"genres/{slug(g)}.html" for g in GENRE_LIST] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
@@ -897,4 +963,5 @@ social_post = social.build(OUT, SITE, TODAY.date(), {
     "main_cities": MAIN_CITIES, "wk_days": wk_days,
     "social_queue": json.loads((ROOT / "data/social_queue.json").read_text()) if (ROOT / "data/social_queue.json").exists() else []})
 players = sum(1 for a in artists.values() if a.get("deezer"))
+print(f"gig submissions: {len(sub_ok)} live, {len(sub_held)} held back")
 print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}, alerts={len(alert_mail)}, social={(social_post or {}).get('kind', 'none')}")

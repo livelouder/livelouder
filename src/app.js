@@ -158,3 +158,9 @@ document.addEventListener("click", function (ev) {
     fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); }).catch(() => {});
   }
 }
+
+// Submit a gig: show town and state when the city isn't in the list.
+{
+  const c = document.getElementById('gcity'), o = document.getElementById('gother');
+  if (c && o) c.addEventListener('change', () => { o.hidden = c.value !== 'other'; o.querySelector('input').required = c.value === 'other'; });
+}
