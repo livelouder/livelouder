@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const heathen = q => 'https://heathenrecords.com.au/search?type=product&q=' + encodeURIComponent(q) + '&utm_source=livelouder&utm_medium=referral&utm_campaign=my-gigs';
   const dparts = iso => { const [y, m, d] = iso.split('-').map(Number); return {y, m, d, dt: new Date(y, m - 1, d)}; };
   const today = MY.today;
+  const gslug = x => String(x).toLowerCase().replace(/&/g, 'and').replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'x';
+  const gp = x => x.p || `${root}gig/${gslug(x.id)}.html`;
   const daysTo = iso => Math.round((dparts(iso).dt - dparts(today).dt) / 86400000);
   const when = iso => { const n = daysTo(iso); return n === 0 ? 'Tonight' : n === 1 ? 'Tomorrow' : n > 1 && n < 7 ? 'This ' + dparts(iso).dt.toLocaleDateString('en-AU', {weekday: 'long'}) : dparts(iso).dt.toLocaleDateString('en-AU', {weekday: 'short', day: 'numeric', month: 'short'}); };
 
@@ -31,10 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function gigCard(x, mine) {
     const p = dparts(x.d), past = x.d < today;
     const going = mine && !past ? `<button class="going" type="button" data-id="${esc(x.id)}" aria-pressed="${!!x.going}">${x.going ? '✓ Going' : "I'm going"}</button>` : '';
-    const save = `<button class="save" type="button" data-gig="${esc(JSON.stringify({id: x.id, d: x.d, tm: x.tm, a: x.a, s: x.s, v: x.v, c: x.c, u: x.u, vs: x.vs}))}" aria-pressed="false" aria-label="Save">♡</button>`;
-    return `<article class="gcard${past ? ' past' : ''}"><a class="gimg" href="${root}artists/${esc(x.s)}.html">${art(x.s, x.a, 'gph')}
+    const save = `<button class="save" type="button" data-gig="${esc(JSON.stringify({id: x.id, d: x.d, tm: x.tm, a: x.a, s: x.s, v: x.v, c: x.c, u: x.u, vs: x.vs, p: x.p}))}" aria-pressed="false" aria-label="Save">♡</button>`;
+    return `<article class="gcard${past ? ' past' : ''}"><a class="gimg" href="${esc(gp(x))}">${art(x.s, x.a, 'gph')}
       <span class="gdate"><b>${p.d}</b>${MON[p.m - 1]}</span>${past ? '<span class="gbadge">Been there</span>' : x.going ? '<span class="gbadge on">Going</span>' : ''}</a>
-      <div class="gbody"><a class="gname" href="${root}artists/${esc(x.s)}.html">${esc(x.a)}</a>
+      <div class="gbody"><a class="gname" href="${esc(gp(x))}">${esc(x.a)}</a>
       <span class="gwhen">${past ? p.dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short', year: 'numeric'}) : esc(when(x.d))}${x.tm && !past ? ' · ' + esc(x.tm) : ''}</span>
       <span class="gwhere">${esc(x.v)}, ${esc(x.c)}</span>
       <div class="gact">${past ? '' : `<a class="tix" href="${esc(x.u)}" rel="noopener">Tickets</a>`}${going}${save}</div></div></article>`;
@@ -93,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (next) {
       const n = daysTo(next.d);
       h += `<div class="nextup"><a class="nimg" href="${root}artists/${esc(next.s)}.html">${art(next.s, next.a, 'nph')}</a><div class="ntext">
-        <span class="ntag">${next.going ? 'Your next gig' : 'Coming up'}</span><h2><a href="${root}artists/${esc(next.s)}.html">${esc(next.a)}</a></h2>
+        <span class="ntag">${next.going ? 'Your next gig' : 'Coming up'}</span><h2><a href="${esc(gp(next))}">${esc(next.a)}</a></h2>
         <p>${esc(when(next.d))}${next.tm ? ' · ' + esc(next.tm) : ''}<br>${esc(next.v)}, ${esc(next.c)}</p>
         <div class="gact"><a class="btn" href="${esc(next.u)}" rel="noopener">Tickets &amp; details</a>${next.going ? '' : `<button class="going" type="button" data-id="${esc(next.id)}" aria-pressed="false">I'm going</button>`}</div></div>
         <div class="ncount"><b>${n <= 0 ? 'Tonight' : n}</b><span>${n <= 0 ? '' : n === 1 ? 'day to go' : 'days to go'}</span></div></div>`;

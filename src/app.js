@@ -81,10 +81,10 @@ window.LL = (function () {
         const mk = longM[m - 1] + ' ' + y;
         if (mk !== month) { html += (month ? '</ul>' : '') + `<h3 class="month">${mk}</h3><ul class="gigs">`; month = mk; }
         const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
-        html += `<li class="gig"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div><div class="gi"><a class="gname" href="${root}artists/${esc(s[3])}.html">${esc(s[2])}</a>` +
+        html += `<li class="gig"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div><div class="gi"><a class="gname" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${esc(s[2])}</a>` +
           (s[8] ? `<span class="gsup">with ${esc(s[8])}</span>` : '') + `<span class="gw"><a class="vlink" href="${root}venues/${esc(s[11])}.html">${esc(s[4])}</a>, ${esc(s[6])} · ${day}${s[1] ? ' ' + esc(s[1]) : ''}</span></div>` +
           `<div class="ga"><a href="${esc(s[7])}" rel="noopener">${['ticketmaster', 'submitted', 'found'].includes(s[9]) ? 'Tickets' : 'Details'} ↗</a><span class="ga2"><a class="cal" href="${esc(s[10])}" rel="noopener">+ Calendar</a>` +
-          `<button class="save" type="button" data-gig="${esc(JSON.stringify({id: s[13], d: s[0], tm: s[1], a: s[2], s: s[3], v: s[4], c: s[6], u: s[7], vs: s[11]}))}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button></span></div></li>`;
+          `<button class="save" type="button" data-gig="${esc(JSON.stringify({id: s[13], d: s[0], tm: s[1], a: s[2], s: s[3], v: s[4], c: s[6], u: s[7], vs: s[11], p: s[14]}))}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button></span></div></li>`;
       }
       out.innerHTML = html + (month ? '</ul>' : '');
       if (window.MY) MY.paint();
@@ -254,3 +254,17 @@ window.MY = (function () {
     show(0); restart();
   }
 }
+
+// "How far is it from me?" on venue and gig pages (uses the visitor's location only when they tap, never stored).
+document.addEventListener('click', ev => {
+  const b = ev.target.closest('.distbtn'); if (!b) return;
+  const out = b.parentElement.querySelector('.distout');
+  if (!navigator.geolocation) { out.textContent = "Your browser can't share your location."; return; }
+  out.textContent = 'Finding you…';
+  navigator.geolocation.getCurrentPosition(p => {
+    const R = 6371, rad = x => x * Math.PI / 180, la1 = rad(p.coords.latitude), la2 = rad(+b.dataset.lat);
+    const dLa = la2 - la1, dLo = rad(+b.dataset.lon - p.coords.longitude);
+    const km = 2 * R * Math.asin(Math.sqrt(Math.sin(dLa / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLo / 2) ** 2));
+    out.innerHTML = `About <b>${km < 10 ? km.toFixed(1) : Math.round(km).toLocaleString()} km</b> away, as the crow flies.`;
+  }, () => { out.textContent = "Couldn't get your location. Check your browser lets this site use it."; }, {timeout: 10000, maximumAge: 600000});
+});

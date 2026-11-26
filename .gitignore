@@ -6,3 +6,4 @@ data/setlists.json
 data/discogs.json
 data/discogs_releases.json
 data/gig_submissions.json
+data/geo.json

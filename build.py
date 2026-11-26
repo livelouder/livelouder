@@ -11,7 +11,7 @@ Content:
 
 Run: python3 build.py   (Netlify runs this on every deploy)
 """
-import json, html, re, shutil, sys, hashlib, datetime as dt
+import os, json, html, re, shutil, sys, hashlib, datetime as dt
 from pathlib import Path
 from urllib.parse import quote_plus, quote
 
@@ -185,10 +185,20 @@ GENRE_HUE = {g: (i * 41 + 8) % 360 for i, (g, _) in enumerate(GENRES)}
 GENRE_LIST = [g for g, _ in GENRES if any(a["gb"] == g and a["shows"] for a in artists.values())]
 
 def venue_slug(s): return slug(s["venue"] + "-" + s["city"])
+def gig_path(s): return f"/gig/{slug(s['id'])}.html"
 venues = {}
 for s in shows:
-    v = venues.setdefault(venue_slug(s), {"name": s["venue"], "city": s["city"], "suburb": s["suburb"], "shows": []})
+    v = venues.setdefault(venue_slug(s), {"name": s["venue"], "city": s["city"], "suburb": s["suburb"], "state": s.get("state", ""), "shows": []})
     v["shows"].append(s)
+    if s.get("lat") and not v.get("geo"):
+        try: v["geo"] = [round(float(s["lat"]), 5), round(float(s["lon"]), 5)]
+        except (TypeError, ValueError): pass
+# Map positions for venues Ticketmaster didn't give us (OpenStreetMap lookup, cached).
+_geo = extras.geocode({k: (v["name"], v["suburb"], v["city"], v["state"]) for k, v in venues.items() if not v.get("geo")}, ROOT,
+                      limit=0 if os.environ.get("NO_GEOCODE") else 40)
+for k, v in venues.items():
+    if not v.get("geo") and _geo.get(k):
+        v["geo"] = _geo[k]
 
 city_count = {}
 for s in shows:
@@ -310,7 +320,7 @@ def stub(s):
             f'<span>{e(s["city"])} · {e(s["venue"])}</span></div></a>')
 
 def gig_row(s, show_artist=True, show_city=True):
-    who = f'<a class="gname" href="/artists/{slug(s["artist"])}.html">{e(s["artist"])}</a>' if show_artist else ""
+    who = f'<a class="gname" href="{gig_path(s)}">{e(s["artist"])}</a>' if show_artist else ""
     sup = f'<span class="gsup">with {e(", ".join(s["support"]))}</span>' if s["support"] and show_artist else ""
     where = f'<a class="vlink" href="/venues/{venue_slug(s)}.html">{e(s["venue"])}</a>' + (", " + e(s["city"]) if show_city else "")
     wd = d(s["date"]).strftime("%a")
@@ -320,10 +330,10 @@ def gig_row(s, show_artist=True, show_city=True):
         sale = f'<span class="tag">On sale {fmt(s["onsale"][:10], False, False)}</span>'
     label = "Tickets" if s["src"] in ("ticketmaster", "submitted", "found") else "Details"
     snap = json.dumps({"id": s["id"], "d": s["date"], "tm": s["time"], "a": s["artist"], "s": slug(s["artist"]), "v": s["venue"],
-                       "c": s["city"], "u": s["url"], "vs": venue_slug(s)}, separators=(",", ":"))
+                       "c": s["city"], "u": s["url"], "vs": venue_slug(s), "p": gig_path(s)}, separators=(",", ":"))
     save = f'<button class="save" type="button" data-gig="{e(snap)}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button>'
-    return (f'<li class="gig" data-date="{s["date"]}" data-city="{e(s["city"])}"><div class="gd"><b>{d(s["date"]).day}</b>'
-            f'<small>{d(s["date"]).strftime("%b")}</small></div><div class="gi">{who}{sup}<span class="gw">{where}{t}</span>{sale}</div>'
+    return (f'<li class="gig" data-date="{s["date"]}" data-city="{e(s["city"])}"><a class="gd" href="{gig_path(s)}" aria-label="Gig details"><b>{d(s["date"]).day}</b>'
+            f'<small>{d(s["date"]).strftime("%b")}</small></a><div class="gi">{who}{sup}<span class="gw">{where}{t}</span>{sale}</div>'
             f'<div class="ga"><a href="{e(s["url"])}" rel="noopener">{label} ↗</a><span class="ga2"><a class="cal" href="{e(gcal(s, s["artist"]))}" rel="noopener">+ Calendar</a>{save}</span></div></li>')
 
 def gig_list(items, **kw):
@@ -588,7 +598,7 @@ if sale_:
 elif news:
     n_ = next((n for n in news if slug(n.get("artist", "")) not in used), news[0])
     a_ = artists.get(slug(n_.get("artist", "")))
-    slides.append(slide("Latest news", n_["title"], plain(n_["body"]).split(". ")[0][:140], f'/news/{n_["slug"]}.html', "Read more", a_, seed=n_["title"]))
+    slides.append(slide("Latest news", n_["title"], (lambda t_: t_ if len(t_) <= 150 else t_[:150].rsplit(" ", 1)[0] + "…")(plain(n_["body"]).split(". ")[0]), f'/news/{n_["slug"]}.html', "Read more", a_, seed=n_["title"]))
 if fests:
     f_ = fests[0]
     a_ = next((artists[slug(h_)] for h_ in f_.get("headliners", []) if artists.get(slug(h_)) and artists[slug(h_)].get("photo")), None)
@@ -607,10 +617,7 @@ dots = "".join(f'<button type="button" class="cdot" data-i="{i}" aria-label="Sho
 hero_bg = f'<div class="hslides" aria-hidden="true">{"".join(b_ for b_, _ in slides)}</div>' if slides else ""
 hero_caps = (f'<div class="hcaps" aria-roledescription="carousel" aria-label="Featured">{"".join(c_ for _, c_ in slides)}'
              f'<div class="cdots">{dots}</div></div>') if slides else ""
-home = f"""<section class="hero">{hero_bg}<svg class="disc" viewBox="-250 -250 500 500" aria-hidden="true"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}
-<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>
-<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>
-<text y="34" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#141414">LOUDER</text><circle r="7" fill="#141414"/></svg><div class="wrap">
+home = f"""<section class="hero">{hero_bg}<div class="wrap">
 <h1 class="big wm">LIVE<span>LOUDER</span></h1>
 <p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p>
 <form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form>
@@ -672,7 +679,7 @@ page("gigs/index.html", "Gig guide: concerts and gigs in Australia | Live Louder
      "Search every big gig in Australia by artist, venue, city and date. Concerts in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", gg, "gigs/index.html")
 (OUT / "gigs.json").write_text(json.dumps([[s["date"], s["time"], s["artist"], slug(s["artist"]), s["venue"], s["suburb"], s["city"], s["url"],
                                            ", ".join(s["support"]), s["src"], gcal(s, s["artist"]), venue_slug(s),
-                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else "", s["id"]] for s in shows], separators=(",", ":")))
+                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else "", s["id"], gig_path(s)] for s in shows], separators=(",", ":")))
 
 for c in MAIN_CITIES:
     cs = [s for s in shows if s["city"] == c]
@@ -720,6 +727,20 @@ page("this-weekend.html", f"Gigs this weekend in Australia ({wk_label}) | Live L
      f"Every gig on this weekend ({wk_label}) in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", twp, "this-weekend.html")
 
 # ---------------------------------------------------------------- venues
+def venue_map(v, small=False):
+    """Map, directions and a "how far is it?" button for a venue."""
+    q = quote_plus(f"{v['name']}, {v['suburb']}, {v['city']}, Australia")
+    geo = v.get("geo") or []
+    dest = f"{geo[0]},{geo[1]}" if geo else q
+    embed = f"https://maps.google.com/maps?q={dest if geo else q}&amp;z=15&amp;output=embed"
+    near = (f'<button type="button" class="distbtn" data-lat="{geo[0]}" data-lon="{geo[1]}">📍 How far is it from me?</button><span class="distout" aria-live="polite"></span>'
+            if geo else "")
+    vg = vguides.get(slug(v["name"] + "-" + v["city"])) or {}
+    photo = (f'<figure class="vphoto"><img src="{e(vg["photo"])}" alt="{e(v["name"])}" loading="lazy"><figcaption>{e(vg.get("photo_credit", ""))}</figcaption></figure>'
+             if vg.get("photo") else "")
+    return (f'<div class="vmap{" small" if small else ""}">{photo}<iframe title="Map of {e(v["name"])}" src="{embed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+            f'<div class="vmapbar"><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={dest}" rel="noopener">Directions ↗</a>{near}</div></div>')
+
 for k, v in venues.items():
     loc = e(v["city"]) if v["suburb"] == v["city"] else f'{e(v["suburb"])}, {e(v["city"])}'
     n = len(v["shows"])
@@ -742,13 +763,59 @@ for k, v in venues.items():
     vdesc = (f"Going to {v['name']} in {v['city']}? Getting there, bag and age rules, and every upcoming gig." if g
              else f"Upcoming concerts and gigs at {v['name']} in {v['city']}: dates and tickets.")
     body = f"""<section class="page-title"><div class="wrap"><h1>{e(v['name'])}</h1><p>{loc} · {n} upcoming {'show' if n == 1 else 'shows'}</p></div></section>
-<section class="band"><div class="wrap"><p><a href="{maps}" rel="noopener">Find it on Google Maps ↗</a> · <a href="/gigs/{slug(v['city'])}.html">More gigs in {e(v['city'])}</a> · <a href="/gigs/{slug(v['city'])}-this-weekend.html">This weekend in {e(v['city'])}</a></p>
+<section class="band"><div class="wrap">{venue_map(v)}
+<p><a href="/gigs/{slug(v['city'])}.html">More gigs in {e(v['city'])}</a> · <a href="/gigs/{slug(v['city'])}-this-weekend.html">This weekend in {e(v['city'])}</a></p>
 {guide}<h2>Upcoming gigs</h2>{gig_list(v['shows'], show_city=False)}</div></section>"""
     page(f"venues/{k}.html", vtitle + " | Live Louder", vdesc, body, "gigs/index.html")
 (OUT / "data").mkdir(parents=True, exist_ok=True)
 (OUT / "data" / "venues.json").write_text(json.dumps(sorted(
     [{"slug": k, "name": v["name"], "suburb": v["suburb"], "city": v["city"], "shows": len(v["shows"]),
       "guide_checked": (vguides.get(k) or {}).get("checked", "")} for k, v in venues.items()], key=lambda x: -x["shows"])))
+
+# ---------------------------------------------------------------- one page per gig (tickets, price, venue, map)
+for s in shows:
+    a = artists.get(slug(s["artist"])) or {}
+    v = venues.get(venue_slug(s)) or {}
+    wd = d(s["date"]).strftime("%A")
+    when = f'{wd} {fmt(s["date"], False)}' + (f' · {s["time"]}' if s["time"] else "")
+    pic = big_img(a) if a else ""
+    photo = a.get("photo", "") if a else ""
+    hero_img = (f'<div class="gp-bg" style="background-image:url(&quot;{e(pic or photo)}&quot;)"></div>' if (pic or photo) else "")
+    sold = "on sale soon" if s.get("onsale") and s["onsale"][:10] > TODAY_S else ""
+    price = (f'<p class="gp-price"><b>{e(s["price"])}</b> <span>ticket prices at last check, plus fees. Check the ticket page for the latest.</span></p>' if s.get("price")
+             else '<p class="gp-price"><span>Prices are on the ticket page.</span></p>')
+    sale_note = f'<p class="note">Tickets on sale {fmt(s["onsale"][:10])}.</p>' if sold else ""
+    snap = json.dumps({"id": s["id"], "d": s["date"], "tm": s["time"], "a": s["artist"], "s": slug(s["artist"]), "v": s["venue"],
+                       "c": s["city"], "u": s["url"], "vs": venue_slug(s), "p": gig_path(s)}, separators=(",", ":"))
+    others = [x for x in (a.get("shows") or []) if x["id"] != s["id"]]
+    more = f'<h2>More {e(s["artist"])} dates</h2>{gig_list(others[:30])}' if others else ""
+    support = f'<p class="gp-sup">with {e(", ".join(s["support"]))}</p>' if s["support"] else ""
+    src_label = {"ticketmaster": "Ticketmaster", "submitted": "the ticket seller", "found": "the venue / ticket seller"}.get(s["src"], "the promoter")
+    ld = json.dumps({"@context": "https://schema.org", "@type": "MusicEvent", "name": f'{s["artist"]} at {s["venue"]}',
+                     "startDate": s["date"] + (f'T{s["time"]}' if s["time"] else ""), "eventStatus": "https://schema.org/EventScheduled",
+                     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                     "location": {"@type": "Place", "name": s["venue"], "address": {"@type": "PostalAddress", "addressLocality": s["suburb"] or s["city"],
+                                  "addressRegion": s.get("state", ""), "addressCountry": "AU"}},
+                     "performer": [{"@type": "MusicGroup", "name": s["artist"]}] + [{"@type": "MusicGroup", "name": x} for x in s["support"]],
+                     "offers": {"@type": "Offer", "url": s["url"]}, **({"image": [pic or photo]} if (pic or photo) else {})}, ensure_ascii=False).replace("</", "<\\/")
+    body = f"""<script type="application/ld+json">{ld}</script>
+<section class="gp-hero">{hero_img}<div class="wrap gp-in"><div>
+<span class="ntag">{e(s["city"])} · {e(d(s["date"]).strftime("%-d %B %Y"))}</span><h1>{e(s["artist"])}</h1>{support}
+<p class="gp-when">{e(when)}<br><a href="/venues/{venue_slug(s)}.html">{e(s["venue"])}</a>, {e(s["suburb"] if s["suburb"] and s["suburb"] != s["city"] else s["city"])}</p>
+{price}{sale_note}
+<div class="gp-acts"><a class="btn big" href="{e(s["url"])}" rel="noopener">Get tickets ↗</a>
+<button class="save gp-save" type="button" data-gig="{e(snap)}" aria-pressed="false" aria-label="Save to My gigs">♡</button>
+<a class="btn ghost" href="{e(gcal(s, s["artist"]))}" rel="noopener">+ Calendar</a></div>
+<p class="note gp-src">Tickets through {src_label}. Always buy from the official seller.</p></div>
+{f'<img class="gp-photo" src="{e(photo)}" alt="{e(s["artist"])}">' if photo else ""}</div></section>
+<section class="band"><div class="wrap split"><div>
+{f'<p class="lead">{e(a["bio"])}</p>' if a.get("bio") else ""}
+<p><a class="btn ghost" href="/artists/{slug(s["artist"])}.html">All about {e(s["artist"])} →</a></p>
+{more}</div>
+<aside class="side"><div class="card"><h3 style="margin-top:0">The venue</h3><p><a href="/venues/{venue_slug(s)}.html"><b>{e(s["venue"])}</b></a><br>{e(s["suburb"] or s["city"])}, {e(s.get("state", ""))}</p>{venue_map(v, small=True) if v else ""}
+<p><a href="/venues/{venue_slug(s)}.html">Venue guide and more gigs →</a></p></div></aside></div></section>"""
+    page(gig_path(s)[1:], f'{s["artist"]} at {s["venue"]}, {s["city"]} – {fmt(s["date"], False)} | Tickets | Live Louder',
+         f'{s["artist"]} live at {s["venue"]}, {s["city"]} on {fmt(s["date"])}. Tickets, times, prices and venue info.', body, "gigs/index.html")
 
 # ---------------------------------------------------------------- festivals
 fl = f"""<section class="page-title"><div class="wrap"><h1>Festivals</h1><p>Line-ups, dates, venues and tips for Australia's music festivals.</p></div></section>
@@ -1096,6 +1163,7 @@ for icon in (ROOT / "src/icons").iterdir():
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
 urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "submit-a-gig.html", "about.html", "privacy.html"] \
     + [f"genres/{slug(g)}.html" for g in GENRE_LIST] \
+    + [gig_path(x)[1:] for x in shows] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
     + [f"venues/{k}.html" for k in venues] + [f"stories/{s['slug']}.html" for s in stories]

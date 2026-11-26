@@ -60,6 +60,16 @@ def _image(ev, width=640):
     return imgs[0]["url"] if imgs else ""
 
 
+def _price(ev):
+    """Ticketmaster's price range, e.g. "$89.90–$159.90" (it changes, so the site says "at last check")."""
+    pr = [p for p in ev.get("priceRanges", []) if p.get("min")]
+    if not pr:
+        return ""
+    lo, hi = min(p["min"] for p in pr), max(p.get("max") or p["min"] for p in pr)
+    f = lambda x: f"${x:,.0f}" if float(x).is_integer() else f"${x:,.2f}"
+    return f(lo) if hi == lo else f"{f(lo)}–{f(hi)}"
+
+
 def normalise(ev):
     """Turns one Ticketmaster event into Live Louder's show record (or None)."""
     emb = ev.get("_embedded", {})
@@ -95,6 +105,7 @@ def normalise(ev):
         "venue": v.get("name", ""), "suburb": city, "city": metro, "state": mstate,
         "url": ev.get("url", ""), "image": _image(ev), "image_big": _image(ev, 2048), "genre": genre,
         "onsale": onsale, "presales": presales[:3], "status": status, "src": "ticketmaster",
+        "lat": loc.get("latitude", ""), "lon": loc.get("longitude", ""), "price": _price(ev),
     }
 
 

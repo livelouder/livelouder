@@ -481,10 +481,10 @@ button.btn.ghost{border:2px solid var(--ink);background:transparent;color:var(--
 .hs{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;background-repeat:no-repeat}
 .hs.on{opacity:1}
 .hs.wide{background-size:cover;background-position:center}
-.hs.sq{background-size:auto 120%;background-position:right 18% center}
+.hs.sq{background-size:auto 125%;background-position:right 8% center}
 .hs.plain{background:radial-gradient(ellipse at 85% 30%,hsl(var(--h) 55% 16%) 0,#141414 55%)}
 .hs.wide::after,.hs.sq::after{content:"";position:absolute;inset:0;
- background:linear-gradient(90deg,rgba(20,20,20,.97) 0,rgba(20,20,20,.88) 40%,rgba(20,20,20,.5) 68%,rgba(20,20,20,.3) 100%),linear-gradient(0deg,rgba(20,20,20,.95) 0,rgba(20,20,20,0) 45%)}
+ background:linear-gradient(90deg,rgba(20,20,20,.9) 0,rgba(20,20,20,.62) 38%,rgba(20,20,20,.18) 70%,rgba(20,20,20,.05) 100%),linear-gradient(0deg,rgba(20,20,20,.9) 0,rgba(20,20,20,0) 40%)}
 @media(prefers-reduced-motion:no-preference){.hs.on{animation:kb 9s ease-out both}@keyframes kb{from{transform:scale(1.06)}to{transform:scale(1)}}}
 .hero .disc{z-index:1}.hero .wrap{z-index:2}.hero::before{z-index:1}
 .hcaps{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:-8px 0 30px;min-height:64px}
@@ -497,4 +497,29 @@ button.btn.ghost{border:2px solid var(--ink);background:transparent;color:var(--
 .hcaps .cdots{display:flex;gap:8px}
 .cdot{width:10px;height:10px;border-radius:999px;border:0;background:rgba(255,255,255,.4);cursor:pointer;padding:0;transition:width .25s}
 .cdot[aria-current=true]{width:30px;background:var(--red)}
-@media(max-width:760px){.hs.sq{background-size:cover;background-position:center 30%}.hs.wide::after,.hs.sq::after{background:linear-gradient(0deg,rgba(20,20,20,.97) 35%,rgba(20,20,20,.6) 100%)}}
+@media(max-width:760px){.hs.sq{background-size:cover;background-position:center 30%}.hs.wide::after,.hs.sq::after{background:linear-gradient(0deg,rgba(20,20,20,.94) 30%,rgba(20,20,20,.35) 100%)}}
+/* gig pages */
+.gp-hero{position:relative;background:#141414;color:#f6f5f2;border-bottom:6px solid var(--red);overflow:hidden;isolation:isolate}
+.gp-bg{position:absolute;inset:0;background:center/cover no-repeat;filter:blur(24px) saturate(1.2);transform:scale(1.2);z-index:-2}
+.gp-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,20,20,.95),rgba(20,20,20,.7));z-index:-1}
+.gp-in{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:36px;align-items:center;padding-top:clamp(32px,5vw,64px);padding-bottom:clamp(32px,5vw,64px)}
+.gp-hero h1{font-size:clamp(46px,7vw,92px);line-height:.95;color:#fff;margin:12px 0 8px}
+.gp-sup{color:#cfcac2;font-weight:600;margin:0 0 10px}.gp-when{font-size:19px;font-weight:700;line-height:1.5;margin:14px 0}.gp-when a{color:#fff}
+.gp-price b{font:400 30px "Anton",Impact,sans-serif;color:#fff;margin-right:8px}.gp-price span{color:#cfcac2;font-size:14px}
+.gp-acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 8px}
+.btn.big{min-height:56px;font-size:18px;padding:0 30px}
+.gp-acts .btn.ghost{border:2px solid #f6f5f2;color:#f6f5f2;background:transparent;min-height:56px}
+.gp-save{width:56px;height:56px;border-radius:50%;border:2px solid #f6f5f2;background:transparent;color:#f6f5f2;font-size:24px;cursor:pointer}
+.gp-save[aria-pressed=true]{background:var(--red);border-color:var(--red)}
+.gp-src{color:#a9a49c}
+.gp-photo{width:100%;max-width:400px;aspect-ratio:1;object-fit:cover;border-radius:12px;box-shadow:0 24px 50px rgba(0,0,0,.5);justify-self:center;transform:rotate(2deg)}
+@media(max-width:820px){.gp-in{grid-template-columns:minmax(0,1fr)}.gp-photo{max-width:220px;order:-1;justify-self:start}}
+/* venue map */
+.vmap{margin:0 0 24px;border-radius:12px;overflow:hidden;background:var(--card);box-shadow:0 1px 0 var(--line)}
+.vmap iframe{display:block;width:100%;height:320px;border:0}.vmap.small iframe{height:200px}
+.vmapbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:12px 14px}
+.vmap.small .vmapbar .btn{min-height:40px;font-size:14px;padding:0 14px}
+.distbtn{min-height:42px;padding:0 14px;border:2px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:700 14px "Archivo",sans-serif;cursor:pointer}
+.distout{font-size:15px}
+.vphoto{margin:0}.vphoto img{display:block;width:100%;max-height:380px;object-fit:cover}.vphoto figcaption{font-size:12px;color:var(--muted);padding:6px 14px 0}
+a.gd{text-decoration:none;color:inherit}

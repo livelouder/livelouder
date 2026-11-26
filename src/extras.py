@@ -189,3 +189,35 @@ def discogs_releases(items, root, limit=40):
     except OSError:
         pass
     return cache
+
+
+def geocode(venues, root, limit=40):
+    """Venue name -> (lat, lon) using OpenStreetMap's Nominatim (free; 1 request a second; cached forever in data/geo.json).
+    venues: {key: (name, suburb, city, state)}. Returns {key: [lat, lon]}."""
+    import time
+    path = root / "data/geo.json"
+    cache = json.loads(path.read_text()) if path.exists() else {}
+    looked = 0
+    for k, (name, suburb, city, state) in venues.items():
+        if k in cache or looked >= limit:
+            continue
+        looked += 1
+        hit = None
+        for q in (f"{name}, {suburb}, {state}, Australia", f"{name}, {city}, Australia"):
+            try:
+                url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode({"q": q, "format": "json", "limit": 1, "countrycodes": "au"})
+                req = urllib.request.Request(url, headers={"User-Agent": "LiveLouder/1.0 (hello@livelouder.com.au)"})
+                with urllib.request.urlopen(req, timeout=15) as r:
+                    res = json.loads(r.read().decode())
+                time.sleep(1.1)
+                if res:
+                    hit = [round(float(res[0]["lat"]), 5), round(float(res[0]["lon"]), 5)]
+                    break
+            except Exception:
+                time.sleep(1.1)
+        cache[k] = hit or []
+    try:
+        path.write_text(json.dumps(cache, indent=0))
+    except Exception:
+        pass
+    return {k: v for k, v in cache.items() if v}
