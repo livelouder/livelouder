@@ -276,9 +276,9 @@ dl.vfacts dt{font-weight:700}dl.vfacts dd{margin:0;color:var(--muted)}
 .top.open nav{display:flex}.top nav a{padding:13px 6px;border-top:1px solid #2a2a2a;border-radius:0;font-size:17px}
 .top .hsearch{display:none}.top.open .hsearch{display:block;order:4;width:100%;padding-bottom:12px}.top.open .hsearch input{width:100%}}
 /* gigs near you */
-.nearband{background:#f0ede6}
+.nearband{background:light-dark(#f0ede6,#1a1917)}
 .citypick{display:inline-flex;align-items:center;gap:10px;font-weight:700}
-.citypick select{min-height:46px;border:2px solid var(--ink);border-radius:999px;padding:0 16px;font:600 16px "Archivo",sans-serif;background:#fff;color:var(--ink)}
+.citypick select{min-height:46px;border:2px solid var(--ink);border-radius:999px;padding:0 16px;font:600 16px "Archivo",sans-serif;background:var(--card);color:var(--ink)}
 .nearlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:18px}
 .nearlist .stub{min-width:0}
 .nearlinks{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
@@ -301,7 +301,7 @@ background:linear-gradient(135deg,hsl(var(--h) 55% 32%),hsl(calc(var(--h) + 40) 
 .gigform legend{font-family:"Anton",Impact,sans-serif;font-size:26px;padding-right:10px}
 .gigform label{display:block;font-weight:700;margin:12px 0}
 .gigform label small{font-weight:400;color:var(--muted)}
-.gigform input,.gigform select,.gigform textarea{display:block;width:100%;margin-top:6px;min-height:46px;border:2px solid var(--ink);border-radius:8px;background:#fff;color:var(--ink);font:16px "Archivo",sans-serif;padding:8px 12px}
+.gigform input,.gigform select,.gigform textarea{display:block;width:100%;margin-top:6px;min-height:46px;border:2px solid var(--ink);border-radius:8px;background:var(--card);color:var(--ink);font:16px "Archivo",sans-serif;padding:8px 12px}
 .gigform .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .gigform .btn{border:0;font:700 17px "Archivo",sans-serif;cursor:pointer;padding:0 28px}
 .steps{padding-left:20px}.steps li{margin:8px 0}
@@ -382,7 +382,7 @@ button.btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}
 .ncount b{font:400 64px/1 "Anton",Impact,sans-serif}.ncount span{font-weight:700;font-size:14px}
 /* gig cards */
 .ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
-.gcard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 6px 18px rgba(0,0,0,.06);display:flex;flex-direction:column}
+.gcard{background:var(--card);color:var(--ink);border-radius:12px;overflow:hidden;box-shadow:0 1px 0 var(--line),0 6px 18px rgba(0,0,0,.06);display:flex;flex-direction:column}
 .gcard.past{opacity:.85}.gcard.past .gph{filter:grayscale(.6)}
 .gimg{position:relative;display:block;aspect-ratio:16/10;background:#222}
 .gph{display:block;width:100%;height:100%;background:center/cover no-repeat}
@@ -400,7 +400,7 @@ button.btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}
 .poster b{font:400 42px "Anton",Impact,sans-serif;color:rgba(255,255,255,.9)}
 /* artists */
 .agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
-.atile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:#fff;border-radius:12px;padding:18px 12px;box-shadow:0 1px 0 var(--line)}
+.atile{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:var(--card);color:var(--ink);border-radius:12px;padding:18px 12px;box-shadow:0 1px 0 var(--line)}
 .atile a{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
 .aph{display:block;width:110px;height:110px;border-radius:50%;background:center/cover no-repeat #222}.aph.sm{width:72px;height:72px}.aph.sm b{font-size:24px}
 .anext{font-size:13px;color:var(--muted)}.anext.on{color:var(--red);font-weight:700}
@@ -416,14 +416,14 @@ button.btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}
 .rcard strong{font-size:14px;margin-top:6px;line-height:1.25}.rcard>span:not(.rblank):not(.rtour){font-size:13px;color:var(--muted)}
 .rtour{position:absolute;left:8px;top:8px;background:var(--red);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:3px 8px;text-transform:uppercase;letter-spacing:.05em}
 .rtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px}
-.rtools input,.rtools select{min-height:44px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;font:16px "Archivo",sans-serif;background:#fff}
+.rtools input,.rtools select{min-height:44px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;font:16px "Archivo",sans-serif;background:var(--card);color:var(--ink)}
 .rtools input{flex:1 1 240px}
 .chipbtn{min-height:44px;padding:0 16px;border:2px solid var(--ink);border-radius:999px;background:transparent;font:700 14px "Archivo",sans-serif;cursor:pointer}
 .chipbtn[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}.chipbtn small{opacity:.7;margin-left:4px}
 .nvlist{list-style:none;padding:0}.nvlist li{display:grid;grid-template-columns:80px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
 .nvd{font:400 20px "Anton",Impact,sans-serif;color:var(--red)}
 /* discogs promo */
-.dgpromo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:center;background:#fff;border-radius:14px;padding:28px;margin-top:36px;box-shadow:0 1px 0 var(--line)}
+.dgpromo{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:center;background:var(--card);color:var(--ink);border-radius:14px;padding:28px;margin-top:36px;box-shadow:0 1px 0 var(--line)}
 .dgpromo.big{margin-top:0}.dgpromo h2{margin-bottom:8px}.dgpromo p{max-width:560px}
 .dgform{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}.dgform input{flex:1 1 220px;min-height:48px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;font:16px "Archivo",sans-serif}
 .dgstack{position:relative;height:190px}
@@ -432,7 +432,7 @@ button.btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}
 .dgstack span:nth-child(2){left:28%;background:#141414 radial-gradient(circle,#e2391f 0 16%,#141414 17% 18%,#2a2a2a 19% 20%,#141414 21%);border-radius:50%;transform:rotate(4deg)}
 .dgstack span:nth-child(3){left:46%;background:linear-gradient(135deg,#f0c419,#b5651d);transform:rotate(9deg)}
 .err{color:var(--red);font-weight:700;margin-top:8px}
-.loading{display:flex;gap:16px;flex-wrap:wrap;align-items:center}.loading span{width:150px;height:150px;border-radius:6px;background:linear-gradient(90deg,#e8e4dc,#f3f0ea,#e8e4dc);background-size:200% 100%;animation:shim 1.2s infinite}
+.loading{display:flex;gap:16px;flex-wrap:wrap;align-items:center}.loading span{width:150px;height:150px;border-radius:6px;background:linear-gradient(90deg,var(--line),var(--card),var(--line));background-size:200% 100%;animation:shim 1.2s infinite}
 .loading p{flex-basis:100%;color:var(--muted)}@keyframes shim{to{background-position:-200% 0}}
 /* record dialog */
 #recDlg{border:0;border-radius:16px;padding:0;max-width:880px;width:calc(100vw - 24px);background:var(--bg);color:var(--ink)}
@@ -448,7 +448,7 @@ button.btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}
 .tracks span{color:var(--muted)}.tracks em{color:var(--muted);font-style:normal}
 .ractions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 /* empty states, settings */
-.empty{text-align:center;padding:44px 20px;background:#fff;border-radius:14px;box-shadow:0 1px 0 var(--line)}
+.empty{text-align:center;padding:44px 20px;background:var(--card);color:var(--ink);border-radius:14px;box-shadow:0 1px 0 var(--line)}
 .eicon{font-size:44px}.empty h3{font-size:28px;margin:10px 0 6px}.empty p{max-width:520px;margin:0 auto 18px;color:var(--muted)}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.sgrid .card{display:block}.sgrid h3{margin-bottom:8px}
 .danger{color:var(--red)!important}
