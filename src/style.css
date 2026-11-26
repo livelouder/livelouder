@@ -307,3 +307,32 @@ background:linear-gradient(135deg,hsl(var(--h) 55% 32%),hsl(calc(var(--h) + 40) 
 .steps{padding-left:20px}.steps li{margin:8px 0}
 .addgig{margin:0 0 6px}
 @media(max-width:600px){.gigform .two{grid-template-columns:1fr}}
+/* my gigs */
+.mylink{color:#f6f5f2;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:999px;border:2px solid var(--red);white-space:nowrap}
+.mylink span[aria-hidden]{color:var(--red)}
+.mylink:hover{background:var(--red)}.mylink:hover span{color:#fff}
+.mycount{display:inline-block;margin-left:6px;background:var(--red);color:#fff;border-radius:999px;font-size:12px;min-width:20px;padding:1px 6px;text-align:center}
+.mycount[hidden]{display:none}
+.going,.saveartist,#mygigs .ga .save{min-height:34px;padding:0 12px;border:2px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:600 13px "Archivo",sans-serif;cursor:pointer;white-space:nowrap}
+#mygigs .ga .save[aria-pressed=true],.saveartist[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+.going[aria-pressed=true]{background:var(--ink);color:#fff}
+.page-title .saveartist{margin-top:14px;border-color:#fff;color:#fff;min-height:42px;font-size:15px;padding:0 18px}
+.page-title .saveartist[aria-pressed=true]{background:#fff;color:var(--red);border-color:#fff}
+.mygrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px}
+.myart,.dglist{list-style:none;padding:0;margin:0}
+.myart li,.dglist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.myart .gw,.dglist .gw{grid-column:1;font-size:14px;color:var(--muted)}
+.myart button,.dglist button,.dglist .act{grid-column:2;grid-row:1 / span 2}
+.dgform{display:flex;gap:8px;margin-top:12px}.dgform input{flex:1;min-width:0;min-height:46px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;font:16px "Archivo",sans-serif}
+.dgform .btn{border:0;cursor:pointer;font:700 15px "Archivo",sans-serif}
+.discogs h4{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:20px;margin:22px 0 4px}
+.dgsum{margin-top:16px}.err{color:var(--red)}
+.linkish{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font:inherit;font-size:13px}
+@media(max-width:900px){.mygrid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:760px){.mylink{padding:6px 10px;font-size:14px}.top .wm{margin-right:auto}}
+.ga2{display:inline-flex;align-items:center;gap:10px}
+.ga .save{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);font-size:17px;line-height:1;cursor:pointer;padding:0}
+.ga .save[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+#mygigs .ga .save{width:auto;height:auto;border-radius:999px}
+@media(min-width:761px) and (max-width:1440px){.top .hsearch{display:none}}
+@media(max-width:760px){.top .wrap{gap:10px}.top .wm{font-size:24px}.menu{padding:0 12px}}

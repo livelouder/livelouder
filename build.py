@@ -255,6 +255,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <link rel="apple-touch-icon" href="{r}apple-touch-icon.png"><link rel="manifest" href="{r}site.webmanifest"><meta name="theme-color" content="#141414">
 <link rel="stylesheet" href="{r}style.css">{extra_head}</head><body data-root="{r}">
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
+<a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
 <button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}</nav>
 <form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>
 <main>{body}</main>
@@ -297,9 +298,12 @@ def gig_row(s, show_artist=True, show_city=True):
     if s["onsale"] and s["onsale"][:10] > TODAY_S:
         sale = f'<span class="tag">On sale {fmt(s["onsale"][:10], False, False)}</span>'
     label = "Tickets" if s["src"] in ("ticketmaster", "submitted") else "Details"
+    snap = json.dumps({"id": s["id"], "d": s["date"], "tm": s["time"], "a": s["artist"], "s": slug(s["artist"]), "v": s["venue"],
+                       "c": s["city"], "u": s["url"], "vs": venue_slug(s)}, separators=(",", ":"))
+    save = f'<button class="save" type="button" data-gig="{e(snap)}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button>'
     return (f'<li class="gig" data-date="{s["date"]}" data-city="{e(s["city"])}"><div class="gd"><b>{d(s["date"]).day}</b>'
             f'<small>{d(s["date"]).strftime("%b")}</small></div><div class="gi">{who}{sup}<span class="gw">{where}{t}</span>{sale}</div>'
-            f'<div class="ga"><a href="{e(s["url"])}" rel="noopener">{label} ↗</a><a class="cal" href="{e(gcal(s, s["artist"]))}" rel="noopener">+ Calendar</a></div></li>')
+            f'<div class="ga"><a href="{e(s["url"])}" rel="noopener">{label} ↗</a><span class="ga2"><a class="cal" href="{e(gcal(s, s["artist"]))}" rel="noopener">+ Calendar</a>{save}</span></div></li>')
 
 def gig_list(items, **kw):
     out, month = "", None
@@ -584,7 +588,7 @@ page("gigs/index.html", "Gig guide: concerts and gigs in Australia | Live Louder
      "Search every big gig in Australia by artist, venue, city and date. Concerts in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", gg, "gigs/index.html")
 (OUT / "gigs.json").write_text(json.dumps([[s["date"], s["time"], s["artist"], slug(s["artist"]), s["venue"], s["suburb"], s["city"], s["url"],
                                            ", ".join(s["support"]), s["src"], gcal(s, s["artist"]), venue_slug(s),
-                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else ""] for s in shows], separators=(",", ":")))
+                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else "", s["id"]] for s in shows], separators=(",", ":")))
 
 for c in MAIN_CITIES:
     cs = [s for s in shows if s["city"] == c]
@@ -736,7 +740,7 @@ for a in artists.values():
     dates_html = gig_list(sh, show_artist=False) if sh else '<p class="note">Dates to be announced. Check the tour announcement.</p>'
     cal = f'<a class="btn ghost" href="/artists/{a["slug"]}.ics">Add all dates to calendar</a>' if sh else ""
     vinyl = HEATHEN + quote_plus(a["name"].split(" & ")[0])
-    body = f"""<section class="page-title artist"><div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p>{cd}</div>{art(a, 'art hart')}</div></section>
+    body = f"""<section class="page-title artist"><div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p><button class="saveartist" type="button" data-artist="{e(a['slug'])}" data-name="{e(a['name'])}" aria-pressed="false"><span aria-hidden="true">♡</span> Follow</button>{cd}</div>{art(a, 'art hart')}</div></section>
 <section class="band"><div class="wrap split"><div>{head}{note}
 <h2>{len(sh)} {'show' if len(sh) == 1 else 'shows'} in Australia</h2>{dates_html}{tour_map(a['cities'])}{setlist_html}{records_html}</div>
 <aside class="side">{listen}{follow}<div class="card"><h3>Before the show</h3><a class="btn" href="{vinyl}" rel="noopener">Find {e(a['name'])} on vinyl ↗</a>{cal}{src}</div>{extra_cards}</aside></div></section>"""
@@ -858,6 +862,24 @@ osp = (f'<section class="page-title"><div class="wrap"><h1>On sale soon</h1><p>E
        f'<p class="note">Times shown in Sydney time (AEDT/AEST). Sale times can change: always check the ticket page. Updated {UPDATED}.</p></div></section>')
 page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Australia | Live Louder",
      "When tickets go on sale for concerts and tours in Australia: presale and general on-sale dates and times, with calendar reminders.", osp, "on-sale.html")
+
+# ---------------------------------------------------------------- my gigs (saved on the visitor's device)
+mg = """<section class="page-title"><div class="wrap"><h1>My gigs</h1><p>Your saved gigs, the artists you follow, and what's touring from your record collection.</p></div></section>
+<section class="band" id="mygigs"><div class="wrap">
+<div class="mygrid"><div>
+<h2>Going</h2><div id="myGoing"><p class="note">Nothing yet. Save a gig, then tap "I'm going".</p></div>
+<h2 style="margin-top:36px">Saved gigs</h2><div id="mySaved"><p class="note">Tap <b>♡ Save</b> on any gig in the <a href="/gigs/index.html">gig guide</a> and it lands here.</p></div>
+<h2 style="margin-top:36px">Artists you follow</h2><div id="myArtists"><p class="note">Tap <b>♡ Follow</b> on an artist page to keep an eye on their dates.</p></div>
+</div><aside>
+<div class="card discogs"><h3>Your records</h3><p>Link your Discogs collection and we'll show you which artists you own are touring, and what's coming out on vinyl from them.</p>
+<form id="dgForm" class="dgform"><input id="dgUser" placeholder="Your Discogs username" aria-label="Discogs username" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn">Link</button></form>
+<p class="note" id="dgNote">Your collection needs to be public on Discogs (it is by default). We only read it, and nothing is stored on our side.</p>
+<div id="dgOut"></div></div>
+<p class="note">Your saves are kept on this device. Clearing your browser data will clear them too.</p>
+</aside></div></div></section>"""
+page("my-gigs.html", "My gigs | Live Louder", "Your saved gigs, followed artists and record collection on Live Louder.", mg)
+(OUT / "data").mkdir(exist_ok=True)
+(OUT / "data" / "releases.json").write_text(json.dumps([i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S], separators=(",", ":")))
 
 # ---------------------------------------------------------------- submit a gig
 metro_opts = "".join(f"<option>{e(m[0])}</option>" for m in feed.METROS)
