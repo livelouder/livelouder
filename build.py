@@ -50,6 +50,9 @@ rels = json.loads((ROOT / "data/releases.json").read_text())
 stories = json.loads((ROOT / "data/stories.json").read_text())
 news = sorted(json.loads((ROOT / "data/news.json").read_text()), key=lambda n: n["date"], reverse=True)
 fests = json.loads((ROOT / "data/festivals.json").read_text())
+picks_all = json.loads((ROOT / "data/picks.json").read_text()) if (ROOT / "data/picks.json").exists() else []
+picks_all.sort(key=lambda x: x["date"], reverse=True)
+pick = picks_all[0] if picks_all and picks_all[0]["date"] >= (TODAY.date() - dt.timedelta(days=14)).isoformat() else None
 vguides = json.loads((ROOT / "data/venue_guides.json").read_text()) if (ROOT / "data/venue_guides.json").exists() else {}
 tm = feed.fetch(ROOT)
 
@@ -351,6 +354,25 @@ fest_html = "".join(fest_card(f) for f in fests)
 rel_items = [i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S][:8]
 rel_html = "".join(f'<li><div class="when">{"TBC" if a == "2027" else d(a).strftime("%-d %b")}</div><div class="what"><strong>{e(b)} – {e(c)}</strong><span>{e(fm)}</span></div></li>' for a, b, c, fm in rel_items)
 fest_h = '<h2 style="margin-top:36px">Festival guides</h2>' if onsale else "<h2>Festival guides</h2>"
+picks_html = ""
+if pick:
+    g_, r_ = pick.get("gig") or {}, pick.get("record") or {}
+    cards = ""
+    if g_:
+        ga_ = artists.get(slug(g_["artist"]))
+        img_ = art(ga_, "art pk-art") if ga_ else ""
+        when_ = f'{fmt(g_["date"])} · {e(g_.get("venue", ""))}, {e(g_.get("city", ""))}' if g_.get("date") else ""
+        link_ = f'<a class="btn" href="/artists/{slug(g_["artist"])}.html">Dates &amp; tickets</a>' if ga_ else ""
+        cards += (f'<div class="pk">{img_}<div><span class="ntag">Gig pick</span><h3>{e(g_["artist"])}</h3><p class="pk-when">{when_}</p>'
+                  f'<p>{e(g_["text"])}</p>{link_}</div></div>')
+    if r_:
+        hit_ = (REL_DG.get(f'{r_["artist"]}|{r_["title"]}') or {}).get("hit") or {}
+        cov_ = (f'<div class="art pk-art"><img src="{e(hit_["cover"])}" alt="{e(r_["artist"])} – {e(r_["title"])} cover" loading="lazy"></div>' if hit_.get("cover")
+                else f'<div class="art pk-art poster" style="--h:{hue(r_["title"])}"><span>{e(r_["title"][:2].upper())}</span></div>')
+        cards += (f'<div class="pk">{cov_}<div><span class="ntag">Record pick</span><h3>{e(r_["artist"])} – {e(r_["title"])}</h3>'
+                  f'<p>{e(r_["text"])}</p><a class="btn" href="{HEATHEN + quote_plus(r_["artist"] + " " + r_["title"])}" rel="noopener">Find it on vinyl</a></div></div>')
+    picks_html = (f'<section class="band picks"><div class="wrap"><div class="shead"><h2>Mick\'s picks</h2><span class="note">This week\'s gig and record, from the bloke who runs the place.</span></div>'
+                  f'<div class="pkgrid">{cards}</div><p class="pk-sign">— Mick</p></div></section>')
 home = f"""<section class="hero"><svg class="disc" viewBox="-250 -250 500 500" aria-hidden="true"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}
 <path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>
 <circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>
@@ -360,7 +382,7 @@ home = f"""<section class="hero"><svg class="disc" viewBox="-250 -250 500 500" a
 <form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form>
 <div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
 <div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div></div></section>
-{news_html}{gotw_html}
+{news_html}{gotw_html}{picks_html}
 <section class="band citiesband"><div class="wrap"><div class="shead"><h2>Gigs near you</h2><a href="/this-weekend.html">What\'s on this weekend →</a></div>{chips()}</div></section>
 <section class="band"><div class="wrap split">
 <div><h2>This week</h2>{week_html}<a class="more" href="/gigs/index.html">Full gig guide ({len(shows):,} shows) →</a></div>
@@ -769,7 +791,10 @@ for s in stories:
 ab = """<section class="page-title"><div class="wrap"><h1>About</h1></div></section><section class="band"><div class="article">
 <p>Live Louder is an independent Australian music site. We keep track of who's playing where, the big tours heading our way, the festivals worth the trip, what's coming out on vinyl, and the stories behind the records worth owning.</p>
 <p>The news and gig guide update every day. Our news briefs are written by us and always link to the original report. We're based in the Blue Mountains, NSW, and we're music fans first. If you're a band, a venue or a label with a tour or release we should know about, get in touch.</p>
-<p>Live Louder is supported by <a href="https://heathenrecords.com.au">Heathen Records</a>, an independent online record store. Where we link to records, that's usually where the link goes.</p></div></section>"""
+<h2>Who's behind it</h2>
+<p>G'day, I'm Mick Wells. I run Live Louder, and I also run <a href="https://heathenrecords.com.au">Heathen Records</a>, an independent online record store in Blackheath, up in the Blue Mountains. I spend most of my days around records and the people who love them, and I wanted one place that tells you who's coming, what's worth seeing and which records to grab before the show.</p>
+<p>Every week I pick one gig and one record worth your time. You'll find them on the homepage and in the Live Louder Weekly. If you've got a tour, a release or a tip I should know about, email me at <a href="mailto:hello@livelouder.com.au">hello@livelouder.com.au</a>.</p>
+<p>Where we link to records, that link usually goes to Heathen Records. That's how the site pays its way.</p></div></section>"""
 page("about.html", "About Live Louder", "Live Louder is an independent Australian music site: news, gigs, tours, festivals, new vinyl and stories.", ab)
 page("thanks.html", "Thanks | Live Louder", "Thanks for signing up.",
      '<section class="page-title"><div class="wrap"><h1>You\'re in</h1><p>Thanks! We\'ll be in touch. In the meantime, <a style="color:#fff" href="/gigs/index.html">find a gig</a> or catch up on the <a style="color:#fff" href="/news/index.html">latest news</a>.</p></div></section>')
@@ -789,6 +814,6 @@ urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html",
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                                  + "".join(f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY_S}</lastmod></url>" for u in urls) + "</urlset>")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
-weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug, REL_DG)
+weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug, REL_DG, pick)
 players = sum(1 for a in artists.values() if a.get("deezer"))
 print(f"built: {len(news)} news, {len(shows)} shows, {len(artists)} artists, {len(venues)} venues, {len(fests)} festivals, feed={'on' if have_feed else 'off'}, players={players}, alerts={len(alert_mail)}")

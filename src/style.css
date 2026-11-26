@@ -259,3 +259,13 @@ ul.sales{list-style:none;margin:10px 0 0;padding:0}
 dl.vfacts{display:grid;grid-template-columns:180px minmax(0,1fr);gap:8px 18px;margin:12px 0}
 dl.vfacts dt{font-weight:700}dl.vfacts dd{margin:0;color:var(--muted)}
 @media(max-width:600px){dl.vfacts{grid-template-columns:minmax(0,1fr)}dl.vfacts dd{margin-bottom:8px}}
+
+/* Mick's picks */
+.picks{background:#1d1d1d}
+.pkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;margin-top:8px}
+.pk{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:start;background:#141414;border-radius:12px;padding:18px}
+.pk-art{width:150px;aspect-ratio:1}
+.pk h3{font-size:28px;margin:8px 0 4px}.pk-when{color:#ffb3a6;font-weight:700;margin:0 0 6px}
+.pk p{margin:0 0 12px}
+.pk-sign{font:400 26px/1 "Anton",Impact,sans-serif;color:var(--red);margin:18px 0 0}
+@media(max-width:600px){.pk{grid-template-columns:minmax(0,1fr)}.pk-art{width:100%}}

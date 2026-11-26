@@ -127,7 +127,7 @@ def _names(xs):
     return xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
 
 
-def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rels, slug, rel_dg=None):
+def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rels, slug, rel_dg=None, pick=None):
     rel_dg = rel_dg or {}
     today_s = today.isoformat()
     week_ago = (today - dt.timedelta(days=7)).isoformat()
@@ -154,6 +154,19 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
 
     rows = (f'<tr><td style="padding:28px 32px 0;{FONT};font-size:17px;line-height:1.55;color:{INK}">'
             f'Here\'s your week in live music: the tours just announced, the gigs worth leaving the house for, and the records worth owning.</td></tr>')
+    if pick:
+        g_, r_ = pick.get("gig") or {}, pick.get("record") or {}
+        rows += _section("From Mick", "This week's picks")
+        if g_:
+            rows += _feature(_img(photo(g_["artist"]), g_["artist"], 96, 96, g_["artist"]), g_["artist"], link(f"artists/{slug(g_['artist'])}.html"),
+                             "Gig pick" + (f" · {_fmt(g_['date'])}, {g_.get('venue', '')}, {g_.get('city', '')}" if g_.get("date") else ""), "", "Dates & tickets")
+            rows += f'<tr><td style="padding:0 32px 6px 144px;{FONT};font-size:15px;line-height:1.55;color:{INK}">{e(g_["text"])}</td></tr>'
+        if r_:
+            hit = (rel_dg.get(f"{r_['artist']}|{r_['title']}") or {}).get("hit") or {}
+            rows += _feature(_img(hit.get("cover", ""), r_["title"], 96, 96, r_["artist"]), f"{r_['artist']} – {r_['title']}",
+                             HEATHEN + quote_plus(f"{r_['artist']} {r_['title']}"), "Record pick", "", "Find it on vinyl")
+            rows += f'<tr><td style="padding:0 32px 6px 144px;{FONT};font-size:15px;line-height:1.55;color:{INK}">{e(r_["text"])}</td></tr>'
+        rows += f'<tr><td style="padding:4px 32px 0 144px;{FONT};font-size:15px;font-weight:bold;color:{RED}">— Mick</td></tr>'
     if fresh:
         rows += _section("Just announced", "New tours")
         for t in fresh:
