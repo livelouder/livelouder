@@ -127,7 +127,20 @@ def _names(xs):
     return xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
 
 
-def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rels, slug, rel_dg=None, pick=None):
+def _sale_label(x):
+    if x["kind"] != "Presale":
+        return "General on-sale"
+    n = x.get("name") or "Presale"
+    return n if "presale" in n.lower() else n + " presale"
+
+
+def _sale_when(x):
+    t = x["when"].strftime("%-I:%M%p").lower().replace(":00", "")
+    return f'{x["when"].strftime("%a %-d %b")}, {t} Sydney time'
+
+
+def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rels, slug, rel_dg=None, pick=None, sales=None):
+    sales = sales or []
     rel_dg = rel_dg or {}
     today_s = today.isoformat()
     week_ago = (today - dt.timedelta(days=7)).isoformat()
@@ -184,7 +197,13 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
         rows += _section("On this week", "Gigs worth leaving the house for")
         rows += _datelist([(str(dt.date.fromisoformat(s_["date"]).day), dt.date.fromisoformat(s_["date"]).strftime("%b"), s_["artist"],
                             f"{s_['venue']}, {s_['city']}", link(f"artists/{slug(s_['artist'])}.html")) for s_ in week])
-    if onsale:
+    wk_sales = [x for x in sales if x["when"].date() <= today + dt.timedelta(days=7)]
+    if wk_sales:
+        wk_sales = sorted(wk_sales, key=lambda x: (x["kind"] != "Presale", x["when"]))[:8]
+        rows += _section("Set a reminder", "Presales and on-sales this week")
+        rows += _datelist([(str(x["when"].day), x["when"].strftime("%b"), f'{x["artist"]}: {_sale_label(x)}',
+                            f'{_sale_when(x)} · {", ".join(x["cities"][:4])}', link("on-sale.html")) for x in sorted(wk_sales, key=lambda x: x["when"])])
+    elif onsale:
         rows += _section("Set a reminder", "Tickets on sale this week")
         rows += _datelist([(str(dt.date.fromisoformat(s_["onsale"][:10]).day), dt.date.fromisoformat(s_["onsale"][:10]).strftime("%b"), s_["artist"],
                             f"{s_['city']} · show {_fmt(s_['date'])}", link(f"artists/{slug(s_['artist'])}.html"))
@@ -256,11 +275,20 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
             add(n["artist"], f"news:{n['slug']}",
                 f'<tr><td style="padding:8px 32px"><a href="{link("news/" + n["slug"] + ".html")}" style="{FONT};font-size:16px;font-weight:bold;color:{INK};text-decoration:none">{e(n["title"])}</a>'
                 f'<div style="margin-top:4px"><a href="{link("news/" + n["slug"] + ".html")}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">Read more →</a></div></td></tr>')
-    for s_ in tm:
-        if s_.get("onsale") and today_s <= s_["onsale"][:10] <= (today + dt.timedelta(days=3)).isoformat():
-            add(s_["artist"], f"onsale:{s_['id']}",
-                _datelist([(str(dt.date.fromisoformat(s_["onsale"][:10]).day), dt.date.fromisoformat(s_["onsale"][:10]).strftime("%b"),
-                            f"Tickets on sale: {s_['city']}", f"Show {_fmt(s_['date'])} · {s_['venue']}", s_["url"] or link(f"artists/{slug(s_['artist'])}.html"))]))
+    # Presales and on-sales in the next 3 days (Ticketmaster and the tour data), one alert row per sale.
+    for x in sales:
+        if x["when"].date() <= today + dt.timedelta(days=3):
+            alerts.setdefault(x["artist"], {"artist": x["artist"], "tag": f"Artist: {x['artist']}", "items": [], "rows": []}).setdefault(
+                "sale", f'{_sale_label(x)} starts {x["when"].strftime("%a %-d %b")}')
+            add(x["artist"], f"sale:{slug(x['artist'])}:{x['kind']}:{x.get('name', '')}:{x['when'].isoformat()}",
+                _datelist([(str(x["when"].day), x["when"].strftime("%b"), f"{_sale_label(x)}: {_sale_when(x)}",
+                            ", ".join(x["cities"][:6]), x["url"] or link(f"artists/{slug(x['artist'])}.html"))]))
+    if not sales:
+        for s_ in tm:
+            if s_.get("onsale") and today_s <= s_["onsale"][:10] <= (today + dt.timedelta(days=3)).isoformat():
+                add(s_["artist"], f"onsale:{s_['id']}",
+                    _datelist([(str(dt.date.fromisoformat(s_["onsale"][:10]).day), dt.date.fromisoformat(s_["onsale"][:10]).strftime("%b"),
+                                f"Tickets on sale: {s_['city']}", f"Show {_fmt(s_['date'])} · {s_['venue']}", s_["url"] or link(f"artists/{slug(s_['artist'])}.html"))]))
     alert_list = []
     for name, a in alerts.items():
         pv = f"New {name} news on Live Louder."
@@ -272,7 +300,8 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
                 + "".join(a["rows"][:6])
                 + f'<tr><td style="padding:24px 32px 4px">{_button(f"See {name} dates and tickets", link(f"artists/{slug(name)}.html"))}</td></tr>')
         alert_list.append({"artist": name, "tag": a["tag"], "items": a["items"],
-                           "subject": f"{name}: new on Live Louder", "preview": pv, "html": _track(_wrap(rows, pv, site, "Artist alert"), "artist-alert")})
+                           "subject": f"{name} tickets: {a['sale']}" if a.get("sale") else f"{name}: new on Live Louder",
+                           "preview": (f"{name} tickets: {a['sale']}. Set a reminder." if a.get("sale") else pv), "html": _track(_wrap(rows, pv, site, "Artist alert"), "artist-alert")})
 
     d = out / "email"
     d.mkdir(parents=True, exist_ok=True)

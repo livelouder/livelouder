@@ -25,7 +25,7 @@ h3{font-size:24px;margin:0}
 .top .wm{font-size:28px;color:#f6f5f2;text-decoration:none;margin-right:auto}
 .top .wm span{color:var(--red)}
 .top nav{display:flex;gap:4px;flex-wrap:wrap}
-.top nav a{color:#f6f5f2;text-decoration:none;font-weight:600;padding:10px 12px;border-radius:4px}
+.top nav a{color:#f6f5f2;text-decoration:none;font-weight:600;padding:10px 10px;border-radius:4px}
 .top nav a:hover,.top nav a[aria-current]{background:var(--red);color:#fff}
 /* hero */
 .hero{background:radial-gradient(ellipse at 85% 30%,#2a1512 0,#141414 55%);color:#f6f5f2;border-bottom:6px solid var(--red);padding:clamp(28px,5vw,64px) max(5vw,16px) 40px;position:relative;overflow:hidden}
@@ -269,3 +269,30 @@ dl.vfacts dt{font-weight:700}dl.vfacts dd{margin:0;color:var(--muted)}
 .pk p{margin:0 0 12px}
 .pk-sign{font:400 26px/1 "Anton",Impact,sans-serif;color:var(--red);margin:18px 0 0}
 @media(max-width:600px){.pk{grid-template-columns:minmax(0,1fr)}.pk-art{width:100%}}
+
+/* mobile menu */
+.menu{display:none;align-items:center;gap:6px;min-height:42px;padding:0 14px;border:2px solid #f6f5f2;border-radius:999px;background:transparent;color:#f6f5f2;font:600 15px "Archivo",sans-serif;cursor:pointer}
+@media(max-width:760px){.menu{display:inline-flex}.top nav{display:none;width:100%;flex-direction:column;gap:0;padding-bottom:8px}
+.top.open nav{display:flex}.top nav a{padding:13px 6px;border-top:1px solid #2a2a2a;border-radius:0;font-size:17px}
+.top .hsearch{display:none}.top.open .hsearch{display:block;order:4;width:100%;padding-bottom:12px}.top.open .hsearch input{width:100%}}
+/* gigs near you */
+.nearband{background:#f0ede6}
+.citypick{display:inline-flex;align-items:center;gap:10px;font-weight:700}
+.citypick select{min-height:46px;border:2px solid var(--ink);border-radius:999px;padding:0 16px;font:600 16px "Archivo",sans-serif;background:#fff;color:var(--ink)}
+.nearlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:18px}
+.nearlist .stub{min-width:0}
+.nearlinks{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.btn.ghost .nc{color:inherit}
+/* sales on homepage */
+.salesband .sales{margin-top:8px}
+/* genres */
+.gchips a small{font-weight:400;opacity:.65;margin-left:6px}
+.gtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.gtile{display:flex;flex-direction:column;justify-content:flex-end;min-height:150px;padding:20px;border-radius:10px;text-decoration:none;color:#fff;
+background:linear-gradient(135deg,hsl(var(--h) 55% 32%),hsl(calc(var(--h) + 40) 60% 18%))}
+.gtile strong{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:30px;line-height:1.05}
+.gtile span{font-size:14px;opacity:.85;margin-top:6px}
+.gtile:hover{outline:3px solid var(--red);outline-offset:2px}
+.glink{color:inherit}
+@media(max-width:600px){.shead{flex-wrap:wrap;gap:10px}.citypick{width:100%}.citypick select{flex:1}}
+@media(min-width:761px) and (max-width:1280px){.top nav a{padding:10px 7px;font-size:15px}.hsearch input{width:150px}}

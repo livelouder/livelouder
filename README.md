@@ -38,3 +38,9 @@ Every push to `main` publishes automatically.
 - `src/social.py` makes one post a day (images + caption) at the 7am build → site/social/today.json; Make.com publishes it to Instagram and Facebook at 6:30pm.
 - Posts are built for shares, saves and comments: hook slide, a question, and a "send this to a mate" / "save this" slide.
 - `data/social_queue.json`: hand-written posts for a given date (written weekly by the social writer task) replace the automatic one for that day.
+
+## Finding gigs (Nov 2026)
+- **Gigs near you** (homepage): remembers the visitor's city on their device, or guesses it from their time zone, and shows their next gigs from `gigs.json`. The newsletter city and gig guide default to it too.
+- **Genres**: `genres/` pages. An artist's genre comes from the tour `genre` field or Ticketmaster first, then Discogs style tags (`data/discogs.json` `tags`), mapped to the buckets in `GENRES` in build.py. The gig guide has a genre filter (`gigs.json` column 12).
+- **Presales**: homepage "Tickets on sale this week", the weekly email and artist alerts all use `upcoming_sales` (Ticketmaster plus tour `onsale`/`presales`). Artist alerts send when a presale or on-sale is within 3 days.
+- **Mobile menu**: the header collapses into a Menu button under 760px.

@@ -101,6 +101,35 @@ for a in artists.values():
     a["setlist"] = (SETS.get(a["name"]) or {}).get("set")
     a["discogs"] = DISCOGS.get(a["name"]) or {}
 
+# Genres people browse by. An artist's genre comes from the tour data or Ticketmaster first, then Discogs tags.
+GENRES = [("Metal & heavy", r"metal|hardcore|thrash|doom|deathcore|djent|nu metal"),
+          ("Punk", r"(?<!post-)(?<!post )punk|\bska\b|\bemo\b"),
+          ("Hip hop & R&B", r"hip.?hop|rap\b|r&b|rnb|trap\b|grime"),
+          ("Electronic & dance", r"electro|dance|house|techno|edm|trance|drum n bass|dubstep|synth.?wave|disco"),
+          ("Country & folk", r"country|folk|americana|bluegrass|singer.?songwriter"),
+          ("Soul, blues & jazz", r"soul|blues|jazz|gospel|funk"),
+          ("Indie & alternative", r"indie|alternative|post.?punk|shoegaze|grunge|dream pop|lo.?fi|garage"),
+          ("Pop", r"pop"),
+          ("Rock", r"rock|psychedelic|britpop")]
+def genre_bucket(text):
+    t = (text or "").lower()
+    for name, rx in GENRES:
+        if re.search(rx, t):
+            return name
+    return ""
+for a in artists.values():
+    g = genre_bucket(a["genre"])
+    if not g:
+        votes = {}
+        for tag, n in (a["discogs"].get("tags") or []):
+            b = genre_bucket(tag)
+            if b:
+                votes[b] = votes.get(b, 0) + n
+        g = max(votes, key=votes.get) if votes else ""
+    a["gb"] = g
+GENRE_HUE = {g: (i * 41 + 8) % 360 for i, (g, _) in enumerate(GENRES)}
+GENRE_LIST = [g for g, _ in GENRES if any(a["gb"] == g and a["shows"] for a in artists.values())]
+
 def venue_slug(s): return slug(s["venue"] + "-" + s["city"])
 venues = {}
 for s in shows:
@@ -116,8 +145,8 @@ if len(MAIN_CITIES) < 5:
 have_feed = bool(tm)
 
 # ---------------------------------------------------------------- helpers
-NAV = [("News", "news/index.html"), ("Gig guide", "gigs/index.html"), ("On sale", "on-sale.html"), ("Tours", "tours.html"),
-       ("Festivals", "festivals/index.html"), ("Vinyl", "out-soon.html"), ("Stories", "stories/index.html")]
+NAV = [("Gigs", "gigs/index.html"), ("This weekend", "this-weekend.html"), ("On sale", "on-sale.html"), ("Tours", "tours.html"),
+       ("Festivals", "festivals/index.html"), ("Genres", "genres/index.html"), ("News", "news/index.html"), ("Vinyl", "out-soon.html")]
 
 def gcal(s, a_name):
     day = d(s["date"])
@@ -192,14 +221,15 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <link rel="icon" href="{r}favicon.ico" sizes="48x48"><link rel="icon" href="{r}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{r}apple-touch-icon.png"><link rel="manifest" href="{r}site.webmanifest"><meta name="theme-color" content="#141414">
 <link rel="stylesheet" href="{r}style.css">{extra_head}</head><body data-root="{r}">
-<header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a><nav aria-label="Main">{nav}</nav>
-<form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search artists, venues" aria-label="Search gigs"></form></div></header>
+<header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
+<button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}</nav>
+<form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>
 <main>{body}</main>
 {signup_band(r)}
 <footer class="foot"><div class="wrap"><div><div class="wm">LIVE <span>LOUDER</span></div>
 <p>An independent Australian music site: news, gigs, tours, festivals, new vinyl and stories, made in the Blue Mountains, NSW.</p>
 <p>Dates change. Always check with the official ticket seller before you buy. Updated {UPDATED}.</p><p>{credit}</p></div>
-<div><p><a href="{r}news/index.html">News</a> · <a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}about.html">About</a></p>
+<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}about.html">About</a></p>
 <p>Gigs by city: {cities}</p>
 <p>Records for the drive to the show: our friends at <a href="https://heathenrecords.com.au">Heathen Records</a>.</p>
 <p>© {TODAY.year} Live Louder</p></div></div></footer>
@@ -299,6 +329,72 @@ if OUT.exists():
     shutil.rmtree(OUT)
 OUT.mkdir()
 
+# ---------------------------------------------------------------- ticket sales (presales and on-sales)
+try:
+    from zoneinfo import ZoneInfo
+    SYD = ZoneInfo("Australia/Sydney")
+except Exception:
+    SYD = dt.timezone(dt.timedelta(hours=11))
+def sale_time(v):
+    """Ticketmaster sale times are UTC ('...Z'); curated ones are Sydney local 'YYYY-MM-DDTHH:MM'. Returns a Sydney datetime."""
+    if not v:
+        return None
+    try:
+        if v.endswith("Z") or "+" in v[10:]:
+            return dt.datetime.fromisoformat(v.replace("Z", "+00:00")).astimezone(SYD)
+        return dt.datetime.fromisoformat(v if "T" in v else v + "T09:00").replace(tzinfo=SYD)
+    except ValueError:
+        return None
+
+def sale_fmt(x):
+    t = x.strftime("%-I:%M%p").lower().replace(":00", "")
+    return f'{x.strftime("%a %-d %b")}, {t}'
+
+def sale_gcal(title, x, url):
+    st = x.astimezone(dt.timezone.utc)
+    en = st + dt.timedelta(minutes=30)
+    f = lambda y: y.strftime("%Y%m%dT%H%M%SZ")
+    return ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + quote_plus(title)
+            + f"&dates={f(st)}/{f(en)}&details=" + quote_plus("Tickets: " + url))
+
+now_syd = dt.datetime.now(SYD)
+horizon = now_syd + dt.timedelta(days=21)
+recent = now_syd - dt.timedelta(days=7)
+sales = {}  # (artist, kind, name, start) -> info
+def add_sale(artist, kind, name, when, city, url, link):
+    if not when or not (recent <= when <= horizon):
+        return
+    k = (artist, kind, name, when.isoformat())
+    x = sales.setdefault(k, {"artist": artist, "kind": kind, "name": name, "when": when, "cities": [], "url": url, "link": link})
+    if city and city not in x["cities"]:
+        x["cities"].append(city)
+for s_ in tm:
+    al = f"/artists/{slug(s_['artist'])}.html"
+    add_sale(s_["artist"], "General sale", "", sale_time(s_.get("onsale", "")), s_["city"], s_["url"], al)
+    for pr in s_.get("presales", []):
+        add_sale(s_["artist"], "Presale", pr.get("name", "Presale"), sale_time(pr.get("start", "")), s_["city"], s_["url"], al)
+for t in tours:
+    al = f"/artists/{slug(t['artist'])}.html"
+    cities = sorted({x[1] for x in t["dates"]})
+    if t.get("onsale"):
+        for c in cities:
+            add_sale(t["artist"], "General sale", "", sale_time(t["onsale"]), c, t.get("tickets") or t["source"], al)
+    for pr in t.get("presales", []):
+        for c in cities:
+            add_sale(t["artist"], "Presale", pr.get("name", "Presale"), sale_time(pr.get("start", "")), c, t.get("tickets") or t["source"], al)
+upcoming_sales = sorted([x for x in sales.values() if x["when"] >= now_syd], key=lambda x: x["when"])
+just_sales = sorted([x for x in sales.values() if x["when"] < now_syd and x["kind"] == "General sale"], key=lambda x: x["when"], reverse=True)
+
+def sale_row(x, past=False):
+    label = (f'{e(x["name"])} presale' if x["kind"] == "Presale" and x["name"] and "presale" not in x["name"].lower()
+             else e(x["name"]) if x["kind"] == "Presale" else "General public on-sale")
+    rem = "" if past else f'<a class="cal" href="{e(sale_gcal(x["artist"] + " tickets: " + (x["name"] or "on sale"), x["when"], x["url"]))}" rel="noopener">⏰ Remind me</a>'
+    cls = "presale" if x["kind"] == "Presale" else "general"
+    return (f'<li class="sale {cls}"><div class="sw"><b>{x["when"].day}</b><small>{x["when"].strftime("%b")}</small></div>'
+            f'<div class="si"><a class="gname" href="{x["link"]}">{e(x["artist"])}</a><span class="stype">{label}</span>'
+            f'<span class="gw">{e(sale_fmt(x["when"]))} {e(x["when"].tzname() or "")} · {e(", ".join(x["cities"][:6]))}</span></div>'
+            f'<div class="ga"><a href="{e(x["url"])}" rel="noopener">{"Tickets" if past else "Ticket page"} ↗</a>{rem}</div></li>')
+
 # ---------------------------------------------------------------- home
 featured = [s for s in shows if slug(s["artist"]) in curated] or shows
 seen, stubs = set(), []
@@ -348,13 +444,30 @@ if gotw:
                  f'{countdown(gotw["date"], gotw["city"])}</div></section>')
 week_html = gig_list(this_week) if this_week else '<p class="note">Check the <a href="/gigs/index.html">gig guide</a> for what is on.</p>'
 onsale_html = ""
-if onsale:
-    onsale_html = '<h2>On sale soon</h2><ul class="rel">' + "".join(
-        f'<li><div class="when">{fmt(s["onsale"][:10], False, False)}</div><div class="what"><strong><a href="/artists/{slug(s["artist"])}.html">{e(s["artist"])}</a></strong><span>{e(s["city"])} · {e(s["venue"])}</span></div></li>' for s in onsale) + "</ul>"
+wk_sales = [x for x in upcoming_sales if x["when"] <= now_syd + dt.timedelta(days=7)]
+sales_title = "Tickets on sale this week" if wk_sales else "Tickets on sale soon"
+sales_html = ""
+if wk_sales or upcoming_sales:
+    sales_html = (f'<section class="band salesband"><div class="wrap"><div class="shead"><h2>{sales_title}</h2><a href="/on-sale.html">Every presale &amp; on-sale →</a></div>'
+                  f'<p class="note" style="margin-top:0">Presales first. Tap ⏰ Remind me and it goes straight in your calendar.</p>'
+                  f'<ul class="sales">{"".join(sale_row(x) for x in (wk_sales or upcoming_sales)[:6])}</ul></div></section>')
+city_opts_near = "".join(f'<option value="{e(c)}" data-slug="{slug(c)}">{e(c)}</option>' for c in MAIN_CITIES)
+near_c = MAIN_CITIES[0] if MAIN_CITIES else "Sydney"
+near_fallback = "".join(stub(s) for s in [s for s in shows if s["city"] == near_c][:6])
+near_html = (f'<section class="band nearband" id="near"><div class="wrap"><div class="shead"><h2>Gigs near you</h2>'
+             f'<label class="citypick"><span>📍 Your city</span><select id="nearCity" aria-label="Your city">{city_opts_near}</select></label></div>'
+             f'<div class="nearlist" id="nearList">{near_fallback}</div>'
+             f'<p class="nearlinks"><a class="btn" id="nearWk" href="/gigs/{slug(near_c)}-this-weekend.html">This weekend in&nbsp;<span class="nc">{e(near_c)}</span></a> '
+             f'<a class="btn ghost" id="nearAll" href="/gigs/{slug(near_c)}.html">All&nbsp;<span class="nc">{e(near_c)}</span>&nbsp;gigs</a></p></div></section>')
+genre_count = {g: sum(1 for a in artists.values() if a["gb"] == g and a["shows"]) for g in GENRE_LIST}
+genre_html = ""
+if GENRE_LIST:
+    genre_html = ('<section class="band genreband" style="padding-top:0"><div class="wrap"><div class="shead"><h2>Browse by genre</h2><a href="/genres/index.html">All genres →</a></div>'
+                  '<nav class="chips gchips" aria-label="Genres">' + "".join(f'<a href="/genres/{slug(g)}.html">{e(g)} <small>{genre_count[g]}</small></a>' for g in GENRE_LIST) + "</nav></div></section>")
 fest_html = "".join(fest_card(f) for f in fests)
 rel_items = [i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S][:8]
 rel_html = "".join(f'<li><div class="when">{"TBC" if a == "2027" else d(a).strftime("%-d %b")}</div><div class="what"><strong>{e(b)} – {e(c)}</strong><span>{e(fm)}</span></div></li>' for a, b, c, fm in rel_items)
-fest_h = '<h2 style="margin-top:36px">Festival guides</h2>' if onsale else "<h2>Festival guides</h2>"
+fest_h = "<h2>Festival guides</h2>"
 picks_html = ""
 if pick:
     g_, r_ = pick.get("gig") or {}, pick.get("record") or {}
@@ -384,7 +497,7 @@ home = f"""<section class="hero"><svg class="disc" viewBox="-250 -250 500 500" a
 <div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
 <div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div></div></section>
 {news_html}{gotw_html}{picks_html}
-<section class="band citiesband"><div class="wrap"><div class="shead"><h2>Gigs near you</h2><a href="/this-weekend.html">What\'s on this weekend →</a></div>{chips()}</div></section>
+{near_html}{sales_html}{genre_html}
 <section class="band"><div class="wrap split">
 <div><h2>This week</h2>{week_html}<a class="more" href="/gigs/index.html">Full gig guide ({len(shows):,} shows) →</a></div>
 <div>{onsale_html}{fest_h}{fest_html}<h2 style="margin-top:36px">Stories</h2>{''.join(story_card(s) for s in stories[:3])}</div>
@@ -425,17 +538,19 @@ for n in news[:30]:
 
 # ---------------------------------------------------------------- gig guide
 city_opts = "".join(f"<option>{e(c)}</option>" for c in MAIN_CITIES)
-gg = f"""<section class="page-title"><div class="wrap"><h1>Gig guide</h1><p>Every show we know about, across Australia. Search, or narrow it down by city and date.</p></div></section>
+gg = f"""<section class="page-title"><div class="wrap"><h1>Gig guide</h1><p>Every show we know about, across Australia. Search, or narrow it down by city, genre and date.</p></div></section>
 <section class="band"><div class="wrap" id="guide">
 <div class="controls"><input id="q" type="search" placeholder="Artist, venue or suburb" aria-label="Search">
 <select id="city" aria-label="City"><option value="">All cities</option>{city_opts}</select>
+<select id="genre" aria-label="Genre"><option value="">All genres</option>{"".join(f'<option value="{slug(g)}">{e(g)}</option>' for g in GENRE_LIST)}</select>
 <div class="filters" role="group" aria-label="When"><button data-when="all" aria-pressed="true">Any time</button><button data-when="week" aria-pressed="false">This week</button><button data-when="weekend" aria-pressed="false">This weekend</button><button data-when="month" aria-pressed="false">Next 30 days</button></div></div>
 <p class="count" id="count" aria-live="polite">Loading shows…</p><div id="results"></div><button id="moreBtn" class="morebtn" hidden>Show more</button>
 <noscript>{gig_list(shows[:300])}</noscript></div></section>"""
 page("gigs/index.html", "Gig guide: concerts and gigs in Australia | Live Louder",
      "Search every big gig in Australia by artist, venue, city and date. Concerts in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", gg, "gigs/index.html")
 (OUT / "gigs.json").write_text(json.dumps([[s["date"], s["time"], s["artist"], slug(s["artist"]), s["venue"], s["suburb"], s["city"], s["url"],
-                                           ", ".join(s["support"]), s["src"], gcal(s, s["artist"]), venue_slug(s)] for s in shows], separators=(",", ":")))
+                                           ", ".join(s["support"]), s["src"], gcal(s, s["artist"]), venue_slug(s),
+                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else ""] for s in shows], separators=(",", ":")))
 
 for c in MAIN_CITIES:
     cs = [s for s in shows if s["city"] == c]
@@ -474,13 +589,13 @@ for c in MAIN_CITIES:
             f'<section class="band"><div class="wrap">{days_html}'
             f'<p class="note" style="margin-top:28px"><a href="/gigs/{slug(c)}.html">All upcoming gigs in {e(c)} →</a><br>Other cities this weekend: {others}</p></div></section>')
     page(f"gigs/{slug(c)}-this-weekend.html", f"Gigs in {c} this weekend ({wk_label}) | Live Louder",
-         f"What's on in {c} this weekend, {wk_label}: every gig and concert by day, with venues and tickets.", body, "gigs/index.html")
+         f"What's on in {c} this weekend, {wk_label}: every gig and concert by day, with venues and tickets.", body, "this-weekend.html")
 wk_cards = "".join(f'<a class="fcard" href="/gigs/{slug(c)}-this-weekend.html"><span class="ntag">This weekend</span><h3>{e(c)}</h3>'
                    f'<p>{weekend_counts[c]} {"gig" if weekend_counts[c] == 1 else "gigs"}</p></a>' for c in MAIN_CITIES)
 twp = (f'<section class="page-title"><div class="wrap"><h1>This weekend</h1><p>What\'s on around Australia, {e(wk_label)}. Pick your city.</p></div></section>'
        f'<section class="band"><div class="wrap"><div class="grid">{wk_cards}</div></div></section>')
 page("this-weekend.html", f"Gigs this weekend in Australia ({wk_label}) | Live Louder",
-     f"Every gig on this weekend ({wk_label}) in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", twp, "gigs/index.html")
+     f"Every gig on this weekend ({wk_label}) in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", twp, "this-weekend.html")
 
 # ---------------------------------------------------------------- venues
 for k, v in venues.items():
@@ -576,14 +691,14 @@ for a in artists.values():
         records_html = (f'<h2>Essential records</h2><div class="recs">{cards}</div>'
                         f'<p class="note">Record data from <a href="{e(dg.get("url") or "https://www.discogs.com")}" rel="noopener">Discogs ↗</a></p>')
     follow = (f'<form class="card follow" name="follow" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">'
-              f'<h3>Follow {e(a["name"])}</h3><p>Get an email when new Australian dates are announced or tickets go on sale.</p>'
+              f'<h3>Never miss {e(a["name"])} tickets</h3><p>Get presale alerts: we\'ll email you when new Australian dates are announced, and when presales and tickets go on sale.</p>'
               f'<input type="hidden" name="form-name" value="follow"><input type="hidden" name="artist" value="{e(a["name"])}">'
               f'<p hidden><label>Leave this empty <input name="bot-field"></label></p>'
-              f'<input type="email" name="email" required placeholder="Your email" aria-label="Email address"><button class="btn">Follow</button></form>')
+              f'<input type="email" name="email" required placeholder="Your email" aria-label="Email address"><button class="btn">Get presale alerts</button></form>')
     extra_cards = "".join(story_card(s) for s in stories if slug(s.get("artist", "")) == a["slug"]) + \
         "".join(news_card(n) for n in [n for n in news if slug(n.get("artist", "")) == a["slug"]][:3])
     cd = countdown(sh[0]["date"], f'{sh[0]["venue"]}, {sh[0]["city"]}') if sh else ""
-    genre = " · " + e(a["genre"]) if a["genre"] else ""
+    genre = f' · <a class="glink" href="/genres/{slug(a["gb"])}.html">{e(a["gb"])}</a>' if a["gb"] else (" · " + e(a["genre"]) if a["genre"] else "")
     dates_html = gig_list(sh, show_artist=False) if sh else '<p class="note">Dates to be announced. Check the tour announcement.</p>'
     cal = f'<a class="btn ghost" href="/artists/{a["slug"]}.ics">Add all dates to calendar</a>' if sh else ""
     vinyl = HEATHEN + quote_plus(a["name"].split(" & ")[0])
@@ -691,71 +806,6 @@ page("most-wanted.html", "Most wanted records from artists touring Australia | L
      "The vinyl records collectors want most from artists playing Australia soon, ranked by Discogs wantlists.", mw, "out-soon.html")
 
 # ---------------------------------------------------------------- on-sale & presale tracker
-try:
-    from zoneinfo import ZoneInfo
-    SYD = ZoneInfo("Australia/Sydney")
-except Exception:
-    SYD = dt.timezone(dt.timedelta(hours=11))
-
-def sale_time(v):
-    """Ticketmaster sale times are UTC ('...Z'); curated ones are Sydney local 'YYYY-MM-DDTHH:MM'. Returns a Sydney datetime."""
-    if not v:
-        return None
-    try:
-        if v.endswith("Z") or "+" in v[10:]:
-            return dt.datetime.fromisoformat(v.replace("Z", "+00:00")).astimezone(SYD)
-        return dt.datetime.fromisoformat(v if "T" in v else v + "T09:00").replace(tzinfo=SYD)
-    except ValueError:
-        return None
-
-def sale_fmt(x):
-    t = x.strftime("%-I:%M%p").lower().replace(":00", "")
-    return f'{x.strftime("%a %-d %b")}, {t}'
-
-def sale_gcal(title, x, url):
-    st = x.astimezone(dt.timezone.utc)
-    en = st + dt.timedelta(minutes=30)
-    f = lambda y: y.strftime("%Y%m%dT%H%M%SZ")
-    return ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + quote_plus(title)
-            + f"&dates={f(st)}/{f(en)}&details=" + quote_plus("Tickets: " + url))
-
-now_syd = dt.datetime.now(SYD)
-horizon = now_syd + dt.timedelta(days=21)
-recent = now_syd - dt.timedelta(days=7)
-sales = {}  # (artist, kind, name, start) -> info
-def add_sale(artist, kind, name, when, city, url, link):
-    if not when or not (recent <= when <= horizon):
-        return
-    k = (artist, kind, name, when.isoformat())
-    x = sales.setdefault(k, {"artist": artist, "kind": kind, "name": name, "when": when, "cities": [], "url": url, "link": link})
-    if city and city not in x["cities"]:
-        x["cities"].append(city)
-for s_ in tm:
-    al = f"/artists/{slug(s_['artist'])}.html"
-    add_sale(s_["artist"], "General sale", "", sale_time(s_.get("onsale", "")), s_["city"], s_["url"], al)
-    for pr in s_.get("presales", []):
-        add_sale(s_["artist"], "Presale", pr.get("name", "Presale"), sale_time(pr.get("start", "")), s_["city"], s_["url"], al)
-for t in tours:
-    al = f"/artists/{slug(t['artist'])}.html"
-    cities = sorted({x[1] for x in t["dates"]})
-    if t.get("onsale"):
-        for c in cities:
-            add_sale(t["artist"], "General sale", "", sale_time(t["onsale"]), c, t.get("tickets") or t["source"], al)
-    for pr in t.get("presales", []):
-        for c in cities:
-            add_sale(t["artist"], "Presale", pr.get("name", "Presale"), sale_time(pr.get("start", "")), c, t.get("tickets") or t["source"], al)
-upcoming_sales = sorted([x for x in sales.values() if x["when"] >= now_syd], key=lambda x: x["when"])
-just_sales = sorted([x for x in sales.values() if x["when"] < now_syd and x["kind"] == "General sale"], key=lambda x: x["when"], reverse=True)
-
-def sale_row(x, past=False):
-    label = (f'{e(x["name"])} presale' if x["kind"] == "Presale" and x["name"] and "presale" not in x["name"].lower()
-             else e(x["name"]) if x["kind"] == "Presale" else "General public on-sale")
-    rem = "" if past else f'<a class="cal" href="{e(sale_gcal(x["artist"] + " tickets: " + (x["name"] or "on sale"), x["when"], x["url"]))}" rel="noopener">⏰ Remind me</a>'
-    cls = "presale" if x["kind"] == "Presale" else "general"
-    return (f'<li class="sale {cls}"><div class="sw"><b>{x["when"].day}</b><small>{x["when"].strftime("%b")}</small></div>'
-            f'<div class="si"><a class="gname" href="{x["link"]}">{e(x["artist"])}</a><span class="stype">{label}</span>'
-            f'<span class="gw">{e(sale_fmt(x["when"]))} {e(x["when"].tzname() or "")} · {e(", ".join(x["cities"][:6]))}</span></div>'
-            f'<div class="ga"><a href="{e(x["url"])}" rel="noopener">{"Tickets" if past else "Ticket page"} ↗</a>{rem}</div></li>')
 
 if upcoming_sales:
     pre = [x for x in upcoming_sales if x["kind"] == "Presale"]
@@ -774,6 +824,30 @@ osp = (f'<section class="page-title"><div class="wrap"><h1>On sale soon</h1><p>E
        f'<p class="note">Times shown in Sydney time (AEDT/AEST). Sale times can change: always check the ticket page. Updated {UPDATED}.</p></div></section>')
 page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Australia | Live Louder",
      "When tickets go on sale for concerts and tours in Australia: presale and general on-sale dates and times, with calendar reminders.", osp, "on-sale.html")
+
+# ---------------------------------------------------------------- genres
+def genre_tiles(gs):
+    return '<div class="gtiles">' + "".join(
+        f'<a class="gtile" href="/genres/{slug(g)}.html" style="--h:{GENRE_HUE.get(g, 0)}"><strong>{e(g)}</strong><span>{genre_count[g]} {"artist" if genre_count[g] == 1 else "artists"} touring</span></a>' for g in gs) + "</div>"
+gi = (f'<section class="page-title"><div class="wrap"><h1>Browse by genre</h1><p>Find the tours and gigs that are your kind of thing.</p></div></section>'
+      f'<section class="band"><div class="wrap">{genre_tiles(GENRE_LIST)}<p class="note">Genres are a rough guide. Plenty of artists fit more than one.</p></div></section>')
+page("genres/index.html", "Gigs by genre: rock, indie, pop, metal and more | Live Louder",
+     "Browse Australian tours and gigs by genre: rock, indie, pop, metal, hip hop, electronic, country and more.", gi, "genres/index.html")
+for g in GENRE_LIST:
+    ga_list = sorted([a for a in artists.values() if a["gb"] == g and a["shows"]], key=lambda a: a["shows"][0]["date"])
+    gshows = sorted([s for a in ga_list for s in a["shows"]], key=lambda s: (s["date"], s["time"]))
+    tcards = "".join(
+        f'<a class="card tcard" href="/artists/{a["slug"]}.html">{art(a, "art tart")}<div class="tc"><h3>{e(a["name"])}</h3>'
+        f'<div class="meta">{e((a["tour"] or {}).get("tour", ""))}</div><div><span class="first">From {e(fmt(a["shows"][0]["date"]))}</span><br><span class="meta">{e(", ".join(a["cities"]))}</span></div></div></a>'
+        for a in ga_list[:24])
+    others = [x for x in GENRE_LIST if x != g]
+    body = (f'<section class="page-title"><div class="wrap"><h1>{e(g)} gigs</h1><p>{len(ga_list)} {"artist" if len(ga_list) == 1 else "artists"} '
+            f'touring Australia, {len(gshows):,} {"show" if len(gshows) == 1 else "shows"} coming up.</p></div></section>'
+            f'<section class="band"><div class="wrap"><h2>Who\'s touring</h2><div class="grid">{tcards}</div>'
+            f'<h2 style="margin-top:40px">Every {e(g.lower())} show</h2>{gig_list(gshows[:300])}'
+            f'<h2 style="margin-top:40px;font-size:26px">Other genres</h2><nav class="chips small">' + "".join(f'<a href="/genres/{slug(x)}.html">{e(x)}</a>' for x in others) + "</nav></div></section>")
+    page(f"genres/{slug(g)}.html", f"{g} gigs and tours in Australia | Live Louder",
+         f"Upcoming {g.lower()} gigs and tours in Australia: dates, venues and tickets, updated daily.", body, "genres/index.html")
 
 # ---------------------------------------------------------------- stories
 si = '<section class="page-title"><div class="wrap"><h1>Stories</h1><p>Albums, artists and the shows worth catching.</p></div></section><section class="band"><div class="wrap" style="max-width:860px">'
@@ -808,14 +882,15 @@ for icon in (ROOT / "src/icons").iterdir():
 (OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",
     "background_color": "#141414", "theme_color": "#141414",
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
-urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "out-soon.html", "most-wanted.html", "stories/", "about.html"] \
+urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "about.html"] \
+    + [f"genres/{slug(g)}.html" for g in GENRE_LIST] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
     + [f"venues/{k}.html" for k in venues] + [f"stories/{s['slug']}.html" for s in stories]
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                                  + "".join(f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY_S}</lastmod></url>" for u in urls) + "</urlset>")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
-weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug, REL_DG, pick)
+weekly_mail, alert_mail = emails.build(OUT, SITE, TODAY.date(), tours, shows, tm, artists, news, stories, fests, rels, slug, REL_DG, pick, upcoming_sales)
 social_post = social.build(OUT, SITE, TODAY.date(), {
     "tours": tours, "shows": shows, "artists": artists, "news": news, "stories": stories, "rels": rels, "rel_dg": REL_DG,
     "pick": pick, "upcoming_sales": upcoming_sales, "gotw": gotw, "wanted": wanted, "slug": slug, "curated": curated,

@@ -1,3 +1,24 @@
+// Remembers the visitor's city (on this device only) so the site shows their gigs first.
+window.LL = (function () {
+  const zones = {'Australia/Perth': 'Perth', 'Australia/Adelaide': 'Adelaide', 'Australia/Darwin': 'Darwin', 'Australia/Brisbane': 'Brisbane',
+    'Australia/Lindeman': 'Brisbane', 'Australia/Hobart': 'Hobart', 'Australia/Melbourne': 'Melbourne', 'Australia/Sydney': 'Sydney',
+    'Australia/Canberra': 'Canberra', 'Australia/ACT': 'Canberra', 'Pacific/Auckland': 'Auckland'};
+  const get = () => { try { return localStorage.getItem('llCity') || ''; } catch (e) { return ''; } };
+  const guess = () => { try { return zones[Intl.DateTimeFormat().resolvedOptions().timeZone] || ''; } catch (e) { return ''; } };
+  return {city: get, guess: guess, setCity: c => { try { localStorage.setItem('llCity', c); } catch (e) {} }};
+})();
+// Mobile menu.
+{
+  const btn = document.querySelector('.top .menu'), top = document.querySelector('.top');
+  if (btn) btn.addEventListener('click', () => { const open = top.classList.toggle('open'); btn.setAttribute('aria-expanded', open); });
+}
+// Pre-fill the city on the newsletter signup.
+{
+  const c = LL.city() || LL.guess();
+  document.querySelectorAll('form[name="newsletter"] select[name="city"]').forEach(sel => {
+    if (c && [...sel.options].some(o => o.value === c || o.text === c)) sel.value = c;
+  });
+}
 {
   const pad = n => String(n).padStart(2, '0');
   const iso = x => `${x.getFullYear()}-${pad(x.getMonth() + 1)}-${pad(x.getDate())}`;
@@ -36,19 +57,22 @@
   const guide = document.getElementById('guide');
   if (guide) {
     const q = document.getElementById('q'), city = document.getElementById('city'), out = document.getElementById('results');
+    const genre = document.getElementById('genre');
     const count = document.getElementById('count'), more = document.getElementById('moreBtn');
     const params = new URLSearchParams(location.search);
     q.value = params.get('q') || ''; if (params.get('city')) city.value = params.get('city');
+    else if (!params.get('q') && window.LL && LL.city() && [...city.options].some(o => o.value === LL.city())) city.value = LL.city();
+    if (genre && params.get('genre')) genre.value = params.get('genre');
     let when = 'all', shown = 80, all = [];
     const addDays = n => { const x = new Date(now); x.setDate(x.getDate() + n); return iso(x); };
     const weekend = () => { const dow = now.getDay(); return [[5, 6, 0].includes(dow) ? today : addDays(5 - dow), addDays((7 - dow) % 7)]; };
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const longM = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     function render() {
-      const term = q.value.trim().toLowerCase(), c = city.value;
+      const term = q.value.trim().toLowerCase(), c = city.value, g = genre ? genre.value : '';
       let lo = today, hi = '9999';
       if (when === 'week') hi = addDays(7); else if (when === 'month') hi = addDays(30); else if (when === 'weekend') [lo, hi] = weekend();
-      const list = all.filter(s => s[0] >= lo && s[0] <= hi && (!c || s[6] === c) &&
+      const list = all.filter(s => s[0] >= lo && s[0] <= hi && (!c || s[6] === c) && (!g || s[12] === g) &&
         (!term || (s[2] + ' ' + s[4] + ' ' + s[5] + ' ' + s[6] + ' ' + s[8]).toLowerCase().includes(term)));
       count.textContent = list.length ? `${list.length.toLocaleString()} ${list.length === 1 ? 'show' : 'shows'}` : 'No shows match. Try a different search or date.';
       let html = '', month = '';
@@ -70,7 +94,8 @@
       when = b.dataset.when; shown = 80; render();
     });
     let t; q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { shown = 80; render(); }, 120); });
-    city.addEventListener('change', () => { shown = 80; render(); });
+    city.addEventListener('change', () => { shown = 80; if (city.value && window.LL) LL.setCity(city.value); render(); });
+    if (genre) genre.addEventListener('change', () => { shown = 80; render(); });
     more.addEventListener('click', () => { shown += 120; render(); });
     fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); })
       .catch(() => { count.textContent = 'Could not load the gig list. Try refreshing the page.'; });
@@ -100,3 +125,36 @@ document.addEventListener("click", function (ev) {
     a.rel = (a.rel ? a.rel + " " : "") + "noopener";
   }
 });
+
+// Homepage: gigs near you.
+{
+  const sel = document.getElementById('nearCity'), list = document.getElementById('nearList');
+  if (sel && list) {
+    const root = document.body.dataset.root || '';
+    const has = c => [...sel.options].some(o => o.value === c);
+    const start = [LL.city(), LL.guess()].find(c => c && has(c));
+    if (start) sel.value = start;
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const t = new Date(), pad = n => String(n).padStart(2, '0');
+    const today = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
+    let all = null;
+    function render() {
+      const c = sel.value, sl = sel.selectedOptions[0].dataset.slug;
+      document.querySelectorAll('#near .nc').forEach(x => x.textContent = c);
+      document.getElementById('nearWk').href = `${root}gigs/${sl}-this-weekend.html`;
+      document.getElementById('nearAll').href = `${root}gigs/${sl}.html`;
+      if (!all) return;
+      const rows = all.filter(s => s[6] === c && s[0] >= today).slice(0, 8);
+      list.innerHTML = rows.length ? rows.map(s => {
+        const [y, m, d] = s[0].split('-').map(Number);
+        const day = new Date(y, m - 1, d).toLocaleDateString('en-AU', {weekday: 'short'});
+        return `<a class="stub" href="${root}artists/${esc(s[3])}.html"><div class="d"><b>${d}</b><small>${months[m - 1]}</small></div>` +
+          `<div class="i"><strong>${esc(s[2])}</strong><span>${day} · ${esc(s[4])}</span></div></a>`;
+      }).join('') : `<p class="note">No shows listed in ${esc(c)} right now. Try another city.</p>`;
+    }
+    sel.addEventListener('change', () => { LL.setCity(sel.value); render(); });
+    render();
+    fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); }).catch(() => {});
+  }
+}
