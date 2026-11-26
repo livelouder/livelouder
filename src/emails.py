@@ -193,13 +193,14 @@ def build(out, site, today, tours, shows, tm, artists, news, stories, fests, rel
     if read:
         r = read[0]
         rows += _section("One good read", "This week's story")
-        pic = photo(r.get("artist", ""))
-        img = (f'<a href="{link("stories/" + r["slug"] + ".html")}"><img src="{e(pic)}" alt="" width="536" style="display:block;width:100%;max-width:536px;height:auto;border-radius:8px;border:0"></a>'
-               if pic else "")
-        rows += (f'<tr><td style="padding:8px 32px">{img}'
-                 f'<div style="margin-top:12px"><a href="{link("stories/" + r["slug"] + ".html")}" style="{HEAD};font-size:24px;line-height:1.15;color:{INK};text-decoration:none;text-transform:uppercase">{e(r["title"])}</a></div>'
-                 f'<div style="{FONT};font-size:15px;line-height:1.5;color:{MUTED};margin-top:6px">{e(r["dek"])}</div>'
-                 f'<div style="margin-top:8px"><a href="{link("stories/" + r["slug"] + ".html")}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">Read it →</a></div></td></tr>')
+        href = link("stories/" + r["slug"] + ".html")
+        rows += (f'<tr><td style="padding:8px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{PAPER};border-radius:8px"><tr>'
+                 f'<td width="150" valign="top" style="width:150px;padding:16px 0 16px 16px"><a href="{href}">{_img(photo(r.get("artist", "")), r["title"], 150, 150, r.get("artist") or r["title"])}</a></td>'
+                 f'<td valign="middle" style="padding:16px 18px">'
+                 f'<a href="{href}" style="{HEAD};font-size:22px;line-height:1.15;color:{INK};text-decoration:none;text-transform:uppercase">{e(r["title"])}</a>'
+                 f'<div style="{FONT};font-size:14px;line-height:1.5;color:{MUTED};margin-top:6px">{e(r["dek"])}</div>'
+                 f'<div style="margin-top:8px"><a href="{href}" style="{FONT};font-size:13px;font-weight:bold;color:{RED};text-decoration:none">Read it →</a></div>'
+                 f'</td></tr></table></td></tr>')
     rows += (f'<tr><td align="center" style="padding:34px 32px 6px;background:#fff">'
              f'<div style="{HEAD};font-size:28px;color:{INK};text-transform:uppercase;margin-bottom:14px">What\'s on near you?</div>'
              f'{_button("Find a gig near you", link("gigs/index.html"))}</td></tr>')
