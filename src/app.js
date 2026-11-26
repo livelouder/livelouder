@@ -239,24 +239,18 @@ window.MY = (function () {
 })();
 
 
-// Homepage carousel: swipe, arrows, dots, and it moves on by itself every 7 seconds (unless you're interacting, or prefer less motion).
+// Homepage slideshow behind the hero: fades to the next picture every 7 seconds (unless you prefer less motion).
 {
-  const c = document.querySelector('.carousel');
-  if (c) {
-    const track = c.querySelector('.ctrack'), slides = [...c.querySelectorAll('.slide')], dots = [...c.querySelectorAll('.cdot')];
-    const n = slides.length;
+  const bgs = [...document.querySelectorAll('.hslides .hs')], caps = [...document.querySelectorAll('.hcaps .hcap')], dots = [...document.querySelectorAll('.hcaps .cdot')];
+  if (bgs.length) {
     let i = 0, timer = null, paused = false;
-    const go = k => { i = (k + n) % n; track.scrollTo({left: i * track.clientWidth, behavior: 'smooth'}); };
-    const mark = () => dots.forEach((d, j) => d.setAttribute('aria-current', j === i));
-    track.addEventListener('scroll', () => { const k = Math.round(track.scrollLeft / track.clientWidth); if (k !== i) { i = k; } mark(); }, {passive: true});
-    c.querySelector('.prev').addEventListener('click', () => { go(i - 1); restart(); });
-    c.querySelector('.next').addEventListener('click', () => { go(i + 1); restart(); });
-    dots.forEach((d, j) => d.addEventListener('click', () => { go(j); restart(); }));
+    const show = k => { i = (k + bgs.length) % bgs.length; bgs.forEach((b, j) => b.classList.toggle('on', j === i)); caps.forEach((c, j) => c.classList.toggle('on', j === i)); dots.forEach((d, j) => d.setAttribute('aria-current', j === i)); };
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function restart() { clearInterval(timer); if (!still && n > 1) timer = setInterval(() => { if (!paused && !document.hidden) go(i + 1); }, 7000); }
-    ['mouseenter', 'focusin', 'touchstart'].forEach(ev => c.addEventListener(ev, () => { paused = true; }, {passive: true}));
-    ['mouseleave', 'focusout'].forEach(ev => c.addEventListener(ev, () => { paused = false; }));
-    c.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 4000); });
-    mark(); restart();
+    const restart = () => { clearInterval(timer); if (!still && bgs.length > 1) timer = setInterval(() => { if (!paused && !document.hidden) show(i + 1); }, 7000); };
+    dots.forEach((d, j) => d.addEventListener('click', () => { show(j); restart(); }));
+    const box = document.querySelector('.hcaps');
+    box.addEventListener('mouseenter', () => { paused = true; }); box.addEventListener('mouseleave', () => { paused = false; });
+    box.addEventListener('focusin', () => { paused = true; }); box.addEventListener('focusout', () => { paused = false; });
+    show(0); restart();
   }
 }

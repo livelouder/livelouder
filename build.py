@@ -554,20 +554,18 @@ def big_img(a):
             return s_.get("image_big") or s_.get("image")
     return ""
 def slide(label, title, sub, href, cta, a=None, square="", seed=""):
+    """One background picture + one small caption for the homepage hero slideshow."""
     wide = big_img(a)
     sq = square or ((a or {}).get("photo", "") if not wide else "")
-    h = hue(seed or title)
     if wide:
-        bg = f'<div class="sbg wide" style="background-image:url(&quot;{e(wide)}&quot;)"></div>'
-        art_ = ""
+        bg = f'<div class="hs wide" style="background-image:url(&quot;{e(wide)}&quot;)"></div>'
     elif sq:
-        bg = f'<div class="sbg blur" style="background-image:url(&quot;{e(sq)}&quot;)"></div>'
-        art_ = f'<div class="sart"><img src="{e(sq)}" alt="" loading="lazy"></div>'
+        bg = f'<div class="hs sq" style="background-image:url(&quot;{e(sq)}&quot;)"></div>'
     else:
-        bg = f'<div class="sbg plain" style="--h:{h}"></div>'
-        art_ = f'<div class="sart disc-art" aria-hidden="true">{DISC_SVG}</div>'
-    return (f'<article class="slide" aria-roledescription="slide">{bg}<div class="scontent"><span class="ntag">{e(label)}</span>'
-            f'<h2><a href="{href}">{e(title)}</a></h2><p>{e(sub)}</p><a class="btn" href="{href}">{e(cta)}</a></div>{art_}</article>')
+        bg = f'<div class="hs plain" style="--h:{hue(seed or title)}"></div>'
+    cap = (f'<a class="hcap" href="{href}"><span class="ntag">{e(label)}</span><strong>{e(title)}</strong>'
+           f'<span class="hsub">{e(sub)}</span><span class="hcta">{e(cta)} →</span></a>')
+    return bg, cap
 DISC_SVG = (f'<svg viewBox="-250 -250 500 500"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}'
             '<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>'
             '<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>'
@@ -605,15 +603,18 @@ elif stories:
 if slides:
     off = TODAY.toordinal() % len(slides)  # a different slide leads each day
     slides = slides[off:] + slides[:off]
-dots = "".join(f'<button type="button" class="cdot" data-i="{i}" aria-label="Slide {i + 1}"></button>' for i in range(len(slides)))
-carousel = (f'<div class="carousel" aria-roledescription="carousel" aria-label="Featured">'
-            f'<div class="ctrack" tabindex="0">{"".join(slides)}</div>'
-            f'<button type="button" class="cnav prev" aria-label="Previous slide">‹</button><button type="button" class="cnav next" aria-label="Next slide">›</button>'
-            f'<div class="cdots">{dots}</div><div class="cbadge" aria-hidden="true">{DISC_SVG}</div></div>') if slides else ""
-home = f"""<section class="hero"><div class="wrap">{carousel}
-<div class="herobar"><div><h1 class="hwm wm">LIVE <span>LOUDER</span></h1>
-<p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p></div>
-<form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form></div>
+dots = "".join(f'<button type="button" class="cdot" data-i="{i}" aria-label="Show slide {i + 1}"></button>' for i in range(len(slides)))
+hero_bg = f'<div class="hslides" aria-hidden="true">{"".join(b_ for b_, _ in slides)}</div>' if slides else ""
+hero_caps = (f'<div class="hcaps" aria-roledescription="carousel" aria-label="Featured">{"".join(c_ for _, c_ in slides)}'
+             f'<div class="cdots">{dots}</div></div>') if slides else ""
+home = f"""<section class="hero">{hero_bg}<svg class="disc" viewBox="-250 -250 500 500" aria-hidden="true"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}
+<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>
+<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>
+<text y="34" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#141414">LOUDER</text><circle r="7" fill="#141414"/></svg><div class="wrap">
+<h1 class="big wm">LIVE<span>LOUDER</span></h1>
+<p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p>
+<form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form>
+{hero_caps}
 <div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
 <div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div></div></section>
 {news_html}{gotw_html}{picks_html}
