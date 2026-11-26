@@ -3,121 +3,121 @@
   "venue": "Oxford Art Factory",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Lansdowne Hotel",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://songkick.com/venues/4339154-lansdowne",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Crowbar Sydney",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tixel.com/au/tickets/crowbar-sydney",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Factory Theatre",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/35429-factory-theatre/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Manning Bar",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://songkick.com/venues/34998-manning-bar/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Duke of Enmore",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://odd-culture.vercel.app/event/duke-gig-guide",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Marrickville Bowling Club",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://sydneymusic.net/gig-guide/venues/marrickville-bowling-club",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Waywards",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://sydneymusic.net/gig-guide/venues/waywards-ballroom",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Mary's Underground",
   "city": "Sydney",
   "state": "",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "closed"
  },
  {
   "venue": "Liberty Hall",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://entertainmentquarter.com.au/whats-on/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Metro Theatre",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.metrotheatre.com.au/location/metro-theatre/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Enmore Theatre",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.enmoretheatre.com.au/location/enmore-theatre",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Vanguard",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/29965-vanguard/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Leadbelly",
   "city": "Sydney",
   "state": "",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "closed"
  },
  {
   "venue": "Gasoline Pony",
   "city": "Sydney",
   "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://events.humanitix.com/host/gasoline-pony",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Lazybones Lounge",
@@ -1043,6 +1043,46 @@
   "venue": "Mona",
   "city": "Hobart",
   "state": "TAS",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Church Geelong",
+  "city": "Geelong",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "The Newstead Hotel",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Kirwan Tavern",
+  "city": "Townsville",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Venue 114",
+  "city": "Sunshine Coast",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "The Music Lounge Wollongong",
+  "city": "Wollongong",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
