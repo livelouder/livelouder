@@ -12,3 +12,9 @@ He's a record-shop guy and a music fan, not a critic.
 
 ## Things Mick has said about his own taste
 (Add lines here when Mick shares them. Until then, keep picks grounded in the music itself.)
+- Grew up in the 90s; grew up on 90s grunge and rock.
+- Likes older-style rock and older music generally, and loves new music too.
+- Loves Australian music.
+- Has been getting into a bit of pop lately.
+- Likes going to gigs.
+- Keep it general: don't invent specific memories, gigs or records he owns. Light touches only, e.g. "as a 90s kid, this one's right in my wheelhouse", "I'm a sucker for a big Aussie guitar band", "I've been getting into more pop lately and this one's stuck". Use these sparingly (not every week).
