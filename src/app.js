@@ -238,3 +238,25 @@ window.MY = (function () {
   return {get: () => st, save: save, paint: () => { paint(); paintRecs(); }, today: today, replace: replace, push: push, toggleRec: toggleRec};
 })();
 
+
+// Homepage carousel: swipe, arrows, dots, and it moves on by itself every 7 seconds (unless you're interacting, or prefer less motion).
+{
+  const c = document.querySelector('.carousel');
+  if (c) {
+    const track = c.querySelector('.ctrack'), slides = [...c.querySelectorAll('.slide')], dots = [...c.querySelectorAll('.cdot')];
+    const n = slides.length;
+    let i = 0, timer = null, paused = false;
+    const go = k => { i = (k + n) % n; track.scrollTo({left: i * track.clientWidth, behavior: 'smooth'}); };
+    const mark = () => dots.forEach((d, j) => d.setAttribute('aria-current', j === i));
+    track.addEventListener('scroll', () => { const k = Math.round(track.scrollLeft / track.clientWidth); if (k !== i) { i = k; } mark(); }, {passive: true});
+    c.querySelector('.prev').addEventListener('click', () => { go(i - 1); restart(); });
+    c.querySelector('.next').addEventListener('click', () => { go(i + 1); restart(); });
+    dots.forEach((d, j) => d.addEventListener('click', () => { go(j); restart(); }));
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function restart() { clearInterval(timer); if (!still && n > 1) timer = setInterval(() => { if (!paused && !document.hidden) go(i + 1); }, 7000); }
+    ['mouseenter', 'focusin', 'touchstart'].forEach(ev => c.addEventListener(ev, () => { paused = true; }, {passive: true}));
+    ['mouseleave', 'focusout'].forEach(ev => c.addEventListener(ev, () => { paused = false; }));
+    c.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 4000); });
+    mark(); restart();
+  }
+}

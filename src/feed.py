@@ -54,9 +54,9 @@ def _get(params, key):
         return json.loads(r.read().decode())
 
 
-def _image(ev):
+def _image(ev, width=640):
     imgs = [i for i in ev.get("images", []) if i.get("ratio") == "16_9" and not i.get("fallback")]
-    imgs.sort(key=lambda i: abs(i.get("width", 0) - 640))
+    imgs.sort(key=lambda i: abs(i.get("width", 0) - width))
     return imgs[0]["url"] if imgs else ""
 
 
@@ -93,7 +93,7 @@ def normalise(ev):
         "support": [a["name"] for a in atts[1:4]],
         "date": date, "time": (start.get("localTime") or "")[:5],
         "venue": v.get("name", ""), "suburb": city, "city": metro, "state": mstate,
-        "url": ev.get("url", ""), "image": _image(ev), "genre": genre,
+        "url": ev.get("url", ""), "image": _image(ev), "image_big": _image(ev, 2048), "genre": genre,
         "onsale": onsale, "presales": presales[:3], "status": status, "src": "ticketmaster",
     }
 

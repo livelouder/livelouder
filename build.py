@@ -545,13 +545,75 @@ if pick:
                   f'<p>{e(r_["text"])}</p><a class="btn" href="{HEATHEN + quote_plus(r_["artist"] + " " + r_["title"])}" rel="noopener">Find it on vinyl</a></div></div>')
     picks_html = (f'<section class="band picks"><div class="wrap"><div class="shead"><h2>Mick\'s picks</h2><span class="note">This week\'s gig and record, from the bloke who runs the place.</span></div>'
                   f'<div class="pkgrid">{cards}</div><p class="pk-sign">— Mick</p></div></section>')
-home = f"""<section class="hero"><svg class="disc" viewBox="-250 -250 500 500" aria-hidden="true"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}
-<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>
-<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>
-<text y="34" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#141414">LOUDER</text><circle r="7" fill="#141414"/></svg><div class="wrap">
-<h1 class="big wm">LIVE<span>LOUDER</span></h1>
-<p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p>
-<form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form>
+# Homepage banner: up to 5 rotating slides picked from the site's own content each day.
+# Pictures: Ticketmaster's wide photos when the key is set, otherwise artist photos / record covers,
+# otherwise a branded design with the spinning record.
+def big_img(a):
+    for s_ in (a or {}).get("shows", []):
+        if s_.get("image_big") or s_.get("image"):
+            return s_.get("image_big") or s_.get("image")
+    return ""
+def slide(label, title, sub, href, cta, a=None, square="", seed=""):
+    wide = big_img(a)
+    sq = square or ((a or {}).get("photo", "") if not wide else "")
+    h = hue(seed or title)
+    if wide:
+        bg = f'<div class="sbg wide" style="background-image:url(&quot;{e(wide)}&quot;)"></div>'
+        art_ = ""
+    elif sq:
+        bg = f'<div class="sbg blur" style="background-image:url(&quot;{e(sq)}&quot;)"></div>'
+        art_ = f'<div class="sart"><img src="{e(sq)}" alt="" loading="lazy"></div>'
+    else:
+        bg = f'<div class="sbg plain" style="--h:{h}"></div>'
+        art_ = f'<div class="sart disc-art" aria-hidden="true">{DISC_SVG}</div>'
+    return (f'<article class="slide" aria-roledescription="slide">{bg}<div class="scontent"><span class="ntag">{e(label)}</span>'
+            f'<h2><a href="{href}">{e(title)}</a></h2><p>{e(sub)}</p><a class="btn" href="{href}">{e(cta)}</a></div>{art_}</article>')
+DISC_SVG = (f'<svg viewBox="-250 -250 500 500"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}'
+            '<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>'
+            '<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>'
+            '<text y="34" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#141414">LOUDER</text><circle r="7" fill="#141414"/></svg>')
+slides, used = [], set()
+if gotw:
+    ga_ = artists[slug(gotw["artist"])]; used.add(ga_["slug"])
+    slides.append(slide("Gig of the week", ga_["name"], f'{gotw["venue"]}, {gotw["city"]} · {fmt(gotw["date"])}', f'/artists/{ga_["slug"]}.html', "Dates & tickets", ga_))
+for t in sorted(tours, key=lambda t: t.get("added", ""), reverse=True):
+    a_ = artists.get(slug(t["artist"]))
+    if a_ and a_["slug"] not in used and a_["shows"]:
+        used.add(a_["slug"])
+        slides.append(slide("Just announced", a_["name"], f'{t["tour"]} · {", ".join(a_["cities"][:5])}', f'/artists/{a_["slug"]}.html', "See the dates", a_))
+        break
+sale_ = next((x for x in upcoming_sales if slug(x["artist"]) not in used), None)
+if sale_:
+    a_ = artists.get(slug(sale_["artist"])); used.add(slug(sale_["artist"]))
+    kind_ = (sale_["name"] + " presale" if sale_["name"] and "presale" not in sale_["name"].lower() else sale_["name"]) if sale_["kind"] == "Presale" else "Tickets on sale"
+    slides.append(slide("On sale soon", sale_["artist"], f'{kind_}: {sale_fmt(sale_["when"])} · {", ".join(sale_["cities"][:4])}', "/on-sale.html", "Set a reminder", a_))
+elif news:
+    n_ = next((n for n in news if slug(n.get("artist", "")) not in used), news[0])
+    a_ = artists.get(slug(n_.get("artist", "")))
+    slides.append(slide("Latest news", n_["title"], plain(n_["body"]).split(". ")[0][:140], f'/news/{n_["slug"]}.html', "Read more", a_, seed=n_["title"]))
+if fests:
+    f_ = fests[0]
+    a_ = next((artists[slug(h_)] for h_ in f_.get("headliners", []) if artists.get(slug(h_)) and artists[slug(h_)].get("photo")), None)
+    slides.append(slide("Festival guide", f_["name"], f'{f_["when"]} · {", ".join(x[1] for x in f_["dates"])}', f'/festivals/{f_["slug"]}.html', "The full guide", a_, seed=f_["name"]))
+if pick and (pick.get("record") or {}).get("title"):
+    r_ = pick["record"]; hit_ = (REL_DG.get(f'{r_["artist"]}|{r_["title"]}') or {}).get("hit") or {}
+    slides.append(slide("Mick's record pick", f'{r_["artist"]} – {r_["title"]}', r_["text"][:150], HEATHEN + quote_plus(r_["artist"] + " " + r_["title"]), "Find it on vinyl", None, hit_.get("cover", ""), seed=r_["title"]))
+elif stories:
+    st_ = sorted(stories, key=lambda x: x["date"], reverse=True)[0]
+    a_ = artists.get(slug(st_.get("artist", "")))
+    slides.append(slide("Story", st_["title"], st_["dek"], f'/stories/{st_["slug"]}.html', "Read the story", a_, seed=st_["title"]))
+if slides:
+    off = TODAY.toordinal() % len(slides)  # a different slide leads each day
+    slides = slides[off:] + slides[:off]
+dots = "".join(f'<button type="button" class="cdot" data-i="{i}" aria-label="Slide {i + 1}"></button>' for i in range(len(slides)))
+carousel = (f'<div class="carousel" aria-roledescription="carousel" aria-label="Featured">'
+            f'<div class="ctrack" tabindex="0">{"".join(slides)}</div>'
+            f'<button type="button" class="cnav prev" aria-label="Previous slide">‹</button><button type="button" class="cnav next" aria-label="Next slide">›</button>'
+            f'<div class="cdots">{dots}</div><div class="cbadge" aria-hidden="true">{DISC_SVG}</div></div>') if slides else ""
+home = f"""<section class="hero"><div class="wrap">{carousel}
+<div class="herobar"><div><h1 class="hwm wm">LIVE <span>LOUDER</span></h1>
+<p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p></div>
+<form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form></div>
 <div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
 <div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div></div></section>
 {news_html}{gotw_html}{picks_html}
