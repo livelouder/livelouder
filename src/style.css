@@ -216,3 +216,14 @@ h3.month{font-size:22px;margin:26px 0 6px;color:var(--red)}
 .tcard:hover h3{color:var(--red)}
 @media(max-width:900px){.newsgrid,.signwrap{grid-template-columns:minmax(0,1fr)}.gotwrap{grid-template-columns:minmax(0,1fr)}.gart{width:100%;aspect-ratio:16/9}}
 @media(max-width:600px){.sform{grid-template-columns:minmax(0,1fr)}}
+
+/* setlists and records */
+ol.songs{columns:2;column-gap:28px;padding-left:22px;margin:10px 0 6px}
+ol.songs li{break-inside:avoid;padding:3px 0;border-bottom:1px solid rgba(127,127,127,.18)}
+ol.songs.enc{columns:1}
+.enc-h{font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.8rem;margin:14px 0 0;color:var(--red)}
+.recs{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;margin:12px 0}
+.rec{display:flex;flex-direction:column;gap:3px;font-size:.92rem}
+.rec img,.rec-blank{width:100%;aspect-ratio:1;object-fit:cover;background:#222;border-radius:4px;display:block;margin-bottom:6px}
+.rec a{font-size:.85rem;color:var(--red)}
+@media (max-width:640px){ol.songs{columns:1}}

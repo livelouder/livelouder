@@ -19,6 +19,7 @@ ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT / "src"))
 import feed  # noqa: E402
 import emails  # noqa: E402
+import extras  # noqa: E402
 
 OUT = ROOT / "site"
 SITE = "https://livelouder.com.au"
@@ -85,6 +86,14 @@ for a in artists.values():
     hit = dz.get(a["name"])
     a["deezer"] = hit["id"] if hit else None
     a["photo"] = a["image"] or (hit or {}).get("picture", "")
+
+# setlist.fm and Discogs extras (only when their keys are set in Netlify)
+extra_names = ranked[:80]
+SETS = extras.setlists(extra_names, ROOT)
+DISCOGS = extras.discogs(extra_names, ROOT)
+for a in artists.values():
+    a["setlist"] = (SETS.get(a["name"]) or {}).get("set")
+    a["discogs"] = DISCOGS.get(a["name"]) or {}
 
 def venue_slug(s): return slug(s["venue"] + "-" + s["city"])
 venues = {}
@@ -442,7 +451,28 @@ for a in artists.values():
               f'<div class="lrow"><a href="https://open.spotify.com/search/{quote(a["name"])}" rel="noopener">Spotify ↗</a>'
               f'<a href="https://music.apple.com/au/search?term={q}" rel="noopener">Apple Music ↗</a>'
               f'<a href="https://www.youtube.com/results?search_query={q}+live" rel="noopener">YouTube ↗</a></div>'
-              f'<p class="setl"><a href="https://www.setlist.fm/search?query={q}" rel="noopener">What they\'ve been playing: recent setlists on setlist.fm ↗</a></p></div>')
+              + ("" if a.get("setlist") else f'<p class="setl"><a href="https://www.setlist.fm/search?query={q}" rel="noopener">What they\'ve been playing: recent setlists on setlist.fm ↗</a></p>') + '</div>')
+    setlist_html = ""
+    sl = a.get("setlist")
+    if sl:
+        where = ", ".join(x for x in (sl["venue"], sl["city"], sl["country"]) if x)
+        songs = "".join(f"<li>{e(x)}</li>" for x in sl["songs"])
+        enc = ('<p class="enc-h">Encore</p><ol class="songs enc">' + "".join(f"<li>{e(x)}</li>" for x in sl["encore"]) + "</ol>") if sl["encore"] else ""
+        tour_l = f' · {e(sl["tour"])}' if sl.get("tour") else ""
+        setlist_html = (f'<h2>What they\'ve been playing</h2><p class="note">Their most recent setlist: {e(fmt(sl["date"], False))}, {e(where)}{tour_l}.</p>'
+                        f'<ol class="songs">{songs}</ol>{enc}'
+                        f'<p class="note"><a href="{e(sl["url"])}" rel="noopener">Full setlist on setlist.fm ↗</a></p>')
+    records_html = ""
+    dg = a.get("discogs") or {}
+    if dg.get("records"):
+        cards = ""
+        for r in dg["records"]:
+            hq = HEATHEN + quote_plus(f'{a["name"]} {r["title"]}')
+            img = f'<img src="{e(r["thumb"])}" alt="{e(r["title"])} cover" loading="lazy" width="150" height="150">' if r.get("thumb") else '<span class="rec-blank"></span>'
+            cards += (f'<div class="rec">{img}<strong>{e(r["title"])}</strong><span class="meta">{r["year"]}</span>'
+                      f'<a href="{hq}" rel="noopener">Find on vinyl ↗</a></div>')
+        records_html = (f'<h2>Essential records</h2><div class="recs">{cards}</div>'
+                        f'<p class="note">Record data from <a href="{e(dg.get("url") or "https://www.discogs.com")}" rel="noopener">Discogs ↗</a></p>')
     follow = (f'<form class="card follow" name="follow" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">'
               f'<h3>Follow {e(a["name"])}</h3><p>Get an email when new Australian dates are announced or tickets go on sale.</p>'
               f'<input type="hidden" name="form-name" value="follow"><input type="hidden" name="artist" value="{e(a["name"])}">'
@@ -457,7 +487,7 @@ for a in artists.values():
     vinyl = HEATHEN + quote_plus(a["name"].split(" & ")[0])
     body = f"""<section class="page-title artist"><div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p>{cd}</div>{art(a, 'art hart')}</div></section>
 <section class="band"><div class="wrap split"><div>{head}{note}
-<h2>{len(sh)} {'show' if len(sh) == 1 else 'shows'} in Australia</h2>{dates_html}{tour_map(a['cities'])}</div>
+<h2>{len(sh)} {'show' if len(sh) == 1 else 'shows'} in Australia</h2>{dates_html}{tour_map(a['cities'])}{setlist_html}{records_html}</div>
 <aside class="side">{listen}{follow}<div class="card"><h3>Before the show</h3><a class="btn" href="{vinyl}" rel="noopener">Find {e(a['name'])} on vinyl ↗</a>{cal}{src}</div>{extra_cards}</aside></div></section>"""
     desc = (f"{a['name']} {title_tour}: dates, venues and tickets for " + ", ".join(a["cities"]) + ".") if sh else f"{a['name']} Australian tour news."
     jsonld = [{"@context": "https://schema.org", "@type": "MusicEvent", "name": f"{a['name']} live", "startDate": s["date"] + (f"T{s['time']}" if s["time"] else ""),

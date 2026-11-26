@@ -2,3 +2,5 @@ site/
 __pycache__/
 data/ticketmaster.json
 data/deezer.json
+data/setlists.json
+data/discogs.json

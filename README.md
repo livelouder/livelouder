@@ -18,3 +18,8 @@ Every push to `main` publishes automatically.
 - `netlify/functions/artist-alerts.mjs` emails artist followers about new tours, news and on-sales.
 - Content comes from `site/email/weekly.json` and `site/email/alerts.json`, built by `src/emails.py`.
 - Needs `KIT_API_KEY` in Netlify. Emails stay as Kit drafts until `KIT_AUTO_SEND` is set to `yes`.
+
+## Artist page extras
+- `SETLISTFM_KEY` (free, setlist.fm/settings/api): adds "What they've been playing", the latest setlist.
+- `DISCOGS_TOKEN` (free, discogs.com/settings/developers): adds "Essential records" with covers and Heathen links.
+- Both are optional and cached for a week; `netlify/plugins/keep-cache` keeps the caches between builds.
