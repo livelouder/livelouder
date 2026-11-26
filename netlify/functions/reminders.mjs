@@ -54,9 +54,16 @@ async function send(to, subject, html, text) {
 }
 
 export default async () => {
-  const key = process.env.SUPABASE_SECRET_KEY;
+  // Strip anything that can't be part of a key (a pasted key once carried an invisible character).
+  const key = String(process.env.SUPABASE_SECRET_KEY || "").replace(/[^A-Za-z0-9_.-]/g, "");
   if (!key || !process.env.RESEND_API_KEY) { console.log("reminders: keys not set"); return new Response("keys not set"); }
-  const sb = createClient(SB_URL, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  // Newer Supabase secret keys go in the "apikey" header only, never as "Authorization: Bearer".
+  const fetchKey = (url, opts = {}) => {
+    const h = new Headers(opts.headers || {});
+    if (h.get("authorization") === `Bearer ${key}`) h.delete("authorization");
+    return fetch(url, { ...opts, headers: h });
+  };
+  const sb = createClient(SB_URL, key, { auth: { persistSession: false, autoRefreshToken: false }, global: { fetch: fetchKey } });
   const today = sydney(), soon = addDays(today, 3);
   let feed = { sales: [], tours: [] };
   try { feed = await (await fetch(`${SITE}/data/alerts-feed.json`)).json(); } catch (e) { console.log("no alerts feed", e.message); }

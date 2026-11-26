@@ -325,3 +325,13 @@ create trigger guard_profile_photos before insert or update on public.profiles f
 drop policy if exists "profile pics: add own" on storage.objects;
 drop policy if exists "profile pics: change own" on storage.objects;
 
+
+-- Let the site's server code (secret key = service_role) read and write the tables (27 Nov 2026).
+-- Browsers still only get what row level security allows.
+grant usage on schema public to service_role;
+grant all on all tables in schema public to service_role;
+grant all on all sequences in schema public to service_role;
+grant execute on all functions in schema public to service_role;
+alter default privileges in schema public grant all on tables to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
+alter default privileges in schema public grant execute on functions to service_role;
