@@ -12,7 +12,7 @@ export const json = (o, status = 200) => new Response(JSON.stringify(o), { statu
 // Direct calls to Supabase with the secret key in the "apikey" header (how Supabase's newer secret keys are meant to be sent).
 async function call(path, { method = "GET", body, headers = {}, raw = false } = {}) {
   const key = String(process.env.SUPABASE_SECRET_KEY || "").trim().replace(/^["']|["']$/g, "");
-  if (!/^sb_secret_|^eyJ/.test(key)) console.log("SUPABASE_SECRET_KEY looks wrong: starts with", JSON.stringify(key.slice(0, 4)), "length", key.length);
+  if (!call.logged) { call.logged = 1; console.log("key shape:", key.slice(0, 14) + "…", "length", key.length, "env vars seen:", Object.keys(process.env).filter(k => /SUPABASE|VISION|RESEND/.test(k)).join(",")); }
   const r = await fetch(SB_URL + path, { method, body, headers: Object.assign({ apikey: key }, headers) });
   if (!r.ok) { const t = await r.text(); console.log("supabase", method, path.split("?")[0], r.status, t.slice(0, 200)); return { error: t || String(r.status), status: r.status }; }
   if (raw) return { response: r };
