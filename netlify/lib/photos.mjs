@@ -11,8 +11,9 @@ export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&a
 export const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
 // Direct calls to Supabase with the secret key in the "apikey" header (how Supabase's newer secret keys are meant to be sent).
 async function call(path, { method = "GET", body, headers = {}, raw = false } = {}) {
-  const key = String(process.env.SUPABASE_SECRET_KEY || "").trim().replace(/^["']|["']$/g, "");
-  if (!call.logged) { call.logged = 1; console.log("key shape:", key.slice(0, 14) + "…", "length", key.length, "env vars seen:", Object.keys(process.env).filter(k => /SUPABASE|VISION|RESEND/.test(k)).join(",")); }
+  const rawKey = String(process.env.SUPABASE_SECRET_KEY || "");
+  const key = rawKey.replace(/[^A-Za-z0-9_.-]/g, "");
+  if (!call.logged) { call.logged = 1; const odd = [...rawKey].filter(c => !/[A-Za-z0-9_.-]/.test(c)).map(c => "U+" + c.codePointAt(0).toString(16)); console.log("key check: length", key.length, "(raw", rawKey.length + ")", "removed", odd.join(" ") || "nothing", "underscores at", [...key].map((c, i) => c === "_" ? i : -1).filter(i => i >= 0).join(",")); }
   const r = await fetch(SB_URL + path, { method, body, headers: Object.assign({ apikey: key }, headers) });
   if (!r.ok) { const t = await r.text(); console.log("supabase", method, path.split("?")[0], r.status, t.slice(0, 200)); return { error: t || String(r.status), status: r.status }; }
   if (raw) return { response: r };
