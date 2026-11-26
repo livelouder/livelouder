@@ -1,6 +1,5 @@
 // Shared bits for profile photos: the database client, signed review links, and the "photo to check" email.
 // Needs SUPABASE_SECRET_KEY and RESEND_API_KEY. Review emails go to MODERATION_EMAIL (default Mick's address).
-import { createClient } from "@supabase/supabase-js";
 import crypto from "node:crypto";
 
 export const SITE = "https://livelouder.com.au";
@@ -10,7 +9,30 @@ const FROM = "Live Louder <hello@livelouder.com.au>";
 const TO = () => process.env.MODERATION_EMAIL || "mick@heathenrecords.com.au";
 export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 export const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json", "cache-control": "no-store" } });
-export const admin = () => createClient(SB_URL, process.env.SUPABASE_SECRET_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
+// Direct calls to Supabase with the secret key in the "apikey" header (how Supabase's newer secret keys are meant to be sent).
+async function call(path, { method = "GET", body, headers = {}, raw = false } = {}) {
+  const key = process.env.SUPABASE_SECRET_KEY;
+  const r = await fetch(SB_URL + path, { method, body, headers: Object.assign({ apikey: key }, headers) });
+  if (!r.ok) { const t = await r.text(); console.log("supabase", method, path.split("?")[0], r.status, t.slice(0, 200)); return { error: t || String(r.status), status: r.status }; }
+  if (raw) return { response: r };
+  const t = await r.text();
+  return { data: t ? JSON.parse(t) : null, count: Number((r.headers.get("content-range") || "").split("/")[1]) || 0 };
+}
+const J = { "content-type": "application/json" };
+export const db = {
+  // rows: db.select("profiles", "select=username&id=eq.123")
+  select: (table, q) => call(`/rest/v1/${table}?${q}`),
+  one: async (table, q) => { const r = await call(`/rest/v1/${table}?${q}&limit=1`); return { data: r.data && r.data[0] || null, error: r.error }; },
+  count: (table, q) => call(`/rest/v1/${table}?select=*&${q}`, { method: "HEAD", headers: { Prefer: "count=exact" } }),
+  insert: (table, row) => call(`/rest/v1/${table}`, { method: "POST", body: JSON.stringify(row), headers: { ...J, Prefer: "return=minimal" } }),
+  upsert: (table, row) => call(`/rest/v1/${table}`, { method: "POST", body: JSON.stringify(row), headers: { ...J, Prefer: "return=minimal,resolution=merge-duplicates" } }),
+  update: (table, q, patch) => call(`/rest/v1/${table}?${q}`, { method: "PATCH", body: JSON.stringify(patch), headers: { ...J, Prefer: "return=minimal" } }),
+  upload: (path, buf) => call(`/storage/v1/object/profile/${path}`, { method: "POST", body: buf, headers: { "content-type": "image/jpeg", "cache-control": "max-age=31536000", "x-upsert": "false" } }),
+  remove: (paths) => call(`/storage/v1/object/profile`, { method: "DELETE", body: JSON.stringify({ prefixes: paths }), headers: J }),
+  authUser: (id) => call(`/auth/v1/admin/users/${id}`),
+};
+export const eq = (v) => "eq." + encodeURIComponent(v);
+
 export const KINDS = { avatar: "profile photo", banner: "cover photo" };
 
 // Check the person's sign-in token directly with Supabase Auth (uses the public key; the token itself proves who they are).
