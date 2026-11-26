@@ -185,6 +185,8 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="Live Louder news" href="{SITE}/news/feed.xml">
+<link rel="icon" href="{r}favicon.ico" sizes="48x48"><link rel="icon" href="{r}favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{r}apple-touch-icon.png"><link rel="manifest" href="{r}site.webmanifest"><meta name="theme-color" content="#141414">
 <link rel="stylesheet" href="{r}style.css">{extra_head}</head><body data-root="{r}">
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a><nav aria-label="Main">{nav}</nav>
 <form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search artists, venues" aria-label="Search gigs"></form></div></header>
@@ -775,6 +777,11 @@ page("404.html", "Page not found | Live Louder", "Page not found.",
      '<section class="page-title"><div class="wrap"><h1>Wrong stage</h1><p>That page isn\'t here. Try the <a style="color:#fff" href="/gigs/index.html">gig guide</a>, <a style="color:#fff" href="/news/index.html">news</a> or <a style="color:#fff" href="/tours.html">tours</a>.</p></div></section>')
 shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
+for icon in (ROOT / "src/icons").iterdir():
+    shutil.copy(icon, OUT / icon.name)
+(OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",
+    "background_color": "#141414", "theme_color": "#141414",
+    "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
 urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "out-soon.html", "most-wanted.html", "stories/", "about.html"] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
