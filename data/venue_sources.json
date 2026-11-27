@@ -3,25 +3,25 @@
   "venue": "Sydney Coliseum Theatre",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tixel.com/au/tickets/sydney-coliseum-theatre",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Riverside Theatres",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://riversideparramatta.com.au/category/whats-on/music/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Albion Hotel Parramatta",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://musick.com.au/venue/the-albion-hotel/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Evan Theatre, Penrith Panthers",
@@ -51,46 +51,46 @@
   "venue": "Tattersalls Hotel Penrith",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/2520449-tattersalls-hotel",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Lithgow Workies Club",
   "city": "Lithgow",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.ticketebo.com.au/lithgow-workies",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Station Bar",
   "city": "Katoomba",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.stationbar.com.au",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Bootlegger Bar",
   "city": "Katoomba",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://fusionboutique.com.au/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Baroque Room (Carrington Hotel)",
   "city": "Katoomba",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://events.humanitix.com/host/600a118410b507000ac3d00a",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Oxford Art Factory",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
   "checked": "2026-11-27",
   "status": "active"
@@ -98,7 +98,7 @@
  {
   "venue": "The Lansdowne Hotel",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://songkick.com/venues/4339154-lansdowne",
   "checked": "2026-11-27",
   "status": "active"
@@ -106,7 +106,7 @@
  {
   "venue": "Crowbar Sydney",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://tixel.com/au/tickets/crowbar-sydney",
   "checked": "2026-11-27",
   "status": "active"
@@ -114,7 +114,7 @@
  {
   "venue": "Factory Theatre",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://www.songkick.com/venues/35429-factory-theatre/calendar",
   "checked": "2026-11-27",
   "status": "active"
@@ -122,7 +122,7 @@
  {
   "venue": "Manning Bar",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://songkick.com/venues/34998-manning-bar/calendar",
   "checked": "2026-11-27",
   "status": "active"
@@ -130,7 +130,7 @@
  {
   "venue": "The Duke of Enmore",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://odd-culture.vercel.app/event/duke-gig-guide",
   "checked": "2026-11-27",
   "status": "active"
@@ -138,7 +138,7 @@
  {
   "venue": "Marrickville Bowling Club",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://sydneymusic.net/gig-guide/venues/marrickville-bowling-club",
   "checked": "2026-11-27",
   "status": "active"
@@ -146,7 +146,7 @@
  {
   "venue": "Waywards",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://sydneymusic.net/gig-guide/venues/waywards-ballroom",
   "checked": "2026-11-27",
   "status": "active"
@@ -154,7 +154,7 @@
  {
   "venue": "Mary's Underground",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "2026-11-27",
   "status": "closed"
@@ -162,7 +162,7 @@
  {
   "venue": "Liberty Hall",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://entertainmentquarter.com.au/whats-on/",
   "checked": "2026-11-27",
   "status": "active"
@@ -170,7 +170,7 @@
  {
   "venue": "Metro Theatre",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://www.metrotheatre.com.au/location/metro-theatre/",
   "checked": "2026-11-27",
   "status": "active"
@@ -178,7 +178,7 @@
  {
   "venue": "Enmore Theatre",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://www.enmoretheatre.com.au/location/enmore-theatre",
   "checked": "2026-11-27",
   "status": "active"
@@ -186,7 +186,7 @@
  {
   "venue": "The Vanguard",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://www.songkick.com/venues/29965-vanguard/calendar",
   "checked": "2026-11-27",
   "status": "active"
@@ -194,7 +194,7 @@
  {
   "venue": "Leadbelly",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "2026-11-27",
   "status": "closed"
@@ -202,7 +202,7 @@
  {
   "venue": "Gasoline Pony",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "https://events.humanitix.com/host/gasoline-pony",
   "checked": "2026-11-27",
   "status": "active"
@@ -210,31 +210,31 @@
  {
   "venue": "Lazybones Lounge",
   "city": "Sydney",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "NSW",
+  "url": "https://songkick.com/venues/2543674-lazybones-lounge",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Cambridge Hotel Newtown",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "closed"
  },
  {
   "venue": "Hollywood Hotel",
   "city": "Sydney",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "NSW",
+  "url": "https://www.facebook.com/hotel.hollywood.sydney",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Bald Faced Stag",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -242,7 +242,7 @@
  {
   "venue": "Factory Floor",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -250,7 +250,7 @@
  {
   "venue": "Rosemount Hotel Sydney",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -258,7 +258,7 @@
  {
   "venue": "Phoenix Central Park",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -266,7 +266,7 @@
  {
   "venue": "Petersham Bowling Club",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -274,7 +274,7 @@
  {
   "venue": "The Chippo Hotel",
   "city": "Sydney",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -282,23 +282,23 @@
  {
   "venue": "The Corner Hotel",
   "city": "Melbourne",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "VIC",
+  "url": "https://songkick.com/venues/34999-corner-hotel/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Northcote Social Club",
   "city": "Melbourne",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "VIC",
+  "url": "https://tixel.com/au/tickets/northcote-social-club",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Northcote Theatre",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -306,15 +306,15 @@
  {
   "venue": "The Tote",
   "city": "Melbourne",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "VIC",
+  "url": "https://tixel.com/au/tickets/the-tote",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Cherry Bar",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -322,7 +322,7 @@
  {
   "venue": "Howler",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -330,7 +330,7 @@
  {
   "venue": "The Workers Club",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -338,7 +338,7 @@
  {
   "venue": "The Gasometer Hotel",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -346,7 +346,7 @@
  {
   "venue": "Bergy Bandroom",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -354,7 +354,7 @@
  {
   "venue": "Max Watt's Melbourne",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -362,7 +362,7 @@
  {
   "venue": "Croxton Bandroom",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -370,7 +370,7 @@
  {
   "venue": "The Espy",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -378,7 +378,7 @@
  {
   "venue": "Stay Gold",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -386,7 +386,7 @@
  {
   "venue": "Brunswick Ballroom",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -394,7 +394,7 @@
  {
   "venue": "The Night Cat",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -402,7 +402,7 @@
  {
   "venue": "Bar Open",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -410,7 +410,7 @@
  {
   "venue": "The Old Bar",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -418,7 +418,7 @@
  {
   "venue": "The Retreat Hotel",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -426,7 +426,7 @@
  {
   "venue": "Last Chance Rock & Roll Bar",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -434,7 +434,7 @@
  {
   "venue": "Memo Music Hall",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -442,7 +442,7 @@
  {
   "venue": "The Toff in Town",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -450,7 +450,7 @@
  {
   "venue": "Forum Melbourne",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -458,7 +458,7 @@
  {
   "venue": "Prince Bandroom",
   "city": "Melbourne",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -466,15 +466,15 @@
  {
   "venue": "The Triffid",
   "city": "Brisbane",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "QLD",
+  "url": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Zoo",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "2026-11-26",
   "status": "closed"
@@ -482,23 +482,23 @@
  {
   "venue": "Crowbar Brisbane",
   "city": "Brisbane",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "QLD",
+  "url": "https://crowbarbris.oztix.com.au/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Brightside",
   "city": "Brisbane",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "QLD",
+  "url": "https://tixel.com/au/tickets/the-brightside",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Tivoli",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -506,7 +506,7 @@
  {
   "venue": "Black Bear Lodge",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -514,7 +514,7 @@
  {
   "venue": "The Bearded Lady",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -522,7 +522,7 @@
  {
   "venue": "Woolly Mammoth",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -530,7 +530,7 @@
  {
   "venue": "Princess Theatre Brisbane",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -538,7 +538,7 @@
  {
   "venue": "The Outpost",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -546,7 +546,7 @@
  {
   "venue": "Greaser Bar",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -554,7 +554,7 @@
  {
   "venue": "Fortitude Music Hall",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -562,7 +562,7 @@
  {
   "venue": "The Junk Bar",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -570,7 +570,7 @@
  {
   "venue": "Lefty's Music Hall",
   "city": "Brisbane",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -578,23 +578,23 @@
  {
   "venue": "Rosemount Hotel",
   "city": "Perth",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "WA",
+  "url": "https://musick.com.au/venue/the-rosemount-hotel",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Badlands Bar",
   "city": "Perth",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "WA",
+  "url": "https://musick.com.au/venue/badlands-bar",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Bird",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -602,7 +602,7 @@
  {
   "venue": "Mojos Bar",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -610,7 +610,7 @@
  {
   "venue": "Freo.Social",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -618,7 +618,7 @@
  {
   "venue": "Lyric's Underground",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -626,7 +626,7 @@
  {
   "venue": "Amplifier Bar",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -634,7 +634,7 @@
  {
   "venue": "The Magnet House",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -642,7 +642,7 @@
  {
   "venue": "Indian Ocean Hotel",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -650,7 +650,7 @@
  {
   "venue": "The Sewing Room",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -658,7 +658,7 @@
  {
   "venue": "Astor Theatre Perth",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -666,7 +666,7 @@
  {
   "venue": "Milk Bar Perth",
   "city": "Perth",
-  "state": "",
+  "state": "WA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -674,23 +674,23 @@
  {
   "venue": "The Gov",
   "city": "Adelaide",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "SA",
+  "url": "https://tixel.com/au/tickets/the-gov",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Jive",
   "city": "Adelaide",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "SA",
+  "url": "https://tixel.com/au/tickets/jive",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Crown & Anchor",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -698,7 +698,7 @@
  {
   "venue": "Lion Arts Factory",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -706,7 +706,7 @@
  {
   "venue": "The Grace Emily Hotel",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -714,7 +714,7 @@
  {
   "venue": "The Wheatsheaf Hotel",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -722,7 +722,7 @@
  {
   "venue": "Hindley Street Music Hall",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -730,7 +730,7 @@
  {
   "venue": "The Lab Adelaide",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -738,7 +738,7 @@
  {
   "venue": "The Thebarton Theatre",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -746,7 +746,7 @@
  {
   "venue": "Rocket Bar",
   "city": "Adelaide",
-  "state": "",
+  "state": "SA",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -754,15 +754,15 @@
  {
   "venue": "Altar Hobart",
   "city": "Hobart",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "TAS",
+  "url": "https://songkick.com/venues/4466594-altar-bar/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Republic Bar",
   "city": "Hobart",
-  "state": "",
+  "state": "TAS",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -770,7 +770,7 @@
  {
   "venue": "The Brisbane Hotel Hobart",
   "city": "Hobart",
-  "state": "",
+  "state": "TAS",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -778,7 +778,7 @@
  {
   "venue": "Odeon Theatre Hobart",
   "city": "Hobart",
-  "state": "",
+  "state": "TAS",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -786,7 +786,7 @@
  {
   "venue": "Hobart Brewing Company",
   "city": "Hobart",
-  "state": "",
+  "state": "TAS",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -794,15 +794,15 @@
  {
   "venue": "The Basement Canberra",
   "city": "Canberra",
-  "state": "",
+  "state": "ACT",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "closed"
  },
  {
   "venue": "Smith's Alternative",
   "city": "Canberra",
-  "state": "",
+  "state": "ACT",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -810,7 +810,7 @@
  {
   "venue": "The Street Theatre",
   "city": "Canberra",
-  "state": "",
+  "state": "ACT",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -818,7 +818,7 @@
  {
   "venue": "UC Hub",
   "city": "Canberra",
-  "state": "",
+  "state": "ACT",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -826,7 +826,7 @@
  {
   "venue": "King O'Malley's",
   "city": "Canberra",
-  "state": "",
+  "state": "ACT",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -834,23 +834,23 @@
  {
   "venue": "The Cambridge Hotel Newcastle",
   "city": "Newcastle",
-  "state": "",
+  "state": "NSW",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "closed"
  },
  {
   "venue": "Hamilton Station Hotel",
   "city": "Newcastle",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/the-hamilton-station-hotel-8iuk",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "King Street Hotel Newcastle",
   "city": "Newcastle",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -858,15 +858,15 @@
  {
   "venue": "Lass O'Gowrie Hotel",
   "city": "Newcastle",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "NSW",
+  "url": "https://www.jambase.com/venue/the-lass-ogowrie",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Small Ballroom",
   "city": "Newcastle",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -874,15 +874,15 @@
  {
   "venue": "La La La's",
   "city": "Wollongong",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "NSW",
+  "url": "https://app.songkick.com/venues/4358706-la-la-las",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Dicey Riley's",
   "city": "Wollongong",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -890,7 +890,7 @@
  {
   "venue": "Rad Bar",
   "city": "Wollongong",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -898,7 +898,7 @@
  {
   "venue": "Wollongong UniBar",
   "city": "Wollongong",
-  "state": "",
+  "state": "NSW",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -906,15 +906,15 @@
  {
   "venue": "Barwon Club Hotel",
   "city": "Geelong",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "VIC",
+  "url": "https://barwonclub.oztix.com.au/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Workers Club Geelong",
   "city": "Geelong",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -922,7 +922,7 @@
  {
   "venue": "Costa Hall",
   "city": "Geelong",
-  "state": "",
+  "state": "VIC",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -930,15 +930,15 @@
  {
   "venue": "Miami Marketta",
   "city": "Gold Coast",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "QLD",
+  "url": "https://www.miamimarketta.com/ticketed-events",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Vinnies Dive Bar",
   "city": "Gold Coast",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -946,7 +946,7 @@
  {
   "venue": "Coolangatta Hotel",
   "city": "Gold Coast",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -954,7 +954,7 @@
  {
   "venue": "Elsewhere Bar",
   "city": "Gold Coast",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -962,7 +962,7 @@
  {
   "venue": "Solbar",
   "city": "Sunshine Coast",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -970,7 +970,7 @@
  {
   "venue": "Sunshine Coast Pub",
   "city": "Sunshine Coast",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -978,7 +978,7 @@
  {
   "venue": "The Jack Cairns",
   "city": "Cairns",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -986,7 +986,7 @@
  {
   "venue": "Tanks Arts Centre",
   "city": "Cairns",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -994,7 +994,7 @@
  {
   "venue": "The Warehouse Townsville",
   "city": "Townsville",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -1002,7 +1002,7 @@
  {
   "venue": "Flynn's Townsville",
   "city": "Townsville",
-  "state": "",
+  "state": "QLD",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -1010,15 +1010,15 @@
  {
   "venue": "Darwin Railway Club",
   "city": "Darwin",
-  "state": "",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "state": "NT",
+  "url": "https://www.songkick.com/metro-areas/26783-australia-darwin",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Happy Yess",
   "city": "Darwin",
-  "state": "",
+  "state": "NT",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -1026,7 +1026,7 @@
  {
   "venue": "Discovery Darwin",
   "city": "Darwin",
-  "state": "",
+  "state": "NT",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -1034,7 +1034,7 @@
  {
   "venue": "Royal Oak Hotel Launceston",
   "city": "Launceston",
-  "state": "",
+  "state": "TAS",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -1042,7 +1042,7 @@
  {
   "venue": "Saloon Bar Launceston",
   "city": "Launceston",
-  "state": "",
+  "state": "TAS",
   "url": "",
   "checked": "",
   "status": "unchecked"
@@ -1051,81 +1051,81 @@
   "venue": "Hotel Blue",
   "city": "Katoomba",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://bluemountainslive.com.au/events/",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Blue Mountains Theatre",
   "city": "Springwood",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.bluemountainstheatre.com.au/what-s-on/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Byron Theatre",
   "city": "Byron Bay",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.byroncentre.com.au/bct/whats-on",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Northern",
   "city": "Byron Bay",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.jambase.com/venue/the-northern-byron-bay",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Beach Hotel",
   "city": "Byron Bay",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.jambase.com/venue/beach-hotel",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Toowoomba Empire Theatre",
   "city": "Toowoomba",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://empiretheatre.com.au/whats-on",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Gov Hotel",
   "city": "Ballarat",
   "state": "VIC",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Volta",
   "city": "Ballarat",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tixel.com/au/tickets/volta",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Capital",
   "city": "Bendigo",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.bendigoregion.com.au/arts-culture-theatres/space/the-capital",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Railway Club Hotel",
   "city": "Port Macquarie",
   "state": "NSW",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Mona",
@@ -1174,5 +1174,122 @@
   "url": "",
   "checked": "",
   "status": "unchecked"
+ },
+ {
+  "venue": "The Baso",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://thebaso.oztix.com.au/",
+  "checked": "2026-11-27",
+  "status": "active",
+  "region": "Canberra"
+ },
+ {
+  "venue": "The Sunken Monkey Hotel",
+  "city": "Erina",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/the-sunken-monkey-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "Woodport Hotel",
+  "city": "Erina",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/woodport-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "Avoca Beach Theatre",
+  "city": "Avoca Beach",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/avoca-beach-theatre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "The Art House",
+  "city": "Wyong",
+  "state": "NSW",
+  "url": "https://www.thearthousewyong.com.au/whats-on?type=music",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "Everglades Country Club",
+  "city": "Woy Woy",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "The Entrance Leagues Club",
+  "city": "Bateau Bay",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/the-entrance-leagues-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "Katoomba RSL",
+  "city": "Katoomba",
+  "state": "NSW",
+  "url": "https://www.moshtix.com.au/v2/venues/katoomba-rsl/2861",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "Union Theatre",
+  "city": "Lithgow",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "The Joan (Joan Sutherland Performing Arts Centre)",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.thejoan.com.au/event-genre/music/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Western Sydney & Penrith"
+ },
+ {
+  "venue": "Dissent Cafe & Bar",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://songkick.com/venues/4600950-dissent-cafe-and-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Harmonie German Club",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://songkick.com/venues/1857983-harmonie-german-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Canberra Theatre Centre",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://tixel.com/au/tickets/canberra-theatre-centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
  }
 ]
