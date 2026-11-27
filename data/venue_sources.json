@@ -5221,5 +5221,680 @@
   "checked": "",
   "status": "unchecked",
   "region": "Rockhampton & Yeppoon"
+ },
+ {
+  "venue": "Dinah Beach Cruising Yacht Association",
+  "city": "Darwin",
+  "state": "NT",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Darwin"
+ },
+ {
+  "venue": "The Foreshore Restaurant & Cafe",
+  "city": "Darwin",
+  "state": "NT",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Darwin"
+ },
+ {
+  "venue": "Fern Tree Tavern",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://songkick.com/venues/3680924-fern-tree-tavern",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Stirling Arms Hotel",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://www.songkick.com/venues/4043159-stirling-arms-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Lakers Tavern",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "The Y HQ",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Livid Skate Cafe",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Le Vivant",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Koorliny Arts Centre",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Royal Quarters (Royal Nundah Hotel)",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://tixel.com/au/tickets/the-lounge-royal-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "QPAC Concert Hall",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://tixel.com/au/tickets/concert-hall",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Distillery Road Market",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://tixel.com/au/tickets/distillery-road-market",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Brisbane Convention & Exhibition Centre",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://tixel.com/au/tickets/brisbane-convention-exhibition-c",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "The Vault",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://songkick.com/venues/4670709-vault",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Live at The Polo",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://www.songkick.com/venues/4444916-live-at-the-polo",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "The Brit Entertainment Centre",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/venue-listing/the-brit-entertainment-centre/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "West Croydon & Kilkenny RSL",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/venue-listing/west-croydon-and-kilkenny-rsl/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Para Hills Community Club",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/venue-listing/para-hills-community-club/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Grand Junction Tavern",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Seaton Hotel",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Lord Exmouth Hotel",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Vic on the Park Hotel",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "The Juniors Kingsford",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/the-juniors-kingsford",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Richmond Regent Twin Cinema",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/richmond-regent-twin-cinema",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Western Sydney & Penrith"
+ },
+ {
+  "venue": "The Australian Hotel & Brewery",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/the-australian-hotel-brewery",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Paddo RSL",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/paddo-rsl-paddington",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Heaps Normal Health Club",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/heaps-normal-health-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Creatures of Habit Bar & Bandroom",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://events.humanitix.com/host/creatures-of-habit-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Hotel Shoppingtown",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/36141-hotel-shoppingtown",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Lucky 13 Garage",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/2015009-lucky-13-garage",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Plenty Ranges Arts and Convention Centre",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/1636318-plenty-ranges-arts-and-convention-centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Hamer Hall",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/3445614-hamer-hall",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Crown Live",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/4667158-crown-live",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Limerick Arms Hotel",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "St Kilda RSL",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Sunset Bar, Cable Beach Club Resort & Spa",
+  "city": "Broome",
+  "state": "WA",
+  "url": "https://www.visitbroome.com.au/events/live-music-at-sunset-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Broome"
+ },
+ {
+  "venue": "The Common",
+  "city": "Margaret River",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "South West"
+ },
+ {
+  "venue": "Strange Brew Wine Bar",
+  "city": "Cowaramup",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "South West"
+ },
+ {
+  "venue": "Yallingup Hall",
+  "city": "Yallingup",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "South West"
+ },
+ {
+  "venue": "Federal Hotel",
+  "city": "Port Pirie",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Port Lincoln & Whyalla"
+ },
+ {
+  "venue": "Whyalla Left Hand Club",
+  "city": "Whyalla",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Port Lincoln & Whyalla"
+ },
+ {
+  "venue": "Eyre Hotel",
+  "city": "Whyalla",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Port Lincoln & Whyalla"
+ },
+ {
+  "venue": "Travellers Rest Hotel",
+  "city": "Port Augusta",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Port Lincoln & Whyalla"
+ },
+ {
+  "venue": "Grand Tasman Hotel",
+  "city": "Port Lincoln",
+  "state": "SA",
+  "url": "https://musick.com.au/venue/grand-tasman-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Port Lincoln & Whyalla"
+ },
+ {
+  "venue": "The Commercial Hotel",
+  "city": "Mount Gambier",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mount Gambier"
+ },
+ {
+  "venue": "The Dam Denmark",
+  "city": "Denmark",
+  "state": "WA",
+  "url": "http://thedam.raintree.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Great Southern"
+ },
+ {
+  "venue": "Victor Harbor Town Hall",
+  "city": "Victor Harbor",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fleurieu"
+ },
+ {
+  "venue": "Atze's Corner Wines",
+  "city": "Nuriootpa",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Barossa & Clare"
+ },
+ {
+  "venue": "Gladstone Entertainment Convention Centre",
+  "city": "Gladstone",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Rockhampton & Yeppoon"
+ },
+ {
+  "venue": "The Queens Hotel Gladstone",
+  "city": "Gladstone",
+  "state": "QLD",
+  "url": "https://www.queensgladstone.au",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Rockhampton & Yeppoon"
+ },
+ {
+  "venue": "Studio 188",
+  "city": "Ipswich",
+  "state": "QLD",
+  "url": "https://allevents.in/org/studio-188/3736399",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ipswich"
+ },
+ {
+  "venue": "Hotel Commonwealth",
+  "city": "Ipswich",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ipswich"
+ },
+ {
+  "venue": "Old Bundy Tavern",
+  "city": "Bundaberg",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bundaberg & Hervey Bay"
+ },
+ {
+  "venue": "The Globe Hotel",
+  "city": "Bundaberg",
+  "state": "QLD",
+  "url": "https://allevents.in/org/the-new-globe-hotel/26261548",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bundaberg & Hervey Bay"
+ },
+ {
+  "venue": "Carriers Arms Hotel",
+  "city": "Maryborough",
+  "state": "QLD",
+  "url": "https://allevents.in/org/carriers-arms-hotel-motel/14133281",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bundaberg & Hervey Bay"
+ },
+ {
+  "venue": "Oodies Cafe",
+  "city": "Bundaberg",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bundaberg & Hervey Bay"
+ },
+ {
+  "venue": "Hervey Bay RSL",
+  "city": "Hervey Bay",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bundaberg & Hervey Bay"
+ },
+ {
+  "venue": "Tilba Valley Winery and Alehouse",
+  "city": "Narooma",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4403729-tilba-valley-winery-and-alehouse",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Far South Coast"
+ },
+ {
+  "venue": "Orange Ex-Services' Club",
+  "city": "Orange",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/158178-orange-ex-services-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central West"
+ },
+ {
+  "venue": "The Victoria Hotel (The Vic) Orange",
+  "city": "Orange",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/1489613-victoria-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central West"
+ },
+ {
+  "venue": "Canobolas Dance Hall",
+  "city": "Orange",
+  "state": "NSW",
+  "url": "https://canobolasdancehall.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central West"
+ },
+ {
+  "venue": "The Grand Hotel Bega",
+  "city": "Bega",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Far South Coast"
+ },
+ {
+  "venue": "The Hastings Bowral (Bowral Golf Club)",
+  "city": "Bowral",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Southern Highlands & Goulburn"
+ },
+ {
+  "venue": "Tamworth Services Club",
+  "city": "Tamworth",
+  "state": "NSW",
+  "url": "https://www.theserviesgroup.com.au/tamworthservicesclub",
+  "checked": "",
+  "status": "unchecked",
+  "region": "New England"
+ },
+ {
+  "venue": "Bright Brewery",
+  "city": "Bright",
+  "state": "VIC",
+  "url": "https://brightbrewery.com.au/whats-on/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Shepparton & Wangaratta"
+ },
+ {
+  "venue": "Wangaratta Performing Arts & Convention Centre",
+  "city": "Wangaratta",
+  "state": "VIC",
+  "url": "https://www.wangaratta.vic.gov.au/Residents/Recreation-facilities/Wangaratta-Performing-Arts-Convention-Centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Shepparton & Wangaratta"
+ },
+ {
+  "venue": "Vine Hotel",
+  "city": "Wangaratta",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Shepparton & Wangaratta"
+ },
+ {
+  "venue": "Yackandandah Public Hall",
+  "city": "Yackandandah",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Shepparton & Wangaratta"
+ },
+ {
+  "venue": "West Tamworth Leagues Club",
+  "city": "Tamworth",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "New England"
+ },
+ {
+  "venue": "Moonshiners Bar",
+  "city": "Tamworth",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "New England"
+ },
+ {
+  "venue": "The Pub",
+  "city": "Tamworth",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "New England"
+ },
+ {
+  "venue": "The Civic",
+  "city": "Gunnedah",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "New England"
+ },
+ {
+  "venue": "Barwon Heads Hotel",
+  "city": "Barwon Heads",
+  "state": "VIC",
+  "url": "https://musick.com.au/venue/barwon-heads-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Gateway Hotel",
+  "city": "Geelong",
+  "state": "VIC",
+  "url": "https://musick.com.au/venue/gateway-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Kyneton RSL",
+  "city": "Kyneton",
+  "state": "VIC",
+  "url": "https://allevents.in/org/kyneton-rsl/22927172",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
  }
 ]
