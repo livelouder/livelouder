@@ -281,6 +281,21 @@ def _new_tab(m):
         attrs += ' rel="noopener"'
     return f'<a {attrs} target="_blank">'
 
+# Google Analytics 4 (property "Live Louder"). Also sends a few named events: ticket clicks, saved gigs, followed artists, form sends.
+GA_ID = "G-236J3ZHG27"
+GA_HEAD = ("" if not GA_ID else
+    f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'
+    "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());"
+    f"gtag('config','{GA_ID}');"
+    "document.addEventListener('click',function(ev){try{var t=ev.target.closest('a,button');if(!t)return;"
+    "var g=t.closest('.gig,.gp,main');var art=(g&&g.querySelector('.gname,h1')||{}).textContent||document.title;"
+    "if(t.tagName==='A'&&t.host&&t.host!==location.host&&/ticket|details/i.test(t.textContent)){gtag('event','ticket_click',{artist:art.trim().slice(0,100),link_url:t.href});}"
+    "else if(t.matches('button.save')){gtag('event','save_gig',{artist:art.trim().slice(0,100)});}"
+    "else if(t.matches('button.saveartist')){gtag('event','follow_artist',{artist:(t.dataset.name||'').slice(0,100)});}"
+    "}catch(e){}},true);"
+    "document.addEventListener('submit',function(ev){try{var f=ev.target,n=f.getAttribute('name')||'';"
+    "if(n==='newsletter')gtag('event','sign_up',{method:'newsletter'});else if(n)gtag('event','form_'+n);}catch(e){}},true);</script>")
+
 def page(path, title, desc, body, active=None, extra_head="", image=""):
     r = "../" * path.count("/")
     group = NAV_GROUP.get(active, active)
@@ -295,7 +310,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
     credit = "Event data from Ticketmaster. Music previews from Deezer." if have_feed else "Music previews from Deezer."
     cities = " · ".join(f'<a href="{r}gigs/{slug(c)}.html">{e(c)}</a>' for c in MAIN_CITIES[:8]) + f' · <a href="{r}gigs/regional.html">Regional</a>'
     doc = f"""<!DOCTYPE html>
-<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en-AU"><head>{GA_HEAD}<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{canon}">
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:site_name" content="Live Louder"><meta property="og:url" content="{canon}">{og_img}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1284,6 +1299,8 @@ pv = """<section class="page-title"><div class="wrap"><h1>Privacy</h1><p>What we
 <h2>If you just browse</h2>
 <p>You don't need an account to use Live Louder. If you save gigs or follow artists without signing in, that list is kept in your own browser on your device. It isn't sent to us.</p>
 <p>Like every website, our host (Netlify) keeps standard server logs, such as IP addresses and the pages requested, to keep the site running and secure.</p>
+<h2>Site statistics</h2>
+<p>We use Google Analytics to understand how people use Live Louder: which pages get visited, roughly where visitors are (country and city), what device they use, how they found us, and actions like clicking through to buy tickets or saving a gig. Google Analytics uses cookies to do this. We use it only to make the site better, we don't use it to identify you, and we never sell it. You can opt out with Google's <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">opt-out browser add-on</a>, or by blocking cookies in your browser.</p>
 <h2>If you create an account</h2>
 <p>When you sign in (with an email link or with Google) we keep:</p>
 <ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>the records in your collection and wantlist</li><li>your username, the name you choose to show, and the profile and cover photos you upload, if you add them</li><li>the people you follow and who follows you</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
