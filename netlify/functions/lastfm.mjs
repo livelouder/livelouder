@@ -1,6 +1,6 @@
 // One-click start: a person's most-played artists from Last.fm (?u=<Last.fm username>), so they can follow them all at once.
 // Needs LASTFM_API_KEY in Netlify (free key from https://www.last.fm/api/account/create). Public listening data only.
-const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json", "cache-control": "public, max-age=3600" } });
+const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { "content-type": "application/json", "cache-control": status === 200 ? "public, max-age=3600" : "no-store" } });
 
 export default async (req) => {
   const u = (new URL(req.url).searchParams.get("u") || "").trim();
