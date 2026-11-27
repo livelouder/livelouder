@@ -1320,9 +1320,9 @@
   "venue": "Ettamogah Hotel",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://moshtix.com.au/v2/venues/ettamogah-hotel-kellyville-ridge/5298",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/ettamogah-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -1330,8 +1330,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://musick.com.au/venue/camden-hotel/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -1347,9 +1347,9 @@
   "venue": "Mounties",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/host/mounties",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -1365,9 +1365,9 @@
   "venue": "Mingara Recreation Club",
   "city": "Tumbi Umbi",
   "state": "NSW",
-  "url": "https://www.mingara.com.au/event/live-free-music-mingara",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://mingara.com.au/event/live-free-music-mingara/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1384,8 +1384,8 @@
   "city": "Gosford",
   "state": "NSW",
   "url": "https://musick.com.au/venue/gosford-rsl/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1393,8 +1393,8 @@
   "city": "Doyalson",
   "state": "NSW",
   "url": "https://musick.com.au/venue/doyalson-rsl/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1402,8 +1402,8 @@
   "city": "Shoal Bay",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/shoal-bay-country-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
@@ -1420,8 +1420,8 @@
   "city": "Abermain",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/4474192-qirkz-in-the-hunter",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
@@ -1438,35 +1438,35 @@
   "city": "Nelson Bay",
   "state": "NSW",
   "url": "https://songkick.com/venues/1436353-nelson-bay-diggers",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
   "venue": "Kiama Leagues Club",
   "city": "Kiama",
   "state": "NSW",
-  "url": "https://kiama.com.au/whats-on/live-entertainment-music",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://kiamaleagues.com/entertainment/live-in-the-lounge-klc/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
   "venue": "Grand Hotel Kiama",
   "city": "Kiama",
   "state": "NSW",
-  "url": "https://kiama.com.au/whats-on/live-entertainment-music",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.grandhotelkiama.com.au/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
   "venue": "Gerringong Bowlo",
   "city": "Gerringong",
   "state": "NSW",
-  "url": "https://kiama.com.au/whats-on/live-entertainment-music",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.gerringongbowlo.com.au/whats-on",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -1482,9 +1482,9 @@
   "venue": "Keystone 1889",
   "city": "Bathurst",
   "state": "NSW",
-  "url": "https://musick.com.au/regional/bathurst/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://songkick.com/venues/4463752-keystone-1889",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central West"
  },
  {
@@ -1500,18 +1500,18 @@
   "venue": "Bathurst Memorial Entertainment Centre (BMEC)",
   "city": "Bathurst",
   "state": "NSW",
-  "url": "https://www.bmec.com.au/event-category-whats-on/music/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.bmec.com.au/event-category-whats-on/live-music/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central West"
  },
  {
   "venue": "Orange Civic Theatre",
   "city": "Orange",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/1669278-orange-civic-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://app.songkick.com/venues/1669278-orange-civic-theatre",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central West"
  },
  {
@@ -1519,8 +1519,8 @@
   "city": "Huskisson",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/3914594-huskisson-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -1528,8 +1528,8 @@
   "city": "Bathurst",
   "state": "NSW",
   "url": "https://www.eventbrite.com.au/o/19823716405",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central West"
  },
  {
@@ -1537,8 +1537,8 @@
   "city": "Fremantle",
   "state": "WA",
   "url": "https://songkick.com/venues/3934599-duke-of-george",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fremantle"
  },
  {
@@ -1546,8 +1546,8 @@
   "city": "Fremantle",
   "state": "WA",
   "url": "https://songkick.com/venues/43990-metropolis-fremantle",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fremantle"
  },
  {
@@ -1555,8 +1555,8 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://tixel.com/au/tickets/the-rechabite",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -4398,27 +4398,27 @@
   "venue": "Scarborough Beach Amphitheatre",
   "city": "Perth",
   "state": "WA",
-  "url": "https://songkick.com/venues/1141096-scarborough-beach-amphitheatre",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/fr/venues/1141096-scarborough-beach-amphitheatre",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "Quarry Amphitheatre",
   "city": "Perth",
   "state": "WA",
-  "url": "https://www.songkick.com/venues/4654426-quarry-amphitheatre-perth",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/quarry-amphitheatre",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "Arena Joondalup",
   "city": "Perth",
   "state": "WA",
-  "url": "https://www.songkick.com/venues/203438-arena-joondalup",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.arenajoondalup.com.au/events",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -4426,26 +4426,26 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://songkick.com/venues/4671684-cockburn-bowling-and-recreation-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "The Carine",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/3183894-carine",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "Monsoons",
   "city": "Darwin",
   "state": "NT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/darwin/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Darwin"
  },
  {
@@ -4461,9 +4461,9 @@
   "venue": "The Botany View Hotel",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/658441-botany-view-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tickets.songkick.com/venues/658441-botany-view-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4479,18 +4479,18 @@
   "venue": "Kings Cross Hotel",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/1363846-kings-cross-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/kings-cross-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "Regent Theatre",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/64012-regent-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://app.songkick.com/venues/64012-regent-theatre/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4507,8 +4507,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/1551218-low-302",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4516,8 +4516,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4525,8 +4525,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4534,8 +4534,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://songkick.com/venues/4488594-hotel-steyne",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4543,26 +4543,26 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/4360060-leadbeater-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Darebin Arts Centre",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://labs.songkick.com/venues/4343791-darebin-arts-centre",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Thornbury Bowls Club",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://ma.to/venue/thornburybowls",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4570,8 +4570,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://songkick.com/venues/4665463-grand-room",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4579,8 +4579,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://songkick.com/de/venues/4280399-q-room",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4588,62 +4588,62 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://songkick.com/venues/2824248-yarraville-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Edinburgh Castle Hotel",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://edinburghcastle.net.au/gig-guide",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Paris Cat Jazz Club",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://beat.com.au/new-gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Brunswick Artists' Bar",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://beat.com.au/new-gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "The Bridgeway Hotel",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/the-bridgeway-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
   "venue": "Arkaba Hotel",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/arkaba-hotel-m3ww",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
   "venue": "The Trinity Sessions",
   "city": "Adelaide",
   "state": "SA",
-  "url": "https://www.songkick.com/venues/1567128-trinity-sessions",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://labs.songkick.com/venues/1567128-trinity-sessions",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -4660,8 +4660,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://songkick.com/venues/2700883-canberra-southern-cross-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -4669,8 +4669,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://www.songkick.com/venues/92406-ais-arena",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  }
 ]
