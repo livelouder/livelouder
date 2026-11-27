@@ -920,6 +920,29 @@ page("venues/index.html", "Live music venues in Australia: every venue's gig gui
 <aside class="side">{venue_form(title="Missing a venue?", intro="Tell us the venues that put on bands near you, and we'll add their gigs.")}</aside></div></section>""", "venues/index.html")
 
 # ---------------------------------------------------------------- one page per gig (tickets, price, venue, map)
+# Full schema.org MusicEvent for Google (all the recommended fields, so Search Console stays happy).
+def event_ld(s, name=None, image=""):
+    from zoneinfo import ZoneInfo
+    tz = {"WA": "Australia/Perth", "SA": "Australia/Adelaide", "NT": "Australia/Darwin", "QLD": "Australia/Brisbane", "VIC": "Australia/Melbourne",
+          "TAS": "Australia/Hobart", "ACT": "Australia/Sydney"}.get(s.get("state", ""), "Australia/Sydney")
+    start = s["date"]
+    if s["time"]:
+        start = dt.datetime.fromisoformat(f'{s["date"]}T{s["time"]}').replace(tzinfo=ZoneInfo(tz)).isoformat()
+    town = s["suburb"] or s["city"]
+    offer = {"@type": "Offer", "url": s["url"], "availability": "https://schema.org/InStock", "priceCurrency": "AUD", "validFrom": (s.get("onsale") or TODAY.isoformat())[:10]}
+    m = re.search(r"\d+(?:\.\d+)?", str(s.get("price") or ""))
+    if m:
+        offer["price"] = m.group(0)
+    ld = {"@context": "https://schema.org", "@type": "MusicEvent", "name": name or f'{s["artist"]} at {s["venue"]}',
+          "description": f'{s["artist"]} live at {s["venue"]}, {town}' + (f' with {", ".join(s["support"][:3])}' if s.get("support") else "") + f' on {d(s["date"]).strftime("%-d %B %Y")}. Tickets and details on Live Louder.',
+          "startDate": start, "endDate": s["date"], "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {"@type": "Place", "name": s["venue"], "address": {"@type": "PostalAddress", "addressLocality": town, "addressRegion": s.get("state", ""), "addressCountry": "AU"}},
+          "performer": [{"@type": "MusicGroup", "name": s["artist"]}] + [{"@type": "MusicGroup", "name": x} for x in (s.get("support") or [])],
+          "organizer": {"@type": "Organization", "name": s["venue"]},
+          "image": [image or "https://livelouder.com.au/icon-512.png"], "offers": offer, "url": "https://livelouder.com.au" + gig_path(s)}
+    return ld
+
 for s in shows:
     a = artists.get(slug(s["artist"])) or {}
     v = venues.get(venue_slug(s)) or {}
@@ -952,13 +975,7 @@ for s in shows:
                   f'<div class="recs four">{cards}</div>')
     support = f'<p class="gp-sup">with {e(", ".join(s["support"]))}</p>' if s["support"] else ""
     src_label = {"ticketmaster": "Ticketmaster", "submitted": "the ticket seller", "found": "the venue / ticket seller"}.get(s["src"], "the promoter")
-    ld = json.dumps({"@context": "https://schema.org", "@type": "MusicEvent", "name": f'{s["artist"]} at {s["venue"]}',
-                     "startDate": s["date"] + (f'T{s["time"]}' if s["time"] else ""), "eventStatus": "https://schema.org/EventScheduled",
-                     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                     "location": {"@type": "Place", "name": s["venue"], "address": {"@type": "PostalAddress", "addressLocality": s["suburb"] or s["city"],
-                                  "addressRegion": s.get("state", ""), "addressCountry": "AU"}},
-                     "performer": [{"@type": "MusicGroup", "name": s["artist"]}] + [{"@type": "MusicGroup", "name": x} for x in s["support"]],
-                     "offers": {"@type": "Offer", "url": s["url"]}, **({"image": [pic or photo]} if (pic or photo) else {})}, ensure_ascii=False).replace("</", "<\\/")
+    ld = json.dumps(event_ld(s, image=pic or photo), ensure_ascii=False).replace("</", "<\\/")
     body = f"""<script type="application/ld+json">{ld}</script>
 <section class="gp-hero">{hero_img}<div class="wrap gp-in"><div>
 <span class="ntag">{e(s["city"])} · {e(d(s["date"]).strftime("%-d %B %Y"))}</span><h1>{e(s["artist"])}</h1>{support}
@@ -1060,10 +1077,8 @@ for a in artists.values():
 <h2>{len(sh)} {'show' if len(sh) == 1 else 'shows'} in Australia</h2>{dates_html}{tour_map(a['cities'])}{setlist_html}{records_html}</div>
 <aside class="side">{listen}{follow}<div class="card"><h3>Before the show</h3><a class="btn" href="{vinyl}" rel="noopener">Find {e(a['name'])} on vinyl ↗</a>{cal}{src}</div>{extra_cards}</aside></div></section>"""
     desc = (f"{a['name']} {title_tour}: dates, venues and tickets for " + ", ".join(a["cities"]) + ".") if sh else f"{a['name']} Australian tour news."
-    jsonld = [{"@context": "https://schema.org", "@type": "MusicEvent", "name": f"{a['name']} live", "startDate": s["date"] + (f"T{s['time']}" if s["time"] else ""),
-               "location": {"@type": "Place", "name": s["venue"], "address": {"@type": "PostalAddress", "addressLocality": s["suburb"], "addressRegion": s["state"], "addressCountry": "AU"}},
-               "performer": {"@type": "MusicGroup", "name": a["name"]}, "url": s["url"]} for s in sh[:20]]
-    extra = f'<script type="application/ld+json">{json.dumps(jsonld)}</script>' if jsonld else ""
+    jsonld = [event_ld(s, f"{a['name']} live at {s['venue']}", a.get("photo", "")) for s in sh[:20]]
+    extra = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False).replace("</", "<\\/")}</script>' if jsonld else ""
     page(f"artists/{a['slug']}.html", f"{a['name']} {title_tour}: dates & tickets | Live Louder", desc, body, "tours.html", extra, a.get("photo", ""))
     if sh:
         (OUT / "artists" / f"{a['slug']}.ics").write_text(ics(a))
