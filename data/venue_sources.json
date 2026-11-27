@@ -4672,5 +4672,554 @@
   "checked": "2026-11-27",
   "status": "active",
   "region": "Canberra"
+ },
+ {
+  "venue": "The Grand Electric",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4613769-grand-electric",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "State Theatre",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/35559-state-theatre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "ACO Neilson",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4544473-aco-neilson",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Butchers Brew Bar",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4404697-butchers-brew-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Bootleggers (Kelly's on King upstairs)",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4447295-bootleggers",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Castle Hill RSL",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.castlehillrsl.com.au/box-office",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Western Sydney & Penrith"
+ },
+ {
+  "venue": "Kingsgrove RSL",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://kingsgroversl.com.au/whats-on/entertainment/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Liverpool Catholic Club",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://www.liverpoolcatholic.com.au/whats-on-categories/ticketed-events",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Western Sydney & Penrith"
+ },
+ {
+  "venue": "Cactus Room",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://www.cactusroom.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "The Lomond Hotel",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Bar Oussou",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://baroussou.com",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Cafe Gummo",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Shotkickers",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "The Drunken Poet",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://www.thedrunkenpoet.com.au",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "303",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beta.songkick.com/venues/3933069-bar-303",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Nighthawks",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/934581-nighthawks",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "George Lane",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://www.musicosity.com.au/venues/george-lane",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Bunjil Place",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://www.bunjilplace.com.au/node/2694",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Clocktower Centre",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://clocktowercentre.com.au/whats-on",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Cleveland Sands Hotel",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://tixel.com/au/tickets/cleveland-sands-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Pig 'N' Whistle Brunswick Street",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://visit.brisbane.qld.au/whats-on/inner-city/live-performances/oasis-unplugged-by-noasis-at-pig-n-whistle-brunswick-street-b1fa",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Season Three",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://songkick.com/venues/4656221-season-three",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Ravenswood Hotel",
+  "city": "Ravenswood",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "The Mahogany Inn and Distillery",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Crooked Spire Coffee House",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Perth HPC",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://www.songkick.com/venues/4591045-perth-hpc",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Woodbridge Hotel",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Festival Theatre (Adelaide Festival Centre)",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://www.songkick.com/venues/58175-festival-theatre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Aldinga Institute Hall",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://www.songkick.com/venues/4545750-aldinga-institute-hall",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Yonder Aldinga",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://www.songkick.com/venues/4668810-yonder-aldinga",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Three Brothers Arms",
+  "city": "Macclesfield",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "The Drive (Memorial Drive)",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Dodges Ferry Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/4561009-dodges-ferry-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "UC Refectory",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://www.songkick.com/venues/851371-uc-refectory",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Fremantle Prison",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "https://www.songkick.com/venues/3128414-fremantle-prison",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "Port Beach Brewery (Railway Hotel)",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "https://www.songkick.com/venues/4473110-port-beach-brewery",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "Clancy's Fish Pub Fremantle",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "https://www.songkick.com/venues/247243-clancys-fish-pub-fremantle",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "Queens Head Inn",
+  "city": "Perth (TAS)",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/4665634-queens-head-inn",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
+ },
+ {
+  "venue": "Silverdome",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/89203-silverdome",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
+ },
+ {
+  "venue": "Ironhorse Bar & Grill",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "https://www.ironhorsebar.com.au",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
+ },
+ {
+  "venue": "Communion Brewing Co.",
+  "city": "Burnie",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/4448858-communion-brewing-co",
+  "checked": "",
+  "status": "unchecked",
+  "region": "North West"
+ },
+ {
+  "venue": "Mackey's Royal Hotel",
+  "city": "Latrobe",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/3096854-mackeys-royal-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "North West"
+ },
+ {
+  "venue": "Little Sisters General Store",
+  "city": "Sisters Beach",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/4530344-little-sisters-general-store",
+  "checked": "",
+  "status": "unchecked",
+  "region": "North West"
+ },
+ {
+  "venue": "Dancenorth Australia",
+  "city": "Townsville",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4664861-dancenorth-australia-townsville-city-australia",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Townsville"
+ },
+ {
+  "venue": "Salt House",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/salt-house/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "The Luxx Lounge",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/the-luxx-lounge/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Mareeba Workers Club",
+  "city": "Mareeba",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Cairns Convention Centre",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/715116-cairns-convention-centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Ararat Town Hall",
+  "city": "Ararat",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/4446516-ararat-town-hall",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "Maryborough Highland Society",
+  "city": "Maryborough",
+  "state": "VIC",
+  "url": "https://musick.com.au/venue/maryborough-highland-society/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "Belmont Hotel Bendigo",
+  "city": "Bendigo",
+  "state": "VIC",
+  "url": "https://musick.com.au/venue/belmont-hotel-bendigo/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "Ulumbarra Theatre",
+  "city": "Bendigo",
+  "state": "VIC",
+  "url": "https://musick.com.au/venue/ulumbarra-theatre/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "All Seasons Resort Hotel Bendigo",
+  "city": "Bendigo",
+  "state": "VIC",
+  "url": "https://musick.com.au/venue/all-seasons-resort-hotel-bendigo-2/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "Major Tom's",
+  "city": "Kyneton",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "Brothers Leagues Club Ipswich",
+  "city": "Ipswich",
+  "state": "QLD",
+  "url": "https://brothersipswich.com.au/whats-on/entertainment/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ipswich"
+ },
+ {
+  "venue": "Burleigh Pavilion",
+  "city": "Gold Coast",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4342094-burleigh-pavilion",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gold Coast"
+ },
+ {
+  "venue": "M-Arts Precinct",
+  "city": "Gold Coast",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4564109-marts-precinct",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gold Coast"
+ },
+ {
+  "venue": "Bundanoon Hotel",
+  "city": "Bundanoon",
+  "state": "NSW",
+  "url": "https://events.humanitix.com/host/bundanoon-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Southern Highlands & Goulburn"
+ },
+ {
+  "venue": "City Memorial Bowls Club",
+  "city": "Warrnambool",
+  "state": "VIC",
+  "url": "https://www.eventbrite.com.au/e/issi-dye-the-legends-of-rock-n-roll-show-tickets-1998938086627",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Warrnambool & Port Fairy"
+ },
+ {
+  "venue": "Limestone Coast Pantry",
+  "city": "Mount Gambier",
+  "state": "SA",
+  "url": "https://allevents.in/org/limestone-coast-pantry/11787790",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mount Gambier"
+ },
+ {
+  "venue": "Harvey Road Tavern",
+  "city": "Gladstone",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/1753063-harvey-road-tavern",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Rockhampton & Yeppoon"
  }
 ]
