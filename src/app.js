@@ -175,14 +175,21 @@ document.addEventListener("click", function (ev) {
       links(loc ? (loc.city || sel.value) : sel.value);
       if (!all) return;
       if (!loc) {
-        sum.textContent = '';
+        sum.textContent = ''; if ($('nearSuggest')) $('nearSuggest').hidden = true;
         const rows = all.filter(s => s[6] === sel.value && s[0] >= today).slice(0, 8);
         list.innerHTML = rows.length ? rows.map(s => stub(s)).join('') : `<p class="note">No shows listed in ${esc(sel.value)} right now. Try another city.</p>`;
         return;
       }
+      const sug = $('nearSuggest');
       const R = +km.value, soon = all.filter(s => s[0] >= today && s.length > 16 && s[15] != null)
         .map(s => ({s, d: dist(loc.lat, loc.lon, s[15], s[16]), a: !!s[17]}));
       const near = soon.filter(x => x.d <= R).sort((a, b) => a.s[0].localeCompare(b.s[0]) || a.d - b.d);
+      if (sug) {
+        sug.hidden = near.length >= 3;
+        const tIn = sug.querySelector('input[name=town]');
+        if (tIn && !tIn.dataset.touched && loc.label !== 'you') tIn.value = loc.label;
+        if (tIn) tIn.oninput = () => { tIn.dataset.touched = '1'; };
+      }
       if (near.length >= 3) {
         sum.textContent = `${near.length} ${near.length === 1 ? 'gig' : 'gigs'} within ${R} km of ${loc.label}, soonest first.`;
         list.innerHTML = near.slice(0, innerWidth < 600 ? 6 : 12).map(x => stub(x.s, x.d, x.a)).join('');

@@ -31,12 +31,37 @@ async function pullSubmissions(constants) {
   }
 }
 
+// "Tell us your local venues" suggestions -> data/venue_suggestions.json (no emails). Kept 120 days.
+async function pullVenues(constants) {
+  try {
+    const { getStore } = await import("@netlify/blobs");
+    const opts = { name: "venue-suggestions" };
+    if (constants.SITE_ID && constants.NETLIFY_API_TOKEN) { opts.siteID = constants.SITE_ID; opts.token = constants.NETLIFY_API_TOKEN; }
+    const store = getStore(opts);
+    const { blobs } = await store.list();
+    const cutoff = new Date(Date.now() - 120 * 864e5).toISOString();
+    const out = [];
+    for (const b of blobs) {
+      const x = await store.get(b.key, { type: "json" });
+      if (!x) continue;
+      if ((x.received || "") < cutoff) { await store.delete(b.key); continue; }
+      const { email, ...rest } = x;
+      out.push(rest);
+    }
+    fs.writeFileSync("data/venue_suggestions.json", JSON.stringify(out));
+    console.log(`venue suggestions: ${out.length} pulled`);
+  } catch (e) {
+    console.log("venue suggestions: skipped (" + e.message + ")");
+  }
+}
+
 module.exports = {
   async onPreBuild({ utils, constants }) {
     for (const f of FILES) {
       if (await utils.cache.restore(f)) console.log(`keep-cache: restored ${f}`);
     }
     await pullSubmissions(constants || {});
+    await pullVenues(constants || {});
   },
   async onPostBuild({ utils }) {
     for (const f of FILES) {

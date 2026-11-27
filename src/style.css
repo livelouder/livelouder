@@ -522,7 +522,7 @@ button.btn.ghost{border:2px solid var(--ink);background:transparent;color:var(--
 .distbtn{min-height:42px;padding:0 14px;border:2px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:700 14px "Archivo",sans-serif;cursor:pointer}
 .distout{font-size:15px}
 .vphoto{margin:0}.vphoto img{display:block;width:100%;max-height:380px;object-fit:cover}.vphoto figcaption{font-size:12px;color:var(--muted);padding:6px 14px 0}
-a.gd{text-decoration:none;color:inherit}
+a.gd{text-decoration:none;color:var(--bg)}a.gd:hover{background:var(--red)}
 
 /* ---------------------------------------------------------------- Friends */
 .pbtns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -668,3 +668,14 @@ nav .installbtn{border:2px solid var(--red);background:transparent;color:#fff;bo
 .nearsum{margin:12px 0 0}
 .stub .km{display:block;font-style:normal;font-weight:700;font-size:13px;color:var(--red);margin-top:2px}
 @media(max-width:600px){.nearctl{width:100%}.locbtn{flex:1}.locform{flex-basis:100%}}
+
+/* ---------------------------------------------------------------- "Tell us your local venues" */
+.venueform{display:grid;gap:12px}.venueform h3{margin:0}.venueform p{margin:0;color:var(--muted)}
+.venueform label{display:block;font-weight:700;font-size:15px}.venueform label small{font-weight:400;color:var(--muted)}
+.venueform input:not([type=radio]),.venueform select{display:block;width:100%;min-height:44px;margin-top:5px;border:2px solid var(--ink);border-radius:8px;padding:0 12px;font:16px "Archivo",sans-serif;background:var(--card);color:var(--ink)}
+.vfrow{display:grid;grid-template-columns:2fr 1.4fr 0.8fr;gap:10px}
+.vrole{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 16px}.vrole legend{font-weight:700;font-size:15px;margin-bottom:4px}.vrole label{font-weight:400}
+.venueform .btn{justify-self:start}
+.nearsuggest{margin-top:18px}.nearsuggest .venueform{max-width:760px}
+.kmtag{display:inline-block;background:var(--red);color:#fff;border-radius:999px;padding:0 8px;font-size:12px;margin-right:6px}
+@media(max-width:600px){.vfrow{grid-template-columns:1fr}}

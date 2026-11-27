@@ -4,6 +4,8 @@
 //   follow form     -> "Artist: <artist>", "Source: website"
 // The "gig" form (Submit a gig) is different: it's saved to Netlify Blobs, and the next
 // daily build checks it and puts it in the gig guide. Gig submitters are NOT added to Kit.
+// The "venue" form ("Tell us your local venues") is saved to Blobs too; the build publishes the
+// venue names and links (never emails) so the venue gig finder adds them to its list.
 import { kit, kitReady, tagId } from "../lib/kit.mjs";
 import { getStore } from "@netlify/blobs";
 
@@ -19,6 +21,17 @@ async function saveGig(data) {
   return `gig saved: ${clean.artist} ${clean.date} ${clean.venue}`;
 }
 
+const VFIELDS = ["venue", "town", "state", "url", "role", "notes", "email"];
+async function saveVenue(data) {
+  const v = {};
+  for (const f of VFIELDS) v[f] = String(data[f] || "").trim().slice(0, f === "notes" ? 400 : 200);
+  if (!v.venue || !v.town) return "venue: missing name or town";
+  if (v.url && !/^https?:\/\//i.test(v.url)) v.url = "https://" + v.url.replace(/^\/+/, "");
+  v.received = new Date().toISOString();
+  await getStore("venue-suggestions").setJSON(`${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, v);
+  return `venue saved: ${v.venue}, ${v.town}`;
+}
+
 const done = (msg) => { console.log(msg); return new Response(msg); };
 
 export default async (req) => {
@@ -28,6 +41,9 @@ export default async (req) => {
   console.log("form:", payload?.form_name, "fields:", Object.keys(payload?.data || {}).join(","));
   const form = payload?.form_name || payload?.data?.["form-name"];
   const data = payload?.data || {};
+  if (form === "venue") {
+    try { return done(await saveVenue(data)); } catch (e) { return done("venue save error: " + e.message); }
+  }
   if (form === "gig") {
     try { return done(await saveGig(data)); } catch (e) { return done("gig save error: " + e.message); }
   }

@@ -354,7 +354,7 @@ def gig_list(items, **kw):
 
 def chips(cur=None):
     return '<nav class="chips" aria-label="Cities">' + "".join(
-        f'<a href="/gigs/{slug(c)}.html"{" aria-current=page" if c == cur else ""}>{e(c)}</a>' for c in MAIN_CITIES) + "</nav>"
+        f'<a href="/gigs/{slug(c)}.html"{" aria-current=page" if c == cur else ""}>{e(c)}</a>' for c in MAIN_CITIES) + '<a href="/gigs/regional.html">Regional</a></nav>'
 
 # Australia outline (lon, lat), simplified, for the tour maps.
 AUS = [(142.5,-10.7),(143.5,-14.0),(145.3,-15.0),(145.9,-17.0),(146.3,-18.9),(148.8,-20.3),(150.8,-22.6),(153.0,-25.3),(153.6,-28.2),
@@ -525,6 +525,21 @@ if wk_sales or upcoming_sales:
     sales_html = (f'<section class="band salesband"><div class="wrap"><div class="shead"><h2>{sales_title}</h2><a href="/on-sale.html">Every presale &amp; on-sale →</a></div>'
                   f'<p class="note" style="margin-top:0">Presales first. Tap ⏰ Remind me and it goes straight in your calendar.</p>'
                   f'<ul class="sales">{"".join(sale_row(x) for x in (wk_sales or upcoming_sales)[:6])}</ul></div></section>')
+STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"]
+def venue_form(town="", state="", title="Know a local venue we're missing?", intro="Tell us where the bands play near you. We'll add the venue and its gigs, usually within a day or two."):
+    """"Tell us your local venues" (Netlify form "venue"): goes to the venue gig finder's list."""
+    st = "".join(f'<option{" selected" if x == state else ""}>{x}</option>' for x in STATES)
+    return (f'<form class="card venueform" name="venue" method="POST" action="/venue-thanks.html" data-netlify="true" netlify-honeypot="bot-field">'
+            f'<h3>{e(title)}</h3><p>{e(intro)}</p><input type="hidden" name="form-name" value="venue"><p hidden><label>Leave this empty <input name="bot-field"></label></p>'
+            f'<div class="vfrow"><label>Venue name<input name="venue" required maxlength="120" placeholder="e.g. The Hotel Blackheath"></label>'
+            f'<label>Town or suburb<input name="town" required maxlength="80" value="{e(town)}" placeholder="e.g. Blackheath"></label>'
+            f'<label>State<select name="state">{st}</select></label></div>'
+            f'<label>Where they list their gigs <small>(optional: website, Oztix, Humanitix, Moshtix or Facebook page)</small><input name="url" type="url" maxlength="200" placeholder="https://"></label>'
+            f'<fieldset class="vrole"><legend>You are…</legend><label><input type="radio" name="role" value="local" checked> A local who goes there</label>'
+            f'<label><input type="radio" name="role" value="band"> In a band that plays there</label><label><input type="radio" name="role" value="venue"> From the venue</label></fieldset>'
+            f'<label>Your email <small>(optional, only if you\'d like to hear when it\'s added)</small><input name="email" type="email" maxlength="120"></label>'
+            f'<button class="btn">Add this venue</button></form>')
+
 city_opts_near = "".join(f'<option value="{e(c)}" data-slug="{slug(c)}" data-lat="{CITY_CENTRE.get(c, ("", ""))[0]}" data-lon="{CITY_CENTRE.get(c, ("", ""))[1]}">{e(c)}</option>' for c in MAIN_CITIES)
 near_c = MAIN_CITIES[0] if MAIN_CITIES else "Sydney"
 near_fallback = "".join(stub(s) for s in [s for s in shows if s["city"] == near_c][:6])
@@ -537,7 +552,7 @@ near_html = (f'<section class="band nearband" id="near"><div class="wrap"><div c
              f'<label class="citypick"><span>or a city</span><select id="nearCity" aria-label="Your city">{city_opts_near}</select></label>'
              f'<p class="note" id="locMsg">Your location stays on this device. We only use it to sort gigs by distance.</p></div>'
              f'<p class="note nearsum" id="nearSum"></p>'
-             f'<div class="nearlist" id="nearList">{near_fallback}</div>'
+             f'<div class="nearlist" id="nearList">{near_fallback}</div><div class="nearsuggest" id="nearSuggest" hidden>{venue_form()}</div>'
              f'<p class="nearlinks"><a class="btn" id="nearWk" href="/gigs/{slug(near_c)}-this-weekend.html">This weekend in&nbsp;<span class="nc">{e(near_c)}</span></a> '
              f'<a class="btn ghost" id="nearAll" href="/gigs/{slug(near_c)}.html">All&nbsp;<span class="nc">{e(near_c)}</span>&nbsp;gigs</a></p></div></section>')
 genre_count = {g: sum(1 for a in artists.values() if a["gb"] == g and a["shows"]) for g in GENRE_LIST}
@@ -713,6 +728,68 @@ for c in MAIN_CITIES:
 <section class="band"><div class="wrap"><p><a class="btn" href="/gigs/{slug(c)}-this-weekend.html">What\'s on in {e(c)} this weekend →</a></p>{chips(c)}{vchips}<div style="height:10px"></div>{gig_list(cs[:400], show_city=False)}{more_link}<p class="note">Playing in {e(c)}? <a href="/submit-a-gig.html">Add your gig →</a></p></div></section>"""
     page(f"gigs/{slug(c)}.html", f"Gigs in {c}: concerts and live music | Live Louder",
          f"Upcoming gigs and concerts in {c}, updated daily: dates, venues and tickets.", body, "gigs/index.html")
+
+# ---------------------------------------------------------------- regional towns: a page for every town with gigs
+def _km(a, b):
+    import math
+    la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+    h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
+    return 12742 * math.asin(math.sqrt(h))
+towns = {}
+for s_ in shows:
+    if s_["city"] in MAIN_CITIES: continue
+    t = towns.setdefault(s_["city"], {"name": s_["city"], "state": s_.get("state", ""), "shows": [], "pts": []})
+    t["shows"].append(s_)
+    g = gig_geo(s_)
+    if len(g) >= 2: t["pts"].append(g[:2])
+    if not t["state"] and s_.get("state"): t["state"] = s_["state"]
+for tn, t in towns.items():
+    t["slug"] = slug(tn) if slug(tn) not in {slug(c) for c in MAIN_CITIES} else slug(tn) + "-" + slug(t["state"] or "au")
+    c = CITY_CENTRE.get(tn) or ((sum(p[0] for p in t["pts"]) / len(t["pts"]), sum(p[1] for p in t["pts"]) / len(t["pts"])) if t["pts"] else None)
+    t["centre"] = c
+    near = []
+    if c:
+        for s_ in shows:
+            if s_["city"] == tn: continue
+            g = gig_geo(s_)
+            if len(g) >= 2:
+                k = _km(c, g)
+                if k <= 80: near.append((s_, k))
+    near.sort(key=lambda x: (x[0]["date"], x[1]))
+    near_list = ""
+    if near:
+        rows = "".join(gig_row(x).replace('<span class="gw">', f'<span class="gw"><b class="kmtag">{round(k / 5) * 5 if k >= 10 else round(k)} km</b> ', 1) for x, k in near[:40])
+        near_list = f'<h2>Within an hour or so of {e(tn)}</h2><p class="note">Gigs within about 80 km, soonest first.</p><ul class="gigs">{rows}</ul>'
+    st = t["state"]
+    body = f"""<section class="page-title"><div class="wrap"><h1>Gigs in {e(tn)}</h1><p>{len(t["shows"])} upcoming {"show" if len(t["shows"]) == 1 else "shows"} in {e(tn)}{", " + e(st) if st else ""}, plus gigs nearby. Updated daily.</p></div></section>
+<section class="band"><div class="wrap split"><div>{gig_list(t["shows"], show_city=False)}{near_list}</div>
+<aside class="side">{venue_form(tn, st, f"Missing a venue in {tn}?", f"Tell us where the bands play in and around {tn} and we'll add their gigs.")}
+<div class="card"><h3>Playing in {e(tn)}?</h3><p>Add your show to the guide. It's free.</p><a class="btn" href="/submit-a-gig.html">Submit a gig</a></div></aside></div></section>"""
+    page(f"gigs/{t['slug']}.html", f"Gigs in {tn}{', ' + st if st else ''}: live music and concerts | Live Louder",
+         f"Upcoming gigs and live music in {tn}{', ' + st if st else ''} and nearby, updated daily: dates, venues and tickets.", body, "gigs/index.html")
+# Regional index: every town with gigs, by state.
+by_state = {}
+for t in towns.values():
+    by_state.setdefault(t["state"] or "Other", []).append(t)
+reg_rows = ""
+for st in STATES + ["Other"]:
+    ts = sorted(by_state.get(st, []), key=lambda t: -len(t["shows"]))
+    if ts:
+        reg_rows += f'<h2>{e(st)}</h2><nav class="chips">' + "".join(f'<a href="/gigs/{t["slug"]}.html">{e(t["name"])} <small>{len(t["shows"])}</small></a>' for t in ts) + "</nav>"
+reg_body = f"""<section class="page-title"><div class="wrap"><h1>Regional gigs</h1><p>Live music outside the capital cities, town by town. More towns are added every day.</p></div></section>
+<section class="band"><div class="wrap split"><div>{reg_rows or '<p class="note">Regional towns are being added now. Check back soon.</p>'}
+<p class="note" style="margin-top:28px">Looking for a capital city? {" · ".join(f'<a href="/gigs/{slug(c)}.html">{e(c)}</a>' for c in MAIN_CITIES)}</p></div>
+<aside class="side">{venue_form(title="Is your town missing?", intro="Tell us the venues that put on bands near you, and we'll add your town to the guide.")}</aside></div></section>"""
+page("gigs/regional.html", "Regional gigs: live music across regional Australia | Live Louder",
+     "Gigs and live music in regional towns across Australia, town by town, updated daily.", reg_body, "gigs/index.html")
+page("venue-thanks.html", "Thanks for the venue | Live Louder", "Thanks for telling us about a venue.",
+     '<section class="page-title"><div class="wrap"><h1>Thanks, legend</h1><p>We\'ll check out the venue and add its gigs, usually within a day or two. <a style="color:#fff" href="/gigs/regional.html">See regional gigs</a> or <a style="color:#fff" href="/">head home</a>.</p></div></section>')
+# Venue suggestions for the venue gig finder (names and links only; never emails).
+_vs = json.loads((ROOT / "data/venue_suggestions.json").read_text()) if (ROOT / "data/venue_suggestions.json").exists() else []
+_known = {re.sub(r"[^a-z0-9]", "", x.get("venue", "").lower()) for x in json.loads((ROOT / "data/venue_sources.json").read_text())}
+(OUT / "data").mkdir(exist_ok=True)
+(OUT / "data/venue-suggestions.json").write_text(json.dumps([{k: x.get(k, "") for k in ("venue", "town", "state", "url", "role", "notes", "received")}
+    for x in _vs if re.sub(r"[^a-z0-9]", "", x.get("venue", "").lower()) not in _known], ensure_ascii=False))
 
 # ---------------------------------------------------------------- this weekend, per city
 _wd = TODAY.date().weekday()  # Mon=0
@@ -1109,7 +1186,8 @@ sg = f"""<section class="page-title"><div class="wrap"><h1>Submit a gig</h1><p>P
 <label>Anything else? <small>(optional)</small> <textarea name="notes" rows="3" maxlength="600"></textarea></label></fieldset>
 <button class="btn">Add my gig</button></form>
 <aside class="side"><div class="card"><h3>How it works</h3><ol class="steps"><li>Fill in the show details and a ticket link.</li><li>It gets checked overnight.</li><li>It goes up in the gig guide, the city page and the artist page, usually by 7am the next morning.</li></ol></div>
-<div class="card"><h3>Got a whole tour?</h3><p>Send each date separately. It only takes a minute each, and every show gets its own spot in the right city.</p></div></aside></div></section>"""
+<div class="card"><h3>Got a whole tour?</h3><p>Send each date separately. It only takes a minute each, and every show gets its own spot in the right city.</p></div>
+{venue_form(title="Run a venue? Add it once", intro="Tell us your venue and where you list your gigs (website, Oztix, Humanitix, Moshtix). We'll check it regularly and add every show automatically, so you don't have to send each one.")}</aside></div></section>"""
 page("submit-a-gig.html", "Submit a gig: add your show to the gig guide | Live Louder",
      "Add your gig to the Live Louder gig guide for free. Bands, venues and promoters across Australia.", sg, "gigs/index.html")
 page("gig-thanks.html", "Thanks for your gig | Live Louder", "Thanks for sending in your gig.",
@@ -1218,7 +1296,8 @@ urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html",
     + [gig_path(x)[1:] for x in shows] \
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
-    + [f"venues/{k}.html" for k in venues] + [f"stories/{s['slug']}.html" for s in stories]
+    + [f"venues/{k}.html" for k in venues] + [f"stories/{s['slug']}.html" for s in stories] \
+    + ["gigs/regional.html"] + [f"gigs/{t['slug']}.html" for t in towns.values()]
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                                  + "".join(f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY_S}</lastmod></url>" for u in urls) + "</urlset>")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
