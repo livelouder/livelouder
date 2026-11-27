@@ -3381,9 +3381,9 @@
   "venue": "Magnums Hotel",
   "city": "Airlie Beach",
   "state": "QLD",
-  "url": "https://moshtix.com.au/v2/venues/magnums-hotel-airlie-beach/1239",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/magnums-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mackay & Airlie Beach"
  },
  {
@@ -3400,8 +3400,8 @@
   "city": "Ipswich",
   "state": "QLD",
   "url": "https://songkick.com/venues/3950194-banshees-bar-and-artspace",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Ipswich"
  },
  {
@@ -3409,8 +3409,8 @@
   "city": "Bundaberg",
   "state": "QLD",
   "url": "https://www.artsbundaberg.com.au/theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bundaberg & Hervey Bay"
  },
  {
@@ -3418,8 +3418,8 @@
   "city": "Maryborough",
   "state": "QLD",
   "url": "https://ourfrasercoast.com.au/brolga-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bundaberg & Hervey Bay"
  },
  {
@@ -3427,8 +3427,8 @@
   "city": "Goolwa",
   "state": "SA",
   "url": "https://www.songkick.com/venues/4403870-murray-delta-juke-joint",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fleurieu"
  },
  {
@@ -3445,8 +3445,8 @@
   "city": "Whyalla",
   "state": "SA",
   "url": "https://middleback.countryarts.org.au",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Port Lincoln & Whyalla"
  },
  {
@@ -3517,8 +3517,8 @@
   "city": "Albany",
   "state": "WA",
   "url": "https://www.artsculturetrust.wa.gov.au/venues/albany-entertainment-centre/whats-on/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Great Southern"
  },
  {
@@ -3553,8 +3553,8 @@
   "city": "Dunsborough",
   "state": "WA",
   "url": "https://tixel.com/au/tickets/dunsborough-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "South West"
  },
  {
@@ -3562,8 +3562,8 @@
   "city": "Geraldton",
   "state": "WA",
   "url": "https://qpt.cgg.wa.gov.au/events/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geraldton"
  },
  {
@@ -3571,35 +3571,35 @@
   "city": "Broome",
   "state": "WA",
   "url": "https://events.humanitix.com/host/roebuck-bay-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Broome"
  },
  {
   "venue": "Matso's Broome Brewery",
   "city": "Broome",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitbroome.com.au/events",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Broome"
  },
  {
   "venue": "Divers Tavern",
   "city": "Broome",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitbroome.com.au/events",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Broome"
  },
  {
   "venue": "Mangrove Hotel",
   "city": "Broome",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitbroome.com.au/events/friday-night-music-at-the-mangrove-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Broome"
  },
  {
@@ -3616,8 +3616,8 @@
   "city": "Devonport",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4230584-pub-rock-diner",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -3625,8 +3625,8 @@
   "city": "Forth",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4393482-forth-pub",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -3634,17 +3634,17 @@
   "city": "Launceston",
   "state": "TAS",
   "url": "https://tixel.com/au/tickets/country-club-tasmania",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Launceston & Tamar"
  },
  {
   "venue": "Burnie Arts Centre",
   "city": "Burnie",
   "state": "TAS",
-  "url": "https://www.burniearts.net/Whats-On/Performances/2026-Live",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.burniearts.net/Whats-On/Performances",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -3670,8 +3670,8 @@
   "city": "Newcastle",
   "state": "NSW",
   "url": "https://songkick.com/venues/43237-civic-theatre-newcastle",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
@@ -3679,8 +3679,8 @@
   "city": "Newcastle",
   "state": "NSW",
   "url": "https://songkick.com/venues/2845778-stag-and-hunter-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
