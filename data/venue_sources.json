@@ -7732,5 +7732,104 @@
   "checked": "2026-11-27",
   "status": "active",
   "region": "Hobart"
+ },
+ {
+  "venue": "Two Doctors Whiskey Tavern",
+  "city": "Leura",
+  "state": "NSW",
+  "url": "https://www.visitnsw.com/destinations/blue-mountains/katoomba-area/leura/events/live-music-fridays-two-doctors-whiskey-tavern",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "Hotel Etico",
+  "city": "Mount Victoria",
+  "state": "NSW",
+  "url": "https://hoteletico.com.au/events",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "Grandview Hotel",
+  "city": "Wentworth Falls",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "Royal Hotel Springwood",
+  "city": "Springwood",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "Club Lithgow",
+  "city": "Lithgow",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "The Goulburn Club",
+  "city": "Goulburn",
+  "state": "NSW",
+  "url": "https://www.goulburnclub.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Southern Highlands & Goulburn"
+ },
+ {
+  "venue": "Fitzy's Toowoomba",
+  "city": "Toowoomba",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Toowoomba"
+ },
+ {
+  "venue": "North Toowoomba Bowls Club",
+  "city": "Toowoomba",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Toowoomba"
+ },
+ {
+  "venue": "Hop Temple",
+  "city": "Ballarat",
+  "state": "VIC",
+  "url": "https://hoptemple.com.au/events/live-music-at-hop/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "Freight Bar & Rooftop",
+  "city": "Ballarat",
+  "state": "VIC",
+  "url": "https://freightbar.com.au/events/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "The Eastern",
+  "city": "Ballarat",
+  "state": "VIC",
+  "url": "https://tixel.com/au/tickets/the-eastern",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
  }
 ]

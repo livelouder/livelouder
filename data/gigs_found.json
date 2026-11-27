@@ -1,635 +1,5 @@
 [
  {
-  "artist": "The Four Scoops",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Bar Open",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/free-entry-the-four-scoops-front-bar-at-bar-open-fitzroy-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Unscored",
-  "support": "Magpie, Wizard Tricks",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Bar Open",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/unscored-single-launch-w-magpie-wizard-tricks-at-bar-open-fitzroy-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Theory Of Jevvilution",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Barwon Club Hotel",
-  "city": "Geelong",
-  "state": "VIC",
-  "suburb": "South Geelong",
-  "url": "https://barwonclub.oztix.com.au/Default.aspx?Event=248630",
-  "genre": "",
-  "source": "https://barwonclub.oztix.com.au/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Black Seeds",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Beach Hotel",
-  "city": "Byron Bay",
-  "state": "NSW",
-  "suburb": "Byron Bay",
-  "url": "https://www.jambase.com/show/the-black-seeds-beach-hotel-20261127",
-  "genre": "",
-  "source": "https://www.jambase.com/venue/beach-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Bagful Of Beez",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:30",
-  "venue": "Bergy Bandroom",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Brunswick",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/bagful-of-beez-album-launch-of-i",
-  "genre": "",
-  "source": "https://tixel.com/au/tickets/bergy-bandroom",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Vader",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Crowbar Sydney",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Leichhardt",
-  "url": "https://tixel.com/au/tickets/crowbar-sydney",
-  "genre": "Metal",
-  "source": "https://tixel.com/au/tickets/crowbar-sydney",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Saint Etienne",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Enmore Theatre",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Newtown",
-  "url": "https://www.enmoretheatre.com.au/event/saint-etienne/",
-  "genre": "Pop",
-  "source": "https://www.enmoretheatre.com.au/location/enmore-theatre",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Hindley Street Country Club",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Evan Theatre, Penrith Panthers",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Penrith",
-  "url": "https://songkick.com/concerts/43308265-hindley-street-country-club-at-evan-theatre-panthers",
-  "genre": "",
-  "source": "https://songkick.com/venues/4473590-evan-theatre-panthers/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "DMA's",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Fortitude Music Hall",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/dma-s",
-  "genre": "Indie",
-  "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Tijuana Cartel",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Freo.Social",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Fremantle",
-  "url": "https://musick.com.au/gig/tijuana-cartel-cactus-blossom-tour-2026-11-27/",
-  "genre": "Electronic",
-  "source": "https://musick.com.au/venue/freo-social",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Blind Roulette",
-  "support": "Austin Jenko, Stickerbomb!, Chained Conviction",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Greaser Bar",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Fortitude Valley",
-  "url": "https://www.theprinceconsort.com.au/whats-on/november-gig-guide--greaser.html",
-  "genre": "Rock",
-  "source": "https://www.theprinceconsort.com.au/whats-on/november-gig-guide--greaser.html",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Hoodoo Gurus",
-  "support": "Ratcat, The Stems",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Hindley Street Music Hall",
-  "city": "Adelaide",
-  "state": "SA",
-  "suburb": "Adelaide",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/hoodoo-gurus-hindley-street-musi",
-  "genre": "Rock",
-  "source": "https://tixel.com/au/tickets/hq-complex",
-  "added": "2026-11-27"
- },
- {
-  "artist": "King Parrot",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "La La La's",
-  "city": "Wollongong",
-  "state": "NSW",
-  "suburb": "Wollongong",
-  "url": "https://app.songkick.com/concerts/43353579-king-parrot-at-la-la-las",
-  "genre": "Metal",
-  "source": "https://app.songkick.com/venues/4358706-la-la-las",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Seims",
-  "support": "Mad Vantage, Precious Mess",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "Last Chance Rock & Roll Bar",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "North Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/seims-sorry-perth-its-not-you-it",
-  "genre": "Rock",
-  "source": "https://tixel.com/au/tickets/the-last-chance-rock-roll-bar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "MONSTR - The Best of MTV Unplugged",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Lefty's Music Hall",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Petrie Terrace",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/monstr-the-best-of-mtv-unplugged",
-  "genre": "",
-  "source": "https://tixel.com/au/tickets/lefty-s-old-time-music-hall",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Honey Dijon",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Manning Bar",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Camperdown",
-  "url": "https://songkick.com/concerts/43413125-honey-dijon-at-manning-bar",
-  "genre": "Electronic",
-  "source": "https://songkick.com/venues/34998-manning-bar/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Sisters of Mercy",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Metro Theatre",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Sydney",
-  "url": "https://www.metrotheatre.com.au/event/sisters-of-mercy/",
-  "genre": "Rock",
-  "source": "https://www.metrotheatre.com.au/location/metro-theatre/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Zayden Kennedy",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Miami Marketta",
-  "city": "Gold Coast",
-  "state": "QLD",
-  "suburb": "Miami",
-  "url": "https://www.miamimarketta.com/ticketed-events/zayden-kennedy-loop",
-  "genre": "",
-  "source": "https://www.miamimarketta.com/ticketed-events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Dreams Burn Down",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Milk Bar Perth",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Inglewood",
-  "url": "https://musick.com.au/gig/dreams-burn-down-at-milk-bar-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/milk-bar-perth/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Rua Tava",
-  "support": "Shangarajive",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Mojos Bar",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "North Fremantle",
-  "url": "https://musick.com.au/gig/rua-tava-with-shangarajive-afro-soul-experience-2026-11-27/",
-  "genre": "Soul",
-  "source": "https://musick.com.au/venue/mojos-bar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Kaite Chester Quartet",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "13:00",
-  "venue": "Mona",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Berriedale",
-  "url": "https://mona.net.au/stuff-to-do/music-at-mona",
-  "genre": "Jazz",
-  "source": "https://mona.net.au/stuff-to-do/music-at-mona",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Kerri Chandler",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Northcote Theatre",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43212909-kerri-chandler-at-northcote-theatre",
-  "genre": "Electronic",
-  "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Björn Again",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Odeon Theatre Hobart",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://inthehanginggarden.com.au/events/odeon/bjoern-again-abba-forever-tour/189703",
-  "genre": "Pop",
-  "source": "https://inthehanginggarden.com.au/venues/odeon",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Sly Withers",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Oxford Art Factory",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43342606-sly-withers-at-oxford-art-factory",
-  "genre": "Punk",
-  "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Liars",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Phoenix Central Park",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Chippendale",
-  "url": "https://phoenixcentralpark.com.au/season-xxii/liars",
-  "genre": "Indie",
-  "source": "https://phoenixcentralpark.com.au/season-xxii",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Belair Lip Bombs",
-  "support": "Zach Stephenson, Public Figures",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Princess Theatre Brisbane",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Woolloongabba",
-  "url": "https://theprincesstheatre.com.au/events/the-belair-lip-bombs",
-  "genre": "Indie",
-  "source": "https://theprincesstheatre.com.au/events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Shuggah Daddies",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Rosemount Hotel",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "North Perth",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/shuggah-daddies-australias-meshu",
-  "genre": "Metal",
-  "source": "https://musick.com.au/venue/the-rosemount-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Diger Rokwell",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "17:00",
-  "venue": "Rosemount Hotel",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "North Perth",
-  "url": "https://musick.com.au/gig/friday-happy-hour-ft-diger-rokwell-at-the-rosemount-hotel-2026-11-27/",
-  "genre": "Electronic",
-  "source": "https://musick.com.au/venue/the-rosemount-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Caroline Rose",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Smith St Hotel",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Collingwood",
-  "url": "https://tixel.com/au/tickets/smith-st-hotel",
-  "genre": "Indie",
-  "source": "https://tixel.com/au/tickets/smith-st-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Sydney Symphony Orchestra",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Sydney Coliseum Theatre",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Rooty Hill",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/sydney-symphony-orchestra-colise",
-  "genre": "",
-  "source": "https://tixel.com/au/tickets/sydney-coliseum-theatre",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Thirsty Merc",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "The Baso",
-  "city": "Canberra",
-  "state": "ACT",
-  "suburb": "Belconnen",
-  "url": "https://thebaso.oztix.com.au/Default.aspx?Event=245617",
-  "genre": "Rock",
-  "source": "https://thebaso.oztix.com.au/outlet/event/842b5bec-ae50-4da9-a6f3-897726966086",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Frenzee",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Chippo Hotel",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Chippendale",
-  "url": "https://tickets.oztix.com.au/outlet/event/9aaba9e9-8759-4ea9-8848-e045f7fd116c",
-  "genre": "",
-  "source": "https://linktr.ee/TheChippoHotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "#1 Dads",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "The Grace Emily Hotel",
-  "city": "Adelaide",
-  "state": "SA",
-  "suburb": "Adelaide",
-  "url": "https://musick.com.au/gig/1-dads-at-grace-emily-hotel-2026-11-27/",
-  "genre": "Indie",
-  "source": "https://musick.com.au/venue/grace-emily-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Reytons",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "The Magnet House",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Perth",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/the-reytons-magnet-house-night-c",
-  "genre": "Indie",
-  "source": "https://tixel.com/au/tickets/magnet-house",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Switch Disco",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "The Magnet House",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Perth",
-  "url": "https://tixel.com/au/tickets/magnet-house",
-  "genre": "Electronic",
-  "source": "https://tixel.com/au/tickets/magnet-house",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Piti Fernández",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "The Night Cat",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/piti-fernandez-australia-tour-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Lucy's House",
-  "support": "The Mundaynes, Tellerwood",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "The Old Bar",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Fitzroy",
-  "url": "https://theoldbar.oztix.com.au/outlet/event/1bd11310-20f7-4d61-8f33-351f141d6387",
-  "genre": "",
-  "source": "https://www.theoldbar.com.au/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Bath",
-  "support": "Taz Flower, Lily Hallawell",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "The Retreat Hotel",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Brunswick",
-  "url": "https://ma.to/event/bath-the-retreat-hotel-2026-11-27",
-  "genre": "",
-  "source": "https://ma.to/venue/retreat_hotel_brunswick",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Chats",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "The Tote",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Collingwood",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/the-chats-the-tote-melbourne",
-  "genre": "Punk",
-  "source": "https://tixel.com/au/tickets/the-tote",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Mico",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Triffid",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43223318-mico-at-triffid",
-  "genre": "",
-  "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Echt!",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Vanguard",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Newtown",
-  "url": "https://www.songkick.com/concerts/43416260-echt-at-vanguard",
-  "genre": "",
-  "source": "https://www.songkick.com/venues/29965-vanguard/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Resignators",
-  "support": "Topnovil",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Workers Club",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Fitzroy",
-  "url": "https://theworkersclub.oztix.com.au/Default.aspx?Event=248103",
-  "genre": "",
-  "source": "https://theworkersclub.oztix.com.au/outlet/event/447b89bb-4bbc-4241-afb3-e01fb0a10de9",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Forever Neil Diamond",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:30",
-  "venue": "Toowoomba Empire Theatre",
-  "city": "Toowoomba",
-  "state": "QLD",
-  "suburb": "Toowoomba",
-  "url": "https://tickets.empiretheatre.com.au/event/forever-neil-diamond-e6y9bo?useEmbed=true",
-  "genre": "",
-  "source": "https://empiretheatre.com.au/whats-on",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Sabercat",
-  "support": "Knifepoint, Glory Days, Perpanic",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Vinnies Dive Bar",
-  "city": "Gold Coast",
-  "state": "QLD",
-  "suburb": "Southport",
-  "url": "https://vinniesdive.oztix.com.au/Default.aspx?Event=253815",
-  "genre": "Punk",
-  "source": "https://vinniesdive.oztix.com.au/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Middle Kids",
-  "support": "Jade Yee-Smith, The Pulse",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Waywards",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Newtown",
-  "url": "https://www.moshtix.com.au/v2/event/good-music-fridays/202738",
-  "genre": "Indie",
-  "source": "https://sydneymusic.net/gig-guide/venues/waywards-ballroom",
-  "added": "2026-11-27"
- },
- {
   "artist": "Dark Side of the Dreams",
   "support": "",
   "date": "2026-11-28",
@@ -18592,20 +17962,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Ryan Harris",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Brunswick Picture House",
-  "city": "Brunswick Heads",
-  "state": "NSW",
-  "suburb": "Brunswick Heads",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/ryan-harris-brunswick-picture-ho",
-  "genre": "",
-  "source": "https://tixel.com/au/tickets/brunswick-picture-house",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Doors Alive (UK)",
   "support": "",
   "date": "2026-11-28",
@@ -18634,20 +17990,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Nathan Cavaleri",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Manning Entertainment Centre",
-  "city": "Taree",
-  "state": "NSW",
-  "suburb": "Taree",
-  "url": "https://songkick.com/concerts/43212815-nathan-cavaleri-at-manning-entertainment-centre",
-  "genre": "Blues",
-  "source": "https://songkick.com/venues/118678-manning-entertainment-centre",
-  "added": "2026-11-27"
- },
- {
   "artist": "Sara Berki",
   "support": "",
   "date": "2027-01-22",
@@ -18673,20 +18015,6 @@
   "url": "https://tixel.com/au/tickets/romanos-hotel",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/romanos-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Ross Wilson",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Beer DeLuxe Albury",
-  "city": "Albury",
-  "state": "NSW",
-  "suburb": "Albury",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/ross-wilson-beer-deluxe-albury",
-  "genre": "Rock",
-  "source": "https://tixel.com/au/tickets/beer-deluxe",
   "added": "2026-11-27"
  },
  {
@@ -19292,20 +18620,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Jack Biilmann & Buddy Dingo",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Tanswell's Commercial Hotel",
-  "city": "Beechworth",
-  "state": "VIC",
-  "suburb": "Beechworth",
-  "url": "https://musick.com.au/gig/jack-biilmann-buddy-dingo-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/tanswells-hotel/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Bad Knees",
   "support": "",
   "date": "2026-11-28",
@@ -19642,20 +18956,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Belle Chen",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Brisbane Powerhouse",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "New Farm",
-  "url": "https://www.songkick.com/concerts/43304068-belle-chen-at-brisbane-powerhouse",
-  "genre": "",
-  "source": "https://www.songkick.com/venues/91020-brisbane-powerhouse",
-  "added": "2026-11-27"
- },
- {
   "artist": "im grand mam",
   "support": "",
   "date": "2026-12-08",
@@ -19723,20 +19023,6 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/07/jme-at-felons-barrel-hall",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/felons-barrel-hall",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Regurgitator",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Logan Entertainment Centre",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Logan Central",
-  "url": "https://www.loganarts.com.au/event/regurgitator/",
-  "genre": "Rock",
-  "source": "https://loganarts.com.au/venue/logan-entertainment-centre",
   "added": "2026-11-27"
  },
  {
@@ -19866,20 +19152,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Ian Moss + Troy Cassar-Daley",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:30",
-  "venue": "Theatre Royal",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://www.theatreroyal.com.au/shows/ian-moss-troy-cassar-daley-together-alone",
-  "genre": "Rock",
-  "source": "https://www.theatreroyal.com.au/show-categories/music",
-  "added": "2026-11-27"
- },
- {
   "artist": "RocKwiz Rocks Christmas",
   "support": "",
   "date": "2026-12-10",
@@ -19978,20 +19250,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Sanfona",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Wesley Anne",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Northcote",
-  "url": "https://musick.com.au/gig/sanfona-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/wesley-anne/",
-  "added": "2026-11-27"
- },
- {
   "artist": "LCO Trio",
   "support": "",
   "date": "2026-11-28",
@@ -20048,20 +19306,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Nat Pav",
-  "support": "Hannah Kate",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "The Gem",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Collingwood",
-  "url": "https://musick.com.au/gig/nat-pav-hannah-kate-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/the-gem/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Gavin!",
   "support": "",
   "date": "2026-11-28",
@@ -20101,34 +19345,6 @@
   "url": "https://musick.com.au/gig/nick-carver-jungle-jim-smith-joshua-seymour-uncle-quentin-arvo-2026-11-29/",
   "genre": "",
   "source": "https://musick.com.au/venue/the-gem/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "SADE: The Live Experience",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Camelot Lounge",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Marrickville",
-  "url": "https://www.stickytickets.com.au/u2fb1k",
-  "genre": "Soul",
-  "source": "https://www.stickytickets.com.au/camelot/events?page=1",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Blue Apples: Music of The Beatles",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Camelot Lounge",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Marrickville",
-  "url": "https://www.stickytickets.com.au/c8rssj",
-  "genre": "Rock",
-  "source": "https://www.stickytickets.com.au/camelot/events?page=1",
   "added": "2026-11-27"
  },
  {
@@ -21291,20 +20507,6 @@
   "url": "https://www.songkick.com/concerts/43474982-felipe-baldomir-at-kings-beach-tavern",
   "genre": "",
   "source": "https://www.songkick.com/venues/961461-kings-beach-tavern/calendar",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Sweet",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Events Centre Caloundra",
-  "city": "Sunshine Coast",
-  "state": "QLD",
-  "suburb": "Caloundra",
-  "url": "https://theeventscentre.com.au/event/the-sweet-uk-the-final-blitz-tour/",
-  "genre": "Rock",
-  "source": "https://theeventscentre.com.au/whats-on/",
   "added": "2026-11-27"
  },
  {
@@ -23408,20 +22610,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "The Black Seeds",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Beach Road Hotel",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Bondi Beach",
-  "url": "https://www.songkick.com/concerts/43351329-black-seeds-at-beach-road-hotel",
-  "genre": "Soul",
-  "source": "https://www.songkick.com/venues/178678-beach-road-hotel",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Rubens",
   "support": "",
   "date": "2027-01-26",
@@ -24374,20 +23562,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Wrench",
-  "support": "Crossed",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Medusa Bar",
-  "city": "Geelong",
-  "state": "VIC",
-  "suburb": "Geelong",
-  "url": "https://www.songkick.com/concerts/43439366-wrench-at-medusa-bar",
-  "genre": "",
-  "source": "https://www.songkick.com/metro-areas/26784-australia-geelong",
-  "added": "2026-11-27"
- },
- {
   "artist": "Squamata",
   "support": "queen hyena, Morir Muerto, Shipyard",
   "date": "2026-12-11",
@@ -24724,48 +23898,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Mick & Mon",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "17:30",
-  "venue": "Matso's Broome Brewery",
-  "city": "Broome",
-  "state": "WA",
-  "suburb": "Broome",
-  "url": "https://www.visitbroome.com.au/events/live-music-at-matsos-broome",
-  "genre": "",
-  "source": "https://www.visitbroome.com.au/events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Hundred Helmets",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "15:00",
-  "venue": "Divers Tavern",
-  "city": "Broome",
-  "state": "WA",
-  "suburb": "Cable Beach",
-  "url": "https://www.visitbroome.com.au/events/hundred-helmets-divers-tavern-from-3pm",
-  "genre": "",
-  "source": "https://www.visitbroome.com.au/events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "DJ Jack Charlie",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Divers Tavern",
-  "city": "Broome",
-  "state": "WA",
-  "suburb": "Cable Beach",
-  "url": "https://www.visitbroome.com.au/events/dj-jack-charlie-at-divers-tavern",
-  "genre": "Electronic",
-  "source": "https://www.visitbroome.com.au/events",
-  "added": "2026-11-27"
- },
- {
   "artist": "3rd Wheel",
   "support": "",
   "date": "2026-11-28",
@@ -24775,20 +23907,6 @@
   "state": "WA",
   "suburb": "Cable Beach",
   "url": "https://www.visitbroome.com.au/events/dj-jack-charlie-at-divers-tavern-2",
-  "genre": "",
-  "source": "https://www.visitbroome.com.au/events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Matteo Scarano",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "17:00",
-  "venue": "Mangrove Hotel",
-  "city": "Broome",
-  "state": "WA",
-  "suburb": "Broome",
-  "url": "https://www.visitbroome.com.au/events/friday-night-music-at-the-mangrove-hotel",
   "genre": "",
   "source": "https://www.visitbroome.com.au/events",
   "added": "2026-11-27"
@@ -24892,20 +24010,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "The Animals",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Country Club Tasmania",
-  "city": "Launceston",
-  "state": "TAS",
-  "suburb": "Prospect Vale",
-  "url": "https://tixel.com/au/tickets/country-club-tasmania",
-  "genre": "Rock",
-  "source": "https://tixel.com/au/tickets/country-club-tasmania",
-  "added": "2026-11-27"
- },
- {
   "artist": "Creedence Clearwater Collective",
   "support": "",
   "date": "2026-12-06",
@@ -24973,20 +24077,6 @@
   "url": "https://www.burniearts.net/Whats-On/2027/Seventh-Wonder-performs-Fleetwood-Mac",
   "genre": "Rock",
   "source": "https://www.burniearts.net/Whats-On/Performances",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Kim Wilde",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Civic Theatre Newcastle",
-  "city": "Newcastle",
-  "state": "NSW",
-  "suburb": "Newcastle",
-  "url": "https://songkick.com/concerts/43066279-kim-wilde-at-civic-theatre-newcastle",
-  "genre": "Pop",
-  "source": "https://songkick.com/venues/43237-civic-theatre-newcastle",
   "added": "2026-11-27"
  },
  {
@@ -25085,34 +24175,6 @@
   "url": "https://allevents.in/gawler/greenock-giddy-up-christmas-knock-offs/200030845230306",
   "genre": "",
   "source": "https://allevents.in/gawler/greenock-giddy-up-christmas-knock-offs/200030845230306",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Sherrahs",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Gawler Civic Centre",
-  "city": "Gawler",
-  "state": "SA",
-  "suburb": "Gawler",
-  "url": "https://allevents.in/gawler/the-sherrahs-classic-harmony-hits/200031003605750",
-  "genre": "",
-  "source": "https://allevents.in/gawler/the-sherrahs-classic-harmony-hits/200031003605750",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Retroburn",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "21:30",
-  "venue": "Kingsford Hotel",
-  "city": "Gawler",
-  "state": "SA",
-  "suburb": "Kingsford",
-  "url": "https://allevents.in/gawler/retroburn/200031018944812",
-  "genre": "",
-  "source": "https://allevents.in/gawler/retroburn/200031018944812",
   "added": "2026-11-27"
  },
  {
@@ -25267,20 +24329,6 @@
   "url": "https://events.humanitix.com/two-fires-chisel-barnes-show-devonport-rsl",
   "genre": "Rock",
   "source": "https://events.humanitix.com/host/show-entertainment",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Brad Cox",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Queens Beach Hotel",
-  "city": "Bowen",
-  "state": "QLD",
-  "suburb": "Bowen",
-  "url": "https://app.songkick.com/concerts/43471051-brad-cox-at-queens-beach-hotel",
-  "genre": "Country",
-  "source": "https://app.songkick.com/metro-areas/26788-australia-mackay",
   "added": "2026-11-27"
  },
  {
@@ -25578,20 +24626,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Ricki Wood",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Yarram Regent Theatre (The Mezz)",
-  "city": "Yarram",
-  "state": "VIC",
-  "suburb": "Yarram",
-  "url": "https://yarramregenttheatre.com/the-mezz/",
-  "genre": "",
-  "source": "https://southcoastfm.au/gig-guide/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Jungle Jim Smith",
   "support": "",
   "date": "2026-12-18",
@@ -25603,20 +24637,6 @@
   "url": "https://yarramregenttheatre.com/the-mezz/",
   "genre": "",
   "source": "https://southcoastfm.au/gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "MrMoondog Blues",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "17:30",
-  "venue": "The Convent Brewery (Rutherglen Convent)",
-  "city": "Rutherglen",
-  "state": "VIC",
-  "suburb": "Rutherglen",
-  "url": "https://www.eventfinda.com.au/2026/mrmoondog-blues/north-eastern-victoria",
-  "genre": "Blues",
-  "source": "https://musick.com.au/regional/wangaratta/",
   "added": "2026-11-27"
  },
  {
@@ -26152,20 +25172,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Chandler Jay",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Parkside Community and Services Club",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Brisbane",
-  "url": "https://songkick.com/concerts/43482788-chandler-jay-at-parkside-community-and-services-club",
-  "genre": "",
-  "source": "https://songkick.com/metro-areas/26778-australia-brisbane/2026",
-  "added": "2026-11-27"
- },
- {
   "artist": "Atomic Blonde",
   "support": "",
   "date": "2027-01-01",
@@ -26205,34 +25211,6 @@
   "url": "https://tickets.songkick.com/concerts/43490422-morituri-at-botany-view-hotel",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/658441-botany-view-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Cabal",
-  "support": "Chardy, Dopamine",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Kings Cross Hotel",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Kings Cross",
-  "url": "https://www.songkick.com/concerts/43506277-cabal-at-kings-cross-hotel",
-  "genre": "",
-  "source": "https://www.songkick.com/metro-areas/26794-australia-sydney/this-month",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Diesel",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Regent Theatre",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Sydney",
-  "url": "https://app.songkick.com/concerts/43277543-diesel-at-regent-theatre",
-  "genre": "Rock",
-  "source": "https://app.songkick.com/venues/64012-regent-theatre/calendar",
   "added": "2026-11-27"
  },
  {
@@ -26348,20 +25326,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Joel Leggett",
-  "support": "Max Kelly",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Low 302",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Darlinghurst",
-  "url": "https://www.songkick.com/concerts/43520039-joel-leggett-at-low-302",
-  "genre": "",
-  "source": "https://www.songkick.com/metro-areas/26794-australia-sydney/this-month",
-  "added": "2026-11-27"
- },
- {
   "artist": "Quivers",
   "support": "Bridge Dog",
   "date": "2026-12-11",
@@ -26413,20 +25377,6 @@
   "state": "NSW",
   "suburb": "Caringbah",
   "url": "https://allevents.in/sutherland/brit-fest-2027-caringbah-nsw/200030952557315",
-  "genre": "",
-  "source": "https://allevents.in/sutherland-ns/music",
-  "added": "2026-11-27"
- },
- {
-  "artist": "One Hit Wonders Band",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Club on East",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Sutherland",
-  "url": "https://allevents.in/sutherland/one-hit-wonders-band-live-and-free/200031022737208",
   "genre": "",
   "source": "https://allevents.in/sutherland-ns/music",
   "added": "2026-11-27"
@@ -26558,20 +25508,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Nicky Bomba's Bustamento",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Grand Room",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "South Yarra",
-  "url": "https://songkick.com/concerts/43467405-nicky-bombas-bustamento-at-grand-room",
-  "genre": "",
-  "source": "https://songkick.com/metro-areas/26790-australia-melbourne/this-month",
-  "added": "2026-11-27"
- },
- {
   "artist": "Tenelle",
   "support": "Alo Key, Brownhill",
   "date": "2027-01-16",
@@ -26583,20 +25519,6 @@
   "url": "https://songkick.com/de/concerts/43540666-tenelle-at-q-room",
   "genre": "",
   "source": "https://songkick.com/de/metro-areas/26790-australia-melbourne/2027",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Tony J King",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Edinburgh Castle Hotel",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Brunswick",
-  "url": "https://www.edinburghcastle.net.au/gig-guide/tony-j-kingjuly-65p64-p9zb4",
-  "genre": "",
-  "source": "https://edinburghcastle.net.au/gig-guide",
   "added": "2026-11-27"
  },
  {
@@ -26838,62 +25760,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Tamara Kuldin & Paul Coyle present Ella & Louis: Cheek to Cheek",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Paris Cat Jazz Club",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Melbourne",
-  "url": "https://beat.com.au/tamara-kuldin-paul-coyle-present-ella-louis-cheek-to-cheek/",
-  "genre": "Jazz",
-  "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Music of Fleetwood Mac with Amethyst Jane",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Paris Cat Jazz Club",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Melbourne",
-  "url": "https://beat.com.au/the-music-of-fleetwood-mac-with-amethyst-jane/",
-  "genre": "Jazz",
-  "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Chet Baker Reimagined",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Paris Cat Jazz Club",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Melbourne",
-  "url": "https://beat.com.au/chet-baker-reimagined-3/",
-  "genre": "Jazz",
-  "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Nana Koizumi Quartet plays The Great American Songbook",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Paris Cat Jazz Club",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Melbourne",
-  "url": "https://beat.com.au/nana-koizumi-quartet-plays-the-great-american-songbook/",
-  "genre": "Jazz",
-  "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Alinta & The Jazz Emperors",
   "support": "",
   "date": "2026-11-28",
@@ -27020,20 +25886,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Back To The Mac - The Fleetwood Mac Experience",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Mounties",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Mount Pritchard",
-  "url": "https://events.humanitix.com/back-to-mac-the-fleetwood-mac-experience",
-  "genre": "Rock",
-  "source": "https://events.humanitix.com/host/mounties",
-  "added": "2026-11-27"
- },
- {
   "artist": "California Gold - The Ultimate West Coast Yacht Rock Experience",
   "support": "",
   "date": "2026-12-31",
@@ -27059,20 +25911,6 @@
   "url": "https://events.humanitix.com/legends-of-motown",
   "genre": "Soul",
   "source": "https://events.humanitix.com/host/mounties",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Way",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:30",
-  "venue": "Mingara Recreation Club",
-  "city": "Tumbi Umbi",
-  "state": "NSW",
-  "suburb": "Tumbi Umbi",
-  "url": "https://mingara.com.au/event/live-free-music-mingara/",
-  "genre": "",
-  "source": "https://mingara.com.au/event/live-free-music-mingara/",
   "added": "2026-11-27"
  },
  {
@@ -27384,20 +26222,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Keelan Green",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Grand Hotel Kiama",
-  "city": "Kiama",
-  "state": "NSW",
-  "suburb": "Kiama",
-  "url": "https://www.grandhotelkiama.com.au/",
-  "genre": "",
-  "source": "https://kiama.com.au/whats-on/live-entertainment-music",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Freewheeler",
   "support": "",
   "date": "2026-11-29",
@@ -27549,20 +26373,6 @@
   "url": "https://www.gerringongbowlo.com.au/whats-on",
   "genre": "",
   "source": "https://kiama.com.au/whats-on/live-entertainment-music",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Fanny Lumsden",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Keystone 1889",
-  "city": "Bathurst",
-  "state": "NSW",
-  "suburb": "Bathurst",
-  "url": "https://songkick.com/concerts/43353592-fanny-lumsden-at-keystone-1889",
-  "genre": "Country",
-  "source": "https://songkick.com/venues/4463752-keystone-1889",
   "added": "2026-11-27"
  },
  {
@@ -28014,20 +26824,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Lisa Budin",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Kingsgrove RSL",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Kingsgrove",
-  "url": "https://kingsgroversl.com.au/whats-on/entertainment/",
-  "genre": "",
-  "source": "https://kingsgroversl.com.au/whats-on/entertainment/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Joe Gatehau",
   "support": "",
   "date": "2026-11-29",
@@ -28165,34 +26961,6 @@
   "url": "https://liverpoolcatholic.com.au/whats-on/the-fab-four/",
   "genre": "Rock",
   "source": "https://www.liverpoolcatholic.com.au/whats-on-categories/ticketed-events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Big Boogaloo",
-  "support": "Kerri Simpson",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Lomond Hotel",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Brunswick East",
-  "url": "https://www.eventbrite.com.au/e/lowie-live-presents-the-big-boogaloo-tickets-2004580445073",
-  "genre": "",
-  "source": "https://www.rrr.org.au/events/the-big-boogaloo",
-  "added": "2026-11-27"
- },
- {
-  "artist": "laurapanic",
-  "support": "pussy horse, ...and the mountain",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Cafe Gummo",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Thornbury",
-  "url": "https://www.rrr.org.au/events/laurapanic-pussy-horse-and-the-mountain",
-  "genre": "",
-  "source": "https://www.rrr.org.au/events/laurapanic-pussy-horse-and-the-mountain",
   "added": "2026-11-27"
  },
  {
@@ -28361,20 +27129,6 @@
   "url": "https://tixel.com/au/tickets/cleveland-sands-hotel",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/cleveland-sands-hotel",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Memphis Rockers",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Crooked Spire Coffee House",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Midland",
-  "url": "https://allevents.in/midland/memphis-rockers-present-jukebox-to-memphis/200030904534644",
-  "genre": "",
-  "source": "https://allevents.in/midland-wa/performances",
   "added": "2026-11-27"
  },
  {
@@ -28826,20 +27580,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Moses and His Disciples",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Y HQ",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Leederville",
-  "url": "https://heatseeker.oztix.com.au/",
-  "genre": "",
-  "source": "https://heatseeker.oztix.com.au/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Amplified Minds",
   "support": "",
   "date": "2026-12-18",
@@ -28935,20 +27675,6 @@
   "url": "https://heatseeker.oztix.com.au/",
   "genre": "",
   "source": "https://heatseeker.oztix.com.au/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Neil Murray",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Royal Quarters (Royal Nundah Hotel)",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Nundah",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/neil-murray-royal-quarters-brisb",
-  "genre": "Folk",
-  "source": "https://tixel.com/au/tickets/the-lounge-royal-hotel",
   "added": "2026-11-27"
  },
  {
@@ -29568,20 +28294,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Flight To Dubai",
-  "support": "Love Banana",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "Vic on the Park Hotel",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Marrickville",
-  "url": "https://tickets.oztix.com.au/outlet/event/50a7d17e-0c57-4e18-a5a1-7e9d7fcde30a",
-  "genre": "Rock",
-  "source": "https://tickets.oztix.com.au/outlet/event/50a7d17e-0c57-4e18-a5a1-7e9d7fcde30a",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Array",
   "support": "Tea Towel",
   "date": "2026-12-11",
@@ -29610,20 +28322,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Live Tribute Concert to Notis Sfakianakis",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "The Juniors Kingsford",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Kingsford",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/live-tribute-concert-to-notis-sf",
-  "genre": "",
-  "source": "https://tixel.com/au/music-tickets/2026/11/27/live-tribute-concert-to-notis-sf",
-  "added": "2026-11-27"
- },
- {
   "artist": "Normie Rowe",
   "support": "",
   "date": "2027-02-07",
@@ -29649,20 +28347,6 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/13/beach-boys-tribute",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-juniors-kingsford",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Diesel",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Richmond Regent Twin Cinema",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Richmond",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/diesel-by-request-spring-26",
-  "genre": "",
-  "source": "https://tixel.com/au/tickets/richmond-regent-twin-cinema",
   "added": "2026-11-27"
  },
  {
@@ -29850,20 +28534,6 @@
  {
   "artist": "Matt Bamkin",
   "support": "",
-  "date": "2026-11-27",
-  "time": "17:30",
-  "venue": "Sunset Bar, Cable Beach Club Resort & Spa",
-  "city": "Broome",
-  "state": "WA",
-  "suburb": "Cable Beach",
-  "url": "https://www.visitbroome.com.au/events/live-music-at-sunset-bar",
-  "genre": "",
-  "source": "https://www.visitbroome.com.au/events",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Matt Bamkin",
-  "support": "",
   "date": "2026-12-11",
   "time": "17:30",
   "venue": "Sunset Bar, Cable Beach Club Resort & Spa",
@@ -29929,34 +28599,6 @@
   "url": "https://allevents.in/margaret-river/the-soul-masons-live-at-strange-brew/200030792076302",
   "genre": "Soul",
   "source": "https://allevents.in/margaret-river/the-soul-masons-live-at-strange-brew/200030792076302",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Patrick James",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Yallingup Hall",
-  "city": "Yallingup",
-  "state": "WA",
-  "suburb": "Yallingup",
-  "url": "https://events.humanitix.com/patrick-james-live-in-concert-yallingup-hall",
-  "genre": "",
-  "source": "https://events.humanitix.com/patrick-james-live-in-concert-yallingup-hall",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Liam and Dan Duo",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Federal Hotel",
-  "city": "Port Pirie",
-  "state": "SA",
-  "suburb": "Port Pirie",
-  "url": "https://allevents.in/whyalla/liam-and-dan-duo-live-in-the-front-bar/200031003662548",
-  "genre": "Blues",
-  "source": "https://allevents.in/whyalla",
   "added": "2026-11-27"
  },
  {
@@ -30226,20 +28868,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Jake Higgins",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:30",
-  "venue": "The Globe Hotel",
-  "city": "Bundaberg",
-  "state": "QLD",
-  "suburb": "Bundaberg",
-  "url": "https://allevents.in/bundaberg/jake-higgins-the-globe-hotel/200030492979136",
-  "genre": "",
-  "source": "https://allevents.in/org/the-new-globe-hotel/26261548",
-  "added": "2026-11-27"
- },
- {
   "artist": "Saltwater Cartel",
   "support": "",
   "date": "2026-11-28",
@@ -30352,20 +28980,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Derek Smith",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Carriers Arms Hotel",
-  "city": "Maryborough",
-  "state": "QLD",
-  "suburb": "Maryborough",
-  "url": "https://allevents.in/maryborough/derek-smith-live-at-the-carriers/200031114680459",
-  "genre": "",
-  "source": "https://allevents.in/org/carriers-arms-hotel-motel/14133281",
-  "added": "2026-11-27"
- },
- {
   "artist": "Dirt N Diesel",
   "support": "",
   "date": "2026-11-28",
@@ -30377,34 +28991,6 @@
   "url": "https://allevents.in/maryborough/dirt-n-diesel-live-at-the-carriers/200031114681910",
   "genre": "",
   "source": "https://allevents.in/org/carriers-arms-hotel-motel/14133281",
-  "added": "2026-11-27"
- },
- {
-  "artist": "8 Ball Aitken",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Oodies Cafe",
-  "city": "Bundaberg",
-  "state": "QLD",
-  "suburb": "Bundaberg North",
-  "url": "https://oodies.com.au/product/8ballaitkenfriday2026/",
-  "genre": "Blues",
-  "source": "https://allevents.in/bundaberg/8-ball-aitken-live-oodies-cafe-night-2/200030912338244",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The TNT Big Band",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Hervey Bay RSL",
-  "city": "Hervey Bay",
-  "state": "QLD",
-  "suburb": "Pialba",
-  "url": "https://allevents.in/pialba/hervey-bay-jazz-and-blues-club-presents-the-tnt-big-band-xmas-special/200031004489416",
-  "genre": "Jazz",
-  "source": "https://allevents.in/pialba/hervey-bay-jazz-and-blues-club-presents-the-tnt-big-band-xmas-special/200031004489416",
   "added": "2026-11-27"
  },
  {
@@ -30856,20 +29442,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Ricky Albeck & the Belair Line Band",
-  "support": "Caitlan Harnett & The Pony Boys",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Grand Junction Hotel (The Junkyard)",
-  "city": "Maitland",
-  "state": "NSW",
-  "suburb": "Maitland",
-  "url": "https://events.humanitix.com/ricky-albeck-and-the-belair-line-band-or-summer-oz-tour-or-maitland",
-  "genre": "Country",
-  "source": "https://events.humanitix.com/ricky-albeck-and-the-belair-line-band-or-summer-oz-tour-or-maitland?hxchl=hex-pfl",
-  "added": "2026-11-27"
- },
- {
   "artist": "Rops1",
   "support": "CV",
   "date": "2027-01-31",
@@ -31206,20 +29778,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Kitty, Daisy & Lewis",
-  "support": "Rob Kingsley",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Theatre Royal Castlemaine",
-  "city": "Castlemaine",
-  "state": "VIC",
-  "suburb": "Castlemaine",
-  "url": "https://songkick.com/concerts/43505470-kitty-daisy-and-lewis-at-theatre-royal-castlemaine",
-  "genre": "",
-  "source": "https://songkick.com/venues/84062-theatre-royal-castlemaine",
-  "added": "2026-11-27"
- },
- {
   "artist": "Grace Cummings",
   "support": "",
   "date": "2026-12-19",
@@ -31444,20 +30002,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Peter Garrett",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Hotel Brunswick",
-  "city": "Brunswick Heads",
-  "state": "NSW",
-  "suburb": "Brunswick Heads",
-  "url": "https://www.songkick.com/concerts/43304399-peter-garrett-at-hotel-brunswick",
-  "genre": "Rock",
-  "source": "https://www.songkick.com/venues/1641028-hotel-brunswick/calendar",
-  "added": "2026-11-27"
- },
- {
   "artist": "Karnivool",
   "support": "",
   "date": "2026-12-04",
@@ -31623,20 +30167,6 @@
   "url": "https://tixel.com/au/tickets/the-hoey-moey",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/the-hoey-moey",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Brothers",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Seaview Tavern",
-  "city": "Woolgoolga",
-  "state": "NSW",
-  "suburb": "Woolgoolga",
-  "url": "https://musick.com.au/gig/brothers-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/venue/seaview-tavern/",
   "added": "2026-11-27"
  },
  {
@@ -32085,20 +30615,6 @@
   "url": "https://developer.songkick.com/concerts/43353534-ross-wilson-at-karralyka-centre",
   "genre": "Rock",
   "source": "https://developer.songkick.com/venues/2005064-karralyka-centre",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Jack Jones",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Bird's Basement",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43391835-jack-jones-at-birds-basement",
-  "genre": "",
-  "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
   "added": "2026-11-27"
  },
  {
@@ -32732,34 +31248,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Mechanical Pterodactyl",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Ragtime Tavern",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Preston",
-  "url": "https://beat.com.au/mechanical-pterodactyl/",
-  "genre": "",
-  "source": "https://beat.com.au/gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Madeleine Clare",
-  "support": "Jumpin' Jack Jordan",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Ragtime Tavern",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Preston",
-  "url": "https://beat.com.au/cruise-ship-cabaret-madeleine-clare-jumpin-jack-jordan/",
-  "genre": "",
-  "source": "https://beat.com.au/gig-guide/",
-  "added": "2026-11-27"
- },
- {
   "artist": "River Feet",
   "support": "",
   "date": "2026-11-28",
@@ -32785,20 +31273,6 @@
   "url": "https://beat.com.au/harrison-skepper/",
   "genre": "",
   "source": "https://beat.com.au/gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Immortal Fish",
-  "support": "Velour, Samuel Blake",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Mamma Chen's",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Footscray",
-  "url": "https://ma.to/event/immortal-fishveloursamuel-blake-27-nov-2026",
-  "genre": "",
-  "source": "https://ma.to/venue/mammachens",
   "added": "2026-11-27"
  },
  {
@@ -32869,20 +31343,6 @@
   "url": "https://www.trybooking.com/au/event/1666946",
   "genre": "Pop",
   "source": "https://www.trybooking.com/eventlist/pride",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Luca Roy",
-  "support": "Propert Conduct",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Motley Bauhaus",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Carlton",
-  "url": "https://beat.com.au/luca-roy-propert-conduct/",
-  "genre": "",
-  "source": "https://beat.com.au/gig-guide/",
   "added": "2026-11-27"
  },
  {
@@ -33334,20 +31794,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Neil and the JB's",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "The Nook",
-  "city": "Cooroy",
-  "state": "QLD",
-  "suburb": "Cooroy",
-  "url": "https://events.humanitix.com/the-nook-sessions-neil-and-the-jb-s-33m4dspn",
-  "genre": "",
-  "source": "https://yelo.live/gigs/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Shelley Short",
   "support": "",
   "date": "2026-11-28",
@@ -33765,20 +32211,6 @@
   "url": "https://tixel.com/au/tickets/south-bank-cultural-forecourt",
   "genre": "",
   "source": "https://tixel.com/au/tickets/south-bank-cultural-forecourt",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Lise",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Festival Hall",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "West Melbourne",
-  "url": "https://www.songkick.com/concerts/43264114-lise-at-festival-hall-melbourne",
-  "genre": "",
-  "source": "https://app.songkick.com/venues/34189-festival-hall-melbourne/calendar",
   "added": "2026-11-27"
  },
  {
@@ -34202,34 +32634,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Giddy Up Strut",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Bay Central Tavern",
-  "city": "Hervey Bay",
-  "state": "QLD",
-  "suburb": "Hervey Bay",
-  "url": "https://tickets.oztix.com.au/outlet/event/33ef7111-7e3f-418d-94b3-0f7ea2bbfc32",
-  "genre": "",
-  "source": "https://musick.com.au/regional/hervey-bay/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Jordie Lane",
-  "support": "Daisy Kilbourne",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Archies Creek Hotel",
-  "city": "Archies Creek",
-  "state": "VIC",
-  "suburb": "Archies Creek",
-  "url": "https://songkick.com/concerts/43402836-jordie-lane-at-archies-creek-hotel",
-  "genre": "Folk",
-  "source": "https://songkick.com/venues/4377403-archies-creek-hotel",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Black Sorrows",
   "support": "",
   "date": "2026-12-12",
@@ -34412,20 +32816,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Alphabet Soup",
-  "support": "Rhoda Mann, Sista Against The Machine",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "The Presynct",
-  "city": "Sunshine Coast",
-  "state": "QLD",
-  "suburb": "Nambour",
-  "url": "https://thepresynct.com.au/whats-on/",
-  "genre": "",
-  "source": "https://yelo.live/gigs/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Coterie",
   "support": "",
   "date": "2026-11-29",
@@ -34552,20 +32942,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Cascada",
-  "support": "Darren Bailie, Nick Skitz",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Banana Bender Pub",
-  "city": "Sunshine Coast",
-  "state": "QLD",
-  "suburb": "Ilkley",
-  "url": "https://thebananabenderpub.com/events/",
-  "genre": "Electronic",
-  "source": "https://yelo.live/gigs/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Chicane",
   "support": "",
   "date": "2027-01-23",
@@ -34604,20 +32980,6 @@
   "suburb": "Ilkley",
   "url": "https://thebananabenderpub.com/events/",
   "genre": "Rock",
-  "source": "https://yelo.live/gigs/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Dolly - The Tribute",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Norton Music Factory",
-  "city": "Sunshine Coast",
-  "state": "QLD",
-  "suburb": "Caloundra West",
-  "url": "https://nortonmusicfactory.com.au/events/",
-  "genre": "Country",
   "source": "https://yelo.live/gigs/",
   "added": "2026-11-27"
  },
@@ -34832,20 +33194,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "LF System",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "The Prince Consort Hotel",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-prince-consort-hotel",
-  "genre": "Electronic",
-  "source": "https://tixel.com/au/tickets/the-prince-consort-hotel",
-  "added": "2026-11-27"
- },
- {
   "artist": "Boyz II Men",
   "support": "Bell Biv DeVoe, Salt-N-Pepa",
   "date": "2026-12-06",
@@ -34857,20 +33205,6 @@
   "url": "https://www.adayonthegreen.com.au/currenttours/boyziimen/mountcotton",
   "genre": "Soul",
   "source": "https://www.adayonthegreen.com.au/currenttours/boyziimen/mountcotton",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Spacey Jane",
-  "support": "Telenova, Armlock",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Riverstage",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Brisbane City",
-  "url": "https://songkick.com/concerts/43217536-spacey-jane-at-riverstage-brisbane",
-  "genre": "Indie",
-  "source": "https://songkick.com/venues/35555-riverstage-brisbane/calendar",
   "added": "2026-11-27"
  },
  {
@@ -35364,20 +33698,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Charlie Pittman",
-  "support": "bella amor",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Season Three",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Brisbane",
-  "url": "https://www.songkick.com/concerts/43417657-charlie-pittman-at-season-three",
-  "genre": "",
-  "source": "https://labs.songkick.com/venues/4656221-season-three",
-  "added": "2026-11-27"
- },
- {
   "artist": "Alex Lloyd",
   "support": "",
   "date": "2026-11-29",
@@ -35560,20 +33880,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Amber Farnan",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Salt House",
-  "city": "Cairns",
-  "state": "QLD",
-  "suburb": "Cairns City",
-  "url": "https://musick.com.au/gig/amber-farnan-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/cairns/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Stan Stone",
   "support": "",
   "date": "2026-11-28",
@@ -35683,20 +33989,6 @@
   "url": "https://www.eventbrite.com.au/e/issi-dye-the-legends-of-rock-n-roll-show-tickets-1998938086627",
   "genre": "Rock",
   "source": "https://beatstorapon.com/event/issi-dye-the-legends-of-rock-n-roll-show-6ae17b519f1bb794c946b800",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Calamari for Breakfast",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Limestone Coast Pantry",
-  "city": "Mount Gambier",
-  "state": "SA",
-  "suburb": "Mount Gambier",
-  "url": "https://allevents.in/mount-gambier/end-of-year-party-nov-27/200031018878017",
-  "genre": "",
-  "source": "https://allevents.in/mount-gambier/end-of-year-party-nov-27/200031018878017",
   "added": "2026-11-27"
  },
  {
@@ -35926,20 +34218,6 @@
  {
   "artist": "Toby Mobbs",
   "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Commercial Club Albury",
-  "city": "Albury",
-  "state": "NSW",
-  "suburb": "Albury",
-  "url": "https://www.songkick.com/concerts/43304243-toby-mobbs-at-albury-commercial-golf-club",
-  "genre": "",
-  "source": "https://www.songkick.com/metro-areas/26775-australia-albury",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Toby Mobbs",
-  "support": "",
   "date": "2026-12-05",
   "time": "",
   "venue": "Commercial Club Albury",
@@ -35963,20 +34241,6 @@
   "url": "https://songkick.com/concerts/43494455-chamberz-and-cole-at-hotel-metropolitan",
   "genre": "",
   "source": "https://songkick.com/metro-areas/26774-australia-adelaide/2027",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Social Circle",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Blackwood RSL",
-  "city": "Adelaide",
-  "state": "SA",
-  "suburb": "Blackwood",
-  "url": "https://pubsandevents.com.au/event-details/?id=1022",
-  "genre": "",
-  "source": "https://pubsandevents.com.au/venue-listing/blackwood-rsl/",
   "added": "2026-11-27"
  },
  {
@@ -36075,20 +34339,6 @@
   "url": "https://pubsandevents.com.au/event-details/?id=1005",
   "genre": "",
   "source": "https://pubsandevents.com.au/sa/events/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Bailey Judd",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Baxter's Lot",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Fitzroy",
-  "url": "https://ma.to/event/live-music-bailey-judd-27-nov-2026",
-  "genre": "",
-  "source": "https://ma.to/venue/baxterslive",
   "added": "2026-11-27"
  },
  {
@@ -36414,20 +34664,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Ofri",
-  "support": "Mid-Air Station",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "The Eveleigh Hotel",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Redfern",
-  "url": "https://sydneymusic.net/gig-guide/",
-  "genre": "",
-  "source": "https://sydneymusic.net/gig-guide/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Georgia Mulligan",
   "support": "Beryl",
   "date": "2026-12-03",
@@ -36523,20 +34759,6 @@
   "url": "https://musick.com.au/gig/dreams-presents-fleetwood-mac-rumours-50th-anniversary-tour-at-hamilton-hotel-2027-02-05/",
   "genre": "Rock",
   "source": "https://musick.com.au/venue/hamilton-hotel/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Naoya Ogura Quartet",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "JMI Live",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Bowen Hills",
-  "url": "https://events.humanitix.com/naoya-ogura-quartet",
-  "genre": "Jazz",
-  "source": "https://events.humanitix.com/naoya-ogura-quartet",
   "added": "2026-11-27"
  },
  {
@@ -36708,20 +34930,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Sydney Bardot",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "In The Hanging Garden",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://tasguide.com.au/event/sydney-bardot/",
-  "genre": "",
-  "source": "https://tasguide.com.au/gig-guide/?region=hobart-south",
-  "added": "2026-11-27"
- },
- {
   "artist": "Fosters",
   "support": "",
   "date": "2026-11-28",
@@ -36750,20 +34958,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Vendetta",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "Irish Murphy's Hobart",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://tasguide.com.au/event/vendetta-2/",
-  "genre": "",
-  "source": "https://tasguide.com.au/gig-guide/?region=hobart-south",
-  "added": "2026-11-27"
- },
- {
   "artist": "Brett Collidge",
   "support": "",
   "date": "2026-11-28",
@@ -36787,34 +34981,6 @@
   "state": "TAS",
   "suburb": "Hobart",
   "url": "https://tasguide.com.au/event/christo-jones-9/",
-  "genre": "",
-  "source": "https://tasguide.com.au/gig-guide/?region=hobart-south",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Isaac Westwood",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "17:00",
-  "venue": "New Sydney Hotel",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://tasguide.com.au/event/isaac-westwood-new-sydney/",
-  "genre": "",
-  "source": "https://tasguide.com.au/gig-guide/?region=hobart-south",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Aaron Laguda",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "New Sydney Hotel",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://tasguide.com.au/event/aaron-laguda-3/",
   "genre": "",
   "source": "https://tasguide.com.au/gig-guide/?region=hobart-south",
   "added": "2026-11-27"
@@ -37072,20 +35238,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Poison Oak",
-  "support": "Relaxolotyl, Reverence, Home Improvement",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Otherwise Bar",
-  "city": "Townsville",
-  "state": "QLD",
-  "suburb": "Townsville City",
-  "url": "https://www.eventbrite.com.au/e/poison-oak-album-launch-we-used-to-talk-tickets-2002398756584",
-  "genre": "",
-  "source": "https://www.eventbrite.com.au/e/poison-oak-album-launch-we-used-to-talk-tickets-2002398756584",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Beatles Show",
   "support": "",
   "date": "2026-12-26",
@@ -37111,20 +35263,6 @@
   "url": "https://songkick.com/concerts/43461553-shaun-kirk-at-mangrove-mountain-hall",
   "genre": "Blues",
   "source": "https://songkick.com/metro-areas/26794-australia-sydney/2027",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Ultra Naté",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "The Arts Factory",
-  "city": "Byron Bay",
-  "state": "NSW",
-  "suburb": "Byron Bay",
-  "url": "https://musick.com.au/gig/ultra-nat-byron-bay-at-the-arts-factory-byron-bay-2026-11-27/",
-  "genre": "Electronic",
-  "source": "https://musick.com.au/regional/mullumbimby/",
   "added": "2026-11-27"
  },
  {
@@ -37321,20 +35459,6 @@
   "url": "https://www.songkick.com/concerts/43474960-felipe-baldomir-at-woopi-brewing-co",
   "genre": "",
   "source": "https://songkick.com/metro-areas/26782-australia-coffs-harbour",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Matt Doyle",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Customs House Hotel",
-  "city": "Hobart",
-  "state": "TAS",
-  "suburb": "Hobart",
-  "url": "https://tasguide.com.au/event/matt-doyle-2/",
-  "genre": "",
-  "source": "https://tasguide.com.au/gig-guide/?region=hobart-south",
   "added": "2026-11-27"
  },
  {
@@ -37716,20 +35840,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Emmie Li",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "17:00",
-  "venue": "Peninsula Beer Garden",
-  "city": "Boneo",
-  "state": "VIC",
-  "suburb": "Boneo",
-  "url": "https://www.visitmorningtonpeninsula.org/Whats-On/View/18579/emmie-li-live-at-peninsula-beer-garden",
-  "genre": "",
-  "source": "https://www.visitmorningtonpeninsula.org/Whats-On/Live-Music",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Calmer Miles",
   "support": "",
   "date": "2026-11-28",
@@ -37795,20 +35905,6 @@
   "state": "VIC",
   "suburb": "Mornington",
   "url": "https://www.visitmorningtonpeninsula.org/Whats-On/View/18617/phisha-live-at-tar-barrel",
-  "genre": "",
-  "source": "https://www.visitmorningtonpeninsula.org/Whats-On/Live-Music",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Ben Smith",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Jetty Road Brewery",
-  "city": "Dromana",
-  "state": "VIC",
-  "suburb": "Dromana",
-  "url": "https://www.visitmorningtonpeninsula.org/Whats-On/View/18601/ben-smith-live-at-jetty-road-brewery",
   "genre": "",
   "source": "https://www.visitmorningtonpeninsula.org/Whats-On/Live-Music",
   "added": "2026-11-27"
@@ -38304,20 +36400,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "wAFF",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Port Beach Garden Bar & Brewery (Railway Hotel)",
-  "city": "Fremantle",
-  "state": "WA",
-  "suburb": "North Fremantle",
-  "url": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
-  "genre": "Electronic",
-  "source": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
-  "added": "2026-11-27"
- },
- {
   "artist": "Baggy Trousers",
   "support": "",
   "date": "2026-12-04",
@@ -38371,20 +36453,6 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/03/pachyman-flying-colours-brisbane",
   "genre": "",
   "source": "https://tixel.com/au/tickets/flying-colours",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Hedex",
-  "support": "Eksman, Mozey",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Superordinary",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Hamilton",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/hedex-superordinary-brisbane",
-  "genre": "Electronic",
-  "source": "https://tixel.com/au/tickets/superordinary-zbl1",
   "added": "2026-11-27"
  },
  {
@@ -38509,20 +36577,6 @@
   "state": "NSW",
   "suburb": "Newcastle",
   "url": "https://musick.com.au/gig/tom-avgenicos-house-band-2026-12-17/",
-  "genre": "",
-  "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Moodwatch",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Maru HiFi",
-  "city": "Newcastle",
-  "state": "NSW",
-  "suburb": "Newcastle West",
-  "url": "https://musick.com.au/gig/moodwatch-live-pop-funk-2026-11-27/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
   "added": "2026-11-27"
@@ -38747,20 +36801,6 @@
   "state": "ACT",
   "suburb": "Canberra City",
   "url": "https://musick.com.au/gig/bootleg-rascal-asleep-in-the-machine-10th-anniversary-tour-2026-11-29/",
-  "genre": "",
-  "source": "https://musick.com.au/canberra/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Rachael Thoms Trio",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Tuggeranong Arts Centre",
-  "city": "Canberra",
-  "state": "ACT",
-  "suburb": "Greenway",
-  "url": "https://musick.com.au/gig/lakeside-at-5-rachael-thoms-trio-2026-11-27/",
   "genre": "",
   "source": "https://musick.com.au/canberra/",
   "added": "2026-11-27"
@@ -39382,20 +37422,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Tim Conlon",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "Harbord Diggers",
-  "city": "Sydney",
-  "state": "NSW",
-  "suburb": "Freshwater",
-  "url": "https://www.harborddiggers.com.au/weekly-activities/live-music",
-  "genre": "",
-  "source": "https://www.harborddiggers.com.au/weekly-activities/live-music",
-  "added": "2026-11-27"
- },
- {
   "artist": "Jamie Lindsay",
   "support": "",
   "date": "2026-11-28",
@@ -39491,48 +37517,6 @@
   "url": "https://allevents.in/kirrawee/live-music-double-trouble/200031069736229",
   "genre": "",
   "source": "https://allevents.in/kirrawee/live-music-double-trouble/200031069736229",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Ultra Nate",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "The Wickham",
-  "city": "Brisbane",
-  "state": "QLD",
-  "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/11/27/ultra-nate-the-wickham-brisbane",
-  "genre": "Electronic",
-  "source": "https://tixel.com/au/tickets/the-wickham",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Brett Gray",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:00",
-  "venue": "The Lion Hotel",
-  "city": "Adelaide",
-  "state": "SA",
-  "suburb": "North Adelaide",
-  "url": "https://musick.com.au/gig/brett-gray-live-at-the-lion-hotel-from-6pm-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/adelaide/2020/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Kevin Perks",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Prince Albert Hotel",
-  "city": "Adelaide",
-  "state": "SA",
-  "suburb": "Adelaide",
-  "url": "https://musick.com.au/gig/kevin-perks-live-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/adelaide/2020/",
   "added": "2026-11-27"
  },
  {
@@ -39690,20 +37674,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Andrea Duo",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Trinity Beach Sports Club",
-  "city": "Cairns",
-  "state": "QLD",
-  "suburb": "Trinity Beach",
-  "url": "https://musick.com.au/gig/andrea-duo-trinity-beach-sports-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/regional/cairns/",
-  "added": "2026-11-27"
- },
- {
   "artist": "The Creedence Clearwater Experience",
   "support": "",
   "date": "2026-12-05",
@@ -39757,20 +37727,6 @@
   "url": "https://musick.com.au/gig/spoonful-rainbow-sunday-arvo-2026-12-06/",
   "genre": "",
   "source": "https://musick.com.au/venue/rainbow-hotel/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Chris Bieniek's Kind of Blue Quartet",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:00",
-  "venue": "Lido Jazz Room",
-  "city": "Melbourne",
-  "state": "VIC",
-  "suburb": "Hawthorn",
-  "url": "https://musick.com.au/gig/chris-bienieks-kind-of-blue-quartet-2026-11-27/",
-  "genre": "Jazz",
-  "source": "https://musick.com.au/venue/lido-jazz-room/",
   "added": "2026-11-27"
  },
  {
@@ -39914,20 +37870,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Andrew Kucks",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Southern Hotel Toowoomba",
-  "city": "Toowoomba",
-  "state": "QLD",
-  "suburb": "Kearneys Spring",
-  "url": "https://musick.com.au/gig/andrew-kucks-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/toowoomba",
-  "added": "2026-11-27"
- },
- {
   "artist": "Dave Ritter",
   "support": "",
   "date": "2026-11-28",
@@ -39967,20 +37909,6 @@
   "url": "https://tasguide.com.au/event/pete-cornelius-4/",
   "genre": "Blues",
   "source": "https://tasguide.com.au/gig-guide/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Runes",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "20:30",
-  "venue": "Southport Sharks",
-  "city": "Gold Coast",
-  "state": "QLD",
-  "suburb": "Southport",
-  "url": "https://southportsharks.com.au/live-weekend-entertainment/",
-  "genre": "",
-  "source": "https://southportsharks.com.au/live-weekend-entertainment/",
   "added": "2026-11-27"
  },
  {
@@ -40894,20 +38822,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Dirty Blvd",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Valley Social",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Henley Brook",
-  "url": "https://www.swanvalley.com.au/products/lou-reed-tribute-at-valley-social",
-  "genre": "Rock",
-  "source": "https://www.swanvalley.com.au/Business-Listings/Valley-Social",
-  "added": "2026-11-27"
- },
- {
   "artist": "Legends Live",
   "support": "",
   "date": "2026-11-28",
@@ -41006,20 +38920,6 @@
   "added": "2026-11-27"
  },
  {
-  "artist": "Little Belle",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Universal Bar",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Northbridge",
-  "url": "https://musick.com.au/gig/little-belle-live-at-universal-bar-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/perth/",
-  "added": "2026-11-27"
- },
- {
   "artist": "Adam Harvey",
   "support": "",
   "date": "2026-11-28",
@@ -41030,34 +38930,6 @@
   "suburb": "Thornlie",
   "url": "https://musick.com.au/gig/an-evening-with-adam-harvey-2026-11-28/",
   "genre": "Country",
-  "source": "https://musick.com.au/perth/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "The Southern Dukes",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "Honky Tonk Freo",
-  "city": "Fremantle",
-  "state": "WA",
-  "suburb": "Fremantle",
-  "url": "https://musick.com.au/gig/the-southern-dukes-2026-11-27/",
-  "genre": "",
-  "source": "https://musick.com.au/perth/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Darren Reid",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "",
-  "venue": "The Local House Bar & Grill",
-  "city": "Perth",
-  "state": "WA",
-  "suburb": "Cockburn Central",
-  "url": "https://musick.com.au/gig/darren-reid-2026-11-27/",
-  "genre": "",
   "source": "https://musick.com.au/perth/",
   "added": "2026-11-27"
  },
@@ -41073,48 +38945,6 @@
   "url": "https://musick.com.au/gig/ruby-fields-regional-tour-at-edge-hill-tavern-2027-02-11/",
   "genre": "Indie",
   "source": "https://musick.com.au/venue/edge-hill-tavern/",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Two Dogs Music",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Barron Falls Hotel",
-  "city": "Kuranda",
-  "state": "QLD",
-  "suburb": "Kuranda",
-  "url": "https://www.entertainmentcairns.com/barron-falls-hotel-kuranda-5",
-  "genre": "",
-  "source": "https://www.entertainmentcairns.com/cairns-gig-guide",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Miss Wendy and Ben",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "19:00",
-  "venue": "Mt Molloy Hotel",
-  "city": "Mt Molloy",
-  "state": "QLD",
-  "suburb": "Mt Molloy",
-  "url": "https://www.entertainmentcairns.com/mt-molloy-hotel-5",
-  "genre": "",
-  "source": "https://www.entertainmentcairns.com/cairns-gig-guide",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Big Noise",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "21:00",
-  "venue": "BAR36 at The Reef Hotel Casino",
-  "city": "Cairns",
-  "state": "QLD",
-  "suburb": "Cairns City",
-  "url": "https://www.entertainmentcairns.com/big-noise-livethecasino-playin-bar36",
-  "genre": "Pop",
-  "source": "https://www.entertainmentcairns.com/cairns-gig-guide",
   "added": "2026-11-27"
  },
  {
@@ -41213,20 +39043,6 @@
   "url": "https://www.entertainmentcairns.com/new-years-eve-at-the-casino-rocket-into-2027-with-the-rocketman-1",
   "genre": "Pop",
   "source": "https://www.entertainmentcairns.com/new-years-eve-at-the-casino-rocket-into-2027-with-the-rocketman-1",
-  "added": "2026-11-27"
- },
- {
-  "artist": "Kickstart",
-  "support": "",
-  "date": "2026-11-27",
-  "time": "18:30",
-  "venue": "Cazalys Cairns",
-  "city": "Cairns",
-  "state": "QLD",
-  "suburb": "Westcourt",
-  "url": "https://www.entertainmentcairns.com/live-music-424",
-  "genre": "",
-  "source": "https://www.entertainmentcairns.com/cairns-gig-guide",
   "added": "2026-11-27"
  },
  {
