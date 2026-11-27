@@ -1338,9 +1338,9 @@
   "venue": "The Estate Camden",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/4609374-estate-camden",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -1356,9 +1356,9 @@
   "venue": "The Beer Shed Brewing Co",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/4428516-beer-shed-brewing-co",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -1563,9 +1563,9 @@
   "venue": "Regal Theatre",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/33449-regal-theatre/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -1599,9 +1599,9 @@
   "venue": "Red Hill Auditorium",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/red-hill-auditorium",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -1626,9 +1626,9 @@
   "venue": "Bone Idol Brewery",
   "city": "Toowoomba",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/venue/bone-idol-brewery/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Toowoomba"
  },
  {
@@ -4156,8 +4156,8 @@
   "city": "Sunshine Coast",
   "state": "QLD",
   "url": "https://musick.com.au/venue/the-presynct/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -4165,8 +4165,8 @@
   "city": "Sunshine Coast",
   "state": "QLD",
   "url": "https://musick.com.au/venue/banana-bender-pub-brisbane/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -4174,8 +4174,8 @@
   "city": "Sunshine Coast",
   "state": "QLD",
   "url": "https://musick.com.au/venue/norton-music-factory/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -4201,8 +4201,8 @@
   "city": "Noosa",
   "state": "QLD",
   "url": "https://musick.com.au/venue/villa-noosa-hotel-the-v-room/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -4291,8 +4291,8 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "https://songkick.com/venues/4618843-hopfields-brewery",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -4318,8 +4318,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/4396635-prince-consort-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4327,8 +4327,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/45256-met",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4345,8 +4345,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/4615625-sirromet",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4363,8 +4363,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/35555-riverstage-brisbane",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4381,8 +4381,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://brisbanejazzclub.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Brisbane"
  },
  {
@@ -4390,8 +4390,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/33435-brisbane-entertainment-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4471,8 +4471,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/4337629-moshpit",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4687,8 +4687,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/35559-state-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4714,8 +4714,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://songkick.com/venues/4447295-bootleggers",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4750,8 +4750,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.cactusroom.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4768,8 +4768,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://baroussou.com",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4804,8 +4804,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://beta.songkick.com/venues/3933069-bar-303",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4813,8 +4813,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://songkick.com/venues/934581-nighthawks",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4822,8 +4822,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.musicosity.com.au/venues/george-lane",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4858,8 +4858,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://visit.brisbane.qld.au/whats-on/inner-city/live-performances/oasis-unplugged-by-noasis-at-pig-n-whistle-brunswick-street-b1fa",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4867,8 +4867,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/4656221-season-three",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4921,8 +4921,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/58175-festival-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -4930,8 +4930,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/4545750-aldinga-institute-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Adelaide"
  },
  {
@@ -4966,8 +4966,8 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4561009-dodges-ferry-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -4984,8 +4984,8 @@
   "city": "Fremantle",
   "state": "WA",
   "url": "https://www.songkick.com/venues/3128414-fremantle-prison",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fremantle"
  },
  {
@@ -4993,8 +4993,8 @@
   "city": "Fremantle",
   "state": "WA",
   "url": "https://www.songkick.com/venues/4473110-port-beach-brewery",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fremantle"
  },
  {
@@ -5020,8 +5020,8 @@
   "city": "Launceston",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/89203-silverdome",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Launceston & Tamar"
  },
  {
@@ -5038,8 +5038,8 @@
   "city": "Burnie",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4448858-communion-brewing-co",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -5056,8 +5056,8 @@
   "city": "Sisters Beach",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4530344-little-sisters-general-store",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -5065,8 +5065,8 @@
   "city": "Townsville",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/4664861-dancenorth-australia-townsville-city-australia",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Townsville"
  },
  {
@@ -5074,8 +5074,8 @@
   "city": "Cairns",
   "state": "QLD",
   "url": "https://musick.com.au/venue/salt-house/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
@@ -5083,8 +5083,8 @@
   "city": "Cairns",
   "state": "QLD",
   "url": "https://musick.com.au/venue/the-luxx-lounge/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
@@ -5101,8 +5101,8 @@
   "city": "Cairns",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/715116-cairns-convention-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
@@ -5110,8 +5110,8 @@
   "city": "Ararat",
   "state": "VIC",
   "url": "https://songkick.com/venues/4446516-ararat-town-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Ballarat"
  },
  {
@@ -5137,8 +5137,8 @@
   "city": "Bendigo",
   "state": "VIC",
   "url": "https://musick.com.au/venue/ulumbarra-theatre/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bendigo & Castlemaine"
  },
  {
@@ -5173,8 +5173,8 @@
   "city": "Gold Coast",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/4342094-burleigh-pavilion",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
@@ -5182,8 +5182,8 @@
   "city": "Gold Coast",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/4564109-marts-precinct",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
@@ -5200,8 +5200,8 @@
   "city": "Warrnambool",
   "state": "VIC",
   "url": "https://www.eventbrite.com.au/e/issi-dye-the-legends-of-rock-n-roll-show-tickets-1998938086627",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Warrnambool & Port Fairy"
  },
  {
@@ -5209,8 +5209,8 @@
   "city": "Mount Gambier",
   "state": "SA",
   "url": "https://allevents.in/org/limestone-coast-pantry/11787790",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mount Gambier"
  },
  {
@@ -5218,8 +5218,8 @@
   "city": "Gladstone",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/1753063-harvey-road-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Rockhampton & Yeppoon"
  },
  {
@@ -6010,8 +6010,8 @@
   "city": "Milton",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/176173-milton-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -6019,8 +6019,8 @@
   "city": "Wollongong",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/3267129-franks-wild-years",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -6028,8 +6028,8 @@
   "city": "Nowra",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/1152306-shoalhaven-entertainment-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -6037,8 +6037,8 @@
   "city": "Wollongong",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/1078691-ryans-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -6046,8 +6046,8 @@
   "city": "Wollongong",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/4272084-society-city",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -6055,8 +6055,8 @@
   "city": "Huskisson",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/4442907-jervis-bay-brewing-co",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
