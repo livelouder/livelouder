@@ -7453,5 +7453,284 @@
   "checked": "2026-11-27",
   "status": "active",
   "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Edge Hill Tavern",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/edge-hill-tavern/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Barron Falls Hotel",
+  "city": "Kuranda",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Mt Molloy Hotel",
+  "city": "Mt Molloy",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "BAR36 at The Reef Hotel Casino",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Cazalys Cairns",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Surf Club Palm Cove",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Yorkeys Knob Boating Club",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Queensland Country Bank Stadium",
+  "city": "Townsville",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4368718-queensland-country-bank-stadium",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Townsville"
+ },
+ {
+  "venue": "Wendouree Centre for Performing Arts",
+  "city": "Ballarat",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "The Southern Hotel Toowoomba",
+  "city": "Toowoomba",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/the-southern-hotel-toowoomba/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Toowoomba"
+ },
+ {
+  "venue": "Australian Italian Club of Launceston",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
+ },
+ {
+  "venue": "Bar Urbane",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "https://www.discovertasmania.com.au/things-to-do/festivals-and-events/live-music-at-bar-urbane/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
+ },
+ {
+  "venue": "The Swan Hotel",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "The Left Bank",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "https://events.humanitix.com/the-left-bank-xmas-eve-2026",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "Fremantle Buffalo Club",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "Southport Sharks",
+  "city": "Gold Coast",
+  "state": "QLD",
+  "url": "https://southportsharks.com.au/live-weekend-entertainment/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gold Coast"
+ },
+ {
+  "venue": "The Boathouse",
+  "city": "Noosa",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/the-boathouse/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sunshine Coast & Noosa"
+ },
+ {
+  "venue": "Peace Run Records",
+  "city": "Sunshine Coast",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/peace-run-records-and-agency/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sunshine Coast & Noosa"
+ },
+ {
+  "venue": "Valley Social",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://www.swanvalley.com.au/Business-Listings/Valley-Social",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Old Habits Neighbourhood Bar",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://tixel.com/au/tickets/old-habits-neighbourhood-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Hotel Rottnest",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://tixel.com/au/tickets/hotel-rottnest",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Universal Bar",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://tixel.com/au/tickets/universal-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Don Russell Performing Arts Centre",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Honky Tonk Freo",
+  "city": "Fremantle",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Fremantle"
+ },
+ {
+  "venue": "The Local House Bar & Grill",
+  "city": "Perth",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Hotel Valern",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://tasguide.com.au/venues/hotel-valern/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Prince of Wales Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://tasguide.com.au/venues/prince-of-wales-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Maypole Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://tasguide.com.au/venues/maypole-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Paddy Wagon Hotel & Bistro",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://tasguide.com.au/venues/paddy-wagon-hotel-bistro/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Henry Jones Art Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://tasguide.com.au/venues/henry-jones-art-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Shipwright's Arms",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://tasguide.com.au/venues/shipwrights-arms/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
  }
 ]
