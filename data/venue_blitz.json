@@ -1,12 +1,11 @@
 {
  "runs": 9,
- "added": 654,
+ "added": 653,
  "retried": [
   "Alice Springs",
   "Hobart surrounds",
   "Kalgoorlie",
   "Mildura",
   "Toowoomba"
- ],
- "running": "2026-11-27T08:23:50Z"
+ ]
 }
