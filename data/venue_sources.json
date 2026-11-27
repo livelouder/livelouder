@@ -2463,9 +2463,9 @@
   "venue": "Theatre Royal",
   "city": "Hobart",
   "state": "TAS",
-  "url": "https://www.songkick.com/venues/34050-theatre-royal",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.theatreroyal.com.au/show-categories/music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -2490,9 +2490,9 @@
   "venue": "Wesley Anne",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "https://www.songkick.com/venues/550231-wesley-anne",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/venue/wesley-anne/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -2500,8 +2500,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://musick.com.au/venue/the-gem/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -2509,8 +2509,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://musick.com.au/venue/post-office-hotel/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -2527,8 +2527,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://musick.com.au/venue/the-jazzlab/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -2554,17 +2554,17 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://musick.com.au/venue/grace-darling-hotel/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Camelot Lounge",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.stickytickets.com.au/camelot/details",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.stickytickets.com.au/camelot/events",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2572,17 +2572,17 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/the-brass-monkey",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "The Bridge Hotel",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://moshtix.com.au/v2/venues/the-bridge-hotel/2247",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/the-bridge-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2590,8 +2590,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/the-mona-vale-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2599,8 +2599,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.glenstreet.com.au/whats-on/music",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2608,8 +2608,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/dee-why-rsl",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2617,8 +2617,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/burdekin-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2626,8 +2626,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://songkick.com/venues/119219-avalon-beach-rsl-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2635,8 +2635,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.hornsbyrsl.com.au/showroom-box-office/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -2644,8 +2644,8 @@
   "city": "Sunshine Coast",
   "state": "QLD",
   "url": "https://imperialhoteleumundi.com.au/whats-on",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -2653,8 +2653,8 @@
   "city": "Noosa",
   "state": "QLD",
   "url": "https://www.thej.com.au/category/live-music",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -2662,17 +2662,17 @@
   "city": "Noosa",
   "state": "QLD",
   "url": "https://themajestictheatre.com.au/eventsnew/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
   "venue": "Kings Beach Tavern",
   "city": "Sunshine Coast",
   "state": "QLD",
-  "url": "https://www.songkick.com/venues/961461-kings-beach-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/961461-kings-beach-tavern/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -2680,8 +2680,8 @@
   "city": "Sunshine Coast",
   "state": "QLD",
   "url": "https://theeventscentre.com.au/whats-on/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -2689,8 +2689,8 @@
   "city": "Gold Coast",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/soundlounge",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
@@ -2698,8 +2698,8 @@
   "city": "Gold Coast",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/mos-desert-clubhouse",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
@@ -2716,8 +2716,8 @@
   "city": "Gold Coast",
   "state": "QLD",
   "url": "https://hota.com.au/whats-on/live",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
@@ -2725,17 +2725,17 @@
   "city": "Gold Coast",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/burleigh-town-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
   "venue": "The Star Gold Coast",
   "city": "Gold Coast",
   "state": "QLD",
-  "url": "https://songkick.com/venues/1853763-star-gold-coast",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://songkick.com/venues/1853763-star-gold-coast/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gold Coast"
  },
  {
@@ -2743,8 +2743,8 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://www.ellingtonjazz.com.au/tc-events",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -2752,17 +2752,17 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://tixel.com/au/tickets/lynotts-lounge",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "The Ice Cream Factory",
   "city": "Perth",
   "state": "WA",
-  "url": "https://www.songkick.com/venues/3746349-ice-cream-factory",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/3746349-ice-cream-factory/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -2770,8 +2770,8 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://songkick.com/venues/118695-mandurah-performing-arts-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
