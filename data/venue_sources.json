@@ -3751,8 +3751,8 @@
   "city": "Tanunda",
   "state": "SA",
   "url": "https://www.barossa.com/?p=31098",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3760,8 +3760,8 @@
   "city": "Nuriootpa",
   "state": "SA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3769,8 +3769,8 @@
   "city": "Greenock",
   "state": "SA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3778,8 +3778,8 @@
   "city": "Gawler",
   "state": "SA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3787,8 +3787,8 @@
   "city": "Gawler",
   "state": "SA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3796,8 +3796,8 @@
   "city": "Mount Gambier",
   "state": "SA",
   "url": "https://tixel.com/au/tickets/the-globe-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mount Gambier"
  },
  {
@@ -3805,8 +3805,8 @@
   "city": "Freeling",
   "state": "SA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3814,8 +3814,8 @@
   "city": "Lyndoch",
   "state": "SA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Barossa & Clare"
  },
  {
@@ -3823,8 +3823,8 @@
   "city": "Albany",
   "state": "WA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Great Southern"
  },
  {
@@ -3832,8 +3832,8 @@
   "city": "Albany",
   "state": "WA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Great Southern"
  },
  {
@@ -3841,8 +3841,8 @@
   "city": "Albany",
   "state": "WA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Great Southern"
  },
  {
@@ -3850,8 +3850,8 @@
   "city": "Albany",
   "state": "WA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Great Southern"
  },
  {
@@ -3859,26 +3859,26 @@
   "city": "Albany",
   "state": "WA",
   "url": "https://artsandculture.albany.wa.gov.au/events/?c=130",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Great Southern"
  },
  {
   "venue": "Shearwater Tavern",
   "city": "Port Sorell",
   "state": "TAS",
-  "url": "https://www.songkick.com/venues/4355503-shearwater-resort",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/venue/shearwater-tavern/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
   "venue": "Island State Brewing - The Pier",
   "city": "Ulverstone",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/venue/island-state-brewing-the-pier-ulverstone/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -3886,8 +3886,8 @@
   "city": "Evandale",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4399107-clarendon-arms",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Launceston & Tamar"
  },
  {
@@ -3895,26 +3895,26 @@
   "city": "Launceston",
   "state": "TAS",
   "url": "https://songkick.com/venues/1755183-tramsheds",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Launceston & Tamar"
  },
  {
   "venue": "The Don Theatre",
   "city": "Wynyard",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/host/rennie-pearson-music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
   "venue": "Devonport RSL",
   "city": "Devonport",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/host/show-entertainment",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "North West"
  },
  {
@@ -4021,8 +4021,8 @@
   "city": "Mackay",
   "state": "QLD",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Mackay & Airlie Beach"
  },
  {
@@ -4039,8 +4039,8 @@
   "city": "Bowen",
   "state": "QLD",
   "url": "https://app.songkick.com/venues/4398416-queens-beach-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mackay & Airlie Beach"
  },
  {
@@ -4074,9 +4074,9 @@
   "venue": "Kilcunda Ocean View Hotel",
   "city": "Kilcunda",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://southcoastfm.au/gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -4120,8 +4120,8 @@
   "city": "Rutherglen",
   "state": "VIC",
   "url": "https://musick.com.au/venue/the-convent-brewery-rutherglen-convent/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Shepparton & Wangaratta"
  },
  {
@@ -4129,8 +4129,8 @@
   "city": "Warrnambool",
   "state": "VIC",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Warrnambool & Port Fairy"
  },
  {
@@ -4138,8 +4138,8 @@
   "city": "Mildura",
   "state": "VIC",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mildura"
  },
  {
@@ -4147,8 +4147,8 @@
   "city": "Mooroopna",
   "state": "VIC",
   "url": "https://riverlinksvenues.com.au/whats-on/upcoming-performances",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Shepparton & Wangaratta"
  },
  {
@@ -4183,17 +4183,17 @@
   "city": "Sunshine Coast",
   "state": "QLD",
   "url": "https://musick.com.au/venue/blackflag-brewing-coolum/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
   "venue": "Mapleton Public House",
   "city": "Mapleton",
   "state": "QLD",
-  "url": "https://musick.com.au/venue/mapleton-public-house-2/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/mapleton-public-house",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sunshine Coast & Noosa"
  },
  {
@@ -4210,8 +4210,8 @@
   "city": "Atherton",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/4643241-mt-uncle-distillery",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
@@ -4219,26 +4219,26 @@
   "city": "Cairns",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/4670093-events-watsons",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
   "venue": "Mojo's Bar",
   "city": "Fremantle",
   "state": "WA",
-  "url": "https://www.moshtix.com.au/v2/venues/mojos-bar/788",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://songkick.com/venues/169708-mojos-bar/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fremantle"
  },
  {
   "venue": "The River",
   "city": "Margaret River",
   "state": "WA",
-  "url": "https://events.humanitix.com/the-dreggs-live-at-the-river",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/the-river",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "South West"
  },
  {
@@ -4246,35 +4246,35 @@
   "city": "Queenscliff",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/1407733-queenscliff-town-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "The Sound Doctor",
   "city": "Anglesea",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/4366986-sound-doctor",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "Lorne Theatre",
   "city": "Lorne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/4549332-lorne-theatre",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "Bellarine Estate",
   "city": "Portarlington",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/3158819-bellarine-estate",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -4282,8 +4282,8 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "https://songkick.com/venues/4623828-mayfair-bar-and-bottle-shop",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -4300,8 +4300,8 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -4309,8 +4309,8 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/503056-salamanca-arts-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -4336,8 +4336,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/sandstone-point-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
