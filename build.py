@@ -215,8 +215,15 @@ if len(MAIN_CITIES) < 5:
 have_feed = bool(tm)
 
 # ---------------------------------------------------------------- helpers
-NAV = [("Gigs", "gigs/index.html"), ("This weekend", "this-weekend.html"), ("On sale", "on-sale.html"), ("Tours", "tours.html"),
-       ("Festivals", "festivals/index.html"), ("Genres", "genres/index.html"), ("News", "news/index.html"), ("Vinyl", "out-soon.html")]
+NAV = [("Gigs", "gigs/index.html"), ("Tours & festivals", "tours.html"), ("News", "news/index.html"), ("Vinyl", "out-soon.html")]
+# Pages that live under each menu item (for highlighting the menu, and the small sub-menu under the header).
+NAV_GROUP = {"this-weekend.html": "gigs/index.html", "on-sale.html": "gigs/index.html", "genres/index.html": "gigs/index.html",
+             "festivals/index.html": "tours.html", "most-wanted.html": "out-soon.html", "stories/index.html": "news/index.html"}
+SUBNAV = {"gigs/index.html": [("Gig guide", "gigs/index.html"), ("📍 Near me", "index.html#near"), ("This weekend", "this-weekend.html"), ("On sale soon", "on-sale.html"),
+                              ("Genres", "genres/index.html"), ("Regional", "gigs/regional.html"), ("Submit a gig", "submit-a-gig.html")],
+          "tours.html": [("Tours", "tours.html"), ("Festivals", "festivals/index.html")],
+          "out-soon.html": [("Out soon on vinyl", "out-soon.html"), ("Most wanted", "most-wanted.html")],
+          "news/index.html": [("News", "news/index.html"), ("Stories", "stories/index.html")]}
 
 def gcal(s, a_name):
     day = d(s["date"])
@@ -275,7 +282,12 @@ def _new_tab(m):
 
 def page(path, title, desc, body, active=None, extra_head="", image=""):
     r = "../" * path.count("/")
-    nav = "".join(f'<a href="{r}{h}"{" aria-current=page" if h == active else ""}>{n}</a>' for n, h in NAV)
+    group = NAV_GROUP.get(active, active)
+    nav = "".join(f'<a href="{r}{h}"{" aria-current=page" if h == group else ""}>{e(n)}</a>' for n, h in NAV)
+    subnav = ""
+    if group in SUBNAV:
+        subnav = ('<nav class="subnav" aria-label="In this section"><div class="wrap">' + "".join(
+            f'<a href="{r}{h}"{" aria-current=page" if h == path else ""}>{e(n)}</a>' for n, h in SUBNAV[group]) + '</div></nav>')
     canon = SITE + "/" + ("" if path == "index.html" else path.replace("index.html", ""))
     body = body.replace('href="/', 'href="' + r).replace('src="/', 'src="' + r).replace('action="/', 'action="' + r)
     og_img = f'<meta property="og:image" content="{e(image)}">' if image.startswith("http") else ""
@@ -294,7 +306,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
 <a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
 <button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}<button class="installbtn" type="button" hidden>📲 Get the app</button></nav>
-<form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>
+<form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>{subnav}
 <main>{body}</main>
 {signup_band(r)}
 <footer class="foot"><div class="wrap"><div><div class="wm">LIVE <span>LOUDER</span></div>
@@ -506,7 +518,7 @@ def fest_card(f):
 disc = "".join(f'<circle r="{r}" fill="none" stroke="#333" stroke-width="1.2"/>' for r in range(96, 238, 9))
 news_html = ""
 if news:
-    news_html = (f'<section class="band newsband"><div class="wrap"><div class="shead"><h2>Latest news</h2><a href="/news/index.html">All news →</a></div>'
+    news_html = (f'<section class="band newsband"><div class="wrap"><div class="shead"><h2>Latest news</h2><span class="shlinks"><a href="/stories/index.html">Stories</a> · <a href="/news/index.html">All news →</a></span></div>'
                  f'<div class="newsgrid">{news_card(news[0], True)}<div class="nlist">{"".join(news_card(n) for n in news[1:5])}</div></div></div></section>')
 gotw_html = ""
 if gotw:
@@ -647,22 +659,22 @@ hero_caps = (f'<div class="hcaps" aria-roledescription="carousel" aria-label="Fe
              f'<div class="cdots">{dots}</div></div>') if slides else ""
 home = f"""<section class="hero">{hero_bg}<div class="wrap">
 <h1 class="big wm">LIVE<span>LOUDER</span></h1>
-<p class="lede">Australian music news, every big gig and tour, festival guides, and what's coming out on vinyl.</p>
-<form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or city" aria-label="Search gigs"><button>Find gigs</button></form>
-{hero_caps}
-<div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
-<div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div></div></section>
+<p class="lede">Every gig near you. What your mates are going to. The records to match.</p>
+<form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or town" aria-label="Search gigs"><button>Find gigs</button></form>
+<div class="herobtns"><a class="hbtn" href="#near" data-nearme>📍 Gigs near me</a><a class="hbtn" href="/this-weekend.html">This weekend</a><a class="hbtn" href="/on-sale.html">On sale soon</a><a class="hbtn" href="/my-gigs.html">♥ My gigs</a></div>
+{hero_caps}</div></section>
+{near_html}
 <section class="band ffeedband" id="ffeed" hidden></section>
-{news_html}{gotw_html}{picks_html}
-{near_html}{sales_html}{genre_html}
-<section class="band"><div class="wrap split">
-<div><h2>This week</h2>{week_html}<a class="more" href="/gigs/index.html">Full gig guide ({len(shows):,} shows) →</a></div>
-<div>{onsale_html}{fest_h}{fest_html}<h2 style="margin-top:36px">Stories</h2>{''.join(story_card(s) for s in stories[:3])}</div>
-</div></section>
-<section class="band" style="padding-top:0"><div class="wrap"><div class="shead"><h2>Just announced</h2><a href="/tours.html">All the big tours →</a></div><div class="grid">{''.join(tour_card(t) for t in announced)}</div></div></section>
-<section class="band" style="padding-top:0"><div class="wrap"><div class="shead"><h2>Out soon on vinyl</h2><a href="/out-soon.html">Full release list →</a></div><ul class="rel two">{rel_html}</ul></div></section>"""
-page("index.html", "Live Louder | Australian music news, gigs, tours and new vinyl",
-     "Australian music news, every big gig and tour by city, festival guides, and what's coming out on vinyl.", home)
+<section class="band bigband"><div class="wrap">
+<div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
+<div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div><a class="more light" href="/gigs/index.html">Full gig guide ({len(shows):,} shows) →</a></div></section>
+<section class="band"><div class="wrap"><div class="shead"><h2>Just announced</h2><a href="/tours.html">All tours →</a></div><div class="grid">{''.join(tour_card(t) for t in announced)}</div></div></section>
+{sales_html}
+{news_html}
+{picks_html or gotw_html}
+<section class="band"><div class="wrap"><div class="shead"><h2>Out soon on vinyl</h2><a href="/out-soon.html">Full release list →</a></div><ul class="rel two">{rel_html}</ul></div></section>"""
+page("index.html", "Live Louder | Every gig near you, your mates' gigs, and the records to match",
+     "Find gigs near you anywhere in Australia, see what your friends are going to, and keep your record collection. Tours, presales, news and new vinyl.", home)
 
 # ---------------------------------------------------------------- news
 lead = news_card(news[0], True) if news else ""

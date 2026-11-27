@@ -204,6 +204,13 @@ document.addEventListener("click", function (ev) {
     }
     function setLoc(l) { l.city = nearestCity(l); saveLoc(l); if (l.city) { sel.value = l.city; LL.setCity(l.city); } box.hidden = true; btn.setAttribute('aria-expanded', 'false'); render(); }
     btn.addEventListener('click', () => { box.hidden = !box.hidden; btn.setAttribute('aria-expanded', String(!box.hidden)); });
+    // "📍 Gigs near me" in the top banner: jump down, and ask where you are if we don't know yet.
+    document.querySelectorAll('[data-nearme]').forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('near').scrollIntoView({behavior: 'smooth', block: 'start'});
+      if (!loc) { box.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+    }));
+    if (location.hash === '#near' && !loc) { box.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
     km.addEventListener('change', () => { try { localStorage.setItem('llKm', km.value); } catch (e) {} render(); });
     sel.addEventListener('change', () => { saveLoc(null); LL.setCity(sel.value); box.hidden = true; render(); });
     $('locGps').addEventListener('click', () => {
