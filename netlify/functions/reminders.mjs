@@ -29,6 +29,46 @@ function row(title, sub, href, label) {
 <div style="${FONT};font-size:14px;color:${MUTED};margin-top:3px">${esc(sub)}</div>
 ${href ? `<div style="margin-top:8px"><a href="${esc(utm(href))}" style="${FONT};font-size:14px;font-weight:bold;color:${RED};text-decoration:none">${esc(label)} →</a></div>` : ""}</td></tr></table></td></tr>`;
 }
+const HEATHEN = "https://heathenrecords.com.au/search?type=product&q=";
+const heathen = (q) => HEATHEN + encodeURIComponent(q) + "&utm_source=livelouder&utm_medium=email&utm_campaign=reminder";
+function btn(href, label, solid) {
+  return `<a href="${esc(href)}" style="display:inline-block;margin:0 8px 8px 0;${FONT};font-size:14px;font-weight:bold;text-decoration:none;padding:11px 18px;border-radius:999px;${solid ? `background:${RED};color:#fff;border:2px solid ${RED}` : `background:#fff;color:${INK};border:2px solid ${INK}`}">${esc(label)}</a>`;
+}
+// The big card for the next gig: photo, name, when and where, buttons, then records to play before the show.
+function gigHero(g, when, art) {
+  const x = g.gig, page = x.p ? SITE + x.p : `${SITE}/artists/${x.s || ""}.html`;
+  // Wide photos run edge to edge; square artist photos sit on a dark band (cropping isn't reliable in Gmail).
+  const pic = !art?.img
+    ? `<tr><td style="background:${INK};padding:34px 32px;border-bottom:6px solid ${RED}">&nbsp;</td></tr>`
+    : art.wide
+      ? `<tr><td style="padding:0;border-bottom:6px solid ${RED}"><a href="${esc(utm(page))}"><img src="${esc(art.img)}" width="600" alt="${esc(x.a)}" style="display:block;width:100%;max-width:600px;height:auto;border:0"></a></td></tr>`
+      : `<tr><td align="center" style="background:${INK};padding:28px 32px;border-bottom:6px solid ${RED}"><a href="${esc(utm(page))}"><img src="${esc(art.img)}" width="250" height="250" alt="${esc(x.a)}" style="display:block;width:250px;height:250px;border-radius:50%;border:0"></a></td></tr>`;
+  const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${x.v}, ${x.c}`)}`;
+  let recs = "";
+  if (art?.recs?.length) {
+    const cells = art.recs.slice(0, 4).map((r) => `<td width="25%" valign="top" style="padding:0 5px;text-align:center">
+<a href="${esc(heathen(`${x.a} ${r[0]}`))}" style="text-decoration:none"><img src="${esc(r[2])}" width="122" alt="${esc(r[0])}" style="display:block;width:100%;max-width:122px;height:auto;border-radius:4px;border:0;margin:0 auto">
+<div style="${FONT};font-size:12px;line-height:1.3;color:${INK};font-weight:bold;margin-top:6px">${esc(r[0])}</div>${r[1] ? `<div style="${FONT};font-size:11px;color:${MUTED}">${esc(r[1])}</div>` : ""}</a></td>`).join("");
+    recs = `<tr><td style="padding:22px 27px 4px"><div style="padding:0 5px;${HEAD};font-size:22px;color:${INK};text-transform:uppercase">Before the show</div>
+<div style="padding:2px 5px 12px;${FONT};font-size:14px;color:${MUTED}">Get the songs in your head. Tap a record to find it on vinyl.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${cells}</tr></table></td></tr>`;
+  }
+  return `${pic}
+<tr><td style="padding:24px 32px 0"><span style="display:inline-block;background:${RED};color:#fff;${FONT};font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:3px">${esc(when)}</span>
+<div style="${HEAD};font-size:40px;line-height:1.05;color:${INK};text-transform:uppercase;margin-top:12px">${esc(x.a)}</div>
+<div style="${FONT};font-size:16px;line-height:1.5;color:${INK};margin-top:8px"><b>${esc(dayName(x.d))}${x.tm ? " · " + esc(x.tm) : ""}</b><br>${esc(x.v)}, ${esc(x.c)}</div></td></tr>
+<tr><td style="padding:18px 32px 0">${btn(utm(x.u || page), g.going ? "Your tickets" : "Get tickets", true)}${btn(map, "Directions")}${btn(utm(page), "Gig page")}</td></tr>
+${recs}`;
+}
+// Smaller card for any other gigs in the same email.
+function gigRow(g, when, art) {
+  const x = g.gig, page = x.p ? SITE + x.p : `${SITE}/artists/${x.s || ""}.html`;
+  const thumb = art?.img ? `<td width="76" valign="top" style="padding:12px 0 12px 12px"><img src="${esc(art.img)}" width="64" height="64" alt="" style="display:block;width:64px;height:64px;object-fit:cover;border-radius:4px;border:0"></td>` : "";
+  return `<tr><td style="padding:6px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e3dfd6;border-radius:6px"><tr>${thumb}
+<td style="padding:12px 16px"><div style="${FONT};font-size:16px;font-weight:bold;color:${INK}">${esc(x.a)}</div>
+<div style="${FONT};font-size:14px;color:${MUTED};margin-top:3px">${esc(when)}${x.tm ? " · " + esc(x.tm) : ""} · ${esc(x.v)}, ${esc(x.c)}</div>
+<div style="margin-top:8px"><a href="${esc(utm(x.u || page))}" style="${FONT};font-size:14px;font-weight:bold;color:${RED};text-decoration:none">${g.going ? "Tickets & details" : "Get tickets"} →</a></div></td></tr></table></td></tr>`;
+}
 function section(h) { return `<tr><td style="padding:24px 32px 6px"><div style="${HEAD};font-size:26px;color:${INK};text-transform:uppercase">${esc(h)}</div></td></tr>`; }
 function wrap(rows, preview) {
   return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -65,7 +105,8 @@ export default async () => {
   };
   const sb = createClient(SB_URL, key, { auth: { persistSession: false, autoRefreshToken: false }, global: { fetch: fetchKey } });
   const today = sydney(), soon = addDays(today, 3);
-  let feed = { sales: [], tours: [] };
+  let feed = { sales: [], tours: [] }, artMap = {};
+  try { artMap = await (await fetch(`${SITE}/data/email-art.json`)).json(); } catch (e) { console.log("no email art", e.message); }
   try { feed = await (await fetch(`${SITE}/data/alerts-feed.json`)).json(); } catch (e) { console.log("no alerts feed", e.message); }
   const now = Date.now(), until = now + 36 * 3600 * 1000;
   const sales = (feed.sales || []).filter((x) => { const t = Date.parse(x.when); return t > now && t <= until; });
@@ -101,17 +142,17 @@ export default async () => {
     const email = u?.user?.email;
     if (error || !email) continue;
     const t = todo[uid];
-    let rows = `<tr><td style="padding:28px 32px 0;${FONT};font-size:17px;line-height:1.55;color:${INK}">Here's what's coming up for you.</td></tr>`;
+    let rows = "";
     const subj = [];
     if (t.gigs.length) {
       t.gigs.sort((a, b) => a.gig.d.localeCompare(b.gig.d));
-      rows += section(t.gigs.length === 1 ? "Your gig is coming up" : "Your gigs are coming up");
-      for (const g of t.gigs) {
-        const x = g.gig, when = x.d === today ? "Tonight" : x.d === addDays(today, 1) ? "Tomorrow" : dayName(x.d);
-        rows += row(x.a, `${when}${x.tm ? " · " + x.tm : ""} · ${x.v}, ${x.c}`, x.u, g.going ? "Tickets & details" : "Get tickets");
-      }
+      const whenOf = (d) => d === today ? "Tonight" : d === addDays(today, 1) ? "Tomorrow" : dayName(d);
+      const artOf = (x) => artMap[x.s] || artMap[(x.a || "").toLowerCase().replace(/&/g, "and").replace(/'/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")];
+      t.gigs.forEach((g, i) => { rows += i === 0 ? gigHero(g, whenOf(g.gig.d), artOf(g.gig)) : (i === 1 ? section("Also coming up") : "") + gigRow(g, whenOf(g.gig.d), artOf(g.gig)); });
       const g0 = t.gigs[0].gig;
       subj.push(g0.d === today ? `${g0.a} is tonight` : g0.d === addDays(today, 1) ? `${g0.a} is tomorrow` : `${g0.a} is coming up`);
+    } else {
+      rows += `<tr><td style="padding:28px 32px 0;${FONT};font-size:17px;line-height:1.55;color:${INK}">Here's what's coming up for you.</td></tr>`;
     }
     if (t.sales.length) {
       rows += section("Tickets go on sale");

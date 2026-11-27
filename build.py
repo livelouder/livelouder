@@ -1244,6 +1244,17 @@ page("u/index.html", "A Live Louder profile | Live Louder", "Gigs they're going 
 (OUT / "data" / "artists.json").write_text(json.dumps({a["slug"]: [a["name"], a.get("photo", ""), a["gb"],
     a["shows"][0]["date"] if a["shows"] else "", a["shows"][0]["city"] if a["shows"] else "", len(a["shows"])] for a in artists.values()}, separators=(",", ":")))
 (OUT / "data" / "releases.json").write_text(json.dumps([i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S], separators=(",", ":")))
+# Pictures for the reminder emails: the artist's best photo and up to 4 records, for artists playing in the next 10 days.
+_soon = (TODAY + dt.timedelta(days=10)).date().isoformat()
+_art = {}
+for a_ in artists.values():
+    if not any(TODAY_S <= x["date"] <= _soon for x in a_.get("shows", [])):
+        continue
+    recs_ = [[r["title"], r.get("year", ""), r["thumb"]] for r in ((a_.get("discogs") or {}).get("records") or [])[:4] if r.get("thumb")]
+    img_ = big_img(a_) or a_.get("photo", "")
+    if img_ or recs_:
+        _art[a_["slug"]] = {"img": img_, "wide": bool(big_img(a_)), "recs": recs_}
+(OUT / "data" / "email-art.json").write_text(json.dumps(_art, separators=(",", ":")))
 
 # ---------------------------------------------------------------- submit a gig
 metro_opts = "".join(f"<option>{e(m[0])}</option>" for m in feed.METROS)
