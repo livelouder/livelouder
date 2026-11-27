@@ -374,6 +374,15 @@ def gcard(s, extra=""):
     return (f'<a class="gcard{extra}" data-date="{s["date"]}" href="{gig_path(s)}">{face}<span class="gcd"><b>{x.day}</b><small>{x.strftime("%b")}</small></span>'
             f'<span class="gcin"><strong>{e(s["artist"])}</strong><span>{x.strftime("%a")} · {e(s["venue"])}, {e(s["city"])}</span></span></a>')
 
+def gthumb(s):
+    """Small square picture for a gig row: artist photo, else venue photo, else a colourful poster with initials."""
+    a_ = artists.get(slug(s["artist"])) or {}
+    u_ = re.sub(r"/1000x1000-", "/250x250-", a_.get("photo") or big_img(a_) or (vguides.get(venue_slug(s)) or {}).get("photo", ""))
+    if u_:
+        return f'<a class="gth" href="{gig_path(s)}" tabindex="-1" aria-hidden="true"><img src="{e(u_)}" alt="" loading="lazy" width="58" height="58"></a>'
+    ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", s["artist"])[:2]).upper()
+    return f'<a class="gth poster" href="{gig_path(s)}" tabindex="-1" aria-hidden="true" style="--h:{hue(s["artist"])}"><span>{e(ini)}</span></a>'
+
 def gig_row(s, show_artist=True, show_city=True):
     who = f'<a class="gname" href="{gig_path(s)}">{e(s["artist"])}</a>' if show_artist else ""
     sup = f'<span class="gsup">with {e(", ".join(s["support"]))}</span>' if s["support"] and show_artist else ""
@@ -387,8 +396,8 @@ def gig_row(s, show_artist=True, show_city=True):
     snap = json.dumps({"id": s["id"], "d": s["date"], "tm": s["time"], "a": s["artist"], "s": slug(s["artist"]), "v": s["venue"],
                        "c": s["city"], "u": s["url"], "vs": venue_slug(s), "p": gig_path(s)}, separators=(",", ":"))
     save = f'<button class="save" type="button" data-gig="{e(snap)}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button>'
-    return (f'<li class="gig" data-date="{s["date"]}" data-city="{e(s["city"])}"><a class="gd" href="{gig_path(s)}" aria-label="Gig details"><b>{d(s["date"]).day}</b>'
-            f'<small>{d(s["date"]).strftime("%b")}</small></a><div class="gi">{who}{sup}<span class="gw">{where}{t}</span>{sale}</div>'
+    return (f'<li class="gig{" th" if show_artist else ""}" data-date="{s["date"]}" data-city="{e(s["city"])}"><a class="gd" href="{gig_path(s)}" aria-label="Gig details"><b>{d(s["date"]).day}</b>'
+            f'<small>{d(s["date"]).strftime("%b")}</small></a>{gthumb(s) if show_artist else ""}<div class="gi">{who}{sup}<span class="gw">{where}{t}</span>{sale}</div>'
             f'<div class="ga"><a href="{e(s["url"])}" rel="noopener">{label} ↗</a><span class="ga2"><a class="cal" href="{e(gcal(s, s["artist"]))}" rel="noopener">+ Calendar</a>{save}</span></div></li>')
 
 def gig_list(items, **kw):

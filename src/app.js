@@ -63,7 +63,9 @@ window.LL = (function () {
     q.value = params.get('q') || ''; if (params.get('city')) city.value = params.get('city');
     else if (!params.get('q') && window.LL && LL.city() && [...city.options].some(o => o.value === LL.city())) city.value = LL.city();
     if (genre && params.get('genre')) genre.value = params.get('genre');
-    let when = 'all', shown = 80, all = [];
+    let when = 'all', shown = 80, all = [], pics = {a: {}, v: {}};
+    const pic = u => !u ? '' : u.startsWith('dz:') ? `https://cdn-images.dzcdn.net/images/artist/${u.slice(3)}/250x250-000000-80-0-0.jpg` : u;
+    const hueOf = n => { let h = 0; for (const ch of n) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
     const addDays = n => { const x = new Date(now); x.setDate(x.getDate() + n); return iso(x); };
     const weekend = () => { const dow = now.getDay(); return [[5, 6, 0].includes(dow) ? today : addDays(5 - dow), addDays((7 - dow) % 7)]; };
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -81,7 +83,10 @@ window.LL = (function () {
         const mk = longM[m - 1] + ' ' + y;
         if (mk !== month) { html += (month ? '</ul>' : '') + `<h3 class="month">${mk}</h3><ul class="gigs">`; month = mk; }
         const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
-        html += `<li class="gig"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div><div class="gi"><a class="gname" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${esc(s[2])}</a>` +
+        const u = pic(pics.a[s[3]] || pics.v[s[11]]), gp = esc(s[14] || (root + 'artists/' + s[3] + '.html'));
+        const th = u ? `<a class="gth" href="${gp}" tabindex="-1" aria-hidden="true"><img src="${esc(u)}" alt="" loading="lazy" width="58" height="58"></a>`
+          : `<a class="gth poster" href="${gp}" tabindex="-1" aria-hidden="true" style="--h:${hueOf(s[2])}"><span>${esc((s[2].match(/[A-Za-z0-9]+/g) || ['?']).slice(0, 2).map(w => w[0]).join('').toUpperCase())}</span></a>`;
+        html += `<li class="gig th"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div>${th}<div class="gi"><a class="gname" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${esc(s[2])}</a>` +
           (s[8] ? `<span class="gsup">with ${esc(s[8])}</span>` : '') + `<span class="gw"><a class="vlink" href="${root}venues/${esc(s[11])}.html">${esc(s[4])}</a>, ${esc(s[6])} · ${day}${s[1] ? ' ' + esc(s[1]) : ''}</span></div>` +
           `<div class="ga"><a href="${esc(s[7])}" rel="noopener">${['ticketmaster', 'submitted', 'found'].includes(s[9]) ? 'Tickets' : 'Details'} ↗</a><span class="ga2"><a class="cal" href="${esc(s[10])}" rel="noopener">+ Calendar</a>` +
           `<button class="save" type="button" data-gig="${esc(JSON.stringify({id: s[13], d: s[0], tm: s[1], a: s[2], s: s[3], v: s[4], c: s[6], u: s[7], vs: s[11], p: s[14]}))}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button></span></div></li>`;
@@ -99,7 +104,8 @@ window.LL = (function () {
     city.addEventListener('change', () => { shown = 80; if (city.value && window.LL) LL.setCity(city.value); render(); });
     if (genre) genre.addEventListener('change', () => { shown = 80; render(); });
     more.addEventListener('click', () => { shown += 120; render(); });
-    fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); })
+    Promise.all([fetch(root + 'gigs.json').then(r => r.json()), fetch(root + 'data/pics.json').then(r => r.json()).catch(() => null)])
+      .then(([d, p]) => { all = d; if (p) pics = p; render(); })
       .catch(() => { count.textContent = 'Could not load the gig list. Try refreshing the page.'; });
   }
 }
