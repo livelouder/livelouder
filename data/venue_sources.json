@@ -4722,9 +4722,9 @@
   "venue": "Castle Hill RSL",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.castlehillrsl.com.au/box-office",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.castlehillrsl.com.au/whats-on",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -4732,8 +4732,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://kingsgroversl.com.au/whats-on/entertainment/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4741,8 +4741,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.liverpoolcatholic.com.au/whats-on-categories/ticketed-events",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -4831,8 +4831,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.bunjilplace.com.au/node/2694",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4840,8 +4840,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://clocktowercentre.com.au/whats-on",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -4849,8 +4849,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/cleveland-sands-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -4894,8 +4894,8 @@
   "city": "Perth",
   "state": "WA",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -5002,8 +5002,8 @@
   "city": "Fremantle",
   "state": "WA",
   "url": "https://www.songkick.com/venues/247243-clancys-fish-pub-fremantle",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Fremantle"
  },
  {
@@ -5028,9 +5028,9 @@
   "venue": "Ironhorse Bar & Grill",
   "city": "Launceston",
   "state": "TAS",
-  "url": "https://www.ironhorsebar.com.au",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.greatwesterntiers.net.au/this-month/category/73-music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Launceston & Tamar"
  },
  {
@@ -5154,9 +5154,9 @@
   "venue": "Major Tom's",
   "city": "Kyneton",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/venue/major-toms/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bendigo & Castlemaine"
  },
  {
@@ -5191,8 +5191,8 @@
   "city": "Bundanoon",
   "state": "NSW",
   "url": "https://events.humanitix.com/host/bundanoon-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Southern Highlands & Goulburn"
  },
  {
