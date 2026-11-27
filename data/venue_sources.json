@@ -2788,8 +2788,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://www.jambase.com/venue/gang-gang-cafe-and-bar",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -2806,8 +2806,8 @@
   "city": "Canberra",
   "state": "NSW",
   "url": "https://theq.net.au/whats-on/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -2815,8 +2815,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://www.musicaviva.com.au/concerts/our-cities/canberra",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -2878,8 +2878,8 @@
   "city": "Darwin",
   "state": "NT",
   "url": "https://songkick.com/venues/4418251-mayberry",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Darwin"
  },
  {
@@ -2887,8 +2887,8 @@
   "city": "Darwin",
   "state": "NT",
   "url": "https://brownsmart.com.au/whats-on",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Darwin"
  },
  {
@@ -2896,8 +2896,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/koala-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2905,8 +2905,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/119004-old-museum",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2923,8 +2923,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://songkick.com/venues/528666-beenleigh-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2968,8 +2968,8 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://tixel.com/au/tickets/the-court-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -2977,8 +2977,8 @@
   "city": "Perth",
   "state": "WA",
   "url": "https://www.artsculturetrust.wa.gov.au/venues/subiaco-arts-centre/whats-on",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -3031,17 +3031,17 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://hopgood.countryarts.org.au/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
   "venue": "Adelaide Entertainment Centre",
   "city": "Adelaide",
   "state": "SA",
-  "url": "https://www.adelaideentertainmentcentre.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.adelaideentertainmentcentre.com.au/events/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -3049,35 +3049,35 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://tixel.com/au/tickets/her-majestys-theatre-i5l5",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
   "venue": "Exeter Hotel",
   "city": "Adelaide",
   "state": "SA",
-  "url": "https://theexeter.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/venue/exeter-hotel/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
   "venue": "Port Noarlunga Arts Centre",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://allevents.in/christie-downs/concerts",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
   "venue": "Shedley Theatre",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://allevents.in/elizabeth-au/theatre",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -3112,8 +3112,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/178678-beach-road-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -3121,8 +3121,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://songkick.com/venues/4630918-felons-barrel-room",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -3130,17 +3130,17 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/selina-s-coogee-bay-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "The Concourse Chatswood",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.theconcourse.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.theconcourse.com.au/jazz-at-the-lounge-2026/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -3184,8 +3184,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://drum.greaterdandenong.vic.gov.au/drum/events",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -3193,26 +3193,26 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://songkick.com/venues/3918919-merri-creek-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "170 Russell",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "https://www.songkick.com/venues/35426-170-russell",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/35426-170-russell/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
   "venue": "Palais Theatre",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "https://www.songkick.com/venues/1104131-palais-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/1104131-palais-theatre/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -3220,8 +3220,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.wyndham.vic.gov.au/node/26837",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -3265,8 +3265,8 @@
   "city": "Castlemaine",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/1932879-bridge-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bendigo & Castlemaine"
  },
  {
@@ -3283,8 +3283,8 @@
   "city": "Torquay",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/50334-torquay-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -3301,17 +3301,17 @@
   "city": "Geelong",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/4504790-medusa-bar",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "Eureka Hotel",
   "city": "Geelong",
   "state": "VIC",
-  "url": "https://www.songkick.com/venues/899036-eureka-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/4543353-eureka-bandroom",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -3319,8 +3319,8 @@
   "city": "Geelong",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/89707-wool-exchange",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -3328,8 +3328,8 @@
   "city": "Rockhampton",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/great-western-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Rockhampton & Yeppoon"
  },
  {
@@ -3337,8 +3337,8 @@
   "city": "Yeppoon",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/1858353-strand-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Rockhampton & Yeppoon"
  },
  {
@@ -3346,8 +3346,8 @@
   "city": "Rockhampton",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/leichhardt-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Rockhampton & Yeppoon"
  },
  {
@@ -3364,8 +3364,8 @@
   "city": "Mackay",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/the-seabreeze-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mackay & Airlie Beach"
  },
  {
@@ -3373,8 +3373,8 @@
   "city": "Mackay",
   "state": "QLD",
   "url": "https://songkick.com/venues/88582-mcguires-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mackay & Airlie Beach"
  },
  {
