@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const signedIn = window.ACC && ACC.user();
     $('uCta').innerHTML = P.me ? `<a class="btn" href="${root}my-gigs.html#settings">Edit my profile</a>`
       : `<button type="button" class="followbtn big${P.following ? ' on' : ''}" data-ufollow>${P.following ? 'Following' : signedIn ? 'Follow' : 'Follow ' + esc(first())}</button>`
+        + (P.following && P.follows_you ? `<a class="btn msgbtn" href="${root}messages.html?u=${encodeURIComponent(P.username)}">💬 Message</a>` : '')
         + (P.avatar || P.banner ? '<button type="button" class="linkish small reportlink" data-ureport>Report a photo</button>' : '');
     const going = P.gigs.filter(g => g.going).length;
     const stat = (n, l, t) => `<a class="stat" href="#${t}" data-utab="${t}"><b>${Number(n).toLocaleString()}</b><span>${l}</span></a>`;

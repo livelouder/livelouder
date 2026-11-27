@@ -134,12 +134,27 @@
     box.hidden = false;
   }
 
+  // ------------------------------------------------ unread messages (the number on the header's Messages button)
+  async function loadUnread(force) {
+    if (!signedIn() || document.getElementById('msgs')) return;
+    const show = n => document.querySelectorAll('.msgcount').forEach(b => { b.textContent = n > 99 ? '99+' : n; b.hidden = !n; });
+    try {
+      const c = JSON.parse(sessionStorage.getItem('llMsgN') || 'null');
+      if (!force && c && Date.now() - c.t < 60 * 1000) { show(c.n); return; }
+    } catch (e) {}
+    const r = await ACC.rpc('unread_messages');
+    if (r.error) return;
+    show(r.data || 0);
+    try { sessionStorage.setItem('llMsgN', JSON.stringify({t: Date.now(), n: r.data || 0})); } catch (e) {}
+  }
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) loadUnread(); });
+
   function start() {
     let was = null; try { was = localStorage.getItem('llSignedIn'); } catch (e) {}
     if (!window.ACC || !was) { const b = document.getElementById('ffeed'); if (b) b.hidden = true; return; }
-    ACC.session().then(u => { if (!u) { const b = document.getElementById('ffeed'); if (b) b.hidden = true; return; } loadGoing(); watch(); homeFeed(); });
+    ACC.session().then(u => { if (!u) { const b = document.getElementById('ffeed'); if (b) b.hidden = true; return; } loadGoing(); watch(); homeFeed(); loadUnread(); });
   }
   window.FRIENDS = {renderFeed, loadFeed: () => { feedP = null; return loadFeed(); }, annotate, face};
-  document.addEventListener('acc', () => { if (signedIn() && !going) { loadGoing(); watch(); homeFeed(); } });
+  document.addEventListener('acc', () => { if (signedIn() && !going) { loadGoing(); watch(); homeFeed(); loadUnread(); } });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

@@ -275,8 +275,10 @@ document.addEventListener('DOMContentLoaded', function () {
       : kind === 'follower' ? (p.following ? `<button type="button" class="followbtn on" data-unfollow="${esc(p.username)}">Following</button>` : `<button type="button" class="followbtn" data-follow="${esc(p.username)}">Follow back</button>`)
         + `<button type="button" class="linkish small" data-removefollower="${esc(p.username)}">Remove</button>`
       : p.following ? `<button type="button" class="followbtn on" data-unfollow="${esc(p.username)}">Following</button>` : `<button type="button" class="followbtn" data-follow="${esc(p.username)}">Follow</button>`;
+    const mutual = kind === 'follower' ? p.following : kind === 'following' && people && (people.followers || []).some(f => f.username === p.username);
+    const msg = mutual ? `<a class="followbtn on msgmini" href="${root}messages.html?u=${encodeURIComponent(p.username)}" aria-label="Message ${esc(p.name || p.username)}">💬</a>` : '';
     return `<div class="ptile">${p.shared ? `<a href="${purl(p.username)}">` : '<div>'}${avatar(p, 'fav')}<strong>${esc(p.name || p.username)}</strong><span class="handle">@${esc(p.username)}</span>${p.shared ? '</a>' : '</div>'}
-      <span class="anext">${esc(line)}</span><div class="pbtns">${btn}</div></div>`;
+      <span class="anext">${esc(line)}</span><div class="pbtns">${btn}${msg}</div></div>`;
   }
   function loadPeople(force) {
     if (!me() || peopleLoading || (people && !force)) return;
@@ -306,6 +308,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!me()) return empty('👋', 'Follow your friends', 'Sign in, then follow your friends to see which gigs they\'re going to and what\'s in their record collection.', '<button type="button" class="btn" data-signin>Sign in or create an account</button>');
     loadPeople();
     let h = shareBox();
+    let unread = 0; try { unread = (JSON.parse(sessionStorage.getItem('llMsgN') || 'null') || {}).n || 0; } catch (e) {}
+    h += `<a class="msgcta" href="${root}messages.html"><span aria-hidden="true">💬</span><span><b>Messages</b><span class="note">Chat with friends who follow you back</span></span><span class="msgcount"${unread ? '' : ' hidden'}>${unread || ''}</span><span aria-hidden="true">→</span></a>`;
     h += `<form class="recsearch findform" data-findpeople role="search"><input name="q" type="search" placeholder="Find friends by name or username" aria-label="Find friends" value="${esc(find.q)}" autocomplete="off"><button class="btn">Search</button></form>`;
     if (find.loading) h += '<p class="note">Searching…</p>';
     else if (find.results) h += find.results.length ? `<div class="shead"><h3>People matching "${esc(find.q)}"</h3><button type="button" class="linkish" data-clearfind>Clear</button></div><div class="pgrid">${find.results.map(p => personTile(p, 'search')).join('')}</div>`
@@ -356,7 +360,8 @@ document.addEventListener('DOMContentLoaded', function () {
     h += `<div class="card"><h3>Your account</h3>${u ? `<p>Signed in as <b>${esc(u.email || '')}</b></p><p class="acts"><button type="button" class="linkish" data-act="out">Sign out</button></p>`
       : `<p>You're not signed in, so everything here is saved on this device only.</p><button type="button" class="btn" data-signin>Sign in or create an account</button><p class="note">Free. No password needed.</p>`}</div>`;
     h += `<div class="card"><h3>Emails</h3>${u ? `<label class="tog"><input type="checkbox" data-pref="remind_gigs" ${p.remind_gigs !== false ? 'checked' : ''}> A reminder a few days before gigs I've saved</label>
-      <label class="tog"><input type="checkbox" data-pref="remind_presales" ${p.remind_presales !== false ? 'checked' : ''}> Presales, on-sales and new dates for artists I follow</label><p class="note">At most one email a day.</p>`
+      <label class="tog"><input type="checkbox" data-pref="remind_presales" ${p.remind_presales !== false ? 'checked' : ''}> Presales, on-sales and new dates for artists I follow</label>
+      <label class="tog"><input type="checkbox" data-pref="remind_messages" ${p.remind_messages !== false ? 'checked' : ''}> A friend sent me a message (if I haven't seen it)</label><p class="note">Gig and presale reminders come at most once a day. Message emails come at most every few hours.</p>`
       : '<p>Sign in to get a reminder before your gigs and a heads-up when presales start for artists you follow.</p>'}</div>`;
     h += `<div class="card"><h3>Records</h3><p>${recs('records').length.toLocaleString()} in your collection, ${recs('wants').length.toLocaleString()} on your wantlist.</p><p class="note" style="margin-top:0">Import from Discogs any time. Records you already have here are kept.</p>${linkForm(false)}</div>`;
     h += `<div class="card"><h3>Your data</h3><p>See our <a href="${root}privacy.html">privacy policy</a> for what we keep.</p>${u ? '<p class="acts"><button type="button" class="linkish danger" data-act="delete">Delete my account</button></p>' : ''}</div>`;

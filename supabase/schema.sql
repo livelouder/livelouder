@@ -429,3 +429,203 @@ create or replace function public.gig_diary(pid uuid) returns jsonb language sql
     order by s.gig->>'d' desc limit 60) x
 $$;
 revoke all on function public.gig_diary(uuid) from public, anon, authenticated;
+
+-- Messages (added 27 Nov 2026). Private messages between friends: you can only message someone when you both
+-- follow each other. Everything goes through the functions below, which check that, plus blocks, bans and limits.
+-- People can read their own messages directly too (needed for the live "new message" signal), but never write them.
+create table if not exists public.messages (
+  id bigint generated always as identity primary key,
+  sender uuid not null references auth.users(id) on delete cascade,
+  recipient uuid not null references auth.users(id) on delete cascade,
+  body text not null,
+  created_at timestamptz not null default now(),
+  read_at timestamptz,
+  notified boolean not null default false,          -- "you've got a message" email sent (or not needed)
+  hidden_for_sender boolean not null default false,   -- "Delete conversation" only hides it for you
+  hidden_for_recipient boolean not null default false,
+  check (sender <> recipient),
+  check (char_length(body) between 1 and 1000));
+create index if not exists messages_pair on public.messages (sender, recipient, id desc);
+create index if not exists messages_unread on public.messages (recipient) where read_at is null;
+create index if not exists messages_sender_time on public.messages (sender, created_at desc);
+alter table public.messages enable row level security;
+drop policy if exists "see own messages" on public.messages;
+create policy "see own messages" on public.messages for select to authenticated using ((select auth.uid()) in (sender, recipient));
+revoke all on public.messages from anon, authenticated;
+grant select on public.messages to authenticated;
+grant all on public.messages to service_role;
+-- Live updates: Supabase Realtime tells the browser straight away when a new message arrives.
+do $$ begin
+  if exists (select 1 from pg_publication where pubname = 'supabase_realtime')
+     and not exists (select 1 from pg_publication_tables where pubname = 'supabase_realtime' and schemaname = 'public' and tablename = 'messages') then
+    alter publication supabase_realtime add table public.messages;
+  end if;
+end $$;
+
+-- Blocking: you can block anyone. They can't message you or follow you, existing follows both ways are removed,
+-- and they're not told. Message bans are set by Mick from a report email (server only).
+create table if not exists public.user_blocks (
+  blocker uuid not null references auth.users(id) on delete cascade,
+  blocked uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (blocker, blocked),
+  check (blocker <> blocked));
+alter table public.user_blocks enable row level security;
+drop policy if exists "see own blocks" on public.user_blocks;
+create policy "see own blocks" on public.user_blocks for select to authenticated using ((select auth.uid()) = blocker);
+revoke all on public.user_blocks from anon, authenticated;
+grant select on public.user_blocks to authenticated;
+create table if not exists public.message_bans (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now());
+create table if not exists public.message_reports (
+  id bigint generated always as identity primary key,
+  reporter uuid references auth.users(id) on delete set null,
+  reported uuid references auth.users(id) on delete cascade,
+  message_id bigint, body text, reason text,
+  created_at timestamptz not null default now());
+alter table public.message_bans enable row level security;
+alter table public.message_reports enable row level security;
+grant all on public.user_blocks, public.message_bans, public.message_reports to service_role;
+alter table public.profiles add column if not exists remind_messages boolean not null default true;  -- "you've got a message" emails
+alter table public.profiles add column if not exists last_message_email timestamptz;
+
+create or replace function public.is_blocked(a uuid, b uuid) returns boolean language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.user_blocks where (blocker = a and blocked = b) or (blocker = b and blocked = a))
+$$;
+revoke all on function public.is_blocked(uuid, uuid) from public, anon, authenticated;
+
+-- Can I message this person? Returns 'ok', or why not: 'not_friends', 'blocked_by_you', 'blocked', 'banned'.
+create or replace function public.message_status(me uuid, t uuid) returns text language sql stable security definer set search_path = '' as $$
+  select case
+    when exists (select 1 from public.message_bans where user_id = me) then 'banned'
+    when exists (select 1 from public.user_blocks where blocker = me and blocked = t) then 'blocked_by_you'
+    when exists (select 1 from public.user_blocks where blocker = t and blocked = me) then 'blocked'
+    when exists (select 1 from public.follows where follower = me and followee = t)
+     and exists (select 1 from public.follows where follower = t and followee = me) then 'ok'
+    else 'not_friends' end
+$$;
+revoke all on function public.message_status(uuid, uuid) from public, anon, authenticated;
+
+-- Send a message. Limits keep spam out: 60 messages an hour, 20 a day for accounts less than a day old,
+-- and no more than 5 in a row to someone until they reply.
+create or replace function public.send_message(uname text, body text) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); t uuid; st text; b text := btrim(coalesce(body, '')); m public.messages; streak int;
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  select id into t from public.profiles where lower(username) = lower(uname);
+  if t is null or t = me then return jsonb_build_object('error', 'not_found'); end if;
+  if b = '' then return jsonb_build_object('error', 'empty'); end if;
+  if char_length(b) > 1000 then return jsonb_build_object('error', 'too_long'); end if;
+  st := public.message_status(me, t);
+  if st <> 'ok' then return jsonb_build_object('error', st); end if;
+  if (select count(*) from public.messages where sender = me and created_at > now() - interval '1 hour') >= 60 then
+    return jsonb_build_object('error', 'slow_down'); end if;
+  if (select created_at from auth.users where id = me) > now() - interval '1 day'
+     and (select count(*) from public.messages where sender = me and created_at > now() - interval '1 day') >= 20 then
+    return jsonb_build_object('error', 'new_account'); end if;
+  select count(*) into streak from public.messages x where x.sender = me and x.recipient = t
+    and x.id > coalesce((select max(y.id) from public.messages y where y.sender = t and y.recipient = me), 0);
+  if streak >= 5 and not exists (select 1 from public.messages y where y.sender = t and y.recipient = me) then
+    return jsonb_build_object('error', 'wait_reply'); end if;
+  insert into public.messages (sender, recipient, body) values (me, t, b) returning * into m;
+  return jsonb_build_object('id', m.id, 'body', m.body, 'at', m.created_at, 'mine', true);
+end $$;
+
+-- Your conversations, newest first, with the last message and how many are unread.
+create or replace function public.my_conversations() returns jsonb language sql stable security definer set search_path = '' as $$
+  with mine as (
+    select m.*, case when m.sender = auth.uid() then m.recipient else m.sender end other
+    from public.messages m
+    where (m.sender = auth.uid() and not m.hidden_for_sender) or (m.recipient = auth.uid() and not m.hidden_for_recipient)),
+  last as (select distinct on (other) other, id, body, created_at, sender = auth.uid() mine from mine order by other, id desc),
+  unread as (select other, count(*) n from mine where recipient = auth.uid() and read_at is null group by other)
+  select coalesce(jsonb_agg(public.person_card(l.other) - 'going' - 'records' - 'banner' || jsonb_build_object(
+      'last', l.body, 'at', l.created_at, 'mine', l.mine, 'unread', coalesce(u.n, 0),
+      'can', public.message_status(auth.uid(), l.other)) order by l.id desc), '[]'::jsonb)
+  from last l left join unread u on u.other = l.other
+  where not exists (select 1 from public.user_blocks b where b.blocker = auth.uid() and b.blocked = l.other)
+$$;
+
+-- One conversation (50 messages at a time, older ones with before_id). Opening it marks their messages as read.
+create or replace function public.conversation(uname text, before_id bigint default null) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); t uuid; msgs jsonb;
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  select id into t from public.profiles where lower(username) = lower(uname);
+  if t is null or t = me then return null; end if;
+  if before_id is null then
+    update public.messages set read_at = now() where sender = t and recipient = me and read_at is null;
+  end if;
+  select coalesce(jsonb_agg(jsonb_build_object('id', x.id, 'body', x.body, 'at', x.created_at, 'mine', x.sender = me,
+           'read', x.read_at is not null) order by x.id), '[]'::jsonb) into msgs
+  from (select * from public.messages m
+        where ((m.sender = me and m.recipient = t and not m.hidden_for_sender) or (m.sender = t and m.recipient = me and not m.hidden_for_recipient))
+          and (before_id is null or m.id < before_id)
+          and not exists (select 1 from public.user_blocks b where b.blocker = me and b.blocked = t and m.sender = t and m.created_at > b.created_at)
+        order by m.id desc limit 50) x;
+  return public.person_card(t) - 'going' - 'records' || jsonb_build_object('messages', msgs, 'can', public.message_status(me, t),
+    'more', jsonb_array_length(msgs) = 50,
+    'i_follow', exists (select 1 from public.follows where follower = me and followee = t),
+    'follows_me', exists (select 1 from public.follows where follower = t and followee = me));
+end $$;
+
+-- The red number on the Messages button.
+create or replace function public.unread_messages() returns int language sql stable security definer set search_path = '' as $$
+  select count(*)::int from public.messages m where m.recipient = auth.uid() and m.read_at is null and not m.hidden_for_recipient
+    and not exists (select 1 from public.user_blocks b where b.blocker = auth.uid() and b.blocked = m.sender)
+$$;
+
+-- "Delete conversation": hides it for you only. If either of you writes again, a fresh conversation starts.
+create or replace function public.delete_conversation(uname text) returns void language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); t uuid;
+begin
+  select id into t from public.profiles where lower(username) = lower(uname);
+  if me is null or t is null then return; end if;
+  update public.messages set hidden_for_sender = true where sender = me and recipient = t;
+  update public.messages set hidden_for_recipient = true, read_at = coalesce(read_at, now()) where sender = t and recipient = me;
+end $$;
+
+create or replace function public.block_user(uname text) returns void language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); t uuid;
+begin
+  select id into t from public.profiles where lower(username) = lower(uname);
+  if me is null or t is null or t = me then return; end if;
+  insert into public.user_blocks (blocker, blocked) values (me, t) on conflict do nothing;
+  delete from public.follows where (follower = me and followee = t) or (follower = t and followee = me);
+  update public.messages set read_at = coalesce(read_at, now()), notified = true where sender = t and recipient = me;
+end $$;
+create or replace function public.unblock_user(uname text) returns void language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); t uuid;
+begin
+  select id into t from public.profiles where lower(username) = lower(uname);
+  delete from public.user_blocks where blocker = me and blocked = t;
+end $$;
+create or replace function public.my_blocks() returns jsonb language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_agg(jsonb_build_object('username', p.username) order by b.created_at desc), '[]'::jsonb)
+  from public.user_blocks b join public.profiles p on p.id = b.blocked where b.blocker = auth.uid()
+$$;
+
+-- Following now also checks blocks (same as before otherwise).
+create or replace function public.follow_user(uname text) returns boolean language plpgsql security definer set search_path = '' as $$
+declare t uuid; me uuid := auth.uid();
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  select id into t from public.profiles where lower(username) = lower(uname) and share;
+  if t is null or t = me or public.is_blocked(me, t) then return false; end if;
+  if (select count(*) from public.follows where follower = me) >= 2000 then raise exception 'Following too many people'; end if;
+  insert into public.follows (follower, followee) values (me, t) on conflict do nothing;
+  return true;
+end $$;
+
+revoke all on function public.send_message(text, text) from public, anon;
+revoke all on function public.my_conversations() from public, anon;
+revoke all on function public.conversation(text, bigint) from public, anon;
+revoke all on function public.unread_messages() from public, anon;
+revoke all on function public.delete_conversation(text) from public, anon;
+revoke all on function public.block_user(text) from public, anon;
+revoke all on function public.unblock_user(text) from public, anon;
+revoke all on function public.my_blocks() from public, anon;
+revoke all on function public.follow_user(text) from public, anon;
+grant execute on function public.send_message(text, text), public.my_conversations(), public.conversation(text, bigint), public.unread_messages(),
+  public.delete_conversation(text), public.block_user(text), public.unblock_user(text), public.my_blocks(), public.follow_user(text) to authenticated;

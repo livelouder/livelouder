@@ -321,6 +321,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <link rel="stylesheet" href="{r}style.css">{extra_head}</head><body data-root="{r}">
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
 <a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
+<a class="msglink" href="{r}messages.html" hidden aria-label="Messages" title="Messages"><span aria-hidden="true">💬</span><span class="msgcount" hidden></span></a>
 <button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}<button class="installbtn" type="button" hidden>📲 Get the app</button></nav>
 <form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>{subnav}
 <main>{body}</main>
@@ -1206,6 +1207,13 @@ mg = """<div id="profile">
 <script src="/profile.js" defer></script>"""
 page("my-gigs.html", "My gigs | Live Louder", "Your saved gigs, followed artists and record collection on Live Louder.", mg)
 
+# ---------------------------------------------------------------- messages (between friends who follow each other, filled in by messages.js)
+msgp = """<div id="msgs" class="msgs"><div class="wrap msgwrap">
+<aside class="mlist" id="mList" aria-label="Your conversations"><p class="note">Loading…</p></aside>
+<section class="mthread" id="mThread" aria-label="Conversation"></section></div></div>
+<script src="/messages.js" defer></script>"""
+page("messages.html", "Messages | Live Louder", "Chat with your friends on Live Louder.", msgp, extra_head='<meta name="robots" content="noindex">')
+
 # ---------------------------------------------------------------- shared profiles (/u/<username>, filled in by people.js)
 pub = """<div id="pub">
 <section class="phero" id="uHero"><div class="wrap phero-in"><div class="pav" id="uAv" aria-hidden="true">♥</div>
@@ -1303,9 +1311,11 @@ pv = """<section class="page-title"><div class="wrap"><h1>Privacy</h1><p>What we
 <p>We use Google Analytics to understand how people use Live Louder: which pages get visited, roughly where visitors are (country and city), what device they use, how they found us, and actions like clicking through to buy tickets or saving a gig. Google Analytics uses cookies to do this. We use it only to make the site better, we don't use it to identify you, and we never sell it. You can opt out with Google's <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">opt-out browser add-on</a>, or by blocking cookies in your browser.</p>
 <h2>If you create an account</h2>
 <p>When you sign in (with an email link or with Google) we keep:</p>
-<ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>the records in your collection and wantlist</li><li>your username, the name you choose to show, and the profile and cover photos you upload, if you add them</li><li>the people you follow and who follows you</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
+<ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>the records in your collection and wantlist</li><li>your username, the name you choose to show, and the profile and cover photos you upload, if you add them</li><li>the people you follow and who follows you, and anyone you've blocked</li><li>messages you send and receive</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
 <p>We use these only to run your account: showing your gigs on every device and sending the reminder emails you've switched on. Accounts are stored with Supabase in their Sydney data centre.</p>
 <p>If you import from Discogs, we copy your public collection and wantlist into your Live Louder collection. You can remove records any time.</p><h2>Sharing your profile</h2><p>New accounts get a shared profile, so friends can find and follow you. You can make yours private any time: untick "Share my profile" in My gigs, Settings. (Accounts made before 27 November 2026 stay private unless the person switches sharing on.) When sharing is on, anyone with your link (livelouder.com.au/u/your-username) and people who follow you can see your name, username, photos, the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown. Switch sharing off and your profile goes private straight away. Photos you upload are checked automatically by Google's SafeSearch service to keep the site friendly. They're stored at a web address that isn't listed anywhere, and are deleted when you remove them or delete your account. Anyone signed in can report a photo, and reported photos are hidden until we've looked at them.</p>
+<h2>Messages</h2>
+<p>You can send private messages to friends when you both follow each other. Messages are only shown to you and the person you're talking to. We don't read them, except when one is reported to us: then we see the reported message and that person's recent messages to the reporter, so we can decide whether to stop them messaging. Anyone can block someone, which stops them messaging or following you. "Delete conversation" removes it for you; the other person keeps their copy. When an account is deleted, every message it sent or received is deleted too. If a message isn't read within a few minutes, we may email you to say who it's from (never what it says). You can switch these emails off in Settings.</p>
 <h2>Emails</h2>
 <p>Sign-in links and reminder emails are sent through Resend. If you sign up to the Live Louder Weekly newsletter or to artist alerts, your email (and the city or artists you picked) is kept by Kit, our newsletter service. Every newsletter has an unsubscribe link, and reminder emails can be switched off on the My gigs page.</p>
 <h2>Gig submissions</h2>
@@ -1316,7 +1326,7 @@ pv = """<section class="page-title"><div class="wrap"><h1>Privacy</h1><p>What we
 <p>Only the services that run the site: Netlify (hosting), Supabase (accounts), Resend (account emails), Kit (newsletter) and Google (if you choose to sign in with Google). We don't sell or rent your details to anyone.</p>
 <h2>Deleting your data</h2>
 <p>Signed in? Go to <a href="/my-gigs.html">My gigs</a> and choose "Delete my account". Your account and everything saved in it is deleted straight away. Newsletter subscribers can unsubscribe from any email. For anything else, or a copy of what we hold about you, email <a href="mailto:hello@livelouder.com.au">hello@livelouder.com.au</a>.</p>
-<p class="note">Last updated 26 November 2026.</p></div></section>"""
+<p class="note">Last updated 27 November 2026.</p></div></section>"""
 page("privacy.html", "Privacy | Live Louder", "What Live Louder collects, why, and how to delete it.", pv)
 
 # Data for the daily reminder emails (netlify/functions/reminders.mjs): presales and on-sales, and newly announced tours.
@@ -1348,12 +1358,13 @@ shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
 shutil.copy(ROOT / "src/people.js", OUT / "people.js")
 shutil.copy(ROOT / "src/friends.js", OUT / "friends.js")
+shutil.copy(ROOT / "src/messages.js", OUT / "messages.js")
 shutil.copy(ROOT / "src/sw.js", OUT / "sw.js")
 for icon in (ROOT / "src/icons").iterdir():
     shutil.copy(icon, OUT / icon.name)
 (OUT / "site.webmanifest").write_text(json.dumps({"id": "/", "name": "Live Louder", "short_name": "Live Louder", "start_url": "/?app=1", "scope": "/", "display": "standalone",
     "description": "Australian gigs, your friends, and your records in one place.", "background_color": "#141414", "theme_color": "#141414",
-    "shortcuts": [{"name": "My gigs", "url": "/my-gigs.html"}, {"name": "Gig guide", "url": "/gigs/index.html"}, {"name": "This weekend", "url": "/this-weekend.html"}],
+    "shortcuts": [{"name": "My gigs", "url": "/my-gigs.html"}, {"name": "Messages", "url": "/messages.html"}, {"name": "Gig guide", "url": "/gigs/index.html"}, {"name": "This weekend", "url": "/this-weekend.html"}],
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
 urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "submit-a-gig.html", "about.html", "privacy.html"] \
     + [f"genres/{slug(g)}.html" for g in GENRE_LIST] \

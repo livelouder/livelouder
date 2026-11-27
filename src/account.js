@@ -12,7 +12,7 @@
 
   // Only load the sign-in library when it's needed: on My gigs, when coming back from a sign-in link,
   // or when this browser has signed in before.
-  const needed = document.getElementById('profile') || document.getElementById('pub') || /access_token|error_description|type=magiclink/.test(location.hash + location.search) || lsGet('llSignedIn');
+  const needed = document.getElementById('profile') || document.getElementById('pub') || document.getElementById('msgs') || /access_token|error_description|type=magiclink/.test(location.hash + location.search) || lsGet('llSignedIn');
   let readyP = null;
   function ready() {
     if (!readyP) readyP = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm').then(m => {
@@ -241,6 +241,16 @@
       return r.ok ? {} : {error: j.error || "Couldn't send that. Try again."};
     } catch (e) { return {error: "Couldn't send that. Try again."}; }
   }
+  // Messages: report one sent to you (netlify/functions/report-message.mjs), optionally blocking the sender too.
+  async function reportMessage(id, reason, block) {
+    const t = await token();
+    if (!t) return {error: 'Please sign in to report a message.'};
+    try {
+      const r = await fetch('/.netlify/functions/report-message', {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'application/json'}, body: JSON.stringify({id, reason, block: !!block})});
+      const j = await r.json().catch(() => ({}));
+      return r.ok ? {} : {error: j.error || "Couldn't send that. Try again."};
+    } catch (e) { return {error: "Couldn't send that. Try again."}; }
+  }
   async function removePhoto(kind) {
     const c = await ready();
     if (!c || !user) return {};
@@ -257,11 +267,13 @@
   // Header dot, and tell the My gigs page to redraw.
   function ui() {
     document.querySelectorAll('.mylink').forEach(a => a.classList.toggle('in', !!user));
+    document.querySelectorAll('.msglink').forEach(a => { a.hidden = !user; });
     document.dispatchEvent(new CustomEvent('acc'));
   }
 
   window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
-                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto, reportPhoto, rateGig, diary, removeGigPhoto};
+                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto, reportPhoto, rateGig, diary, removeGigPhoto,
+                reportMessage, client: ready};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }
