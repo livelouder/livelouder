@@ -5896,5 +5896,302 @@
   "checked": "2026-11-27",
   "status": "active",
   "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "The Manly Fig",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Ragtime Tavern",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/ragtime-tavern/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Mamma Chen's",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://ma.to/venue/mammachens",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Pride of Our Footscray Community Bar",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://www.trybooking.com/eventlist/pride",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "The Motley Bauhaus",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/the-motley-bauhaus/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Bodriggy Brewing Company",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/bodriggy-brewing-company/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "The Horn African Cafe & Restaurant",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/the-horn-african-cafe-restaurant/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Toronto Hotel (Live On The Lake)",
+  "city": "Newcastle",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hunter"
+ },
+ {
+  "venue": "Hiss & Crackle Records",
+  "city": "Newcastle",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4340364-hiss-and-crackle-records",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hunter"
+ },
+ {
+  "venue": "Bimbadgen",
+  "city": "Pokolbin",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/101083-bimbadgen",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hunter"
+ },
+ {
+  "venue": "Waves Towradgi Beach Hotel",
+  "city": "Wollongong",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/1890593-waves-towradgi-beach-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Marlin Hotel",
+  "city": "Ulladulla",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/231118-marlin-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "The Milton Theatre",
+  "city": "Milton",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/176173-milton-theatre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Frank's Wild Years",
+  "city": "Wollongong",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/3267129-franks-wild-years",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Shoalhaven Entertainment Centre",
+  "city": "Nowra",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/1152306-shoalhaven-entertainment-centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Ryan's Hotel",
+  "city": "Wollongong",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/1078691-ryans-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Society City",
+  "city": "Wollongong",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4272084-society-city",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Jervis Bay Brewing Co",
+  "city": "Huskisson",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4442907-jervis-bay-brewing-co",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Illawarra & South Coast"
+ },
+ {
+  "venue": "Sopo",
+  "city": "Gold Coast",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4459395-sopo",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gold Coast"
+ },
+ {
+  "venue": "Lonestar Tavern",
+  "city": "Gold Coast",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gold Coast"
+ },
+ {
+  "venue": "The Yard",
+  "city": "Gold Coast",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4670730-yard",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gold Coast"
+ },
+ {
+  "venue": "Kings Park & Botanic Garden",
+  "city": "Perth",
+  "state": "WA",
+  "url": "https://www.songkick.com/venues/50682-kings-park-and-botanic-garden",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Perth"
+ },
+ {
+  "venue": "Peregian Beach Hotel",
+  "city": "Sunshine Coast",
+  "state": "QLD",
+  "url": "https://peregianbeachhotel.com.au/whats-on/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sunshine Coast & Noosa"
+ },
+ {
+  "venue": "The Nook",
+  "city": "Cooroy",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sunshine Coast & Noosa"
+ },
+ {
+  "venue": "Blackflag Brewing Mooloolaba",
+  "city": "Sunshine Coast",
+  "state": "QLD",
+  "url": "https://www.blackflagbrewing.com.au/pages/events",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sunshine Coast & Noosa"
+ },
+ {
+  "venue": "Black Box Theatre",
+  "city": "Sunshine Coast",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/1121571-black-box-theatre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sunshine Coast & Noosa"
+ },
+ {
+  "venue": "Tablelands Music Lovers FNQ",
+  "city": "Atherton",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Waterfront Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://www.songkick.com/venues/4471469-waterfront-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Continental Hotel",
+  "city": "Sorrento",
+  "state": "VIC",
+  "url": "https://www.songkick.com/venues/46482-continental-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mornington Peninsula"
+ },
+ {
+  "venue": "Sorrento Portsea RSL (Tom Katz)",
+  "city": "Sorrento",
+  "state": "VIC",
+  "url": "https://www.trybooking.com/eventlist/tomkatz",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mornington Peninsula"
+ },
+ {
+  "venue": "Bairnsdale RSL",
+  "city": "Bairnsdale",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Gippsland"
+ },
+ {
+  "venue": "Tallagandra Hill Winery",
+  "city": "Gundaroo",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4397359-tallagandra-hill-winery",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "South Bank Cultural Forecourt (On The Banks)",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://songkick.com/venues/4629145-on-the-banks",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
  }
 ]
