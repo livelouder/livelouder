@@ -6193,5 +6193,608 @@
   "checked": "2026-11-27",
   "status": "active",
   "region": "Brisbane"
+ },
+ {
+  "venue": "Martians Saloon",
+  "city": "Deans Marsh",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/4662782-martians-saloon",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Manor Suite Wine Bar",
+  "city": "Wallington",
+  "state": "VIC",
+  "url": "https://songkick.com/venues/4588184-manor-suite-wine-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Bells Beach Brewing",
+  "city": "Torquay",
+  "state": "VIC",
+  "url": "https://www.jambase.com/venue/bells-beach-brewing",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Geelong Arts Centre",
+  "city": "Geelong",
+  "state": "VIC",
+  "url": "https://www.songkick.com/venues/4431761-geelong-arts-centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "St Mary of the Angels Basilica (Music at the Basilica)",
+  "city": "Geelong",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Potato Shed Theatre (Bellarine Arts Centre)",
+  "city": "Drysdale",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Globe Theatre Winchelsea",
+  "city": "Winchelsea",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Geelong & Surf Coast"
+ },
+ {
+  "venue": "Ballarat Trades Hall",
+  "city": "Ballarat",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "Ballaarat Mechanics' Institute",
+  "city": "Ballarat",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Ballarat"
+ },
+ {
+  "venue": "Chateau Dore Winery",
+  "city": "Bendigo",
+  "state": "VIC",
+  "url": "https://www.songkick.com/venues/4632307-chateau-dore-winery-and-receptions",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "The Coolroom at the Northern Arts Hotel",
+  "city": "Castlemaine",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "Castlemaine Town Hall",
+  "city": "Castlemaine",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Bendigo & Castlemaine"
+ },
+ {
+  "venue": "Flamingos Live",
+  "city": "Newcastle",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4578259-flamingos-live",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hunter"
+ },
+ {
+  "venue": "Tea Gardens Hotel",
+  "city": "Tea Gardens",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4669940-tea-gardens-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hunter"
+ },
+ {
+  "venue": "Newcastle Harness Racing Club",
+  "city": "Newcastle",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/1604683-newcastle-harness-racing-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hunter"
+ },
+ {
+  "venue": "Margaret River HEART",
+  "city": "Margaret River",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "South West"
+ },
+ {
+  "venue": "Dunsborough Hall",
+  "city": "Dunsborough",
+  "state": "WA",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "South West"
+ },
+ {
+  "venue": "Gilligans Cairns",
+  "city": "Cairns",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Parkview Tavern",
+  "city": "Gordonvale",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Atherton International Club",
+  "city": "Atherton",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Innisfail Shire Hall",
+  "city": "Innisfail",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Cairns & Port Douglas"
+ },
+ {
+  "venue": "Otherwise Bar",
+  "city": "Townsville",
+  "state": "QLD",
+  "url": "https://www.songkick.com/venues/4357168-otherwise-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Townsville"
+ },
+ {
+  "venue": "Craigie Knowe Vineyard",
+  "city": "Townsville",
+  "state": "QLD",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Townsville"
+ },
+ {
+  "venue": "FunHaus Factory (The Gosford Arts Centre)",
+  "city": "Gosford",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "Mangrove Mountain Hall",
+  "city": "Mangrove Mountain",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4352252-mangrove-mountain-hall",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Central Coast"
+ },
+ {
+  "venue": "The Arts Factory",
+  "city": "Byron Bay",
+  "state": "NSW",
+  "url": "https://musick.com.au/venue/the-arts-factory-byron-bay/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Northern Rivers"
+ },
+ {
+  "venue": "Club Byron (Byron Bay Bowls Club)",
+  "city": "Byron Bay",
+  "state": "NSW",
+  "url": "https://musick.com.au/venue/byron-bay-bowls-club-club-byron/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Northern Rivers"
+ },
+ {
+  "venue": "Mullumbimby Ex-Services Club",
+  "city": "Mullumbimby",
+  "state": "NSW",
+  "url": "https://musick.com.au/venue/mullumbimby-ex-services-club/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Northern Rivers"
+ },
+ {
+  "venue": "Pearces Creek Hall",
+  "city": "Pearces Creek",
+  "state": "NSW",
+  "url": "https://musick.com.au/venue/pearces-creek-hall/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Northern Rivers"
+ },
+ {
+  "venue": "Woopi Brewing Co",
+  "city": "Woolgoolga",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/4442232-woopi-brewing-co",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mid North Coast"
+ },
+ {
+  "venue": "Laurieton United Services Club",
+  "city": "Laurieton",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/648571-laurieton-united-services-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mid North Coast"
+ },
+ {
+  "venue": "Bellingen Memorial Hall",
+  "city": "Bellingen",
+  "state": "NSW",
+  "url": "https://songkick.com/venues/1065871-bellingen-memorial-hall",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mid North Coast"
+ },
+ {
+  "venue": "Bellingen Brewery",
+  "city": "Bellingen",
+  "state": "NSW",
+  "url": "https://musick.com.au/venue/bellingen-brewery/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mid North Coast"
+ },
+ {
+  "venue": "Oregon Hall",
+  "city": "Beechworth",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Shepparton & Wangaratta"
+ },
+ {
+  "venue": "Wagga Wagga Civic Theatre",
+  "city": "Wagga Wagga",
+  "state": "NSW",
+  "url": "https://civictheatre.com.au/whats-on",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Riverina & Murray"
+ },
+ {
+  "venue": "Kinross Woolshed",
+  "city": "Albury",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/257936-kinross-woolshed",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Riverina & Murray"
+ },
+ {
+  "venue": "Commercial Club Albury",
+  "city": "Albury",
+  "state": "NSW",
+  "url": "https://www.songkick.com/venues/4613464-albury-commercial-golf-club",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Riverina & Murray"
+ },
+ {
+  "venue": "Hotel Metropolitan",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://songkick.com/venues/4473105-hotel-metropolitan",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Blackwood RSL",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/venue-listing/blackwood-rsl/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Christies Beach Sailing Club",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/christies-sailing-club-christies-beach/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Waterloo Station Hotel",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/waterloo-station-hotel-paralowie/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Newmarket Hotel",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/newmarket-hotel-port-adelaide/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Rhino Room",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/rhino-room-adelaide/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Blue Gums Hotel",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/blue-gums-hotel-motel-fairview-park/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Gingers Vintage Lounge Bar",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/gingers-vintage-lounge-bar-goodwood/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Kick Back Brewing",
+  "city": "Adelaide",
+  "state": "SA",
+  "url": "https://pubsandevents.com.au/location/kick-back-brewing-aldinga/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Adelaide"
+ },
+ {
+  "venue": "Baxter's Lot",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://baxterslivemusic.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "The Vic Bar",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/the-vic-bar/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Classic Southside",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/classic-southside/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Brunswick Mechanics Institute",
+  "city": "Melbourne",
+  "state": "VIC",
+  "url": "https://beat.com.au/directory/brunswick-mechanics-institute/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Melbourne"
+ },
+ {
+  "venue": "Miranda Hotel",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/miranda-hotel",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Red Rattler Theatre",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "https://tixel.com/au/tickets/red-rattler-theatre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Seymour Centre",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Engadine Tavern",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Golden Barley Hotel",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "The Eveleigh Hotel",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Sydney"
+ },
+ {
+  "venue": "Soapbox Beer",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/soapbox-beer/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Hamilton Hotel",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://musick.com.au/venue/hamilton-hotel/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "JMI Live",
+  "city": "Brisbane",
+  "state": "QLD",
+  "url": "https://www.bandsintown.com/v/10403957-jmi-live",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Brisbane"
+ },
+ {
+  "venue": "Canberra Bowling Club",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Old Canberra Inn",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Dickson Taphouse",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "Wesley Music Centre",
+  "city": "Canberra",
+  "state": "ACT",
+  "url": "https://www.wesleymusiccanberra.org/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Canberra"
+ },
+ {
+  "venue": "In The Hanging Garden",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://musick.com.au/venue/in-the-hanging-garden/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Irish Murphy's Hobart",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "https://musick.com.au/venue/irish-murphys-hobart/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "New Sydney Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
+ },
+ {
+  "venue": "Customs House Hotel",
+  "city": "Hobart",
+  "state": "TAS",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Hobart"
  }
 ]
