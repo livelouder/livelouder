@@ -837,5 +837,67 @@
    ]
   ],
   "tickets": "https://www.destroyalllines.com"
+ },
+ {
+  "artist": "The Apartments",
+  "tour": "It's A Casino Life tour",
+  "support": "Team Building (Sydney), Renovator's Delight (Brisbane), Mick Harvey and Amanda Acevedo (Melbourne), Phantom Island (Perth)",
+  "note": "Canberra and Adelaide shows feature two sets from The Apartments.",
+  "source": "https://www.noise11.com/news/apartments-2027-australian-tour-20261127",
+  "genre": "Indie",
+  "added": "2026-11-28",
+  "dates": [
+   [
+    "2027-02-12",
+    "Sydney",
+    "LOW 302"
+   ],
+   [
+    "2027-02-13",
+    "Canberra",
+    "Smith's Alternative"
+   ],
+   [
+    "2027-02-20",
+    "Brisbane",
+    "The Junk Bar"
+   ],
+   [
+    "2027-02-27",
+    "Melbourne",
+    "Brunswick Ballroom"
+   ],
+   [
+    "2027-04-17",
+    "Perth",
+    "Lyric's Underground"
+   ],
+   [
+    "2027-04-24",
+    "Adelaide",
+    "The Wheatsheaf Hotel"
+   ]
+  ]
+ },
+ {
+  "artist": "Devon Allman Project",
+  "tour": "Australian tour 2027",
+  "support": "Billy Vincent",
+  "note": "Also appearing at Blues on Broadbeach. Presented by Love Police and Chugg Entertainment.",
+  "source": "https://www.noise11.com/news/devon-allman-project-australia-2027-20261127",
+  "genre": "Rock",
+  "added": "2026-11-28",
+  "dates": [
+   [
+    "2027-05-11",
+    "Sydney",
+    "Factory Theatre"
+   ],
+   [
+    "2027-05-12",
+    "Melbourne",
+    "The Corner"
+   ]
+  ]
  }
 ]
