@@ -23,9 +23,10 @@ const addDays = (iso, n) => { const d = new Date(iso + "T12:00:00Z"); d.setUTCDa
 const dayName = (iso) => new Date(iso + "T12:00:00Z").toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" });
 const saleWhen = (iso) => new Date(iso).toLocaleString("en-AU", { timeZone: "Australia/Sydney", weekday: "short", day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
 
-function row(title, sub, href, label) {
-  return `<tr><td style="padding:6px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e3dfd6;border-radius:6px"><tr>
-<td style="padding:12px 16px"><div style="${FONT};font-size:16px;font-weight:bold;color:${INK}">${esc(title)}</div>
+function row(title, sub, href, label, img) {
+  const thumb = img ? `<td width="88" valign="top" style="padding:12px 0 12px 12px"><img src="${esc(img)}" width="76" height="76" alt="" style="display:block;width:76px;height:76px;border-radius:4px;border:0"></td>` : "";
+  return `<tr><td style="padding:6px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e3dfd6;border-radius:6px;background:#fff"><tr>${thumb}
+<td valign="top" style="padding:12px 16px"><div style="${FONT};font-size:16px;font-weight:bold;color:${INK}">${esc(title)}</div>
 <div style="${FONT};font-size:14px;color:${MUTED};margin-top:3px">${esc(sub)}</div>
 ${href ? `<div style="margin-top:8px"><a href="${esc(utm(href))}" style="${FONT};font-size:14px;font-weight:bold;color:${RED};text-decoration:none">${esc(label)} →</a></div>` : ""}</td></tr></table></td></tr>`;
 }
@@ -63,7 +64,8 @@ ${recs}`;
 // Smaller card for any other gigs in the same email.
 function gigRow(g, when, art) {
   const x = g.gig, page = x.p ? SITE + x.p : `${SITE}/artists/${x.s || ""}.html`;
-  const thumb = art?.img ? `<td width="76" valign="top" style="padding:12px 0 12px 12px"><img src="${esc(art.img)}" width="64" height="64" alt="" style="display:block;width:64px;height:64px;object-fit:cover;border-radius:4px;border:0"></td>` : "";
+  const sq = art?.sq || (art && !art.wide ? art.img : "");
+  const thumb = sq ? `<td width="76" valign="top" style="padding:12px 0 12px 12px"><img src="${esc(sq)}" width="64" height="64" alt="" style="display:block;width:64px;height:64px;border-radius:4px;border:0"></td>` : "";
   return `<tr><td style="padding:6px 32px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e3dfd6;border-radius:6px"><tr>${thumb}
 <td style="padding:12px 16px"><div style="${FONT};font-size:16px;font-weight:bold;color:${INK}">${esc(x.a)}</div>
 <div style="${FONT};font-size:14px;color:${MUTED};margin-top:3px">${esc(when)}${x.tm ? " · " + esc(x.tm) : ""} · ${esc(x.v)}, ${esc(x.c)}</div>
@@ -158,13 +160,13 @@ export default async () => {
       rows += section("Tickets go on sale");
       for (const s of t.sales.sort((a, b) => a.when.localeCompare(b.when))) {
         const label = s.kind === "Presale" ? (s.name && !/presale/i.test(s.name) ? `${s.name} presale` : s.name || "Presale") : "General on-sale";
-        rows += row(`${s.artist}: ${label}`, `${saleWhen(s.when)} Sydney time · ${(s.cities || []).join(", ")}`, s.url, "Ticket page");
+        rows += row(`${s.artist}: ${label}`, `${saleWhen(s.when)} Sydney time · ${(s.cities || []).join(", ")}`, s.url, "Ticket page", s.img);
       }
       subj.push(`${t.sales[0].artist} tickets on sale soon`);
     }
     if (t.tours.length) {
       rows += section("Just announced");
-      for (const x of t.tours) rows += row(`${x.artist}: ${x.tour}`, (x.cities || []).join(", "), `${SITE}/artists/${x.slug}.html`, "Dates & tickets");
+      for (const x of t.tours) rows += row(`${x.artist}: ${x.tour}`, (x.cities || []).join(", "), `${SITE}/artists/${x.slug}.html`, "Dates & tickets", x.img);
       subj.push(`${t.tours[0].artist} just announced dates`);
     }
     const subject = subj.slice(0, 2).join(" · ");

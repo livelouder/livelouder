@@ -1253,7 +1253,7 @@ for a_ in artists.values():
     recs_ = [[r["title"], r.get("year", ""), r["thumb"]] for r in ((a_.get("discogs") or {}).get("records") or [])[:4] if r.get("thumb")]
     img_ = big_img(a_) or a_.get("photo", "")
     if img_ or recs_:
-        _art[a_["slug"]] = {"img": img_, "wide": bool(big_img(a_)), "recs": recs_}
+        _art[a_["slug"]] = {"img": img_, "wide": bool(big_img(a_)), "sq": a_.get("photo", ""), "recs": recs_}
 (OUT / "data" / "email-art.json").write_text(json.dumps(_art, separators=(",", ":")))
 
 # ---------------------------------------------------------------- submit a gig
@@ -1357,12 +1357,15 @@ page("privacy.html", "Privacy | Live Louder", "What Live Louder collects, why, a
 
 # Data for the daily reminder emails (netlify/functions/reminders.mjs): presales and on-sales, and newly announced tours.
 (OUT / "data").mkdir(parents=True, exist_ok=True)
+def _pic(name):
+    a_ = artists.get(slug(name)) or {}
+    return a_.get("photo", "") or big_img(a_)
 (OUT / "data" / "alerts-feed.json").write_text(json.dumps({
     "built": TODAY_S,
     "sales": [{"artist": x["artist"], "slug": slug(x["artist"]), "kind": x["kind"], "name": x["name"], "when": x["when"].isoformat(),
-               "cities": x["cities"][:6], "url": x["url"]} for x in upcoming_sales],
+               "cities": x["cities"][:6], "url": x["url"], "img": _pic(x["artist"])} for x in upcoming_sales],
     "tours": [{"artist": t["artist"], "slug": slug(t["artist"]), "tour": t["tour"], "added": t.get("added", ""),
-               "cities": sorted({x[1] for x in t["dates"]}), "first": t["dates"][0][0] if t["dates"] else ""}
+               "cities": sorted({x[1] for x in t["dates"]}), "first": t["dates"][0][0] if t["dates"] else "", "img": _pic(t["artist"])}
               for t in tours if t.get("added", "") >= (TODAY.date() - dt.timedelta(days=3)).isoformat()]}, separators=(",", ":")))
 
 # ---------------------------------------------------------------- about, thanks, 404, assets, sitemap
