@@ -771,3 +771,82 @@ body:has(#msgs) .signup{display:none}@media(max-width:760px){body:has(.msgs.mope
 .msgcount[hidden]{display:none}
 .msglink .msgcount{border:2px solid #141414}
 @media(max-width:440px){.top .wrap:has(.msglink:not([hidden])) .menu{font-size:0;gap:0;padding:0 11px}.top .wrap:has(.msglink:not([hidden])) .menu span{font-size:18px}}
+/* ---------------------------------------------------------------- homepage banner carousel (Nov 2026)
+   Full width; the middle slide is bright and the next ones peek in, darker, either side. Swipe, arrows or dots. */
+.hx{position:relative;background:#0b0b0b;padding:14px 0 34px;overflow:hidden}
+.hxtrack{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+ padding:0 calc((100% - var(--sw)) / 2);--sw:min(1120px,82vw);scroll-behavior:smooth}
+.hxtrack::-webkit-scrollbar{display:none}
+.hxs{flex:0 0 var(--sw);height:clamp(230px,38vh,420px);scroll-snap-align:center;position:relative;border-radius:14px;overflow:hidden;
+ background-color:#1b1b1b;background-size:cover;background-position:center 30%;color:#fff;text-decoration:none;
+ filter:brightness(.42) saturate(.8);transform:scale(.94);transition:filter .45s,transform .45s}
+.hxs.on{filter:none;transform:none}
+.hxs.sq{background-position:center 22%}
+.hxs.plain{background:radial-gradient(ellipse at 80% 20%,hsl(var(--h) 70% 38%) 0,hsl(var(--h) 60% 14%) 55%,#141414 100%)}
+.hxs::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,10,.92) 0,rgba(10,10,10,.35) 45%,rgba(10,10,10,0) 70%)}
+.hxcap{position:absolute;left:clamp(18px,3vw,36px);right:clamp(18px,3vw,36px);bottom:clamp(16px,2.6vw,30px);z-index:1;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.hxcap strong{font:400 clamp(30px,4.4vw,60px)/1 "Anton",Impact,sans-serif;text-transform:uppercase;max-width:18ch;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.hxcap .hsub{color:#e4ded4;font-size:clamp(14px,1.4vw,17px);max-width:60ch;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hxcap .hcta{margin-top:4px;display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:999px;background:var(--red);font-weight:700;font-size:15px}
+.hxs:hover .hcta{background:#fff;color:#141414}
+.hxgo{position:absolute;top:calc(14px + clamp(230px,38vh,420px) / 2);transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;
+ border:0;background:#fff;color:#141414;font:700 28px/1 "Archivo",sans-serif;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+.hxgo.prev{left:max(10px,calc((100% - min(1120px,82vw)) / 2 - 23px))}
+.hxgo.next{right:max(10px,calc((100% - min(1120px,82vw)) / 2 - 23px))}
+.hxgo:hover{background:var(--red);color:#fff}
+.hx .cdots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:8px}
+.hxbar{background:#141414;color:#f6f5f2;border-bottom:6px solid var(--red);padding:18px max(5vw,16px) 22px}
+.hxbar .wrap{display:grid;grid-template-columns:minmax(0,480px) minmax(0,1fr);gap:14px 24px;align-items:center}
+.hxh{grid-column:1/-1;margin:0;font:400 clamp(24px,2.6vw,34px)/1.1 "Anton",Impact,sans-serif;text-transform:uppercase;letter-spacing:.2px}
+.hxh span{color:var(--red)}
+.hxbar .bigsearch{margin:0;max-width:none}
+.hxbar .herobtns{margin:0}
+@media(max-width:860px){.hxbar .wrap{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.hxtrack{--sw:88vw;gap:10px}.hxs{height:min(62vw,300px)}.hxgo{display:none}.hx{padding:10px 0 30px}
+ .hxbar{padding:18px 16px 20px}.hxh{font-size:23px}}
+@media(prefers-reduced-motion:reduce){.hxtrack{scroll-behavior:auto}.hxs{transition:none}}
+/* ---------------------------------------------------------------- picture cards for gigs (homepage near you + big shows) */
+.gcard{position:relative;display:flex;flex-direction:column;min-width:0;background:#fff;color:#141414;border-radius:10px;overflow:hidden;text-decoration:none;
+ box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s}
+.gcard:hover{transform:translateY(-3px);box-shadow:0 10px 0 rgba(0,0,0,.2)}
+.gcpic{display:block;aspect-ratio:16/10;background:#1b1b1b center 25%/cover no-repeat}
+.gcpic.poster{display:grid;place-items:center;background:radial-gradient(circle at 70% 25%,hsl(var(--h) 75% 55%) 0,hsl(var(--h) 65% 32%) 55%,hsl(var(--h) 60% 16%) 100%);position:relative;overflow:hidden}
+.gcpic.poster::before{content:"";position:absolute;width:150%;aspect-ratio:1;right:-75%;top:-20%;border-radius:50%;
+ background:repeating-radial-gradient(circle,rgba(0,0,0,.25) 0 2px,transparent 2px 7px);opacity:.55}
+.gcpic.poster span{position:relative;font:400 clamp(40px,5vw,58px)/1 "Anton",Impact,sans-serif;color:rgba(255,255,255,.92);letter-spacing:1px}
+.gcd{position:absolute;top:10px;left:10px;background:#141414;color:#fff;border-radius:6px;text-align:center;padding:5px 9px 4px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.gcd b{display:block;font:400 22px/1 "Anton",Impact,sans-serif}.gcd small{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--red)}
+.gcin{display:flex;flex-direction:column;gap:3px;padding:10px 12px 12px}
+.gcin strong{font:400 19px/1.1 "Anton",Impact,sans-serif;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.gcin>span{font-size:13.5px;color:#4d4a45;line-height:1.35}
+.gcin .km{font-style:normal;font-weight:700;font-size:13px;color:var(--red)}
+.gcard:hover strong{color:var(--red)}
+.nearlist{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.stubs .gcard.big{flex:0 0 300px;scroll-snap-align:start}
+.stubs .gcard.big .gcin strong{font-size:22px}
+@media(max-width:600px){.nearlist{grid-template-columns:1fr 1fr;gap:10px}.gcin{padding:8px 10px 10px}.gcin strong{font-size:16px}.gcin>span{font-size:12.5px}
+ .gcd b{font-size:18px}.stubs .gcard.big{flex-basis:72vw}}
+/* ---------------------------------------------------------------- default cover + record avatars (Nov 2026)
+   No cover photo: stage lights in the person's own colour (--h) over a gig crowd with hands up (crowd.svg).
+   No profile photo: a vinyl record with their initial on the label. Uploaded photos sit on top and replace both. */
+.phero{--h:8;padding-top:clamp(150px,20vw,260px);
+ background-image:url("/crowd.svg"),
+  conic-gradient(from 168deg at 22% -12%,transparent 0deg,hsl(var(--h) 95% 70% / .32) 6deg,transparent 13deg),
+  conic-gradient(from 186deg at 78% -12%,transparent 0deg,hsl(calc(var(--h) + 40) 95% 70% / .28) 7deg,transparent 15deg),
+  conic-gradient(from 174deg at 50% -18%,transparent 0deg,rgba(255,255,255,.14) 5deg,transparent 11deg),
+  radial-gradient(ellipse at 50% -10%,hsl(var(--h) 85% 48%) 0,hsl(var(--h) 70% 22%) 38%,#141414 78%);
+ background-size:max(100%,1100px) auto,100% 100%,100% 100%,100% 100%,100% 100%;
+ background-position:center bottom,0 0,0 0,0 0,0 0;background-repeat:no-repeat}
+.phero.hasbanner{background-size:cover;background-position:center}
+.pav,.fav,.phav{--h:8;color:#fff;
+ background:
+  conic-gradient(from 20deg,rgba(255,255,255,0) 0 8%,rgba(255,255,255,.16) 13%,rgba(255,255,255,0) 19% 58%,rgba(255,255,255,.12) 63%,rgba(255,255,255,0) 69%),
+  radial-gradient(circle,#141414 0 3.5%,hsl(var(--h) 78% 50%) 4% 31%,#0d0d0d 32% 35%,transparent 35.5%),
+  repeating-radial-gradient(circle,#161616 0 1.6px,#242424 1.6px 3.2px)}
+.pav{font-size:30px;border-color:#f6f5f2}
+.phero.hasbanner .pav{font-size:36px}
+.fav b{font-size:24px;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.fav.sm b{font-size:14px}.fav.xs b{font-size:9px}
+.phav{font-size:20px}
+@media(max-width:600px){.pav{font-size:22px}.phero{padding-top:90px}}
+.phban.def{background:url("/crowd.svg") center bottom/140% auto no-repeat,radial-gradient(ellipse at 50% -10%,hsl(var(--h) 85% 48%) 0,hsl(var(--h) 70% 22%) 45%,#141414 85%)}

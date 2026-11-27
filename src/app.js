@@ -28,7 +28,7 @@ window.LL = (function () {
 
   // Hide shows that have already happened (the site is rebuilt daily, this covers the gap).
   document.querySelectorAll('[data-date]').forEach(el => {
-    if (el.dataset.date < today) { if (el.classList.contains('stub') || el.classList.contains('gig')) el.remove(); else el.classList.add('past'); }
+    if (el.dataset.date < today) { if (el.classList.contains('stub') || el.classList.contains('gig') || el.classList.contains('gcard')) el.remove(); else el.classList.add('past'); }
   });
 
   // Ticket-stub carousel arrows.
@@ -155,13 +155,21 @@ document.addEventListener("click", function (ev) {
       [...sel.options].forEach(o => { if (!o.dataset.lat) return; const dd = dist(l.lat, l.lon, +o.dataset.lat, +o.dataset.lon); if (dd < bd) { bd = dd; best = o.value; } });
       return best;
     }
+    // Picture cards: the artist's photo, else the venue's photo, else a colourful poster with their initials.
+    let pics = {a: {}, v: {}};
+    const pic = u => !u ? '' : u.startsWith('dz:') ? `https://cdn-images.dzcdn.net/images/artist/${u.slice(3)}/500x500-000000-80-0-0.jpg` : u;
+    const hueOf = n => { let h = 0; for (const ch of n) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
     function stub(s, d, approx) {
       const [y, m, dd] = s[0].split('-').map(Number);
       const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
       const far = d == null ? '' : `<em class="km">${approx ? 'about ' : ''}${d < 1 ? 'under 1' : d < 10 ? d.toFixed(0) : Math.round(d / 5) * 5} km</em>`;
       const town = s[5] && s[5] !== s[6] ? s[5] : s[6];
-      return `<a class="stub" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}"><div class="d"><b>${dd}</b><small>${months[m - 1]}</small></div>` +
-        `<div class="i"><strong>${esc(s[2])}</strong><span>${day} · ${esc(s[4])}${loc ? ', ' + esc(town) : ''}</span>${far}</div></a>`;
+      const u = pic(pics.a[s[3]] || pics.v[s[11]]);
+      const ini = (s[2].match(/[A-Za-z0-9]+/g) || ['?']).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+      const face = u ? `<span class="gcpic" style="background-image:url(&quot;${esc(u)}&quot;)"></span>`
+                     : `<span class="gcpic poster" style="--h:${hueOf(s[2])}"><span>${esc(ini)}</span></span>`;
+      return `<a class="gcard" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${face}<span class="gcd"><b>${dd}</b><small>${months[m - 1]}</small></span>` +
+        `<span class="gcin"><strong>${esc(s[2])}</strong><span>${day} · ${esc(s[4])}${loc ? ', ' + esc(town) : ''}</span>${far}</span></a>`;
     }
     function links(c) {
       const o = [...sel.options].find(x => x.value === c) || sel.options[0];
@@ -243,7 +251,8 @@ document.addEventListener("click", function (ev) {
       } catch (err) { msg.textContent = "Couldn't look that up right now. Try again in a moment."; }
     });
     render();
-    fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); }).catch(() => {});
+    Promise.all([fetch(root + 'gigs.json').then(r => r.json()), fetch(root + 'data/pics.json').then(r => r.json()).catch(() => null)])
+      .then(([d, p]) => { all = d; if (p) pics = p; render(); }).catch(() => {});
   }
 }
 
@@ -325,19 +334,48 @@ window.MY = (function () {
 })();
 
 
-// Homepage slideshow behind the hero: fades to the next picture every 7 seconds (unless you prefer less motion).
+// Homepage banner carousel: the slide nearest the middle is "on" (bright) and the next ones peek in either side.
+// It loops: copies of the last two slides sit before the first and copies of the first two after the last, and
+// when you land on a copy it quietly jumps to the real one. Swipe, arrows, dots, and it moves on every 7 seconds.
 {
-  const bgs = [...document.querySelectorAll('.hslides .hs')], caps = [...document.querySelectorAll('.hcaps .hcap')], dots = [...document.querySelectorAll('.hcaps .cdot')];
-  if (bgs.length) {
-    let i = 0, timer = null, paused = false;
-    const show = k => { i = (k + bgs.length) % bgs.length; bgs.forEach((b, j) => b.classList.toggle('on', j === i)); caps.forEach((c, j) => c.classList.toggle('on', j === i)); dots.forEach((d, j) => d.setAttribute('aria-current', j === i)); };
+  const track = document.querySelector('.hxtrack');
+  if (track) {
+    const real = [...track.children], n = real.length, dots = [...document.querySelectorAll('.hx .cdot')];
+    if (n > 1) {
+      const copy = el => { const c = el.cloneNode(true); c.classList.add('copy'); c.setAttribute('aria-hidden', 'true'); c.tabIndex = -1; return c; };
+      real.slice(-2).reverse().forEach(el => track.prepend(copy(el)));
+      real.slice(0, 2).forEach(el => track.append(copy(el)));
+    }
+    const all = [...track.children], off = n > 1 ? 2 : 0;
+    let cur = off, timer = null, paused = false;
+    const left = el => el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2;
+    const jump = k => { track.style.scrollBehavior = 'auto'; track.scrollLeft = left(all[k]); track.style.scrollBehavior = ''; };
+    const nearest = () => { const mid = track.scrollLeft + track.clientWidth / 2; let best = 0, bd = Infinity;
+      all.forEach((s, j) => { const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid); if (d < bd) { bd = d; best = j; } }); return best; };
+    const mark = () => {
+      cur = nearest();
+      const r = ((cur - off) % n + n) % n;
+      all.forEach((s, j) => { const on = j === cur || (s.classList.contains('copy') && ((j - off) % n + n) % n === r && j === cur); s.classList.toggle('on', on); if (!s.classList.contains('copy')) s.tabIndex = j === cur ? 0 : -1; });
+      dots.forEach((d, j) => d.setAttribute('aria-current', j === r));
+    };
+    // After scrolling stops on a copy, swap to the real slide (looks identical, so you don't notice).
+    const settle = () => { mark(); if (all[cur].classList.contains('copy')) { const r = ((cur - off) % n + n) % n; jump(off + r); mark(); } };
+    let raf, st;
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(mark); clearTimeout(st); st = setTimeout(settle, 140); }, {passive: true});
+    const go = k => track.scrollTo({left: left(all[k])});
+    document.querySelectorAll('.hxgo').forEach(b => b.addEventListener('click', () => { go(cur + +b.dataset.hx); restart(); }));
+    dots.forEach((d, j) => d.addEventListener('click', () => { go(off + j); restart(); }));
+    // Tapping a dimmed side slide brings it to the middle instead of opening it.
+    all.forEach((s, j) => s.addEventListener('click', ev => { if (j !== cur) { ev.preventDefault(); go(j); restart(); } }));
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const restart = () => { clearInterval(timer); if (!still && bgs.length > 1) timer = setInterval(() => { if (!paused && !document.hidden) show(i + 1); }, 7000); };
-    dots.forEach((d, j) => d.addEventListener('click', () => { show(j); restart(); }));
-    const box = document.querySelector('.hcaps');
-    box.addEventListener('mouseenter', () => { paused = true; }); box.addEventListener('mouseleave', () => { paused = false; });
-    box.addEventListener('focusin', () => { paused = true; }); box.addEventListener('focusout', () => { paused = false; });
-    show(0); restart();
+    const restart = () => { clearInterval(timer); if (!still && n > 1) timer = setInterval(() => { if (!paused && !document.hidden) go(cur + 1); }, 7000); };
+    const box = document.querySelector('.hx');
+    ['mouseenter', 'focusin', 'touchstart'].forEach(e => box.addEventListener(e, () => { paused = true; }, {passive: true}));
+    ['mouseleave', 'focusout'].forEach(e => box.addEventListener(e, () => { paused = false; }));
+    box.addEventListener('touchend', () => setTimeout(() => { paused = false; }, 4000), {passive: true});
+    jump(off); mark();
+    addEventListener('resize', () => { jump(cur); });
+    restart();
   }
 }
 

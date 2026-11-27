@@ -81,6 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pic) av.innerHTML = `<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">`;
     else av.textContent = u ? (pr.display_name || md.full_name || u.email || '?')[0].toUpperCase() : '♥';
     const heroEl = document.getElementById('pHero');
+    // Their own colour for the record label and the stage lights (same colour friends see), from their username.
+    const seed = pr.username || (u && u.email) || 'live louder';
+    av.style.setProperty('--h', hue(seed)); heroEl.style.setProperty('--h', hue(seed));
     heroEl.classList.toggle('hasbanner', !!pr.banner_url);
     heroEl.style.backgroundImage = pr.banner_url ? `linear-gradient(180deg,rgba(20,20,20,.15) 0,rgba(20,20,20,.55) 45%,rgba(20,20,20,.96) 100%),url('${pr.banner_url.replace(/'/g, '%27')}')` : '';
     const cam = document.getElementById('pCam'), cov = document.getElementById('pCover');
@@ -340,9 +343,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!u) return '';
     const md = u.user_metadata || {};
     const pic = p.avatar_url || md.avatar_url;
-    const photos = `<div class="photorow"><div class="phbox"><span class="phav">${pic ? `<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">` : esc((p.display_name || md.full_name || u.email || '?')[0].toUpperCase())}</span>
+    const photos = `<div class="photorow"><div class="phbox"><span class="phav" style="--h:${hue(p.username || u.email || '?')}">${pic ? `<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">` : esc((p.display_name || md.full_name || u.email || '?')[0].toUpperCase())}</span>
         <div><b>Profile photo</b><div class="pbtns"><button type="button" class="btn ghost sm" data-pickphoto="avatar">${uploading === 'avatar' ? 'Uploading…' : p.avatar_url ? 'Change' : 'Upload'}</button>${p.avatar_url ? '<button type="button" class="linkish small" data-rmphoto="avatar">Remove</button>' : ''}</div></div></div>
-      <div class="phbox"><span class="phban"${p.banner_url ? ` style="background-image:url('${esc(p.banner_url)}')"` : ''}></span>
+      <div class="phbox"><span class="phban${p.banner_url ? '' : ' def'}" style="--h:${hue(p.username || u.email || '?')}${p.banner_url ? `;background-image:url('${esc(p.banner_url)}')` : ''}"></span>
         <div><b>Cover photo</b><div class="pbtns"><button type="button" class="btn ghost sm" data-pickphoto="banner">${uploading === 'banner' ? 'Uploading…' : p.banner_url ? 'Change' : 'Upload'}</button>${p.banner_url ? '<button type="button" class="linkish small" data-rmphoto="banner">Remove</button>' : ''}</div></div></div></div>
       ${photoMsg ? `<p class="note impmsg">${photoMsg}</p>` : ''}${['avatar', 'banner'].map(k => ({pending: `Your ${k === 'avatar' ? 'profile' : 'cover'} photo is waiting for a quick check. Only you can see it until then, usually within a day.`, hidden: `Your ${k === 'avatar' ? 'profile' : 'cover'} photo has been reported and is hidden while we take a look.`})[p[k + '_status']]).filter(Boolean).map(t => `<p class="note phstat">${t}</p>`).join('')}
       <p class="note rules"><b>Photo rules:</b> keep it friendly. No nudity, hate or violence, and only photos you took or have permission to use. Photos are checked automatically, and ones that break the rules are removed. A wide photo works best for the cover, like a crowd shot or your favourite venue.</p>`;

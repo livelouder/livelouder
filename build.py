@@ -354,6 +354,26 @@ def stub(s):
             f'<small>{x.strftime("%b")}</small></div><div class="i"><strong>{e(s["artist"])}</strong>'
             f'<span>{e(s["city"])} · {e(s["venue"])}</span></div></a>')
 
+def big_img(a):
+    for s_ in (a or {}).get("shows", []):
+        if s_.get("image_big") or s_.get("image"):
+            return s_.get("image_big") or s_.get("image")
+    return ""
+
+def gcard(s, extra=""):
+    """Picture card for a gig (homepage): artist photo, else venue photo, else a colourful poster with initials."""
+    x = d(s["date"])
+    a_ = artists.get(slug(s["artist"])) or {}
+    u_ = a_.get("photo") or big_img(a_) or (vguides.get(venue_slug(s)) or {}).get("photo", "")
+    u_ = re.sub(r"/1000x1000-", "/500x500-", u_)
+    if u_:
+        face = f'<span class="gcpic" style="background-image:url(&quot;{e(u_)}&quot;)"></span>'
+    else:
+        ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", s["artist"])[:2]).upper()
+        face = f'<span class="gcpic poster" style="--h:{hue(s["artist"])}"><span>{e(ini)}</span></span>'
+    return (f'<a class="gcard{extra}" data-date="{s["date"]}" href="{gig_path(s)}">{face}<span class="gcd"><b>{x.day}</b><small>{x.strftime("%b")}</small></span>'
+            f'<span class="gcin"><strong>{e(s["artist"])}</strong><span>{x.strftime("%a")} · {e(s["venue"])}, {e(s["city"])}</span></span></a>')
+
 def gig_row(s, show_artist=True, show_city=True):
     who = f'<a class="gname" href="{gig_path(s)}">{e(s["artist"])}</a>' if show_artist else ""
     sup = f'<span class="gsup">with {e(", ".join(s["support"]))}</span>' if s["support"] and show_artist else ""
@@ -506,7 +526,7 @@ for s in featured:
     if k in seen:
         continue
     seen.add(k)
-    stubs.append(stub(s))
+    stubs.append(gcard(s, " big"))
     if len(stubs) >= 14:
         break
 week_end = (TODAY.date() + dt.timedelta(days=7)).isoformat()
@@ -571,7 +591,7 @@ def venue_form(town="", state="", title="Know a local venue we're missing?", int
 
 city_opts_near = "".join(f'<option value="{e(c)}" data-slug="{slug(c)}" data-lat="{CITY_CENTRE.get(c, ("", ""))[0]}" data-lon="{CITY_CENTRE.get(c, ("", ""))[1]}">{e(c)}</option>' for c in MAIN_CITIES)
 near_c = MAIN_CITIES[0] if MAIN_CITIES else "Sydney"
-near_fallback = "".join(stub(s) for s in [s for s in shows if s["city"] == near_c][:6])
+near_fallback = "".join(gcard(s) for s in [s for s in shows if s["city"] == near_c][:6])
 km_opts = "".join(f'<option value="{k}"{" selected" if k == 50 else ""}>Within {k} km</option>' for k in (10, 25, 50, 100, 200))
 near_html = (f'<section class="band nearband" id="near"><div class="wrap"><div class="shead"><h2>Gigs near you</h2>'
              f'<div class="nearctl"><button class="locbtn" id="nearLoc" type="button" aria-expanded="false" aria-controls="locBox">📍 <span id="nearWhere">{e(near_c)}</span> <small>Change</small></button>'
@@ -615,24 +635,16 @@ if pick:
 # Homepage banner: up to 5 rotating slides picked from the site's own content each day.
 # Pictures: Ticketmaster's wide photos when the key is set, otherwise artist photos / record covers,
 # otherwise a branded design with the spinning record.
-def big_img(a):
-    for s_ in (a or {}).get("shows", []):
-        if s_.get("image_big") or s_.get("image"):
-            return s_.get("image_big") or s_.get("image")
-    return ""
 def slide(label, title, sub, href, cta, a=None, square="", seed=""):
-    """One background picture + one small caption for the homepage hero slideshow."""
+    """One full-width slide for the homepage banner carousel: picture plus caption."""
     wide = big_img(a)
     sq = square or ((a or {}).get("photo", "") if not wide else "")
-    if wide:
-        bg = f'<div class="hs wide" style="background-image:url(&quot;{e(wide)}&quot;)"></div>'
-    elif sq:
-        bg = f'<div class="hs sq" style="background-image:url(&quot;{e(sq)}&quot;)"></div>'
-    else:
-        bg = f'<div class="hs plain" style="--h:{hue(seed or title)}"></div>'
-    cap = (f'<a class="hcap" href="{href}"><span class="ntag">{e(label)}</span><strong>{e(title)}</strong>'
-           f'<span class="hsub">{e(sub)}</span><span class="hcta">{e(cta)} →</span></a>')
-    return bg, cap
+    pic = wide or sq
+    kind = "wide" if wide else ("sq" if sq else "plain")
+    style = (f'background-image:url(&quot;{e(pic)}&quot;)' if pic else f'--h:{hue(seed or title)}')
+    ext = ' rel="noopener"' if href.startswith("http") else ""
+    return (f'<a class="hxs {kind}" href="{href}"{ext} style="{style}"><span class="hxcap"><span class="ntag">{e(label)}</span>'
+            f'<strong>{e(title)}</strong><span class="hsub">{e(sub)}</span><span class="hcta">{e(cta)} →</span></span></a>')
 DISC_SVG = (f'<svg viewBox="-250 -250 500 500"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}'
             '<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>'
             '<circle r="86" fill="#e2391f"/><text y="-8" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="40" fill="#fff">LIVE</text>'
@@ -671,15 +683,15 @@ if slides:
     off = TODAY.toordinal() % len(slides)  # a different slide leads each day
     slides = slides[off:] + slides[:off]
 dots = "".join(f'<button type="button" class="cdot" data-i="{i}" aria-label="Show slide {i + 1}"></button>' for i in range(len(slides)))
-hero_bg = f'<div class="hslides" aria-hidden="true">{"".join(b_ for b_, _ in slides)}</div>' if slides else ""
-hero_caps = (f'<div class="hcaps" aria-roledescription="carousel" aria-label="Featured">{"".join(c_ for _, c_ in slides)}'
-             f'<div class="cdots">{dots}</div></div>') if slides else ""
-home = f"""<section class="hero">{hero_bg}<div class="wrap">
-<h1 class="big wm">LIVE<span>LOUDER</span></h1>
-<p class="lede">Every gig near you. What your mates are going to. The records to match.</p>
+hero_x = (f'<section class="hx" aria-roledescription="carousel" aria-label="Featured"><div class="hxtrack">{"".join(slides)}</div>'
+          f'<button type="button" class="hxgo prev" data-hx="-1" aria-label="Previous">‹</button><button type="button" class="hxgo next" data-hx="1" aria-label="Next">›</button>'
+          f'<div class="cdots">{dots}</div></section>') if slides else ""
+home = f"""{hero_x}
+<section class="hxbar"><div class="wrap">
+<h1 class="hxh">Every gig near you. What your mates are going to. <span>The records to match.</span></h1>
 <form class="bigsearch" action="/gigs/index.html" role="search"><input type="search" name="q" placeholder="Search an artist, venue or town" aria-label="Search gigs"><button>Find gigs</button></form>
 <div class="herobtns"><a class="hbtn" href="#near" data-nearme>📍 Gigs near me</a><a class="hbtn" href="/this-weekend.html">This weekend</a><a class="hbtn" href="/on-sale.html">On sale soon</a><a class="hbtn" href="/my-gigs.html">♥ My gigs</a></div>
-{hero_caps}</div></section>
+</div></section>
 {near_html}
 <section class="band ffeedband" id="ffeed" hidden></section>
 <section class="band bigband"><div class="wrap">
@@ -744,6 +756,21 @@ def gig_geo(s):
 (OUT / "gigs.json").write_text(json.dumps([[s["date"], s["time"], s["artist"], slug(s["artist"]), s["venue"], s["suburb"], s["city"], s["url"],
                                            ", ".join(s["support"]), s["src"], gcal(s, s["artist"]), venue_slug(s),
                                            slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else "", s["id"], gig_path(s)] + gig_geo(s) for s in shows], separators=(",", ":")))
+
+# Pictures for the gig tiles (app.js): artist photo by artist slug, venue photo by venue slug. Deezer photos are
+# stored as "dz:<id>" and asked for at 500px, which is plenty for a tile and much lighter than the 1000px original.
+def _short(u):
+    m_ = re.match(r"https://cdn-images\.dzcdn\.net/images/artist/([0-9a-f]+)/", u or "")
+    return "dz:" + m_.group(1) if m_ else (u or "")
+_pa = {}
+for s in shows:
+    a_ = artists.get(slug(s["artist"])) or {}
+    u_ = a_.get("photo") or big_img(a_)
+    if u_:
+        _pa[slug(s["artist"])] = _short(u_)
+_pv = {k: (g.get("photo") or "") for k, g in vguides.items() if g.get("photo")}
+(OUT / "data").mkdir(exist_ok=True)
+(OUT / "data" / "pics.json").write_text(json.dumps({"a": _pa, "v": _pv}, separators=(",", ":")))
 
 for c in MAIN_CITIES:
     cs = [s for s in shows if s["city"] == c]
@@ -1389,6 +1416,7 @@ shutil.copy(ROOT / "src/people.js", OUT / "people.js")
 shutil.copy(ROOT / "src/friends.js", OUT / "friends.js")
 shutil.copy(ROOT / "src/messages.js", OUT / "messages.js")
 shutil.copy(ROOT / "src/sw.js", OUT / "sw.js")
+shutil.copy(ROOT / "src/crowd.svg", OUT / "crowd.svg")
 for icon in (ROOT / "src/icons").iterdir():
     shutil.copy(icon, OUT / icon.name)
 (OUT / "site.webmanifest").write_text(json.dumps({"id": "/", "name": "Live Louder", "short_name": "Live Louder", "start_url": "/?app=1", "scope": "/", "display": "standalone",
