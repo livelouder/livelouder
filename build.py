@@ -529,15 +529,34 @@ def sale_row(x, past=False):
 
 # ---------------------------------------------------------------- home
 featured = [s for s in shows if slug(s["artist"]) in curated] or shows
-seen, stubs = set(), []
+# "Big shows coming up": one card per artist (soonest show first), with their date range and cities,
+# linking to the artist's page where every date is listed.
+def tour_stub(a_name, ss):
+    a_ = artists.get(slug(a_name)) or {}
+    first, last = d(ss[0]["date"]), d(ss[-1]["date"])
+    u_ = re.sub(r"/1000x1000-", "/500x500-", a_.get("photo") or big_img(a_) or (vguides.get(venue_slug(ss[0])) or {}).get("photo", ""))
+    if u_:
+        face = f'<span class="gcpic" style="background-image:url(&quot;{e(u_)}&quot;)"></span>'
+    else:
+        ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", a_name)[:2]).upper()
+        face = f'<span class="gcpic poster" style="--h:{hue(a_name)}"><span>{e(ini)}</span></span>'
+    if len(ss) == 1:
+        when = f'{first.strftime("%a")} {first.day} {first.strftime("%b")}'
+        where = f'{e(ss[0]["venue"])}, {e(ss[0]["city"])}'
+        href = gig_path(ss[0])
+    else:
+        when = f'{first.day} {first.strftime("%b")} – {last.day} {last.strftime("%b")}'
+        cities = list(dict.fromkeys(x["city"] for x in ss))
+        where = e(", ".join(cities[:4]) + (f" + {len(cities) - 4} more" if len(cities) > 4 else ""))
+        href = f'/artists/{slug(a_name)}.html'
+    n = f'<span class="gcn">{len(ss)} shows</span>' if len(ss) > 1 else ""
+    return (f'<a class="gcard big" data-date="{ss[-1]["date"]}" href="{href}">{face}<span class="gcd"><b>{first.day}</b><small>{first.strftime("%b")}</small></span>{n}'
+            f'<span class="gcin"><strong>{e(a_name)}</strong><span><b>{when}</b> · {where}</span></span></a>')
+
+by_artist = {}
 for s in featured:
-    k = (s["artist"], s["city"])
-    if k in seen:
-        continue
-    seen.add(k)
-    stubs.append(gcard(s, " big"))
-    if len(stubs) >= 14:
-        break
+    by_artist.setdefault(s["artist"], []).append(s)
+stubs = [tour_stub(a_n, ss) for a_n, ss in sorted(by_artist.items(), key=lambda kv: kv[1][0]["date"])[:14]]
 week_end = (TODAY.date() + dt.timedelta(days=7)).isoformat()
 this_week = [s for s in shows if s["date"] < week_end][:12]
 onsale = {}
