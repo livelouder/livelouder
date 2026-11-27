@@ -6469,8 +6469,8 @@
   "city": "Laurieton",
   "state": "NSW",
   "url": "https://songkick.com/venues/648571-laurieton-united-services-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
@@ -6478,8 +6478,8 @@
   "city": "Bellingen",
   "state": "NSW",
   "url": "https://songkick.com/venues/1065871-bellingen-memorial-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
@@ -6487,17 +6487,17 @@
   "city": "Bellingen",
   "state": "NSW",
   "url": "https://musick.com.au/venue/bellingen-brewery/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
   "venue": "Oregon Hall",
   "city": "Beechworth",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://concerts.hypebot.com/cities/popular/wangaratta-australia",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Shepparton & Wangaratta"
  },
  {
@@ -6514,8 +6514,8 @@
   "city": "Albury",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/257936-kinross-woolshed",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -6523,8 +6523,8 @@
   "city": "Albury",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/4613464-albury-commercial-golf-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -6532,8 +6532,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://songkick.com/venues/4473105-hotel-metropolitan",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6541,8 +6541,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/venue-listing/blackwood-rsl/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6550,8 +6550,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/christies-sailing-club-christies-beach/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6559,8 +6559,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/waterloo-station-hotel-paralowie/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6568,8 +6568,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/newmarket-hotel-port-adelaide/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6577,8 +6577,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/rhino-room-adelaide/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6586,8 +6586,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/blue-gums-hotel-motel-fairview-park/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6595,8 +6595,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/gingers-vintage-lounge-bar-goodwood/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6604,8 +6604,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://pubsandevents.com.au/location/kick-back-brewing-aldinga/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -6613,8 +6613,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://baxterslivemusic.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -6622,8 +6622,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://beat.com.au/directory/the-vic-bar/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -6631,8 +6631,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://beat.com.au/directory/classic-southside/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -6640,8 +6640,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://beat.com.au/directory/brunswick-mechanics-institute/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -6649,8 +6649,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/miranda-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -6658,44 +6658,44 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/red-rattler-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "Seymour Centre",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://sydneymusic.net/gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "Engadine Tavern",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://sydneymusic.net/gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "Golden Barley Hotel",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://sydneymusic.net/gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
   "venue": "The Eveleigh Hotel",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://sydneymusic.net/gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -6703,8 +6703,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://musick.com.au/venue/soapbox-beer/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -6712,8 +6712,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://musick.com.au/venue/hamilton-hotel/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -6721,35 +6721,35 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://www.bandsintown.com/v/10403957-jmi-live",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
   "venue": "Canberra Bowling Club",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://canberrabluessociety.com.au/Gig-Guide",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
   "venue": "Old Canberra Inn",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://canberrabluessociety.com.au/Gig-Guide",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
   "venue": "Dickson Taphouse",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://canberrabluessociety.com.au/Gig-Guide",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -6757,8 +6757,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://www.wesleymusiccanberra.org/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -6766,8 +6766,8 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "https://musick.com.au/venue/in-the-hanging-garden/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
@@ -6775,17 +6775,17 @@
   "city": "Hobart",
   "state": "TAS",
   "url": "https://musick.com.au/venue/irish-murphys-hobart/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
   "venue": "New Sydney Hotel",
   "city": "Hobart",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tasguide.com.au/gig-guide/?region=hobart-south",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  },
  {
