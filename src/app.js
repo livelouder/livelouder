@@ -187,7 +187,10 @@ document.addEventListener("click", function (ev) {
         sum.textContent = `${near.length} ${near.length === 1 ? 'gig' : 'gigs'} within ${R} km of ${loc.label}, soonest first.`;
         list.innerHTML = near.slice(0, innerWidth < 600 ? 6 : 12).map(x => stub(x.s, x.d, x.a)).join('');
       } else {
-        const close = soon.sort((a, b) => a.d - b.d).slice(0, innerWidth < 600 ? 6 : 8);
+        const in60 = new Date(Date.now() + 60 * 864e5).toISOString().slice(0, 10);
+        const pool = soon.filter(x => x.s[0] <= in60).length >= 8 ? soon.filter(x => x.s[0] <= in60) : soon;
+        // Nearest first, but treat venues within ~15 km of each other as the same distance and show the soonest of those first.
+        const close = pool.sort((a, b) => (Math.round(a.d / 15) - Math.round(b.d / 15)) || a.s[0].localeCompare(b.s[0])).slice(0, innerWidth < 600 ? 6 : 8);
         sum.textContent = near.length ? `Only ${near.length} within ${R} km of ${loc.label} so far, so here are the closest gigs.` : `Nothing listed within ${R} km of ${loc.label} yet, so here are the closest gigs. More local venues are being added every day.`;
         list.innerHTML = close.map(x => stub(x.s, x.d, x.a)).join('');
       }
