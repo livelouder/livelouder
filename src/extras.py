@@ -199,11 +199,12 @@ def geocode(venues, root, limit=40):
     cache = json.loads(path.read_text()) if path.exists() else {}
     looked = 0
     for k, (name, suburb, city, state) in venues.items():
-        if k in cache or looked >= limit:
+        if (k in cache and cache[k]) or looked >= limit:
             continue
         looked += 1
         hit = None
-        for q in (f"{name}, {suburb}, {state}, Australia", f"{name}, {city}, Australia"):
+        # Last resort: the town or suburb itself (marked approximate with a third value, 1).
+        for i, q in enumerate((f"{name}, {suburb}, {state}, Australia", f"{name}, {city}, Australia", f"{suburb or city}, {state}, Australia")):
             try:
                 url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode({"q": q, "format": "json", "limit": 1, "countrycodes": "au"})
                 req = urllib.request.Request(url, headers={"User-Agent": "LiveLouder/1.0 (hello@livelouder.com.au)"})
@@ -211,7 +212,7 @@ def geocode(venues, root, limit=40):
                     res = json.loads(r.read().decode())
                 time.sleep(1.1)
                 if res:
-                    hit = [round(float(res[0]["lat"]), 5), round(float(res[0]["lon"]), 5)]
+                    hit = [round(float(res[0]["lat"]), 5), round(float(res[0]["lon"]), 5)] + ([1] if i == 2 else [])
                     break
             except Exception:
                 time.sleep(1.1)

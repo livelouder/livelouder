@@ -25,6 +25,12 @@ import social  # noqa: E402
 OUT = ROOT / "site"
 SITE = "https://livelouder.com.au"
 HEATHEN = "https://heathenrecords.com.au/search?type=product&q="
+CITY_CENTRE = {"Sydney": (-33.8688, 151.2093), "Melbourne": (-37.8136, 144.9631), "Brisbane": (-27.4698, 153.0251), "Perth": (-31.9523, 115.8613),
+               "Adelaide": (-34.9285, 138.6007), "Canberra": (-35.2809, 149.13), "Hobart": (-42.8821, 147.3272), "Darwin": (-12.4634, 130.8456),
+               "Gold Coast": (-28.0167, 153.4), "Newcastle": (-32.9283, 151.7817), "Wollongong": (-34.4278, 150.8931), "Geelong": (-38.1499, 144.3617),
+               "Sunshine Coast": (-26.65, 153.0667), "Cairns": (-16.9186, 145.7781), "Townsville": (-19.259, 146.8169), "Launceston": (-41.4332, 147.1441),
+               "Byron Bay": (-28.6474, 153.602), "Ballarat": (-37.5622, 143.8503), "Bendigo": (-36.757, 144.2794), "Katoomba": (-33.7148, 150.3118),
+               "Springwood": (-33.6996, 150.5636), "Lithgow": (-33.4823, 150.1566), "Penrith": (-33.7507, 150.6877), "Parramatta": (-33.815, 151.0011)}
 NOW_UTC = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None)
 TODAY = NOW_UTC + dt.timedelta(hours=10)  # Australian east-coast date at build
 TODAY_S = TODAY.date().isoformat()
@@ -195,7 +201,7 @@ for s in shows:
         except (TypeError, ValueError): pass
 # Map positions for venues Ticketmaster didn't give us (OpenStreetMap lookup, cached).
 _geo = extras.geocode({k: (v["name"], v["suburb"], v["city"], v["state"]) for k, v in venues.items() if not v.get("geo")}, ROOT,
-                      limit=0 if os.environ.get("NO_GEOCODE") else 40)
+                      limit=0 if os.environ.get("NO_GEOCODE") else 120)
 for k, v in venues.items():
     if not v.get("geo") and _geo.get(k):
         v["geo"] = _geo[k]
@@ -519,11 +525,18 @@ if wk_sales or upcoming_sales:
     sales_html = (f'<section class="band salesband"><div class="wrap"><div class="shead"><h2>{sales_title}</h2><a href="/on-sale.html">Every presale &amp; on-sale →</a></div>'
                   f'<p class="note" style="margin-top:0">Presales first. Tap ⏰ Remind me and it goes straight in your calendar.</p>'
                   f'<ul class="sales">{"".join(sale_row(x) for x in (wk_sales or upcoming_sales)[:6])}</ul></div></section>')
-city_opts_near = "".join(f'<option value="{e(c)}" data-slug="{slug(c)}">{e(c)}</option>' for c in MAIN_CITIES)
+city_opts_near = "".join(f'<option value="{e(c)}" data-slug="{slug(c)}" data-lat="{CITY_CENTRE.get(c, ("", ""))[0]}" data-lon="{CITY_CENTRE.get(c, ("", ""))[1]}">{e(c)}</option>' for c in MAIN_CITIES)
 near_c = MAIN_CITIES[0] if MAIN_CITIES else "Sydney"
 near_fallback = "".join(stub(s) for s in [s for s in shows if s["city"] == near_c][:6])
+km_opts = "".join(f'<option value="{k}"{" selected" if k == 50 else ""}>Within {k} km</option>' for k in (10, 25, 50, 100, 200))
 near_html = (f'<section class="band nearband" id="near"><div class="wrap"><div class="shead"><h2>Gigs near you</h2>'
-             f'<label class="citypick"><span>📍 Your city</span><select id="nearCity" aria-label="Your city">{city_opts_near}</select></label></div>'
+             f'<div class="nearctl"><button class="locbtn" id="nearLoc" type="button" aria-expanded="false" aria-controls="locBox">📍 <span id="nearWhere">{e(near_c)}</span> <small>Change</small></button>'
+             f'<select id="nearKm" aria-label="How far you\'ll travel" hidden>{km_opts}</select></div></div>'
+             f'<div class="locbox" id="locBox" hidden><button class="btn" id="locGps" type="button">📍 Use my location</button>'
+             f'<form id="locForm" class="locform"><input name="q" placeholder="Or type your town or postcode, e.g. Blackheath" aria-label="Your town or postcode" autocomplete="address-level2"><button class="btn ghost">Set</button></form>'
+             f'<label class="citypick"><span>or a city</span><select id="nearCity" aria-label="Your city">{city_opts_near}</select></label>'
+             f'<p class="note" id="locMsg">Your location stays on this device. We only use it to sort gigs by distance.</p></div>'
+             f'<p class="note nearsum" id="nearSum"></p>'
              f'<div class="nearlist" id="nearList">{near_fallback}</div>'
              f'<p class="nearlinks"><a class="btn" id="nearWk" href="/gigs/{slug(near_c)}-this-weekend.html">This weekend in&nbsp;<span class="nc">{e(near_c)}</span></a> '
              f'<a class="btn ghost" id="nearAll" href="/gigs/{slug(near_c)}.html">All&nbsp;<span class="nc">{e(near_c)}</span>&nbsp;gigs</a></p></div></section>')
@@ -678,9 +691,15 @@ gg = f"""<section class="page-title"><div class="wrap"><h1>Gig guide</h1><p>Ever
 <noscript>{gig_list(shows[:300])}</noscript></div></section>"""
 page("gigs/index.html", "Gig guide: concerts and gigs in Australia | Live Louder",
      "Search every big gig in Australia by artist, venue, city and date. Concerts in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", gg, "gigs/index.html")
+# Where each gig is: the venue's map position, or the city centre (marked approximate) so "Gigs near you" can sort by distance.
+def gig_geo(s):
+    g = (venues.get(venue_slug(s)) or {}).get("geo") or []
+    if len(g) >= 2: return [g[0], g[1]] + ([1] if len(g) > 2 else [])
+    c = CITY_CENTRE.get(s["suburb"]) or CITY_CENTRE.get(s["city"])
+    return [c[0], c[1], 1] if c else []
 (OUT / "gigs.json").write_text(json.dumps([[s["date"], s["time"], s["artist"], slug(s["artist"]), s["venue"], s["suburb"], s["city"], s["url"],
                                            ", ".join(s["support"]), s["src"], gcal(s, s["artist"]), venue_slug(s),
-                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else "", s["id"], gig_path(s)] for s in shows], separators=(",", ":")))
+                                           slug(artists[slug(s["artist"])]["gb"]) if artists.get(slug(s["artist"])) and artists[slug(s["artist"])]["gb"] else "", s["id"], gig_path(s)] + gig_geo(s) for s in shows], separators=(",", ":")))
 
 for c in MAIN_CITIES:
     cs = [s for s in shows if s["city"] == c]

@@ -128,34 +128,103 @@ document.addEventListener("click", function (ev) {
   }
 });
 
-// Homepage: gigs near you.
+// Homepage: gigs near you. Set your spot (location, a town/postcode, or a city) and see gigs by distance.
+// Your spot is kept on this device only (localStorage "llLoc"); town lookups use OpenStreetMap.
 {
   const sel = document.getElementById('nearCity'), list = document.getElementById('nearList');
   if (sel && list) {
     const root = document.body.dataset.root || '';
+    const $ = id => document.getElementById(id);
+    const box = $('locBox'), btn = $('nearLoc'), km = $('nearKm'), sum = $('nearSum'), msg = $('locMsg');
     const has = c => [...sel.options].some(o => o.value === c);
-    const start = [LL.city(), LL.guess()].find(c => c && has(c));
-    if (start) sel.value = start;
+    const startCity = [LL.city(), LL.guess()].find(c => c && has(c));
+    if (startCity) sel.value = startCity;
     const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const t = new Date(), pad = n => String(n).padStart(2, '0');
     const today = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
-    let all = null;
-    function render() {
-      const c = sel.value, sl = sel.selectedOptions[0].dataset.slug;
-      document.querySelectorAll('#near .nc').forEach(x => x.textContent = c);
-      document.getElementById('nearWk').href = `${root}gigs/${sl}-this-weekend.html`;
-      document.getElementById('nearAll').href = `${root}gigs/${sl}.html`;
-      if (!all) return;
-      const rows = all.filter(s => s[6] === c && s[0] >= today).slice(0, 8);
-      list.innerHTML = rows.length ? rows.map(s => {
-        const [y, m, d] = s[0].split('-').map(Number);
-        const day = new Date(y, m - 1, d).toLocaleDateString('en-AU', {weekday: 'short'});
-        return `<a class="stub" href="${root}artists/${esc(s[3])}.html"><div class="d"><b>${d}</b><small>${months[m - 1]}</small></div>` +
-          `<div class="i"><strong>${esc(s[2])}</strong><span>${day} · ${esc(s[4])}</span></div></a>`;
-      }).join('') : `<p class="note">No shows listed in ${esc(c)} right now. Try another city.</p>`;
+    const rad = x => x * Math.PI / 180;
+    const dist = (a, b, c, d) => { const h = Math.sin(rad(c - a) / 2) ** 2 + Math.cos(rad(a)) * Math.cos(rad(c)) * Math.sin(rad(d - b) / 2) ** 2; return 12742 * Math.asin(Math.sqrt(h)); };
+    let all = null, loc = null;
+    try { loc = JSON.parse(localStorage.getItem('llLoc') || 'null'); } catch (e) {}
+    try { const k = localStorage.getItem('llKm'); if (k) km.value = k; } catch (e) {}
+    const saveLoc = l => { loc = l; try { l ? localStorage.setItem('llLoc', JSON.stringify(l)) : localStorage.removeItem('llLoc'); } catch (e) {} };
+    // The nearest big city, for the "This weekend in…" links and for other pages.
+    function nearestCity(l) {
+      let best = null, bd = 1e9;
+      [...sel.options].forEach(o => { if (!o.dataset.lat) return; const dd = dist(l.lat, l.lon, +o.dataset.lat, +o.dataset.lon); if (dd < bd) { bd = dd; best = o.value; } });
+      return best;
     }
-    sel.addEventListener('change', () => { LL.setCity(sel.value); render(); });
+    function stub(s, d, approx) {
+      const [y, m, dd] = s[0].split('-').map(Number);
+      const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
+      const far = d == null ? '' : `<em class="km">${approx ? 'about ' : ''}${d < 1 ? 'under 1' : d < 10 ? d.toFixed(0) : Math.round(d / 5) * 5} km</em>`;
+      const town = s[5] && s[5] !== s[6] ? s[5] : s[6];
+      return `<a class="stub" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}"><div class="d"><b>${dd}</b><small>${months[m - 1]}</small></div>` +
+        `<div class="i"><strong>${esc(s[2])}</strong><span>${day} · ${esc(s[4])}${loc ? ', ' + esc(town) : ''}</span>${far}</div></a>`;
+    }
+    function links(c) {
+      const o = [...sel.options].find(x => x.value === c) || sel.options[0];
+      document.querySelectorAll('#near .nc').forEach(x => x.textContent = o.value);
+      $('nearWk').href = `${root}gigs/${o.dataset.slug}-this-weekend.html`;
+      $('nearAll').href = `${root}gigs/${o.dataset.slug}.html`;
+    }
+    function render() {
+      km.hidden = !loc;
+      $('nearWhere').textContent = loc ? loc.label : sel.value;
+      links(loc ? (loc.city || sel.value) : sel.value);
+      if (!all) return;
+      if (!loc) {
+        sum.textContent = '';
+        const rows = all.filter(s => s[6] === sel.value && s[0] >= today).slice(0, 8);
+        list.innerHTML = rows.length ? rows.map(s => stub(s)).join('') : `<p class="note">No shows listed in ${esc(sel.value)} right now. Try another city.</p>`;
+        return;
+      }
+      const R = +km.value, soon = all.filter(s => s[0] >= today && s.length > 16 && s[15] != null)
+        .map(s => ({s, d: dist(loc.lat, loc.lon, s[15], s[16]), a: !!s[17]}));
+      const near = soon.filter(x => x.d <= R).sort((a, b) => a.s[0].localeCompare(b.s[0]) || a.d - b.d);
+      if (near.length >= 3) {
+        sum.textContent = `${near.length} ${near.length === 1 ? 'gig' : 'gigs'} within ${R} km of ${loc.label}, soonest first.`;
+        list.innerHTML = near.slice(0, innerWidth < 600 ? 6 : 12).map(x => stub(x.s, x.d, x.a)).join('');
+      } else {
+        const close = soon.sort((a, b) => a.d - b.d).slice(0, innerWidth < 600 ? 6 : 8);
+        sum.textContent = near.length ? `Only ${near.length} within ${R} km of ${loc.label} so far, so here are the closest gigs.` : `Nothing listed within ${R} km of ${loc.label} yet, so here are the closest gigs. More local venues are being added every day.`;
+        list.innerHTML = close.map(x => stub(x.s, x.d, x.a)).join('');
+      }
+    }
+    function setLoc(l) { l.city = nearestCity(l); saveLoc(l); if (l.city) { sel.value = l.city; LL.setCity(l.city); } box.hidden = true; btn.setAttribute('aria-expanded', 'false'); render(); }
+    btn.addEventListener('click', () => { box.hidden = !box.hidden; btn.setAttribute('aria-expanded', String(!box.hidden)); });
+    km.addEventListener('change', () => { try { localStorage.setItem('llKm', km.value); } catch (e) {} render(); });
+    sel.addEventListener('change', () => { saveLoc(null); LL.setCity(sel.value); box.hidden = true; render(); });
+    $('locGps').addEventListener('click', () => {
+      if (!navigator.geolocation) { msg.textContent = "Your browser can't share your location. Type your town instead."; return; }
+      msg.textContent = 'Finding you…';
+      navigator.geolocation.getCurrentPosition(async p => {
+        const l = {lat: +p.coords.latitude.toFixed(3), lon: +p.coords.longitude.toFixed(3), label: 'you'};
+        try {
+          const r = await (await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=14&lat=${l.lat}&lon=${l.lon}`)).json();
+          const a = r.address || {};
+          l.label = a.suburb || a.town || a.village || a.city || a.hamlet || 'you';
+        } catch (e) {}
+        msg.textContent = 'Your location stays on this device. We only use it to sort gigs by distance.';
+        setLoc(l);
+      }, () => { msg.textContent = "We couldn't get your location. Type your town or postcode instead."; }, {timeout: 10000, maximumAge: 600000});
+    });
+    $('locForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const q = e.target.q.value.trim();
+      if (!q) return;
+      msg.textContent = 'Looking that up…';
+      try {
+        const r = await (await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=au&addressdetails=1&q=${encodeURIComponent(q)}`)).json();
+        if (!r.length) { msg.textContent = `We couldn't find "${q}". Try a town name or a 4-digit postcode.`; return; }
+        const a = r[0].address || {};
+        const label = /^\d{4}$/.test(q) ? (a.suburb || a.town || a.village || a.city || q) : (a.suburb || a.town || a.village || a.city || q.replace(/\b\w/g, c => c.toUpperCase()));
+        msg.textContent = 'Your location stays on this device. We only use it to sort gigs by distance.';
+        e.target.q.value = '';
+        setLoc({lat: +(+r[0].lat).toFixed(3), lon: +(+r[0].lon).toFixed(3), label});
+      } catch (err) { msg.textContent = "Couldn't look that up right now. Try again in a moment."; }
+    });
     render();
     fetch(root + 'gigs.json').then(r => r.json()).then(d => { all = d; render(); }).catch(() => {});
   }

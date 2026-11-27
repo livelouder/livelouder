@@ -1,5 +1,93 @@
 [
  {
+  "venue": "Sydney Coliseum Theatre",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Riverside Theatres",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "The Albion Hotel Parramatta",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Evan Theatre, Penrith Panthers",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "High Street Social",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Elton Chong",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Tattersalls Hotel Penrith",
+  "city": "Sydney",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Lithgow Workies Club",
+  "city": "Lithgow",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Station Bar",
+  "city": "Katoomba",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "The Bootlegger Bar",
+  "city": "Katoomba",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
+  "venue": "Baroque Room (Carrington Hotel)",
+  "city": "Katoomba",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked"
+ },
+ {
   "venue": "Oxford Art Factory",
   "city": "Sydney",
   "state": "",
