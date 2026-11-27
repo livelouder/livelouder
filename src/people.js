@@ -39,6 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
       <strong>${esc(r.t)}</strong><span>${esc(r.a)}${r.y ? ' · ' + r.y : ''}</span></a>
       <div class="radd"><button type="button" class="addbtn" data-addrec="${j}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${j}" data-list="wants">+ Wantlist</button></div></div>`;
   }
+  function beenCard(x) {
+    const p = dparts(x.d), n = x.rating || 0;
+    const photos = (x.photos || []).map(u => `<span class="dph"><a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Photo from ${esc(x.a)}" loading="lazy"></a>${!P.me && window.ACC && ACC.user() ? `<button type="button" class="dreport" data-rgph="${esc(u)}" title="Report this photo" aria-label="Report this photo">⚑</button>` : ''}</span>`).join('');
+    return `<article class="dcard"><a class="gimg" href="${esc(gp(x))}">${photo(x.s, x.a)}<span class="gdate"><b>${p.d}</b>${MON[p.m - 1]}</span></a>
+      <div class="dbody"><a class="gname" href="${esc(gp(x))}">${esc(x.a)}</a><span class="gwhere">${esc(x.v)}, ${esc(x.c)} · ${p.dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short', year: 'numeric'})}</span>
+      ${n ? `<span class="stars" aria-label="${n} out of 5">${'★'.repeat(n)}<i>${'★'.repeat(5 - n)}</i></span>` : ''}${x.review ? `<q class="frev">${esc(x.review)}</q>` : ''}
+      ${photos ? `<div class="dphotos">${photos}</div>` : ''}</div></article>`;
+  }
   const head = (h, more) => `<div class="shead"><h2>${h}</h2>${more || ''}</div>`;
   const first = () => String(P.name || P.username).split(' ')[0];
 
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const up = P.gigs, going = up.filter(g => g.going), inter = up.filter(g => !g.going);
     h += head('Going', going.length ? `<span class="note">${going.length}</span>` : '') + (going.length ? `<div class="ggrid">${going.map(g => gigCard(g)).join('')}</div>` : `<p class="note">${esc(first())} hasn't marked any upcoming gigs as going yet.</p>`);
     if (inter.length) h += head('Interested', `<span class="note">${inter.length}</span>`) + `<div class="ggrid">${inter.map(g => gigCard(g)).join('')}</div>`;
-    if (P.been.length) h += head('Been to', `<span class="note">${P.been.length}</span>`) + `<div class="ggrid">${P.been.map(g => gigCard(Object.assign({going: true}, g), true)).join('')}</div>`;
+    if (P.been.length) h += head(P.me ? 'Your gig diary' : `${esc(first())}'s gig diary`, `<span class="note">${P.been.length} ${P.been.length === 1 ? 'gig' : 'gigs'}</span>`) + `<div class="dgrid">${P.been.map(beenCard).join('')}</div>`;
     return h;
   }
   function shelf(list) {
@@ -151,6 +159,10 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
     if (ev.target.closest('[data-umore]')) { shown += 60; render(); }
+    const rg = ev.target.closest('[data-rgph]');
+    if (rg) { if (!confirm('Report this photo? It will be hidden while we take a look.')) return;
+      const r = await ACC.reportPhoto(P.username, 'gig', 'other', rg.dataset.rgph);
+      if (r.error) alert(r.error); else { P.been.forEach(g => { g.photos = (g.photos || []).filter(u => u !== rg.dataset.rgph); }); render(); } }
     if (ev.target.closest('[data-ureport]')) { if (!ACC.user()) { ACC.open(); return; } openReport(); }
   });
   let typing;

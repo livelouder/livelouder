@@ -268,3 +268,27 @@ document.addEventListener('click', ev => {
     out.innerHTML = `About <b>${km < 10 ? km.toFixed(1) : Math.round(km).toLocaleString()} km</b> away, as the crow flies.`;
   }, () => { out.textContent = "Couldn't get your location. Check your browser lets this site use it."; }, {timeout: 10000, maximumAge: 600000});
 });
+
+// ---------------------------------------------------------------- app install (phones and desktops)
+// The service worker (sw.js) makes the site installable and keeps My gigs working with no signal.
+(function () {
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+  }
+  let prompt = null;
+  const show = on => document.querySelectorAll('.installbtn').forEach(b => { b.hidden = !on; });
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); prompt = e; show(true); });
+  window.addEventListener('appinstalled', () => { prompt = null; show(false); try { localStorage.setItem('llApp', '1'); } catch (x) {} });
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('.installbtn');
+    if (!b || !prompt) return;
+    prompt.prompt();
+    await prompt.userChoice.catch(() => {});
+    prompt = null; show(false);
+  });
+  window.LLAPP = {
+    installed: () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true,
+    canPrompt: () => !!prompt,
+    ios: () => /iphone|ipad|ipod/i.test(navigator.userAgent),
+  };
+})();

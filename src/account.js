@@ -72,6 +72,7 @@
       if (kind === 'gig' && op === 'remove') await sb.from('saved_gigs').delete().eq('gig_id', item.id);
       if (kind === 'gig' && op === 'going') await sb.from('saved_gigs').update({going: !!item.going}).eq('gig_id', item.id);
       if (kind === 'artist' && op === 'add') await sb.from('followed_artists').upsert({user_id: user.id, slug: item.slug, name: item.name});
+      if (kind === 'artists' && op === 'add' && item.length) await sb.from('followed_artists').upsert(item.map(x => ({user_id: user.id, slug: x.slug, name: x.name})));
       if (kind === 'artist' && op === 'remove') await sb.from('followed_artists').delete().eq('slug', item.slug);
       if (kind === 'discogs') await sb.from('profiles').update({discogs: item || null}).eq('id', user.id);
       if (kind === 'rec' && op === 'add') await sb.from('user_records').upsert({user_id: user.id, list: item.list === 'records' ? 'collection' : 'wantlist', rid: item.rec.rid, rec: item.rec});
@@ -166,13 +167,15 @@
   }
   // Profile photo and cover banner. Pictures are cropped and shrunk in the browser, then stored in the
   // "profile" bucket in a folder named after the account (only the owner can change it).
-  const SIZES = {avatar: [480, 480], banner: [1800, 600]};
+  const SIZES = {avatar: [480, 480], banner: [1800, 600], gig: [1600, 1600]};
   function shrink(file, kind) {
     return new Promise((res, rej) => {
       const img = new Image(), url = URL.createObjectURL(file);
       img.onload = () => {
-        const [W, H] = SIZES[kind], r = Math.max(W / img.width, H / img.height);
-        const w = Math.min(W, Math.round(img.width * r)), h = Math.min(H, Math.round(img.height * r));
+        const [W, H] = SIZES[kind];
+        // Gig photos keep their shape (shrunk to fit); profile and cover photos are cropped to size.
+        const r = kind === 'gig' ? Math.min(1, W / img.width, H / img.height) : Math.max(W / img.width, H / img.height);
+        const w = kind === 'gig' ? Math.round(img.width * r) : Math.min(W, Math.round(img.width * r)), h = kind === 'gig' ? Math.round(img.height * r) : Math.min(H, Math.round(img.height * r));
         const sw = w / r, sh = h / r, c = document.createElement('canvas');
         c.width = w; c.height = h;
         c.getContext('2d').drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, 0, 0, w, h);
@@ -190,7 +193,7 @@
     return r && r.data && r.data.session && r.data.session.access_token;
   }
   // Uploads go through the site's server code, which checks the photo before it goes live (netlify/functions/profile-photo.mjs).
-  async function setPhoto(kind, file) {
+  async function setPhoto(kind, file, gigId) {
     if (!user) return {error: 'Sign in first'};
     let blob;
     try { blob = await shrink(file, kind); } catch (e) { return {error: e.message === 'blob' ? "Couldn't read that photo." : e.message}; }
@@ -198,19 +201,42 @@
     if (!t) return {error: 'Please sign in again.'};
     let r, j = {};
     try {
-      r = await fetch('/.netlify/functions/profile-photo?kind=' + kind, {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'image/jpeg'}, body: blob});
+      r = await fetch('/.netlify/functions/profile-photo?kind=' + kind + (gigId ? '&gig=' + encodeURIComponent(gigId) : ''), {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'image/jpeg'}, body: blob});
       j = await r.json();
     } catch (e) { return {error: "Couldn't upload that photo. Check your connection and try again."}; }
     if (!r.ok) return {error: j.error || "Couldn't upload that photo. Try again."};
-    profile = Object.assign(profile || {}, {[kind + '_url']: j.url, [kind + '_status']: j.status});
-    ui();
+    if (kind !== 'gig') { profile = Object.assign(profile || {}, {[kind + '_url']: j.url, [kind + '_status']: j.status}); ui(); }
     return j;
   }
-  async function reportPhoto(username, kind, reason) {
+  // Gig diary: rate a gig you went to, add a short note, and your photos from it.
+  async function rateGig(gigId, rating, review) {
+    const c = await ready();
+    if (!c || !user) return {error: 'Sign in first'};
+    const {error} = await c.from('saved_gigs').update({rating: rating || null, review: review ? String(review).slice(0, 280) : null}).eq('user_id', user.id).eq('gig_id', gigId);
+    return error ? {error: "Couldn't save that. Try again."} : {};
+  }
+  async function diary() {
+    const c = await ready();
+    if (!c || !user) return {};
+    const [g, ph] = await Promise.all([c.from('saved_gigs').select('gig_id,rating,review').eq('user_id', user.id).eq('going', true),
+                                       c.from('gig_photos').select('id,gig_id,url,path,status').eq('user_id', user.id).order('created_at')]);
+    const out = {};
+    (g.data || []).forEach(x => { out[x.gig_id] = {rating: x.rating, review: x.review, photos: []}; });
+    (ph.data || []).forEach(x => { (out[x.gig_id] = out[x.gig_id] || {photos: []}).photos.push(x); });
+    return out;
+  }
+  async function removeGigPhoto(ph) {
+    const c = await ready();
+    if (!c || !user) return {};
+    await c.storage.from('profile').remove([ph.path]);
+    const {error} = await c.from('gig_photos').delete().eq('id', ph.id);
+    return error ? {error: "Couldn't remove that photo."} : {};
+  }
+  async function reportPhoto(username, kind, reason, photo) {
     const t = await token();
     if (!t) return {error: 'Please sign in to report a photo.'};
     try {
-      const r = await fetch('/.netlify/functions/report-photo', {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'application/json'}, body: JSON.stringify({username, kind, reason})});
+      const r = await fetch('/.netlify/functions/report-photo', {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'application/json'}, body: JSON.stringify({username, kind, reason, photo})});
       const j = await r.json().catch(() => ({}));
       return r.ok ? {} : {error: j.error || "Couldn't send that. Try again."};
     } catch (e) { return {error: "Couldn't send that. Try again."}; }
@@ -235,7 +261,7 @@
   }
 
   window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
-                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto, reportPhoto};
+                syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto, reportPhoto, rateGig, diary, removeGigPhoto};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }

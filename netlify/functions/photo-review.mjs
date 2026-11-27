@@ -17,9 +17,18 @@ export default async (req) => {
   const q = req.method === "POST" ? new URLSearchParams(await req.text()) : new URL(req.url).searchParams;
   const uid = q.get("u") || "", kind = q.get("k") || "", path = q.get("p") || "", sig = q.get("s") || "";
   if (!/^[0-9a-f-]{36}$/.test(uid) || !KINDS[kind] || !same(sig, sign(uid, kind, path))) return page("Link not valid", "<h1>That link isn't valid</h1><p>Open the review button from the email again.</p>");
-  const { data: p } = await db.one("profiles", `select=username,${kind}_url,${kind}_status&id=${eq(uid)}`);
-  if (!p) return page("Account gone", "<h1>This account has been deleted</h1><p>Nothing to do.</p>");
-  const current = p[`${kind}_url`], curPath = current && current.startsWith(PUBLIC_PREFIX) ? current.slice(PUBLIC_PREFIX.length) : "";
+  let p, current, curPath;
+  if (kind === "gig") {
+    const { data: g } = await db.one("gig_photos", `select=id,url,status,gig_id&user_id=${eq(uid)}&path=${eq(path)}`);
+    const { data: pr } = await db.one("profiles", `select=username&id=${eq(uid)}`);
+    if (!g) return page("Already removed", "<h1>Already removed</h1><p>That gig photo has been deleted since.</p>");
+    p = { username: pr && pr.username, gig_url: g.url, gig_status: g.status };
+    current = g.url; curPath = path;
+  } else {
+    ({ data: p } = await db.one("profiles", `select=username,${kind}_url,${kind}_status&id=${eq(uid)}`));
+    if (!p) return page("Account gone", "<h1>This account has been deleted</h1><p>Nothing to do.</p>");
+    current = p[`${kind}_url`]; curPath = current && current.startsWith(PUBLIC_PREFIX) ? current.slice(PUBLIC_PREFIX.length) : "";
+  }
   if (curPath !== path) return page("Already changed", `<h1>Already changed</h1><p>@${esc(p.username)} has changed or removed this ${KINDS[kind]} since. If the new one is a problem, it'll come through as a new email when it's checked or reported.</p>`);
   let shown = current;
   if (!shown && kind === "avatar") { const r = await db.authUser(uid); shown = r.data && r.data.user_metadata && r.data.user_metadata.avatar_url; }
@@ -28,12 +37,14 @@ export default async (req) => {
   if (req.method === "POST") {
     const a = q.get("a");
     if (a === "keep") {
-      await db.update("profiles", `id=${eq(uid)}`, { [`${kind}_status`]: "approved" });
+      if (kind === "gig") await db.update("gig_photos", `user_id=${eq(uid)}&path=${eq(path)}`, { status: "approved" });
+      else await db.update("profiles", `id=${eq(uid)}`, { [`${kind}_status`]: "approved" });
       return page("Kept", `<h1>Kept ✓</h1><p>${prof}'s ${KINDS[kind]} is showing again. Future reports on it will still be emailed to you, but won't hide it.</p>`);
     }
     if (a === "remove" || a === "block") {
       if (path) await db.remove([path]);
-      await db.update("profiles", `id=${eq(uid)}`, { [`${kind}_url`]: null, [`${kind}_status`]: path ? "ok" : "hidden" });
+      if (kind === "gig") await db.remove_rows("gig_photos", `user_id=${eq(uid)}&path=${eq(path)}`);
+      else await db.update("profiles", `id=${eq(uid)}`, { [`${kind}_url`]: null, [`${kind}_status`]: path ? "ok" : "hidden" });
       if (a === "block") await db.upsert("photo_blocks", { user_id: uid });
       return page("Removed", `<h1>Removed ✓</h1><p>${prof}'s ${KINDS[kind]} has been taken down${a === "block" ? ", and they can't upload photos any more. (To undo the block, delete their row from the photo_blocks table in Supabase.)" : "."}</p>`);
     }

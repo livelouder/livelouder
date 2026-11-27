@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const recs = list => Object.values(MY.get()[list] || {});
   let recQ = '', recSort = 'added', recTouring = false, recShown = 60, wantShown = 60;
   const touring = {};
-  let uploading = '', photoMsg = '', people = null, peopleLoading = false, find = {q: '', results: null, loading: false}, shareMsg = '', copied = false;
+  let startOpen = false, lfm = {loading: false, msg: '', found: null}, dia = null, diaLoading = false, gigUp = '', gigMsg = {}, feed = null, uploading = '', photoMsg = '', people = null, peopleLoading = false, find = {q: '', results: null, loading: false}, shareMsg = '', copied = false;
   const tour = name => touring[norm(name)];
 
   // ------------------------------------------------ pieces
@@ -96,10 +96,86 @@ document.addEventListener('DOMContentLoaded', function () {
       + stat(Object.keys(st.artists).length, 'Following', 'artists') + stat(recs('records').length.toLocaleString(), 'Records', 'records')
       + stat(recs('wants').length.toLocaleString(), 'Wantlist', 'wantlist');
   }
+
+  // ------------------------------------------------ one-click start
+  const followed = () => Object.keys(MY.get().artists || {}).length;
+  function followMany(list) {
+    const st = MY.get(), add = [];
+    list.forEach(x => { if (!st.artists[x.slug]) { st.artists[x.slug] = x.name; add.push(x); } });
+    MY.save(); MY.paint();
+    if (add.length && window.ACC) ACC.push('artists', 'add', add);
+    return add.length;
+  }
+  function popular() {
+    return Object.entries(arts).filter(([, a]) => a[3]).sort((a, b) => (!!b[1][1] - !!a[1][1]) || b[1][5] - a[1][5]).slice(0, 18);
+  }
+  function startCard() {
+    const n = followed();
+    if (!startOpen && (n >= 3 || localStorage.getItem('llStartDone'))) return '';
+    const chips = popular().map(([sl, a]) => {
+      const on = !!MY.get().artists[sl];
+      return `<button class="pickart${on ? ' on' : ''}" type="button" data-pick="${esc(sl)}" data-name="${esc(a[0])}" aria-pressed="${on}">${art(sl, a[0], 'paph')}<span>${esc(a[0])}</span></button>`;
+    }).join('');
+    return `<div class="startcard" id="start"><div class="shead"><h2>Make Live Louder yours</h2><button type="button" class="linkish" data-startdone>${n ? 'Done' : 'Not now'}</button></div>
+      <p class="note">Follow your artists and we'll show their gigs first, and email you when they announce a tour or tickets go on sale.</p>
+      <div class="startgrid">
+        <div class="startbox"><h3>① Bring your music</h3>
+          <form class="dgform" data-lfm><input name="u" placeholder="Your Last.fm username" aria-label="Last.fm username" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn ghost">${lfm.loading ? 'Looking…' : 'Follow my top artists'}</button></form>
+          ${lfm.msg ? `<p class="note impmsg">${lfm.msg}</p>` : '<p class="note">Uses your Last.fm listening history (works with Spotify and Apple Music if you scrobble).</p>'}
+          ${linkForm()}</div>
+        <div class="startbox"><h3>② Or tap who you love</h3><div class="pickgrid">${chips}</div></div>
+      </div>${n ? `<p class="note"><b>You're following ${n} ${n === 1 ? 'artist' : 'artists'}.</b> <a href="#artists">See them →</a></p>` : ''}</div>`;
+  }
+  async function importLastfm(u) {
+    lfm = {loading: true, msg: '', found: null}; render();
+    let j = {};
+    try { j = await (await fetch('/.netlify/functions/lastfm?u=' + encodeURIComponent(u))).json(); } catch (e) { j = {error: "Couldn't reach Last.fm. Try again."}; }
+    if (j.error) { lfm = {loading: false, msg: esc(j.error)}; render(); return; }
+    const byName = {};
+    Object.entries(arts).forEach(([sl, a]) => { byName[norm(a[0])] = sl; });
+    const list = j.artists.slice(0, 150).map(a => ({slug: byName[norm(a.name)] || gslug(a.name), name: a.name}));
+    const touringN = list.filter(x => arts[x.slug] && arts[x.slug][3]).length;
+    const added = followMany(list);
+    lfm = {loading: false, msg: `Done! Following ${added} new ${added === 1 ? 'artist' : 'artists'} from your Last.fm. <b>${touringN} of them ${touringN === 1 ? 'has' : 'have'} Australian dates coming up.</b> We'll tell you when the others tour.`};
+    render();
+  }
+
+  // ------------------------------------------------ gig diary (rate the gigs you went to, add photos)
+  function loadDiary(force) {
+    if (!me() || diaLoading || (dia && !force)) return;
+    diaLoading = true;
+    ACC.diary().then(d => { dia = d || {}; diaLoading = false; render(); });
+  }
+  const starBtns = (id, n) => `<span class="rate" role="group" aria-label="Rate this gig">${[1, 2, 3, 4, 5].map(i => `<button type="button" class="${i <= n ? 'on' : ''}" data-rate="${i}" data-id="${esc(id)}" aria-label="${i} star${i > 1 ? 's' : ''}">★</button>`).join('')}</span>`;
+  function diaryCard(x) {
+    const p = dparts(x.d), d = (dia && dia[x.id]) || {photos: []};
+    const photos = (d.photos || []).map(ph => `<span class="dph"><img src="${esc(ph.url)}" alt="" loading="lazy">${ph.status === 'pending' ? '<i>Checking</i>' : ph.status === 'hidden' ? '<i>Hidden</i>' : ''}<button type="button" data-rmgph="${esc(ph.id)}" aria-label="Remove photo">×</button></span>`).join('');
+    const canAdd = me() && (d.photos || []).length < 4;
+    return `<article class="dcard"><a class="gimg" href="${esc(gp(x))}">${art(x.s, x.a, 'gph')}<span class="gdate"><b>${p.d}</b>${MON[p.m - 1]}</span></a>
+      <div class="dbody"><a class="gname" href="${esc(gp(x))}">${esc(x.a)}</a><span class="gwhere">${esc(x.v)}, ${esc(x.c)} · ${p.dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short', year: 'numeric'})}</span>
+      ${me() ? `${starBtns(x.id, d.rating || 0)}
+        <form class="dnote" data-note="${esc(x.id)}"><input name="t" maxlength="280" placeholder="${d.review ? '' : 'How was it? One line for your gig diary'}" value="${esc(d.review || '')}" aria-label="Note about this gig"><button class="linkish small">${gigMsg[x.id] || 'Save'}</button></form>
+        <div class="dphotos">${photos}${canAdd ? `<button type="button" class="addph" data-addgph="${esc(x.id)}">${gigUp === x.id ? 'Uploading…' : '+ Photo'}</button>` : ''}</div>
+        <a class="setl" href="https://www.setlist.fm/search?query=${encodeURIComponent(x.a + ' ' + x.v)}" rel="noopener">Find the setlist ↗</a>`
+        : '<p class="note"><button type="button" class="linkish" data-signin>Sign in</button> to rate it and add your photos.</p>'}</div></article>`;
+  }
+  function rateNudge(L) {
+    if (!me() || !dia) return '';
+    const recent = L.been.filter(x => daysTo(x.d) >= -14 && !(dia[x.id] && dia[x.id].rating)).slice(0, 2);
+    return recent.map(x => `<div class="ratenudge">${art(x.s, x.a, 'nph sm')}<div><span class="ntag">How was it?</span><p><b>${esc(x.a)}</b> at ${esc(x.v)}</p>${starBtns(x.id, 0)}</div><a class="linkish small" href="#gigs">Add photos →</a></div>`).join('');
+  }
+  function phoneCard() {
+    if (!window.LLAPP || LLAPP.installed()) return '';
+    const how = LLAPP.canPrompt() ? '<button type="button" class="btn installbtn">📲 Install Live Louder</button>'
+      : LLAPP.ios() ? '<p>On iPhone: tap the <b>Share</b> button in Safari, then <b>Add to Home Screen</b>.</p>'
+      : '<p>In Chrome on Android, open the ⋮ menu and choose <b>Install app</b> or <b>Add to Home screen</b>.</p>';
+    return `<div class="card"><h3>Live Louder on your phone</h3><p>Put it on your home screen and it opens like an app, full screen, with My gigs ready to go even with no signal at the venue.</p>${how}</div>`;
+  }
   function overview() {
     const L = lists(), st = MY.get();
     const next = L.going[0] || L.saved[0];
-    let h = '';
+    if (L.been.length) loadDiary();
+    let h = startCard() + rateNudge(L);
     if (next) {
       const n = daysTo(next.d);
       h += `<div class="nextup"><a class="nimg" href="${root}artists/${esc(next.s)}.html">${art(next.s, next.a, 'nph')}</a><div class="ntext">
@@ -136,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let h = '';
     h += head('Going', L.going.length ? `<span class="note">${L.going.length}</span>` : '') + (L.going.length ? `<div class="ggrid">${L.going.map(x => gigCard(x, true)).join('')}</div>` : '<p class="note">Tap "I\'m going" on a saved gig to put it here.</p>');
     h += head('Saved') + (L.saved.length ? `<div class="ggrid">${L.saved.map(x => gigCard(x, true)).join('')}</div>` : '<p class="note">Nothing saved right now.</p>');
-    if (L.been.length) h += head('Been to', `<span class="note">${L.been.length} ${L.been.length === 1 ? 'gig' : 'gigs'}</span>`) + `<div class="ggrid">${L.been.map(x => gigCard(x, true)).join('')}</div>`;
+    if (L.been.length) { loadDiary(); h += head('Your gig diary', `<span class="note">${L.been.length} ${L.been.length === 1 ? 'gig' : 'gigs'} · rate them, add a note and your photos</span>`) + `<div class="dgrid">${L.been.map(diaryCard).join('')}</div>`; }
     return h;
   }
   function touringFromRecords() {
@@ -235,6 +311,8 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (find.results) h += find.results.length ? `<div class="shead"><h3>People matching "${esc(find.q)}"</h3><button type="button" class="linkish" data-clearfind>Clear</button></div><div class="pgrid">${find.results.map(p => personTile(p, 'search')).join('')}</div>`
       : `<p class="note">No one found for "${esc(find.q)}". Only people who share their profile show up. Ask your friend for their Live Louder link.</p>`;
     if (!people) return h + '<p class="note">Loading your friends…</p>';
+    if (feed === null && window.FRIENDS) { feed = false; FRIENDS.loadFeed().then(f => { feed = f; render(); }); }
+    if (feed && feed.length) h += head('Latest from friends') + FRIENDS.renderFeed(feed, 30);
     const fg = friendsGoing();
     if (fg.length) h += head('Your friends are going') + `<ul class="fgoing">${fg.map(({g, who}) => { const p = dparts(g.d);
       return `<li><span class="fgd"><b>${p.d}</b>${MON[p.m - 1]}</span><div class="fgtext"><a class="gname" href="${esc(gp(g))}">${esc(g.a)}</a><span class="gwhere">${esc(g.v)}, ${esc(g.c)}</span>
@@ -274,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   function settings() {
     const u = window.ACC && ACC.user(), p = (window.ACC && ACC.profile()) || {}, st = MY.get();
-    let h = '<div class="sgrid">' + shareCard();
+    let h = '<div class="sgrid">' + shareCard() + phoneCard();
     h += `<div class="card"><h3>Your account</h3>${u ? `<p>Signed in as <b>${esc(u.email || '')}</b></p><p class="acts"><button type="button" class="linkish" data-act="out">Sign out</button></p>`
       : `<p>You're not signed in, so everything here is saved on this device only.</p><button type="button" class="btn" data-signin>Sign in or create an account</button><p class="note">Free. No password needed.</p>`}</div>`;
     h += `<div class="card"><h3>Emails</h3>${u ? `<label class="tog"><input type="checkbox" data-pref="remind_gigs" ${p.remind_gigs !== false ? 'checked' : ''}> A reminder a few days before gigs I've saved</label>
@@ -296,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.MYPAGE = render;
   document.addEventListener('acc', render);
-  function setTab() { const t = (location.hash || '#overview').slice(1); tab = ['overview', 'gigs', 'artists', 'records', 'wantlist', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
+  function setTab() { const t0 = (location.hash || '#overview').slice(1); if (t0 === 'start') startOpen = true; const t = t0 === 'start' ? 'overview' : t0; tab = ['overview', 'gigs', 'artists', 'records', 'wantlist', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
   window.addEventListener('hashchange', () => { setTab(); document.querySelector('.ptabs').scrollIntoView({block: 'nearest'}); });
 
   // ------------------------------------------------ search, import, record view
@@ -363,6 +441,17 @@ document.addEventListener('DOMContentLoaded', function () {
       call.then(() => { if (find.results) find.results.forEach(p => { if (p.username === b.dataset.follow) p.following = true; if (p.username === b.dataset.unfollow) p.following = false; }); loadPeople(true); });
       return;
     }
+    const pa = ev.target.closest('[data-pick]');
+    if (pa) { const st = MY.get(), sl = pa.dataset.pick; if (st.artists[sl]) { delete st.artists[sl]; MY.save(); MY.push('artist', 'remove', {slug: sl, name: pa.dataset.name}); } else followMany([{slug: sl, name: pa.dataset.name}]); MY.paint(); render(); return; }
+    if (ev.target.closest('[data-startdone]')) { try { localStorage.setItem('llStartDone', '1'); } catch (e) {} startOpen = false; render(); return; }
+    const rt = ev.target.closest('[data-rate]');
+    if (rt) { const id = rt.dataset.id, n = +rt.dataset.rate; dia = dia || {}; dia[id] = Object.assign(dia[id] || {photos: []}, {rating: n}); render();
+      ACC.rateGig(id, n, dia[id].review).then(r => { if (r.error) { gigMsg[id] = 'Not saved'; render(); } }); return; }
+    const ag = ev.target.closest('[data-addgph]');
+    if (ag) { if (gigUp) return; pickKind = 'gig'; pickGig = ag.dataset.addgph; fileIn.value = ''; fileIn.click(); return; }
+    const rg = ev.target.closest('[data-rmgph]');
+    if (rg) { if (!confirm('Remove this photo?')) return; const id = +rg.dataset.rmgph;
+      for (const k in dia) { const ph = (dia[k].photos || []).find(p => p.id === id); if (ph) { dia[k].photos = dia[k].photos.filter(p => p !== ph); render(); ACC.removeGigPhoto(ph); break; } } return; }
     const pk = ev.target.closest('[data-pickphoto]');
     if (pk) { pickPhoto(pk.dataset.pickphoto); return; }
     const rm = ev.target.closest('[data-rmphoto]');
@@ -393,6 +482,11 @@ document.addEventListener('DOMContentLoaded', function () {
   box.addEventListener('submit', ev => {
     const f = ev.target.closest('[data-dgform]');
     if (f) { ev.preventDefault(); const u = f.u.value.trim(); if (u && !imp.loading) importDiscogs(u); return; }
+    const nf = ev.target.closest('[data-note]');
+    if (nf) { ev.preventDefault(); const id = nf.dataset.note, t = nf.t.value.trim(); dia = dia || {}; dia[id] = Object.assign(dia[id] || {photos: []}, {review: t});
+      gigMsg[id] = 'Saving…'; render(); ACC.rateGig(id, dia[id].rating || null, t).then(r => { gigMsg[id] = r.error ? 'Not saved' : 'Saved ✓'; render(); setTimeout(() => { gigMsg[id] = ''; render(); }, 2000); }); return; }
+    const lf = ev.target.closest('[data-lfm]');
+    if (lf) { ev.preventDefault(); const u = lf.u.value.trim(); if (u) importLastfm(u); return; }
     const pf = ev.target.closest('[data-findpeople]');
     if (pf) { ev.preventDefault(); const q = pf.q.value.trim(); if (q.length < 2) return; find = {q, results: null, loading: true}; render();
       ACC.rpc('find_people', {q}).then(r => { find = {q, results: r.data || [], loading: false}; render(); }); return; }
@@ -416,12 +510,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ------------------------------------------------ photos
-  let pickKind = '';
+  let pickKind = '', pickGig = '';
   const fileIn = document.getElementById('pFile');
   function pickPhoto(kind) { if (!me()) { ACC.open(); return; } if (uploading) return; pickKind = kind; fileIn.value = ''; fileIn.click(); }
   fileIn.addEventListener('change', () => {
     const f = fileIn.files && fileIn.files[0]; if (!f) return;
     if (f.size > 25 * 1024 * 1024) { photoMsg = 'That photo is too big. Try one under 25 MB.'; render(); return; }
+    if (pickKind === 'gig') {
+      const id = pickGig; gigUp = id; gigMsg[id] = ''; render();
+      ACC.setPhoto('gig', f, id).then(r => { gigUp = '';
+        if (r.error) alert(r.error);
+        else { dia = dia || {}; (dia[id] = dia[id] || {photos: []}).photos.push({id: r.id, url: r.url, status: r.status, path: r.url.split('/object/public/profile/')[1]}); if (r.status === 'pending') alert('Thanks! Your photo is waiting for a quick check. Only you can see it until then.'); }
+        render(); });
+      return;
+    }
     uploading = pickKind; photoMsg = ''; render();
     ACC.setPhoto(pickKind, f).then(r => { uploading = ''; photoMsg = r.error ? esc(r.error) : r.status === 'pending' ? 'Thanks. Your photo is waiting for a quick check, and only you can see it until then.' : ''; if (r.error || r.status === 'pending') location.hash = '#settings'; render(); });
   });

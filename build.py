@@ -287,7 +287,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <link rel="stylesheet" href="{r}style.css">{extra_head}</head><body data-root="{r}">
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
 <a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
-<button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}</nav>
+<button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}<button class="installbtn" type="button" hidden>📲 Get the app</button></nav>
 <form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>
 <main>{body}</main>
 {signup_band(r)}
@@ -298,7 +298,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <p>Gigs by city: {cities}</p>
 <p>Records for the drive to the show: our friends at <a href="https://heathenrecords.com.au">Heathen Records</a>.</p>
 <p>© {TODAY.year} Live Louder</p></div></div></footer>
-<script src="{r}app.js" defer></script><script src="{r}account.js" defer></script></body></html>"""
+<script src="{r}app.js" defer></script><script src="{r}account.js" defer></script><script src="{r}friends.js" defer></script></body></html>"""
     doc = HEATHEN_LINK.sub(lambda m: _utm(m, "site"), doc)
     doc = EXT_LINK.sub(_new_tab, doc)
     p = OUT / path
@@ -624,6 +624,7 @@ home = f"""<section class="hero">{hero_bg}<div class="wrap">
 {hero_caps}
 <div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
 <div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div></div></section>
+<section class="band ffeedband" id="ffeed" hidden></section>
 {news_html}{gotw_html}{picks_html}
 {near_html}{sales_html}{genre_html}
 <section class="band"><div class="wrap split">
@@ -789,6 +790,20 @@ for s in shows:
                        "c": s["city"], "u": s["url"], "vs": venue_slug(s), "p": gig_path(s)}, separators=(",", ":"))
     others = [x for x in (a.get("shows") or []) if x["id"] != s["id"]]
     more = f'<h2>More {e(s["artist"])} dates</h2>{gig_list(others[:30])}' if others else ""
+    before = ""
+    dg = (a.get("discogs") or {}) if a else {}
+    if dg.get("records"):
+        cards = ""
+        for r in dg["records"][:4]:
+            hq = HEATHEN + quote_plus(f'{a["name"]} {r["title"]}') + "&utm_source=livelouder&utm_medium=referral&utm_campaign=gig-page"
+            img = f'<img src="{e(r["thumb"])}" alt="{e(r["title"])} cover" loading="lazy" width="150" height="150">' if r.get("thumb") else '<span class="rec-blank"></span>'
+            rj = e(json.dumps({"rid": f'm{r["master"]}', "a": a["name"], "t": r["title"], "y": r["year"], "img": r.get("thumb", "")}, separators=(",", ":"))) if r.get("master") else ""
+            addb = (f'<span class="radd sm"><button type="button" class="addbtn" data-addrec="{rj}" data-list="records">+ Collection</button>'
+                    f'<button type="button" class="addbtn" data-addrec="{rj}" data-list="wants">+ Wantlist</button></span>') if rj else ""
+            cards += (f'<div class="rec">{img}<strong>{e(r["title"])}</strong><span class="meta">{r["year"]}</span>'
+                      f'<a href="{hq}" rel="noopener">Find on vinyl ↗</a>{addb}</div>')
+        before = (f'<h2>Before the show</h2><p class="note">Get to know the records before you go, or tick off the ones you own.</p>'
+                  f'<div class="recs four">{cards}</div>')
     support = f'<p class="gp-sup">with {e(", ".join(s["support"]))}</p>' if s["support"] else ""
     src_label = {"ticketmaster": "Ticketmaster", "submitted": "the ticket seller", "found": "the venue / ticket seller"}.get(s["src"], "the promoter")
     ld = json.dumps({"@context": "https://schema.org", "@type": "MusicEvent", "name": f'{s["artist"]} at {s["venue"]}',
@@ -811,7 +826,7 @@ for s in shows:
 <section class="band"><div class="wrap split"><div>
 {f'<p class="lead">{e(a["bio"])}</p>' if a.get("bio") else ""}
 <p><a class="btn ghost" href="/artists/{slug(s["artist"])}.html">All about {e(s["artist"])} →</a></p>
-{more}</div>
+{before}{more}</div>
 <aside class="side"><div class="card"><h3 style="margin-top:0">The venue</h3><p><a href="/venues/{venue_slug(s)}.html"><b>{e(s["venue"])}</b></a><br>{e(s["suburb"] or s["city"])}, {e(s.get("state", ""))}</p>{venue_map(v, small=True) if v else ""}
 <p><a href="/venues/{venue_slug(s)}.html">Venue guide and more gigs →</a></p></div></aside></div></section>"""
     page(gig_path(s)[1:], f'{s["artist"]} at {s["venue"]}, {s["city"]} – {fmt(s["date"], False)} | Tickets | Live Louder',
@@ -1171,10 +1186,13 @@ shutil.copy(ROOT / "src/app.js", OUT / "app.js")
 shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
 shutil.copy(ROOT / "src/people.js", OUT / "people.js")
+shutil.copy(ROOT / "src/friends.js", OUT / "friends.js")
+shutil.copy(ROOT / "src/sw.js", OUT / "sw.js")
 for icon in (ROOT / "src/icons").iterdir():
     shutil.copy(icon, OUT / icon.name)
-(OUT / "site.webmanifest").write_text(json.dumps({"name": "Live Louder", "short_name": "Live Louder", "start_url": "/", "display": "standalone",
-    "background_color": "#141414", "theme_color": "#141414",
+(OUT / "site.webmanifest").write_text(json.dumps({"id": "/", "name": "Live Louder", "short_name": "Live Louder", "start_url": "/?app=1", "scope": "/", "display": "standalone",
+    "description": "Australian gigs, your friends, and your records in one place.", "background_color": "#141414", "theme_color": "#141414",
+    "shortcuts": [{"name": "My gigs", "url": "/my-gigs.html"}, {"name": "Gig guide", "url": "/gigs/index.html"}, {"name": "This weekend", "url": "/this-weekend.html"}],
     "icons": [{"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"}]}))
 urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html", "festivals/", "genres/", "out-soon.html", "most-wanted.html", "stories/", "submit-a-gig.html", "about.html", "privacy.html"] \
     + [f"genres/{slug(g)}.html" for g in GENRE_LIST] \

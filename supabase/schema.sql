@@ -176,8 +176,7 @@ begin
     'n_following', (select count(*) from public.follows where follower = p.id),
     'gigs', coalesce((select jsonb_agg(s.gig || jsonb_build_object('id', s.gig_id, 'going', s.going) order by s.gig->>'d')
         from public.saved_gigs s where s.user_id = p.id and (s.gig->>'d') >= today), '[]'::jsonb),
-    'been', coalesce((select jsonb_agg(x.g order by x.g->>'d' desc) from (select s.gig || jsonb_build_object('id', s.gig_id) g
-        from public.saved_gigs s where s.user_id = p.id and s.going and (s.gig->>'d') < today order by s.gig->>'d' desc limit 40) x), '[]'::jsonb),
+    'been', public.gig_diary(p.id),
     'collection', coalesce((select jsonb_agg(x.rec) from (select rec from public.user_records where user_id = p.id and list = 'collection' order by created_at desc limit 1500) x), '[]'::jsonb),
     'wants', coalesce((select jsonb_agg(x.rec) from (select rec from public.user_records where user_id = p.id and list = 'wantlist' order by created_at desc limit 1500) x), '[]'::jsonb),
     'n_wants', (select count(*) from public.user_records where user_id = p.id and list = 'wantlist'));
@@ -335,3 +334,98 @@ grant execute on all functions in schema public to service_role;
 alter default privileges in schema public grant all on tables to service_role;
 alter default privileges in schema public grant all on sequences to service_role;
 alter default privileges in schema public grant execute on functions to service_role;
+
+-- Friends feed, gig diary and gig photos (added 27 Nov 2026).
+-- saved_gigs gets: when you marked "going" (for the feed), and a rating + short note after the gig.
+alter table public.saved_gigs add column if not exists going_at timestamptz;
+alter table public.saved_gigs add column if not exists rating smallint;
+alter table public.saved_gigs add column if not exists review text;
+alter table public.saved_gigs add column if not exists reviewed_at timestamptz;
+alter table public.saved_gigs drop constraint if exists rating_ok;
+alter table public.saved_gigs add constraint rating_ok check ((rating is null or rating between 1 and 5) and (review is null or char_length(review) <= 280));
+update public.saved_gigs set going_at = created_at where going and going_at is null;
+create or replace function public.stamp_saved_gig() returns trigger language plpgsql set search_path = '' as $$
+begin
+  if new.going and (tg_op = 'INSERT' or not coalesce(old.going, false)) then new.going_at := now(); end if;
+  if not new.going then new.going_at := null; end if;
+  if new.rating is distinct from (case when tg_op = 'UPDATE' then old.rating end)
+     or new.review is distinct from (case when tg_op = 'UPDATE' then old.review end) then new.reviewed_at := now(); end if;
+  return new;
+end $$;
+drop trigger if exists stamp_saved_gig on public.saved_gigs;
+create trigger stamp_saved_gig before insert or update on public.saved_gigs for each row execute function public.stamp_saved_gig();
+
+-- Gig photos: uploaded only through the site's server code (SafeSearch check, like profile photos). Up to 4 per gig per person.
+create table if not exists public.gig_photos (
+  id bigint generated always as identity primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  gig_id text not null,
+  url text not null,
+  path text not null,
+  status text not null default 'ok' check (status in ('ok', 'approved', 'pending', 'hidden')),
+  created_at timestamptz not null default now());
+create index if not exists gig_photos_user on public.gig_photos (user_id, gig_id);
+alter table public.gig_photos enable row level security;
+drop policy if exists "see own gig photos" on public.gig_photos;
+create policy "see own gig photos" on public.gig_photos for select to authenticated using ((select auth.uid()) = user_id);
+drop policy if exists "remove own gig photos" on public.gig_photos;
+create policy "remove own gig photos" on public.gig_photos for delete to authenticated using ((select auth.uid()) = user_id);
+grant select, delete on public.gig_photos to authenticated;
+grant all on public.gig_photos to service_role;
+
+-- Who you follow who is shared (helper).
+create or replace function public.my_followees() returns setof uuid language sql stable security definer set search_path = '' as $$
+  select f.followee from public.follows f join public.profiles p on p.id = f.followee
+  where f.follower = auth.uid() and p.share and p.username is not null
+$$;
+revoke all on function public.my_followees() from public, anon, authenticated;
+
+-- What the people you follow have been up to (last 60 days, newest first).
+create or replace function public.friends_feed() returns jsonb language sql stable security definer set search_path = '' as $$
+  with f as (select public.my_followees() id),
+  who as (select p.id, jsonb_build_object('username', p.username,
+            'name', coalesce(nullif(p.display_name, ''), u.raw_user_meta_data->>'full_name', p.username),
+            'avatar', case when p.avatar_status in ('ok', 'approved') then coalesce(p.avatar_url, u.raw_user_meta_data->>'avatar_url') end) card
+          from public.profiles p join auth.users u on u.id = p.id where p.id in (select id from f)),
+  ev as (
+    select s.user_id, 'going' t, s.going_at at, s.gig || jsonb_build_object('id', s.gig_id) gig, null::jsonb rec, null::smallint rating, null::text review, null::text photo
+      from public.saved_gigs s where s.user_id in (select id from f) and s.going and s.going_at > now() - interval '60 days'
+    union all
+    select s.user_id, 'review', s.reviewed_at, s.gig || jsonb_build_object('id', s.gig_id), null, s.rating, s.review, null
+      from public.saved_gigs s where s.user_id in (select id from f) and s.rating is not null and s.reviewed_at > now() - interval '60 days'
+    union all
+    select r.user_id, 'record', r.created_at, null, r.rec || jsonb_build_object('rid', r.rid), null, null, null
+      from public.user_records r where r.user_id in (select id from f) and r.list = 'collection' and r.created_at > now() - interval '60 days'
+    union all
+    select g.user_id, 'photo', g.created_at, (select s.gig || jsonb_build_object('id', s.gig_id) from public.saved_gigs s where s.user_id = g.user_id and s.gig_id = g.gig_id), null, null, null, g.url
+      from public.gig_photos g where g.user_id in (select id from f) and g.status in ('ok', 'approved') and g.created_at > now() - interval '60 days')
+  select coalesce(jsonb_agg(jsonb_build_object('who', w.card, 't', e.t, 'at', e.at, 'gig', e.gig, 'rec', e.rec, 'rating', e.rating, 'review', e.review, 'photo', e.photo) order by e.at desc), '[]'::jsonb)
+  from (select * from ev order by at desc limit 400) e join who w on w.id = e.user_id
+$$;
+revoke all on function public.friends_feed() from public, anon;
+grant execute on function public.friends_feed() to authenticated;
+
+-- Which upcoming gigs your friends are going to: {"<gig id>": [{username, name, avatar}, ...]}.
+create or replace function public.friends_going() returns jsonb language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_object_agg(x.gig_id, x.people), '{}'::jsonb) from (
+    select s.gig_id, jsonb_agg(jsonb_build_object('username', p.username,
+             'name', coalesce(nullif(p.display_name, ''), u.raw_user_meta_data->>'full_name', p.username),
+             'avatar', case when p.avatar_status in ('ok', 'approved') then coalesce(p.avatar_url, u.raw_user_meta_data->>'avatar_url') end)) people
+    from public.saved_gigs s join public.profiles p on p.id = s.user_id join auth.users u on u.id = s.user_id
+    where s.user_id in (select public.my_followees()) and s.going
+      and (s.gig->>'d') >= to_char(now() at time zone 'Australia/Sydney', 'YYYY-MM-DD')
+    group by s.gig_id) x
+$$;
+revoke all on function public.friends_going() from public, anon;
+grant execute on function public.friends_going() to authenticated;
+
+-- Shared profiles also show the gig diary (ratings, notes, photos) on "Been to".
+create or replace function public.gig_diary(pid uuid) returns jsonb language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_agg(x.g order by x.g->>'d' desc), '[]'::jsonb) from (
+    select s.gig || jsonb_build_object('id', s.gig_id, 'rating', s.rating, 'review', s.review,
+      'photos', coalesce((select jsonb_agg(gp.url order by gp.created_at) from public.gig_photos gp where gp.user_id = s.user_id and gp.gig_id = s.gig_id and gp.status in ('ok', 'approved')), '[]'::jsonb)) g
+    from public.saved_gigs s where s.user_id = pid and s.going
+      and (s.gig->>'d') < to_char(now() at time zone 'Australia/Sydney', 'YYYY-MM-DD')
+    order by s.gig->>'d' desc limit 60) x
+$$;
+revoke all on function public.gig_diary(uuid) from public, anon, authenticated;

@@ -12,12 +12,25 @@ export default async (req) => {
   let body = {};
   try { body = await req.json(); } catch (e) {}
   const kind = body.kind, reason = REASONS[body.reason] ? body.reason : "other";
-  if (!["avatar", "banner"].includes(kind) || !body.username) return json({ error: "Missing details" }, 400);
+  if (!["avatar", "banner", "gig"].includes(kind) || !body.username) return json({ error: "Missing details" }, 400);
 
   const used = await db.count("photo_reports", `reporter=${eq(user.id)}&created_at=gte.${encodeURIComponent(new Date(Date.now() - 864e5).toISOString())}`);
   if (used.count >= 10) return json({ error: "Thanks. We've had a lot of reports from you today, so we'll look at those first." }, 429);
 
   const uname = String(body.username).toLowerCase().replace(/[^a-z0-9_]/g, "");
+  if (kind === "gig") {
+    const url = String(body.photo || "");
+    if (!url.startsWith(PUBLIC_PREFIX)) return json({ error: "Missing details" }, 400);
+    const path = url.slice(PUBLIC_PREFIX.length);
+    const [{ data: g }, { data: owner }] = await Promise.all([db.one("gig_photos", `select=user_id,status&path=${eq(path)}`), db.one("profiles", `select=id,username&username=ilike.${encodeURIComponent(uname)}`)]);
+    if (!g || !owner || g.user_id !== owner.id || owner.id === user.id) return json({ ok: true });
+    await db.insert("photo_reports", { reporter: user.id, owner: owner.id, kind, reason });
+    const kept = g.status === "approved";
+    if (!kept) await db.update("gig_photos", `path=${eq(path)}`, { status: "hidden" });
+    await emailReview({ uid: owner.id, kind, path, url, username: owner.username, why: `Reported: ${REASONS[reason]}`,
+      detail: kept ? "You approved this photo before, so it's still showing. Remove it if you've changed your mind." : "" });
+    return json({ ok: true });
+  }
   const { data: p } = await db.one("profiles", `select=id,username,${kind}_url,${kind}_status&username=ilike.${encodeURIComponent(uname)}`);
   if (!p || p.id === user.id) return json({ ok: true });
   await db.insert("photo_reports", { reporter: user.id, owner: p.id, kind, reason });

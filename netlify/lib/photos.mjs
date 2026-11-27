@@ -25,6 +25,8 @@ export const db = {
   select: (table, q) => call(`/rest/v1/${table}?${q}`),
   one: async (table, q) => { const r = await call(`/rest/v1/${table}?${q}&limit=1`); return { data: r.data && r.data[0] || null, error: r.error }; },
   count: (table, q) => call(`/rest/v1/${table}?select=*&${q}`, { method: "HEAD", headers: { Prefer: "count=exact" } }),
+  insertReturn: (table, row) => call(`/rest/v1/${table}`, { method: "POST", body: JSON.stringify(row), headers: { ...J, Prefer: "return=representation" } }),
+  remove_rows: (table, q) => call(`/rest/v1/${table}?${q}`, { method: "DELETE", headers: { Prefer: "return=minimal" } }),
   insert: (table, row) => call(`/rest/v1/${table}`, { method: "POST", body: JSON.stringify(row), headers: { ...J, Prefer: "return=minimal" } }),
   upsert: (table, row) => call(`/rest/v1/${table}`, { method: "POST", body: JSON.stringify(row), headers: { ...J, Prefer: "return=minimal,resolution=merge-duplicates" } }),
   update: (table, q, patch) => call(`/rest/v1/${table}?${q}`, { method: "PATCH", body: JSON.stringify(patch), headers: { ...J, Prefer: "return=minimal" } }),
@@ -34,7 +36,7 @@ export const db = {
 };
 export const eq = (v) => "eq." + encodeURIComponent(v);
 
-export const KINDS = { avatar: "profile photo", banner: "cover photo" };
+export const KINDS = { avatar: "profile photo", banner: "cover photo", gig: "gig photo" };
 
 // Check the person's sign-in token directly with Supabase Auth (uses the public key; the token itself proves who they are).
 const PUBLISHABLE = "sb_publishable_pL0ygBPAPtoIXzMi3e1lsQ_ytrBXiNY";
