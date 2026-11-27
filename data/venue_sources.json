@@ -731,25 +731,25 @@
   "venue": "The Lab Adelaide",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/4423728-lab-at-ila",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Thebarton Theatre",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/29278-thebarton-theatre/calendar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Rocket Bar",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.moshtix.com.au/v2/venues/rocket-bar/1840",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Altar Hobart",
@@ -763,33 +763,33 @@
   "venue": "The Republic Bar",
   "city": "Hobart",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://pubbanc.com.au/republic/",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Brisbane Hotel Hobart",
   "city": "Hobart",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tixel.com/au/tickets/the-brisbane-hotel-wkaw",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Odeon Theatre Hobart",
   "city": "Hobart",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://inthehanginggarden.com.au/venues/odeon",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Hobart Brewing Company",
   "city": "Hobart",
   "state": "TAS",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Basement Canberra",
@@ -803,33 +803,33 @@
   "venue": "Smith's Alternative",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.smithsalternative.com/app/home?view=list",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Street Theatre",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://songkick.com/venues/904226-street-theatre",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "UC Hub",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://ucx.canberra.edu.au/whats-on/live-music/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "King O'Malley's",
   "city": "Canberra",
   "state": "ACT",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Cambridge Hotel Newcastle",
@@ -851,9 +851,9 @@
   "venue": "King Street Hotel Newcastle",
   "city": "Newcastle",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/4519744-king-street-bandroom",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Lass O'Gowrie Hotel",
@@ -867,7 +867,7 @@
   "venue": "The Small Ballroom",
   "city": "Newcastle",
   "state": "NSW",
-  "url": "",
+  "url": "https://www.songkick.com/de/venues/2299049-small-ballroom",
   "checked": "",
   "status": "unchecked"
  },
@@ -883,25 +883,25 @@
   "venue": "Dicey Riley's",
   "city": "Wollongong",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.diceyrileyshotel.com.au/gig-guide/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Rad Bar",
   "city": "Wollongong",
   "state": "NSW",
   "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-27",
+  "status": "closed"
  },
  {
   "venue": "Wollongong UniBar",
   "city": "Wollongong",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://unibar.uow.edu.au/gigs-events/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Barwon Club Hotel",
@@ -915,7 +915,7 @@
   "venue": "The Workers Club Geelong",
   "city": "Geelong",
   "state": "VIC",
-  "url": "",
+  "url": "https://songkick.com/venues/2887138-workers-club",
   "checked": "",
   "status": "unchecked"
  },
@@ -923,9 +923,9 @@
   "venue": "Costa Hall",
   "city": "Geelong",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://geelongartscentre.org.au/whats-on/all-events/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Miami Marketta",
@@ -939,31 +939,31 @@
   "venue": "Vinnies Dive Bar",
   "city": "Gold Coast",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://vinniesdive.oztix.com.au/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Coolangatta Hotel",
   "city": "Gold Coast",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://coolyhotel.oztix.com.au/outlet/event/98195af2-7610-40d6-a57c-7c833395b220",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Elsewhere Bar",
   "city": "Gold Coast",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/854706-elsewhere-bar",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Solbar",
   "city": "Sunshine Coast",
   "state": "QLD",
-  "url": "",
+  "url": "https://www.songkick.com/venues/1132356-solbar",
   "checked": "",
   "status": "unchecked"
  },
@@ -979,7 +979,7 @@
   "venue": "The Jack Cairns",
   "city": "Cairns",
   "state": "QLD",
-  "url": "",
+  "url": "https://musick.com.au/cairns",
   "checked": "",
   "status": "unchecked"
  },
@@ -987,17 +987,17 @@
   "venue": "Tanks Arts Centre",
   "city": "Cairns",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://labs.songkick.com/venues/176148-tanks-arts-centre",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Warehouse Townsville",
   "city": "Townsville",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://songkick.com/venues/4626689-warehouse-townsville",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Flynn's Townsville",
@@ -1019,7 +1019,7 @@
   "venue": "Happy Yess",
   "city": "Darwin",
   "state": "NT",
-  "url": "",
+  "url": "https://brownsmart.com.au/whats-on",
   "checked": "",
   "status": "unchecked"
  },
@@ -1027,7 +1027,7 @@
   "venue": "Discovery Darwin",
   "city": "Darwin",
   "state": "NT",
-  "url": "",
+  "url": "https://tixel.com/au/tickets/discovery-darwin",
   "checked": "",
   "status": "unchecked"
  },
@@ -1035,17 +1035,17 @@
   "venue": "Royal Oak Hotel Launceston",
   "city": "Launceston",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tickets.iwannaticket.com.au/seller/royal-oak-491d",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Saloon Bar Launceston",
   "city": "Launceston",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/156833-saloon-bar-tasmania-hotel",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Hotel Blue",
@@ -1131,49 +1131,49 @@
   "venue": "Mona",
   "city": "Hobart",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://mona.net.au/stuff-to-do/music-at-mona",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Church Geelong",
   "city": "Geelong",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://churchgeelong.com.au/",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "The Newstead Hotel",
   "city": "Launceston",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/de/venues/4448865-newstead-hotel",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Kirwan Tavern",
   "city": "Townsville",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://songkick.com/venues/2575043-kirwan-tavern",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "Venue 114",
   "city": "Sunshine Coast",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://venue114.com.au/events",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Music Lounge Wollongong",
   "city": "Wollongong",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://www.songkick.com/venues/4397151-music-lounge",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Baso",
@@ -1189,8 +1189,8 @@
   "city": "Erina",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/the-sunken-monkey-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1198,8 +1198,8 @@
   "city": "Erina",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/woodport-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1207,8 +1207,8 @@
   "city": "Avoca Beach",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/avoca-beach-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1216,17 +1216,17 @@
   "city": "Wyong",
   "state": "NSW",
   "url": "https://www.thearthousewyong.com.au/whats-on?type=music",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
   "venue": "Everglades Country Club",
   "city": "Woy Woy",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/everglades",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -1234,26 +1234,26 @@
   "city": "Bateau Bay",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/the-entrance-leagues-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
   "venue": "Katoomba RSL",
   "city": "Katoomba",
   "state": "NSW",
-  "url": "https://www.moshtix.com.au/v2/venues/katoomba-rsl/2861",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://katoombarsl.com.au/what-s-on/",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Blue Mountains & Lithgow"
  },
  {
   "venue": "Union Theatre",
   "city": "Lithgow",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://council.lithgow.com/venue/union-theatre/",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Blue Mountains & Lithgow"
  },
  {
@@ -1261,8 +1261,8 @@
   "city": "Sydney",
   "state": "NSW",
   "url": "https://www.thejoan.com.au/event-genre/music/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
@@ -1270,8 +1270,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://songkick.com/venues/4600950-dissent-cafe-and-bar",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -1279,8 +1279,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://songkick.com/venues/1857983-harmonie-german-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -1288,25 +1288,25 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://tixel.com/au/tickets/canberra-theatre-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
   "venue": "Smith St Hotel",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tixel.com/au/tickets/smith-st-hotel",
+  "checked": "2026-11-27",
+  "status": "active"
  },
  {
   "venue": "Ivory Tusk",
   "city": "Brisbane",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked"
+  "url": "https://tixel.com/au/tickets/ivory-tusk",
+  "checked": "2026-11-27",
+  "status": "no-listings"
  },
  {
   "venue": "The Ed Castle Hotel",
