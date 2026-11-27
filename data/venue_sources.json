@@ -1815,18 +1815,18 @@
   "venue": "The Pavilion Performing Arts Centre",
   "city": "Sydney",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://paviliontheatre.org.au/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Western Sydney & Penrith"
  },
  {
   "venue": "The Oaks Hotel",
   "city": "Wollongong",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/2728528-oaks-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Illawarra & South Coast"
  },
  {
@@ -1878,9 +1878,9 @@
   "venue": "Shaws Bay Hotel",
   "city": "Ballina",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitnsw.com/destinations/north-coast/byron-bay-area/ballina/events/shawsy-sessions-the-shaws-bay-hotel",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Northern Rivers"
  },
  {
@@ -1977,36 +1977,36 @@
   "venue": "Capitol Theatre Tamworth",
   "city": "Tamworth",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://entertainmentvenues.com.au/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "New England"
  },
  {
   "venue": "TRECC (Tamworth Regional Entertainment and Conference Centre)",
   "city": "Tamworth",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://entertainmentvenues.com.au/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "New England"
  },
  {
   "venue": "Tamworth Town Hall",
   "city": "Tamworth",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://entertainmentvenues.com.au/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "New England"
  },
  {
   "venue": "The Press Basement",
   "city": "Tamworth",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/henry-wagons-the-press-basement",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "New England"
  },
  {
@@ -2022,9 +2022,9 @@
   "venue": "Longyard Hotel",
   "city": "Tamworth",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://developer.songkick.com/venues/754716-longyard-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "New England"
  },
  {
@@ -2040,9 +2040,9 @@
   "venue": "Riverina Playhouse",
   "city": "Wagga Wagga",
   "state": "NSW",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.csu.edu.au/riverina-playhouse",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -2184,9 +2184,9 @@
   "venue": "Wonthaggi Union Community Arts Centre",
   "city": "Wonthaggi",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.trybooking.com/eventlist/bccvenues",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -2229,27 +2229,27 @@
   "venue": "Peninsula Beer Garden",
   "city": "Boneo",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitmorningtonpeninsula.org/Whats-On/Live-Music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mornington Peninsula"
  },
  {
   "venue": "Tar Barrel",
   "city": "Mornington",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitmorningtonpeninsula.org/Whats-On/Live-Music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mornington Peninsula"
  },
  {
   "venue": "Jetty Road Brewery",
   "city": "Dromana",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.visitmorningtonpeninsula.org/Whats-On/Live-Music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mornington Peninsula"
  },
  {
@@ -2796,9 +2796,9 @@
   "venue": "Canberra Irish Club",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/this-way-irish-dec",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -2850,9 +2850,9 @@
   "venue": "Snow Concert Hall",
   "city": "Canberra",
   "state": "ACT",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/snow-concert-hall-2027-season",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Canberra"
  },
  {
@@ -2940,27 +2940,27 @@
   "venue": "Netherworld",
   "city": "Brisbane",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/3992034-netherworld",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
   "venue": "Mirrorball Ministries",
   "city": "Brisbane",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.songkick.com/venues/4621187-mirrorball-ministries",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
   "venue": "The Cave Inn",
   "city": "Brisbane",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/the-cave-inn",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2985,36 +2985,36 @@
   "venue": "Metro City",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/metro-city",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "His Majesty's Theatre",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/his-majestys-theatre-19bc",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "Gosnells Hotel",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/gosnells-hotel",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
   "venue": "RAC Arena",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://songkick.com/venues/1852538-rac-arena/calendar",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Perth"
  },
  {
@@ -6199,8 +6199,8 @@
   "city": "Deans Marsh",
   "state": "VIC",
   "url": "https://songkick.com/venues/4662782-martians-saloon",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -6208,8 +6208,8 @@
   "city": "Wallington",
   "state": "VIC",
   "url": "https://songkick.com/venues/4588184-manor-suite-wine-bar",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -6217,8 +6217,8 @@
   "city": "Torquay",
   "state": "VIC",
   "url": "https://www.jambase.com/venue/bells-beach-brewing",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
@@ -6226,44 +6226,44 @@
   "city": "Geelong",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/4431761-geelong-arts-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "St Mary of the Angels Basilica (Music at the Basilica)",
   "city": "Geelong",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://entertainmentgeelong.com/diary/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "Potato Shed Theatre (Bellarine Arts Centre)",
   "city": "Drysdale",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://entertainmentgeelong.com/diary/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "Globe Theatre Winchelsea",
   "city": "Winchelsea",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://entertainmentgeelong.com/diary/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Geelong & Surf Coast"
  },
  {
   "venue": "Ballarat Trades Hall",
   "city": "Ballarat",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/ballarat-standbg",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Ballarat"
  },
  {
@@ -6271,8 +6271,8 @@
   "city": "Ballarat",
   "state": "VIC",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "no-listings",
   "region": "Ballarat"
  },
  {
@@ -6280,26 +6280,26 @@
   "city": "Bendigo",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/4632307-chateau-dore-winery-and-receptions",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bendigo & Castlemaine"
  },
  {
   "venue": "The Coolroom at the Northern Arts Hotel",
   "city": "Castlemaine",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://events.humanitix.com/bob-sedergreen",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bendigo & Castlemaine"
  },
  {
   "venue": "Castlemaine Town Hall",
   "city": "Castlemaine",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://concerts.hypebot.com/cities/popular/castlemaine-australia",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Bendigo & Castlemaine"
  },
  {
@@ -6307,8 +6307,8 @@
   "city": "Newcastle",
   "state": "NSW",
   "url": "https://songkick.com/venues/4578259-flamingos-live",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
@@ -6316,8 +6316,8 @@
   "city": "Tea Gardens",
   "state": "NSW",
   "url": "https://songkick.com/venues/4669940-tea-gardens-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
@@ -6325,44 +6325,44 @@
   "city": "Newcastle",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/1604683-newcastle-harness-racing-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hunter"
  },
  {
   "venue": "Margaret River HEART",
   "city": "Margaret River",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tixel.com/au/tickets/margaret-river-heart",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "South West"
  },
  {
   "venue": "Dunsborough Hall",
   "city": "Dunsborough",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://concerts.hypebot.com/cities/popular/busselton-australia",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "South West"
  },
  {
   "venue": "Gilligans Cairns",
   "city": "Cairns",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.eventbrite.com.au/d/australia--cairns-city/performances/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
   "venue": "Parkview Tavern",
   "city": "Gordonvale",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.eventbrite.com.au/d/australia--cairns-city/performances/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
@@ -6378,9 +6378,9 @@
   "venue": "Innisfail Shire Hall",
   "city": "Innisfail",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.eventbrite.com.au/d/australia--innisfail/events/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Cairns & Port Douglas"
  },
  {
@@ -6388,17 +6388,17 @@
   "city": "Townsville",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/4357168-otherwise-bar",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Townsville"
  },
  {
   "venue": "Craigie Knowe Vineyard",
   "city": "Townsville",
   "state": "QLD",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/townsville",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Townsville"
  },
  {
@@ -6415,8 +6415,8 @@
   "city": "Mangrove Mountain",
   "state": "NSW",
   "url": "https://songkick.com/venues/4352252-mangrove-mountain-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Central Coast"
  },
  {
@@ -6424,8 +6424,8 @@
   "city": "Byron Bay",
   "state": "NSW",
   "url": "https://musick.com.au/venue/the-arts-factory-byron-bay/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Northern Rivers"
  },
  {
@@ -6433,8 +6433,8 @@
   "city": "Byron Bay",
   "state": "NSW",
   "url": "https://musick.com.au/venue/byron-bay-bowls-club-club-byron/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Northern Rivers"
  },
  {
@@ -6442,8 +6442,8 @@
   "city": "Mullumbimby",
   "state": "NSW",
   "url": "https://musick.com.au/venue/mullumbimby-ex-services-club/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Northern Rivers"
  },
  {
@@ -6451,8 +6451,8 @@
   "city": "Pearces Creek",
   "state": "NSW",
   "url": "https://musick.com.au/venue/pearces-creek-hall/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Northern Rivers"
  },
  {
@@ -6460,8 +6460,8 @@
   "city": "Woolgoolga",
   "state": "NSW",
   "url": "https://songkick.com/venues/4442232-woopi-brewing-co",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
@@ -6792,9 +6792,9 @@
   "venue": "Customs House Hotel",
   "city": "Hobart",
   "state": "TAS",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tasguide.com.au/gig-guide/?region=hobart-south",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Hobart"
  }
 ]
