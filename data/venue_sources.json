@@ -1834,8 +1834,8 @@
   "city": "Brunswick Heads",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/brunswick-picture-house",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Northern Rivers"
  },
  {
@@ -1843,8 +1843,8 @@
   "city": "Tweed Heads",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/twin-towns-services-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Northern Rivers"
  },
  {
@@ -1951,8 +1951,8 @@
   "city": "Port Macquarie",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/finnians-irish-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
@@ -1960,8 +1960,8 @@
   "city": "Taree",
   "state": "NSW",
   "url": "https://songkick.com/venues/118678-manning-entertainment-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
@@ -2014,8 +2014,8 @@
   "city": "Tamworth",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/748001-wests-diggers-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "New England"
  },
  {
@@ -2032,8 +2032,8 @@
   "city": "Wagga Wagga",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/romanos-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -2059,8 +2059,8 @@
   "city": "Wodonga",
   "state": "VIC",
   "url": "https://songkick.com/venues/2775928-cube",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -2068,8 +2068,8 @@
   "city": "Albury",
   "state": "NSW",
   "url": "https://songkick.com/venues/1000636-albury-entertainment-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -2077,8 +2077,8 @@
   "city": "Albury",
   "state": "NSW",
   "url": "https://tixel.com/au/tickets/beer-deluxe",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -2086,8 +2086,8 @@
   "city": "Albury",
   "state": "NSW",
   "url": "https://songkick.com/venues/4582308-albury-brewhouse",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
@@ -2095,17 +2095,17 @@
   "city": "Albury",
   "state": "NSW",
   "url": "https://www.songkick.com/venues/4614719-astor-hotel-albury",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Riverina & Murray"
  },
  {
   "venue": "Tathra Hotel",
   "city": "Tathra",
   "state": "NSW",
-  "url": "https://songkick.com/venues/203408-tathra-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://newdrafttathra.squarespace.com/events",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Far South Coast"
  },
  {
@@ -2113,8 +2113,8 @@
   "city": "Merimbula",
   "state": "NSW",
   "url": "https://songkick.com/venues/878751-club-sapphire-merimbula",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Far South Coast"
  },
  {
@@ -2158,8 +2158,8 @@
   "city": "Traralgon",
   "state": "VIC",
   "url": "https://songkick.com/venues/4431755-gippsland-performing-arts-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -2176,8 +2176,8 @@
   "city": "Sale",
   "state": "VIC",
   "url": "https://thewedge.com.au/whats-on/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -2194,8 +2194,8 @@
   "city": "Meeniyan",
   "state": "VIC",
   "url": "https://songkick.com/venues/528951-meeniyan-town-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -2203,8 +2203,8 @@
   "city": "Bairnsdale",
   "state": "VIC",
   "url": "https://songkick.com/venues/2171239-forge-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -2212,8 +2212,8 @@
   "city": "Main Ridge",
   "state": "VIC",
   "url": "https://www.trybooking.com/eventlist/theshed",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mornington Peninsula"
  },
  {
@@ -2221,8 +2221,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://artscentre.frankston.vic.gov.au/Whats-On/Search-All-Events",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mornington Peninsula"
  },
  {
@@ -2257,8 +2257,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/4618957-young-street-tavern",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Mornington Peninsula"
  },
  {
@@ -2266,8 +2266,8 @@
   "city": "Shepparton",
   "state": "VIC",
   "url": "https://riverlinksvenues.com.au/whats-on",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Shepparton & Wangaratta"
  },
  {
@@ -2275,8 +2275,8 @@
   "city": "Warrnambool",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/1840273-lighthouse-theatre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Warrnambool & Port Fairy"
  },
  {
@@ -2284,8 +2284,8 @@
   "city": "Beechworth",
   "state": "VIC",
   "url": "https://musick.com.au/venue/tanswells-hotel/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Shepparton & Wangaratta"
  },
  {
@@ -2293,26 +2293,26 @@
   "city": "Warrnambool",
   "state": "VIC",
   "url": "https://tixel.com/au/tickets/the-whalers-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Warrnambool & Port Fairy"
  },
  {
   "venue": "Dukes Commercial Hotel",
   "city": "Koroit",
   "state": "VIC",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://allevents.in/warrnambool/music",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Warrnambool & Port Fairy"
  },
  {
   "venue": "Aussie Hotel",
   "city": "Shepparton",
   "state": "VIC",
-  "url": "https://www.bandsintown.com/v/10201832-aussie-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://musick.com.au/regional/shepparton/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Shepparton & Wangaratta"
  },
  {
@@ -2320,8 +2320,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/1420523-eatons-hill-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2329,8 +2329,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/91020-brisbane-powerhouse",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2338,8 +2338,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://tixel.com/au/tickets/felons-barrel-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2347,17 +2347,17 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://loganarts.com.au/venue/logan-entertainment-centre",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
   "venue": "Redland Performing Arts Centre",
   "city": "Brisbane",
   "state": "QLD",
-  "url": "https://www.rpac.com.au/2026-season",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.rpac.com.au/christmas-at-rpac/",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2365,8 +2365,8 @@
   "city": "Brisbane",
   "state": "QLD",
   "url": "https://www.songkick.com/venues/186208-kedronwavell-services-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -2374,8 +2374,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/4648158-semaphore-workers-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -2383,8 +2383,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/193978-austral-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -2392,8 +2392,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/89612-unibar-adelaide",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -2401,8 +2401,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/4277439-woodville-town-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -2410,8 +2410,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://www.songkick.com/venues/35450-norwood-concert-hall",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
@@ -2419,8 +2419,8 @@
   "city": "Adelaide",
   "state": "SA",
   "url": "https://songkick.com/venues/684026-norwood-live-norwood-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-27",
+  "status": "active",
   "region": "Adelaide"
  },
  {
