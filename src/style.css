@@ -113,6 +113,7 @@ h3{font-size:24px;margin:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips a{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:2px solid var(--ink);border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600}
 .chips a:hover,.chips a[aria-current]{background:var(--ink);color:var(--bg)}
+.chips a small{margin-left:6px;font-weight:400;opacity:.7}
 .citiesband{padding-bottom:0}
 /* gig lists */
 h3.month{font-size:22px;margin:26px 0 6px;color:var(--red)}
@@ -691,7 +692,7 @@ nav .installbtn{border:2px solid var(--red);background:transparent;color:#fff;bo
 .shlinks a{font-weight:700}
 .subnav{background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
 .subnav .wrap{display:flex;gap:6px;padding-top:8px;padding-bottom:8px;white-space:nowrap}
-.subnav a{padding:6px 14px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
+.subnav a{flex:0 0 auto;padding:6px 14px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
 .subnav a:hover{background:var(--line)}.subnav a[aria-current=page]{background:var(--ink);color:var(--bg)}
 @media(max-width:600px){.hbtn{min-height:40px;padding:0 14px;font-size:14px}.herobtns{gap:8px}}
 .locbox[hidden],.nearsuggest[hidden]{display:none}

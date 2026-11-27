@@ -218,10 +218,11 @@ have_feed = bool(tm)
 NAV = [("Gigs", "gigs/index.html"), ("Tours & festivals", "tours.html"), ("News", "news/index.html"), ("Vinyl", "out-soon.html")]
 # Pages that live under each menu item (for highlighting the menu, and the small sub-menu under the header).
 NAV_GROUP = {"this-weekend.html": "gigs/index.html", "on-sale.html": "gigs/index.html", "genres/index.html": "gigs/index.html",
-             "festivals/index.html": "tours.html", "most-wanted.html": "out-soon.html", "stories/index.html": "news/index.html"}
-SUBNAV = {"gigs/index.html": [("Gig guide", "gigs/index.html"), ("📍 Near me", "index.html#near"), ("This weekend", "this-weekend.html"), ("On sale soon", "on-sale.html"),
-                              ("Genres", "genres/index.html"), ("Regional", "gigs/regional.html"), ("Submit a gig", "submit-a-gig.html")],
-          "tours.html": [("Tours", "tours.html"), ("Festivals", "festivals/index.html")],
+             "gigs/regional.html": "gigs/index.html", "venues/index.html": "gigs/index.html", "submit-a-gig.html": "gigs/index.html",
+             "festivals/index.html": "tours.html", "artists/index.html": "tours.html", "most-wanted.html": "out-soon.html", "stories/index.html": "news/index.html"}
+SUBNAV = {"gigs/index.html": [("Gig guide", "gigs/index.html"), ("📍 Near me", "index.html#near"), ("This weekend", "this-weekend.html"), ("Regional", "gigs/regional.html"),
+                              ("Venues", "venues/index.html"), ("On sale soon", "on-sale.html"), ("Genres", "genres/index.html"), ("Submit a gig", "submit-a-gig.html")],
+          "tours.html": [("Tours", "tours.html"), ("Festivals", "festivals/index.html"), ("Artists A–Z", "artists/index.html")],
           "out-soon.html": [("Out soon on vinyl", "out-soon.html"), ("Most wanted", "most-wanted.html")],
           "news/index.html": [("News", "news/index.html"), ("Stories", "stories/index.html")]}
 
@@ -292,7 +293,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
     body = body.replace('href="/', 'href="' + r).replace('src="/', 'src="' + r).replace('action="/', 'action="' + r)
     og_img = f'<meta property="og:image" content="{e(image)}">' if image.startswith("http") else ""
     credit = "Event data from Ticketmaster. Music previews from Deezer." if have_feed else "Music previews from Deezer."
-    cities = " · ".join(f'<a href="{r}gigs/{slug(c)}.html">{e(c)}</a>' for c in MAIN_CITIES[:8])
+    cities = " · ".join(f'<a href="{r}gigs/{slug(c)}.html">{e(c)}</a>' for c in MAIN_CITIES[:8]) + f' · <a href="{r}gigs/regional.html">Regional</a>'
     doc = f"""<!DOCTYPE html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{canon}">
@@ -312,7 +313,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <footer class="foot"><div class="wrap"><div><div class="wm">LIVE <span>LOUDER</span></div>
 <p>An independent Australian music site: news, gigs, tours, festivals, new vinyl and stories, made in the Blue Mountains, NSW.</p>
 <p>Dates change. Always check with the official ticket seller before you buy. Updated {UPDATED}.</p><p>{credit}</p></div>
-<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}submit-a-gig.html">Submit a gig</a> · <a href="{r}about.html">About</a> · <a href="{r}privacy.html">Privacy</a></p>
+<div><p><a href="{r}gigs/index.html">Gig guide</a> · <a href="{r}this-weekend.html">This weekend</a> · <a href="{r}on-sale.html">On sale</a> · <a href="{r}tours.html">Tours</a> · <a href="{r}festivals/index.html">Festivals</a> · <a href="{r}genres/index.html">Genres</a> · <a href="{r}gigs/regional.html">Regional gigs</a> · <a href="{r}venues/index.html">Venues</a> · <a href="{r}artists/index.html">Artists A–Z</a> · <a href="{r}news/index.html">News</a> · <a href="{r}out-soon.html">Vinyl</a> · <a href="{r}most-wanted.html">Most wanted</a> · <a href="{r}stories/index.html">Stories</a> · <a href="{r}submit-a-gig.html">Submit a gig</a> · <a href="{r}about.html">About</a> · <a href="{r}privacy.html">Privacy</a></p>
 <p>Gigs by city: {cities}</p>
 <p>Records for the drive to the show: our friends at <a href="https://heathenrecords.com.au">Heathen Records</a>.</p>
 <p>© {TODAY.year} Live Louder</p></div></div></footer>
@@ -667,7 +668,7 @@ home = f"""<section class="hero">{hero_bg}<div class="wrap">
 <section class="band ffeedband" id="ffeed" hidden></section>
 <section class="band bigband"><div class="wrap">
 <div class="stubs-head"><h2>Big shows coming up</h2><div class="arrows"><button data-go="-1" aria-label="Previous shows">←</button> <button data-go="1" aria-label="Next shows">→</button></div></div>
-<div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div><a class="more light" href="/gigs/index.html">Full gig guide ({len(shows):,} shows) →</a></div></section>
+<div class="stubs" tabindex="0" aria-label="Upcoming shows">{''.join(stubs)}</div><a class="more light" href="/gigs/index.html">Full gig guide ({len(shows):,} shows) →</a> <a class="more light" href="/gigs/regional.html">Regional gigs →</a> <a class="more light" href="/venues/index.html">All venues →</a></div></section>
 <section class="band"><div class="wrap"><div class="shead"><h2>Just announced</h2><a href="/tours.html">All tours →</a></div><div class="grid">{''.join(tour_card(t) for t in announced)}</div></div></section>
 {sales_html}
 {news_html}
@@ -873,13 +874,34 @@ for k, v in venues.items():
              else f"Upcoming concerts and gigs at {v['name']} in {v['city']}: dates and tickets.")
     body = f"""<section class="page-title"><div class="wrap"><h1>{e(v['name'])}</h1><p>{loc} · {n} upcoming {'show' if n == 1 else 'shows'}</p></div></section>
 <section class="band"><div class="wrap">{venue_map(v)}
-<p><a href="/gigs/{slug(v['city'])}.html">More gigs in {e(v['city'])}</a> · <a href="/gigs/{slug(v['city'])}-this-weekend.html">This weekend in {e(v['city'])}</a></p>
+<p><a href="/gigs/{slug(v['city'])}.html">More gigs in {e(v['city'])}</a>{f' · <a href="/gigs/{slug(v["city"])}-this-weekend.html">This weekend in {e(v["city"])}</a>' if v['city'] in MAIN_CITIES else ' · <a href="/gigs/regional.html">More regional gigs</a>'} · <a href="/venues/index.html">All venues</a></p>
 {guide}<h2>Upcoming gigs</h2>{gig_list(v['shows'], show_city=False)}</div></section>"""
     page(f"venues/{k}.html", vtitle + " | Live Louder", vdesc, body, "gigs/index.html")
 (OUT / "data").mkdir(parents=True, exist_ok=True)
 (OUT / "data" / "venues.json").write_text(json.dumps(sorted(
     [{"slug": k, "name": v["name"], "suburb": v["suburb"], "city": v["city"], "shows": len(v["shows"]),
       "guide_checked": (vguides.get(k) or {}).get("checked", "")} for k, v in venues.items()], key=lambda x: -x["shows"])))
+
+# Venues directory: every venue, grouped by state then city/town, so every venue page is one click from a list.
+STATE_ORDER = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"]
+STATE_NAME = {"NSW": "New South Wales", "VIC": "Victoria", "QLD": "Queensland", "WA": "Western Australia", "SA": "South Australia",
+              "TAS": "Tasmania", "ACT": "Australian Capital Territory", "NT": "Northern Territory"}
+_byst = {}
+for k, v in venues.items():
+    _byst.setdefault(v.get("state") or "Other", {}).setdefault(v["city"], []).append((k, v))
+_vrows = ""
+for st in sorted(_byst, key=lambda x: STATE_ORDER.index(x) if x in STATE_ORDER else 99):
+    _vrows += f'<h2 id="{slug(st)}">{e(STATE_NAME.get(st, st))}</h2>'
+    for c in sorted(_byst[st], key=lambda c: (c not in MAIN_CITIES, c)):
+        vs = sorted(_byst[st][c], key=lambda kv: kv[1]["name"].lower())
+        _vrows += (f'<h3 class="month"><a href="/gigs/{slug(c)}.html">{e(c)}</a></h3><nav class="chips">'
+                   + "".join(f'<a href="/venues/{k}.html">{e(v["name"])} <small>{len(v["shows"])}</small></a>' for k, v in vs) + "</nav>")
+_jump = " · ".join(f'<a style="color:#fff" href="#{slug(st)}">{e(st)}</a>' for st in sorted(_byst, key=lambda x: STATE_ORDER.index(x) if x in STATE_ORDER else 99))
+page("venues/index.html", "Live music venues in Australia: every venue's gig guide | Live Louder",
+     f"Gig guides for {len(venues):,} live music venues across Australia, from capital city band rooms to regional pubs, clubs and theatres.",
+     f"""<section class="page-title"><div class="wrap"><h1>Venues</h1><p>{len(venues):,} live music venues across Australia, with every upcoming gig. Jump to: {_jump}</p></div></section>
+<section class="band"><div class="wrap split"><div>{_vrows}</div>
+<aside class="side">{venue_form(title="Missing a venue?", intro="Tell us the venues that put on bands near you, and we'll add their gigs.")}</aside></div></section>""", "venues/index.html")
 
 # ---------------------------------------------------------------- one page per gig (tickets, price, venue, map)
 for s in shows:
@@ -1029,6 +1051,19 @@ for a in artists.values():
     page(f"artists/{a['slug']}.html", f"{a['name']} {title_tour}: dates & tickets | Live Louder", desc, body, "tours.html", extra, a.get("photo", ""))
     if sh:
         (OUT / "artists" / f"{a['slug']}.ics").write_text(ics(a))
+
+# Artists A–Z: every artist page linked from one list.
+_letters = {}
+for a in sorted(artists.values(), key=lambda a: re.sub(r"^the\s+", "", a["name"].lower())):
+    ch = re.sub(r"^the\s+", "", a["name"].lower())[:1].upper()
+    _letters.setdefault(ch if ch.isalpha() else "#", []).append(a)
+_order = sorted(_letters, key=lambda x: (x == "#", x))
+_arows = "".join(f'<h2 id="l-{slug(L) or "num"}">{e(L)}</h2><nav class="chips">' + "".join(
+    f'<a href="/artists/{a["slug"]}.html">{e(a["name"])}' + (f' <small>{len(a["shows"])}</small>' if a["shows"] else "") + "</a>" for a in _letters[L]) + "</nav>" for L in _order)
+page("artists/index.html", "Artists A–Z: tour dates and upcoming gigs in Australia | Live Louder",
+     f"{len(artists):,} artists with Australian tour dates and gigs, from A to Z.",
+     f"""<section class="page-title"><div class="wrap"><h1>Artists A–Z</h1><p>{' · '.join(f'<a style="color:#fff" href="#l-{slug(L) or "num"}">{e(L)}</a>' for L in _order)}</p></div></section>
+<section class="band"><div class="wrap">{_arows}</div></section>""", "artists/index.html")
 
 # ---------------------------------------------------------------- tours
 def tour_block(t):
@@ -1309,7 +1344,7 @@ urls = ["", "news/", "gigs/", "on-sale.html", "this-weekend.html", "tours.html",
     + [f"news/{n['slug']}.html" for n in news] + [f"gigs/{slug(c)}.html" for c in MAIN_CITIES] + [f"gigs/{slug(c)}-this-weekend.html" for c in MAIN_CITIES] \
     + [f"festivals/{f['slug']}.html" for f in fests] + [f"artists/{a['slug']}.html" for a in artists.values()] \
     + [f"venues/{k}.html" for k in venues] + [f"stories/{s['slug']}.html" for s in stories] \
-    + ["gigs/regional.html"] + [f"gigs/{t['slug']}.html" for t in towns.values()]
+    + ["gigs/regional.html", "venues/", "artists/"] + [f"gigs/{t['slug']}.html" for t in towns.values()]
 (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
                                  + "".join(f"<url><loc>{SITE}/{u}</loc><lastmod>{TODAY_S}</lastmod></url>" for u in urls) + "</urlset>")
 (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n")
