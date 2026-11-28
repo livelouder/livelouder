@@ -248,5 +248,50 @@
    "Final release tickets are on sale now."
   ],
   "source": "https://themusic.com.au/news/froth-and-fury-festival-completes-2027-line-up/dznFa2ptbG8/26-11-26"
+ },
+ {
+  "slug": "superposition-2026",
+  "name": "Superposition 2026",
+  "when": "26–29 November 2026",
+  "intro": "A brand-new arts and music festival spread across the Blue Mountains and Penrith, with a Block Party curated by Hermitude and Haiku Hands, a queer arts takeover in Katoomba, and gigs in local pubs and bars.",
+  "dates": [
+   [
+    "2026-11-26",
+    "Penrith",
+    "Venues around Penrith",
+    ""
+   ],
+   [
+    "2026-11-28",
+    "Katoomba",
+    "Venues around Katoomba and the upper Blue Mountains",
+    ""
+   ],
+   [
+    "2026-11-29",
+    "Katoomba",
+    "Venues around Katoomba and the upper Blue Mountains",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Hermitude",
+   "Haiku Hands"
+  ],
+  "lineup": [
+   "Jamaica Moana",
+   "Vv Pete",
+   "TOAH",
+   "DJ Charlie Villas",
+   "Dykes on Bikes",
+   "Lesbionica",
+   "Justin Shoulder",
+   "Betty Apple"
+  ],
+  "tips": [
+   "Events run across Penrith, Katoomba, Blackheath, Mount Victoria, Medlow Bath and Wentworth Falls, so check each event's location before you go.",
+   "Tickets are sold per event through the festival's ticket page."
+  ],
+  "source": "https://superpositionfestival.ferve.tickets/"
  }
 ]
