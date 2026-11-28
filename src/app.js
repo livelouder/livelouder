@@ -109,18 +109,55 @@ window.LL = (function () {
       if (k === 'resale') return `<a class="resale" href="${esc(tu)}" rel="noopener" ${tk}>Resale tickets ↗</a>`;
       return `<a href="${gp}">Details →</a>`;
     };
+    const strip = document.querySelector('#gbar .filters') || guide.querySelector('.filters');
+    const tonightEl = document.getElementById('tonight');
+    // Date tiles: Any time, then the next 10 days with how many gigs each, then This weekend and Next 30 days.
+    function paintStrip() {
+      if (!strip || !strip.classList.contains('dstrip')) return;
+      const c = city.value, n = {};
+      all.forEach(s => { if (!c || s[6] === c) n[s[0]] = (n[s[0]] || 0) + 1; });
+      let h = `<button data-when="all" aria-pressed="${when === 'all'}"><small>Any</small><b>All</b><small>time</small></button>`;
+      for (let i = 0; i < 10; i++) {
+        const dIso = addDays(i), [y, m, dd] = dIso.split('-').map(Number);
+        const lab = i === 0 ? 'Tonight' : i === 1 ? 'Tomorrow' : new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
+        h += `<button data-when="d:${dIso}" aria-pressed="${when === 'd:' + dIso}"><small>${lab}</small><b>${dd}</b><small>${n[dIso] || 0} gigs</small></button>`;
+      }
+      h += `<button data-when="weekend" aria-pressed="${when === 'weekend'}"><small>This</small><b>Wknd</b><small>Fri–Sun</small></button>` +
+        `<button data-when="month" aria-pressed="${when === 'month'}"><small>Next</small><b>30</b><small>days</small></button>`;
+      strip.innerHTML = h;
+    }
+    // "Tonight in <city>": picture cards for today's gigs, photos first.
+    const t12 = t => { let [h, mi] = t.split(':').map(Number); const ap = h >= 12 ? 'pm' : 'am'; h = h % 12 || 12; return h + (mi ? ':' + String(mi).padStart(2, '0') : '') + ap; };
+    function paintTonight(term, c, g) {
+      if (!tonightEl) return;
+      if (term || (when !== 'all' && when !== 'd:' + today)) { tonightEl.innerHTML = ''; return; }
+      const tn = all.filter(s => s[0] === today && (!c || s[6] === c) && (!g || s[12] === g));
+      const ph = s => pics.a[s[3]] || pics.v[s[11]] ? 1 : 0;
+      const top = tn.slice().sort((a, b) => ph(b) - ph(a)).slice(0, 8);
+      if (!top.length) { tonightEl.innerHTML = ''; return; }
+      const big = u => !u ? '' : u.startsWith('dz:') ? `https://cdn-images.dzcdn.net/images/artist/${u.slice(3)}/500x500-000000-80-0-0.jpg` : u;
+      tonightEl.innerHTML = `<div class="ghead"><h2>Tonight ${c ? 'in ' + esc(c) : 'around Australia'}</h2>${tn.length > top.length && when === 'all' ? `<button type="button" class="linkish" data-tonight>All ${tn.length} tonight →</button>` : ''}</div><div class="gcgrid">` +
+        top.map(s => { const u = big(pics.a[s[3]] || pics.v[s[11]]); const face = u ? `<span class="gcpic" style="background-image:url(&quot;${esc(u)}&quot;)"></span>` : LLPOSTER.big(s[2], s[12]);
+          return `<a class="gcard" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${face}<span class="gcd"><b>${s[1] ? t12(s[1]) : 'Today'}</b></span>` +
+            `<span class="gcin"><strong>${esc(s[2])}</strong><span>${esc(s[4])}, ${esc(s[5] && s[5] !== s[6] ? s[5] : s[6])}</span></span></a>`; }).join('') + '</div>';
+    }
+    if (tonightEl) tonightEl.addEventListener('click', ev => { if (ev.target.closest('[data-tonight]')) { when = 'd:' + today; shown = 80; render(); } });
     function render() {
       const term = q.value.trim().toLowerCase(), c = city.value, g = genre ? genre.value : '';
       let lo = today, hi = '9999';
       if (when === 'week') hi = addDays(7); else if (when === 'month') hi = addDays(30); else if (when === 'weekend') [lo, hi] = weekend();
+      else if (when.startsWith('d:')) lo = hi = when.slice(2);
       const list = all.filter(s => s[0] >= lo && s[0] <= hi && (!c || s[6] === c) && (!g || s[12] === g) &&
         (!term || (s[2] + ' ' + s[4] + ' ' + s[5] + ' ' + s[6] + ' ' + s[8]).toLowerCase().includes(term)));
       count.textContent = list.length ? `${list.length.toLocaleString()} ${list.length === 1 ? 'show' : 'shows'}` : 'No shows match. Try a different search or date.';
       let html = '', month = '';
+      const perDay = {}; list.forEach(s => { perDay[s[0]] = (perDay[s[0]] || 0) + 1; });
+      paintStrip(); paintTonight(term, c, g);
       for (const s of list.slice(0, shown)) {
         const [y, m, dd] = s[0].split('-').map(Number);
-        const mk = longM[m - 1] + ' ' + y;
-        if (mk !== month) { html += (month ? '</ul>' : '') + `<h3 class="month">${mk}</h3><ul class="gigs">`; month = mk; }
+        const mk = s[0];
+        if (mk !== month) { const lab = s[0] === today ? 'Tonight' : s[0] === addDays(1) ? 'Tomorrow' : new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'long', day: 'numeric', month: 'long'});
+          html += (month ? '</ul>' : '') + `<h3 class="month gday">${lab} <span class="gdn">${perDay[s[0]]} ${perDay[s[0]] === 1 ? 'gig' : 'gigs'}</span></h3><ul class="gigs">`; month = mk; }
         const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
         const u = pic(pics.a[s[3]] || pics.v[s[11]]), gp = esc(s[14] || (root + 'artists/' + s[3] + '.html'));
         const th = u ? `<a class="gth" href="${gp}" tabindex="-1" aria-hidden="true"><img src="${esc(u)}" alt="" loading="lazy" width="58" height="58"></a>`
@@ -134,9 +171,9 @@ window.LL = (function () {
       if (window.MY) MY.paint();
       more.hidden = list.length <= shown;
     }
-    guide.querySelector('.filters').addEventListener('click', ev => {
+    strip.addEventListener('click', ev => {
       const b = ev.target.closest('button'); if (!b) return;
-      guide.querySelectorAll('.filters button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      strip.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
       when = b.dataset.when; shown = 80; render();
     });
     let t; q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { shown = 80; render(); }, 120); });

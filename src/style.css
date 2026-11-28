@@ -1061,3 +1061,74 @@ a.resale{color:#b26b00}
  .azg{grid-template-columns:repeat(3,1fr);gap:10px}.azt b{font-size:13px}.azt small{font-size:11px}
  .azsec h2{font-size:36px}
 }
+/* ---------------------------------------------------------------- Gigs section pages (Nov 2026) */
+.bsel{font:600 14px "Archivo",sans-serif;padding:10px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.bchip{display:inline-flex;align-items:center;font:600 13px/1 "Archivo",sans-serif;padding:10px 13px;border-radius:99px;border:1px solid var(--line);color:var(--ink);text-decoration:none;white-space:nowrap}
+.bchip:hover,.bchip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.bn{opacity:.6;font-weight:500}
+.ghead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:22px 0 12px}.ghead h2{margin:0}.ghead p{margin:0}
+.ghead a,.ghead .linkish{font-weight:700;color:var(--red);background:none;border:0;cursor:pointer;font-size:15px}
+.gcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:10px}
+.gcgrid.gc4{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+/* gig guide date strip */
+.filters.dstrip{flex-wrap:nowrap;overflow-x:auto;gap:6px;margin:0;padding-bottom:4px;scrollbar-width:thin;width:100%}
+.dstrip button{flex:0 0 auto;min-height:0;min-width:70px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 10px;border:1px solid var(--line);border-radius:12px;font:600 12px "Archivo",sans-serif}
+.dstrip button b{font:400 22px/1 "Anton",Impact,sans-serif}.dstrip button small{font-size:11px;opacity:.75;white-space:nowrap}
+.dstrip button[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}.dstrip button[aria-pressed=true] small{opacity:1}
+h3.gday{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:6px;color:var(--ink)}
+.gdn{font:600 14px "Archivo",sans-serif;color:var(--muted)}
+#tonight:empty{display:none}
+/* photo cards (towns, venues) */
+.pcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.pcg2{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.pc{display:flex;flex-direction:column;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;transition:transform .2s}
+.pc[hidden]{display:none}.pc:hover{transform:translateY(-3px)}.pc:hover strong{color:var(--red)}
+.pci{position:relative;display:grid;place-items:center;aspect-ratio:16/9;background:#1b1b1b center 25%/cover no-repeat;overflow:hidden}
+.pctag{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.72);color:#fff;font:700 11px "Archivo",sans-serif;padding:4px 8px;border-radius:99px;max-width:calc(100% - 16px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcb{display:flex;flex-direction:column;gap:3px;padding:10px 12px 12px}
+.pcb strong{font:400 19px/1.1 "Anton",Impact,sans-serif;text-transform:uppercase}
+.pcb>span{font-size:13.5px;color:var(--muted)}.pcb>span b{color:var(--red)}
+.pcl{font-size:13px;color:var(--ink)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcl::before{content:"→ ";color:var(--red)}
+.morebtn{display:block;margin:22px auto 0}
+/* regional map */
+.regw{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;align-items:start}
+.regmap{position:sticky;top:calc(var(--hh,64px) + 74px)}
+#regmap{height:calc(100vh - var(--hh,64px) - 110px);min-height:420px;border-radius:14px;border:1px solid var(--line);z-index:0}
+#regmap.fdark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
+/* this weekend */
+.wkcols{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:18px;margin-top:20px}.wkcols.one{grid-template-columns:minmax(0,720px)}
+.wkcol{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.wkcol h3{margin:0 0 6px;font-size:22px;display:flex;justify-content:space-between;align-items:baseline}.wkcol h3 span{font:700 14px "Archivo",sans-serif;color:var(--red)}
+.wkcol h4{margin:14px 0 6px;font:700 12px "Archivo",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.wkcol ul{list-style:none;margin:0;padding:0}
+.wkcol li a{display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none}
+.wkcol li a:hover strong{color:var(--red)}
+.wkcol li .gth{flex:0 0 40px;width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font-size:14px;overflow:hidden}
+.wkcol li span>strong{display:block;font-size:15px;line-height:1.2}.wkcol li small{color:var(--muted);font-size:13px}
+/* on sale */
+.osalert{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--ink);color:var(--bg);border-radius:14px;padding:16px 18px;margin:10px 0 8px}
+.osalert>div{flex:1 1 260px;display:flex;flex-direction:column;gap:2px}.osalert strong{font:400 22px/1.1 "Anton",Impact,sans-serif;text-transform:uppercase}
+.osalert span{opacity:.8;font-size:14px}.osalert .bsearch{flex:1 1 220px;max-width:340px}.osmsg{flex-basis:100%;opacity:.85}
+.osh{scroll-margin-top:calc(var(--hh,64px) + 70px);margin-top:34px}
+.tc2new{color:var(--red)}
+/* genres */
+.gptiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:18px}
+.gpt{position:relative;display:block;aspect-ratio:1;border-radius:14px;overflow:hidden;color:#fff;text-decoration:none}
+.gpt.gpw{grid-column:span 2;aspect-ratio:2/1}
+.gpt .gpp{position:absolute;inset:0;display:grid;place-items:center}
+.gpt .gpp .pn{opacity:.35}
+.gpb{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:3px;padding:14px 16px;background:linear-gradient(transparent,rgba(0,0,0,.82))}
+.gpb strong{font:400 30px/1 "Anton",Impact,sans-serif;text-transform:uppercase}.gpb>span{font-size:14px;font-weight:700}.gpb small{font-size:13px;opacity:.85}
+.gpf{display:flex;margin-bottom:6px}.gpf img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-right:-10px;background:#333}
+.gpt:hover strong{color:var(--red)}
+/* submit a gig */
+.sgprev{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:16px}
+.sglab{margin:0 0 10px;font:700 12px "Archivo",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.sgcard{max-width:320px}.sgcard:hover{transform:none}
+@media(max-width:900px){.regw{grid-template-columns:1fr}.regmap{position:static}#regmap{height:44vh;min-height:280px}
+ .wkcols{grid-template-columns:1fr}.gptiles{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.pcg,.pcg2{grid-template-columns:1fr 1fr;gap:10px}.pcb strong{font-size:16px}.pcl{font-size:12px}
+ .gcgrid{grid-template-columns:1fr 1fr;gap:10px}.gpt.gpw{aspect-ratio:1}.gpb strong{font-size:22px}}
+#vcity,#regst,#wkdays{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}#vcity{order:3;flex:1 1 100%}
+.gpt .gpp .pn,.gpt .gpp .plive{display:none}

@@ -947,14 +947,15 @@ for n in news[:30]:
 
 # ---------------------------------------------------------------- gig guide
 city_opts = "".join(f"<option>{e(c)}</option>" for c in MAIN_CITIES)
-gg = f"""<section class="page-title"><div class="wrap"><h1>Gig guide</h1><p>Every show we know about, across Australia. Search, or narrow it down by city, genre and date.</p></div></section>
-<section class="band"><div class="wrap" id="guide">
-<div class="controls"><input id="q" type="search" placeholder="Artist, venue or suburb" aria-label="Search">
-<select id="city" aria-label="City"><option value="">All cities</option>{city_opts}</select>
-<select id="genre" aria-label="Genre"><option value="">All genres</option>{"".join(f'<option value="{slug(g)}">{e(g)}</option>' for g in GENRE_LIST)}</select>
-<div class="filters" role="group" aria-label="When"><button data-when="all" aria-pressed="true">Any time</button><button data-when="week" aria-pressed="false">This week</button><button data-when="weekend" aria-pressed="false">This weekend</button><button data-when="month" aria-pressed="false">Next 30 days</button></div></div>
+gg = f"""<section class="page-title"><div class="wrap"><h1>Gig guide</h1><p>Every gig we know about across Australia, from arenas to the local pub.</p></div></section>
+<div class="bbar" id="gbar"><div class="wrap brow"><label class="bcity"><span aria-hidden="true">📍</span><select id="city" aria-label="City"><option value="">All cities</option>{city_opts}</select></label>
+<input id="q" class="bsearch" type="search" placeholder="Search artists, venues or suburbs" aria-label="Search">
+<select id="genre" class="bsel" aria-label="Genre"><option value="">All genres</option>{"".join(f'<option value="{slug(g)}">{e(g)}</option>' for g in GENRE_LIST)}</select>
+<a class="bchip" href="/this-weekend.html">This weekend →</a></div>
+<div class="wrap brow"><div class="filters dstrip" role="group" aria-label="When"><button data-when="all" aria-pressed="true"><small>Any</small><b>All</b><small>time</small></button></div></div></div>
+<section class="band tband"><div class="wrap" id="guide"><div id="tonight"></div>
+<div class="ghead"><h2>Coming up</h2><p class="count" id="count" aria-live="polite">Loading shows…</p></div><div id="results"></div><button id="moreBtn" class="morebtn" hidden>Show more</button>
 <p class="note addgig">Know a gig we're missing? <a href="/submit-a-gig.html">Add it to the guide →</a></p>
-<p class="count" id="count" aria-live="polite">Loading shows…</p><div id="results"></div><button id="moreBtn" class="morebtn" hidden>Show more</button>
 <noscript>{gig_list(shows[:300])}</noscript></div></section>"""
 page("gigs/index.html", "Gig guide: concerts and gigs in Australia | Live Louder",
      "Search every big gig in Australia by artist, venue, city and date. Concerts in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", gg, "gigs/index.html")
@@ -1031,21 +1032,32 @@ for tn, t in towns.items():
     PLACE = (t.get("centre"), t.get("state", ""))
     page(f"gigs/{t['slug']}.html", f"Gigs in {tn}{', ' + st if st else ''}: live music and concerts | Live Louder",
          f"Upcoming gigs and live music in {tn}{', ' + st if st else ''} and nearby, updated daily: dates, venues and tickets.", body, "gigs/index.html")
-# Regional index: every town with gigs, by state.
-by_state = {}
-for t in towns.values():
-    by_state.setdefault(t["state"] or "Other", []).append(t)
-reg_rows = ""
-for st in STATES + ["Other"]:
-    ts = sorted(by_state.get(st, []), key=lambda t: -len(t["shows"]))
-    if ts:
-        reg_rows += f'<h2>{e(st)}</h2><nav class="chips">' + "".join(f'<a href="/gigs/{t["slug"]}.html">{e(t["name"])} <small>{len(t["shows"])}</small></a>' for t in ts) + "</nav>"
-reg_body = f"""<section class="page-title"><div class="wrap"><h1>Regional gigs</h1><p>Live music outside the capital cities, town by town. More towns are added every day.</p></div></section>
-<section class="band"><div class="wrap split"><div>{reg_rows or '<p class="note">Regional towns are being added now. Check back soon.</p>'}
-<p class="note" style="margin-top:28px">Looking for a capital city? {" · ".join(f'<a href="/gigs/{slug(c)}.html">{e(c)}</a>' for c in MAIN_CITIES)}</p></div>
-<aside class="side">{venue_form(title="Is your town missing?", intro="Tell us the venues that put on bands near you, and we'll add your town to the guide.")}</aside></div></section>"""
+# Regional index: a map of every town with gigs, plus photo cards (busiest first) that filter by state and search.
+def _show_pic(s_, size="500x500"):
+    a_ = artists.get(slug(s_["artist"])) or {}
+    return small_photo(a_.get("photo", ""), size) or (vguides.get(venue_slug(s_)) or {}).get("photo", "")
+_tlist = sorted(towns.values(), key=lambda t: -len(t["shows"]))
+def town_card(t, i):
+    ph_s = next((x for x in t["shows"] if _show_pic(x)), None)
+    face = (f'<span class="pci" style="background-image:url(&quot;{e(_show_pic(ph_s))}&quot;)"></span>' if ph_s
+            else poster(t["name"], "", "pci", "span"))
+    nxt = "".join(f'<span class="pcl">{d(x["date"]).strftime("%a %-d %b")} · {e(x["artist"])}</span>' for x in t["shows"][:2])
+    return (f'<a class="pc" href="/gigs/{t["slug"]}.html" data-st="{e(t["state"] or "Other")}" data-n="{e(t["name"].lower())}"{" hidden" if i >= 24 else ""}>{face}'
+            f'<span class="pcb"><strong>{e(t["name"])}</strong><span>{e(t["state"])}{" · " if t["state"] else ""}<b>{len(t["shows"])} {"gig" if len(t["shows"]) == 1 else "gigs"}</b> coming up</span>{nxt}</span></a>')
+_tjs = json.dumps([[t["name"], t["slug"], t["state"], round(t["centre"][0], 4), round(t["centre"][1], 4), len(t["shows"])] for t in _tlist if t.get("centre")], ensure_ascii=False).replace("</", "<\\/")
+_stc = {st: sum(1 for t in _tlist if t["state"] == st) for st in STATES}
+reg_body = f"""<section class="page-title"><div class="wrap"><h1>Regional gigs</h1><p>{sum(len(t["shows"]) for t in _tlist):,} gigs in {len(_tlist)} towns outside the big cities. More towns are added every day.</p></div></section>
+<div class="bbar" id="regbar"><div class="wrap brow"><input id="regq" class="bsearch" type="search" placeholder="Search a town" aria-label="Search towns">
+<div class="bchips" id="regst" role="group" aria-label="State"><button type="button" class="on" data-st="">All states</button>{"".join(f'<button type="button" data-st="{st}">{st} <span class="bn">{_stc[st]}</span></button>' for st in STATES if _stc.get(st))}</div></div></div>
+<section class="band tband"><div class="wrap"><div class="regw"><div class="regmap"><div id="regmap" role="region" aria-label="Map of regional towns with gigs"></div></div>
+<div><div class="ghead"><h2>Busiest towns</h2><p class="bcount" id="regcount">{len(_tlist)} towns</p></div><div class="pcg pcg2" id="regcards">{"".join(town_card(t, i) for i, t in enumerate(_tlist))}</div>
+<button type="button" class="morebtn" id="regmore"{" hidden" if len(_tlist) <= 24 else ""}>Show all {len(_tlist)} towns</button></div></div>
+<p class="note" style="margin-top:28px">Looking for a capital city? {" · ".join(f'<a href="/gigs/{slug(c)}.html">{e(c)}</a>' for c in MAIN_CITIES)}</p>
+<div style="max-width:720px;margin-top:24px">{venue_form(title="Is your town missing?", intro="Tell us the venues that put on bands near you, and we'll add your town to the guide.")}</div></div></section>
+<script id="regdata" type="application/json">{_tjs}</script>"""
 page("gigs/regional.html", "Regional gigs: live music across regional Australia | Live Louder",
-     "Gigs and live music in regional towns across Australia, town by town, updated daily.", reg_body, "gigs/index.html")
+     "Gigs and live music in regional towns across Australia, town by town, updated daily.", reg_body, "gigs/index.html",
+     extra_head='<link rel="stylesheet" href="/vendor/leaflet/leaflet.css"><script src="/vendor/leaflet/leaflet.js" defer></script><script src="/gigsui.js" defer></script>')
 page("venue-thanks.html", "Thanks for the venue | Live Louder", "Thanks for telling us about a venue.",
      '<section class="page-title"><div class="wrap"><h1>Thanks, legend</h1><p>We\'ll check out the venue and add its gigs, usually within a day or two. <a style="color:#fff" href="/gigs/regional.html">See regional gigs</a> or <a style="color:#fff" href="/">head home</a>.</p></div></section>')
 # Venue suggestions for the venue gig finder (names and links only; never emails).
@@ -1083,10 +1095,18 @@ for c in MAIN_CITIES:
          f"What's on in {c} this weekend, {wk_label}: every gig and concert by day, with venues and tickets.", body, "this-weekend.html")
 wk_cards = "".join(f'<a class="fcard" href="/gigs/{slug(c)}-this-weekend.html"><span class="ntag">This weekend</span><h3>{e(c)}</h3>'
                    f'<p>{weekend_counts[c]} {"gig" if weekend_counts[c] == 1 else "gigs"}</p></a>' for c in MAIN_CITIES)
-twp = (f'<section class="page-title"><div class="wrap"><h1>This weekend</h1><p>What\'s on around Australia, {e(wk_label)}. Pick your city.</p></div></section>'
-       f'<section class="band"><div class="wrap"><div class="grid">{wk_cards}</div></div></section>')
+twp = (f'<section class="page-title"><div class="wrap"><h1>This weekend</h1><p>What\'s on around Australia, {e(wk_label)}.</p></div></section>'
+       f'<div class="bbar" id="wkbar"><div class="wrap brow"><label class="bcity"><span aria-hidden="true">📍</span><select id="wkcity" aria-label="City">'
+       + "".join(f'<option>{e(c)}</option>' for c in MAIN_CITIES) + '</select></label>'
+       f'<div class="bchips" id="wkdays" role="group" aria-label="Day"><button type="button" class="on" data-d="">Whole weekend</button>'
+       + "".join(f'<button type="button" data-d="{x.isoformat()}">{x.strftime("%a")} <span class="bn"></span></button>' for x in wk_days) + '</div>'
+       f'<select id="wkgenre" class="bsel" aria-label="Genre"><option value="">All genres</option>' + "".join(f'<option value="{slug(g)}">{e(g)}</option>' for g in GENRE_LIST) + '</select></div></div>'
+       f'<section class="band tband"><div class="wrap" id="wk" data-days="{",".join(wk_iso)}" data-label="{e(wk_label)}"><p class="bcount" id="wkcount" aria-live="polite">Loading…</p>'
+       f'<div id="wkpicks"></div><div id="wkcols" class="wkcols"></div>'
+       f'<h2 style="margin-top:40px;font-size:30px">Every city this weekend</h2><div class="grid">{wk_cards}</div></div></section>')
 page("this-weekend.html", f"Gigs this weekend in Australia ({wk_label}) | Live Louder",
-     f"Every gig on this weekend ({wk_label}) in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", twp, "this-weekend.html")
+     f"Every gig on this weekend ({wk_label}) in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", twp, "this-weekend.html",
+     extra_head='<script src="/gigsui.js" defer></script>')
 
 # ---------------------------------------------------------------- venues
 def fest_btn(f):
@@ -1169,12 +1189,36 @@ for st in sorted(_byst, key=lambda x: STATE_ORDER.index(x) if x in STATE_ORDER e
         vs = sorted(_byst[st][c], key=lambda kv: kv[1]["name"].lower())
         _vrows += (f'<h3 class="month"><a href="/gigs/{slug(c)}.html">{e(c)}</a></h3><nav class="chips">'
                    + "".join(f'<a href="/venues/{k}.html">{e(v["name"])} <small>{len(v["shows"])}</small></a>' for k, v in vs) + "</nav>")
-_jump = " · ".join(f'<a style="color:#fff" href="#{slug(st)}">{e(st)}</a>' for st in sorted(_byst, key=lambda x: STATE_ORDER.index(x) if x in STATE_ORDER else 99))
+# Venue cards: the venue's photo, else the photo of the next act playing there ("Coming up"), else a poster.
+def venue_card(k, v, i):
+    vp = (vguides.get(k) or {}).get("photo", "")
+    nx = next((x for x in v["shows"] if small_photo((artists.get(slug(x["artist"])) or {}).get("photo", ""))), None)
+    if vp:
+        face = f'<span class="pci" style="background-image:url(&quot;{e(vp)}&quot;)"></span>'
+    elif nx:
+        face = (f'<span class="pci" style="background-image:url(&quot;{e(small_photo(artists[slug(nx["artist"])]["photo"]))}&quot;)">'
+                f'<span class="pctag">Coming up: {e(nx["artist"])}</span></span>')
+    else:
+        face = poster(v["name"], "", "pci", "span")
+    n_ = len(v["shows"])
+    nxt = "".join(f'<span class="pcl">{d(x["date"]).strftime("%a %-d %b")} · {e(x["artist"])}</span>' for x in v["shows"][:2])
+    grp = v["city"] if v["city"] in MAIN_CITIES else "Regional"
+    return (f'<a class="pc" href="/venues/{k}.html" data-c="{e(grp)}" data-n="{e((v["name"] + " " + v["suburb"] + " " + v["city"]).lower())}" data-s="{n_}">{face}'
+            f'<span class="pcb"><strong>{e(v["name"])}</strong><span>{e(v["suburb"] if v["suburb"] != v["city"] else v["city"])}{", " + e(v["city"]) if grp == "Regional" and v["suburb"] != v["city"] else ""} · '
+            f'<b>{n_} {"gig" if n_ == 1 else "gigs"}</b> coming up</span>{nxt}</span></a>')
+_vsorted = sorted(venues.items(), key=lambda kv: -len(kv[1]["shows"]))
+_vgroups = [c for c in MAIN_CITIES if any(v["city"] == c for v in venues.values())] + ["Regional"]
 page("venues/index.html", "Live music venues in Australia: every venue's gig guide | Live Louder",
      f"Gig guides for {len(venues):,} live music venues across Australia, from capital city band rooms to regional pubs, clubs and theatres.",
-     f"""<section class="page-title"><div class="wrap"><h1>Venues</h1><p>{len(venues):,} live music venues across Australia, with every upcoming gig. Jump to: {_jump}</p></div></section>
-<section class="band"><div class="wrap split"><div>{_vrows}</div>
-<aside class="side">{venue_form(title="Missing a venue?", intro="Tell us the venues that put on bands near you, and we'll add their gigs.")}</aside></div></section>""", "venues/index.html")
+     f"""<section class="page-title"><div class="wrap"><h1>Venues</h1><p>{len(venues):,} live music venues around Australia, from stadiums to the corner pub.</p></div></section>
+<div class="bbar" id="vbar"><div class="wrap brow"><input id="vq" class="bsearch" type="search" placeholder="Search {len(venues):,} venues by name or suburb" aria-label="Search venues">
+<div class="bchips" id="vcity" role="group" aria-label="City"><button type="button" class="on" data-c="">All</button>{"".join(f'<button type="button" data-c="{e(c)}">{e(c)}</button>' for c in _vgroups)}</div>
+<select id="vsort" class="bsel" aria-label="Sort"><option value="s">Most gigs</option><option value="n">A–Z</option></select></div></div>
+<section class="band tband"><div class="wrap"><p class="bcount" id="vcount" aria-live="polite">{len(venues):,} venues</p>
+<div class="pcg" id="vcards">{"".join(venue_card(k, v, i) for i, (k, v) in enumerate(_vsorted))}</div>
+<button type="button" class="morebtn" id="vmore">Show more venues</button>
+<div style="max-width:720px;margin-top:32px">{venue_form(title="Missing a venue?", intro="Tell us the venues that put on bands near you, and we'll add their gigs.")}</div></div></section>""", "venues/index.html",
+     extra_head='<script src="/gigsui.js" defer></script>')
 
 # ---------------------------------------------------------------- one page per gig (tickets, price, venue, map)
 # Full schema.org MusicEvent for Google (all the recommended fields, so Search Console stays happy).
@@ -1404,7 +1448,7 @@ for a in artists.values():
     vinyl = HEATHEN + quote_plus(a["name"].split(" & ")[0])
     _ph = re.sub(r"/1000x1000-", "/500x500-", a.get("photo", ""))
     _hs = (f' hasph" style="--u:url(&quot;{e(_ph)}&quot;)"><span class="abg" aria-hidden="true"></span>' if _ph else f'" style="--h:{hue(a["name"])}">')
-    body = f"""<section class="page-title artist{_hs}<div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p><button class="saveartist" type="button" data-artist="{e(a['slug'])}" data-name="{e(a['name'])}" aria-pressed="false"><span aria-hidden="true">♡</span> Follow</button>{cd}</div>{art(a, 'art hart')}</div></section>
+    body = f"""<section class="page-title artist{_hs}<div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p><button class="saveartist" id="follow" type="button" data-artist="{e(a['slug'])}" data-name="{e(a['name'])}" aria-pressed="false"><span aria-hidden="true">♡</span> Follow</button>{cd}</div>{art(a, 'art hart')}</div></section>
 <section class="band"><div class="wrap split"><div>{head}{note}
 <h2>{len(sh)} {'show' if len(sh) == 1 else 'shows'} in Australia</h2>{dates_html}{tour_map(a['cities'])}{setlist_html}{records_html}</div>
 <aside class="side">{listen}{follow}<div class="card"><h3>Before the show</h3><a class="btn" href="{vinyl}" rel="noopener">Find {e(a['name'])} on vinyl ↗</a>{cal}{src}</div>{extra_cards}</aside></div></section>"""
@@ -1592,11 +1636,27 @@ else:
     up_html = ('<p class="lead">No on-sales are listed for the next three weeks just yet. We add them as tours are announced, '
                'so check back, or <a href="/tours.html">follow an artist</a> and we\'ll email you when their tickets go on sale.</p>')
 just_html = ('<h2 style="margin-top:36px">On sale in the last week</h2><ul class="sales">' + "".join(sale_row(x, True) for x in just_sales[:20]) + "</ul>") if just_sales else ""
-osp = (f'<section class="page-title"><div class="wrap"><h1>On sale soon</h1><p>Every presale and general on-sale for the next three weeks, in Sydney time. '
-       f'Tap "Remind me" to put it in your calendar.</p></div></section><section class="band"><div class="wrap" style="max-width:920px">{up_html}{just_html}'
-       f'<p class="note">Times shown in Sydney time (AEDT/AEST). Sale times can change: always check the ticket page. Updated {UPDATED}.</p></div></section>')
+# On sale: one hub with alerts, on-sale times, just-announced tours and sold-out shows, so it's never empty.
+_td = {x["s"]: x for x in tour_data}
+_ann = [t for t in sorted(tours, key=lambda t: t.get("added", ""), reverse=True) if _td.get(slug(t["artist"]))][:8]
+_ann_html = "".join(tcard(_td[slug(t["artist"])]).replace('<p class="tc2t">', f'<p class="tc2t"><b class="tc2new">Announced {d(t["added"]).strftime("%a %-d %b")}</b> · ', 1) for t in _ann if t.get("added"))
+_so = [x for x in shows if x.get("status") == "sold out"][:12]
+_alist = "".join(f'<option value="{e(a["name"])}" data-s="{a["slug"]}"></option>' for a in sorted(artists.values(), key=lambda a: -len(a["shows"]))[:400] if a["shows"])
+osp = (f'<section class="page-title"><div class="wrap"><h1>On sale</h1><p>Presales and on-sale times, just-announced tours and sold-out shows, all in one place.</p></div></section>'
+       f'<div class="bbar"><div class="wrap brow"><div class="bchips"><a class="bchip on" href="#soon">On sale soon</a><a class="bchip" href="#announced">Just announced</a>'
+       f'{"<a class=bchip href=#soldout>Sold out</a>" if _so else ""}<a class="bchip" href="#alerts">🔔 Alerts</a></div></div></div>'
+       f'<section class="band tband"><div class="wrap">'
+       f'<form class="osalert" id="alerts" data-root="/"><div><strong>Never miss an on-sale</strong><span>Follow an artist and we\'ll email you before their presale starts.</span></div>'
+       f'<input class="bsearch" id="osq" list="osartists" placeholder="Type an artist…" aria-label="Artist to follow"><datalist id="osartists">{_alist}</datalist>'
+       f'<button class="btn" type="submit">🔔 Follow</button><small class="osmsg" id="osmsg" hidden></small></form>'
+       f'<h2 id="soon" class="osh">On sale soon</h2><div style="max-width:920px">{up_html}{just_html}'
+       f'<p class="note">Times shown in Sydney time (AEDT/AEST). Sale times can change: always check the ticket page. Updated {UPDATED}.</p></div>'
+       + (f'<div class="ghead"><h2 id="announced" class="osh">Just announced</h2><a href="/tours.html">All tours →</a></div><div class="tgrid">{_ann_html}</div>' if _ann_html else "")
+       + (f'<h2 id="soldout" class="osh">Sold out</h2><p class="note">The official seller says these are sold out. Tap through for the waitlist or official resale.</p>{gig_list(_so)}' if _so else "")
+       + '</div></section>')
 page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Australia | Live Louder",
-     "When tickets go on sale for concerts and tours in Australia: presale and general on-sale dates and times, with calendar reminders.", osp, "on-sale.html")
+     "When tickets go on sale for concerts and tours in Australia: presale and general on-sale dates and times, just-announced tours and sold-out shows.", osp, "on-sale.html",
+     extra_head='<script src="/gigsui.js" defer></script>')
 
 # ---------------------------------------------------------------- my gigs (saved on the visitor's device)
 mg = """<div id="profile">
@@ -1652,6 +1712,7 @@ for a_ in artists.values():
 metro_opts = "".join(f"<option>{e(m[0])}</option>" for m in feed.METROS)
 state_opts = "".join(f"<option>{x}</option>" for x in ("NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"))
 genre_opts = "".join(f"<option>{e(g)}</option>" for g, _ in GENRES)
+_vlist = "".join(f'<option value="{e(v["name"])}">{e(v["suburb"] or v["city"])}</option>' for v in sorted(venues.values(), key=lambda v: -len(v["shows"])))
 sg = f"""<section class="page-title"><div class="wrap"><h1>Submit a gig</h1><p>Playing a show, running a venue or putting on a night? Add it to the Live Louder gig guide. It's free.</p></div></section>
 <section class="band"><div class="wrap split"><form class="gigform" name="gig" method="POST" action="/gig-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
 <input type="hidden" name="form-name" value="gig"><p hidden><label>Leave this empty <input name="bot-field"></label></p>
@@ -1661,7 +1722,7 @@ sg = f"""<section class="page-title"><div class="wrap"><h1>Submit a gig</h1><p>P
 <div class="two"><label>Date <input type="date" name="date" required min="{TODAY_S}"></label><label>Start time <small>(optional)</small> <input type="time" name="time"></label></div>
 <label>Genre <select name="genre"><option value="">Pick one</option>{genre_opts}</select></label></fieldset>
 <fieldset><legend>Where</legend>
-<label>Venue <input name="venue" required maxlength="100"></label>
+<label>Venue <input name="venue" required maxlength="100" list="gvenues" autocomplete="off"></label><datalist id="gvenues">{_vlist}</datalist>
 <label>City <select name="city" id="gcity" required><option value="">Pick a city</option>{metro_opts}<option value="other">Somewhere else</option></select></label>
 <div class="two" id="gother" hidden><label>Town or suburb <input name="town" maxlength="60"></label><label>State <select name="state"><option value="">State</option>{state_opts}</select></label></div></fieldset>
 <fieldset><legend>Tickets</legend>
@@ -1673,11 +1734,15 @@ sg = f"""<section class="page-title"><div class="wrap"><h1>Submit a gig</h1><p>P
 <p class="note" style="margin-top:4px">Only used if we need to check something. It's never shown on the site and we won't add you to any lists.</p>
 <label>Anything else? <small>(optional)</small> <textarea name="notes" rows="3" maxlength="600"></textarea></label></fieldset>
 <button class="btn">Add my gig</button></form>
-<aside class="side"><div class="card"><h3>How it works</h3><ol class="steps"><li>Fill in the show details and a ticket link.</li><li>It gets checked overnight.</li><li>It goes up in the gig guide, the city page and the artist page, usually by 7am the next morning.</li></ol></div>
+<aside class="side"><div class="sgprev"><p class="sglab">How it'll look</p><div class="gcard sgcard" id="sgcard"><span class="gcpic poster ps ps-grit pl-s" style="--h:350" id="sgpic"><span class="pn" id="sgpn">Your band</span><span class="plive">Live</span></span>
+<span class="gcd"><b id="sgd">–</b><small id="sgm"></small></span><span class="gcin"><strong id="sga">Your band</strong><span id="sgw">Venue, city</span></span></div>
+<p class="note">We'll swap in a photo of the artist if we can find one.</p></div>
+<div class="card"><h3>What happens next</h3><ol class="steps"><li>We check the ticket link overnight.</li><li>It goes live with the next morning's update, usually by 7am.</li><li>It shows up in the gig guide, on the venue page and on the city or town page.</li><li>Anyone following the artist gets an email about it.</li></ol></div>
 <div class="card"><h3>Got a whole tour?</h3><p>Send each date separately. It only takes a minute each, and every show gets its own spot in the right city.</p></div>
 {venue_form(title="Run a venue? Add it once", intro="Tell us your venue and where you list your gigs (website, Oztix, Humanitix, Moshtix). We'll check it regularly and add every show automatically, so you don't have to send each one.")}</aside></div></section>"""
 page("submit-a-gig.html", "Submit a gig: add your show to the gig guide | Live Louder",
-     "Add your gig to the Live Louder gig guide for free. Bands, venues and promoters across Australia.", sg, "gigs/index.html")
+     "Add your gig to the Live Louder gig guide for free. Bands, venues and promoters across Australia.", sg, "gigs/index.html",
+     extra_head='<script src="/gigsui.js" defer></script>')
 page("gig-thanks.html", "Thanks for your gig | Live Louder", "Thanks for sending in your gig.",
      '<section class="page-title"><div class="wrap"><h1>Got it, thanks</h1><p>We\'ll check your gig overnight and it should be in the gig guide by 7am tomorrow. Got another date? <a style="color:#fff" href="/submit-a-gig.html">Add another gig</a>.</p></div></section>')
 
@@ -1685,8 +1750,20 @@ page("gig-thanks.html", "Thanks for your gig | Live Louder", "Thanks for sending
 def genre_tiles(gs):
     return '<div class="gtiles">' + "".join(
         f'<a class="gtile" href="/genres/{slug(g)}.html" style="--h:{GENRE_HUE.get(g, 0)}"><strong>{e(g)}</strong><span>{genre_count[g]} {"artist" if genre_count[g] == 1 else "artists"} touring</span></a>' for g in gs) + "</div>"
+# Genre index: big poster tiles (the same poster style as artists without a photo), with a few artist faces,
+# gig counts and the top acts. Busiest genres first; the first two are wide.
+def _gtile(g, i):
+    ga_ = sorted([a for a in artists.values() if a["gb"] == g and a["shows"]], key=lambda a: -len(a["shows"]))
+    n_g = sum(len(a["shows"]) for a in ga_)
+    faces = "".join(f'<img src="{e(small_photo(a["photo"], "120x120"))}" alt="" loading="lazy">' for a in [a for a in ga_ if a.get("photo")][:4])
+    top = ", ".join(e(a["name"]) for a in ga_[:3])
+    return (f'<a class="gpt{" gpw" if i < 2 else ""}" href="/genres/{slug(g)}.html">{poster(g, "", "gpp", "span").replace(" ps-" + poster_style(g), " ps-" + ("grit", "neon", "paper", "pop")[i % 4])}'
+            f'<span class="gpb"><span class="gpf">{faces}</span><strong>{e(g)}</strong><span>{n_g:,} {"gig" if n_g == 1 else "gigs"} · {len(ga_)} {"artist" if len(ga_) == 1 else "artists"}</span>'
+            f'{f"<small>{top}</small>" if top else ""}</span></a>')
+_gsorted = sorted(GENRE_LIST, key=lambda g: -genre_count[g])
 gi = (f'<section class="page-title"><div class="wrap"><h1>Browse by genre</h1><p>Find the tours and gigs that are your kind of thing.</p></div></section>'
-      f'<section class="band"><div class="wrap">{genre_tiles(GENRE_LIST)}<p class="note">Genres are a rough guide. Plenty of artists fit more than one.</p></div></section>')
+      f'<section class="band tband"><div class="wrap"><div class="gptiles">{"".join(_gtile(g, i) for i, g in enumerate(_gsorted) if genre_count[g])}</div>'
+      f'<p class="note">Genres are a rough guide. Plenty of artists fit more than one.</p></div></section>')
 page("genres/index.html", "Gigs by genre: rock, indie, pop, metal and more | Live Louder",
      "Browse Australian tours and gigs by genre: rock, indie, pop, metal, hip hop, electronic, country and more.", gi, "genres/index.html")
 for g in GENRE_LIST:
@@ -1777,6 +1854,7 @@ shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
 shutil.copy(ROOT / "src/festmap.js", OUT / "festmap.js")
 shutil.copy(ROOT / "src/browse.js", OUT / "browse.js")
+shutil.copy(ROOT / "src/gigsui.js", OUT / "gigsui.js")
 shutil.copytree(ROOT / "src/vendor", OUT / "vendor", dirs_exist_ok=True)
 shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
