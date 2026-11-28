@@ -7,10 +7,12 @@
   var dark = document.documentElement.dataset.theme === 'dark' ||
     (document.documentElement.dataset.theme !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
   var map = L.map(el, { zoomControl: true, scrollWheelZoom: false, worldCopyJump: false, minZoom: 3 });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/' + (dark ? 'dark_all' : 'rastertiles/voyager') + '/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  // OpenStreetMap's own tiles (no key needed); darkened with a CSS filter in dark mode.
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
+  if (dark) el.classList.add('fdark');
   el.addEventListener('click', function () { map.scrollWheelZoom.enable(); }, { once: true });
 
   var AU = L.latLngBounds([-43.8, 112.5], [-10.5, 154]);

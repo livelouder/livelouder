@@ -1002,6 +1002,7 @@ a.resale{color:#b26b00}
 .fxpin:hover{background:var(--line)}
 .fmapbox{border-radius:14px;overflow:hidden;border:1px solid var(--line);min-height:300px}
 #fmap{width:100%;height:100%;background:var(--card)}
+#fmap.fdark .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
 .fpop{color:inherit;text-decoration:none;font:14px/1.4 "Archivo",sans-serif}
 .fpop strong{font:400 17px/1.1 "Anton",Impact,sans-serif}
 .fpop span{color:#e2391f;font-weight:600}

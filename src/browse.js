@@ -1,5 +1,5 @@
 /* Tours page and Artists A–Z: city picker (shared with the rest of the site via window.LL), search and filters. */
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var root = document.body.dataset.root || '/';
   var getCity = function () { return (window.LL && window.LL.city()) || ''; };
@@ -119,4 +119,4 @@
     });
     aq.addEventListener('input', apply);
   }
-})();
+});
