@@ -81,25 +81,28 @@ document.addEventListener('DOMContentLoaded', function () {
     if (pic) av.innerHTML = `<img src="${esc(pic)}" alt="" referrerpolicy="no-referrer">`;
     else av.textContent = u ? (pr.display_name || md.full_name || u.email || '?')[0].toUpperCase() : '♥';
     const heroEl = document.getElementById('pHero');
-    // Their own colour for the record label and the stage lights (same colour friends see), from their username.
+    // Their own colour for the default cover and the photo circle (same colour friends see), from their username.
     const seed = pr.username || (u && u.email) || 'live louder';
     av.style.setProperty('--h', hue(seed)); heroEl.style.setProperty('--h', hue(seed));
     heroEl.classList.toggle('hasbanner', !!pr.banner_url);
     ['cv', 'cv0', 'cv1', 'cv2'].forEach(c => heroEl.classList.remove(c));
     if (!pr.banner_url) heroEl.classList.add('cv', 'cv' + (hue(seed) % 3));
-    heroEl.style.backgroundImage = pr.banner_url ? `linear-gradient(180deg,rgba(20,20,20,.15) 0,rgba(20,20,20,.55) 45%,rgba(20,20,20,.96) 100%),url('${pr.banner_url.replace(/'/g, '%27')}')` : '';
+    heroEl.style.backgroundImage = pr.banner_url ? `url('${pr.banner_url.replace(/'/g, '%27')}')` : '';
     const cam = document.getElementById('pCam'), cov = document.getElementById('pCover');
     cam.hidden = cov.hidden = !u;
     cam.textContent = uploading === 'avatar' ? '…' : '📷';
     cov.textContent = uploading === 'banner' ? 'Uploading…' : pr.banner_url ? '📷 Change cover' : '📷 Add a cover photo';
     document.getElementById('pName').textContent = u ? (pr.display_name || md.full_name || (u.email || '').split('@')[0]) : 'My gigs';
-    document.getElementById('pSub').innerHTML = u ? `Member since ${new Date(u.created_at).toLocaleDateString('en-AU', {month: 'long', year: 'numeric'})}`
-      : 'Saved on this device. Sign in to keep it everywhere and get reminders before the show.';
-    document.getElementById('pCta').innerHTML = u ? '' : '<button type="button" class="btn" data-signin>Sign in</button>';
-    const stat = (n, l, t) => `<a class="stat" href="#${t}"><b>${n}</b><span>${l}</span></a>`;
-    document.getElementById('pStats').innerHTML = stat(L.going.length, 'Going', 'gigs') + stat(L.saved.length, 'Saved', 'gigs') + stat(L.been.length, 'Been to', 'gigs')
-      + stat(Object.keys(st.artists).length, 'Following', 'artists') + stat(recs('records').length.toLocaleString(), 'Records', 'records')
-      + stat(recs('wants').length.toLocaleString(), 'Wantlist', 'wantlist');
+    document.getElementById('pHandle').innerHTML = u && pr.username ? `@${esc(pr.username)}${pr.share ? '' : ' · <span class="ppriv">🔒 Private profile</span>'}` : '';
+    const bits = [pr.bio ? esc(pr.bio) : '', pr.city ? `📍 ${esc(pr.city)}` : ''].filter(Boolean);
+    document.getElementById('pSub').innerHTML = u ? (bits.length ? bits.join(' <span class="dotsep">·</span> ') : '<a href="#settings">+ Add a short bio</a>')
+      : 'Saved on this device. Sign in to keep it everywhere, post updates and see what your friends are going to.';
+    document.getElementById('pCta').innerHTML = u ? `<a class="btn ghost sm" href="#settings">Edit profile</a>${pr.share && pr.username ? `<button type="button" class="btn ghost sm" data-sharelink>${copied ? 'Link copied ✓' : 'Share'}</button>` : ''}`
+      : '<button type="button" class="btn" data-signin>Sign in</button>';
+    const stat = (n, l, t) => n ? `<a href="#${t}"><b>${Number(n).toLocaleString()}</b> ${l}</a>` : '';
+    document.getElementById('pStats').innerHTML = [stat(L.been.length, 'seen live', 'seen'), stat(L.going.length, 'going', 'gigs'), stat(L.saved.length, 'saved', 'gigs'),
+      stat(Object.keys(st.artists).length, Object.keys(st.artists).length === 1 ? 'artist' : 'artists', 'artists'), stat(recs('records').length, 'records', 'records'),
+      stat(people ? people.following.length : 0, 'following', 'friends'), stat(people ? (people.followers || []).length + (people.private_followers || 0) : 0, 'followers', 'friends')].filter(Boolean).join('');
   }
 
   // ------------------------------------------------ one-click start
@@ -176,40 +179,78 @@ document.addEventListener('DOMContentLoaded', function () {
       : '<p>In Chrome on Android, open the ⋮ menu and choose <b>Install app</b> or <b>Add to Home screen</b>.</p>';
     return `<div class="card"><h3>Live Louder on your phone</h3><p>Put it on your home screen and it opens like an app, full screen, with My gigs ready to go even with no signal at the venue.</p>${how}</div>`;
   }
+  // ------------------------------------------------ activity: what you (and your friends) have been up to
+  let act = {mode: '', mine: null, friends: null, loading: false, err: ''};
+  function loadActivity(force) {
+    if (!me() || act.loading || (act.mine && !force)) return;
+    act.loading = true;
+    Promise.all([ACC.rpc('profile_activity', {uname: prof().username || ''}), window.FRIENDS ? FRIENDS.loadFeed().catch(() => []) : Promise.resolve([])])
+      .then(([m, f]) => { act.mine = m.data || []; act.friends = Array.isArray(f) ? f : []; act.err = m.error ? 'soon' : ''; act.loading = false; render(); });
+  }
+  document.addEventListener('llpost', () => { loadActivity(true); });
+  function feedItems() {
+    const mine = act.mine || [], myName = prof().username;
+    if (act.mode === 'me') return mine;
+    const seen = new Set(mine.filter(x => x.t === 'post').map(x => x.post && x.post.id));
+    const fr = (act.friends || []).filter(x => !(x.t === 'post' && x.post && seen.has(x.post.id)) && !(myName && x.who && x.who.username === myName && x.t !== 'post'));
+    return [...mine, ...fr].sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  }
+  function sideBox(title, inner, more) { return inner ? `<div class="sbox"><div class="shead"><h3>${title}</h3>${more || ''}</div>${inner}</div>` : ''; }
+  function mostSeen(L) {
+    const by = {};
+    L.been.forEach(x => { (by[x.s] = by[x.s] || {s: x.s, a: x.a, n: 0}).n++; });
+    const top = Object.values(by).sort((a, b) => b.n - a.n).slice(0, 3);
+    return top.length ? `<div class="topseen">${top.map(x => `<a href="${root}artists/${esc(x.s)}.html">${art(x.s, x.a, 'tsimg')}<span>${esc(x.a)}</span><small>${x.n} ${x.n === 1 ? 'time' : 'times'}</small></a>`).join('')}</div>` : '';
+  }
   function overview() {
-    const L = lists(), st = MY.get();
+    const L = lists();
     const next = L.going[0] || L.saved[0];
     if (L.been.length) loadDiary();
+    if (me()) { loadPeople(); loadActivity(); }
     let h = startCard() + rateNudge(L);
     if (next) {
-      const n = daysTo(next.d);
-      h += `<div class="nextup"><a class="nimg" href="${root}artists/${esc(next.s)}.html">${art(next.s, next.a, 'nph')}</a><div class="ntext">
-        <span class="ntag">${next.going ? 'Your next gig' : 'Coming up'}</span><h2><a href="${esc(gp(next))}">${esc(next.a)}</a></h2>
-        <p>${esc(when(next.d))}${next.tm ? ' · ' + esc(next.tm) : ''}<br>${esc(next.v)}, ${esc(next.c)}</p>
-        <div class="gact"><a class="btn" href="${esc(next.u)}" rel="noopener">Tickets &amp; details</a>${next.going ? '' : `<button class="going" type="button" data-id="${esc(next.id)}" aria-pressed="false">I'm going</button>`}</div></div>
-        <div class="ncount"><b>${n <= 0 ? 'Tonight' : n}</b><span>${n <= 0 ? '' : n === 1 ? 'day to go' : 'days to go'}</span></div></div>`;
-    } else {
-      h += empty('🎟️', 'No gigs saved yet', 'Tap the ♡ on any gig and it lands here, with a countdown and a reminder before the show.',
-        `<a class="btn" href="${root}gigs/index.html">Find a gig</a> <a class="btn ghost" href="${root}this-weekend.html">What's on this weekend</a>`);
+      h += `<div class="pnext"><a href="${esc(gp(next))}">${art(next.s, next.a, 'pnimg')}</a><div class="pnt"><span class="ntag">${next.going ? 'Your next gig' : 'Coming up'}</span>
+        <strong><a href="${esc(gp(next))}">${esc(next.a)}</a> · ${esc(when(next.d))}${next.tm ? ', ' + esc(next.tm) : ''}</strong><small>${esc(next.v)}, ${esc(next.c)}</small></div>
+        <div class="pnb">${next.going ? '' : `<button class="going" type="button" data-id="${esc(next.id)}" aria-pressed="false">I'm going</button>`}<a class="btn sm" href="${esc(next.u)}" rel="noopener">Tickets</a></div></div>`;
     }
-    const up = [...L.going, ...L.saved].filter(x => x !== next).slice(0, 4);
-    if (up.length) h += head('Your gigs', '<a href="#gigs">See all →</a>') + `<div class="ggrid">${up.map(x => gigCard(x, true)).join('')}</div>`;
-    // records
+    // main column: write a post, then the feed
+    let main = '';
+    if (me()) {
+      main += window.FRIENDS ? FRIENDS.composer() : '';
+      const following = people && people.following.length;
+      if (!act.mode) act.mode = following ? 'all' : 'me';
+      main += `<div class="shead fhead"><h2>${act.mode === 'me' ? 'Your activity' : 'Your feed'}</h2><div class="bchips fmodes"><button type="button" data-amode="all" class="${act.mode === 'all' ? 'on' : ''}">You &amp; friends</button><button type="button" data-amode="me" class="${act.mode === 'me' ? 'on' : ''}">Just you</button></div></div>`;
+      if (!act.mine) main += '<p class="note">Loading…</p>';
+      else {
+        const items = feedItems();
+        main += items.length ? FRIENDS.renderFeed(items, 60)
+          : empty('🎸', act.mode === 'me' ? 'Nothing here yet' : 'Your feed is quiet', act.mode === 'me' ? 'Write a post above, mark a gig as going, or add a record. It all shows up here.'
+            : 'Follow your friends to see their posts, the gigs they\'re going to and the records they\'re buying.', `<a class="btn ghost" href="#friends">Find friends</a>`);
+      }
+    } else {
+      main += empty('👋', 'Sign in to post and follow friends', 'Your saved gigs work on this device already. Sign in to keep them everywhere, post updates, and see what your friends are going to.',
+        '<button type="button" class="btn" data-signin>Sign in or create an account</button>');
+      const up = [...L.going, ...L.saved].filter(x => x !== next).slice(0, 4);
+      if (up.length) main += head('Your gigs', '<a href="#gigs">See all →</a>') + `<div class="ggrid">${up.map(x => gigCard(x, true)).join('')}</div>`;
+    }
+    // side column
+    let side = sideBox('Most seen live', mostSeen(L), L.been.length ? '<a href="#seen">All →</a>' : '');
+    const fg = me() && people ? friendsGoing().slice(0, 4) : [];
+    side += sideBox('Friends going soon', fg.length ? `<ul class="sgo">${fg.map(({g, who}) => `<li>${avatar(who[0], 'fav sm')}<div><a href="${esc(gp(g))}"><b>${esc(g.a)}</b></a><small>${esc(who.length === 1 ? who[0].name : who[0].name + ' +' + (who.length - 1))} · ${esc(when(g.d))}</small></div></li>`).join('')}</ul>` : '', '<a href="#friends">All →</a>');
     const col = recs('records');
     if (col.length) {
-      const t = touringFromRecords().slice(0, 8);
-      if (t.length) h += head('Touring from your records', '<a href="#artists">See all →</a>') + `<div class="agrid">${t.map(x => artistTile(x.slug, x.name, `You own ${x.n} · ${x.shows} ${x.shows === 1 ? 'show' : 'shows'}`)).join('')}</div>`;
-      const recent = col.sort((a, b) => (b.add || '').localeCompare(a.add || '')).slice(0, 12);
-      h += head('Recently added to your collection', '<a href="#records">See all →</a>') + `<div class="rrow">${recent.map(r => recCard(r, 'records')).join('')}</div>`;
+      const recent = col.slice().sort((a, b) => (b.add || '').localeCompare(a.add || '')).slice(0, 6);
+      side += sideBox('Recently added', `<div class="srecs">${recent.map(r => recCard(r, 'records')).join('')}</div>`, '<a href="#records">All →</a>');
+      const t = touringFromRecords().slice(0, 4);
+      if (t.length) side += sideBox('Touring from your records', `<ul class="sgo">${t.map(x => `<li>${art(x.slug, x.name, 'fav sm')}<div><a href="${root}artists/${esc(x.slug)}.html"><b>${esc(x.name)}</b></a><small>You own ${x.n} · ${x.shows} ${x.shows === 1 ? 'show' : 'shows'}</small></div></li>`).join('')}</ul>`);
       const nv = newVinyl();
-      if (nv.length) h += head('New on vinyl from your artists') + `<ul class="nvlist">${nv.slice(0, 6).map(r => `<li><span class="nvd">${r[0] === '2027' ? '2027' : esc(dparts(r[0]).dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short'}))}</span><strong>${esc(r[1])} – ${esc(r[2])}</strong><a href="${heathen(r[1] + ' ' + r[2])}" rel="noopener">Pre-order ↗</a></li>`).join('')}</ul>`;
+      if (nv.length) side += sideBox('New on vinyl from your artists', `<ul class="nvlist">${nv.slice(0, 4).map(r => `<li><span class="nvd">${r[0] === '2027' ? '2027' : esc(dparts(r[0]).dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short'}))}</span><strong>${esc(r[1])} – ${esc(r[2])}</strong><a href="${heathen(r[1] + ' ' + r[2])}" rel="noopener">Pre-order ↗</a></li>`).join('')}</ul>`);
     } else {
-      h += `<div class="dgpromo"><div><h2>Start your record collection</h2><p>Add the records you own and the ones you're after. We'll show you which of your artists are touring and what's coming out on vinyl from them.</p>${searchForm('Search an album or artist, e.g. Powderfinger')}<p class="note">Already on Discogs? <a href="#records">Import your collection</a> in one go.</p></div><div class="dgstack" aria-hidden="true"><span></span><span></span><span></span></div></div>`;
-      if (srch.results || srch.loading || srch.error) h += results();
+      side += sideBox('Your record collection', `<p class="note" style="margin-top:0">Add the records you own and we'll tell you when those artists tour.</p><a class="btn sm" href="#records">+ Add records</a>`);
     }
-    const fa = Object.entries(st.artists);
-    if (fa.length) h += head('Artists you follow', '<a href="#artists">See all →</a>') + `<div class="arow">${fa.slice(0, 10).map(([s, n]) => `<a class="achip" href="${root}artists/${esc(s)}.html">${art(s, n, 'aph sm')}<span>${esc(n)}</span></a>`).join('')}</div>`;
-    return h;
+    const fa = Object.entries(MY.get().artists);
+    if (fa.length) side += sideBox('Artists you follow', `<div class="sarts">${fa.slice(0, 8).map(([sl, n]) => `<a href="${root}artists/${esc(sl)}.html" title="${esc(n)}">${art(sl, n, 'aph sm')}</a>`).join('')}</div>`, '<a href="#artists">All →</a>');
+    return h + `<div class="pgrid2"><div class="pmain">${main}</div><aside class="pside">${side}</aside></div>`;
   }
   function gigsTab() {
     const L = lists();
@@ -217,7 +258,33 @@ document.addEventListener('DOMContentLoaded', function () {
     let h = '';
     h += head('Going', L.going.length ? `<span class="note">${L.going.length}</span>` : '') + (L.going.length ? `<div class="ggrid">${L.going.map(x => gigCard(x, true)).join('')}</div>` : '<p class="note">Tap "I\'m going" on a saved gig to put it here.</p>');
     h += head('Saved') + (L.saved.length ? `<div class="ggrid">${L.saved.map(x => gigCard(x, true)).join('')}</div>` : '<p class="note">Nothing saved right now.</p>');
-    if (L.been.length) { loadDiary(); h += head('Your gig diary', `<span class="note">${L.been.length} ${L.been.length === 1 ? 'gig' : 'gigs'} · rate them, add a note and your photos</span>`) + `<div class="dgrid">${L.been.map(diaryCard).join('')}</div>`; }
+    if (L.been.length) h += `<p class="note" style="margin-top:28px">You've been to ${L.been.length} ${L.been.length === 1 ? 'gig' : 'gigs'}. <a href="#seen">Rate them and add photos on Seen live →</a></p>`;
+    return h;
+  }
+  // ------------------------------------------------ seen live: a wall of every gig you've been to
+  let openSeen = '';
+  const stars = n => n ? `<span class="swstars" aria-label="${n} out of 5">${'★'.repeat(n)}<i>${'★'.repeat(5 - n)}</i></span>` : '';
+  function bigArt(slug, name, cls) {
+    const ph = photo(slug, name);
+    if (ph) return `<span class="${cls}" style="background-image:url('${esc(String(ph).replace('/1000x1000-', '/500x500-'))}')"></span>`;
+    const a = arts[slug];
+    return window.LLPOSTER ? LLPOSTER.big(name, a && a[2] ? gslug(a[2]) : '').replace('class="gcpic', `class="${cls}`) : art(slug, name, cls);
+  }
+  function seenTab() {
+    const L = lists();
+    if (!L.been.length) return empty('🎫', 'Your gig wall starts here', 'Mark a gig as "I\'m going". After the night it moves here, where you can rate it and add your photos.', `<a class="btn" href="${root}gigs/index.html">Find a gig</a>`);
+    loadDiary();
+    const years = {};
+    L.been.forEach(x => { (years[x.d.slice(0, 4)] = years[x.d.slice(0, 4)] || []).push(x); });
+    let h = '';
+    if (openSeen) { const x = L.been.find(g => g.id === openSeen); if (x) h += `<div class="seenpanel" id="seenpanel"><div class="shead"><h3>Your gig diary</h3><button type="button" class="linkish" data-seen="">Close</button></div>${diaryCard(x)}</div>`; }
+    Object.keys(years).sort().reverse().forEach(y => {
+      const list = years[y];
+      h += head(`${list.length} ${list.length === 1 ? 'gig' : 'gigs'} seen in ${y}`, y === Object.keys(years).sort().reverse()[0] && me() ? '<span class="note">Tap a gig to rate it or add photos</span>' : '');
+      h += `<div class="swall">${list.map(x => { const d = (dia && dia[x.id]) || {}, p = dparts(x.d);
+        return `<button type="button" class="swt${openSeen === x.id ? ' on' : ''}" data-seen="${esc(x.id)}">${bigArt(x.s, x.a, 'swimg')}${(d.photos || []).length ? `<span class="swph">📷 ${(d.photos || []).length}</span>` : ''}
+          <strong>${esc(x.a)}</strong><small>${p.dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short'})} · ${esc(x.v)}</small>${stars(d.rating || 0)}</button>`; }).join('')}</div>`;
+    });
     return h;
   }
   function touringFromRecords() {
@@ -241,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   function shelf(list) {
     const items0 = recs(list), isCol = list === 'records';
-    let h = `<div class="addbar">${searchForm(isCol ? 'Add to your collection: search any album or artist' : 'Add to your wantlist: search any album or artist')}
+    let h = `<div class="bchips subt"><a class="bchip${isCol ? ' on' : ''}" href="#records">Collection <span class="bn">${recs('records').length.toLocaleString()}</span></a><a class="bchip${isCol ? '' : ' on'}" href="#wantlist">Wantlist <span class="bn">${recs('wants').length.toLocaleString()}</span></a></div><div class="addbar">${searchForm(isCol ? 'Add to your collection: search any album or artist' : 'Add to your wantlist: search any album or artist')}
       <details class="impbox"${imp.loading || imp.msg ? ' open' : ''}><summary>Import from Discogs</summary><p class="note" style="margin-top:6px">Brings in your Discogs collection and wantlist (they need to be public). Records you already have here are kept.</p>${linkForm(false)}</details></div>`;
     h += results();
     if (!items0.length) return h + empty(isCol ? '💿' : '🔎', isCol ? 'Your collection is empty' : 'Your wantlist is empty',
@@ -355,6 +422,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <form data-shareform class="shareform">
       <label>Username<span class="uname"><i>livelouder.com.au/u/</i><input name="username" value="${esc(p.username || suggestName())}" maxlength="24" autocapitalize="off" autocomplete="off" spellcheck="false" pattern="[a-z0-9_]{3,24}" required></span></label>
       <label>Name people see<input name="display_name" value="${esc(p.display_name || md.full_name || '')}" maxlength="40" placeholder="Your name or a nickname"></label>
+      <label>Short bio <small>(optional)</small><input name="bio" value="${esc(p.bio || '')}" maxlength="120" placeholder="e.g. 90s grunge, Aussie rock, front row at the Enmore"></label>
       <label class="tog"><input type="checkbox" name="share" ${p.share ? 'checked' : ''}> <span><b>Share my profile.</b> Anyone with your link, and people who follow you, can see your photos, the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown. Untick to make your profile private.</span></label>
       <button class="btn">Save</button>${shareMsg ? `<p class="note impmsg">${shareMsg}</p>` : ''}</form>
       <p class="note">Private profiles can't be seen or followed, and don't show up in search.</p></div>`;
@@ -376,15 +444,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // ------------------------------------------------ render
   function render() {
     hero();
-    document.querySelectorAll('.ptabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === tab ? 'page' : 'false'));
+    document.querySelectorAll('.ptabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === (tab === 'wantlist' ? 'records' : tab) ? 'page' : 'false'));
     const body = document.getElementById('pBody');
-    body.innerHTML = tab === 'gigs' ? gigsTab() : tab === 'artists' ? artistsTab() : tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wants') : tab === 'settings' ? settings() : tab === 'friends' ? friendsTab() : overview();
+    body.innerHTML = tab === 'gigs' ? gigsTab() : tab === 'artists' ? artistsTab() : tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wants') : tab === 'settings' ? settings() : tab === 'friends' ? friendsTab() : tab === 'seen' ? seenTab() : overview();
     const sel = body.querySelector('[data-rsort]'); if (sel) sel.value = recSort;
     MY.paint();
   }
   window.MYPAGE = render;
   document.addEventListener('acc', render);
-  function setTab() { const t0 = (location.hash || '#overview').slice(1); if (t0 === 'start') startOpen = true; const t = t0 === 'start' ? 'overview' : t0; tab = ['overview', 'gigs', 'artists', 'records', 'wantlist', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
+  function setTab() { const t0 = (location.hash || '#overview').slice(1); if (t0 === 'start') startOpen = true; const t = t0 === 'start' ? 'overview' : t0; tab = ['overview', 'gigs', 'seen', 'artists', 'records', 'wantlist', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
   window.addEventListener('hashchange', () => { setTab(); document.querySelector('.ptabs').scrollIntoView({block: 'nearest'}); });
 
   // ------------------------------------------------ search, import, record view
@@ -442,6 +510,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ------------------------------------------------ events
   box.addEventListener('click', ev => {
+    const sw = ev.target.closest('[data-seen]');
+    if (sw) { openSeen = openSeen === sw.dataset.seen ? '' : sw.dataset.seen; render(); const pnl = document.getElementById('seenpanel'); if (pnl) pnl.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
+    const am = ev.target.closest('[data-amode]');
+    if (am) { act.mode = am.dataset.amode; render(); return; }
     const g = ev.target.closest('button.going');
     if (g) { const st = MY.get(), x = st.gigs[g.dataset.id]; if (x) { x.going = !x.going; MY.save(); MY.push('gig', 'going', x); render(); } return; }
     const fo = ev.target.closest('[data-follow]'), uf = ev.target.closest('[data-unfollow]'), rf = ev.target.closest('[data-removefollower]');
@@ -505,7 +577,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const username = shf.username.value.trim().toLowerCase(), display_name = shf.display_name.value.trim(), share = shf.share.checked;
       if (!/^[a-z0-9_]{3,24}$/.test(username)) { shareMsg = 'Usernames are 3 to 24 lowercase letters, numbers or underscores.'; render(); return; }
       shareMsg = 'Saving…'; render();
-      ACC.saveProfile({username, display_name: display_name || null, share}).then(r => { shareMsg = r.error ? esc(r.error) : share ? `Saved. Your profile is shared at <a href="${purl(username)}">livelouder.com.au/u/${esc(username)}</a>.` : 'Saved. Your profile is private.'; render(); });
+      const bio = shf.bio ? shf.bio.value.trim() : '';
+      ACC.saveProfile({username, display_name: display_name || null, share}).then(async r => {
+        if (!r.error && bio !== (prof().bio || '')) { const b = await ACC.rpc('set_bio', {bio}); if (b.error) r = {error: b.error.replace(/^.*?: /, '')}; else Object.assign(ACC.profile() || {}, {bio: bio || null}); } shareMsg = r.error ? esc(r.error) : share ? `Saved. Your profile is shared at <a href="${purl(username)}">livelouder.com.au/u/${esc(username)}</a>.` : 'Saved. Your profile is private.'; render(); });
       return; }
     const sf = ev.target.closest('[data-recsearch]');
     if (sf) { ev.preventDefault(); const q = sf.q.value.trim(); if (q) doSearch(q); }
@@ -543,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Promise.all([fetch(root + 'gigs.json').then(r => r.json()).catch(() => []), fetch(root + 'data/artists.json').then(r => r.json()).catch(() => ({})),
                fetch(root + 'data/releases.json').then(r => r.json()).catch(() => [])])
     .then(([g, a, r]) => {
-      gigsAll = g; arts = a; rels = r;
+      gigsAll = g; arts = a; rels = r; window.LLARTS = a;
       for (const [slug, x] of Object.entries(arts)) if (x[3]) touring[norm(x[0])] = {slug, name: x[0], shows: x[5], city: x[4]};
       render();
     });

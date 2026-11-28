@@ -509,6 +509,10 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
 <a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
 <a class="msglink" href="{r}messages.html" hidden aria-label="Messages" title="Messages"><span aria-hidden="true">💬</span><span class="msgcount" hidden></span></a>
+<div class="meav" hidden><button type="button" class="meavbtn" aria-haspopup="true" aria-expanded="false" aria-label="Your account"><span class="meimg"></span><span class="mecaret" aria-hidden="true">▾</span></button>
+<div class="memenu" hidden><a class="memh" href="{r}my-gigs.html"><span class="meimg"></span><span><strong class="mename">You</strong><small>View your profile</small></span></a>
+<a href="{r}my-gigs.html#gigs"><span>♥ Saved gigs</span><span class="mycount" hidden></span></a><a href="{r}messages.html"><span>💬 Messages</span><span class="msgcount" hidden></span></a>
+<a href="{r}my-gigs.html#friends"><span>👥 Friends</span></a><a href="{r}my-gigs.html#settings"><span>⚙ Settings</span></a><button type="button" data-signout><span>Sign out</span></button></div></div>
 <button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}<button class="installbtn" type="button" hidden>📲 Get the app</button></nav>
 <form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>{subnav}
 <main>{body}</main>
@@ -1690,15 +1694,15 @@ page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Austra
      extra_head='<script src="/gigsui.js" defer></script>')
 
 # ---------------------------------------------------------------- my gigs (saved on the visitor's device)
-mg = """<div id="profile">
-<section class="phero" id="pHero"><button type="button" class="pcover" id="pCover" hidden>📷 Add a cover photo</button>
+mg = """<div id="profile" class="p2">
+<section class="pban" id="pHero"><button type="button" class="pcover" id="pCover" hidden>📷 Change cover</button></section>
 <input type="file" accept="image/*" id="pFile" hidden>
-<div class="wrap phero-in"><div class="pavwrap"><div class="pav" id="pAv" aria-hidden="true">♥</div><button type="button" class="pcam" id="pCam" hidden aria-label="Change profile photo">📷</button></div>
-<div class="pwho"><h1 id="pName">My gigs</h1><p id="pSub">Your gigs, your artists and your records, all in one place.</p></div>
-<div id="pCta"></div></div><div class="wrap"><div class="pstats" id="pStats"></div></div></section>
+<div class="wrap pid"><div class="pavwrap"><div class="pav" id="pAv" aria-hidden="true">♥</div><button type="button" class="pcam" id="pCam" hidden aria-label="Change profile photo">📷</button></div>
+<div class="pwho"><h1 id="pName">My gigs</h1><p class="phandle" id="pHandle"></p></div><div id="pCta" class="pbtns"></div></div>
+<div class="wrap"><p class="pbio" id="pSub">Your gigs, your artists and your records, all in one place.</p><p class="pstats2" id="pStats"></p></div>
 <nav class="ptabs" aria-label="My gigs sections"><div class="wrap">
-<a href="#overview" data-tab="overview">Overview</a><a href="#gigs" data-tab="gigs">Gigs</a><a href="#artists" data-tab="artists">Artists</a>
-<a href="#records" data-tab="records">Records</a><a href="#wantlist" data-tab="wantlist">Wantlist</a><a href="#friends" data-tab="friends">Friends</a><a href="#settings" data-tab="settings">Settings</a></div></nav>
+<a href="#overview" data-tab="overview">Activity</a><a href="#gigs" data-tab="gigs">Gigs</a><a href="#seen" data-tab="seen">Seen live</a>
+<a href="#records" data-tab="records">Records</a><a href="#artists" data-tab="artists">Artists</a><a href="#friends" data-tab="friends">Friends</a></div></nav>
 <section class="band pbody"><div class="wrap" id="pBody"><p class="note">Loading…</p></div></section>
 <dialog id="recDlg" aria-label="Record details"><form method="dialog" class="sclose"><button aria-label="Close">×</button></form><div id="recBody"></div></dialog>
 </div>
@@ -1713,10 +1717,11 @@ msgp = """<div id="msgs" class="msgs"><div class="wrap msgwrap">
 page("messages.html", "Messages | Live Louder", "Chat with your friends on Live Louder.", msgp, extra_head='<meta name="robots" content="noindex">')
 
 # ---------------------------------------------------------------- shared profiles (/u/<username>, filled in by people.js)
-pub = """<div id="pub">
-<section class="phero" id="uHero"><div class="wrap phero-in"><div class="pav" id="uAv" aria-hidden="true">♥</div>
-<div class="pwho"><h1 id="uName">Loading…</h1><p id="uSub"></p></div><div id="uCta" class="pbtns"></div></div>
-<div class="wrap"><div class="pstats" id="uStats"></div></div></section>
+pub = """<div id="pub" class="p2">
+<section class="pban" id="uHero"></section>
+<div class="wrap pid"><div class="pavwrap"><div class="pav" id="uAv" aria-hidden="true">♥</div></div>
+<div class="pwho"><h1 id="uName">Loading…</h1><p class="phandle" id="uHandle"></p></div><div id="uCta" class="pbtns"></div></div>
+<div class="wrap"><p class="pbio" id="uSub"></p><p class="pstats2" id="uStats"></p></div>
 <nav class="ptabs" aria-label="Profile sections"><div class="wrap" id="uTabs"></div></nav>
 <section class="band pbody"><div class="wrap" id="uBody"><p class="note">Loading…</p></div></section>
 </div>

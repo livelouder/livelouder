@@ -82,13 +82,35 @@
     }
     return out;
   }
+  // Artist photos, when the page has them (My gigs and profiles load data/artists.json into window.LLARTS).
+  const artPic = s => { const a = window.LLARTS && window.LLARTS[s]; return a && a[1] ? String(a[1]).replace('/1000x1000-', '/250x250-') : ''; };
+  function gigCard(g) {
+    if (!g) return '';
+    const pic = artPic(g.s);
+    const face = pic ? `<span class="fgimg" style="background-image:url('${esc(pic)}')"></span>` : (window.LLPOSTER ? LLPOSTER.small(g.a, '', esc(gp(g))).replace(/^<a /, '<span ').replace(/<\/a>$/, '</span>').replace('class="gth', 'class="fgimg gth') : '');
+    return `<a class="fgcard" href="${esc(gp(g))}">${face}<span><strong>${esc(g.a)}</strong><small>${esc(gdate(g.d))} · ${esc(g.v)}${g.c ? ', ' + esc(g.c) : ''}</small></span></a>`;
+  }
+  const linkify = t => esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" rel="noopener nofollow ugc" target="_blank">$1</a>').replace(/\n/g, '<br>');
+  function postBody(p) {
+    const tag = p.gig ? gigCard(p.gig) : p.artist ? `<a class="fgcard" href="${root}artists/${esc(p.artist.slug)}.html">${artPic(p.artist.slug) ? `<span class="fgimg round" style="background-image:url('${esc(artPic(p.artist.slug))}')"></span>` : ''}<span><strong>${esc(p.artist.name)}</strong><small>Artist</small></span></a>` : '';
+    const me = signedIn();
+    return `<p class="pbody">${linkify(p.body)}</p>${tag}${p.hidden ? '<p class="note phid">Hidden while we check a report. Only you can see it.</p>' : ''}
+      <div class="pacts" data-post="${p.id}"><button type="button" class="pact${p.liked ? ' on' : ''}" data-like aria-pressed="${!!p.liked}" aria-label="Like">${p.liked ? '♥' : '♡'} <span>${p.likes || ''}</span></button>
+      <button type="button" class="pact" data-replies aria-expanded="false">💬 <span>${p.replies ? p.replies + ' ' + (p.replies === 1 ? 'reply' : 'replies') : 'Reply'}</span></button>
+      ${me ? `<span class="pmore"><button type="button" class="pact" data-pmenu aria-label="More">⋯</button><span class="pmenu" hidden>${p.mine ? '<button type="button" data-delpost>Delete post</button>' : '<button type="button" data-report="post">Report post</button>'}</span></span>` : ''}</div>
+      <div class="preplies" hidden></div>`;
+  }
   function item(it) {
     const w = it.who, who = `<a class="fwho" href="${purl(w.username)}">${esc(w.name || w.username)}</a>`;
     let text = '', extra = '', act = '';
+    if (it.t === 'post') {
+      const p = it.post || {};
+      return `<li class="fi fpost" data-pid="${p.id}"><a href="${purl(w.username)}" aria-hidden="true" tabindex="-1">${face(w, 'fav sm')}</a><div class="ft"><p>${who} <span class="fwhen">${esc(ago(it.at))}</span></p>${postBody(p)}</div></li>`;
+    }
     if (it.t === 'going') {
       const g = it.gig;
       text = `${who} is going to ${gigLink(g)}`;
-      extra = g ? `<span class="fmeta">${esc(gdate(g.d))} · ${esc(g.v)}, ${esc(g.c)}</span>` : '';
+      extra = g ? gigCard(g) : '';
       act = saveBtn(g);
     } else if (it.t === 'review') {
       text = `${who} rated ${gigLink(it.gig)} ${stars(it.rating)}`;
@@ -111,6 +133,134 @@
   }
   let feedP = null;
   const loadFeed = () => feedP || (feedP = ACC.rpc('friends_feed').then(r => r.data || []));
+
+  // ------------------------------------------------ posts: write one, like, reply, delete, report
+  function composer() {
+    const u = signedIn();
+    if (!u) return '';
+    const st = window.MY ? MY.get() : {gigs: {}, artists: {}}, today = new Date().toISOString().slice(0, 10);
+    const gigs = Object.values(st.gigs || {}).filter(g => g.d >= today).sort((a, b) => a.d.localeCompare(b.d)).slice(0, 30);
+    const arts = Object.entries(st.artists || {}).sort((a, b) => String(a[1]).localeCompare(String(b[1]))).slice(0, 200);
+    const p = ACC.profile() || {}, md = u.user_metadata || {};
+    const meFace = {avatar: p.avatar_url || md.avatar_url, username: p.username || u.email, name: p.display_name || md.full_name || p.username};
+    const opts = (gigs.length ? `<optgroup label="Your gigs">${gigs.map(g => `<option value="g:${esc(g.id)}">${esc(g.a)} · ${esc(gdate(g.d))}</option>`).join('')}</optgroup>` : '')
+      + (arts.length ? `<optgroup label="Artists you follow">${arts.map(([sl, n]) => `<option value="a:${esc(sl)}">${esc(n)}</option>`).join('')}</optgroup>` : '');
+    const priv = !(p.share && p.username);
+    return `<form class="pcomp" data-postform>${face(meFace, 'fav sm')}<div class="pcin"><textarea name="body" maxlength="500" rows="2" placeholder="What's on your mind? A gig you're hyped for, a record you just got…" aria-label="Write a post"></textarea>
+      <div class="pcrow">${opts ? `<select name="tag" aria-label="Tag a gig or artist"><option value="">🎟 Tag a gig or artist</option>${opts}</select>` : ''}<span class="pccount">0/500</span><button class="btn sm">Post</button></div>
+      <p class="note pcmsg">${priv ? `Your profile is private, so only you will see your posts. <a href="${root}my-gigs.html#settings">Share your profile</a> so friends can see them.` : 'Friends who follow you will see this in their feed.'}</p></div></form>`;
+  }
+  const postEl = el => el.closest('[data-post]');
+  const pidOf = el => +postEl(el).dataset.post;
+  function setCounts(box, p) {
+    if (!p) return;
+    const lb = box.querySelector('[data-like]');
+    lb.classList.toggle('on', !!p.liked); lb.setAttribute('aria-pressed', !!p.liked); lb.innerHTML = `${p.liked ? '♥' : '♡'} <span>${p.likes || ''}</span>`;
+  }
+  function replyHtml(r) {
+    return `<li data-rid="${r.id}">${face(r.who || {}, 'fav xs')}<div><p><a class="fwho" href="${purl((r.who || {}).username)}">${esc((r.who || {}).name || (r.who || {}).username)}</a> ${linkify(r.body)} <span class="fwhen">${esc(ago(r.at))}</span></p>
+      ${r.hidden ? '<p class="note phid">Hidden while we check a report.</p>' : ''}${signedIn() ? `<span class="ract">${r.can_delete ? '<button type="button" data-delreply>Delete</button>' : ''}${!r.mine ? '<button type="button" data-report="reply">Report</button>' : ''}</span>` : ''}</div></li>`;
+  }
+  async function openReplies(acts) {
+    const box = acts.nextElementSibling, pid = +acts.dataset.post;
+    const b = acts.querySelector('[data-replies]');
+    if (!box.hidden) { box.hidden = true; b.setAttribute('aria-expanded', 'false'); return; }
+    box.hidden = false; b.setAttribute('aria-expanded', 'true');
+    box.innerHTML = '<p class="note">Loading…</p>';
+    const r = await ACC.rpc('post_replies_list', {pid});
+    const list = r.data || [];
+    box.innerHTML = `<ul class="rlist">${list.map(replyHtml).join('')}</ul>` + (signedIn()
+      ? `<form class="rform" data-replyform><input name="body" maxlength="280" placeholder="Write a reply…" aria-label="Write a reply" autocomplete="off"><button class="btn sm">Reply</button></form>`
+      : `<p class="note"><a href="${root}my-gigs.html">Sign in</a> to reply.</p>`);
+  }
+  const REASONS = [['spam', 'Spam or scam'], ['nasty', 'Nasty or bullying'], ['hate', 'Hateful or offensive'], ['sexual', 'Sexual or creepy'], ['other', 'Something else']];
+  document.addEventListener('click', async ev => {
+    const t = ev.target;
+    if (!t.closest) return;
+    if (!t.closest('.pmore')) document.querySelectorAll('.pmenu').forEach(m => { m.hidden = true; });
+    const lk = t.closest('[data-like]');
+    if (lk) {
+      if (!signedIn()) { ACC.open(); return; }
+      const acts = postEl(lk), on = !lk.classList.contains('on'), n = +(lk.querySelector('span').textContent || 0) + (on ? 1 : -1);
+      setCounts(acts, {liked: on, likes: Math.max(0, n)});
+      const r = await ACC.rpc('like_post', {pid: +acts.dataset.post, on_: on});
+      if (r.data) setCounts(acts, r.data);
+      return;
+    }
+    const rp = t.closest('[data-replies]');
+    if (rp) { openReplies(postEl(rp)); return; }
+    const pm = t.closest('[data-pmenu]');
+    if (pm) { const m = pm.nextElementSibling; m.hidden = !m.hidden; return; }
+    const dp = t.closest('[data-delpost]');
+    if (dp) {
+      if (!confirm('Delete this post? It can\'t be undone.')) return;
+      const id = pidOf(dp);
+      await ACC.rpc('delete_post', {pid: id});
+      document.querySelectorAll(`[data-pid="${id}"]`).forEach(li => li.remove());
+      return;
+    }
+    const dr = t.closest('[data-delreply]');
+    if (dr) {
+      if (!confirm('Delete this reply?')) return;
+      const li = dr.closest('[data-rid]');
+      await ACC.rpc('delete_reply', {rid: +li.dataset.rid}); li.remove();
+      return;
+    }
+    const rep = t.closest('[data-report]');
+    if (rep) {
+      const kind = rep.dataset.report, holder = kind === 'reply' ? rep.closest('[data-rid]') : postEl(rep);
+      const id = kind === 'reply' ? +holder.dataset.rid : +holder.dataset.post;
+      const spot = kind === 'reply' ? holder.querySelector('div') : holder;
+      if (spot.querySelector('.rpform')) return;
+      spot.insertAdjacentHTML('beforeend', `<form class="rpform" data-reportform data-kind="${kind}" data-id="${id}"><b>Why are you reporting this?</b>${REASONS.map(([k, l], i) => `<label><input type="radio" name="reason" value="${k}"${i ? '' : ' checked'}> ${l}</label>`).join('')}<span><button class="btn sm">Report</button> <button type="button" class="linkish small" data-cancelreport>Cancel</button></span></form>`);
+      return;
+    }
+    const cr = t.closest('[data-cancelreport]');
+    if (cr) { cr.closest('form').remove(); return; }
+  });
+  document.addEventListener('input', ev => {
+    const ta = ev.target.closest && ev.target.closest('[data-postform] textarea');
+    if (ta) { const c = ta.form.querySelector('.pccount'); if (c) c.textContent = `${ta.value.length}/500`; ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 260) + 'px'; }
+  });
+  document.addEventListener('submit', async ev => {
+    const f = ev.target;
+    if (f.matches('[data-postform]')) {
+      ev.preventDefault();
+      const body = f.body.value.trim(), msg = f.querySelector('.pcmsg'), btn = f.querySelector('button');
+      if (!body) { f.body.focus(); return; }
+      let gig = null, artist = null;
+      const tag = f.tag ? f.tag.value : '', st = window.MY ? MY.get() : {gigs: {}, artists: {}};
+      if (tag.startsWith('g:')) { const g = st.gigs[tag.slice(2)]; if (g) gig = {id: g.id, d: g.d, tm: g.tm, a: g.a, s: g.s, v: g.v, c: g.c, u: g.u, p: g.p}; }
+      if (tag.startsWith('a:')) artist = {slug: tag.slice(2), name: st.artists[tag.slice(2)] || tag.slice(2)};
+      btn.disabled = true; btn.textContent = 'Posting…';
+      const r = await ACC.rpc('create_post', {body, gig, artist});
+      btn.disabled = false; btn.textContent = 'Post';
+      if (r.error) { msg.textContent = r.error.replace(/^.*?: /, ''); msg.classList.add('err'); return; }
+      f.reset(); f.querySelector('.pccount').textContent = '0/500'; msg.classList.remove('err');
+      feedP = null;
+      document.dispatchEvent(new CustomEvent('llpost', {detail: r.data}));
+      return;
+    }
+    if (f.matches('[data-replyform]')) {
+      ev.preventDefault();
+      const body = f.body.value.trim(); if (!body) return;
+      const acts = f.parentNode.previousElementSibling, pid = +acts.dataset.post;
+      f.querySelector('button').disabled = true;
+      const r = await ACC.rpc('reply_post', {pid, body});
+      f.querySelector('button').disabled = false;
+      if (r.error) { alert(r.error.replace(/^.*?: /, '')); return; }
+      f.body.value = '';
+      f.parentNode.querySelector('.rlist').insertAdjacentHTML('beforeend', replyHtml(r.data));
+      const sp = acts.querySelector('[data-replies] span'), n = f.parentNode.querySelectorAll('.rlist li').length;
+      sp.textContent = `${n} ${n === 1 ? 'reply' : 'replies'}`;
+      return;
+    }
+    if (f.matches('[data-reportform]')) {
+      ev.preventDefault();
+      const r = await ACC.reportPost(f.dataset.kind, +f.dataset.id, (f.querySelector('input[name=reason]:checked') || {}).value || 'other');
+      f.outerHTML = `<p class="note rpdone">${r.error ? esc(r.error) : 'Thanks for letting us know. It\'s hidden for now while we take a look.'}</p>`;
+    }
+  });
 
   // Homepage: "From your friends", only for signed-in people who follow someone.
   async function homeFeed() {
@@ -154,7 +304,7 @@
     if (!window.ACC || !was) { const b = document.getElementById('ffeed'); if (b) b.hidden = true; return; }
     ACC.session().then(u => { if (!u) { const b = document.getElementById('ffeed'); if (b) b.hidden = true; return; } loadGoing(); watch(); homeFeed(); loadUnread(); });
   }
-  window.FRIENDS = {renderFeed, loadFeed: () => { feedP = null; return loadFeed(); }, annotate, face};
+  window.FRIENDS = {renderFeed, loadFeed: () => { feedP = null; return loadFeed(); }, annotate, face, composer, item};
   document.addEventListener('acc', () => { if (signedIn() && !going) { loadGoing(); watch(); homeFeed(); loadUnread(); } });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
