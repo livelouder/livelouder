@@ -189,11 +189,42 @@ ranked = [a["name"] for a in artists.values() if a["tour"]] + \
          [a["name"] for a in sorted(artists.values(), key=lambda a: -len(a["shows"])) if not a["tour"]]
 dz = feed.deezer_lookup(ranked, ROOT, limit=None)
 REAL_PIC = re.compile(r"/images/artist/[0-9a-f]{20,}/")  # Deezer's blank placeholder has no picture id
+# Some Deezer picture ids just show Deezer's grey silhouette. Known ones are listed in data/deezer_blank.json;
+# new ones are found by downloading each new small photo once and comparing it with the silhouette
+# (results kept between builds in data/deezer_checked.json). Those artists get a genre poster instead.
+DZ_BLANK_SHA = "2efe9d6a7da99aee11e6a5373b8c07a1b4277adbb522465a5a4a846662b0cd68"
+_dzb_path, _dzc_path = ROOT / "data/deezer_blank.json", ROOT / "data/deezer_checked.json"
+_dzb = set(json.loads(_dzb_path.read_text()).get("blank", [])) if _dzb_path.exists() else set()
+_dzc = json.loads(_dzc_path.read_text()) if _dzc_path.exists() else {}
+def _dz_id(u):
+    m = re.search(r"/images/artist/([0-9a-f]{20,})/", u or "")
+    return m.group(1) if m else ""
+def _dz_check(ids, limit=400):
+    import hashlib, urllib.request
+    from concurrent.futures import ThreadPoolExecutor
+    todo = [i for i in ids if i not in _dzc and i not in _dzb][:limit]
+    if not todo or os.environ.get("NO_GEOCODE"):
+        return
+    def one(i):
+        try:
+            b = urllib.request.urlopen(f"https://cdn-images.dzcdn.net/images/artist/{i}/120x120-000000-80-0-0.jpg", timeout=10).read()
+            return i, hashlib.sha256(b).hexdigest() == DZ_BLANK_SHA
+        except Exception:
+            return i, None
+    with ThreadPoolExecutor(12) as ex:
+        res = list(ex.map(one, todo))
+    for i, blank in res:
+        if blank is not None:
+            _dzc[i] = 1 if blank else 0
+    _dzc_path.write_text(json.dumps(_dzc, separators=(",", ":")))
+    print(f"deezer photos: checked {sum(1 for _, b in res if b is not None)} new, {sum(1 for _, b in res if b)} blank")
+_dz_check([_dz_id((dz.get(a["name"]) or {}).get("picture", "")) for a in artists.values() if dz.get(a["name"])])
+_dzb |= {i for i, b in _dzc.items() if b}
 for a in artists.values():
     hit = dz.get(a["name"])
     a["deezer"] = hit["id"] if hit else None
     pic_ = (hit or {}).get("picture", "")
-    a["photo"] = a["image"] or (pic_ if REAL_PIC.search(pic_ or "") else "")
+    a["photo"] = a["image"] or (pic_ if REAL_PIC.search(pic_ or "") and _dz_id(pic_) not in _dzb else "")
 
 # setlist.fm and Discogs extras (only when their keys are set in Netlify)
 extra_names = ranked[:80]

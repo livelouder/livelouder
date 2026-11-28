@@ -4,7 +4,7 @@
 // into data/gig_submissions.json for build.py to check and publish.
 const fs = require("fs");
 const crypto = require("crypto");
-const FILES = ["data/deezer.json", "data/setlists.json", "data/discogs.json", "data/discogs_releases.json", "data/ticketmaster.json", "data/geo.json"];
+const FILES = ["data/deezer.json", "data/deezer_checked.json", "data/setlists.json", "data/discogs.json", "data/discogs_releases.json", "data/ticketmaster.json", "data/geo.json"];
 
 async function pullSubmissions(constants) {
   try {
