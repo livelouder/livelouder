@@ -629,3 +629,253 @@ revoke all on function public.my_blocks() from public, anon;
 revoke all on function public.follow_user(text) from public, anon;
 grant execute on function public.send_message(text, text), public.my_conversations(), public.conversation(text, bigint), public.unread_messages(),
   public.delete_conversation(text), public.block_user(text), public.unblock_user(text), public.my_blocks(), public.follow_user(text) to authenticated;
+
+-- ============================================================================================
+-- Posts, likes and replies, a short bio, and profile activity (added 28 Nov 2026).
+-- People can post a short update ("Can't wait for the gig tonight"), optionally tagged with a gig or an artist.
+-- Who sees a post: the person who wrote it, and (if their profile is shared) anyone who can see their profile;
+-- people who follow them get it in their friends feed. Blocks work both ways. Everything goes through the
+-- functions below, which check sign-in, bans, limits and a small blocked-words list.
+-- Reporting a post or reply hides it straight away until Mick reviews it (netlify/functions/report-post.mjs).
+alter table public.profiles add column if not exists bio text;
+alter table public.profiles drop constraint if exists bio_ok;
+alter table public.profiles add constraint bio_ok check (bio is null or char_length(bio) <= 120);
+
+create table if not exists public.posts (
+  id bigint generated always as identity primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  body text not null check (char_length(btrim(body)) between 1 and 500),
+  gig jsonb,                       -- snapshot of a tagged gig: id, d, tm, a, s, v, c, u, p
+  artist jsonb,                    -- a tagged artist: slug, name
+  status text not null default 'ok' check (status in ('ok', 'approved', 'hidden', 'removed')),
+  created_at timestamptz not null default now());
+create index if not exists posts_user_time on public.posts (user_id, created_at desc);
+create table if not exists public.post_likes (
+  post_id bigint not null references public.posts(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (post_id, user_id));
+create table if not exists public.post_replies (
+  id bigint generated always as identity primary key,
+  post_id bigint not null references public.posts(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  body text not null check (char_length(btrim(body)) between 1 and 280),
+  status text not null default 'ok' check (status in ('ok', 'approved', 'hidden', 'removed')),
+  created_at timestamptz not null default now());
+create index if not exists post_replies_post on public.post_replies (post_id, id);
+create index if not exists post_replies_user_time on public.post_replies (user_id, created_at desc);
+create table if not exists public.post_reports (
+  id bigint generated always as identity primary key,
+  reporter uuid not null references auth.users(id) on delete cascade,
+  kind text not null check (kind in ('post', 'reply')),
+  target bigint not null,
+  owner uuid references auth.users(id) on delete cascade,
+  body text, reason text,
+  created_at timestamptz not null default now());
+create table if not exists public.post_bans (user_id uuid primary key references auth.users(id) on delete cascade, created_at timestamptz not null default now());
+-- Words that stop a post or reply going up (whole words, any case). Add more rows in Supabase any time.
+create table if not exists public.blocked_words (word text primary key);
+-- Server-only tables: row level security on and no policies, so browsers can only use them through the functions.
+alter table public.posts enable row level security;
+alter table public.post_likes enable row level security;
+alter table public.post_replies enable row level security;
+alter table public.post_reports enable row level security;
+alter table public.post_bans enable row level security;
+alter table public.blocked_words enable row level security;
+revoke all on public.posts, public.post_likes, public.post_replies, public.post_reports, public.post_bans, public.blocked_words from anon, authenticated;
+grant all on public.posts, public.post_likes, public.post_replies, public.post_reports, public.post_bans, public.blocked_words to service_role;
+
+create or replace function public.has_blocked_word(t text) returns boolean language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.blocked_words w where lower(t) ~ ('(^|[^a-z])' || w.word || '($|[^a-z])'))
+$$;
+revoke all on function public.has_blocked_word(text) from public, anon, authenticated;
+
+-- Can this viewer see this person's posts?
+create or replace function public.can_see_posts(viewer uuid, owner uuid) returns boolean language sql stable security definer set search_path = '' as $$
+  select viewer is not distinct from owner or (exists (select 1 from public.profiles p where p.id = owner and p.share and p.username is not null)
+    and (viewer is null or not public.is_blocked(viewer, owner)))
+$$;
+revoke all on function public.can_see_posts(uuid, uuid) from public, anon, authenticated;
+
+create or replace function public.who_card(pid uuid) returns jsonb language sql stable security definer set search_path = '' as $$
+  select jsonb_build_object('username', p.username,
+    'name', coalesce(nullif(p.display_name, ''), u.raw_user_meta_data->>'full_name', p.username),
+    'avatar', case when p.avatar_status in ('ok', 'approved') then coalesce(p.avatar_url, u.raw_user_meta_data->>'avatar_url') end)
+  from public.profiles p join auth.users u on u.id = p.id where p.id = pid
+$$;
+revoke all on function public.who_card(uuid) from public, anon, authenticated;
+
+-- One post as the browser sees it.
+create or replace function public.post_json(pid bigint) returns jsonb language sql stable security definer set search_path = '' as $$
+  select jsonb_build_object('id', x.id, 'body', x.body, 'gig', x.gig, 'artist', x.artist, 'at', x.created_at,
+    'mine', x.user_id = auth.uid(), 'hidden', x.status = 'hidden',
+    'likes', (select count(*) from public.post_likes l where l.post_id = x.id),
+    'liked', exists (select 1 from public.post_likes l where l.post_id = x.id and l.user_id = auth.uid()),
+    'replies', (select count(*) from public.post_replies r where r.post_id = x.id and (r.status in ('ok', 'approved') or r.user_id = auth.uid())))
+  from public.posts x where x.id = pid
+$$;
+revoke all on function public.post_json(bigint) from public, anon, authenticated;
+
+-- A post the viewer is allowed to see (null if not).
+create or replace function public.visible_post(pid bigint) returns public.posts language sql stable security definer set search_path = '' as $$
+  select x.* from public.posts x where x.id = pid and public.can_see_posts(auth.uid(), x.user_id)
+    and (x.status in ('ok', 'approved') or (x.status = 'hidden' and x.user_id = auth.uid()))
+$$;
+revoke all on function public.visible_post(bigint) from public, anon, authenticated;
+
+create or replace function public.create_post(body text, gig jsonb default null, artist jsonb default null) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); b text := btrim(coalesce(body, '')); g jsonb; a jsonb; nid bigint;
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  if exists (select 1 from public.post_bans where user_id = me) then raise exception 'Posting is switched off for your account'; end if;
+  if char_length(b) < 1 or char_length(b) > 500 then raise exception 'Posts can be up to 500 characters'; end if;
+  if public.has_blocked_word(b) then raise exception 'Your post has a word we don''t allow. Please change it and try again.'; end if;
+  if (select count(*) from public.posts where user_id = me and created_at > now() - interval '1 hour') >= 10 then raise exception 'That''s a lot of posts. Try again in a little while.'; end if;
+  if gig is not null and gig ? 'id' then
+    g := jsonb_strip_nulls(jsonb_build_object('id', left(gig->>'id', 120), 'd', left(gig->>'d', 10), 'tm', left(gig->>'tm', 10), 'a', left(gig->>'a', 120),
+      's', left(gig->>'s', 120), 'v', left(gig->>'v', 120), 'c', left(gig->>'c', 60), 'u', left(gig->>'u', 400), 'p', left(gig->>'p', 200)));
+  end if;
+  if artist is not null and artist ? 'slug' then a := jsonb_build_object('slug', left(artist->>'slug', 120), 'name', left(artist->>'name', 120)); end if;
+  insert into public.posts (user_id, body, gig, artist) values (me, b, g, a) returning id into nid;
+  return public.post_json(nid);
+end $$;
+
+create or replace function public.delete_post(pid bigint) returns void language sql security definer set search_path = '' as $$
+  delete from public.posts where id = pid and user_id = auth.uid()
+$$;
+
+create or replace function public.like_post(pid bigint, on_ boolean default true) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid();
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  if (public.visible_post(pid)).id is null then return null; end if;
+  if on_ then insert into public.post_likes (post_id, user_id) values (pid, me) on conflict do nothing;
+  else delete from public.post_likes where post_id = pid and user_id = me; end if;
+  return public.post_json(pid);
+end $$;
+
+create or replace function public.reply_json(rid bigint) returns jsonb language sql stable security definer set search_path = '' as $$
+  select jsonb_build_object('id', r.id, 'body', r.body, 'at', r.created_at, 'who', public.who_card(r.user_id),
+    'mine', r.user_id = auth.uid(), 'hidden', r.status = 'hidden',
+    'can_delete', r.user_id = auth.uid() or (select x.user_id from public.posts x where x.id = r.post_id) = auth.uid())
+  from public.post_replies r where r.id = rid
+$$;
+revoke all on function public.reply_json(bigint) from public, anon, authenticated;
+
+create or replace function public.reply_post(pid bigint, body text) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); b text := btrim(coalesce(body, '')); p public.posts; nid bigint;
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  if exists (select 1 from public.post_bans where user_id = me) then raise exception 'Posting is switched off for your account'; end if;
+  p := public.visible_post(pid);
+  if p.id is null then raise exception 'That post isn''t available'; end if;
+  if char_length(b) < 1 or char_length(b) > 280 then raise exception 'Replies can be up to 280 characters'; end if;
+  if public.has_blocked_word(b) then raise exception 'Your reply has a word we don''t allow. Please change it and try again.'; end if;
+  if (select count(*) from public.post_replies where user_id = me and created_at > now() - interval '1 hour') >= 30 then raise exception 'That''s a lot of replies. Try again in a little while.'; end if;
+  insert into public.post_replies (post_id, user_id, body) values (pid, me, b) returning id into nid;
+  return public.reply_json(nid);
+end $$;
+
+-- Replies on a post: anyone who can see the post sees its replies (except ones hidden after a report, or from people blocked either way).
+create or replace function public.post_replies_list(pid bigint) returns jsonb language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_agg(public.reply_json(r.id) order by r.id), '[]'::jsonb) from public.post_replies r
+  where r.post_id = pid and (public.visible_post(pid)).id is not null
+    and (r.status in ('ok', 'approved') or (r.status = 'hidden' and r.user_id = auth.uid()))
+    and (auth.uid() is null or not public.is_blocked(auth.uid(), r.user_id))
+$$;
+
+-- Delete your own reply, or any reply on your own post.
+create or replace function public.delete_reply(rid bigint) returns void language sql security definer set search_path = '' as $$
+  delete from public.post_replies r where r.id = rid
+    and (r.user_id = auth.uid() or exists (select 1 from public.posts x where x.id = r.post_id and x.user_id = auth.uid()))
+$$;
+
+-- Bio line on your profile.
+create or replace function public.set_bio(bio text) returns void language plpgsql security definer set search_path = '' as $$
+declare b text := nullif(btrim(coalesce(bio, '')), '');
+begin
+  if auth.uid() is null then raise exception 'Sign in first'; end if;
+  if char_length(b) > 120 then raise exception 'Keep it to 120 characters'; end if;
+  if public.has_blocked_word(coalesce(b, '')) then raise exception 'That has a word we don''t allow.'; end if;
+  update public.profiles set bio = b, updated_at = now() where id = auth.uid();
+end $$;
+
+-- Everything one person has been up to, newest first: posts, going, ratings, records and photos.
+-- Their own page shows it all; other people see it only if the profile is shared (and not blocked).
+create or replace function public.profile_activity(uname text, before timestamptz default null) returns jsonb language plpgsql stable security definer set search_path = '' as $$
+declare pid uuid; me uuid := auth.uid(); cut timestamptz := coalesce(before, now() + interval '1 minute'); who jsonb;
+begin
+  select id into pid from public.profiles where lower(username) = lower(uname);
+  if pid is null and me is not null and (uname is null or uname = '') then pid := me; end if;
+  if pid is null or not public.can_see_posts(me, pid) then return '[]'::jsonb; end if;
+  who := public.who_card(pid);
+  return coalesce((select jsonb_agg(jsonb_build_object('who', who, 't', e.t, 'at', e.at, 'gig', e.gig, 'rec', e.rec, 'rating', e.rating, 'review', e.review, 'photo', e.photo, 'post', e.post) order by e.at desc)
+  from (select * from (
+    select 'post' t, x.created_at at, null::jsonb gig, null::jsonb rec, null::smallint rating, null::text review, null::text photo, public.post_json(x.id) post
+      from public.posts x where x.user_id = pid and x.created_at < cut and (x.status in ('ok', 'approved') or (x.status = 'hidden' and pid = me))
+    union all
+    select 'going', s.going_at, s.gig || jsonb_build_object('id', s.gig_id), null, null, null, null, null
+      from public.saved_gigs s where s.user_id = pid and s.going and s.going_at is not null and s.going_at < cut
+    union all
+    select 'review', s.reviewed_at, s.gig || jsonb_build_object('id', s.gig_id), null, s.rating, s.review, null, null
+      from public.saved_gigs s where s.user_id = pid and s.rating is not null and s.reviewed_at < cut
+    union all
+    select 'record', r.created_at, null, r.rec || jsonb_build_object('rid', r.rid), null, null, null, null
+      from public.user_records r where r.user_id = pid and r.list = 'collection' and r.created_at < cut
+    union all
+    select 'photo', g.created_at, (select s.gig || jsonb_build_object('id', s.gig_id) from public.saved_gigs s where s.user_id = g.user_id and s.gig_id = g.gig_id), null, null, null, g.url, null
+      from public.gig_photos g where g.user_id = pid and g.created_at < cut and (g.status in ('ok', 'approved') or pid = me)
+  ) u order by at desc limit 300) e), '[]'::jsonb);
+end $$;
+
+-- The friends feed now includes posts (from the people you follow, and your own).
+create or replace function public.friends_feed() returns jsonb language sql stable security definer set search_path = '' as $$
+  with f as (select public.my_followees() id),
+  who as (select x.id, public.who_card(x.id) card from (select id from f union select auth.uid()) x),
+  ev as (
+    select x.user_id, 'post' t, x.created_at at, null::jsonb gig, null::jsonb rec, null::smallint rating, null::text review, null::text photo, public.post_json(x.id) post
+      from public.posts x where x.created_at > now() - interval '60 days'
+        and ((x.user_id in (select id from f) and x.status in ('ok', 'approved') and not public.is_blocked(auth.uid(), x.user_id))
+          or (x.user_id = auth.uid() and x.status <> 'removed'))
+    union all
+    select s.user_id, 'going', s.going_at, s.gig || jsonb_build_object('id', s.gig_id), null, null, null, null, null
+      from public.saved_gigs s where s.user_id in (select id from f) and s.going and s.going_at > now() - interval '60 days'
+    union all
+    select s.user_id, 'review', s.reviewed_at, s.gig || jsonb_build_object('id', s.gig_id), null, s.rating, s.review, null, null
+      from public.saved_gigs s where s.user_id in (select id from f) and s.rating is not null and s.reviewed_at > now() - interval '60 days'
+    union all
+    select r.user_id, 'record', r.created_at, null, r.rec || jsonb_build_object('rid', r.rid), null, null, null, null
+      from public.user_records r where r.user_id in (select id from f) and r.list = 'collection' and r.created_at > now() - interval '60 days'
+    union all
+    select g.user_id, 'photo', g.created_at, (select s.gig || jsonb_build_object('id', s.gig_id) from public.saved_gigs s where s.user_id = g.user_id and s.gig_id = g.gig_id), null, null, null, g.url, null
+      from public.gig_photos g where g.user_id in (select id from f) and g.status in ('ok', 'approved') and g.created_at > now() - interval '60 days')
+  select coalesce(jsonb_agg(jsonb_build_object('who', w.card, 't', e.t, 'at', e.at, 'gig', e.gig, 'rec', e.rec, 'rating', e.rating, 'review', e.review, 'photo', e.photo, 'post', e.post) order by e.at desc), '[]'::jsonb)
+  from (select * from ev order by at desc limit 400) e join who w on w.id = e.user_id
+$$;
+
+-- Shared profiles now include the bio and a few counts for the stats line.
+create or replace function public.profile_extras(pid uuid) returns jsonb language sql stable security definer set search_path = '' as $$
+  select jsonb_build_object('bio', p.bio, 'city', p.city,
+    'n_seen', (select count(*) from public.saved_gigs s where s.user_id = pid and s.going and (s.gig->>'d') < to_char(now() at time zone 'Australia/Sydney', 'YYYY-MM-DD')),
+    'n_artists', (select count(*) from public.followed_artists a where a.user_id = pid))
+  from public.profiles p where p.id = pid
+$$;
+revoke all on function public.profile_extras(uuid) from public, anon, authenticated;
+create or replace function public.public_profile_v2(uname text) returns jsonb language plpgsql stable security definer set search_path = '' as $$
+declare r jsonb := public.public_profile(uname); pid uuid;
+begin
+  if r is null or (r ? 'private') then return r; end if;
+  select id into pid from public.profiles where lower(username) = lower(uname);
+  return r || public.profile_extras(pid);
+end $$;
+
+revoke all on function public.create_post(text, jsonb, jsonb), public.delete_post(bigint), public.like_post(bigint, boolean), public.reply_post(bigint, text),
+  public.delete_reply(bigint), public.set_bio(text), public.friends_feed() from public, anon;
+revoke all on function public.post_replies_list(bigint), public.profile_activity(text, timestamptz), public.public_profile_v2(text) from public;
+grant execute on function public.create_post(text, jsonb, jsonb), public.delete_post(bigint), public.like_post(bigint, boolean), public.reply_post(bigint, text),
+  public.delete_reply(bigint), public.set_bio(text), public.friends_feed() to authenticated;
+grant execute on function public.post_replies_list(bigint), public.profile_activity(text, timestamptz), public.public_profile_v2(text) to anon, authenticated;
+
+-- A starter list of hateful slurs that can't be posted (everyday swearing is fine at a gig site). Add more any time.
+insert into public.blocked_words (word) values ('nigger'), ('nigga'), ('faggot'), ('fag'), ('coon'), ('chink'), ('gook'), ('spic'), ('kike'),
+  ('wetback'), ('tranny'), ('retard'), ('abo'), ('boong'), ('sandnigger'), ('raghead'), ('towelhead'), ('paki') on conflict do nothing;
