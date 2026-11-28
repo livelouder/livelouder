@@ -165,6 +165,113 @@ document.addEventListener('DOMContentLoaded', function () {
     MY.paint();
   }
 
+  // ------------------------------------------------ Heathen Records stock (data/heathen.json, refreshed every build)
+  let HS = null, HSi = {};
+  const hkey = (a, t) => norm(a) + '|' + norm(String(t).replace(/\s*\([^)]*\)\s*$/, ''));
+  function loadStock() {
+    if (HS) return; HS = [];
+    fetch(root + 'data/heathen.json').then(r => r.ok ? r.json() : []).catch(() => []).then(j => { HS = j || []; HS.forEach(x => { HSi[hkey(x[0], x[1])] = x; }); if (HS.length) render(); });
+  }
+  const stockFor = r => r && HSi[hkey(String(r.a).split(' & ')[0], r.t)];
+  const shopUrl = (x, camp) => `https://heathenrecords.com.au/products/${encodeURIComponent(x[2])}?utm_source=livelouder&utm_medium=referral&utm_campaign=${camp || 'wantlist'}`;
+
+  // ------------------------------------------------ now spinning: plays (from your "Now spinning" posts)
+  let plays = null;
+  function loadPlays(force) { if (!me() || (plays && !force)) return Promise.resolve(); return ACC.rpc('my_plays').then(r => { plays = r.data || {}; }); }
+  const ago2 = t => { const d = Math.round((Date.now() - new Date(t)) / 86400000); return d <= 0 ? 'today' : d === 1 ? 'yesterday' : d < 7 ? d + ' days ago' : new Date(t).toLocaleDateString('en-AU', {day: 'numeric', month: 'short'}); };
+
+  // ------------------------------------------------ scan a barcode (phone camera), then pick the pressing
+  let scan = null;
+  async function openScanner() {
+    let d = document.getElementById('scanDlg');
+    if (!d) { d = document.createElement('dialog'); d.id = 'scanDlg'; d.className = 'scandlg'; box.appendChild(d); d.addEventListener('close', stopScan); }
+    scan = {stream: null, done: false, timer: 0, reader: null};
+    d.innerHTML = `<form method="dialog" class="sclose"><button aria-label="Close">×</button></form>
+      <div class="scanview"><video id="scanVid" playsinline muted></video><div class="scanframe"><i></i></div><p class="scanhint">Point your camera at the barcode on the back of the sleeve</p></div>
+      <form class="scanman" data-scanman><input name="bc" inputmode="numeric" placeholder="Or type the barcode numbers" aria-label="Barcode number" autocomplete="off"><button class="btn sm">Look up</button></form>
+      <div id="scanRes"></div>${discogsNote('')}`;
+    d.showModal ? d.showModal() : d.setAttribute('open', '');
+    const vid = document.getElementById('scanVid');
+    try {
+      scan.stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment', width: {ideal: 1280}}, audio: false});
+      vid.srcObject = scan.stream; await vid.play();
+    } catch (e) { d.querySelector('.scanview').innerHTML = '<p class="note scanno">We couldn\'t open your camera. Check the browser has permission, or type the barcode numbers below.</p>'; return; }
+    if ('BarcodeDetector' in window) {
+      const det = new BarcodeDetector({formats: ['ean_13', 'upc_a', 'ean_8', 'upc_e']});
+      const tick = async () => { if (!scan || scan.done) return; try { const c = await det.detect(vid); if (c.length) return found(c[0].rawValue); } catch (e) {} scan.timer = setTimeout(tick, 250); };
+      tick();
+    } else {
+      // iPhone and some other browsers: a small barcode reader, loaded only when someone scans.
+      try {
+        if (!window.ZXing) await new Promise((ok, no) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js'; sc.onload = ok; sc.onerror = no; document.head.appendChild(sc); });
+        const hints = new Map(); hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.UPC_A, ZXing.BarcodeFormat.EAN_8, ZXing.BarcodeFormat.UPC_E]);
+        scan.reader = new ZXing.BrowserMultiFormatReader(hints);
+        scan.reader.decodeFromVideoElementContinuously(vid, res => { if (res && scan && !scan.done) found(res.getText()); });
+      } catch (e) { const h = d.querySelector('.scanhint'); if (h) h.textContent = 'Scanning isn\'t available in this browser. Type the barcode numbers below instead.'; }
+    }
+  }
+  function stopScan() {
+    if (!scan) return; scan.done = true; clearTimeout(scan.timer);
+    try { if (scan.reader) scan.reader.reset(); } catch (e) {}
+    if (scan.stream) scan.stream.getTracks().forEach(t => t.stop());
+    scan = null;
+  }
+  async function found(code) {
+    if (scan) { scan.done = true; if (navigator.vibrate) navigator.vibrate(60); }
+    const res = document.getElementById('scanRes'); if (!res) return;
+    res.innerHTML = `<p class="note">Looking up ${esc(code)} on Discogs…</p>`;
+    let j = {};
+    try { j = await (await fetch('/.netlify/functions/discogs-user?barcode=' + encodeURIComponent(code))).json(); } catch (e) { j = {error: "Couldn't reach Discogs. Try again."}; }
+    if (j.error || !(j.results || []).length) { res.innerHTML = `<p class="note">${j.error ? esc(j.error) : `Nothing on Discogs with barcode ${esc(code)}. Try searching by name instead.`}</p><button type="button" class="vbtn sm" data-rescan>Scan again</button>`; return; }
+    const list = j.results.slice(0, 8), st = MY.get();
+    res.innerHTML = `<p class="scanok">✓ Found ${list.length === 1 ? 'it' : list.length + ' pressings with that barcode'}</p><ul class="vlist">${list.map(x => {
+      const rec = {rid: x.rid, a: x.a, t: x.t, y: x.y, img: x.img, g: x.g, f: x.f, l: x.l, c: x.c, cat: x.cat}, j2 = esc(JSON.stringify(rec)), tr = x.a.split(' & ').map(tour).find(Boolean);
+      return `<li><img src="${esc(x.img)}" alt=""><div class="vi"><b>${esc(x.t)}</b><small>${esc(x.a)} · ${esc([x.c, x.l, x.cat, x.y || ''].filter(Boolean).join(' · '))}</small>${rareBadges(x.have, x.want, x.y)}<small class="hw">${n0(x.have)} have · ${n0(x.want)} want</small>${tr ? `<small class="mine">🎟 ${esc(tr.name)} ${tr.shows === 1 ? 'has a show' : 'are touring'}: next in ${esc(tr.city)}</small>` : ''}</div>
+        <div class="vbt"><button type="button" class="addbtn" data-addrec="${j2}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${j2}" data-list="wants">+ Wantlist</button></div></li>`; }).join('')}</ul><button type="button" class="vbtn sm" data-rescan style="margin:10px 0 0">Scan another</button>`;
+    MY.paint();
+  }
+
+  // ------------------------------------------------ share my crate: a picture sized for Instagram stories
+  async function shareCrate() {
+    const col = recs('records'); if (!col.length) return;
+    const W = 1080, H = 1920, c = document.createElement('canvas'); c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(W * .3, H * .1, 50, W * .5, H * .5, H * .9); g.addColorStop(0, '#e2391f'); g.addColorStop(.45, '#5a1208'); g.addColorStop(1, '#120606');
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    try { await document.fonts.load('400 120px Anton'); } catch (e) {}
+    const pr = prof(), u = me(), md = (u && u.user_metadata) || {};
+    const name = (pr.display_name || md.full_name || pr.username || 'My').split(' ')[0];
+    x.fillStyle = '#fff'; x.font = '400 110px Anton, Impact, sans-serif'; x.textBaseline = 'top';
+    x.fillText((name + "'s crate").toUpperCase(), 80, 90);
+    const known = rareKnown(col).filter(([, i]) => !isNew(i.h, i.y)).sort((a, b) => a[1].h - b[1].h);
+    const picks = [...known.map(k => k[0]), ...col.slice().sort((a, b) => (b.add || '').localeCompare(a.add || ''))].filter((r, i, arr) => r.img && arr.indexOf(r) === i).slice(0, 9);
+    const load = src => new Promise(ok => { const im = new Image(); im.crossOrigin = 'anonymous'; im.onload = () => ok(im); im.onerror = () => ok(null); im.src = '/.netlify/functions/img?u=' + encodeURIComponent(src); });
+    const ims = await Promise.all(picks.map(r => load(r.img)));
+    const S = 296, G = 16, X0 = 80, Y0 = 260;
+    ims.forEach((im, i) => { const cx = X0 + (i % 3) * (S + G), cy = Y0 + Math.floor(i / 3) * (S + G); x.fillStyle = '#222'; x.fillRect(cx, cy, S, S); if (im) x.drawImage(im, cx, cy, S, S); });
+    const yB = Y0 + 3 * (S + G) + 40;
+    x.font = '400 230px Anton, Impact, sans-serif'; x.fillText(col.length.toLocaleString(), 80, yB);
+    x.font = '700 50px Archivo, Arial, sans-serif'; x.fillText(col.length === 1 ? 'record' : 'records', 90, yB + 250);
+    const dec = {}; col.forEach(r => { if (r.y > 1900) { const k = Math.floor(r.y / 10) * 10; dec[k] = (dec[k] || 0) + 1; } });
+    const topDec = Object.entries(dec).sort((a, b) => b[1] - a[1])[0];
+    const lines = [];
+    if (topDec) lines.push(`Mostly the ${topDec[0]}s (${Math.round(topDec[1] / col.length * 100)}%)`);
+    if (known[0]) lines.push(`Rarest: ${known[0][0].t}`);
+    const seenA = [...new Set(lists().been.map(z => norm(z.a)))].filter(a => col.some(r => norm(r.a) === a));
+    if (seenA.length) lines.push(`Seen ${seenA.length} of these artists live`);
+    const topArt = Object.entries(col.reduce((o, r) => (o[r.a] = (o[r.a] || 0) + 1, o), {})).sort((a, b) => b[1] - a[1])[0];
+    if (topArt && topArt[1] > 1) lines.push(`Most collected: ${topArt[0]}`);
+    x.font = '600 46px Archivo, Arial, sans-serif'; x.fillStyle = 'rgba(255,255,255,.92)';
+    lines.slice(0, 4).forEach((l, i) => x.fillText(l.length > 38 ? l.slice(0, 37) + '…' : l, 80, yB + 350 + i * 66));
+    x.font = '400 64px Anton, Impact, sans-serif'; x.fillStyle = '#fff'; x.fillText('LIVE', 80, H - 150);
+    const lw = x.measureText('LIVE ').width; x.fillStyle = '#ff8a73'; x.fillText('LOUDER', 80 + lw, H - 150);
+    x.font = '600 34px Archivo, Arial, sans-serif'; x.fillStyle = 'rgba(255,255,255,.75)'; x.fillText('livelouder.com.au' + (pr.username && pr.share ? '/u/' + pr.username : ''), 80, H - 70);
+    const blob = await new Promise(ok => c.toBlob(ok, 'image/png'));
+    const file = new File([blob], 'my-crate.png', {type: 'image/png'});
+    if (navigator.canShare && navigator.canShare({files: [file]})) { try { await navigator.share({files: [file], title: 'My crate on Live Louder'}); return; } catch (e) { if (e.name === 'AbortError') return; } }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'my-crate.png'; document.body.appendChild(a); a.click(); a.remove();
+  }
+
   // ------------------------------------------------ pieces
   const photo = (slug, name) => { const a = arts[slug]; return a && a[1] ? a[1] : ''; };
   function art(slug, name, cls) {
@@ -193,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function recCard(r, list) {
     const t = r.a.split(' & ').map(tour).find(Boolean), i = fresh(r.rid), seen = seenBy(r.a);
     return `<button class="rcard" type="button" data-rec="${esc(r.rid)}" data-from="${list}"><span class="rcv">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}
-      <span class="rtags">${i ? rareBadges(i.h, i.w, i.y || r.y) : ''}</span><span class="rtl">${seen ? `<span class="vpill r">Seen live${seen > 1 ? ' ×' + seen : ''}</span>` : ''}${t ? '<span class="vpill">🎟 Touring</span>' : ''}</span></span>
+      <span class="rtags">${i ? rareBadges(i.h, i.w, i.y || r.y) : ''}</span><span class="rtl">${list === 'wants' && stockFor(r) ? '<span class="vpill g">✓ In stock at Heathen</span>' : ''}${seen ? `<span class="vpill r">Seen live${seen > 1 ? ' ×' + seen : ''}</span>` : ''}${t ? '<span class="vpill">🎟 Touring</span>' : ''}</span></span>
       <strong>${esc(r.t)}</strong><span>${esc(r.a)}</span><span class="rsub">${i && i.c ? flag(i.c) + esc(i.c) + ' · ' : r.c ? flag(r.c) + esc(r.c) + ' · ' : ''}${r.y ? r.y : ''}${r.rid[0] === 'm' && list !== 'search' ? '<em class="rpick">Pick pressing</em>' : ''}</span></button>`;
   }
   // How many times you've been to see this artist (from your gig history).
@@ -453,12 +560,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const switches = on => `<div class="bchips subt"><a class="bchip${on === 'records' ? ' on' : ''}" href="#records">Collection <span class="bn">${recs('records').length.toLocaleString()}</span></a><a class="bchip${on === 'wantlist' ? ' on' : ''}" href="#wantlist">Wantlist <span class="bn">${recs('wants').length.toLocaleString()}</span></a><a class="bchip${on === 'recstats' ? ' on' : ''}" href="#recstats">Stats</a></div>`;
   function shelf(list) {
     const items0 = recs(list), isCol = list === 'records';
-    needRarity(items0);
-    let h = switches(isCol ? 'records' : 'wantlist') + `<div class="addbar">${searchForm(isCol ? 'Add to your collection: search any album or artist' : 'Add to your wantlist: search any album or artist')}
+    needRarity(items0); loadStock();
+    let h = switches(isCol ? 'records' : 'wantlist') + `<div class="addbar">${searchForm(isCol ? 'Add to your collection: search any album or artist' : 'Add to your wantlist: search any album or artist')}${navigator.mediaDevices ? '<button type="button" class="vbtn scanbtn" data-scan>📷 Scan a barcode</button>' : ''}
       <details class="impbox"${imp.loading || imp.msg ? ' open' : ''}><summary>Import from Discogs</summary><p class="note" style="margin-top:6px">Brings in your Discogs collection and wantlist (they need to be public). Records you already have here are kept.</p>${linkForm(false)}</details></div>`;
     h += results();
     if (!items0.length) return h + empty(isCol ? '💿' : '🔎', isCol ? 'Your collection is empty' : 'Your wantlist is empty',
       isCol ? 'Search above, choose your pressing and tap <b>+ Collection</b>. Or import your records from Discogs in one go.' : 'Search above and tap <b>+ Wantlist</b> on the records you\'re after.', '');
+    // Wantlist: what's in stock at Heathen Records right now
+    const inStock = isCol ? [] : items0.map(r => [r, stockFor(r)]).filter(x => x[1]);
+    if (inStock.length && !recQ) h += `<div class="valert"><div class="vacov">${inStock.slice(0, 4).map(([r, x]) => `<a href="${esc(shopUrl(x))}" rel="noopener"><img src="${esc(x[3] || r.img)}" alt="${esc(r.a + ' – ' + r.t)}"></a>`).join('')}</div>
+      <div class="vatext"><b>${inStock.length} ${inStock.length === 1 ? 'record' : 'records'} on your wantlist ${inStock.length === 1 ? 'is' : 'are'} in stock at Heathen Records</b><small>${inStock.slice(0, 3).map(([r, x]) => `<a href="${esc(shopUrl(x))}" rel="noopener">${esc(r.t)}</a>`).join(' · ')}${me() ? ". We'll email you when anything else on your wantlist comes in." : ''}</small></div>
+      <a class="vbtn red" href="${esc(shopUrl(inStock[0][1]))}" rel="noopener">Get ${inStock.length === 1 ? 'it' : 'them'} →</a></div>`;
     // Your rarest records (once we know enough of them)
     const known = rareKnown(items0);
     if (isCol && known.filter(([, i]) => !isNew(i.h, i.y)).length >= 3 && !recQ) {
@@ -494,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const aus = known.filter(([, i]) => i.c === 'Australia').length, rare = known.filter(([, i]) => tierOf(i.h) >= 2 && !isNew(i.h, i.y)).length;
     const seenArtists = [...new Set(lists().been.map(x => norm(x.a)))].filter(a => artists.has(a));
     const box = (v, l) => `<div><b>${v}</b><span>${l}</span></div>`;
-    h += head('Your crate in numbers') + `<div class="vst">${box(col.length.toLocaleString(), col.length === 1 ? 'record' : 'records')}${box(artists.size, 'artists')}${box(labels.size || '–', 'labels')}${box(known.length ? aus : '–', '🇦🇺 Aussie pressings')}${box(known.length ? rare : '–', 'rare or very rare')}${box(seenArtists.length, 'artists seen live')}</div>`;
+    h += head('Your crate in numbers', '<button type="button" class="vbtn red" data-sharecrate>Share my crate</button>') + `<div class="vst">${box(col.length.toLocaleString(), col.length === 1 ? 'record' : 'records')}${box(artists.size, 'artists')}${box(labels.size || '–', 'labels')}${box(known.length ? aus : '–', '🇦🇺 Aussie pressings')}${box(known.length ? rare : '–', 'rare or very rare')}${box(seenArtists.length, 'artists seen live')}</div>`;
     const bars = (rows, colr) => { const mx = Math.max(1, ...rows.map(x => x[1])); return rows.map(([k, v]) => `<div class="vbar"><span>${esc(k)}</span><i style="width:${v / mx * 100}%${colr ? ';background:' + colr : ''}"></i><em>${v}</em></div>`).join(''); };
     const dec = {}; col.forEach(r => { if (r.y > 1900) { const d = Math.floor(r.y / 10) * 10 + 's'; dec[d] = (dec[d] || 0) + 1; } });
     const gen = {}; col.forEach(r => { const g = String(r.g || '').split(',')[0].trim(); if (g) gen[g] = (gen[g] || 0) + 1; });
@@ -623,7 +735,8 @@ document.addEventListener('DOMContentLoaded', function () {
       : `<p>You're not signed in, so everything here is saved on this device only.</p><button type="button" class="btn" data-signin>Sign in or create an account</button><p class="note">Free. No password needed.</p>`}</div>`;
     h += `<div class="card"><h3>Emails</h3>${u ? `<label class="tog"><input type="checkbox" data-pref="remind_gigs" ${p.remind_gigs !== false ? 'checked' : ''}> A reminder a few days before gigs I've saved</label>
       <label class="tog"><input type="checkbox" data-pref="remind_presales" ${p.remind_presales !== false ? 'checked' : ''}> Presales, on-sales and new dates for artists I follow</label>
-      <label class="tog"><input type="checkbox" data-pref="remind_messages" ${p.remind_messages !== false ? 'checked' : ''}> A friend sent me a message (if I haven't seen it)</label><p class="note">Gig and presale reminders come at most once a day. Message emails come at most every few hours.</p>`
+      <label class="tog"><input type="checkbox" data-pref="remind_messages" ${p.remind_messages !== false ? 'checked' : ''}> A friend sent me a message (if I haven't seen it)</label>
+      <label class="tog"><input type="checkbox" data-pref="remind_wants" ${p.remind_wants !== false ? 'checked' : ''}> Something on my wantlist is in stock at Heathen Records</label><p class="note">Gig and presale reminders come at most once a day. Message emails come at most every few hours.</p>`
       : '<p>Sign in to get a reminder before your gigs and a heads-up when presales start for artists you follow.</p>'}</div>`;
     h += `<div class="card"><h3>Records</h3><p>${recs('records').length.toLocaleString()} in your collection, ${recs('wants').length.toLocaleString()} on your wantlist.</p><p class="note" style="margin-top:0">Import from Discogs any time. Records you already have here are kept.</p>${linkForm(false)}</div>`;
     h += `<div class="card"><h3>Your data</h3><p>See our <a href="${root}privacy.html">privacy policy</a> for what we keep.</p>${u ? '<p class="acts"><button type="button" class="linkish danger" data-act="delete">Delete my account</button></p>' : ''}</div>`;
@@ -683,9 +796,12 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="radd big"><button type="button" class="addbtn" data-addrec="${j}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${j}" data-list="wants">+ Wantlist</button></div>
       <dl class="rmeta">${r.y ? `<dt>Year</dt><dd>${r.y}</dd>` : ''}${r.l ? `<dt>Label</dt><dd>${esc(r.l)}</dd>` : ''}${r.f ? `<dt>Format</dt><dd>${esc(r.f)}</dd>` : ''}${r.g ? `<dt>Style</dt><dd>${esc(r.g)}</dd>` : ''}${r.add && st.records[rid] ? `<dt>Added</dt><dd>${esc(dparts(r.add).dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short', year: 'numeric'}))}</dd>` : ''}</dl>
       ${tourHtml}<div id="recMore"><p class="note">Loading tracklist…</p></div>
-      <p class="ractions"><a class="btn" href="${heathen(r.a + ' ' + r.t)}" rel="noopener">Find it on vinyl at Heathen Records</a> <a class="btn ghost" href="https://www.discogs.com/${rid[0] === 'm' ? 'master' : 'release'}/${esc(rid.slice(1))}" rel="noopener">See on Discogs ↗</a></p>${discogsNote(rid)}</div></div>`;
+      ${st.records[rid] && me() ? `<div class="spinbox" id="spinBox"><button type="button" class="vbtn red spinbtn" data-spinopen>▶ Now spinning</button><span class="note" id="playLine"></span>
+        <form class="spinform" data-spin="${esc(rid)}" hidden><textarea name="body" maxlength="500" rows="2" placeholder="Add a comment (optional): pre-gig warm-up, first spin, Sunday morning…"></textarea><div class="pcrow"><span class="note">Posts to your feed and counts a play</span><button class="btn sm">Post</button></div></form></div>` : ''}
+      <p class="ractions">${stockFor(r) ? `<a class="btn" href="${esc(shopUrl(stockFor(r), 'record'))}" rel="noopener">In stock at Heathen Records →</a>` : `<a class="btn" href="${heathen(r.a + ' ' + r.t)}" rel="noopener">Find it on vinyl at Heathen Records</a>`} <a class="btn ghost" href="https://www.discogs.com/${rid[0] === 'm' ? 'master' : 'release'}/${esc(rid.slice(1))}" rel="noopener">See on Discogs ↗</a></p>${discogsNote(rid)}</div></div>`;
     MY.paint();
     d.showModal ? d.showModal() : d.setAttribute('open', '');
+    if (st.records[rid] && me()) loadPlays().then(() => { const pl = document.getElementById('playLine'), p0 = plays && plays[rid]; if (pl && p0) pl.textContent = `Spun ${p0[0]} ${p0[0] === 1 ? 'time' : 'times'} · last ${ago2(p0[1])}`; });
     if (rid[0] === 'r') {
       let i = fresh(rid);
       if (!i) { try { const x = await dg('/releases/' + rid.slice(1)); if (x) { RC[rid] = i = relInfo(x); saveRC(); } } catch (e) {} }
@@ -710,6 +826,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ------------------------------------------------ events
   box.addEventListener('click', ev => {
+    if (ev.target.closest('[data-scan]')) { openScanner(); return; }
+    if (ev.target.closest('[data-rescan]')) { const rs = document.getElementById('scanRes'); if (rs) rs.innerHTML = ''; stopScan(); document.getElementById('scanDlg').close(); openScanner(); return; }
+    const shc = ev.target.closest('[data-sharecrate]');
+    if (shc) { shc.disabled = true; shc.textContent = 'Making your picture…'; shareCrate().finally(() => { shc.disabled = false; shc.textContent = 'Share my crate'; }); return; }
+    const so = ev.target.closest('[data-spinopen]');
+    if (so) { const f = so.parentNode.querySelector('.spinform'); f.hidden = !f.hidden; if (!f.hidden) f.body.focus(); return; }
     const pf = ev.target.closest('[data-pickfor]');
     if (pf) { const rd = document.getElementById('recDlg'); if (rd.open) rd.close(); const sf = pf.dataset.swapfrom, st0 = MY.get();
       openPicker(JSON.parse(pf.dataset.pickfor), sf ? {swap: sf, list: st0.records[sf] ? 'records' : 'wants'} : {}); return; }
@@ -776,6 +898,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
   box.addEventListener('submit', ev => {
+    const sm = ev.target.closest('[data-scanman]');
+    if (sm) { ev.preventDefault(); const v = sm.bc.value.replace(/[^0-9]/g, ''); if (v) { stopScan(); found(v); } return; }
+    const sp = ev.target.closest('[data-spin]');
+    if (sp) { ev.preventDefault(); const r = MY.get().records[sp.dataset.spin]; if (!r) return; const i = fresh(r.rid) || {}, b = sp.querySelector('button'); b.disabled = true; b.textContent = 'Posting…';
+      ACC.rpc('create_post', {body: sp.body.value.trim(), gig: null, artist: null, record: {rid: r.rid, a: r.a, t: r.t, y: String(r.y || ''), img: r.img, c: i.c || r.c || '', l: i.l || r.l || '', col: i.col || r.col || ''}}).then(res => {
+        if (res.error) { b.disabled = false; b.textContent = 'Post'; alert(res.error.replace(/^.*?: /, '')); return; }
+        document.dispatchEvent(new CustomEvent('llpost', {detail: res.data}));
+        sp.outerHTML = '<p class="note spunok">✓ Posted to your feed. Enjoy the spin!</p>'; loadPlays(true).then(() => { const pl = document.getElementById('playLine'), p0 = plays && plays[r.rid]; if (pl && p0) pl.textContent = `Spun ${p0[0]} ${p0[0] === 1 ? 'time' : 'times'} · last ${ago2(p0[1])}`; });
+      }); return; }
     const f = ev.target.closest('[data-dgform]');
     if (f) { ev.preventDefault(); const u = f.u.value.trim(); if (u && !imp.loading) importDiscogs(u); return; }
     const nf = ev.target.closest('[data-note]');

@@ -496,3 +496,38 @@ document.addEventListener('click', ev => {
     ios: () => /iphone|ipad|ipod/i.test(navigator.userAgent),
   };
 })();
+
+// Gig pages: "On your shelf". For people with a record collection on Live Louder: the records they own by
+// this artist, wantlist records that are in stock at Heathen Records, and what's missing from their shelf.
+document.addEventListener('DOMContentLoaded', () => {
+  const acts = document.querySelector('.gp-acts'), b = acts && acts.querySelector('.save[data-gig]');
+  if (!b || !window.MY) return;
+  let g; try { g = JSON.parse(b.dataset.gig); } catch (e) { return; }
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const norm = s => String(s).toLowerCase().replace(/^the\s+/, '').replace(/&/g, 'and').replace(/[^a-z0-9]/g, '');
+  const root = document.body.dataset.root || '';
+  function paint() {
+    const st = MY.get(), ka = norm(g.a), by = r => String(r.a || '').split(' & ').some(x => norm(x) === ka);
+    const all = Object.values(st.records || {}), mine = all.filter(by), wants = Object.values(st.wants || {}).filter(by);
+    const old = document.getElementById('gpShelf'); if (old) old.remove();
+    if (!all.length && !wants.length) return;   // only for people who keep their records here
+    const seen = Object.values(st.gigs || {}).filter(x => x.going && x.d < MY.today && norm(x.a) === ka).length;
+    fetch(root + 'data/heathen.json').then(r => r.ok ? r.json() : []).catch(() => []).then(hs => {
+      const key = (a, t) => norm(a) + '|' + norm(String(t).replace(/\s*\([^)]*\)\s*$/, ''));
+      const owned = new Set([...mine, ...wants].map(r => key(String(r.a).split(' & ')[0], r.t)));
+      const shop = x => `https://heathenrecords.com.au/products/${encodeURIComponent(x[2])}?utm_source=livelouder&utm_medium=referral&utm_campaign=gig-shelf`;
+      const stock = (hs || []).filter(x => norm(x[0]) === ka);
+      const wantIn = wants.map(r => [r, stock.find(x => key(x[0], x[1]) === key(String(r.a).split(' & ')[0], r.t))]).filter(x => x[1]);
+      const missing = stock.filter(x => !owned.has(key(x[0], x[1]))).slice(0, 2);
+      if (!mine.length && !wantIn.length && !missing.length) return;
+      const row = (img, html, btn) => `<div class="gsrow">${img ? `<img src="${esc(img)}" alt="">` : '<span class="gsno">💿</span>'}<div>${html}</div>${btn || ''}</div>`;
+      let h = '';
+      if (mine.length) h += row(mine[0].img, `<b>You own ${mine.slice(0, 3).map(r => esc(r.t)).join(', ')}${mine.length > 3 ? ` and ${mine.length - 3} more` : ''}</b><small>${seen ? `You've seen ${esc(g.a)} live${seen > 1 ? ' ' + seen + ' times' : ''} · ` : ''}<a href="${root}my-gigs.html#records">Your collection</a></small>`);
+      wantIn.slice(0, 2).forEach(([r, x]) => { h += row(x[3] || r.img, `<b>On your wantlist: ${esc(r.t)}</b><small>In stock at Heathen Records</small>`, `<a class="gsbtn" href="${esc(shop(x))}" rel="noopener">Get it →</a>`); });
+      missing.forEach(x => { h += row(x[3], `<b>${mine.length ? 'Missing from your shelf' : 'For your shelf'}: ${esc(x[1])}</b><small>${esc(x[5] || x[1])} · in stock at Heathen Records</small>`, `<a class="gsbtn" href="${esc(shop(x))}" rel="noopener">Get it →</a>`); });
+      acts.insertAdjacentHTML('afterend', `<div class="gpshelf" id="gpShelf"><h3>On your shelf</h3>${h}</div>`);
+    });
+  }
+  paint();
+  document.addEventListener('acc', () => setTimeout(paint, 300));
+});

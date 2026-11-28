@@ -108,14 +108,39 @@ document.addEventListener('DOMContentLoaded', function () {
     h += act.length ? (window.FRIENDS ? FRIENDS.renderFeed(act, 60) : '') : `<p class="note">${P.me ? 'Nothing here yet. Write a post, or mark a gig as going.' : esc(first()) + " hasn't posted anything yet."}</p>`;
     return h;
   }
+  // Taste match: how much your music overlaps (records, artists you follow, gigs you've been to and are going to).
+  let showShared = false;
   function common_html() {
     if (P.me || !(window.ACC && ACC.user())) return '';
-    const c = common(), bits = [];
-    if (c.gigs.length) bits.push(`You're both into <b>${c.gigs.length} ${c.gigs.length === 1 ? 'gig' : 'gigs'}</b>: ${c.gigs.slice(0, 3).map(g => esc(g.a)).join(', ')}`);
-    if (c.both.length) bits.push(`You both own <b>${c.both.length} ${c.both.length === 1 ? 'record' : 'records'}</b>`);
-    if (c.theyHaveYouWant.length) bits.push(`${esc(first())} owns <b>${c.theyHaveYouWant.length}</b> from your wantlist`);
-    if (c.youHaveTheyWant.length) bits.push(`You own <b>${c.youHaveTheyWant.length}</b> from ${esc(first())}'s wantlist`);
-    return bits.length ? `<div class="incommon"><span class="ntag">In common</span><ul>${bits.map(b => `<li>${b}</li>`).join('')}</ul></div>` : '';
+    const st = MY.get(), c = common(), key = r => norm(r.a) + '|' + norm(r.t);
+    const today = MY.today;
+    const mineA = new Set([...Object.values(st.records || {}).flatMap(r => String(r.a).split(' & ')), ...Object.values(st.artists || {}),
+      ...Object.values(st.gigs || {}).map(g => g.a)].map(norm).filter(Boolean));
+    const theirA = new Set([...P.collection.flatMap(r => String(r.a).split(' & ')), ...P.wants.flatMap(r => String(r.a).split(' & ')),
+      ...P.gigs.map(g => g.a), ...P.been.map(g => g.a)].map(norm).filter(Boolean));
+    const both = [...mineA].filter(a => theirA.has(a));
+    const myBeen = new Set(Object.values(st.gigs || {}).filter(g => g.going && g.d < today).map(g => norm(g.a)));
+    const seenBoth = [...new Set(P.been.map(g => norm(g.a)))].filter(a => myBeen.has(a));
+    const theirWant = new Set(P.wants.map(key)), wantBoth = Object.values(st.wants || {}).filter(r => theirWant.has(key(r)));
+    if (mineA.size < 5 || theirA.size < 5) {
+      const bits = [];
+      if (c.gigs.length) bits.push(`You're both into <b>${c.gigs.length} ${c.gigs.length === 1 ? 'gig' : 'gigs'}</b>: ${c.gigs.slice(0, 3).map(g => esc(g.a)).join(', ')}`);
+      if (c.both.length) bits.push(`You both own <b>${c.both.length} ${c.both.length === 1 ? 'record' : 'records'}</b>`);
+      return bits.length ? `<div class="incommon"><span class="ntag">In common</span><ul>${bits.map(b => `<li>${b}</li>`).join('')}</ul></div>` : '';
+    }
+    const pct = Math.max(1, Math.min(99, Math.round(100 * Math.sqrt(both.length / Math.min(mineA.size, theirA.size)))));
+    const nameOf = k => { const r = P.collection.find(x => norm(x.a) === k) || P.gigs.find(x => norm(x.a) === k) || P.been.find(x => norm(x.a) === k); return r ? r.a : k; };
+    const stat = (n, l) => n ? `<li><b>${n}</b> ${l}</li>` : '';
+    const covers = c.both.filter(r => r.img).slice(0, 8);
+    return `<div class="vmatch"><div class="vring" style="--p:${pct}"><div><span><b>${pct}%</b><small>match</small></span></div></div>
+      <div class="vmtext"><b class="vmh">You and ${esc(first())} are a ${pct}% match</b>
+      <ul>${stat(c.both.length, c.both.length === 1 ? 'record you both own' : 'records you both own')}${stat(both.length, both.length === 1 ? 'artist you both love' : 'artists you both love')}${stat(seenBoth.length, "seen live by you both")}${stat(wantBoth.length, wantBoth.length === 1 ? 'record you both want' : 'records you both want')}${stat(c.gigs.length, c.gigs.length === 1 ? "gig you're both into" : "gigs you're both into")}</ul>
+      ${covers.length ? `<div class="vcov">${covers.map(r => `<img src="${esc(r.img)}" alt="${esc(r.a + ' – ' + r.t)}" title="${esc(r.a + ' – ' + r.t)}" loading="lazy">`).join('')}</div>` : ''}</div>
+      <button type="button" class="vbtn" data-shared>${showShared ? 'Hide' : 'See what you share'}</button></div>
+      ${showShared ? `<div class="vshared">${both.length ? `<h3>Artists you both love</h3><div class="topart">${both.slice(0, 40).map(k => `<span>${esc(nameOf(k))}</span>`).join('')}</div>` : ''}
+        ${c.gigs.length ? `<h3>Gigs you're both into</h3><div class="topart">${c.gigs.map(g => `<a href="${esc(gp(g))}"><span>${esc(g.a)} · ${dparts(g.d).dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short'})}</span></a>`).join('')}</div>` : ''}
+        ${wantBoth.length ? `<h3>You both want</h3><div class="topart">${wantBoth.slice(0, 20).map(r => `<span>${esc(r.a)} – ${esc(r.t)}</span>`).join('')}</div>` : ''}
+        ${c.theyHaveYouWant.length ? `<h3>${esc(first())} owns these from your wantlist</h3><div class="rrow">${c.theyHaveYouWant.slice(0, 12).map(rec).join('')}</div>` : ''}</div>` : ''}`;
   }
   // ------------------------------------------------ seen live wall
   let openSeen = '';
@@ -200,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('acc', render);
 
   box.addEventListener('click', async ev => {
+    if (ev.target.closest('[data-shared]')) { showShared = !showShared; render(); return; }
     const sw = ev.target.closest('[data-seen]');
     if (sw) { openSeen = openSeen === sw.dataset.seen ? '' : sw.dataset.seen; render(); const pnl = document.getElementById('seenpanel'); if (pnl) pnl.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
     const f = ev.target.closest('[data-ufollow]');

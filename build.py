@@ -1731,6 +1731,38 @@ page("u/index.html", "A Live Louder profile | Live Louder", "Gigs they're going 
 (OUT / "data").mkdir(exist_ok=True)
 (OUT / "data" / "artists.json").write_text(json.dumps({a["slug"]: [a["name"], a.get("photo", ""), a["gb"],
     a["shows"][0]["date"] if a["shows"] else "", a["shows"][0]["city"] if a["shows"] else "", len(a["shows"])] for a in artists.values()}, separators=(",", ":")))
+# Heathen Records stock (records in stock right now), for "in stock at Heathen" on wantlists, record pages,
+# gig pages and the daily wantlist email. Read from the shop's public product list at build time.
+def heathen_stock():
+    if os.environ.get("NO_GEOCODE"):
+        return None
+    import urllib.request
+    out = []
+    try:
+        for pg in range(1, 41):
+            req = urllib.request.Request(f"https://heathenrecords.com.au/products.json?limit=250&page={pg}", headers={"User-Agent": "LiveLouder/1.0 (+https://livelouder.com.au)"})
+            ps = json.loads(urllib.request.urlopen(req, timeout=25).read()).get("products") or []
+            if not ps:
+                break
+            for x in ps:
+                if not any(v.get("available") for v in x.get("variants") or []):
+                    continue
+                parts = re.split(r"\s+[–-]\s+", x.get("title", ""), 1)
+                if len(parts) < 2:
+                    continue
+                alb = re.sub(r"\s*\([^)]*\)\s*$", "", parts[1]).strip()
+                img = ((x.get("images") or [{}])[0] or {}).get("src", "")
+                if img:
+                    img += ("&" if "?" in img else "?") + "width=300"
+                out.append([parts[0].strip(), alb, x.get("handle", ""), img, x.get("product_type", ""), parts[1].strip()])
+    except Exception as ex:
+        print("heathen stock: failed", ex)
+        return out or None
+    print(f"heathen stock: {len(out)} records in stock")
+    return out
+_hs = heathen_stock()
+if _hs is not None:
+    (OUT / "data" / "heathen.json").write_text(json.dumps(_hs, ensure_ascii=False, separators=(",", ":")))
 (OUT / "data" / "releases.json").write_text(json.dumps([i for i in rels["items"] if i[0] == "2027" or i[0] >= TODAY_S], separators=(",", ":")))
 # Pictures for the reminder emails: the artist's best photo and up to 4 records, for artists playing in the next 10 days.
 _soon = (TODAY + dt.timedelta(days=10)).date().isoformat()

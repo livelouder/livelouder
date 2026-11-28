@@ -92,9 +92,11 @@
   }
   const linkify = t => esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" rel="noopener nofollow ugc" target="_blank">$1</a>').replace(/\n/g, '<br>');
   function postBody(p) {
-    const tag = p.gig ? gigCard(p.gig) : p.artist ? `<a class="fgcard" href="${root}artists/${esc(p.artist.slug)}.html">${artPic(p.artist.slug) ? `<span class="fgimg round" style="background-image:url('${esc(artPic(p.artist.slug))}')"></span>` : ''}<span><strong>${esc(p.artist.name)}</strong><small>Artist</small></span></a>` : '';
+    const rec = p.record;
+    const tag = rec ? `<span class="fgcard frec">${rec.img ? `<span class="fgimg" style="background-image:url('${esc(rec.img)}')"></span>` : ''}<span><strong>${esc(rec.t)}</strong><small>${esc(rec.a)}${[rec.col, rec.c, rec.y].filter(Boolean).length ? ' · ' + esc([rec.col, rec.c, rec.y].filter(Boolean).join(' · ')) : ''}</small></span><span class="fspin" aria-hidden="true"></span></span>`
+      : p.gig ? gigCard(p.gig) : p.artist ? `<a class="fgcard" href="${root}artists/${esc(p.artist.slug)}.html">${artPic(p.artist.slug) ? `<span class="fgimg round" style="background-image:url('${esc(artPic(p.artist.slug))}')"></span>` : ''}<span><strong>${esc(p.artist.name)}</strong><small>Artist</small></span></a>` : '';
     const me = signedIn();
-    return `<p class="pbody">${linkify(p.body)}</p>${tag}${p.hidden ? '<p class="note phid">Hidden while we check a report. Only you can see it.</p>' : ''}
+    return `${p.body ? `<p class="pbody">${linkify(p.body)}</p>` : ''}${tag}${p.hidden ? '<p class="note phid">Hidden while we check a report. Only you can see it.</p>' : ''}
       <div class="pacts" data-post="${p.id}"><button type="button" class="pact${p.liked ? ' on' : ''}" data-like aria-pressed="${!!p.liked}" aria-label="Like">${p.liked ? '♥' : '♡'} <span>${p.likes || ''}</span></button>
       <button type="button" class="pact" data-replies aria-expanded="false">💬 <span>${p.replies ? p.replies + ' ' + (p.replies === 1 ? 'reply' : 'replies') : 'Reply'}</span></button>
       ${me ? `<span class="pmore"><button type="button" class="pact" data-pmenu aria-label="More">⋯</button><span class="pmenu" hidden>${p.mine ? '<button type="button" data-delpost>Delete post</button>' : '<button type="button" data-report="post">Report post</button>'}</span></span>` : ''}</div>
@@ -105,7 +107,7 @@
     let text = '', extra = '', act = '';
     if (it.t === 'post') {
       const p = it.post || {};
-      return `<li class="fi fpost" data-pid="${p.id}"><a href="${purl(w.username)}" aria-hidden="true" tabindex="-1">${face(w, 'fav sm')}</a><div class="ft"><p>${who} <span class="fwhen">${esc(ago(it.at))}</span></p>${postBody(p)}</div></li>`;
+      return `<li class="fi fpost" data-pid="${p.id}"><a href="${purl(w.username)}" aria-hidden="true" tabindex="-1">${face(w, 'fav sm')}</a><div class="ft"><p>${who}${p.record ? ' is spinning' : ''} <span class="fwhen">${esc(ago(it.at))}</span></p>${postBody(p)}</div></li>`;
     }
     if (it.t === 'going') {
       const g = it.gig;

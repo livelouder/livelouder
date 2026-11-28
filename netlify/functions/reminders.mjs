@@ -1,6 +1,7 @@
 // Daily reminder emails for Live Louder account holders, 8:30am Sydney time (21:30 UTC, daylight saving).
 //  - "Coming up": gigs they saved that are on in the next 3 days
 //  - Presales and on-sales in the next 36 hours, and newly announced tours, for artists they follow
+//  - Records on their wantlist that are in stock at Heathen Records (data/heathen.json, refreshed every build)
 // One email per person per day at most. Each item is only ever sent once (table sent_reminders).
 // Needs SUPABASE_SECRET_KEY and RESEND_API_KEY in Netlify. People can switch each kind off on My gigs.
 import { createClient } from "@supabase/supabase-js";
@@ -110,14 +111,25 @@ export default async () => {
   let feed = { sales: [], tours: [] }, artMap = {};
   try { artMap = await (await fetch(`${SITE}/data/email-art.json`)).json(); } catch (e) { console.log("no email art", e.message); }
   try { feed = await (await fetch(`${SITE}/data/alerts-feed.json`)).json(); } catch (e) { console.log("no alerts feed", e.message); }
+  let stock = [];
+  try { stock = await (await fetch(`${SITE}/data/heathen.json`)).json(); } catch (e) { console.log("no heathen stock", e.message); }
+  const norm = (x) => String(x || "").toLowerCase().replace(/^the\s+/, "").replace(/&/g, "and").replace(/[^a-z0-9]/g, "");
+  const hkey = (a, t) => norm(String(a).split(" & ")[0]) + "|" + norm(String(t).replace(/\s*\([^)]*\)\s*$/, ""));
+  const stockIdx = Object.fromEntries((stock || []).map((x) => [hkey(x[0], x[1]), x]));
   const now = Date.now(), until = now + 36 * 3600 * 1000;
   const sales = (feed.sales || []).filter((x) => { const t = Date.parse(x.when); return t > now && t <= until; });
 
   // Everyone with something to hear about.
+  const wantRows = [];
+  for (let from = 0; from < 200000; from += 1000) {
+    const { data, error } = await sb.from("user_records").select("user_id,rid,rec").eq("list", "wantlist").range(from, from + 999);
+    if (error || !data || !data.length) break;
+    wantRows.push(...data); if (data.length < 1000) break;
+  }
   const [gigsR, artsR, profR, sentR] = await Promise.all([
     sb.from("saved_gigs").select("user_id,gig_id,gig,going").gte("gig->>d", today).lte("gig->>d", soon),
     sb.from("followed_artists").select("user_id,slug,name"),
-    sb.from("profiles").select("id,remind_gigs,remind_presales"),
+    sb.from("profiles").select("id,remind_gigs,remind_presales,remind_wants"),
     sb.from("sent_reminders").select("user_id,key").gte("sent_at", new Date(now - 40 * 86400 * 1000).toISOString()),
   ]);
   for (const r of [gigsR, artsR, profR, sentR]) if (r.error) { console.log("reminders db error", r.error.message); return new Response("db error"); }
@@ -126,7 +138,7 @@ export default async () => {
   const todo = {}; // user -> {gigs:[], sales:[], tours:[]}
   const add = (uid, kind, k, item) => {
     if (sent.has(`${uid}|${k}`)) return;
-    (todo[uid] ||= { gigs: [], sales: [], tours: [], keys: [] })[kind].push(item);
+    (todo[uid] ||= { gigs: [], sales: [], tours: [], wants: [], keys: [] })[kind].push(item);
     todo[uid].keys.push(k);
   };
   for (const g of gigsR.data || []) if ((prefs[g.user_id] || {}).remind_gigs !== false) add(g.user_id, "gigs", `gig:${g.gig_id}`, g);
@@ -134,6 +146,11 @@ export default async () => {
     if ((prefs[a.user_id] || {}).remind_presales === false) continue;
     for (const s of sales.filter((x) => x.slug === a.slug)) add(a.user_id, "sales", `sale:${s.slug}:${s.kind}:${s.name}:${s.when}`, s);
     for (const t of (feed.tours || []).filter((x) => x.slug === a.slug)) add(a.user_id, "tours", `tour:${t.slug}:${t.added}`, t);
+  }
+  for (const w of wantRows) {
+    if ((prefs[w.user_id] || {}).remind_wants === false || !w.rec) continue;
+    const x = stockIdx[hkey(w.rec.a, w.rec.t)];
+    if (x) add(w.user_id, "wants", `want:${w.rid}:${x[2]}`, { rec: w.rec, x });
   }
   const users = Object.keys(todo);
   if (!users.length) return new Response("nothing to send");
@@ -169,10 +186,19 @@ export default async () => {
       for (const x of t.tours) rows += row(`${x.artist}: ${x.tour}`, (x.cities || []).join(", "), `${SITE}/artists/${x.slug}.html`, "Dates & tickets", x.img);
       subj.push(`${t.tours[0].artist} just announced dates`);
     }
+    if (t.wants.length) {
+      rows += section("On your wantlist, in stock now");
+      for (const w of t.wants.slice(0, 6)) {
+        const url = `https://heathenrecords.com.au/products/${encodeURIComponent(w.x[2])}?utm_source=livelouder&utm_medium=email&utm_campaign=wantlist`;
+        rows += row(`${w.rec.a}: ${w.rec.t}`, `${w.x[5] || w.x[1]} · in stock at Heathen Records`, url, "Get it", w.x[3] || w.rec.img);
+      }
+      subj.push(t.wants.length === 1 ? `${t.wants[0].rec.t} is in stock` : `${t.wants.length} records on your wantlist are in stock`);
+    }
     const subject = subj.slice(0, 2).join(" · ");
     const text = [...t.gigs.map((g) => `${g.gig.a}: ${g.gig.d}, ${g.gig.v}, ${g.gig.c} ${g.gig.u}`),
                   ...t.sales.map((s) => `${s.artist} tickets: ${saleWhen(s.when)} Sydney time ${s.url}`),
-                  ...t.tours.map((x) => `${x.artist} announced ${x.tour}: ${SITE}/artists/${x.slug}.html`)].join("\n")
+                  ...t.tours.map((x) => `${x.artist} announced ${x.tour}: ${SITE}/artists/${x.slug}.html`),
+                  ...t.wants.map((w) => `${w.rec.a}: ${w.rec.t} is in stock at Heathen Records https://heathenrecords.com.au/products/${w.x[2]}`)].join("\n")
                  + `\n\nManage your emails: ${SITE}/my-gigs.html`;
     try {
       await send(email, subject, wrap(rows, subject), text);
