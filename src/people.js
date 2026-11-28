@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const m = location.pathname.match(/\/u\/([^/?#]+)/);
   const uname = decodeURIComponent((m && m[1] !== 'index.html' ? m[1] : new URLSearchParams(location.search).get('u')) || '').toLowerCase();
-  let P = null, arts = {}, tab = 'gigs', q = '', shown = 60;
+  let P = null, arts = {}, tab = 'activity', q = '', shown = 60;
 
   function photo(slug, name) {
     const a = arts[slug], p = a && a[1];
@@ -70,36 +70,82 @@ document.addEventListener('DOMContentLoaded', function () {
     $('uAv').style.setProperty('--h', hue(P.username)); hb.style.setProperty('--h', hue(P.username));
     ['cv', 'cv0', 'cv1', 'cv2'].forEach(c => hb.classList.remove(c));
     if (!P.banner) hb.classList.add('cv', 'cv' + (hue(P.username) % 3));
-    hb.style.backgroundImage = P.banner ? `linear-gradient(180deg,rgba(20,20,20,.15) 0,rgba(20,20,20,.55) 45%,rgba(20,20,20,.96) 100%),url('${String(P.banner).replace(/'/g, '%27')}')` : '';
-    $('uSub').innerHTML = `@${esc(P.username)}${P.since ? ` · On Live Louder since ${new Date(P.since).toLocaleDateString('en-AU', {month: 'long', year: 'numeric'})}` : ''}${P.follows_you ? ' · <b>Follows you</b>' : ''}`;
+    hb.style.backgroundImage = P.banner ? `url('${String(P.banner).replace(/'/g, '%27')}')` : '';
+    $('uHandle').innerHTML = `@${esc(P.username)}${P.follows_you ? ' <span class="fyou">Follows you</span>' : ''}`;
+    const bits = [P.bio ? esc(P.bio) : '', P.city ? `📍 ${esc(P.city)}` : '', !P.bio && P.since ? `On Live Louder since ${new Date(P.since).toLocaleDateString('en-AU', {month: 'long', year: 'numeric'})}` : ''].filter(Boolean);
+    $('uSub').innerHTML = bits.join(' <span class="dotsep">·</span> ');
     const signedIn = window.ACC && ACC.user();
-    $('uCta').innerHTML = P.me ? `<a class="btn" href="${root}my-gigs.html#settings">Edit my profile</a>`
+    $('uCta').innerHTML = P.me ? `<a class="btn ghost sm" href="${root}my-gigs.html#settings">Edit profile</a>`
       : `<button type="button" class="followbtn big${P.following ? ' on' : ''}" data-ufollow>${P.following ? 'Following' : signedIn ? 'Follow' : 'Follow ' + esc(first())}</button>`
-        + (P.following && P.follows_you ? `<a class="btn msgbtn" href="${root}messages.html?u=${encodeURIComponent(P.username)}">💬 Message</a>` : '')
+        + (P.following && P.follows_you ? `<a class="btn ghost sm msgbtn" href="${root}messages.html?u=${encodeURIComponent(P.username)}">Message</a>` : '')
         + (P.avatar || P.banner ? '<button type="button" class="linkish small reportlink" data-ureport>Report a photo</button>' : '');
     const going = P.gigs.filter(g => g.going).length;
-    const stat = (n, l, t) => `<a class="stat" href="#${t}" data-utab="${t}"><b>${Number(n).toLocaleString()}</b><span>${l}</span></a>`;
-    $('uStats').innerHTML = stat(going, 'Going', 'gigs') + stat(P.gigs.length - going, 'Interested', 'gigs') + stat(P.been.length, 'Been to', 'gigs')
-      + stat(P.records, 'Records', 'records') + stat(P.n_wants, 'Wantlist', 'wantlist') + stat(P.n_followers, P.n_followers === 1 ? 'Follower' : 'Followers', 'gigs');
-    const tabs = [['gigs', 'Gigs'], ['records', 'Records'], ['wantlist', 'Wantlist']];
+    const stat = (n, l, t) => n ? `<a href="#${t}" data-utab="${t}"><b>${Number(n).toLocaleString()}</b> ${l}</a>` : '';
+    $('uStats').innerHTML = [stat(P.n_seen || P.been.length, 'seen live', 'seen'), stat(going, 'going', 'gigs'), stat(P.records, 'records', 'records'),
+      stat(P.n_followers, P.n_followers === 1 ? 'follower' : 'followers', 'activity'), stat(P.n_following, 'following', 'activity')].filter(Boolean).join('');
+    const tabs = [['activity', 'Activity'], ['gigs', 'Gigs'], ['seen', 'Seen live'], ['records', 'Records'], ['wantlist', 'Wantlist']];
     $('uTabs').innerHTML = tabs.map(([k, n]) => `<a href="#${k}" data-utab="${k}" aria-current="${tab === k ? 'page' : 'false'}">${n}</a>`).join('');
+  }
+  // ------------------------------------------------ activity: their posts, gigs, ratings, records and photos
+  let act = null, actLoading = false;
+  function loadAct(force) {
+    if (actLoading || (act && !force)) return;
+    actLoading = true;
+    ACC.rpc('profile_activity', {uname: P.username}).then(r => { act = r.data || []; actLoading = false; render(); });
+  }
+  document.addEventListener('llpost', () => { if (P && P.me) loadAct(true); });
+  function activityTab() {
+    loadAct();
+    let h = '';
+    if (P.me && !P.shared) h += `<div class="sharebox"><div><span class="ntag">Only you can see this</span><p>Your profile is private. Switch on sharing in <a href="${root}my-gigs.html#settings">Settings</a> so friends can follow you.</p></div></div>`;
+    if (P.me && window.FRIENDS) h += FRIENDS.composer();
+    h += common_html();
+    if (!act) return h + '<p class="note">Loading…</p>';
+    const next = P.gigs.filter(g => g.going)[0];
+    if (next) h += `<div class="pnext"><a href="${esc(gp(next))}">${photo(next.s, next.a).replace('class="gph', 'class="pnimg')}</a><div class="pnt"><span class="ntag">${P.me ? 'Your next gig' : esc(first()) + '\'s next gig'}</span>
+      <strong><a href="${esc(gp(next))}">${esc(next.a)}</a> · ${dparts(next.d).dt.toLocaleDateString('en-AU', {weekday: 'short', day: 'numeric', month: 'short'})}</strong><small>${esc(next.v)}, ${esc(next.c)}</small></div>
+      <div class="pnb"><button class="save" type="button" data-gig="${esc(JSON.stringify({id: next.id, d: next.d, tm: next.tm, a: next.a, s: next.s, v: next.v, c: next.c, u: next.u, vs: next.vs, p: next.p}))}" aria-pressed="false" aria-label="Save to My gigs">♡</button></div></div>`;
+    h += act.length ? (window.FRIENDS ? FRIENDS.renderFeed(act, 60) : '') : `<p class="note">${P.me ? 'Nothing here yet. Write a post, or mark a gig as going.' : esc(first()) + " hasn't posted anything yet."}</p>`;
+    return h;
+  }
+  function common_html() {
+    if (P.me || !(window.ACC && ACC.user())) return '';
+    const c = common(), bits = [];
+    if (c.gigs.length) bits.push(`You're both into <b>${c.gigs.length} ${c.gigs.length === 1 ? 'gig' : 'gigs'}</b>: ${c.gigs.slice(0, 3).map(g => esc(g.a)).join(', ')}`);
+    if (c.both.length) bits.push(`You both own <b>${c.both.length} ${c.both.length === 1 ? 'record' : 'records'}</b>`);
+    if (c.theyHaveYouWant.length) bits.push(`${esc(first())} owns <b>${c.theyHaveYouWant.length}</b> from your wantlist`);
+    if (c.youHaveTheyWant.length) bits.push(`You own <b>${c.youHaveTheyWant.length}</b> from ${esc(first())}'s wantlist`);
+    return bits.length ? `<div class="incommon"><span class="ntag">In common</span><ul>${bits.map(b => `<li>${b}</li>`).join('')}</ul></div>` : '';
+  }
+  // ------------------------------------------------ seen live wall
+  let openSeen = '';
+  function wallImg(slug, name) {
+    const a = arts[slug], p = a && a[1];
+    if (p) return `<span class="swimg" style="background-image:url('${esc(String(p).replace('/1000x1000-', '/500x500-'))}')"></span>`;
+    return window.LLPOSTER ? LLPOSTER.big(name, a && a[2] ? gslug(a[2]) : '').replace('class="gcpic', 'class="swimg') : photo(slug, name);
+  }
+  function seenTab() {
+    if (!P.been.length) return `<p class="note">${P.me ? 'Gigs you go to show up here afterwards.' : esc(first()) + " hasn't been to any gigs on Live Louder yet."}</p>`;
+    let h = '';
+    if (openSeen) { const x = P.been.find(g => g.id === openSeen); if (x) h += `<div class="seenpanel" id="seenpanel"><div class="shead"><h3>${esc(x.a)}</h3><button type="button" class="linkish" data-seen="">Close</button></div>${beenCard(x)}</div>`; }
+    const years = {};
+    P.been.forEach(x => { (years[x.d.slice(0, 4)] = years[x.d.slice(0, 4)] || []).push(x); });
+    Object.keys(years).sort().reverse().forEach(y => {
+      const list = years[y];
+      h += head(`${list.length} ${list.length === 1 ? 'gig' : 'gigs'} seen in ${y}`);
+      h += `<div class="swall">${list.map(x => { const p = dparts(x.d), n = x.rating || 0;
+        return `<button type="button" class="swt${openSeen === x.id ? ' on' : ''}" data-seen="${esc(x.id)}">${wallImg(x.s, x.a)}${(x.photos || []).length ? `<span class="swph">📷 ${x.photos.length}</span>` : ''}
+          <strong>${esc(x.a)}</strong><small>${p.dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short'})} · ${esc(x.v)}</small>${n ? `<span class="swstars">${'★'.repeat(n)}<i>${'★'.repeat(5 - n)}</i></span>` : ''}</button>`; }).join('')}</div>`;
+    });
+    return h;
   }
   function gigsTab() {
     let h = '';
     if (P.me && !P.shared) h += `<div class="sharebox"><div><span class="ntag">Only you can see this</span><p>Your profile is private. Switch on sharing in <a href="${root}my-gigs.html#settings">Settings</a> so friends can follow you.</p></div></div>`;
-    if (!P.me && window.ACC && ACC.user()) {
-      const c = common();
-      const bits = [];
-      if (c.gigs.length) bits.push(`You're both into <b>${c.gigs.length} ${c.gigs.length === 1 ? 'gig' : 'gigs'}</b>: ${c.gigs.slice(0, 3).map(g => esc(g.a)).join(', ')}`);
-      if (c.both.length) bits.push(`You both own <b>${c.both.length} ${c.both.length === 1 ? 'record' : 'records'}</b>`);
-      if (c.theyHaveYouWant.length) bits.push(`${esc(first())} owns <b>${c.theyHaveYouWant.length}</b> from your wantlist`);
-      if (c.youHaveTheyWant.length) bits.push(`You own <b>${c.youHaveTheyWant.length}</b> from ${esc(first())}'s wantlist`);
-      if (bits.length) h += `<div class="incommon"><span class="ntag">In common</span><ul>${bits.map(b => `<li>${b}</li>`).join('')}</ul></div>`;
-    }
     const up = P.gigs, going = up.filter(g => g.going), inter = up.filter(g => !g.going);
     h += head('Going', going.length ? `<span class="note">${going.length}</span>` : '') + (going.length ? `<div class="ggrid">${going.map(g => gigCard(g)).join('')}</div>` : `<p class="note">${esc(first())} hasn't marked any upcoming gigs as going yet.</p>`);
     if (inter.length) h += head('Interested', `<span class="note">${inter.length}</span>`) + `<div class="ggrid">${inter.map(g => gigCard(g)).join('')}</div>`;
-    if (P.been.length) h += head(P.me ? 'Your gig diary' : `${esc(first())}'s gig diary`, `<span class="note">${P.been.length} ${P.been.length === 1 ? 'gig' : 'gigs'}</span>`) + `<div class="dgrid">${P.been.map(beenCard).join('')}</div>`;
+    if (P.been.length) h += `<p class="note" style="margin-top:24px"><a href="#seen">See the ${P.been.length} ${P.been.length === 1 ? 'gig' : 'gigs'} ${P.me ? "you've" : esc(first()) + ' has'} been to →</a></p>`;
     return h;
   }
   function shelf(list) {
@@ -126,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function render() {
     if (!P) return;
     hero();
-    $('uBody').innerHTML = tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wantlist') : gigsTab();
+    $('uBody').innerHTML = tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wantlist') : tab === 'seen' ? seenTab() : tab === 'gigs' ? gigsTab() : activityTab();
     MY.paint();
   }
   function notFound(title, text) {
@@ -138,8 +184,9 @@ document.addEventListener('DOMContentLoaded', function () {
   async function load() {
     if (!uname) return notFound('Find your friends', 'Open a friend\'s Live Louder link, or search for them on the Friends tab of My gigs.');
     await ACC.session();
-    const [r, a] = await Promise.all([ACC.rpc('public_profile', {uname}), fetch(root + 'data/artists.json').then(x => x.json()).catch(() => ({}))]);
-    arts = a;
+    let [r, a] = await Promise.all([ACC.rpc('public_profile_v2', {uname}), fetch(root + 'data/artists.json').then(x => x.json()).catch(() => ({}))]);
+    if (r.error) r = await ACC.rpc('public_profile', {uname});
+    arts = a; window.LLARTS = a;
     if (r.error) return notFound('Couldn\'t load this profile', 'Something went wrong. Try again in a minute.');
     if (!r.data) return notFound('No one here by that name', 'Check the link, or search for your friend on the Friends tab of My gigs.');
     if (r.data.private) return notFound('This profile is private', 'This person hasn\'t shared their gigs and records.');
@@ -147,12 +194,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.title = `${P.name || P.username} on Live Louder`;
     setTab();
   }
-  function setTab() { const t = (location.hash || '#gigs').slice(1); tab = ['gigs', 'records', 'wantlist'].includes(t) ? t : 'gigs'; q = ''; shown = 60; render(); }
+  function setTab() { const t = (location.hash || '#activity').slice(1); tab = ['activity', 'gigs', 'seen', 'records', 'wantlist'].includes(t) ? t : 'activity'; q = ''; shown = 60; render(); }
   window.addEventListener('hashchange', () => { setTab(); const n = document.querySelector('.ptabs'); if (n) n.scrollIntoView({block: 'nearest'}); });
   window.MYPAGE = render;
   document.addEventListener('acc', render);
 
   box.addEventListener('click', async ev => {
+    const sw = ev.target.closest('[data-seen]');
+    if (sw) { openSeen = openSeen === sw.dataset.seen ? '' : sw.dataset.seen; render(); const pnl = document.getElementById('seenpanel'); if (pnl) pnl.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
     const f = ev.target.closest('[data-ufollow]');
     if (f) {
       if (!ACC.user()) { ACC.open(); return; }

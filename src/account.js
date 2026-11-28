@@ -242,6 +242,15 @@
     } catch (e) { return {error: "Couldn't send that. Try again."}; }
   }
   // Messages: report one sent to you (netlify/functions/report-message.mjs), optionally blocking the sender too.
+  async function reportPost(kind, id, reason) {
+    const t = await token();
+    if (!t) return {error: 'Please sign in to report this.'};
+    try {
+      const r = await fetch('/.netlify/functions/report-post', {method: 'POST', headers: {authorization: 'Bearer ' + t, 'content-type': 'application/json'}, body: JSON.stringify({kind, id, reason})});
+      const j = await r.json().catch(() => ({}));
+      return r.ok ? {} : {error: j.error || "Couldn't send that. Try again."};
+    } catch (e) { return {error: "Couldn't send that. Try again."}; }
+  }
   async function reportMessage(id, reason, block) {
     const t = await token();
     if (!t) return {error: 'Please sign in to report a message.'};
@@ -265,15 +274,38 @@
   const session = () => sessionP || (sessionP = ready().then(c => c && c.auth.getSession()).then(r => { if (r && r.data && r.data.session && !user) user = r.data.session.user; return user; }).catch(() => null));
 
   // Header dot, and tell the My gigs page to redraw.
+  // Header: signed out shows "My gigs"; signed in shows your photo (with a menu) and the Messages icon.
+  const escH = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  function meCard() {
+    const md = (user && user.user_metadata) || {}, p = profile || {};
+    const pic = p.avatar_url || md.avatar_url, name = p.display_name || md.full_name || p.username || (user && user.email || '').split('@')[0] || 'You';
+    let h = 0; for (const ch of String(p.username || (user && user.email) || 'x')) h = (h * 31 + ch.charCodeAt(0)) % 360;
+    document.querySelectorAll('.meimg').forEach(el => { el.style.setProperty('--h', h); el.innerHTML = pic ? `<img src="${escH(pic)}" alt="" referrerpolicy="no-referrer">` : `<b>${escH(name[0].toUpperCase())}</b>`; });
+    document.querySelectorAll('.mename').forEach(el => { el.textContent = name; });
+  }
+  let menuWired = false;
+  function wireMenu() {
+    if (menuWired) return; menuWired = true;
+    const close = () => document.querySelectorAll('.memenu').forEach(m => { m.hidden = true; const b = m.parentNode.querySelector('.meavbtn'); if (b) b.setAttribute('aria-expanded', 'false'); });
+    document.addEventListener('click', ev => {
+      const b = ev.target.closest('.meavbtn');
+      if (b) { const m = b.parentNode.querySelector('.memenu'), open = m.hidden; close(); m.hidden = !open; b.setAttribute('aria-expanded', String(open)); return; }
+      if (ev.target.closest('[data-signout]')) { close(); signOut(); return; }
+      if (!ev.target.closest('.memenu') || ev.target.closest('.memenu a')) close();
+    });
+    document.addEventListener('keydown', ev => { if (ev.key === 'Escape') close(); });
+  }
   function ui() {
-    document.querySelectorAll('.mylink').forEach(a => a.classList.toggle('in', !!user));
+    document.querySelectorAll('.mylink').forEach(a => { a.classList.toggle('in', !!user); a.hidden = !!user; });
+    document.querySelectorAll('.meav').forEach(a => { a.hidden = !user; });
+    if (user) { meCard(); wireMenu(); }
     document.querySelectorAll('.msglink').forEach(a => { a.hidden = !user; });
     document.dispatchEvent(new CustomEvent('acc'));
   }
 
   window.ACC = {push, user: () => user, profile: () => profile, open: openSignIn, signOut, deleteAccount, setPref,
                 syncing: () => merging, ready: () => !!sb, saveProfile, rpc, session, setPhoto, removePhoto, reportPhoto, rateGig, diary, removeGigPhoto,
-                reportMessage, client: ready};
+                reportMessage, reportPost, client: ready};
   ui();
   if (needed) ready().then(c => c && c.auth.getSession()).then(r => {
     if (r && r.data && r.data.session) { user = r.data.session.user; ui(); merge(); }

@@ -354,7 +354,7 @@ window.MY = (function () {
   // drop gigs that have happened
   Object.keys(st.gigs).forEach(k => { if (st.gigs[k].d < today && !st.gigs[k].going) delete st.gigs[k]; }); // gigs you went to stay, as your history
   function badge() {
-    const n = Object.values(st.gigs).filter(g => g.d >= today).length + Object.keys(st.artists).length;
+    const n = Object.values(st.gigs).filter(g => g.d >= today).length;  // upcoming saved gigs (shown in the account menu)
     document.querySelectorAll('.mycount').forEach(b => { b.textContent = n; b.hidden = !n; });
   }
   function paint() {

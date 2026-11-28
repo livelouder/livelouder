@@ -509,6 +509,10 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
 <a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
 <a class="msglink" href="{r}messages.html" hidden aria-label="Messages" title="Messages"><span aria-hidden="true">💬</span><span class="msgcount" hidden></span></a>
+<div class="meav" hidden><button type="button" class="meavbtn" aria-haspopup="true" aria-expanded="false" aria-label="Your account"><span class="meimg"></span><span class="mecaret" aria-hidden="true">▾</span></button>
+<div class="memenu" hidden><a class="memh" href="{r}my-gigs.html"><span class="meimg"></span><span><strong class="mename">You</strong><small>View your profile</small></span></a>
+<a href="{r}my-gigs.html#gigs"><span>♥ Saved gigs</span><span class="mycount" hidden></span></a><a href="{r}messages.html"><span>💬 Messages</span><span class="msgcount" hidden></span></a>
+<a href="{r}my-gigs.html#friends"><span>👥 Friends</span></a><a href="{r}my-gigs.html#settings"><span>⚙ Settings</span></a><button type="button" data-signout><span>Sign out</span></button></div></div>
 <button class="menu" type="button" aria-expanded="false" aria-controls="mainnav"><span aria-hidden="true">☰</span> Menu</button><nav id="mainnav" aria-label="Main">{nav}<button class="installbtn" type="button" hidden>📲 Get the app</button></nav>
 <form class="hsearch" action="{r}gigs/index.html" role="search"><input type="search" name="q" placeholder="Search gigs" aria-label="Search gigs"></form></div></header>{subnav}
 <main>{body}</main>
@@ -1690,15 +1694,15 @@ page("on-sale.html", "Tickets on sale soon: presales and on-sale times in Austra
      extra_head='<script src="/gigsui.js" defer></script>')
 
 # ---------------------------------------------------------------- my gigs (saved on the visitor's device)
-mg = """<div id="profile">
-<section class="phero" id="pHero"><button type="button" class="pcover" id="pCover" hidden>📷 Add a cover photo</button>
+mg = """<div id="profile" class="p2">
+<section class="pban" id="pHero"><button type="button" class="pcover" id="pCover" hidden>📷 Change cover</button></section>
 <input type="file" accept="image/*" id="pFile" hidden>
-<div class="wrap phero-in"><div class="pavwrap"><div class="pav" id="pAv" aria-hidden="true">♥</div><button type="button" class="pcam" id="pCam" hidden aria-label="Change profile photo">📷</button></div>
-<div class="pwho"><h1 id="pName">My gigs</h1><p id="pSub">Your gigs, your artists and your records, all in one place.</p></div>
-<div id="pCta"></div></div><div class="wrap"><div class="pstats" id="pStats"></div></div></section>
+<div class="wrap pid"><div class="pavwrap"><div class="pav" id="pAv" aria-hidden="true">♥</div><button type="button" class="pcam" id="pCam" hidden aria-label="Change profile photo">📷</button></div>
+<div class="pwho"><h1 id="pName">My gigs</h1><p class="phandle" id="pHandle"></p></div><div id="pCta" class="pbtns"></div></div>
+<div class="wrap"><p class="pbio" id="pSub">Your gigs, your artists and your records, all in one place.</p><p class="pstats2" id="pStats"></p></div>
 <nav class="ptabs" aria-label="My gigs sections"><div class="wrap">
-<a href="#overview" data-tab="overview">Overview</a><a href="#gigs" data-tab="gigs">Gigs</a><a href="#artists" data-tab="artists">Artists</a>
-<a href="#records" data-tab="records">Records</a><a href="#wantlist" data-tab="wantlist">Wantlist</a><a href="#friends" data-tab="friends">Friends</a><a href="#settings" data-tab="settings">Settings</a></div></nav>
+<a href="#overview" data-tab="overview">Activity</a><a href="#gigs" data-tab="gigs">Gigs</a><a href="#seen" data-tab="seen">Seen live</a>
+<a href="#records" data-tab="records">Records</a><a href="#artists" data-tab="artists">Artists</a><a href="#friends" data-tab="friends">Friends</a></div></nav>
 <section class="band pbody"><div class="wrap" id="pBody"><p class="note">Loading…</p></div></section>
 <dialog id="recDlg" aria-label="Record details"><form method="dialog" class="sclose"><button aria-label="Close">×</button></form><div id="recBody"></div></dialog>
 </div>
@@ -1713,10 +1717,11 @@ msgp = """<div id="msgs" class="msgs"><div class="wrap msgwrap">
 page("messages.html", "Messages | Live Louder", "Chat with your friends on Live Louder.", msgp, extra_head='<meta name="robots" content="noindex">')
 
 # ---------------------------------------------------------------- shared profiles (/u/<username>, filled in by people.js)
-pub = """<div id="pub">
-<section class="phero" id="uHero"><div class="wrap phero-in"><div class="pav" id="uAv" aria-hidden="true">♥</div>
-<div class="pwho"><h1 id="uName">Loading…</h1><p id="uSub"></p></div><div id="uCta" class="pbtns"></div></div>
-<div class="wrap"><div class="pstats" id="uStats"></div></div></section>
+pub = """<div id="pub" class="p2">
+<section class="pban" id="uHero"></section>
+<div class="wrap pid"><div class="pavwrap"><div class="pav" id="uAv" aria-hidden="true">♥</div></div>
+<div class="pwho"><h1 id="uName">Loading…</h1><p class="phandle" id="uHandle"></p></div><div id="uCta" class="pbtns"></div></div>
+<div class="wrap"><p class="pbio" id="uSub"></p><p class="pstats2" id="uStats"></p></div>
 <nav class="ptabs" aria-label="Profile sections"><div class="wrap" id="uTabs"></div></nav>
 <section class="band pbody"><div class="wrap" id="uBody"><p class="note">Loading…</p></div></section>
 </div>
@@ -1839,7 +1844,7 @@ pv = """<section class="page-title"><div class="wrap"><h1>Privacy</h1><p>What we
 <p>When you sign in (with an email link or with Google) we keep:</p>
 <ul><li>your email address, and your name if you sign in with Google</li><li>the gigs you save, whether you're going, and the artists you follow</li><li>the records in your collection and wantlist</li><li>your username, the name you choose to show, and the profile and cover photos you upload, if you add them</li><li>the people you follow and who follows you, and anyone you've blocked</li><li>messages you send and receive</li><li>your Discogs username, if you link it</li><li>your email settings (gig reminders, presale alerts)</li></ul>
 <p>We use these only to run your account: showing your gigs on every device and sending the reminder emails you've switched on. Accounts are stored with Supabase in their Sydney data centre.</p>
-<p>If you import from Discogs, we copy your public collection and wantlist into your Live Louder collection. You can remove records any time.</p><h2>Sharing your profile</h2><p>New accounts get a shared profile, so friends can find and follow you. You can make yours private any time: untick "Share my profile" in My gigs, Settings. (Accounts made before 27 November 2026 stay private unless the person switches sharing on.) When sharing is on, anyone with your link (livelouder.com.au/u/your-username) and people who follow you can see your name, username, photos, the gigs you've saved and are going to, and your record collection and wantlist. Your email address is never shown. Switch sharing off and your profile goes private straight away. Photos you upload are checked automatically by Google's SafeSearch service to keep the site friendly. They're stored at a web address that isn't listed anywhere, and are deleted when you remove them or delete your account. Anyone signed in can report a photo, and reported photos are hidden until we've looked at them.</p>
+<p>If you import from Discogs, we copy your public collection and wantlist into your Live Louder collection. You can remove records any time.</p><h2>Sharing your profile</h2><p>New accounts get a shared profile, so friends can find and follow you. You can make yours private any time: untick "Share my profile" in My gigs, Settings. (Accounts made before 27 November 2026 stay private unless the person switches sharing on.) When sharing is on, anyone with your link (livelouder.com.au/u/your-username) and people who follow you can see your name, username, bio, photos, posts and replies, the gigs you've saved and are going to and have been to, and your record collection and wantlist. Your email address is never shown. Switch sharing off and your profile goes private straight away. Photos you upload are checked automatically by Google's SafeSearch service to keep the site friendly. They're stored at a web address that isn't listed anywhere, and are deleted when you remove them or delete your account. Anyone signed in can report a photo, and reported photos are hidden until we've looked at them.</p><h2>Posts and replies</h2><p>Posts are short updates you write on your profile. If your profile is shared, anyone who can see your profile can see your posts, and people who follow you see them in their feed; if it's private, only you can see them. Friends can like a post and reply. You can delete your own posts and replies, and any reply on your own post, at any time. A small list of hateful words can't be posted. Anyone signed in can report a post or reply: it's hidden straight away until we've looked at it, and we may remove it or stop an account posting. Posts and replies are deleted when you delete your account.</p>
 <h2>Messages</h2>
 <p>You can send private messages to friends when you both follow each other. Messages are only shown to you and the person you're talking to. We don't read them, except when one is reported to us: then we see the reported message and that person's recent messages to the reporter, so we can decide whether to stop them messaging. Anyone can block someone, which stops them messaging or following you. "Delete conversation" removes it for you; the other person keeps their copy. When an account is deleted, every message it sent or received is deleted too. If a message isn't read within a few minutes, we may email you to say who it's from (never what it says). You can switch these emails off in Settings.</p>
 <h2>Emails</h2>
