@@ -902,3 +902,16 @@ body:has(#msgs) .signup{display:none}@media(max-width:760px){body:has(.msgs.mope
  .hxs.sq .hxcap{max-width:none;right:16px}
  .hxs.sq .hxcap strong{font-size:28px}
  .hxs.sq::after{background:linear-gradient(0deg,rgba(10,10,10,.9) 0,rgba(10,10,10,.45) 50%,rgba(10,10,10,.1) 100%)}}
+/* ---------------------------------------------------------------- artist page header (Nov 2026)
+   Blurred copy of the artist's photo behind (no red), name on the left, photo always on the right. */
+.page-title.artist{position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 80% 20%,hsl(var(--h,8) 55% 28%) 0,#141414 70%)}
+.page-title.artist.hasph{background:#141414}
+.page-title.artist .abg{position:absolute;inset:-40px;z-index:-1;background:var(--u) center/cover no-repeat;filter:blur(8px) brightness(.42) saturate(1.15)}
+.page-title.artist .ahead{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(16px,3vw,40px);flex-wrap:nowrap}
+.page-title.artist h1{overflow-wrap:break-word;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+.page-title.artist .hart{width:clamp(150px,28vw,400px);border-radius:12px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.page-title.artist .count-box{background:rgba(20,20,20,.85);backdrop-filter:blur(4px)}
+@media(max-width:600px){
+ .page-title.artist .ahead{grid-template-columns:minmax(0,1fr) 104px;align-items:start;gap:14px}
+ .page-title.artist .hart{width:104px}
+ .page-title.artist h1{font-size:clamp(30px,9vw,42px)}}

@@ -408,7 +408,8 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
             open_, tag_ = b_
             body = body.replace('<section class="page-title"><div class="wrap">', open_ + '<div class="wrap">' + tag_, 1)
     PLACE = None
-    r = "../" * path.count("/")
+    # The "not found" page can be shown at any address (e.g. /artists/typo.html), so its links must start from the root.
+    r = "/" if path == "404.html" else "../" * path.count("/")
     group = NAV_GROUP.get(active, active)
     nav = "".join(f'<a href="{r}{h}"{" aria-current=page" if h == group else ""}>{e(n)}</a>' for n, h in NAV)
     subnav = ""
@@ -1241,7 +1242,9 @@ for a in artists.values():
     dates_html = gig_list(sh, show_artist=False) if sh else '<p class="note">Dates to be announced. Check the tour announcement.</p>'
     cal = f'<a class="btn ghost" href="/artists/{a["slug"]}.ics">Add all dates to calendar</a>' if sh else ""
     vinyl = HEATHEN + quote_plus(a["name"].split(" & ")[0])
-    body = f"""<section class="page-title artist"><div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p><button class="saveartist" type="button" data-artist="{e(a['slug'])}" data-name="{e(a['name'])}" aria-pressed="false"><span aria-hidden="true">♡</span> Follow</button>{cd}</div>{art(a, 'art hart')}</div></section>
+    _ph = re.sub(r"/1000x1000-", "/500x500-", a.get("photo", ""))
+    _hs = (f' hasph" style="--u:url(&quot;{e(_ph)}&quot;)"><span class="abg" aria-hidden="true"></span>' if _ph else f'" style="--h:{hue(a["name"])}">')
+    body = f"""<section class="page-title artist{_hs}<div class="wrap ahead"><div><h1>{e(a['name'])}</h1><p>{e(title_tour)}{genre}</p><button class="saveartist" type="button" data-artist="{e(a['slug'])}" data-name="{e(a['name'])}" aria-pressed="false"><span aria-hidden="true">♡</span> Follow</button>{cd}</div>{art(a, 'art hart')}</div></section>
 <section class="band"><div class="wrap split"><div>{head}{note}
 <h2>{len(sh)} {'show' if len(sh) == 1 else 'shows'} in Australia</h2>{dates_html}{tour_map(a['cities'])}{setlist_html}{records_html}</div>
 <aside class="side">{listen}{follow}<div class="card"><h3>Before the show</h3><a class="btn" href="{vinyl}" rel="noopener">Find {e(a['name'])} on vinyl ↗</a>{cal}{src}</div>{extra_cards}</aside></div></section>"""
