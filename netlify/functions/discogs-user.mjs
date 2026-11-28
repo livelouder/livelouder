@@ -68,7 +68,7 @@ export default async (req) => {
       image: ((j.images || []).find((i) => i.type === "primary") || (j.images || [])[0] || {}).uri || "",
       tracks: (j.tracklist || []).filter((t) => t.type_ !== "heading").map((t) => [t.position || "", t.title || "", t.duration || ""]).slice(0, 40),
       have: 0, want: 0, url: j.uri || `https://www.discogs.com/master/${j.id}`, versions: j.num_for_sale || 0,
-    }, 200, "public, max-age=86400");
+    }, 200, "public, max-age=21600");
   }
   const rel = (q.get("release") || "").trim();
   if (rel) {
@@ -84,9 +84,9 @@ export default async (req) => {
       genres: [...(j.genres || []), ...(j.styles || [])].slice(0, 5),
       image: ((j.images || []).find((i) => i.type === "primary") || (j.images || [])[0] || {}).uri || "",
       tracks: (j.tracklist || []).filter((t) => t.type_ !== "heading").map((t) => [t.position || "", t.title || "", t.duration || ""]).slice(0, 40),
-      have: j.community?.have || 0, want: j.community?.want || 0,
+      have: j.community?.have || 0, want: j.community?.want || 0, master: j.master_id || 0,
       url: j.uri || `https://www.discogs.com/release/${j.id}`,
-    }, 200, "public, max-age=86400");
+    }, 200, "public, max-age=21600"); // Discogs asks that data shown is no more than 6 hours old
   }
   const u = (q.get("u") || "").trim();
   if (!/^[A-Za-z0-9_.\-]{1,40}$/.test(u)) return json({ error: "Enter a Discogs username (letters, numbers, dots, dashes)." }, 400, "no-store");
