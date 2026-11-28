@@ -87,3 +87,5 @@ Every push to `main` publishes automatically.
 - Blocking (menu in a conversation): they can't message or follow you, follows both ways are removed, they aren't told. "Delete conversation" hides it for you only.
 - Reporting: `netlify/functions/report-message.mjs` (signed-in, 10 a day, can block at the same time) emails Mick the message and their recent messages to that person. `message-review.mjs` is the page that email links to: "Stop them sending messages" adds them to `message_bans` (with an undo).
 - Emails: `netlify/functions/message-emails.mjs` runs every 20 minutes and emails people about messages unread for 10+ minutes, at most once every 3 hours, saying who it's from but never what it says. Switch off in Settings (`profiles.remind_messages`).
+
+<!-- Ticket links cleaned 28 Nov 2026 -->
