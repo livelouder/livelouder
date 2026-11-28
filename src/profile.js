@@ -187,6 +187,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   // How many times you've been to see this artist (from your gig history).
   function seenBy(a) { const k = norm(a); return lists().been.filter(x => norm(x.a) === k).length; }
+  const empty = (icon, title, text, btn) => `<div class="empty"><div class="eicon" aria-hidden="true">${icon}</div><h3>${title}</h3><p>${text}</p>${btn || ''}</div>`;
+  const head = (h, more) => `<div class="shead"><h2>${h}</h2>${more || ''}</div>`;
+  const linkForm = big => `<form class="dgform${big ? ' big' : ''}" data-dgform><input name="u" placeholder="Your Discogs username" aria-label="Discogs username" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(MY.get().discogs || '')}"><button class="btn ghost">${imp.loading ? 'Importing…' : 'Import from Discogs'}</button></form>${imp.msg ? `<p class="note impmsg">${imp.msg}</p>` : ''}`;
+  const searchForm = (ph) => `<form class="recsearch" data-recsearch role="search"><input name="q" type="search" placeholder="${ph || 'Search any album or artist to add it'}" aria-label="Search records" value="${esc(srch.q)}" autocomplete="off"><button class="btn">Search</button></form>`;
   function results() {
     if (srch.loading) return `<div class="loading"><span></span><span></span><span></span><span></span><p>Searching…</p></div>`;
     if (srch.error) return `<p class="err">${esc(srch.error)}</p>`;
