@@ -293,5 +293,535 @@
    "Tickets are sold per event through the festival's ticket page."
   ],
   "source": "https://superpositionfestival.ferve.tickets/"
+ },
+ {
+  "slug": "spilt-milk-2026",
+  "name": "Spilt Milk 2026",
+  "when": "12–20 December 2026",
+  "intro": "Spilt Milk tours four cities over two December weekends, with Lewis Capaldi (playing Australia only for this festival) and Raye on top. Geelong takes over from Ballarat as the Victorian stop this year.",
+  "dates": [
+   [
+    "2026-12-12",
+    "Canberra",
+    "Exhibition Park",
+    ""
+   ],
+   [
+    "2026-12-13",
+    "Gold Coast",
+    "Gold Coast Sports Precinct",
+    ""
+   ],
+   [
+    "2026-12-19",
+    "Geelong",
+    "Kardinia Park Stadium & Precinct",
+    ""
+   ],
+   [
+    "2026-12-20",
+    "Perth",
+    "Claremont Showground",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Lewis Capaldi",
+   "RAYE"
+  ],
+  "lineup": [
+   "Baby Keem",
+   "KETTAMA",
+   "Remi Wolf",
+   "Maisie Peters",
+   "DMA'S",
+   "Aleksiah",
+   "The Terrys",
+   "Miss Kaninna",
+   "Birdland (Perth)",
+   "Jaida-Rose (Perth)",
+   "Lowbrain (Perth)",
+   "Polly (Perth)"
+  ],
+  "tips": [
+   "General admission went out in staged releases, with prices climbing each release.",
+   "Add-on packages cover things like express entry, private toilets and bars, and elevated viewing."
+  ],
+  "source": "https://www.timeout.com/australia/news/how-to-get-tickets-to-spilt-milk-in-australia-2026-dates-prices-lineup-and-more-072426"
+ },
+ {
+  "slug": "lost-paradise-2026",
+  "name": "Lost Paradise 2026",
+  "when": "28 December 2026 – 1 January 2027",
+  "intro": "Lost Paradise marks 20 years of its promoters with a five-day New Year camping festival in Glenworth Valley, about an hour north of Sydney. John Summit, Skepta, KI/KI and Overmono lead a bill heavy on house, techno and drum and bass.",
+  "dates": [
+   [
+    "2026-12-28",
+    "Glenworth Valley",
+    "Glenworth Valley",
+    "camping"
+   ],
+   [
+    "2027-01-01",
+    "Glenworth Valley",
+    "Glenworth Valley",
+    "camping"
+   ]
+  ],
+  "headliners": [
+   "John Summit",
+   "Skepta",
+   "KI/KI",
+   "Overmono",
+   "Nia Archives"
+  ],
+  "lineup": [
+   "Armand Van Helden",
+   "Benwal",
+   "Caleb Jackson",
+   "Chaos In The CBD",
+   "Dameeeela",
+   "Dart",
+   "Dean Turnley",
+   "DJ Seinfeld (Live)",
+   "Drifting Clouds",
+   "Ewan McVicar",
+   "Flava D",
+   "Hamdi",
+   "Harry Hayes",
+   "Helena Lauwaert",
+   "Hot Dub Time Machine",
+   "Jamback",
+   "James Pepper B2B Baron Von Trax",
+   "Jayda G",
+   "Job Jobse",
+   "The Jungle Giants",
+   "Kirollus",
+   "Kyle Starkey",
+   "Loods",
+   "Luuk Van Dijk",
+   "Memphis LK",
+   "Mella Dee",
+   "Ned Bennett",
+   "Not Without Friends (Ext. Set)",
+   "Osmosis Jones",
+   "Partiboi69",
+   "Pretty Girl (Live)",
+   "Riordan",
+   "Rossi.",
+   "Saint Ludo",
+   "Salute",
+   "SAM Alfred",
+   "Soul Mass Transit System",
+   "Stacie Fields",
+   "Supergloss",
+   "Tommy Holohan",
+   "Twofaced",
+   "Willo"
+  ],
+  "tips": [
+   "Every ticket includes general camping.",
+   "Stages include Arcadia, Lost Disco and Paradise Club, with an art hub at Shambhala Fields."
+  ],
+  "source": "https://www.lostparadise.com.au/"
+ },
+ {
+  "slug": "beyond-the-valley-2026",
+  "name": "Beyond The Valley 2026",
+  "when": "28 December 2026 – 1 January 2027",
+  "intro": "Beyond The Valley starts its second decade at Barunah Plains in western Victoria, with John Summit, Black Eyed Peas, Vince Staples and The Veronicas on New Year's Eve and KI/KI playing a three-hour set on opening night.",
+  "dates": [
+   [
+    "2026-12-28",
+    "Barunah Plains",
+    "Barunah Plains",
+    "camping"
+   ],
+   [
+    "2027-01-01",
+    "Barunah Plains",
+    "Barunah Plains",
+    "camping"
+   ]
+  ],
+  "headliners": [
+   "John Summit",
+   "Black Eyed Peas",
+   "Vince Staples",
+   "KI/KI",
+   "Overmono"
+  ],
+  "lineup": [
+   "The Veronicas",
+   "Skepta",
+   "Nia Archives",
+   "Disco Lines",
+   "Armand Van Helden",
+   "Ocean Valley",
+   "Hannah Laing",
+   "Funk Tribu",
+   "Jayda G",
+   "BIIANCO",
+   "Bryson Hill",
+   "DELULU",
+   "SPFDJ",
+   "Jackie Hollander",
+   "Odd Mob",
+   "MPH",
+   "Riordan",
+   "Rossi.",
+   "oskar med k",
+   "Yikes",
+   "CRŸBABY",
+   "Club Angel",
+   "WVCHWY",
+   "JUPiTA b2b bbsanii",
+   "Afrodisiac",
+   "Lex",
+   "DJ PGZ",
+   "Dean Turnley",
+   "WOLTERS",
+   "TWOFACED"
+  ],
+  "tips": [
+   "Headliners are spread across the days, so check the day-by-day line-up before planning your arrival.",
+   "The 2025 edition sold out in under an hour."
+  ],
+  "source": "https://beyondthevalley.com.au/"
+ },
+ {
+  "slug": "woodford-folk-festival-2026",
+  "name": "Woodford Folk Festival 2026/27",
+  "when": "27 December 2026 – 1 January 2027",
+  "intro": "The 39th Woodford Folk Festival fills Woodfordia, north of Brisbane, for six days over New Year, mixing folk and roots with rock, cabaret, First Nations culture and talks. DZ Deathrays make their debut alongside Peter Garrett & The Alter Egos and The Dreggs.",
+  "dates": [
+   [
+    "2026-12-27",
+    "Woodford",
+    "Woodfordia",
+    "camping"
+   ],
+   [
+    "2027-01-01",
+    "Woodford",
+    "Woodfordia",
+    "camping"
+   ]
+  ],
+  "headliners": [
+   "DZ Deathrays",
+   "Peter Garrett & The Alter Egos",
+   "The Dreggs",
+   "Kate Miller-Heidke"
+  ],
+  "lineup": [
+   "Playlunch",
+   "Pierce Brothers",
+   "Kim Churchill",
+   "Georgia Mooney",
+   "Jem Cassar-Daley",
+   "Frank Yamma",
+   "Stiff Gins",
+   "The Maes",
+   "Elsy Wameyo",
+   "DEVAURA",
+   "Stella Bridie",
+   "Jamaica Moana",
+   "Birdland",
+   "Sons of the East",
+   "The Herd",
+   "Emma Donovan",
+   "Tim Freedman's Moonlit Deck",
+   "Theia",
+   "The East Pointers",
+   "Katherine Priddy",
+   "Flook",
+   "Jess Hitchcock",
+   "Pirritu",
+   "Charlie Needs Braces",
+   "Reuben Kaye"
+  ],
+  "tips": [
+   "Day and season tickets are sold with or without camping.",
+   "Stardust Songwriters runs a nightly folk club in an alcohol-free area.",
+   "The festival closes with the Sunrise Ceremony on New Year's Day."
+  ],
+  "source": "https://au.rollingstone.com/music/music-news/woodford-folk-festival-2026-102349/"
+ },
+ {
+  "slug": "wildlands-2026",
+  "name": "Wildlands 2026/27",
+  "when": "31 December 2026 – 2 January 2027",
+  "intro": "Wildlands brings a one-day dance and hip-hop festival to Brisbane on New Year's Eve and Perth two days later, led by John Summit, Skepta and an Australian-exclusive set from WORSHIP.",
+  "dates": [
+   [
+    "2026-12-31",
+    "Brisbane",
+    "Brisbane Showgrounds",
+    ""
+   ],
+   [
+    "2027-01-02",
+    "Perth",
+    "Arena Joondalup",
+    ""
+   ]
+  ],
+  "headliners": [
+   "John Summit",
+   "Skepta",
+   "WORSHIP",
+   "KI/KI",
+   "Disco Lines"
+  ],
+  "lineup": [
+   "Anetha B2B SPFDJ",
+   "Benwal B2B Kyle Starkey",
+   "Dean Turnley",
+   "Ewan McVicar",
+   "Frost Children",
+   "Funk Tribu",
+   "Groove Junction (Perth)",
+   "Hamdi",
+   "Hannah Laing",
+   "KT (Perth)",
+   "Layton Giordani",
+   "Lens",
+   "MPH",
+   "MYASWRLD (Brisbane)",
+   "Nia Archives",
+   "nikitasilly (Brisbane)",
+   "Oppidan",
+   "Overmono",
+   "Robert Baxter",
+   "Saint Ludo",
+   "Yikes"
+  ],
+  "tips": [
+   "There are three stages: the open-air Sahara Stage, the tented Summit Stage and the new Wilds Stage."
+  ],
+  "source": "https://www.thenote.com.au/news/wildlands-festival-reveals-2026-27-lineup"
+ },
+ {
+  "slug": "south-west-dub-fest-2027",
+  "name": "South West Dub Fest 2027",
+  "when": "2–3 January 2027",
+  "intro": "After a sold-out first year, this sound-system festival at Cheeky Monkey Brewing in Wilyabrup grows to two evenings, with France's O.B.F. on the Sunday and the Red Earth Sound System running all weekend.",
+  "dates": [
+   [
+    "2027-01-02",
+    "Wilyabrup",
+    "Cheeky Monkey Brewing Co",
+    "All ages"
+   ],
+   [
+    "2027-01-03",
+    "Wilyabrup",
+    "Cheeky Monkey Brewing Co",
+    "All ages"
+   ]
+  ],
+  "headliners": [
+   "O.B.F."
+  ],
+  "lineup": [
+   "Red Earth Sound System 2.0"
+  ],
+  "tips": [
+   "Under-12s get in free with a ticketed parent or guardian, but need to be registered ahead.",
+   "There's no camping on site, so book accommodation nearby.",
+   "Return buses run from Margaret River, Cowaramup and Dunsborough for $25 a day, sold separately."
+  ],
+  "source": "https://events.humanitix.com/south-west-dub-fest-2027"
+ },
+ {
+  "slug": "tamworth-country-music-festival-2027",
+  "name": "Tamworth Country Music Festival 2027",
+  "when": "15–24 January 2027",
+  "intro": "The 55th Tamworth Country Music Festival takes over the whole city for ten days, with Lee Kernaghan and Troy Cassar-Daley headlining at TRECC and the Golden Guitar Awards on the final Saturday.",
+  "dates": [
+   [
+    "2027-01-15",
+    "Tamworth",
+    "Venues across Tamworth",
+    ""
+   ],
+   [
+    "2027-01-24",
+    "Tamworth",
+    "Venues across Tamworth",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Lee Kernaghan",
+   "Troy Cassar-Daley"
+  ],
+  "lineup": [
+   "Adam Harvey",
+   "Amber Lawrence",
+   "The Wolfe Brothers",
+   "Max Jackson",
+   "Tyla Rodrigues",
+   "Jarrad Wrigley",
+   "Dear Tommie",
+   "Robbie Mortimer",
+   "Fanny Lumsden",
+   "John Butler",
+   "Kaylee Bell",
+   "Travis Collins",
+   "Waylon Wyatt",
+   "Lyn Bowtell",
+   "Ashleigh Dallas",
+   "Sara Storer",
+   "Shane Nicholson",
+   "Felicity Urquhart & Josh Cunningham",
+   "Kristy Cox",
+   "Hussy Hicks",
+   "Catherine Britt",
+   "Joe Camilleri & The Black Sorrows",
+   "The Screaming Jets",
+   "The Bushwackers",
+   "Beccy Cole",
+   "Brooke McClymont & Adam Eckersley",
+   "Busby Marou",
+   "Dan Sultan",
+   "James Blundell",
+   "Mitch Tambo",
+   "Kevin Bennett & The Flood",
+   "Henry Wagons",
+   "Karise Eden",
+   "Andrew Swift",
+   "Midnight Chicken",
+   "Dee White",
+   "Clint Wilson",
+   "Colin Buchanan",
+   "Gretta Ziller",
+   "19-Twenty",
+   "Sunday Lemonade"
+  ],
+  "tips": [
+   "Shows run at venues all over town, including the Town Hall, Capitol Theatre, The Longyard and the Bluebird Room.",
+   "Toyota Park has a themed day most days, from Americana in the Park to a Bluegrass Hoedown.",
+   "Hundreds more free and ticketed shows are still being added to the program."
+  ],
+  "source": "https://www.tamworth.nsw.gov.au/about/news/latest-news/2026/july/tamworth-country-music-festival-first-line-up-announced"
+ },
+ {
+  "slug": "boyup-brook-country-music-muster-2027",
+  "name": "Boyup Brook Country Music Muster 2027",
+  "when": "19–21 February 2027",
+  "intro": "WA's biggest country music festival turns 40 in Boyup Brook, with the WA Country Music Awards held over the weekend. Line-up to be announced.",
+  "dates": [
+   [
+    "2027-02-19",
+    "Boyup Brook",
+    "Music Park, Jackson Street",
+    ""
+   ],
+   [
+    "2027-02-21",
+    "Boyup Brook",
+    "Music Park, Jackson Street",
+    ""
+   ]
+  ],
+  "headliners": [],
+  "lineup": [],
+  "tips": [
+   "Temporary community campsites are set up within walking distance of the Music Park."
+  ],
+  "source": "https://www.boyupbrook.wa.gov.au/annual-events.aspx"
+ },
+ {
+  "slug": "nannup-music-festival-2027",
+  "name": "Nannup Music Festival 2027",
+  "when": "26 February – 1 March 2027",
+  "intro": "The 38th Nannup Music Festival fills the small South West town with folk, roots and world music across ten free and ticketed stages over the Labour Day long weekend, with Kasey Chambers, Mia Dyson and The Inspector Cluzo among more than a hundred acts.",
+  "dates": [
+   [
+    "2027-02-26",
+    "Nannup",
+    "Venues around Nannup",
+    ""
+   ],
+   [
+    "2027-03-01",
+    "Nannup",
+    "Venues around Nannup",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Kasey Chambers",
+   "Mia Dyson",
+   "The Inspector Cluzo",
+   "Emily Barker",
+   "Bobby Alu"
+  ],
+  "lineup": [
+   "The Burning Hell",
+   "Grace Petrie",
+   "Jordie Lane",
+   "Scott Cook",
+   "Brett Newski",
+   "Fran Lusty",
+   "Jenny Mitchell",
+   "Flora Falls",
+   "Charlie Needs Braces",
+   "Midnight Chicken",
+   "Sunday Lemonade",
+   "19-Twenty",
+   "Georgie Winchester",
+   "Glenn Skuthorpe",
+   "Loren Kate",
+   "Maggie Carty",
+   "Tom Harrington",
+   "Winter McQuinn",
+   "Zac Gunthorpe",
+   "Selfless Orchestra",
+   "DOWNSYDE",
+   "Dilip 'n the Davs",
+   "Grand Casual",
+   "Stack of Bibles",
+   "Delilah Rose & the All Star Ladies of Rock",
+   "Roysen Local String Band",
+   "Balaclava Peace Collective",
+   "Casii Williams",
+   "Lake Mammoth",
+   "Riley Catherall"
+  ],
+  "tips": [
+   "There's a festival campground, and campers are asked to leave the car there and ride the Cruisy Bus into town.",
+   "Some stages are free and others ticketed.",
+   "Kids' activities and workshops run through the weekend."
+  ],
+  "source": "https://www.nannupmusicfestival.org"
+ },
+ {
+  "slug": "national-folk-festival-2027",
+  "name": "National Folk Festival 2027",
+  "when": "25–29 March 2027",
+  "intro": "The National Folk Festival gathers the folk community in Canberra over the Easter long weekend for five days of music, dance and workshops. The first artists are on the festival site, with more names still to come; line-up to be announced in full.",
+  "dates": [
+   [
+    "2027-03-25",
+    "Canberra",
+    "Exhibition Park in Canberra",
+    ""
+   ],
+   [
+    "2027-03-29",
+    "Canberra",
+    "Exhibition Park in Canberra",
+    ""
+   ]
+  ],
+  "headliners": [],
+  "lineup": [],
+  "tips": [
+   "Early bird tickets are on sale through the festival website."
+  ],
+  "source": "https://www.folkfestival.org.au/artists2027"
  }
 ]
