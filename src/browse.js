@@ -38,7 +38,7 @@
     var card = function (x, city) {
       var my = city ? x.d.filter(function (r) { return r[1] === city; }) : [];
       var img = x.p ? '<a class="tc2i" href="' + root + 'artists/' + x.s + '.html" style="background-image:url(&quot;' + esc(x.p) + '&quot;)" aria-hidden="true" tabindex="-1"></a>'
-        : '<a class="tc2i tc2n" href="' + root + 'artists/' + x.s + '.html" style="--h:' + x.h + '" aria-hidden="true" tabindex="-1"><span>' + esc(x.n) + '</span></a>';
+        : '<a class="tc2i tc2n" href="' + root + 'artists/' + x.s + '.html" aria-hidden="true" tabindex="-1">' + (window.LLPOSTER ? LLPOSTER.big(x.n, x.gs) : '') + '</a>';
       var cs = []; x.d.forEach(function (r) { if (cs.indexOf(r[1]) < 0) cs.push(r[1]); });
       var when, more, btn;
       if (my.length) {

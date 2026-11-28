@@ -1028,8 +1028,8 @@ a.resale{color:#b26b00}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
 .tc2{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .tc2i{display:block;aspect-ratio:16/10;background-size:cover;background-position:center 30%}
-.tc2n{display:flex;align-items:flex-end;padding:12px;background:hsl(var(--h) 55% 32%);text-decoration:none}
-.tc2n span{font:400 28px/1 "Anton",Impact,sans-serif;color:#fff;text-transform:uppercase}
+.tc2n{position:relative;overflow:hidden;text-decoration:none}
+.tc2n .gcpic{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:0}
 .tc2b{display:flex;flex-direction:column;gap:3px;padding:12px 14px 14px;flex:1}
 .tc2b h3{font-size:24px}.tc2b h3 a{color:var(--ink);text-decoration:none}
 .tc2t{margin:0;color:var(--muted);font-size:14px}
@@ -1048,9 +1048,6 @@ a.resale{color:#b26b00}
 .azw{position:relative;display:block}
 .azp{display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--card)}
 .azp img{width:100%;height:100%;object-fit:cover;display:block}
-.azn{display:flex;align-items:flex-end;padding:10px;background:hsl(var(--h) 55% 32%)}
-.azn span{font:400 21px/1.02 "Anton",Impact,sans-serif;color:#fff;text-transform:uppercase;overflow-wrap:anywhere}
-.azn.azlong span{font-size:16px}
 .azw em{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font:700 11px/1 "Archivo",sans-serif;font-style:normal;padding:4px 7px;border-radius:99px}
 .azt b{font-size:15px;line-height:1.2;margin-top:5px}.azt small{font-size:12.5px;color:var(--muted)}
 @media (max-width:600px){
@@ -1060,8 +1057,6 @@ a.resale{color:#b26b00}
  .bchips{flex-wrap:nowrap}
  .azl{flex-wrap:nowrap}
  .tgrid{grid-template-columns:1fr 1fr;gap:10px}.tc2b{padding:10px}.tc2b h3{font-size:18px}.tc2t,.tc2m{display:none}.tc2d{font-size:13px}.tc2btn{font-size:13px;padding:8px 12px}
- .tc2n span{font-size:20px}
  .azg{grid-template-columns:repeat(3,1fr);gap:10px}.azt b{font-size:13px}.azt small{font-size:11px}
- .azn{padding:7px}.azn span{font-size:15px}.azn.azlong span{font-size:12px}
  .azsec h2{font-size:36px}
 }

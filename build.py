@@ -1427,7 +1427,7 @@ def aztile(a):
     nx = sh[0] if sh else None
     ph = small_photo(a.get("photo", ""), "250x250")
     pic = (f'<span class="azp"><img src="{e(ph)}" alt="" loading="lazy"></span>' if ph
-           else f'<span class="azp azn{" azlong" if len(a["name"]) > 22 else ""}" style="--h:{hue(a["name"])}"><span>{e(a["name"])}</span></span>')
+           else poster(a["name"], a.get("gb", ""), "azp", "span"))
     badge = f'<em>{len(sh)} shows</em>' if len(sh) > 2 else ""
     nxt = f'<small>Next: {d(nx["date"]).strftime("%-d %b")} · {e(nx["city"])}</small>' if nx else '<small>No dates yet</small>'
     cities = "|".join(dict.fromkeys(s_["city"] for s_ in sh))
@@ -1484,12 +1484,12 @@ for t in big:
         u_ = s_.get("url") or ""
         ds_.append([s_["date"], s_["city"], s_["venue"], add_utm(u_, "tour") if u_ and link_kind(u_) != "info" else ""])
     tour_data.append({"s": a_["slug"], "n": t["artist"], "t": t.get("tour", ""), "g": a_.get("gb", ""), "p": small_photo(a_.get("photo", "")),
-                      "h": hue(t["artist"]), "so": 1 if t.get("soldout") else 0, "d": ds_})
+                      "h": hue(t["artist"]), "gs": slug(a_.get("gb", "")), "so": 1 if t.get("soldout") else 0, "d": ds_})
 def _dshort(x):
     return d(x).strftime("%-d %b")
 def tcard(x):
     img = (f'<a class="tc2i" href="/artists/{x["s"]}.html" style="background-image:url(&quot;{e(x["p"])}&quot;)" aria-hidden="true" tabindex="-1"></a>' if x["p"]
-           else f'<a class="tc2i tc2n" href="/artists/{x["s"]}.html" style="--h:{x["h"]}" aria-hidden="true" tabindex="-1"><span>{e(x["n"])}</span></a>')
+           else f'<a class="tc2i tc2n" href="/artists/{x["s"]}.html" aria-hidden="true" tabindex="-1">{poster(x["n"], x["g"])}</a>')
     cs = list(dict.fromkeys(r[1] for r in x["d"]))
     if x["d"]:
         when = _dshort(x["d"][0][0]) + (f' – {_dshort(x["d"][-1][0])}' if x["d"][-1][0] != x["d"][0][0] else "")
