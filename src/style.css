@@ -971,3 +971,10 @@ body:has(#msgs) .signup{display:none}@media(max-width:760px){body:has(.msgs.mope
 .stubs .gcpic.ps.poster,.art.ps.poster{justify-content:center;padding-bottom:0!important}
 @media(max-width:600px){.nearlist .ps.poster .plive{display:none}.nearlist .gcpic.ps.poster{padding-bottom:6%!important}
  .nearlist .ps.poster.pl-s .pn{font-size:16cqw}.nearlist .ps.poster.pl-m .pn{font-size:11.5cqw}.nearlist .ps.poster.pl-l .pn{font-size:9.5cqw}.nearlist .ps.poster.pl-xl .pn{font-size:8cqw}}
+/* Ticket link states (Nov 2026) */
+.tag.soldout{background:#141414;color:#fff;margin:0 0 2px}
+.ga .soldout+a{font-size:13.5px}
+.btn.big.soldout{background:#3a3a3a;color:#fff;cursor:default;border-color:#3a3a3a}
+a.resale{color:#b26b00}
+.btn.big.resale{background:#b26b00;border-color:#b26b00}
+.gp-src a{color:inherit}

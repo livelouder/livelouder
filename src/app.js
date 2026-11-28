@@ -1,3 +1,17 @@
+// Ticket links: same rules as link_kind() in build.py. 'tickets' = buy here, 'resale' (Tixel etc.), 'info' = listing/news page.
+window.LLLINK = (() => {
+  const RESALE = ['tixel.com', 'viagogo.com', 'viagogo.com.au', 'stubhub.com', 'stubhub.com.au', 'twickets.live', 'ticketswap.com'];
+  const INFO = ['songkick.com', 'jambase.com', 'allevents.in', 'musick.com.au', 'tasguide.com.au', 'pubsandevents.com.au', 'russh.com',
+    'bandsintown.com', 'concertarchives.org', 'setlist.fm', 'whatson.com.au', 'timeout.com', 'themusic.com.au', 'musicfeeds.com.au',
+    'rollingstone.com', 'au.rollingstone.com', 'variety.com', 'au.variety.com', 'theaureview.com', 'happymag.tv', 'abc.net.au',
+    'beat.com.au', 'tonedeaf.thebrag.com', 'thebrag.com', 'concertful.com', 'songkick.net', 'facebook.com', 'instagram.com',
+    'visitnsw.com', 'visitvictoria.com', 'concerty.com', 'ents24.com', 'livemusic.com.au', 'gigguide.com.au'];
+  const host = u => { const m = /^https?:\/\/([^/]+)/i.exec(u || ''); return m ? m[1].toLowerCase().replace(/^www\./, '') : ''; };
+  const is = (h, list) => list.some(x => h === x || h.endsWith('.' + x));
+  const kind = u => { const h = host(u); return !h ? 'info' : is(h, RESALE) ? 'resale' : is(h, INFO) ? 'info' : 'tickets'; };
+  return {host, kind};
+})();
+
 // Gig-poster artwork for acts with no photo, styled by genre (same rules as build.py's poster()).
 window.LLPOSTER = (() => {
   const byGenre = {'rock': 'grit', 'metal-and-heavy': 'grit', 'punk': 'grit', 'country-and-folk': 'paper', 'soul-blues-and-jazz': 'paper',
@@ -84,6 +98,13 @@ window.LL = (function () {
     const weekend = () => { const dow = now.getDay(); return [[5, 6, 0].includes(dow) ? today : addDays(5 - dow), addDays((7 - dow) % 7)]; };
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const longM = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const buy = (s, gp) => {
+      const k = LLLINK.kind(s[7]), tk = `data-tk="${k}" data-seller="${esc(LLLINK.host(s[7]))}" data-artist="${esc(s[2])}" data-venue="${esc(s[4])}" data-city="${esc(s[6])}"`;
+      if (s[18] === 'sold out') return `<span class="tag soldout">Sold out</span><a href="${esc(s[7])}" rel="noopener" ${tk}>${k === 'resale' ? 'Resale' : 'Waitlist / resale'} ↗</a>`;
+      if (k === 'tickets') return `<a href="${esc(s[7])}" rel="noopener" ${tk}>Tickets ↗</a>`;
+      if (k === 'resale') return `<a class="resale" href="${esc(s[7])}" rel="noopener" ${tk}>Resale tickets ↗</a>`;
+      return `<a href="${gp}">Details →</a>`;
+    };
     function render() {
       const term = q.value.trim().toLowerCase(), c = city.value, g = genre ? genre.value : '';
       let lo = today, hi = '9999';
@@ -102,7 +123,7 @@ window.LL = (function () {
           : LLPOSTER.small(s[2], s[12], gp);
         html += `<li class="gig th"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div>${th}<div class="gi"><a class="gname" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${esc(s[2])}</a>` +
           (s[8] ? `<span class="gsup">with ${esc(s[8])}</span>` : '') + `<span class="gw"><a class="vlink" href="${root}venues/${esc(s[11])}.html">${esc(s[4])}</a>, ${esc(s[6])} · ${day}${s[1] ? ' ' + esc(s[1]) : ''}</span></div>` +
-          `<div class="ga"><a href="${esc(s[7])}" rel="noopener">${['ticketmaster', 'submitted', 'found'].includes(s[9]) ? 'Tickets' : 'Details'} ↗</a><span class="ga2"><a class="cal" href="${esc(s[10])}" rel="noopener">+ Calendar</a>` +
+          `<div class="ga">${buy(s, gp)}<span class="ga2"><a class="cal" href="${esc(s[10])}" rel="noopener">+ Calendar</a>` +
           `<button class="save" type="button" data-gig="${esc(JSON.stringify({id: s[13], d: s[0], tm: s[1], a: s[2], s: s[3], v: s[4], c: s[6], u: s[7], vs: s[11], p: s[14]}))}" aria-pressed="false" title="Save to My gigs" aria-label="Save to My gigs">♡</button></span></div></li>`;
       }
       out.innerHTML = html + (month ? '</ul>' : '');
