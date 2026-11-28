@@ -780,9 +780,12 @@ def slide(label, title, sub, href, cta, a=None, square="", seed=""):
     sq = square or ((a or {}).get("photo", "") if not wide else "")
     pic = wide or sq
     kind = "wide" if wide else ("sq" if sq else "plain")
-    style = (f'background-image:url(&quot;{e(pic)}&quot;)' if pic else f'--h:{hue(seed or title)}')
+    style = ((f'--u:url(&quot;{e(pic)}&quot;)' if kind == "sq" else f'background-image:url(&quot;{e(pic)}&quot;)') if pic else f'--h:{hue(seed or title)}')
     ext = ' rel="noopener"' if href.startswith("http") else ""
-    return (f'<a class="hxs {kind}" href="{href}"{ext} style="{style}"><span class="hxcap"><span class="ntag">{e(label)}</span>'
+    # Square photos (artist photos, covers) are shown whole on the right over a softly blurred copy, so nobody's
+    # cropped to a forehead. Wide artwork (Ticketmaster) fills the slide.
+    layers = '<span class="hxbg" aria-hidden="true"></span><span class="hxsharp" aria-hidden="true"></span>' if kind == "sq" else ""
+    return (f'<a class="hxs {kind}" href="{href}"{ext} style="{style}">{layers}<span class="hxcap"><span class="ntag">{e(label)}</span>'
             f'<strong>{e(title)}</strong><span class="hsub">{e(sub)}</span><span class="hcta">{e(cta)} →</span></span></a>')
 DISC_SVG = (f'<svg viewBox="-250 -250 500 500"><circle r="248" fill="#0b0b0b" stroke="#2c2c2c" stroke-width="2"/>{disc}'
             '<path d="M-230 -60 A238 238 0 0 1 -60 -230" stroke="rgba(255,255,255,.12)" stroke-width="22" fill="none"/>'

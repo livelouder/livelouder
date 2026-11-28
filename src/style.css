@@ -889,3 +889,16 @@ body:has(#msgs) .signup{display:none}@media(max-width:760px){body:has(.msgs.mope
 .pb-blur .wrap{padding-right:clamp(150px,24vw,280px)}
 @media(max-width:600px){.page-title.pb{min-height:200px;padding:0 16px 20px}.pb-wall .pbg{grid-template-columns:repeat(5,1fr)}
  .pb-blur .pbsharp{width:96px;top:16px;transform:none}.pb-blur .wrap{padding-right:16px}}
+/* Banner slides with a square photo: whole photo on the right, softly blurred copy behind (no cropped heads). */
+.hxs.sq{isolation:isolate;background:#111}
+.hxs.sq .hxbg{position:absolute;inset:-30px;z-index:-1;background:var(--u) center/cover no-repeat;filter:blur(6px) brightness(.5) saturate(1.1)}
+.hxs.sq .hxsharp{position:absolute;z-index:1;right:clamp(16px,3vw,44px);top:50%;transform:translateY(-50%);height:84%;aspect-ratio:1;
+ border-radius:12px;background:var(--u) center/cover no-repeat;box-shadow:0 14px 40px rgba(0,0,0,.55)}
+.hxs.sq::after{background:linear-gradient(90deg,rgba(10,10,10,.8) 0,rgba(10,10,10,.25) 55%,rgba(10,10,10,0) 100%)}
+.hxs.sq .hxcap{right:auto;max-width:min(54%,560px)}
+@media(max-width:600px){
+ .hxs.sq{height:min(92vw,340px)}
+ .hxs.sq .hxsharp{top:14px;right:14px;transform:none;height:46%}
+ .hxs.sq .hxcap{max-width:none;right:16px}
+ .hxs.sq .hxcap strong{font-size:28px}
+ .hxs.sq::after{background:linear-gradient(0deg,rgba(10,10,10,.9) 0,rgba(10,10,10,.45) 50%,rgba(10,10,10,.1) 100%)}}
