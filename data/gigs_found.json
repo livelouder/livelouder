@@ -302,10 +302,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43356797-patrick-watson-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/patrick-watson-can-uh-oh-australian-tour/198530",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43356797-patrick-watson-at-northcote-theatre"
  },
  {
   "artist": "The Animals",
@@ -428,10 +429,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/minna-uk-2026-11-28/",
+  "url": "https://thenightcat.com.au/events/minna-uk-201457",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/minna-uk-2026-11-28/"
  },
  {
   "artist": "Blake Cateris",
@@ -568,10 +570,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43342602-sly-withers-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/sly-withers-tickets-ae1687967",
   "genre": "Punk",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43342602-sly-withers-at-triffid"
  },
  {
   "artist": "Trashcore",
@@ -820,10 +823,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/11/29/moodymann-forum-melbourne-melbou",
+  "url": "https://forummelbourne.com.au/shows/moodymann",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/11/29/moodymann-forum-melbourne-melbou"
  },
  {
   "artist": "The Pharcyde",
@@ -974,10 +978,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43223321-mico-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/mico-can/195583",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43223321-mico-at-northcote-theatre"
  },
  {
   "artist": "The Sisters of Mercy",
@@ -1058,10 +1063,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/domingo-latino-with-tumbao-social-2026-11-29/",
+  "url": "https://thenightcat.com.au/events/domingo-latino-with-tumbao-social-202786",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/domingo-latino-with-tumbao-social-2026-11-29/"
  },
  {
   "artist": "Turn Down Services",
@@ -1156,10 +1162,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43425734-pod-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/p-o-d--tickets-ae1052",
   "genre": "Metal",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43425734-pod-at-triffid"
  },
  {
   "artist": "Ricky Albeck and the Belair Line Band",
@@ -1324,10 +1331,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-fortitude-music-hall",
+  "url": "https://www.ticketmaster.com.au/event/130064CAB7F54DF7",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/tickets/the-fortitude-music-hall"
  },
  {
   "artist": "Saint Etienne",
@@ -1492,10 +1500,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/02/wolf-alice-australian-tour-2026",
+  "url": "https://www.thefortitude.com.au/all-events/wolf-alice-tickets-ae429622",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/02/wolf-alice-australian-tour-2026"
  },
  {
   "artist": "Joost Klein",
@@ -1520,10 +1529,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/12/02/the-sisters-of-mercy-forum-melbo",
+  "url": "https://forummelbourne.com.au/shows/the-sisters-of-mercy-26",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/02/the-sisters-of-mercy-forum-melbo"
  },
  {
   "artist": "Dizzee Rascal",
@@ -1576,10 +1586,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43420877-millencolin-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/millencolin-swe-performing-pennybridge-pioneers-in-full/200035",
   "genre": "Punk",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43420877-millencolin-at-northcote-theatre"
  },
  {
   "artist": "Kami Kehoe",
@@ -1590,10 +1601,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43418911-kami-kehoe-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/kami-kehoe-with-special-guests/200220?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43418911-kami-kehoe-at-oxford-art-factory"
  },
  {
   "artist": "Lachy Doley",
@@ -1968,10 +1980,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43361825-thaiboy-digital-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/thaiboy-digital-tickets-ae1227979",
   "genre": "Hip hop",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43361825-thaiboy-digital-at-triffid"
  },
  {
   "artist": "Kalo Davis",
@@ -2178,10 +2191,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-fortitude-music-hall",
+  "url": "https://www.thefortitude.com.au/all-events/the-dandy-warhols-tickets-ae3835",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/tickets/the-fortitude-music-hall"
  },
  {
   "artist": "Altura Nova",
@@ -2724,10 +2738,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/05/dylan-gossett-the-headed-out-bac",
+  "url": "https://www.livenation.com.au/event/dylan-gossett-the-headed-out-back-tour-brisbane-tickets-edp1676014",
   "genre": "Country",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/05/dylan-gossett-the-headed-out-bac"
  },
  {
   "artist": "Pond",
@@ -2892,10 +2907,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43167739-reytons-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/the-reytons-uk-australian-new-zealand-tour/194345",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43167739-reytons-at-northcote-theatre"
  },
  {
   "artist": "LF System",
@@ -2906,10 +2922,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43315798-lf-system-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/lf-system-sydney/197788?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "Electronic",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43315798-lf-system-at-oxford-art-factory"
  },
  {
   "artist": "Jordan Rakei",
@@ -3018,10 +3035,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/now-always-fades-coalesce-album-launch-2026-12-05/",
+  "url": "https://thenightcat.com.au/events/now-always-fades-coalesce-album-launch-200727",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/now-always-fades-coalesce-album-launch-2026-12-05/"
  },
  {
   "artist": "Same Name Confusion",
@@ -3130,10 +3148,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43425721-shag-rock-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/shag-rock-tickets-ae1698128",
   "genre": "Rock",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43425721-shag-rock-at-triffid"
  },
  {
   "artist": "Joel Leggett",
@@ -3144,10 +3163,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43521756-joel-leggett-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43521756-joel-leggett-at-triffid"
  },
  {
   "artist": "Ciévon",
@@ -3480,10 +3500,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/domingo-latino-with-la-45-2026-12-06/",
+  "url": "https://thenightcat.com.au/events/domingo-latino-with-la-45-202788",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/domingo-latino-with-la-45-2026-12-06/"
  },
  {
   "artist": "Real Sunnies",
@@ -3606,10 +3627,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/08/osamason-the-fortitude-music-hal",
+  "url": "https://www.livenation.com.au/event/osamason-psykturnal-tour-brisbane-tickets-edp1674181",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/08/osamason-the-fortitude-music-hal"
  },
  {
   "artist": "Ministry",
@@ -3676,10 +3698,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43420887-allamerican-rejects-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/the-all-american-rejects-usa/199969",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43420887-allamerican-rejects-at-northcote-theatre"
  },
  {
   "artist": "Hana Stretton",
@@ -3732,10 +3755,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43418921-devil-wears-prada-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/the-devil-wears-prada-with-special-guests-future-palace/199967?skin=thetriffid",
   "genre": "Metal",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43418921-devil-wears-prada-at-triffid"
  },
  {
   "artist": "jackzebra",
@@ -3760,10 +3784,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/09/suki-waterhouse-the-fortitude-mu",
+  "url": "https://www.livenation.com.au/event/suki-waterhouse-the-loveland-tour-brisbane-tickets-edp1698790",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/09/suki-waterhouse-the-fortitude-mu"
  },
  {
   "artist": "Rat & Movse",
@@ -3956,10 +3981,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/10/hoodoo-gurus-the-fortitude-music",
+  "url": "https://www.ticketmaster.com.au/event/130064CCA14E396E",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/10/hoodoo-gurus-the-fortitude-music"
  },
  {
   "artist": "Jordan Rakei",
@@ -3970,10 +3996,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/12/10/jordan-rakei-forum-melbourne-mel",
+  "url": "https://forummelbourne.com.au/shows/jordan-rakei-26",
   "genre": "Soul",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/10/jordan-rakei-forum-melbourne-mel"
  },
  {
   "artist": "Ministry",
@@ -4152,10 +4179,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/sophia-stel-2026-12-10/",
+  "url": "https://thenightcat.com.au/events/sophia-stel-199295",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/sophia-stel-2026-12-10/",
+  "soldout": true
  },
  {
   "artist": "Fcukers",
@@ -4180,10 +4209,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43227528-jamie-webster-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43227528-jamie-webster-at-triffid"
  },
  {
   "artist": "Lady Romana",
@@ -4390,10 +4420,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/11/hoodoo-gurus-rewind-tour-all-kil",
+  "url": "https://www.ticketmaster.com.au/event/130064CCA14E396E",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/11/hoodoo-gurus-rewind-tour-all-kil"
  },
  {
   "artist": "Comfortably Numb - The Music of Pink Floyd",
@@ -4544,10 +4575,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/festivals/3460878-defected-melbourne/id/43374411-defected-melbourne-2026",
+  "url": "https://www.moshtix.com.au/v2/event/defected-melbourne-2026/198339",
   "genre": "Electronic",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/festivals/3460878-defected-melbourne/id/43374411-defected-melbourne-2026"
  },
  {
   "artist": "Shag Rock",
@@ -4558,10 +4590,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43425722-shag-rock-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/shag-rock-three-deep-breaths-tour/200391?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43425722-shag-rock-at-oxford-art-factory"
  },
  {
   "artist": "Laura King",
@@ -4726,10 +4759,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/monte-morgan-presents-natural-selection-2026-12-11/",
+  "url": "https://thenightcat.com.au/events/monte-morgan-presents-natural-selection-202281",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/monte-morgan-presents-natural-selection-2026-12-11/"
  },
  {
   "artist": "Sex Mask",
@@ -4740,10 +4774,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://songkick.com/concerts/43516024-sex-mask-at-night-cat",
+  "url": "https://thenightcat.com.au/events/beenwasted-202532",
   "genre": "",
   "source": "https://songkick.com/venues/3442254-night-cat/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43516024-sex-mask-at-night-cat"
  },
  {
   "artist": "Mowgli",
@@ -4782,10 +4817,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43473835-smokedope2016-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "Hip hop",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43473835-smokedope2016-at-triffid"
  },
  {
   "artist": "Dani Enli",
@@ -4908,10 +4944,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/12/subtronics",
+  "url": "https://www.ticketmaster.com.au/event/130064D3D1F76A92",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/12/subtronics",
+  "soldout": true
  },
  {
   "artist": "Busby Marou",
@@ -5132,10 +5170,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43409933-cotto-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/cotto-all-night-long/199945?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43409933-cotto-at-oxford-art-factory"
  },
  {
   "artist": "The Chats",
@@ -5230,10 +5269,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/shag-rock-three-deep-breaths-tour-2026-12-12/",
+  "url": "https://thenightcat.com.au/events/shag-rock-three-deep-breaths-tour-200390",
   "genre": "Indie",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/shag-rock-three-deep-breaths-tour-2026-12-12/"
  },
  {
   "artist": "Marlophone",
@@ -5314,10 +5354,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43380654-rops1-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43380654-rops1-at-triffid"
  },
  {
   "artist": "Same Pains",
@@ -5692,10 +5733,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/domingo-latino-calle-luna-2026-12-13/",
+  "url": "https://thenightcat.com.au/events/domingo-latino-calle-luna-202789",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/domingo-latino-calle-luna-2026-12-13/"
  },
  {
   "artist": "Flickering Stars",
@@ -5748,10 +5790,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43226877-culture-wars-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/culture-wars-tickets-ae1514849",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43226877-culture-wars-at-triffid"
  },
  {
   "artist": "Emily Davis",
@@ -5776,10 +5819,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/14/baby-keem-the-fortitude-music-ha",
+  "url": "https://www.livenation.com.au/event/baby-keem-the-ca-ino-tour-brisbane-tickets-edp1690819",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/14/baby-keem-the-fortitude-music-ha"
  },
  {
   "artist": "NY Oh",
@@ -5846,10 +5890,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/15/dijon-the-fortitude-music-hall-b",
+  "url": "https://www.ticketmaster.com.au/event/130064FF93ED34AE",
   "genre": "Soul",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/15/dijon-the-fortitude-music-hall-b"
  },
  {
   "artist": "Show Me the Body",
@@ -5916,10 +5961,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43370543-f3miii-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/f3miii/199090?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43370543-f3miii-at-oxford-art-factory"
  },
  {
   "artist": "Re:Vel",
@@ -6014,10 +6060,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/f3miii-2026-12-16/",
+  "url": "https://thenightcat.com.au/events/f3miii-199086",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/f3miii-2026-12-16/"
  },
  {
   "artist": "Skabhangers",
@@ -6112,10 +6159,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/12/17/remi-wolf-forum-melbourne-melbou",
+  "url": "https://forummelbourne.com.au/shows/remi-wolf-26",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/17/remi-wolf-forum-melbourne-melbou",
+  "soldout": true
  },
  {
   "artist": "underscores",
@@ -6168,10 +6217,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/festivals/3801470-furnace-and-the-fundamentals-a-very-furnace-christmas/id/43374396-furnace-and-the-fundamentals--a-very-furnace-christmas-2026",
+  "url": "https://www.moshtix.com.au/v2/event/furnace-and-the-fundamentals-%E2%80%98a-very-furnace-christmas-2026%E2%80%99/198861",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/festivals/3801470-furnace-and-the-fundamentals-a-very-furnace-christmas/id/43374396-furnace-and-the-fundamentals--a-very-furnace-christmas-2026"
  },
  {
   "artist": "Lachy Hamilton's Boogaloo Express",
@@ -6224,10 +6274,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/samara-cyn-the-detour-2026-12-17/",
+  "url": "https://thenightcat.com.au/events/samara-cyn-the-detour-199655",
   "genre": "Hip hop",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/samara-cyn-the-detour-2026-12-17/"
  },
  {
   "artist": "Pond",
@@ -6238,10 +6289,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43435142-pond-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/pond-tickets-ae304585",
   "genre": "Rock",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43435142-pond-at-triffid"
  },
  {
   "artist": "Sakr",
@@ -6462,10 +6514,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43435139-pond-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/pond-%E2%80%93-terrestrials-tour/200544",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43435139-pond-at-northcote-theatre"
  },
  {
   "artist": "Sex Mask",
@@ -6770,10 +6823,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/12/19/paul-dempsey-forum-melbourne-mel",
+  "url": "https://forummelbourne.com.au/shows/paul-dempsey-s-christmas-karaoke",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2026/12/19/paul-dempsey-forum-melbourne-mel"
  },
  {
   "artist": "Ocean Sleeper",
@@ -6938,10 +6992,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/disco-boogie-all-niter-2026-12-19/",
+  "url": "https://thenightcat.com.au/events/disco-boogie-all-niter-201818",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/disco-boogie-all-niter-2026-12-19/"
  },
  {
   "artist": "The Opals",
@@ -6966,10 +7021,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43409935-alta-falls-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43409935-alta-falls-at-triffid"
  },
  {
   "artist": "The Chordroys",
@@ -7176,10 +7232,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/domingo-latino-sazon-2026-12-20/",
+  "url": "https://thenightcat.com.au/events/domingo-latino-sazon-202790",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/domingo-latino-sazon-2026-12-20/"
  },
  {
   "artist": "Azure Ryder",
@@ -7610,10 +7667,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43477792-system-olympia-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/high-times-nye-ft-soichi-terada-jpn-system-olympia-uk-marcellus-pittman-u/201764",
   "genre": "Electronic",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43477792-system-olympia-at-northcote-theatre"
  },
  {
   "artist": "Indigo Blaze",
@@ -7722,10 +7780,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/02/oskar-med-k",
+  "url": "https://forummelbourne.com.au/shows/oskar-med-k",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/02/oskar-med-k"
  },
  {
   "artist": "After",
@@ -7750,10 +7809,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/nu-aspect-uk-2027-01-02/",
+  "url": "https://thenightcat.com.au/events/nu-aspect-uk-202969",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/nu-aspect-uk-2027-01-02/"
  },
  {
   "artist": "Nasty Pasties",
@@ -7876,10 +7936,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/06/swae-lee-forum-melbourne-melbour",
+  "url": "https://forummelbourne.com.au/shows/swae-lee",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/06/swae-lee-forum-melbourne-melbour"
  },
  {
   "artist": "Flook",
@@ -7904,10 +7965,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43381944-nia-archives-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/nia-archives-uk-live/199915",
   "genre": "Electronic",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43381944-nia-archives-at-northcote-theatre"
  },
  {
   "artist": "Logan Richard",
@@ -7946,10 +8008,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/07/vince-staples-forum-melbourne-me2",
+  "url": "https://forummelbourne.com.au/shows/vince-staples-26",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/07/vince-staples-forum-melbourne-me2"
  },
  {
   "artist": "Nia Archives",
@@ -7974,10 +8037,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/laszewo-2027-01-07-2/",
+  "url": "https://thenightcat.com.au/events/laszewo-202040",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/laszewo-2027-01-07-2/"
  },
  {
   "artist": "Shannon Noll",
@@ -8142,10 +8206,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43473821-one-of-these-nights-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43473821-one-of-these-nights-at-triffid"
  },
  {
   "artist": "The East Pointers",
@@ -8310,10 +8375,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/soul-mass-transit-system-all-night-long-2027-01-09/",
+  "url": "https://thenightcat.com.au/events/soul-mass-transit-system-all-night-long-199674",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/soul-mass-transit-system-all-night-long-2027-01-09/"
  },
  {
   "artist": "Łaszewo",
@@ -8324,10 +8390,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43418906-laszewo-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43418906-laszewo-at-triffid"
  },
  {
   "artist": "Flook",
@@ -8366,10 +8433,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/01/10/swae-lee-the-fortitude-music-hal",
+  "url": "https://www.livenation.com.au/event/swae-lee-same-difference-tour-brisbane-tickets-edp1706086",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/10/swae-lee-the-fortitude-music-hal"
  },
  {
   "artist": "Ali Sethi",
@@ -8380,10 +8448,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43523669-ali-sethi-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/ali-sethi-pak-usa/202648",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43523669-ali-sethi-at-northcote-theatre"
  },
  {
   "artist": "The East Pointers",
@@ -8394,10 +8463,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43483360-east-pointers-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "Folk",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43483360-east-pointers-at-triffid"
  },
  {
   "artist": "Swae Lee",
@@ -8520,10 +8590,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/14/peaches",
+  "url": "https://forummelbourne.com.au/shows/peaches",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/14/peaches"
  },
  {
   "artist": "Mo'Ju Sings Bill Withers",
@@ -8590,10 +8661,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43342604-start-making-sense-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/start-making-sense-talking-heads-tribute-usa-/198253?skin=thetriffid",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43342604-start-making-sense-at-triffid"
  },
  {
   "artist": "Among The Restless",
@@ -8730,10 +8802,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/15/peaches-forum-melbourne-melbourn",
+  "url": "https://forummelbourne.com.au/shows/peaches",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/15/peaches-forum-melbourne-melbourn",
+  "soldout": true
  },
  {
   "artist": "The Jazz Room: A Frank Sinatra & Louis Armstrong Tribute",
@@ -8842,10 +8916,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/lowertown-2027-01-15/",
+  "url": "https://thenightcat.com.au/events/lowertown-202552",
   "genre": "Indie",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/lowertown-2027-01-15/"
  },
  {
   "artist": "Dar Disku",
@@ -8856,10 +8931,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/dar-disku-melbourne-debut-2027-01-15/",
+  "url": "https://thenightcat.com.au/events/dar-disku-melbourne-debut-202698",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/dar-disku-melbourne-debut-2027-01-15/"
  },
  {
   "artist": "Waylon Wyatt",
@@ -8884,10 +8960,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43453811-alex-cameron-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/alex-cameron-tickets-ae842362",
   "genre": "Indie",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43453811-alex-cameron-at-triffid"
  },
  {
   "artist": "Crime & the City Solution",
@@ -9066,10 +9143,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/festivals/3807534-wasia-project-nocturne-live/id/43473803-wasia-project--nocturne-live-2027",
+  "url": "https://www.moshtix.com.au/v2/event/wasia-project-nocturne-live-2027/201511",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/festivals/3807534-wasia-project-nocturne-live/id/43473803-wasia-project--nocturne-live-2027"
  },
  {
   "artist": "Sycco",
@@ -9136,10 +9214,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/daniel-allan-australian-tour-2027-2027-01-16/",
+  "url": "https://thenightcat.com.au/events/daniel-allan-australian-tour-2027-200032",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/daniel-allan-australian-tour-2027-2027-01-16/"
  },
  {
   "artist": "Ezequiel Arias",
@@ -9374,10 +9453,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-fortitude-music-hall",
+  "url": "https://www.ticketmaster.com.au/event/130065558E0E302E",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/tickets/the-fortitude-music-hall"
  },
  {
   "artist": "Medium Build",
@@ -9402,10 +9482,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/festivals/3807534-wasia-project-nocturne-live/id/43473810-wasia-project--nocturne-live-2027",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/festivals/3807534-wasia-project-nocturne-live/id/43473810-wasia-project--nocturne-live-2027"
  },
  {
   "artist": "Clare Sands",
@@ -9612,10 +9693,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/01/22/knocked-loose-the-fortitude-musi",
+  "url": "https://www.thefortitude.com.au/all-events/knocked-loose-tickets-ae865579",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/22/knocked-loose-the-fortitude-musi"
  },
  {
   "artist": "Ian Asher",
@@ -9710,10 +9792,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43418907-daniel-allan-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/daniel-allan-%E2%80%94-australian-tour-2027/200082?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43418907-daniel-allan-at-oxford-art-factory"
  },
  {
   "artist": "Allday",
@@ -9794,10 +9877,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43418912-medium-build-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/medium-build-the-king-of-having-fun-on-tour/200304?skin=thetriffid",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43418912-medium-build-at-triffid"
  },
  {
   "artist": "Rops1",
@@ -9864,10 +9948,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/23/dinosaur-jr-forum-melbourne-melb",
+  "url": "https://forummelbourne.com.au/shows/dinosaur-jr-27",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/23/dinosaur-jr-forum-melbourne-melb"
  },
  {
   "artist": "Start Making Sense (Talking Heads Tribute)",
@@ -9934,10 +10019,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43226885-waylon-wyatt-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/waylon-wyatt-usa-dustpiles-world-tour/195594",
   "genre": "Country",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43226885-waylon-wyatt-at-northcote-theatre"
  },
  {
   "artist": "Atticus Chimps",
@@ -9990,10 +10076,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/flamingo-pier-live-woven-together-album-release-tour-2027-01-23/",
+  "url": "https://thenightcat.com.au/events/flamingo-pier-live-woven-together-album-release-tour-201809",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/flamingo-pier-live-woven-together-album-release-tour-2027-01-23/"
  },
  {
   "artist": "Baker Boy",
@@ -10018,10 +10105,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43453804-free-throw-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/free-throw-moments-before-the-wind-aus-tour-2027-with-special-guests-ben-quad-sunbleached/200732?skin=thetriffid",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43453804-free-throw-at-triffid"
  },
  {
   "artist": "Little Quirks",
@@ -10074,10 +10162,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/01/24/darren-criss-the-fortitude-music",
+  "url": "https://www.thefortitude.com.au/all-events/darren-criss-tickets-ae215976",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/24/darren-criss-the-fortitude-music"
  },
  {
   "artist": "Public Image Ltd",
@@ -10158,10 +10247,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43237268-waylon-wyatt-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/waylon-wyatt-usa-dustpiles-world-tour/195812",
   "genre": "Country",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43237268-waylon-wyatt-at-northcote-theatre"
  },
  {
   "artist": "Algor Mortis",
@@ -10326,10 +10416,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43384408-dark-angel-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/death-to-all-australian-tour-with-guests-dark-angel/199579?skin=thetriffid",
   "genre": "Metal",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43384408-dark-angel-at-triffid"
  },
  {
   "artist": "Paleface Swiss",
@@ -10382,10 +10473,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/01/27/level-42-the-fortitude-music-hal",
+  "url": "https://www.ticketmaster.com.au/event/130064DAD8B4ACB8",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/01/27/level-42-the-fortitude-music-hal"
  },
  {
   "artist": "Charles Wesley Godwin",
@@ -10606,10 +10698,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43442453-jack-kays-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/jack-kays/200710?skin=thetriffid",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43442453-jack-kays-at-triffid"
  },
  {
   "artist": "Waylon Wyatt",
@@ -11040,10 +11133,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43473826-deicide-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/deicide-usa-australian-tour-2027/200793",
   "genre": "Metal",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43473826-deicide-at-northcote-theatre"
  },
  {
   "artist": "Thornhill",
@@ -11096,10 +11190,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/02/foy-vance-forum-melbourne-melbou",
+  "url": "https://forummelbourne.com.au/shows/foy-vance-the-paper-kites",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/02/foy-vance-forum-melbourne-melbou"
  },
  {
   "artist": "Drama",
@@ -11152,10 +11247,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43298600-igorrr-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/igorrr/196923?skin=thetriffid",
   "genre": "Metal",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43298600-igorrr-at-triffid"
  },
  {
   "artist": "Paleface Swiss",
@@ -11236,10 +11332,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43353594-propagandhi-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/propagandhi-can-australian-tour-2027/198215",
   "genre": "Punk",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43353594-propagandhi-at-northcote-theatre"
  },
  {
   "artist": "Sarah Kinsley",
@@ -11404,10 +11501,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/sawyer-hill-everybodys-home-nobodys-happy-tour-2027-02-04-2/",
+  "url": "https://www.universe.com/events/sawyer-hill-everybodys-home-nobodys-happy-tour-tickets-DBNVYL",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/sawyer-hill-everybodys-home-nobodys-happy-tour-2027-02-04-2/"
  },
  {
   "artist": "Mass of the Fermenting Dregs",
@@ -11418,10 +11516,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43425719-mass-of-the-fermenting-dregs-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "Rock",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43425719-mass-of-the-fermenting-dregs-at-triffid"
  },
  {
   "artist": "Death Angel",
@@ -11474,10 +11573,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/05/swim-the-fortitude-music-hall-fo",
+  "url": "https://www.livenation.com.au/event/swim-brisbane-tickets-edp1703119",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/05/swim-the-fortitude-music-hall-fo"
  },
  {
   "artist": "Story Of The Year",
@@ -11586,10 +11686,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/starjunk-95-2027-02-05/",
+  "url": "https://thenightcat.com.au/events/starjunk-95-202335",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/starjunk-95-2027-02-05/"
  },
  {
   "artist": "The Billy Joel Experience",
@@ -11656,10 +11757,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/06/max-mcnown-the-fortitude-music-h",
+  "url": "https://www.livenation.com.au/event/max-mcnown-slow-down-down-under-tour--brisbane-tickets-edp1697433",
   "genre": "Country",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/06/max-mcnown-the-fortitude-music-h"
  },
  {
   "artist": "Mass of the Fermenting Dregs",
@@ -11670,10 +11772,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/06/mass-of-the-fermenting-dregs-for",
+  "url": "https://forummelbourne.com.au/shows/mass-of-the-fermenting-dregs",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/06/mass-of-the-fermenting-dregs-for"
  },
  {
   "artist": "Corrella",
@@ -11810,10 +11913,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43261462-sawyer-hill-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43261462-sawyer-hill-at-triffid"
  },
  {
   "artist": "Onefour",
@@ -11852,10 +11956,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/07/max-mcnown-the-fortitude-music-h",
+  "url": "https://www.livenation.com.au/event/max-mcnown-slow-down-down-under-tour--brisbane-tickets-edp1698459",
   "genre": "Country",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/07/max-mcnown-the-fortitude-music-h"
  },
  {
   "artist": "Thrown",
@@ -11922,10 +12027,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43425712-kylesa-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "Metal",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43425712-kylesa-at-triffid"
  },
  {
   "artist": "Paleface Swiss",
@@ -11950,10 +12056,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-fortitude-music-hall",
+  "url": "https://www.livenation.com.au/event/holly-humberstone-brisbane-tickets-edp1691888",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/tickets/the-fortitude-music-hall"
  },
  {
   "artist": "Silverstein",
@@ -12090,10 +12197,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/10/holly-humberstone-forum-melbourn",
+  "url": "https://forummelbourne.com.au/shows/holly-humberstone",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/10/holly-humberstone-forum-melbourn"
  },
  {
   "artist": "Marlon Funaki",
@@ -12146,10 +12254,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/winyah-right-here-right-now-world-tour-2027-2027-02-10-2/",
+  "url": "https://thenightcat.com.au/events/winyah-right-here-right-now-world-tour-2027-198405",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/winyah-right-here-right-now-world-tour-2027-2027-02-10-2/"
  },
  {
   "artist": "Sleep Theory",
@@ -12384,10 +12493,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-fortitude-music-hall",
+  "url": "https://www.ticketmaster.com.au/event/13006547DF5CB31A",
   "genre": "Punk",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/tickets/the-fortitude-music-hall"
  },
  {
   "artist": "Thrown",
@@ -12594,10 +12704,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43342625-winyah-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/winyah-right-here-right-now-world-tour-2027/198396?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43342625-winyah-at-oxford-art-factory"
  },
  {
   "artist": "The Music of the Bee Gees",
@@ -12636,10 +12747,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/bl3ss-melbourne-2027-02-13/",
+  "url": "https://thenightcat.com.au/events/bl3ss-melbourne-201880",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/bl3ss-melbourne-2027-02-13/"
  },
  {
   "artist": "Queen Forever",
@@ -12734,10 +12846,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/14/dayseeker-creatures-in-the-black",
+  "url": "https://www.ticketmaster.com.au/event/130064D8E4658FA9",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/14/dayseeker-creatures-in-the-black"
  },
  {
   "artist": "Waterparks",
@@ -12860,10 +12973,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/15/muna-forum-melbourne-melbourne",
+  "url": "https://forummelbourne.com.au/shows/muna",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/15/muna-forum-melbourne-melbourne"
  },
  {
   "artist": "Diiv",
@@ -13084,10 +13198,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/bleech-93-2027-02-17/",
+  "url": "https://thenightcat.com.au/events/bleech-9-3-199791",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/bleech-93-2027-02-17/"
  },
  {
   "artist": "Sevendust",
@@ -13168,10 +13283,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/18/kim-petras-forum-melbourne-melbo",
+  "url": "https://forummelbourne.com.au/shows/kim-petras",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/18/kim-petras-forum-melbourne-melbo"
  },
  {
   "artist": "Thornhill",
@@ -13224,10 +13340,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43498581-florence-road-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/florence-road-irl/200292",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43498581-florence-road-at-northcote-theatre"
  },
  {
   "artist": "The Smyths",
@@ -13350,10 +13467,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43519838-hockey-dad-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "Indie",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43519838-hockey-dad-at-triffid"
  },
  {
   "artist": "Baker Boy",
@@ -13448,10 +13566,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/tickets/the-fortitude-music-hall",
+  "url": "https://www.ticketmaster.com.au/event/13006522BA6C65EC",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/tickets/the-fortitude-music-hall"
  },
  {
   "artist": "Sevendust",
@@ -13518,10 +13637,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/violet-grohl-2027-02-20/",
+  "url": "https://thenightcat.com.au/events/violet-grohl-201690",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/violet-grohl-2027-02-20/"
  },
  {
   "artist": "Tijuana Cartel",
@@ -13532,10 +13652,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43471861-tijuana-cartel-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43471861-tijuana-cartel-at-triffid"
  },
  {
   "artist": "Big Day Shout Canberra",
@@ -13602,10 +13723,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/21/marilyn-manson-the-fortitude-mus",
+  "url": "https://www.ticketmaster.com.au/event/130065579E8A6C1A",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/21/marilyn-manson-the-fortitude-mus"
  },
  {
   "artist": "President",
@@ -13644,10 +13766,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43353585-queen-ifrica-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/king-yellowman-jam-queen-ifrica-jam/198749",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43353585-queen-ifrica-at-northcote-theatre"
  },
  {
   "artist": "Ruby Fields",
@@ -13714,10 +13837,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/23/fkj-the-fortitude-music-hall-bri",
+  "url": "https://www.livenation.com.au/event/fkj-tyber-tour-brisbane-tickets-edp1685243",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/23/fkj-the-fortitude-music-hall-bri"
  },
  {
   "artist": "President",
@@ -13798,10 +13922,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43391217-drain-at-triffid",
+  "url": "https://www.thetriffid.com.au/all-events/drain-tickets-ae1448259",
   "genre": "Punk",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43391217-drain-at-triffid"
  },
  {
   "artist": "Will Varley",
@@ -13826,10 +13951,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/25/president-the-fortitude-music-ha",
+  "url": "https://www.livenation.com.au/event/president-australian-campaign-2027-brisbane-tickets-edp1691285",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/25/president-the-fortitude-music-ha"
  },
  {
   "artist": "Angus & Julia Stone",
@@ -13840,10 +13966,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/25/angus-julia-stone-forum-melbourn",
+  "url": "https://forummelbourne.com.au/shows/angus-julia-stone-27",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/25/angus-julia-stone-forum-melbourn"
  },
  {
   "artist": "The Jazz Room: Marvin Gaye in a Night of Soul",
@@ -13966,10 +14093,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/26/angus-julia-stone-forum-melbourn",
+  "url": "https://forummelbourne.com.au/shows/angus-julia-stone-27",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/26/angus-julia-stone-forum-melbourn",
+  "soldout": true
  },
  {
   "artist": "Skerryvore",
@@ -14134,10 +14263,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/tijuana-cartel-future-roots-2027-02-26/",
+  "url": "https://thenightcat.com.au/events/tijuana-cartel-future-roots-201703",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/tijuana-cartel-future-roots-2027-02-26/"
  },
  {
   "artist": "Bellaire",
@@ -14148,10 +14278,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/bellaire-fr-2027-02-26/",
+  "url": "https://thenightcat.com.au/events/bellaire-fr-201622",
   "genre": "Electronic",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/bellaire-fr-2027-02-26/"
  },
  {
   "artist": "Citizen",
@@ -14316,10 +14447,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43474722-bellaire-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/bellaire-fr/201619?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43474722-bellaire-at-oxford-art-factory"
  },
  {
   "artist": "Perth Dethfest 2027",
@@ -14400,10 +14532,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/28/citizen-forum-melbourne-melbourn",
+  "url": "https://forummelbourne.com.au/shows/citizen",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/02/28/citizen-forum-melbourne-melbourn"
  },
  {
   "artist": "Tinariwen",
@@ -14512,10 +14645,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/01/tove-lo-the-fortitude-music-hall",
+  "url": "https://www.livenation.com.au/event/tove-lo-estrus-tour-brisbane-tickets-edp1696228",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/01/tove-lo-the-fortitude-music-hall"
  },
  {
   "artist": "Bloodbath",
@@ -14554,10 +14688,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/02/underworld-the-fortitude-music-h",
+  "url": "https://www.livenation.com.au/event/underworld-crazy-crazy-tour-brisbane-tickets-edp1706485",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/02/underworld-the-fortitude-music-h",
+  "soldout": true
  },
  {
   "artist": "Haute & Freddy",
@@ -14582,10 +14718,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43454105-isaiah-rashad-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/isaiah-rashad-usa-lil-sunny%E2%80%99s-awful-road-trip/200942",
   "genre": "Hip hop",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43454105-isaiah-rashad-at-northcote-theatre"
  },
  {
   "artist": "Brett Newski",
@@ -14610,10 +14747,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/altin-gun-2027-03-02/",
+  "url": "https://thenightcat.com.au/events/altin-gun-201242",
   "genre": "Rock",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/altin-gun-2027-03-02/"
  },
  {
   "artist": "Smokie",
@@ -14708,10 +14846,11 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Darlinghurst",
-  "url": "https://tickets.songkick.com/concerts/43483366-salimata-at-oxford-art-factory",
+  "url": "https://www.moshtix.com.au/v2/event/salimata/201784?ref=RSS_rss_oaf_website&skin=OAF",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43483366-salimata-at-oxford-art-factory"
  },
  {
   "artist": "The Longest Johns",
@@ -15072,10 +15211,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/05/isaiah-rashad-the-fortitude-musi",
+  "url": "https://www.livenation.com.au/event/isaiah-rashad-lil-sunny-s-awful-road-trip-brisbane-tickets-edp1695781",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/05/isaiah-rashad-the-fortitude-musi"
  },
  {
   "artist": "Angine de Poitrine",
@@ -15240,10 +15380,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/waax-the-femme-values-tour-2027-03-05/",
+  "url": "https://thenightcat.com.au/events/waax-the-femme-values-tour-202294",
   "genre": "Rock",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/waax-the-femme-values-tour-2027-03-05/"
  },
  {
   "artist": "Joe Geia",
@@ -15296,10 +15437,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43473818-altin-gun-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43473818-altin-gun-at-triffid"
  },
  {
   "artist": "Josh Pyke",
@@ -15478,10 +15620,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/salimata-2027-03-06/",
+  "url": "https://thenightcat.com.au/events/salimata-201767",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/salimata-2027-03-06/"
  },
  {
   "artist": "Australian Pantera Show",
@@ -15534,10 +15677,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43425714-kenny-dope-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/kenny-dope-usa/200403",
   "genre": "Electronic",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43425714-kenny-dope-at-northcote-theatre"
  },
  {
   "artist": "The Black Sorrows",
@@ -15758,10 +15902,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/orcutt-shelley-miller-usa-2027-03-09/",
+  "url": "https://thenightcat.com.au/events/orcutt-shelley-miller-usa-201660",
   "genre": "Rock",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/orcutt-shelley-miller-usa-2027-03-09/"
  },
  {
   "artist": "Belinda Carlisle",
@@ -15828,10 +15973,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43473815-tinariwen-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/tinariwen-asawad/201439",
   "genre": "Blues",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43473815-tinariwen-at-northcote-theatre"
  },
  {
   "artist": "The Milk Carton Kids",
@@ -15982,10 +16128,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43421490-tinariwen-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/tinariwen-asawad/200436",
   "genre": "Blues",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43421490-tinariwen-at-northcote-theatre"
  },
  {
   "artist": "Westside Cowboy",
@@ -16024,10 +16171,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/rules-as-soon-as-i-get-home-2027-03-11/",
+  "url": "https://thenightcat.com.au/events/rules-as-soon-as-i-get-home-202794",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/rules-as-soon-as-i-get-home-2027-03-11/"
  },
  {
   "artist": "D-A-D",
@@ -16038,10 +16186,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43374400-dad-at-triffid",
+  "url": "https://moshtix.com.au/v2/event/d-a-d-denmark-the-very-best-of-tour/199009?skin=thetriffid",
   "genre": "Rock",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43374400-dad-at-triffid"
  },
  {
   "artist": "Bridge The Gap",
@@ -16122,10 +16271,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/03/12/periphery-forum-melbourne-melbou",
+  "url": "https://forummelbourne.com.au/shows/periphery",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/12/periphery-forum-melbourne-melbou"
  },
  {
   "artist": "Slow Pilot - Performing the songs of Jeff Buckley",
@@ -16472,10 +16622,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43374398-dad-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/d-a-d-dnk-the-very-best-of-tour/198932",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43374398-dad-at-northcote-theatre"
  },
  {
   "artist": "DOLLY: I Will Always Love You",
@@ -16640,10 +16791,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43467915-aaron-rowe-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/aaron-rowe-ire-australian-tour-2027/201510",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43467915-aaron-rowe-at-northcote-theatre"
  },
  {
   "artist": "Jon Cleary & The Absolute Monster Gentlemen",
@@ -16892,10 +17044,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43435137-ben-ottewell-and-ian-ball-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/ben-ottewell-ian-ball-from-gomez-uk-a-25-year-celebration-of-in-our-gun-and/200288",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43435137-ben-ottewell-and-ian-ball-at-northcote-theatre"
  },
  {
   "artist": "The Fab Four",
@@ -16920,10 +17073,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/jamie-mcintyre-2027-03-17/",
+  "url": "https://thenightcat.com.au/events/jamie-mcintyre-201917",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/jamie-mcintyre-2027-03-17/"
  },
  {
   "artist": "Periphery",
@@ -16948,10 +17102,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43325157-hellacopters-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "Rock",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43325157-hellacopters-at-triffid"
  },
  {
   "artist": "Sixpence None The Richer",
@@ -17018,10 +17173,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/03/18/soul-asylum-forum-melbourne-melb",
+  "url": "https://forummelbourne.com.au/shows/soul-asylum-ugly-kid-joe",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/18/soul-asylum-forum-melbourne-melb"
  },
  {
   "artist": "Hussy Hicks",
@@ -17074,10 +17230,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/festivals/3812882-converge-australianew-zealand/id/43503251-converge-australianew-zealand-2027",
+  "url": "https://moshtix.com.au/v2/event/converge-australia-new-zealand-2027-w-guests-extortion-ends-in-tragedy-nerve-damage/202152?skin=thetriffid",
   "genre": "Metal",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/festivals/3812882-converge-australianew-zealand/id/43503251-converge-australianew-zealand-2027"
  },
  {
   "artist": "Ben Ottewell & Ian Ball",
@@ -17186,10 +17343,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/19/belinda-carlisle-g-day-goodbye",
+  "url": "https://www.livenation.com.au/event/belinda-carlisle-brisbane-tickets-edp1665419",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/19/belinda-carlisle-g-day-goodbye"
  },
  {
   "artist": "Beth Orton",
@@ -17270,10 +17428,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43503256-josh-pyke-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/josh-pyke-memories-dust-kingdom-within-tour-2027/202123",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43503256-josh-pyke-at-northcote-theatre"
  },
  {
   "artist": "Jamie McIntyre",
@@ -17396,10 +17555,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/20/belinda-carlisle-g-day-and-goodb",
+  "url": "https://www.livenation.com.au/event/belinda-carlisle-brisbane-tickets-edp1637719",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/20/belinda-carlisle-g-day-and-goodb"
  },
  {
   "artist": "The Smith Street Band",
@@ -17438,10 +17598,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://songkick.com/concerts/43298601-original-wailers-at-northcote-theatre",
+  "url": "https://www.moshtix.com.au/v2/event/the-original-wailers-ft-al-anderson-jamaica/196284",
   "genre": "",
   "source": "https://songkick.com/venues/4451218-northcote-theatre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://songkick.com/concerts/43298601-original-wailers-at-northcote-theatre"
  },
  {
   "artist": "Beth Orton",
@@ -17494,10 +17655,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Fitzroy",
-  "url": "https://musick.com.au/gig/sosocamo-down-under-tour-2027-03-20/",
+  "url": "https://thenightcat.com.au/events/sosocamo-down-under-tour-202890",
   "genre": "",
   "source": "https://musick.com.au/venue/the-night-cat",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://musick.com.au/gig/sosocamo-down-under-tour-2027-03-20/"
  },
  {
   "artist": "Hard-Ons",
@@ -17704,10 +17866,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Newstead",
-  "url": "https://tickets.songkick.com/concerts/43473800-slow-pilot-at-triffid",
+  "url": "https://www.thetriffid.com.au/whats-on",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/3652419-triffid/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tickets.songkick.com/concerts/43473800-slow-pilot-at-triffid"
  },
  {
   "artist": "Aaron Rowe",
@@ -17746,10 +17909,11 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/23/cake-the-fortitude-music-hall-fo",
+  "url": "https://www.ticketmaster.com.au/event/1300650A92621C61",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/23/cake-the-fortitude-music-hall-fo"
  },
  {
   "artist": "L7",
@@ -17802,10 +17966,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/03/24/cake-an-evening-with-cake",
+  "url": "https://www.thefortitude.com.au/all-events/cake-tickets-ae221167",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://tixel.com/au/music-tickets/2027/03/24/cake-an-evening-with-cake",
+  "soldout": true
  },
  {
   "artist": "Grace Petrie",
@@ -22814,10 +22980,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43361826-thaiboy-digital-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/thaiboy-digital/198493",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43361826-thaiboy-digital-at-170-russell"
  },
  {
   "artist": "P.O.D.",
@@ -22828,10 +22995,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43425713-pod-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/p-o-d-with-very-special-guests-ocean-grove/200095",
   "genre": "Metal",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43425713-pod-at-170-russell"
  },
  {
   "artist": "The Pharcyde",
@@ -22842,10 +23010,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43374394-pharcyde-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/ops-x-with-the-pharcyde/199047",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43374394-pharcyde-at-170-russell"
  },
  {
   "artist": "Cascada",
@@ -22856,10 +23025,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43310522-cascada-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/cascada-2nd-final-melbourne-show/201891",
   "genre": "Electronic",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43310522-cascada-at-170-russell"
  },
  {
   "artist": "Smokedope2016",
@@ -22870,10 +23040,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43480092-smokedope2016-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/2016lyfe-smokedope2016-ghostfacekush-bartesianwater-new-show-added/201356",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43480092-smokedope2016-at-170-russell"
  },
  {
   "artist": "Smokedope2016",
@@ -22884,10 +23055,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43466027-smokedope2016-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/2016lyfe-smokedope2016-ghostfacekush-bartesianwater-/200925",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43466027-smokedope2016-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Fat Dog",
@@ -22898,10 +23071,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43376747-fat-dog-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/now-at-night-cat-fat-dog/197271",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43376747-fat-dog-at-170-russell"
  },
  {
   "artist": "Underscores",
@@ -22912,10 +23086,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43380379-underscores-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/underscores-galleria-australian-chapter/199482",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43380379-underscores-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Underscores",
@@ -22926,10 +23102,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43383732-underscores-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/underscores-galleria-australian-chapter-second-show-/199686",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43383732-underscores-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Sina Bathaie",
@@ -22940,10 +23118,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43503249-sina-bathaie-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/sina-bathaie-white-lotus-world-tour-back-together-melbourne/202161",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43503249-sina-bathaie-at-170-russell"
  },
  {
   "artist": "JME",
@@ -22954,10 +23133,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43374392-jme-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/jme-2nd-show/199304",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43374392-jme-at-170-russell"
  },
  {
   "artist": "JME",
@@ -22968,10 +23148,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43374383-jme-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/jme/197990",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43374383-jme-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "H1GHR Season 2027",
@@ -22982,10 +23164,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/festivals/3815582-h1ghr-season/id/43538134-h1ghr-season-2027",
+  "url": "https://www.moshtix.com.au/v2/event/h1ghr-season-in-australia-2027/202960",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/festivals/3815582-h1ghr-season/id/43538134-h1ghr-season-2027"
  },
  {
   "artist": "Against the Current",
@@ -22996,10 +23179,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43310547-against-the-current-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/against-the-current-till-death-and-back-australian-tour/196721",
   "genre": "Rock",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43310547-against-the-current-at-170-russell"
  },
  {
   "artist": "Rops1",
@@ -23010,10 +23194,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43380667-rops1-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/rops1-cv-the-takeover-tour/199398",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43380667-rops1-at-170-russell"
  },
  {
   "artist": "Free Throw",
@@ -23024,10 +23209,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43453802-free-throw-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/free-throw-moments-before-the-wind-aus-tour-2027-with-special-guests-ben-quad-sunbleached/200644",
   "genre": "Punk",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43453802-free-throw-at-170-russell"
  },
  {
   "artist": "Carpenter Brut",
@@ -23038,10 +23224,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43342616-carpenter-brut-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/carpenter-brut-australia-tour-27/198151",
   "genre": "Electronic",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43342616-carpenter-brut-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Igorrr",
@@ -23052,10 +23240,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43368208-igorrr-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/igorrr/198872",
   "genre": "Metal",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43368208-igorrr-at-170-russell"
  },
  {
   "artist": "Igorrr",
@@ -23066,10 +23255,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43298602-igorrr-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/igorrr/196858",
   "genre": "Metal",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43298602-igorrr-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Thrown",
@@ -23080,10 +23271,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43453808-thrown-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/thrown-australian-tour-2027-with-boundaries-156-silence-zuko/200704",
   "genre": "Metal",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43453808-thrown-at-170-russell"
  },
  {
   "artist": "Sleep Theory",
@@ -23108,10 +23300,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43498593-jane-remover-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/jane-remover/200306",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43498593-jane-remover-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Rachel Chinouriri",
@@ -23122,10 +23316,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43344567-rachel-chinouriri-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/rachel-chinouriri/198074",
   "genre": "Indie",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43344567-rachel-chinouriri-at-170-russell"
  },
  {
   "artist": "Tiffany Day",
@@ -23136,10 +23331,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43498599-tiffany-day-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/tiffany-day/199591",
   "genre": "Pop",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43498599-tiffany-day-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Drain",
@@ -23150,10 +23347,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43390677-drain-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/drain-australian-tour-2027/199522",
   "genre": "Punk",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43390677-drain-at-170-russell"
  },
  {
   "artist": "Haute & Freddy",
@@ -23164,10 +23362,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43478028-haute-and-freddy-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/haute-freddy-big-disgrace-tour/201669",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43478028-haute-and-freddy-at-170-russell",
+  "soldout": true
  },
  {
   "artist": "Haute & Freddy",
@@ -23192,10 +23392,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43494908-smith-street-band-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/the-smith-street-band-dz-deathrays/202085",
   "genre": "Punk",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43494908-smith-street-band-at-170-russell"
  },
  {
   "artist": "Converge",
@@ -23206,10 +23407,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/festivals/3812882-converge-australianew-zealand/id/43503248-converge-australianew-zealand-2027",
+  "url": "https://www.moshtix.com.au/v2/event/converge-australia-new-zealand-2027/202081",
   "genre": "Metal",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/festivals/3812882-converge-australianew-zealand/id/43503248-converge-australianew-zealand-2027"
  },
  {
   "artist": "The Early November",
@@ -23234,10 +23436,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://www.songkick.com/concerts/43466023-slow-pilot-at-170-russell",
+  "url": "https://www.moshtix.com.au/v2/event/slow-pilot-belgium-performing-the-songs-of-jeff-buckley/201193",
   "genre": "",
   "source": "https://www.songkick.com/venues/35426-170-russell/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://www.songkick.com/concerts/43466023-slow-pilot-at-170-russell"
  },
  {
   "artist": "Ebi",
@@ -30626,10 +30829,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/42941740-michael-charles-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a28b7e8a84b85.21216594",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/42941740-michael-charles-at-birds-basement"
  },
  {
   "artist": "Albare",
@@ -30640,10 +30844,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489730-albare-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adeb9632dc126.03781063",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489730-albare-at-birds-basement"
  },
  {
   "artist": "Ross Wilson",
@@ -30654,10 +30859,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43287687-ross-wilson-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a3a28d46ccc80.99219002",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43287687-ross-wilson-at-birds-basement"
  },
  {
   "artist": "Jason Ayres",
@@ -30668,10 +30874,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43329758-jason-ayres-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a3a28d46ccc80.99219002",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43329758-jason-ayres-at-birds-basement"
  },
  {
   "artist": "Ross Wilson",
@@ -30682,10 +30889,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43287700-ross-wilson-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a3a28d46ccc80.99219002",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43287700-ross-wilson-at-birds-basement"
  },
  {
   "artist": "Jason Ayres",
@@ -30696,10 +30904,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43329759-jason-ayres-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a3a28d46ccc80.99219002",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43329759-jason-ayres-at-birds-basement"
  },
  {
   "artist": "Jemma Cher",
@@ -30710,10 +30919,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43436774-jemma-cher-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ab791b990a8a8.89300729",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43436774-jemma-cher-at-birds-basement"
  },
  {
   "artist": "Albare and The Jazz Alchemists",
@@ -30724,10 +30934,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489731-albare-and-the-jazz-alchemists-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adeb96ac6c520.73328912",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489731-albare-and-the-jazz-alchemists-at-birds-basement"
  },
  {
   "artist": "Elly Poletti",
@@ -30738,10 +30949,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43448677-elly-poletti-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6abb4c106b3bd9.18120499",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43448677-elly-poletti-at-birds-basement"
  },
  {
   "artist": "Yacht Rock Revival",
@@ -30752,10 +30964,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43369598-yacht-rock-revival-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a813f76d5b616.45183767",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43369598-yacht-rock-revival-at-birds-basement"
  },
  {
   "artist": "Babba",
@@ -30766,10 +30979,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43391836-babba-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV68d4d45c026758.60761077",
   "genre": "Pop",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43391836-babba-at-birds-basement"
  },
  {
   "artist": "Albare",
@@ -30780,10 +30994,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489733-albare-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adeb9725294e5.38809121",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489733-albare-at-birds-basement"
  },
  {
   "artist": "Ramble Tamble: The Australian Creedence Show",
@@ -30794,10 +31009,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43194397-ramble-tamble-the-australian-creedence-show-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV69be10dde6b7d3.45533290",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43194397-ramble-tamble-the-australian-creedence-show-at-birds-basement"
  },
  {
   "artist": "Helen Catanchin",
@@ -30808,10 +31024,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43403982-helen-catanchin-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a9f9e153d3e93.97834007",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43403982-helen-catanchin-at-birds-basement"
  },
  {
   "artist": "Jason Taylor",
@@ -30822,10 +31039,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43401917-jason-taylor-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a7e7a0b9607b8.62234297",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43401917-jason-taylor-at-birds-basement"
  },
  {
   "artist": "Jackie Bornstein",
@@ -30836,10 +31054,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489734-jackie-bornstein-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6abf2b2c2706e0.77962332",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489734-jackie-bornstein-at-birds-basement"
  },
  {
   "artist": "Elly Poletti",
@@ -30850,10 +31069,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489735-elly-poletti-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adea95f70c240.20837114",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489735-elly-poletti-at-birds-basement"
  },
  {
   "artist": "Deborah Conway",
@@ -30864,10 +31084,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43512856-deborah-conway-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6af51077200ee0.67960454",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43512856-deborah-conway-at-birds-basement"
  },
  {
   "artist": "Dolly & Friends",
@@ -30878,10 +31099,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43417353-dolly-and-friends-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6aa24eda2419d4.74449172",
   "genre": "Country",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43417353-dolly-and-friends-at-birds-basement"
  },
  {
   "artist": "The Bruno Mars Experience",
@@ -30892,10 +31114,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43448679-bruno-mars-experience-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6abdb91c39f138.32240094",
   "genre": "Pop",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43448679-bruno-mars-experience-at-birds-basement"
  },
  {
   "artist": "Totally Stonez",
@@ -30906,10 +31129,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43285021-totally-stonez-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6a3897cd1a5f77.50745861",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43285021-totally-stonez-at-birds-basement"
  },
  {
   "artist": "Joe Chindamo Trio",
@@ -30920,10 +31144,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43491536-joe-chindamo-trio-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ae3f93bed7877.80708470",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43491536-joe-chindamo-trio-at-birds-basement"
  },
  {
   "artist": "Steve Sedergreen",
@@ -30934,10 +31159,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43498768-steve-sedergreen-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adea8f4e34dc4.51130461",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43498768-steve-sedergreen-at-birds-basement"
  },
  {
   "artist": "Rick Price",
@@ -30948,10 +31174,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43448673-rick-price-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6abb794cb2edd5.57397201",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43448673-rick-price-at-birds-basement"
  },
  {
   "artist": "The Piano Men: A Tribute to Elton John and Billy Joel",
@@ -30962,10 +31189,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43512857-piano-men-a-tribute-to-elton-john-and-billy-joel-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ae2992094e6e5.33536471",
   "genre": "Pop",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43512857-piano-men-a-tribute-to-elton-john-and-billy-joel-at-birds-basement"
  },
  {
   "artist": "The Santana Songbook by Spirit",
@@ -30976,10 +31204,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43512859-santana-songbook-by-spirit-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adeb600d90aa3.40774762",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43512859-santana-songbook-by-spirit-at-birds-basement"
  },
  {
   "artist": "The Floyd Show",
@@ -30990,10 +31219,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489736-floyd-show-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ae02294acb7a3.77016595",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489736-floyd-show-at-birds-basement"
  },
  {
   "artist": "The Vampires",
@@ -31004,10 +31234,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43498488-vampires-au-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6adeaa46b62966.12266523",
   "genre": "Jazz",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43498488-vampires-au-at-birds-basement"
  },
  {
   "artist": "Anthony Diamond",
@@ -31018,10 +31249,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43495113-anthony-diamond-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ae29950437496.81714325",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43495113-anthony-diamond-at-birds-basement"
  },
  {
   "artist": "BeeGees Revival",
@@ -31032,10 +31264,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43489737-beegees-revival-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ae0220498dc10.89108649",
   "genre": "Pop",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43489737-beegees-revival-at-birds-basement"
  },
  {
   "artist": "Jacqui Hamilton and Susie King",
@@ -31046,10 +31279,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43512863-jacqui-hamilton-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6ae15327444e43.71341961",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43512863-jacqui-hamilton-at-birds-basement"
  },
  {
   "artist": "Tottie Goldsmith",
@@ -31060,10 +31294,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43498509-tottie-goldsmith-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6aea99d0288853.44799388",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43498509-tottie-goldsmith-at-birds-basement"
  },
  {
   "artist": "Wendy Matthews",
@@ -31074,10 +31309,11 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://app.songkick.com/concerts/43448676-wendy-matthews-at-birds-basement",
+  "url": "https://tickets.birdsbasement.com/4/?x=EV6abb4a1fc71378.35002690",
   "genre": "",
   "source": "https://app.songkick.com/venues/3211783-birds-basement/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "info": "https://app.songkick.com/concerts/43448676-wendy-matthews-at-birds-basement"
  },
  {
   "artist": "Ross Wilson",

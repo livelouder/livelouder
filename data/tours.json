@@ -9,21 +9,25 @@
    [
     "2027-01-22",
     "Sydney",
-    "Accor Stadium"
+    "Accor Stadium",
+    "https://ffm.link/soad27syd"
    ],
    [
     "2027-01-27",
     "Melbourne",
-    "Marvel Stadium"
+    "Marvel Stadium",
+    "https://ffm.link/soad27reg2"
    ],
    [
     "2027-02-01",
     "Brisbane",
-    "Suncorp Stadium"
+    "Suncorp Stadium",
+    "https://ffm.link/soad27reg2"
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Metal"
+  "genre": "Metal",
+  "tickets": "https://teglive.com.au/live_tour/soad27web/"
  },
  {
   "artist": "Foy Vance & The Paper Kites",
@@ -35,16 +39,19 @@
    [
     "2027-01-30",
     "Brisbane",
-    "The Tivoli"
+    "The Tivoli",
+    "https://frntr.co/fvtpk27bne"
    ],
    [
     "2027-02-02",
     "Melbourne",
-    "Forum"
+    "Forum",
+    "https://frntr.co/fvtpk27mel"
    ]
   ],
   "added": "2026-08-27",
-  "genre": "Folk"
+  "genre": "Folk",
+  "tickets": "https://www.frontiertouring.com/fvtpk"
  },
  {
   "artist": "Lizzy McAlpine",
@@ -56,31 +63,37 @@
    [
     "2027-02-03",
     "Adelaide",
-    "Thebarton Theatre"
+    "Thebarton Theatre",
+    "https://frntr.co/LizzyMcAlpine27Adl"
    ],
    [
     "2027-02-05",
     "Perth",
-    "Red Hill Auditorium"
+    "Red Hill Auditorium",
+    "https://frntr.co/LizzyMcAlpine27Per"
    ],
    [
     "2027-02-07",
     "Sydney",
-    "TikTok Entertainment Centre"
+    "TikTok Entertainment Centre",
+    "https://frntr.co/LizzyMcAlpine27Syd"
    ],
    [
     "2027-02-10",
     "Melbourne",
-    "Sidney Myer Music Bowl"
+    "Sidney Myer Music Bowl",
+    "https://frntr.co/LizzyMcAlpine27Mel"
    ],
    [
     "2027-02-12",
     "Brisbane",
-    "Riverstage"
+    "Riverstage",
+    "https://frntr.co/LizzyMcAlpine27Bne"
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Pop"
+  "genre": "Pop",
+  "tickets": "https://www.frontiertouring.com/lizzymcalpine"
  },
  {
   "artist": "Hayley Williams",
@@ -101,7 +114,9 @@
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Alternative"
+  "genre": "Alternative",
+  "tickets": "https://premier.ticketek.com.au/shows/show.aspx?sh=THAYWILS27",
+  "soldout": true
  },
  {
   "artist": "Bruno Mars",
@@ -113,46 +128,55 @@
    [
     "2027-02-13",
     "Perth",
-    "Optus Stadium"
+    "Optus Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-perth-tickets-edp1692872"
    ],
    [
     "2027-02-19",
     "Melbourne",
-    "Marvel Stadium"
+    "Marvel Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-melbourne-tickets-edp1692879"
    ],
    [
     "2027-02-20",
     "Melbourne",
-    "Marvel Stadium"
+    "Marvel Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-melbourne-tickets-edp1692882"
    ],
    [
     "2027-02-23",
     "Melbourne",
-    "Marvel Stadium"
+    "Marvel Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-melbourne-tickets-edp1694415"
    ],
    [
     "2027-02-28",
     "Brisbane",
-    "Suncorp Stadium"
+    "Suncorp Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-brisbane-tickets-edp1692885"
    ],
    [
     "2027-03-01",
     "Brisbane",
-    "Suncorp Stadium"
+    "Suncorp Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-brisbane-tickets-edp1694390"
    ],
    [
     "2027-03-04",
     "Sydney",
-    "Accor Stadium"
+    "Accor Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-sydney-tickets-edp1692888"
    ],
    [
     "2027-03-05",
     "Sydney",
-    "Accor Stadium"
+    "Accor Stadium",
+    "https://www.livenation.com.au/event/bruno-mars-the-romantic-tour-sydney-tickets-edp1692892"
    ]
   ],
   "added": "2026-08-27",
-  "genre": "Pop"
+  "genre": "Pop",
+  "tickets": "https://www.livenation.com.au/bruno-mars-tickets-adp147754"
  },
  {
   "artist": "Angus & Julia Stone",
@@ -164,21 +188,25 @@
    [
     "2027-02-13",
     "Adelaide",
-    "Adelaide Entertainment Centre Theatre"
+    "Adelaide Entertainment Centre Theatre",
+    "https://frntr.co/AngusandJuliaStone27Adl"
    ],
    [
     "2027-02-20",
     "Brisbane",
-    "The Fortitude Music Hall"
+    "The Fortitude Music Hall",
+    "https://frntr.co/AngusandJuliaStone27Bne"
    ],
    [
     "2027-02-25",
     "Melbourne",
-    "Forum Melbourne"
+    "Forum Melbourne",
+    "https://frntr.co/AngusandJuliaStone27Mel"
    ]
   ],
   "added": "2026-09-07",
-  "genre": "Indie folk"
+  "genre": "Indie folk",
+  "tickets": "https://www.frontiertouring.com/angusandjuliastone"
  },
  {
   "artist": "Empire of the Sun",
@@ -190,26 +218,31 @@
    [
     "2027-02-21",
     "Brisbane",
-    "Riverstage"
+    "Riverstage",
+    "https://frntr.co/empireofthesun27Bne"
    ],
    [
     "2027-02-25",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://frntr.co/empireofthesun27Syd"
    ],
    [
     "2027-02-27",
     "Melbourne",
-    "Sidney Myer Music Bowl"
+    "Sidney Myer Music Bowl",
+    "https://frntr.co/empireofthesun27Mel"
    ],
    [
     "2027-03-02",
     "Adelaide",
-    "Adelaide Entertainment Centre"
+    "Adelaide Entertainment Centre",
+    "https://frntr.co/empireofthesun27Adl"
    ]
   ],
   "added": "2026-09-14",
-  "genre": "Electronic"
+  "genre": "Electronic",
+  "tickets": "https://www.frontiertouring.com/empireofthesun"
  },
  {
   "artist": "Bryan Adams",
@@ -221,21 +254,25 @@
    [
     "2027-02-23",
     "Perth",
-    "RAC Arena"
+    "RAC Arena",
+    "https://frntr.co/BryanAdams27Per"
    ],
    [
     "2027-02-26",
     "Sydney",
-    "Qudos Bank Arena"
+    "Qudos Bank Arena",
+    "https://frntr.co/BryanAdams27Syd"
    ],
    [
     "2027-03-01",
     "Brisbane",
-    "Entertainment Centre"
+    "Entertainment Centre",
+    "https://frntr.co/BryanAdams27Bne"
    ]
   ],
   "added": "2026-07-10",
-  "genre": "Rock"
+  "genre": "Rock",
+  "tickets": "https://www.frontiertouring.com/bryanadams"
  },
  {
   "artist": "Geese",
@@ -247,26 +284,31 @@
    [
     "2027-02-27",
     "Brisbane",
-    "On The Banks"
+    "On The Banks",
+    "https://bit.ly/GE27_bne"
    ],
    [
     "2027-03-02",
     "Sydney",
-    "Sydney Opera House Forecourt"
+    "Sydney Opera House Forecourt",
+    "https://bit.ly/GE27_waitlist"
    ],
    [
     "2027-03-05",
     "Melbourne",
-    "Palace Foreshore"
+    "Palace Foreshore",
+    "https://bit.ly/GE27_waitlist"
    ],
    [
     "2027-03-07",
     "Meredith",
-    "Golden Plains"
+    "Golden Plains",
+    "https://goldenplains.com.au/"
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Indie rock"
+  "genre": "Indie rock",
+  "tickets": "https://www.handsometours.com/tours/geese-27/"
  },
  {
   "artist": "Leon Bridges",
@@ -278,17 +320,20 @@
    [
     "2027-02-26",
     "Sydney",
-    "Sydney Opera House Forecourt"
+    "Sydney Opera House Forecourt",
+    "https://frntr.co/LeonBridges27Syd"
    ],
    [
     "2027-02-28",
     "Brisbane",
-    "On the Banks, QPAC"
+    "On the Banks, QPAC",
+    "https://frntr.co/LeonBridges27Bne"
    ],
    [
     "2027-03-03",
     "Fremantle",
-    "Walyalup Fremantle Arts Centre"
+    "Walyalup Fremantle Arts Centre",
+    "https://frntr.co/LeonBridges27Freo"
    ],
    [
     "2027-03-05",
@@ -298,11 +343,13 @@
    [
     "2027-03-06",
     "Melbourne",
-    "Royal Botanic Gardens"
+    "Royal Botanic Gardens",
+    "https://frntr.co/LeonBridges27Mel"
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Soul"
+  "genre": "Soul",
+  "tickets": "https://www.frontiertouring.com/leonbridges"
  },
  {
   "artist": "Kings of Leon",
@@ -314,21 +361,25 @@
    [
     "2027-02-28",
     "Sydney",
-    "Centennial Park"
+    "Centennial Park",
+    "https://www.livenation.com.au/event/kings-of-leon-sydney-tickets-edp1706059"
    ],
    [
     "2027-03-03",
     "Brisbane",
-    "Brisbane Showgrounds"
+    "Brisbane Showgrounds",
+    "https://www.livenation.com.au/event/kings-of-leon-brisbane-tickets-edp1706065"
    ],
    [
     "2027-03-05",
     "Melbourne",
-    "Flemington Racecourse"
+    "Flemington Racecourse",
+    "https://www.livenation.com.au/event/kings-of-leon-melbourne-tickets-edp1706071"
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Rock"
+  "genre": "Rock",
+  "tickets": "https://www.livenation.com.au/kings-of-leon-tickets-adp1593"
  },
  {
   "artist": "Jungle",
@@ -340,26 +391,31 @@
    [
     "2027-03-02",
     "Brisbane",
-    "Brisbane Entertainment Centre"
+    "Brisbane Entertainment Centre",
+    "https://www.livenation.com.au/event/jungle-brisbane-tickets-edp1662582"
    ],
    [
     "2027-03-04",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://www.livenation.com.au/event/jungle-sydney-tickets-edp1662587"
    ],
    [
     "2027-03-06",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://www.livenation.com.au/event/jungle-melbourne-tickets-edp1662592"
    ],
    [
     "2027-03-10",
     "Perth",
-    "RAC Arena"
+    "RAC Arena",
+    "https://www.livenation.com.au/event/jungle-perth-tickets-edp1662597"
    ]
   ],
   "added": "2026-11-26",
-  "genre": "Dance"
+  "genre": "Dance",
+  "tickets": "https://www.livenation.com.au/jungle-tickets-adp492312"
  },
  {
   "artist": "Evanescence",
@@ -371,31 +427,37 @@
    [
     "2027-03-07",
     "Adelaide",
-    "Adelaide Entertainment Centre"
+    "Adelaide Entertainment Centre",
+    "https://www.livenation.com.au/event/evanescence-adelaide-tickets-edp1679354"
    ],
    [
     "2027-03-09",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://www.livenation.com.au/event/evanescence-melbourne-tickets-edp1679362"
    ],
    [
     "2027-03-10",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://www.livenation.com.au/event/evanescence-melbourne-tickets-edp1684603"
    ],
    [
     "2027-03-12",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://www.livenation.com.au/event/evanescence-sydney-tickets-edp1679371"
    ],
    [
     "2027-03-16",
     "Brisbane",
-    "Brisbane Entertainment Centre"
+    "Brisbane Entertainment Centre",
+    "https://www.livenation.com.au/event/evanescence-brisbane-tickets-edp1679380"
    ]
   ],
   "added": "2026-06-05",
-  "genre": "Metal"
+  "genre": "Metal",
+  "tickets": "https://www.livenation.com.au/evanescence-tickets-adp731"
  },
  {
   "artist": "beabadoobee",
@@ -407,21 +469,25 @@
    [
     "2027-03-15",
     "Brisbane",
-    "Brisbane Entertainment Centre"
+    "Brisbane Entertainment Centre",
+    "https://bit.ly/BE27_bne"
    ],
    [
     "2027-03-18",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://bit.ly/BE27_mel"
    ],
    [
     "2027-03-20",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://bit.ly/BE27_syd"
    ]
   ],
   "added": "2026-09-08",
-  "genre": "Indie rock"
+  "genre": "Indie rock",
+  "tickets": "https://www.handsometours.com/tours/beabadoobee-2027/"
  },
  {
   "artist": "Tash Sultana",
@@ -443,96 +509,115 @@
    [
     "2027-09-03",
     "Brisbane",
-    "Brisbane Showgrounds"
+    "Brisbane Showgrounds",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-brisbane-tickets-edp1703860"
    ],
    [
     "2027-09-04",
     "Brisbane",
-    "Brisbane Showgrounds"
+    "Brisbane Showgrounds",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-brisbane-tickets-edp1703867"
    ],
    [
     "2027-09-10",
     "Brisbane",
-    "Brisbane Showgrounds"
+    "Brisbane Showgrounds",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-brisbane-tickets-edp1703874"
    ],
    [
     "2027-09-11",
     "Brisbane",
-    "Brisbane Showgrounds"
+    "Brisbane Showgrounds",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-brisbane-tickets-edp1703880"
    ],
    [
     "2027-09-17",
     "Cairns",
-    "Cazalys Stadium"
+    "Cazalys Stadium",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-cairns-tickets-edp1703886"
    ],
    [
     "2027-09-18",
     "Cairns",
-    "Cazalys Stadium"
+    "Cazalys Stadium",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-cairns-tickets-edp1703893"
    ],
    [
     "2027-09-24",
     "Perth",
-    "Wellington Square"
+    "Wellington Square",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-perth-tickets-edp1703899"
    ],
    [
     "2027-09-25",
     "Perth",
-    "Wellington Square"
+    "Wellington Square",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-perth-tickets-edp1703906"
    ],
    [
     "2027-10-01",
     "Sydney",
-    "The Domain"
+    "The Domain",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-sydney-tickets-edp1703912"
    ],
    [
     "2027-10-02",
     "Sydney",
-    "The Domain"
+    "The Domain",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-sydney-tickets-edp1703918"
    ],
    [
     "2027-10-08",
     "Sydney",
-    "The Domain"
+    "The Domain",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-sydney-tickets-edp1703924"
    ],
    [
     "2027-10-09",
     "Sydney",
-    "The Domain"
+    "The Domain",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-sydney-tickets-edp1703930"
    ],
    [
     "2027-10-15",
     "Adelaide",
-    "Ellis Park"
+    "Ellis Park",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-adelaide-tickets-edp1703937"
    ],
    [
     "2027-10-16",
     "Adelaide",
-    "Ellis Park"
+    "Ellis Park",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-adelaide-tickets-edp1703943"
    ],
    [
     "2027-10-22",
     "Melbourne",
-    "Melbourne Park Oval"
+    "Melbourne Park Oval",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-melbourne-tickets-edp1703949"
    ],
    [
     "2027-10-23",
     "Melbourne",
-    "Melbourne Park Oval"
+    "Melbourne Park Oval",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-melbourne-tickets-edp1703956"
    ],
    [
     "2027-10-29",
     "Melbourne",
-    "Melbourne Park Oval"
+    "Melbourne Park Oval",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-melbourne-tickets-edp1703962"
    ],
    [
     "2027-10-30",
     "Melbourne",
-    "Melbourne Park Oval"
+    "Melbourne Park Oval",
+    "https://www.livenation.com.au/event/powderfinger-live-2027-melbourne-tickets-edp1703968"
    ]
   ],
   "added": "2026-10-12",
-  "genre": "Rock"
+  "genre": "Rock",
+  "tickets": "https://www.livenation.com.au/powderfinger-tickets-adp525"
  },
  {
   "artist": "Spacey Jane",
@@ -556,14 +641,17 @@
    [
     "2026-12-04",
     "Melbourne",
-    "Sidney Myer Music Bowl"
+    "Sidney Myer Music Bowl",
+    "https://frntr.co/SpaceyJane26Mel"
    ],
    [
     "2026-12-05",
     "Melbourne",
-    "Sidney Myer Music Bowl"
+    "Sidney Myer Music Bowl",
+    "https://frntr.co/SpaceyJane26Mel"
    ]
-  ]
+  ],
+  "tickets": "https://www.frontiertouring.com/spaceyjane"
  },
  {
   "artist": "DMA'S",
@@ -582,14 +670,17 @@
    [
     "2026-11-28",
     "Melbourne",
-    "Royal Botanic Gardens"
+    "Royal Botanic Gardens",
+    "https://www.livenation.com.au/event/dma-s-melbourne-tickets-edp1670036"
    ],
    [
     "2026-12-03",
     "Sydney",
-    "On The Steps, Sydney Opera House Forecourt"
+    "On The Steps, Sydney Opera House Forecourt",
+    "https://www.livenation.com.au/event/dma-s-sydney-tickets-edp1669373"
    ]
-  ]
+  ],
+  "tickets": "https://www.livenation.com.au/dma-s-tickets-adp756581"
  },
  {
   "artist": "Guns N' Roses",
@@ -603,14 +694,17 @@
    [
     "2026-11-29",
     "Adelaide",
-    "bp Adelaide Grand Final"
+    "bp Adelaide Grand Final",
+    "https://www.livenation.com.au/event/guns-n-roses-at-bp-adelaide-grand-final-adelaide-tickets-edp1651362"
    ],
    [
     "2026-12-02",
     "Townsville",
-    "Queensland Country Bank Stadium"
+    "Queensland Country Bank Stadium",
+    "https://www.livenation.com.au/event/guns-n-roses-world-tour-2026-townsville-tickets-edp1657684"
    ]
-  ]
+  ],
+  "tickets": "https://www.livenation.com.au/guns-n-roses-tickets-adp69541"
  },
  {
   "artist": "Suki Waterhouse",
@@ -624,24 +718,29 @@
    [
     "2026-12-08",
     "Sydney",
-    "On The Steps, Sydney Opera House Forecourt"
+    "On The Steps, Sydney Opera House Forecourt",
+    "https://www.livenation.com.au/event/suki-waterhouse-the-loveland-tour-sydney-tickets-edp1698785"
    ],
    [
     "2026-12-09",
     "Brisbane",
-    "Fortitude Music Hall"
+    "Fortitude Music Hall",
+    "https://www.livenation.com.au/event/suki-waterhouse-the-loveland-tour-brisbane-tickets-edp1698790"
    ],
    [
     "2026-12-11",
     "Adelaide",
-    "Hindley St. Music Hall"
+    "Hindley St. Music Hall",
+    "https://www.livenation.com.au/event/suki-waterhouse-the-loveland-tour-adelaide-tickets-edp1698795"
    ],
    [
     "2026-12-12",
     "Melbourne",
-    "Festival Hall"
+    "Festival Hall",
+    "https://www.livenation.com.au/event/suki-waterhouse-the-loveland-tour-melbourne-tickets-edp1698800"
    ]
-  ]
+  ],
+  "tickets": "https://www.livenation.com.au/suki-waterhouse-tickets-adp1389247"
  },
  {
   "artist": "Fontaines D.C.",
@@ -655,14 +754,17 @@
    [
     "2027-02-09",
     "Perth",
-    "RAC Arena"
+    "RAC Arena",
+    "https://bit.ly/FDC27_per"
    ],
    [
     "2027-02-17",
     "Adelaide",
-    "AEC Arena"
+    "AEC Arena",
+    "https://bit.ly/FDC27_ade"
    ]
-  ]
+  ],
+  "tickets": "https://www.handsometours.com/tours/fontainesdc-27/"
  },
  {
   "artist": "Belinda Carlisle",
@@ -676,19 +778,23 @@
    [
     "2027-03-03",
     "Fremantle",
-    "Fremantle Prison"
+    "Fremantle Prison",
+    "https://www.livenation.com.au/event/belinda-carlisle-perth-tickets-edp1682252"
    ],
    [
     "2027-03-06",
     "Melbourne",
-    "The Palais"
+    "The Palais",
+    "https://www.livenation.com.au/event/belinda-carlisle-melbourne-tickets-edp1642664"
    ],
    [
     "2027-03-13",
     "Sydney",
-    "Enmore Theatre"
+    "Enmore Theatre",
+    "https://www.livenation.com.au/event/belinda-carlisle-sydney-tickets-edp1682260"
    ]
-  ]
+  ],
+  "tickets": "https://www.livenation.com.au/belinda-carlisle-tickets-adp3728"
  },
  {
   "artist": "Gracie Abrams",
@@ -702,34 +808,41 @@
    [
     "2027-07-27",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://www.livenation.com.au/event/gracie-abrams-the-look-at-my-life-tour-melbourne-tickets-edp1713334"
    ],
    [
     "2027-07-28",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://www.livenation.com.au/event/gracie-abrams-the-look-at-my-life-tour-melbourne-tickets-edp1713338"
    ],
    [
     "2027-07-30",
     "Melbourne",
-    "Rod Laver Arena"
+    "Rod Laver Arena",
+    "https://www.livenation.com.au/event/gracie-abrams-the-look-at-my-life-tour-melbourne-tickets-edp1713341"
    ],
    [
     "2027-08-03",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://www.livenation.com.au/event/gracie-abrams-the-look-at-my-life-tour-sydney-tickets-edp1713344"
    ],
    [
     "2027-08-04",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://www.livenation.com.au/event/gracie-abrams-the-look-at-my-life-tour-sydney-tickets-edp1713347"
    ],
    [
     "2027-08-06",
     "Sydney",
-    "Afterpay Arena"
+    "Afterpay Arena",
+    "https://www.livenation.com.au/event/gracie-abrams-the-look-at-my-life-tour-sydney-tickets-edp1713350"
    ]
-  ]
+  ],
+  "tickets": "https://www.livenation.com.au/gracie-abrams-tickets-adp1303683"
  },
  {
   "artist": "Zach Bryan",
@@ -743,34 +856,41 @@
    [
     "2027-12-03",
     "Melbourne",
-    "Marvel Stadium"
+    "Marvel Stadium",
+    "https://frntr.co/ZachBryan27Mel"
    ],
    [
     "2027-12-04",
     "Melbourne",
-    "Marvel Stadium"
+    "Marvel Stadium",
+    "https://frntr.co/ZachBryan27Mel2"
    ],
    [
     "2027-12-10",
     "Sydney",
-    "Accor Stadium"
+    "Accor Stadium",
+    "https://frntr.co/ZachBryan27Syd"
    ],
    [
     "2027-12-11",
     "Sydney",
-    "Accor Stadium"
+    "Accor Stadium",
+    "https://frntr.co/ZachBryan27Syd2"
    ],
    [
     "2027-12-17",
     "Brisbane",
-    "Suncorp Stadium"
+    "Suncorp Stadium",
+    "https://frntr.co/ZachBryan27Bne"
    ],
    [
     "2027-12-18",
     "Brisbane",
-    "Suncorp Stadium"
+    "Suncorp Stadium",
+    "https://frntr.co/ZachBryan27Bne2"
    ]
-  ]
+  ],
+  "tickets": "https://frontiertouring.com/zachbryan"
  },
  {
   "artist": "Faster Pussycat",
@@ -850,7 +970,8 @@
    [
     "2027-02-12",
     "Sydney",
-    "LOW 302"
+    "LOW 302",
+    "https://low302.oztix.com.au/Default.aspx?Event=251902"
    ],
    [
     "2027-02-13",
@@ -877,7 +998,8 @@
     "Adelaide",
     "The Wheatsheaf Hotel"
    ]
-  ]
+  ],
+  "tickets": "https://low302.oztix.com.au/Default.aspx?Event=251902"
  },
  {
   "artist": "Devon Allman Project",
@@ -891,13 +1013,16 @@
    [
     "2027-05-11",
     "Sydney",
-    "Factory Theatre"
+    "Factory Theatre",
+    "https://moshtix.com.au/v2/event/devon-allman-project/202637"
    ],
    [
     "2027-05-12",
     "Melbourne",
-    "The Corner"
+    "The Corner",
+    "https://tickets.cornerhotel.com/outlet/event/937d8c8c-4ad8-4326-9982-d18c66813d04"
    ]
-  ]
+  ],
+  "tickets": "https://www.lovepolice.com.au/tours2027/devonallmanproject"
  }
 ]
