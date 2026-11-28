@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
     $('uName').textContent = P.name || P.username;
     const hb = $('uHero'); hb.classList.toggle('hasbanner', !!P.banner);
     $('uAv').style.setProperty('--h', hue(P.username)); hb.style.setProperty('--h', hue(P.username));
+    ['cv', 'cv0', 'cv1', 'cv2'].forEach(c => hb.classList.remove(c));
+    if (!P.banner) hb.classList.add('cv', 'cv' + (hue(P.username) % 3));
     hb.style.backgroundImage = P.banner ? `linear-gradient(180deg,rgba(20,20,20,.15) 0,rgba(20,20,20,.55) 45%,rgba(20,20,20,.96) 100%),url('${String(P.banner).replace(/'/g, '%27')}')` : '';
     $('uSub').innerHTML = `@${esc(P.username)}${P.since ? ` · On Live Louder since ${new Date(P.since).toLocaleDateString('en-AU', {month: 'long', year: 'numeric'})}` : ''}${P.follows_you ? ' · <b>Follows you</b>' : ''}`;
     const signedIn = window.ACC && ACC.user();

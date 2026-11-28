@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const seed = pr.username || (u && u.email) || 'live louder';
     av.style.setProperty('--h', hue(seed)); heroEl.style.setProperty('--h', hue(seed));
     heroEl.classList.toggle('hasbanner', !!pr.banner_url);
+    ['cv', 'cv0', 'cv1', 'cv2'].forEach(c => heroEl.classList.remove(c));
+    if (!pr.banner_url) heroEl.classList.add('cv', 'cv' + (hue(seed) % 3));
     heroEl.style.backgroundImage = pr.banner_url ? `linear-gradient(180deg,rgba(20,20,20,.15) 0,rgba(20,20,20,.55) 45%,rgba(20,20,20,.96) 100%),url('${pr.banner_url.replace(/'/g, '%27')}')` : '';
     const cam = document.getElementById('pCam'), cov = document.getElementById('pCover');
     cam.hidden = cov.hidden = !u;
