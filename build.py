@@ -332,7 +332,7 @@ GA_HEAD = ("" if not GA_ID else
     f"gtag('config','{GA_ID}');"
     "document.addEventListener('click',function(ev){try{var t=ev.target.closest('a,button');if(!t)return;"
     "var g=t.closest('.gig,.gp,main');var art=(g&&g.querySelector('.gname,h1')||{}).textContent||document.title;"
-    "if(t.tagName==='A'&&t.dataset.tk){var k=t.dataset.tk,en={tickets:'ticket_click',resale:'ticket_click',festival_tickets:'ticket_click',info:'gig_info_click',directions:'directions_click',venue_site:'venue_site_click'}[k]||(k+'_click');gtag('event',en,{link_type:k,seller:t.dataset.seller||t.host,artist:(t.dataset.artist||art).trim().slice(0,100),venue:(t.dataset.venue||'').slice(0,100),city:t.dataset.city||'',page_type:location.pathname.split('/')[1]||'home',link_url:t.href});}"
+    "if(t.tagName==='A'&&t.dataset.tk){var k=t.dataset.tk,en={tickets:'ticket_click',resale:'ticket_click',festival_tickets:'ticket_click',info:'gig_info_click',directions:'directions_click',venue_site:'venue_site_click',tour_info:'tour_info_click'}[k]||(k+'_click');gtag('event',en,{link_type:k,seller:t.dataset.seller||t.host,artist:(t.dataset.artist||art).trim().slice(0,100),venue:(t.dataset.venue||'').slice(0,100),city:t.dataset.city||'',page_type:location.pathname.split('/')[1]||'home',link_url:t.href});}"
     "else if(t.tagName==='A'&&t.host&&t.host!==location.host&&/ticket/i.test(t.textContent)){gtag('event','ticket_click',{link_type:'other',seller:t.host,artist:art.trim().slice(0,100),link_url:t.href});}"
     "else if(t.matches('button.save')){gtag('event','save_gig',{artist:art.trim().slice(0,100)});}"
     "else if(t.matches('button.saveartist')){gtag('event','follow_artist',{artist:(t.dataset.name||'').slice(0,100)});}"
@@ -1301,8 +1301,11 @@ for a in artists.values():
     src = ""
     if t:
         tk_ = t.get("tickets", "")
-        src = ((f'<p><a class="btn" href="{e(add_utm(tk_, "tour"))}" rel="noopener" data-tk="{link_kind(tk_)}" data-seller="{e(link_host(tk_))}" '
-                f'data-artist="{e(a["name"])}">Tour tickets ↗</a></p>') if tk_ and link_kind(tk_) != "info" else "") + \
+        # every date has its own seller link -> the tour-wide page (usually the promoter's) is just "Tour info"
+        all_direct_ = bool(t.get("dates")) and all(len(r) > 3 and r[3] for r in t["dates"])
+        tk_lab_, tk_cls_, tk_kind_ = ("Tour info ↗", "btn ghost", "tour_info") if all_direct_ else ("Tour tickets ↗", "btn", link_kind(tk_))
+        src = ((f'<p><a class="{tk_cls_}" href="{e(add_utm(tk_, "tour"))}" rel="noopener" data-tk="{tk_kind_}" data-seller="{e(link_host(tk_))}" '
+                f'data-artist="{e(a["name"])}">{tk_lab_}</a></p>') if tk_ and link_kind(tk_) != "info" else "") + \
               f'<p><a href="{e(t["source"])}" rel="noopener" data-tk="info" data-artist="{e(a["name"])}">Tour announcement ↗</a></p>'
     q = quote_plus(a["name"])
     player = ""
