@@ -182,10 +182,12 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Camperdown",
-  "url": "https://songkick.com/concerts/43298609-nina-kraviz-at-manning-bar",
+  "url": "https://moshtix.com.au/v2/event/nina-kraviz/196791",
   "genre": "Electronic",
   "source": "https://songkick.com/venues/34998-manning-bar/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43298609-nina-kraviz-at-manning-bar"
  },
  {
   "artist": "Mick Thomas' Roving Commission",
@@ -428,10 +430,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Perth",
-  "url": "https://tixel.com/au/tickets/magnet-house",
+  "url": "https://magnethouse.com.au/events/chiodos",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/magnet-house",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/magnet-house"
  },
  {
   "artist": "MiNNA",
@@ -631,7 +635,8 @@
   "url": "https://songkick.com/concerts/43443667-san-cisco-at-uc-hub",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4003279-uc-hub/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Myles Bullen",
@@ -3401,7 +3406,8 @@
   "url": "https://songkick.com/concerts/43498145-mystic-tea-party-at-dissent-cafe-and-bar",
   "genre": "",
   "source": "https://songkick.com/venues/4600950-dissent-cafe-and-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Luka Šulić",
@@ -3806,7 +3812,8 @@
   "genre": "Jazz",
   "source": "https://musick.com.au/venue/milk-bar-perth/",
   "added": "2026-11-27",
-  "info": "https://musick.com.au/gig/aj-hix-and-rhythm-six-the-jazz-club-of-wa-2026-12-08/"
+  "info": "https://musick.com.au/gig/aj-hix-and-rhythm-six-the-jazz-club-of-wa-2026-12-08/",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The All-American Rejects",
@@ -4669,10 +4676,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Maylands",
-  "url": "https://tixel.com/au/music-tickets/2026/12/11/the-broken-pokers-irish-big-band",
+  "url": "https://lyricsunderground.oztix.com.au/Default.aspx?Event=250319",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/lyrics-underground",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/11/the-broken-pokers-irish-big-band"
  },
  {
   "artist": "Portal",
@@ -5195,10 +5204,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Maylands",
-  "url": "https://songkick.com/concerts/43329760-jason-ayres-at-lyrics-underground",
+  "url": "https://lyricsunderground.oztix.com.au/Default.aspx?Event=243883",
   "genre": "",
   "source": "https://songkick.com/venues/4358981-lyrics-underground",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43329760-jason-ayres-at-lyrics-underground"
  },
  {
   "artist": "Beherit",
@@ -5546,7 +5557,8 @@
   "url": "https://www.songkick.com/concerts/43497282-same-pains-at-warehouse-townsville",
   "genre": "Metal",
   "source": "https://songkick.com/venues/4626689-warehouse-townsville",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Spirit of the Universe",
@@ -5720,7 +5732,8 @@
   "url": "https://songkick.com/concerts/43484743-quivers-at-dissent-cafe-and-bar",
   "genre": "Indie",
   "source": "https://songkick.com/venues/4600950-dissent-cafe-and-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jamie Webster",
@@ -6131,7 +6144,8 @@
   "genre": "Jazz",
   "source": "https://musick.com.au/venue/milk-bar-perth/",
   "added": "2026-11-27",
-  "info": "https://musick.com.au/gig/swingin-at-the-savoy-the-jazz-club-of-wa-2026-12-15/"
+  "info": "https://musick.com.au/gig/swingin-at-the-savoy-the-jazz-club-of-wa-2026-12-15/",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hoodoo Gurus",
@@ -7873,10 +7887,12 @@
   "city": "Sydney",
   "state": "NSW",
   "suburb": "Camperdown",
-  "url": "https://songkick.com/festivals/3804663-nye-but-gay/id/43406497-nye-but-gay-2026",
+  "url": "https://moshtix.com.au/v2/event/nye-but-gay-2026/200034",
   "genre": "",
   "source": "https://songkick.com/venues/34998-manning-bar/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/festivals/3804663-nye-but-gay/id/43406497-nye-but-gay-2026"
  },
  {
   "artist": "Grub",
@@ -9281,7 +9297,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/15/hermitude-uow-unibar-wollongong",
   "genre": "Electronic",
   "source": "https://tixel.com/au/music-tickets/hermitude",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Nineteen 80",
@@ -10563,7 +10580,8 @@
   "url": "https://www.songkick.com/concerts/43474927-felipe-baldomir-at-indian-ocean-hotel",
   "genre": "",
   "source": "https://www.songkick.com/venues/193973-indian-ocean-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ross Wilson",
@@ -10974,7 +10992,8 @@
   "url": "https://www.jambase.com/show/noasis-beach-hotel-20270128",
   "genre": "Rock",
   "source": "https://www.jambase.com/venue/beach-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Necks",
@@ -11674,7 +11693,8 @@
   "url": "https://www.jambase.com/show/corrella-beach-hotel-20270203",
   "genre": "",
   "source": "https://www.jambase.com/venue/beach-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Cancer Bats",
@@ -12449,10 +12469,12 @@
   "city": "Townsville",
   "state": "QLD",
   "suburb": "Townsville City",
-  "url": "https://tixel.com/au/music-tickets/2027/02/07/paleface-swiss",
+  "url": "https://tickets.oztix.com.au/outlet/event/19f3cd55-c2b6-4b76-afe9-8afa44d2912c",
   "genre": "Metal",
   "source": "https://tixel.com/au/music-tickets/2027/02/07/paleface-swiss",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/07/paleface-swiss"
  },
  {
   "artist": "Holly Humberstone",
@@ -12654,7 +12676,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/10/sleep-theory-australian-tour-ade",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/the-gov",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Winyah",
@@ -15603,10 +15626,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Perth",
-  "url": "https://tixel.com/au/tickets/magnet-house",
+  "url": "https://tickets.393murray.com.au/outlet/event/81850bc6-55d0-49d0-adc0-fe05ffcf2ab2",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/magnet-house",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/magnet-house"
  },
  {
   "artist": "Tinariwen",
@@ -15663,7 +15688,8 @@
   "url": "https://www.songkick.com/concerts/43494904-smith-street-band-at-wollongong-uni-bar",
   "genre": "Punk",
   "source": "https://www.songkick.com/concerts/43494904-smith-street-band-at-wollongong-uni-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Schizophonics",
@@ -15865,7 +15891,8 @@
   "url": "https://www.songkick.com/concerts/43540448-roshani-at-tanks-arts-centre",
   "genre": "",
   "source": "https://labs.songkick.com/venues/176148-tanks-arts-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Bon Jovi The Last Rockstar",
@@ -17379,7 +17406,8 @@
   "url": "https://www.songkick.com/concerts/43436770-jon-cleary-at-tanks-arts-centre",
   "genre": "",
   "source": "https://labs.songkick.com/venues/176148-tanks-arts-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Tom Burlinson & Big Band - Still Swingin'",
@@ -18103,10 +18131,12 @@
   "city": "Geelong",
   "state": "VIC",
   "suburb": "Geelong",
-  "url": "https://www.jambase.com/show/bryan-adams-costa-hall-20270320",
+  "url": "https://frntr.co/BryanAdams27Gee",
   "genre": "Rock",
   "source": "https://www.jambase.com/show/bryan-adams-costa-hall-20270320",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.jambase.com/show/bryan-adams-costa-hall-20270320"
  },
  {
   "artist": "Cake",
@@ -18306,10 +18336,12 @@
   "city": "Geelong",
   "state": "VIC",
   "suburb": "Geelong",
-  "url": "https://www.jambase.com/show/bryan-adams-costa-hall-20270321",
+  "url": "https://frntr.co/BryanAdams27Gee2",
   "genre": "Rock",
   "source": "https://www.jambase.com/show/bryan-adams-costa-hall-20270321",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.jambase.com/show/bryan-adams-costa-hall-20270321"
  },
  {
   "artist": "Pintglass",
@@ -18412,7 +18444,8 @@
   "url": "https://www.songkick.com/concerts/43494912-smith-street-band-at-indian-ocean-hotel",
   "genre": "Punk",
   "source": "https://www.songkick.com/venues/193973-indian-ocean-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Mark Farina",
@@ -18529,7 +18562,8 @@
   "url": "https://songkick.com/concerts/43527912-l7-at-gov",
   "genre": "Punk",
   "source": "https://songkick.com/venues/35558-gov/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Widowspeak",
@@ -18734,7 +18768,8 @@
   "url": "https://songkick.com/concerts/43410583-cam-cole-at-uc-hub",
   "genre": "Blues",
   "source": "https://songkick.com/venues/4003279-uc-hub/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Doors Alive (UK)",
@@ -18804,7 +18839,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/13/hermitude-beer-deluxe-albury",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/beer-deluxe",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Onefour",
@@ -18818,7 +18854,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/20/onefour-beer-deluxe-albury",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/beer-deluxe",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Toby Mobbs",
@@ -18829,10 +18866,12 @@
   "city": "Albury",
   "state": "NSW",
   "suburb": "Albury",
-  "url": "https://songkick.com/concerts/43278501-toby-mobbs-at-albury-brewhouse",
+  "url": "https://www.alburybrewhouse.com.au/live-music-special-events/toby-mobbs-zf7l6-an2gp-t4zmn-38npd-etpfh-mn9ys-ztac2-zmglg-t7jrs-4mshx-sjhp6-l2krg-6hy5s-523el-yaak5-xr3g3",
   "genre": "",
   "source": "https://songkick.com/venues/4582308-albury-brewhouse",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43278501-toby-mobbs-at-albury-brewhouse"
  },
  {
   "artist": "Toby Mobbs",
@@ -18843,10 +18882,12 @@
   "city": "Albury",
   "state": "NSW",
   "suburb": "Albury",
-  "url": "https://songkick.com/concerts/43278504-toby-mobbs-at-albury-brewhouse",
+  "url": "https://www.alburybrewhouse.com.au/live-music-special-events/toby-mobbs-zf7l6-an2gp-t4zmn-38npd-etpfh-mn9ys-ztac2-zmglg-t7jrs-4mshx-sjhp6-l2krg-6hy5s-523el-yaak5-gg7dd",
   "genre": "",
   "source": "https://songkick.com/venues/4582308-albury-brewhouse",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43278504-toby-mobbs-at-albury-brewhouse"
  },
  {
   "artist": "Toby Mobbs",
@@ -18860,7 +18901,8 @@
   "url": "https://www.songkick.com/concerts/43207545-toby-mobbs-at-astor-hotel-albury",
   "genre": "",
   "source": "https://www.songkick.com/venues/4614719-astor-hotel-albury",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Toby Mobbs",
@@ -18874,7 +18916,8 @@
   "url": "https://www.songkick.com/concerts/43497989-toby-mobbs-at-astor-hotel-albury",
   "genre": "",
   "source": "https://www.songkick.com/venues/4614719-astor-hotel-albury",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Benji and The Saltwater Sound System Trio",
@@ -18997,10 +19040,12 @@
   "city": "Traralgon",
   "state": "VIC",
   "suburb": "Traralgon",
-  "url": "https://songkick.com/concerts/43375568-queen-rocks-the-definitve-tribute-at-gippsland-performing-arts-centre",
+  "url": "https://www.latrobe.vic.gov.au/gpac/events/Queen_Rocks_Royal_Rhapsody_Tour",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4431755-gippsland-performing-arts-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43375568-queen-rocks-the-definitve-tribute-at-gippsland-performing-arts-centre"
  },
  {
   "artist": "The Black Sorrows",
@@ -19014,7 +19059,8 @@
   "url": "https://songkick.com/concerts/43474750-black-sorrows-at-gippsland-performing-arts-centre",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4431755-gippsland-performing-arts-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Running in the Shadows",
@@ -19070,7 +19116,8 @@
   "url": "https://songkick.com/concerts/43482957-grace-cummings-at-meeniyan-town-hall",
   "genre": "Folk",
   "source": "https://songkick.com/venues/528951-meeniyan-town-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Milk Carton Kids",
@@ -19084,7 +19131,8 @@
   "url": "https://songkick.com/concerts/43414109-milk-carton-kids-at-meeniyan-town-hall",
   "genre": "Folk",
   "source": "https://songkick.com/venues/528951-meeniyan-town-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Legends of Sunbury",
@@ -19421,7 +19469,8 @@
   "url": "https://musick.com.au/gig/torpedoes-2026-12-04/",
   "genre": "",
   "source": "https://musick.com.au/venue/tanswells-hotel/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "John Kennedy & The New Originals",
@@ -19479,7 +19528,8 @@
   "url": "https://musick.com.au/gig/jamswells-2026-12-17/",
   "genre": "",
   "source": "https://musick.com.au/venue/tanswells-hotel/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Relays",
@@ -19758,7 +19808,8 @@
   "url": "https://www.songkick.com/concerts/43146446-im-grand-mam-at-brisbane-powerhouse",
   "genre": "",
   "source": "https://www.songkick.com/venues/91020-brisbane-powerhouse",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Barcelona Gipsy balKan Orchestra",
@@ -19772,7 +19823,8 @@
   "url": "https://www.songkick.com/concerts/43533538-barcelona-gipsy-balkan-orchestra-at-brisbane-powerhouse",
   "genre": "Folk",
   "source": "https://www.songkick.com/venues/91020-brisbane-powerhouse",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Pharcyde",
@@ -19798,10 +19850,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Brisbane City",
-  "url": "https://tixel.com/au/tickets/felons-barrel-hall",
+  "url": "https://www.moshtix.com.au/v2/event/defected-brisbane-2026/198304",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/felons-barrel-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/felons-barrel-hall"
  },
  {
   "artist": "JME",
@@ -19812,10 +19866,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Brisbane City",
-  "url": "https://tixel.com/au/music-tickets/2027/01/07/jme-at-felons-barrel-hall",
+  "url": "https://moshtix.com.au/v2/event/jme-at-felons-barrel-hall/197974",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/felons-barrel-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/01/07/jme-at-felons-barrel-hall"
  },
  {
   "artist": "Redland City Choir",
@@ -20857,7 +20913,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/11/28/noon-shift-burdekin-hotel-sydney",
   "genre": "",
   "source": "https://tixel.com/au/tickets/burdekin-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "vianova",
@@ -20871,7 +20928,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/08/vianova-burdekin-hotel-sydney",
   "genre": "",
   "source": "https://tixel.com/au/tickets/burdekin-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Alex Lloyd",
@@ -22845,7 +22903,8 @@
   "url": "https://tixel.com/au/tickets/lynotts-lounge",
   "genre": "",
   "source": "https://tixel.com/au/tickets/lynotts-lounge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Smacked Youth",
@@ -22859,7 +22918,8 @@
   "url": "https://tixel.com/au/tickets/lynotts-lounge",
   "genre": "",
   "source": "https://tixel.com/au/tickets/lynotts-lounge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hoodoo Gurus",
@@ -26284,7 +26344,8 @@
   "url": "https://allevents.in/sutherland/the-flatz-band-live-and-free/200031059727841",
   "genre": "",
   "source": "https://allevents.in/sutherland-ns/music",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Max Music Collective",
@@ -26298,7 +26359,8 @@
   "url": "https://allevents.in/sutherland/nye-with-max-music-collective-live-and-free/200031022737713",
   "genre": "",
   "source": "https://allevents.in/sutherland-ns/music",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Last Stand",
@@ -26312,7 +26374,8 @@
   "url": "https://allevents.in/sutherland/last-stand-club-on-east-25-1-27/200031133119357",
   "genre": "",
   "source": "https://allevents.in/sutherland-ns/music",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Avineash Amarnath",
@@ -26662,7 +26725,8 @@
   "url": "https://beat.com.au/alinta-the-jazz-emperors-2/",
   "genre": "Jazz",
   "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Wildest Show: Music of Louis Prima with Justin Fermino",
@@ -26676,7 +26740,8 @@
   "url": "https://beat.com.au/the-wildest-show-music-of-louis-prima-with-justin-fermino/",
   "genre": "Jazz",
   "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Anything Goes: The Songs of Cole Porter",
@@ -26705,7 +26770,8 @@
   "url": "https://beat.com.au/a-celebration-of-bb-king-etta-james-iseula-tommy-rando-2/",
   "genre": "Jazz",
   "source": "https://beat.com.au/new-gig-guide/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Victor Stranges",
@@ -27537,10 +27603,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Northbridge",
-  "url": "https://tixel.com/au/music-tickets/2026/12/15/fat-dog-the-rechabite-perth",
+  "url": "https://premier.ticketek.com.au/shows/Show.aspx?sh=FATDOGG26",
   "genre": "Punk",
   "source": "https://tixel.com/au/tickets/the-rechabite",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/15/fat-dog-the-rechabite-perth"
  },
  {
   "artist": "Swimming Paul",
@@ -27569,7 +27637,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/10/jane-remover-the-rechabite-perth",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-rechabite",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "Tiffany Day",
@@ -27580,10 +27650,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Northbridge",
-  "url": "https://tixel.com/au/music-tickets/2027/02/16/tiffany-day-the-rechabite-perth",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=SAMELATD27",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-rechabite",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/16/tiffany-day-the-rechabite-perth"
  },
  {
   "artist": "ROPS1",
@@ -29206,7 +29278,8 @@
   "url": "https://pubsandevents.com.au/event-details/?id=1068",
   "genre": "",
   "source": "https://pubsandevents.com.au/sa/events/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Wild Yaks Adelaide",
@@ -29220,7 +29293,8 @@
   "url": "https://pubsandevents.com.au/event-details/?id=1069",
   "genre": "",
   "source": "https://pubsandevents.com.au/sa/events/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Wild Yaks Adelaide",
@@ -29234,7 +29308,8 @@
   "url": "https://pubsandevents.com.au/event-details/?id=1070",
   "genre": "",
   "source": "https://pubsandevents.com.au/sa/events/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Array",
@@ -29726,7 +29801,8 @@
   "url": "https://allevents.in/gladstone/dj-kev-i-the-queens-hotel-gladstone/200031002349039",
   "genre": "Electronic",
   "source": "https://allevents.in/org/the-queens-hotel-gladstone/25271600",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Soulhaven",
@@ -29740,7 +29816,8 @@
   "url": "https://allevents.in/gladstone/soulhaven-i-the-queens-hotel-gladstone/200030933778427",
   "genre": "",
   "source": "https://allevents.in/org/the-queens-hotel-gladstone/25271600",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Dellacoma Rio",
@@ -29754,7 +29831,8 @@
   "url": "https://allevents.in/gladstone/new-years-eve-the-final-count-down-dellacoma-rio/200030773306816",
   "genre": "Rock",
   "source": "https://allevents.in/gladstone/new-years-eve-the-final-count-down-dellacoma-rio/200030773306816",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The White Pointers",
@@ -30411,7 +30489,8 @@
   "url": "https://www.songkick.com/concerts/43521749-blush-at-wyola-club",
   "genre": "",
   "source": "https://www.songkick.com/concerts/43521749-blush-at-wyola-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Riley Pearce",
@@ -30425,7 +30504,8 @@
   "url": "https://www.songkick.com/concerts/43516038-riley-pearce-at-wyola-club",
   "genre": "",
   "source": "https://www.songkick.com/concerts/43516038-riley-pearce-at-wyola-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Finojet",
@@ -30439,7 +30519,8 @@
   "url": "https://www.songkick.com/concerts/43492634-finojet-at-wyola-club",
   "genre": "",
   "source": "https://www.songkick.com/concerts/43492634-finojet-at-wyola-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Allira Wilson and Helen Shanahan Duo",
@@ -30851,10 +30932,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Carlton",
-  "url": "https://tixel.com/au/music-tickets/2026/11/29/haru-nemuri-the-curtin-john-curt",
+  "url": "https://johncurtinhotel.oztix.com.au/outlet/event/57c822c7-dc9d-4efc-8790-3e0e63894026",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-curtin",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/11/29/haru-nemuri-the-curtin-john-curt"
  },
  {
   "artist": "William Crighton",
@@ -30865,10 +30948,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Carlton",
-  "url": "https://tixel.com/au/music-tickets/2026/12/05/william-crighton-the-curtin-john",
+  "url": "https://johncurtinhotel.oztix.com.au/outlet/event/e5251cae-d21e-44c1-b5f4-e292d36eea5b",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-curtin",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/05/william-crighton-the-curtin-john"
  },
  {
   "artist": "$iggy Rett$",
@@ -30879,10 +30964,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Carlton",
-  "url": "https://tixel.com/au/music-tickets/2026/12/12/iggy-rett-live-in-melbourne",
+  "url": "https://johncurtinhotel.oztix.com.au/outlet/event/8d73fdac-7dac-4714-8bf1-2d5804f2aef9",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-curtin",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/12/iggy-rett-live-in-melbourne"
  },
  {
   "artist": "Jet",
@@ -33469,7 +33556,8 @@
   "url": "https://tixel.com/au/tickets/the-prince-of-wales-hotel",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-prince-of-wales-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hands Like Houses",
@@ -33483,7 +33571,8 @@
   "url": "https://www.songkick.com/concerts/43507972-hands-like-houses-at-prince-of-wales-hotel",
   "genre": "Rock",
   "source": "https://developer.songkick.com/venues/169713-prince-of-wales-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Skerryvore",
@@ -33497,7 +33586,8 @@
   "url": "https://tixel.com/au/tickets/the-prince-of-wales-hotel",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/the-prince-of-wales-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Gillian Welch and David Rawlings",
@@ -33539,7 +33629,8 @@
   "url": "https://tickets.songkick.com/concerts/43478006-ricky-albeck-and-the-belair-line-band-at-servo",
   "genre": "Country",
   "source": "https://tickets.songkick.com/venues/4439990-servo",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jordie Lane",
@@ -33553,7 +33644,8 @@
   "url": "https://tickets.songkick.com/concerts/43465338-jordie-lane-at-servo",
   "genre": "Folk",
   "source": "https://tickets.songkick.com/venues/4439990-servo",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Pachyman",
@@ -33567,7 +33659,8 @@
   "url": "https://tickets.songkick.com/concerts/43470750-pachyman-at-servo",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/4439990-servo",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Dancing Queen The ABBA Tribute",
@@ -34947,7 +35040,8 @@
   "url": "https://www.songkick.com/concerts/43315840-alex-lloyd-at-little-sisters-general-store",
   "genre": "",
   "source": "https://www.songkick.com/venues/4530344-little-sisters-general-store",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ross Wilson",
@@ -34961,7 +35055,8 @@
   "url": "https://www.songkick.com/concerts/43367200-ross-wilson-at-little-sisters-general-store",
   "genre": "Rock",
   "source": "https://www.songkick.com/venues/4530344-little-sisters-general-store",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ally Row",
@@ -34975,7 +35070,8 @@
   "url": "https://www.songkick.com/concerts/43521750-ally-row-at-little-sisters-general-store",
   "genre": "",
   "source": "https://www.songkick.com/venues/4530344-little-sisters-general-store",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Joe Geia",
@@ -35003,7 +35099,8 @@
   "url": "https://musick.com.au/gig/stan-stone-2026-11-28/",
   "genre": "",
   "source": "https://musick.com.au/cairns/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sunset Raga",
@@ -35014,10 +35111,12 @@
   "city": "Cairns",
   "state": "QLD",
   "suburb": "Cairns City",
-  "url": "https://musick.com.au/gig/sunset-raga-2026-11-29/",
+  "url": "https://salthouse.com.au/whats-on/",
   "genre": "",
   "source": "https://musick.com.au/cairns/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://musick.com.au/gig/sunset-raga-2026-11-29/"
  },
  {
   "artist": "Stan Stone",
@@ -35028,10 +35127,12 @@
   "city": "Cairns",
   "state": "QLD",
   "suburb": "Cairns City",
-  "url": "https://musick.com.au/gig/stan-stone-2026-12-04/",
+  "url": "https://salthouse.com.au/whats-on/",
   "genre": "",
   "source": "https://musick.com.au/cairns/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://musick.com.au/gig/stan-stone-2026-12-04/"
  },
  {
   "artist": "T-Low",
@@ -36544,10 +36645,12 @@
   "city": "Pearces Creek",
   "state": "NSW",
   "suburb": "Pearces Creek",
-  "url": "https://musick.com.au/gig/c-e-l-l-o-f-i-n-i-t-y-the-album-unveiling-2026-11-28/",
+  "url": "https://www.tickettailor.com/events/cellofinity/2495131",
   "genre": "",
   "source": "https://musick.com.au/regional/mullumbimby/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://musick.com.au/gig/c-e-l-l-o-f-i-n-i-t-y-the-album-unveiling-2026-11-28/"
  },
  {
   "artist": "Holly 'Cookie' Baker",
@@ -36561,7 +36664,8 @@
   "url": "https://musick.com.au/gig/holly-cookie-baker-i-hate-to-see-you-go-so-ill-go-springsummer-tour-2026-2026-11-29/",
   "genre": "",
   "source": "https://musick.com.au/regional/mullumbimby/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hootenanny Highway",
@@ -36575,7 +36679,8 @@
   "url": "https://musick.com.au/gig/hootenanny-highway-2026-12-05/",
   "genre": "",
   "source": "https://musick.com.au/regional/mullumbimby/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Caravãna Sun",
@@ -37580,7 +37685,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/04/baggy-trousers-port-beach-garden",
   "genre": "",
   "source": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Kenny Dope",
@@ -37594,7 +37700,8 @@
   "url": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Chicane",
@@ -37605,10 +37712,12 @@
   "city": "Fremantle",
   "state": "WA",
   "suburb": "North Fremantle",
-  "url": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
+  "url": "https://tickets.oztix.com.au/outlet/event/dbff458b-7e0f-422a-9037-869d2da7f31f",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/port-beach-garden-bar-brewery"
  },
  {
   "artist": "Pachyman",
@@ -37678,7 +37787,8 @@
   "url": "https://musick.com.au/gig/x-genz-high-octane-live-rock-pop-2026-11-28/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Flo Lindeman",
@@ -37692,7 +37802,8 @@
   "url": "https://musick.com.au/gig/live-music-flo-lindeman-2026-11-28/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jagr",
@@ -37706,7 +37817,8 @@
   "url": "https://musick.com.au/gig/live-music-jagr-2026-11-29/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Adam Miller House Band",
@@ -37720,7 +37832,8 @@
   "url": "https://musick.com.au/gig/adam-miller-house-band-2026-12-03/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jeremy Borthwick House Band",
@@ -37734,7 +37847,8 @@
   "url": "https://musick.com.au/gig/jeremy-borthwick-house-band-2026-12-10/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Tom Avgenicos House Band",
@@ -37748,7 +37862,8 @@
   "url": "https://musick.com.au/gig/tom-avgenicos-house-band-2026-12-17/",
   "genre": "",
   "source": "https://musick.com.au/newcastle/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Shaun Kirk",
@@ -37790,7 +37905,8 @@
   "url": "https://allevents.in/bunbury/era-80s-90s-00s-pub-rock-band/200031063450755",
   "genre": "Rock",
   "source": "https://allevents.in/bunbury/era-80s-90s-00s-pub-rock-band/200031063450755",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Anthems Inc.",
@@ -37804,7 +37920,8 @@
   "url": "https://allevents.in/bunbury/anthems-inc-live-the-indi-bar-burlington-hotel/200030750896127",
   "genre": "",
   "source": "https://allevents.in/bunbury/anthems-inc-live-the-indi-bar-burlington-hotel/200030750896127",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Anthems Inc.",
@@ -37818,7 +37935,8 @@
   "url": "https://allevents.in/bunbury/anthems-inc-live-the-indi-bar-burlington-hotel-new-years-eve/200031067353419",
   "genre": "",
   "source": "https://allevents.in/bunbury/anthems-inc-live-the-indi-bar-burlington-hotel-new-years-eve/200031067353419",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Rainbow Coast Big Band",
@@ -38363,7 +38481,8 @@
   "url": "https://www.songkick.com/concerts/43518614-renaissance-at-win-sports-and-entertainment-centre",
   "genre": "",
   "source": "https://www.songkick.com/venues/62085-win-sports-and-entertainment-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Wiggles",
@@ -38374,10 +38493,12 @@
   "city": "Wollongong",
   "state": "NSW",
   "suburb": "Wollongong",
-  "url": "https://www.songkick.com/concerts/43289621-wiggles-at-win-sports-and-entertainment-centre",
+  "url": "https://www.ticketmaster.com.au/the-wiggles-tickets/artist/705291?venueId=157282",
   "genre": "",
   "source": "https://www.songkick.com/venues/62085-win-sports-and-entertainment-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.songkick.com/concerts/43289621-wiggles-at-win-sports-and-entertainment-centre"
  },
  {
   "artist": "Live",
@@ -38391,7 +38512,8 @@
   "url": "https://www.songkick.com/concerts/43385332-live-at-win-sports-and-entertainment-centre",
   "genre": "Rock",
   "source": "https://www.songkick.com/venues/62085-win-sports-and-entertainment-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Will Sparks",
