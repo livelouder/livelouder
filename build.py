@@ -296,7 +296,118 @@ GA_HEAD = ("" if not GA_ID else
     "document.addEventListener('submit',function(ev){try{var f=ev.target,n=f.getAttribute('name')||'';"
     "if(n==='newsletter')gtag('event','sign_up',{method:'newsletter'});else if(n)gtag('event','form_'+n);}catch(e){}},true);</script>")
 
+
+def _km(a, b):
+    import math
+    la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+    h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
+    return 12742 * math.asin(math.sqrt(h))
+
+# ---------------------------------------------------------------- page banners (Nov 2026)
+# The top of most pages is a picture banner instead of plain red. Three safe styles, so faces are never cut off:
+#   row   - whole square photos side by side (artists on that page), never cropped
+#   wall  - record covers in a tilted grid (vinyl pages)
+#   blur  - one photo shown whole and sharp, over a lightly blurred copy of itself (news)
+#   photo - one real landscape photo: the region for city, town and venue pages; a fixed one for the rest
+# Photos: Unsplash (free licence, no credit needed); artist photos and covers come from the page itself.
+UNS = lambda id_, w=1800: f"https://images.unsplash.com/photo-{id_}?w={w}&q=70&auto=format&fit=crop"
+REGION_PICS = {"sydney": "1506973035872-a4ec16b8e8d9", "melbourne": "1595434971780-79d5c20c5090", "brisbane": "1566734904496-9309bb1798ae",
+    "perth": "1524586410818-196d249560e4", "adelaide": "1677893111398-0ebb0ed2aa85", "hobart": "1728555429641-391c49d9754a",
+    "canberra": "1773821023994-bffda5c96617", "nt": "1557214997-7eae7e0e7aaa", "newcastle": "1624706495494-7a143e8ed526",
+    "wollongong": "1671524916677-a51d1d1b3db6", "centralcoast": "1729581203722-e728a5ccf5d5", "byron": "1786637706242-468806f00769",
+    "goldcoast": "1759222977031-234980be6ddc", "sunshine": "1607014593352-adca51a032bd", "geelong": "1511233389693-4a066f739752",
+    "bluemts": "1665395492464-fa1da74d2e5c", "northqld": "1727523368539-ee9fcef8ed67", "cairns": "1688337707006-64d5a1f6582c",
+    "launceston": "1675665121651-55b2cec1bcd5", "NSW": "1560160266-62102d011867", "QLD": "1775990694711-5b59dcdd9d88",
+    "VIC": "1592660716806-9d25f5a0e124", "WA": "1776679768423-114637549209", "SA": "1472352327492-9765783b74e1",
+    "TAS": "1701389357376-5b72922c5c8a", "NT": "1557214997-7eae7e0e7aaa", "ACT": "1773821023994-bffda5c96617"}
+REGION_LABEL = {"sydney": "Sydney, NSW", "melbourne": "Melbourne, VIC", "brisbane": "Brisbane, QLD", "perth": "Perth, WA", "adelaide": "Adelaide, SA",
+    "hobart": "Hobart, TAS", "canberra": "Canberra, ACT", "nt": "Northern Territory", "newcastle": "Newcastle & Hunter, NSW",
+    "wollongong": "Illawarra, NSW", "centralcoast": "Central Coast, NSW", "byron": "Northern Rivers, NSW", "goldcoast": "Gold Coast, QLD",
+    "sunshine": "Sunshine Coast, QLD", "geelong": "Geelong & Surf Coast, VIC", "bluemts": "Blue Mountains, NSW", "northqld": "North Queensland",
+    "cairns": "Far North Queensland", "launceston": "Northern Tasmania", "NSW": "New South Wales", "QLD": "Queensland", "VIC": "Victoria",
+    "WA": "Western Australia", "SA": "South Australia", "TAS": "Tasmania", "NT": "Northern Territory", "ACT": "Canberra, ACT"}
+# Region centres and how far (km) each reaches. Nearest one in reach wins; otherwise the state's photo.
+REGIONS = [("bluemts", -33.71, 150.31, 35), ("sydney", -33.87, 151.21, 60), ("melbourne", -37.81, 144.96, 60), ("brisbane", -27.47, 153.03, 50),
+    ("perth", -31.95, 115.86, 60), ("adelaide", -34.93, 138.60, 50), ("hobart", -42.88, 147.33, 50), ("canberra", -35.28, 149.13, 40),
+    ("nt", -12.46, 130.84, 2500), ("newcastle", -32.93, 151.78, 70), ("wollongong", -34.43, 150.89, 45), ("centralcoast", -33.43, 151.34, 30),
+    ("byron", -28.64, 153.61, 70), ("goldcoast", -28.02, 153.40, 35), ("sunshine", -26.65, 153.07, 45), ("geelong", -38.15, 144.36, 70),
+    ("northqld", -19.26, 146.82, 250), ("cairns", -16.92, 145.78, 200), ("launceston", -41.43, 147.14, 90)]
+FIXED_PICS = {"venues/index.html": "1499364615650-ec38552f4f34", "festivals/index.html": "1533174072545-7a4b6ad7a6c3",
+    "gigs/regional.html": "1665395492464-fa1da74d2e5c", "stories/index.html": "1603048588665-791ca8aea617"}
+CROWDS = ["1470229722913-7c0e2dbbafd3", "1540039155733-5bb30b53aa14", "1499364615650-ec38552f4f34"]
+PLACE = None  # set just before page() for city, town and venue pages: ((lat, lon), state)
+
+def region_for(place):
+    (c, st) = place
+    best = None
+    if c:
+        for k, la, lo, r in REGIONS:
+            dd = _km(c, (la, lo))
+            if dd <= r and (best is None or dd < best[1]):
+                best = (k, dd)
+    k = best[0] if best else (st or "NSW")
+    return k if k in REGION_PICS else "NSW"
+
+_ROW_DEFAULT = None
+def row_default():
+    """Photos of artists playing soonest, for pages whose lists are drawn in the browser (the gig guide)."""
+    global _ROW_DEFAULT
+    if _ROW_DEFAULT is None:
+        seen_, out_ = set(), []
+        for s_ in shows:
+            a_ = artists.get(slug(s_["artist"])) or {}
+            if a_.get("photo") and a_["slug"] not in seen_:
+                seen_.add(a_["slug"]); out_.append(a_["photo"])
+            if len(out_) >= 10: break
+        _ROW_DEFAULT = out_
+    return _ROW_DEFAULT
+
+def banner(path, body):
+    """Opening tag + picture layer for the page-title banner, or None to leave it plain."""
+    dz = lambda u: re.sub(r"/1000x1000-", "/500x500-", u)
+    photos = list(dict.fromkeys(dz(u) for u in re.findall(r'https://cdn-images\.dzcdn\.net/images/artist/[0-9a-f]+/1000x1000-[^"&]+', body)))
+    covers = list(dict.fromkeys(re.findall(r'https://i\.discogs\.com/[^"&\s]+', body)))
+    def photo(id_, label="", pos="center"):
+        tag = f'<span class="pbtag">{e(label)}</span>' if label else ""
+        return (f'<section class="page-title pb pb-photo" style="background-image:url(&quot;{UNS(id_)}&quot;);background-position:{pos}">', tag)
+    def row(list_):
+        list_ = (list_ * 3)[:10]
+        return ('<section class="page-title pb pb-row"><div class="pbg" aria-hidden="true">' +
+                "".join(f'<span style="background-image:url(&quot;{e(u)}&quot;)"></span>' for u in list_) + '</div>', "")
+    if PLACE:
+        k = region_for(PLACE)
+        return photo(REGION_PICS[k], REGION_LABEL[k], "center 55%")
+    if path in FIXED_PICS:
+        return photo(FIXED_PICS[path])
+    if path in ("out-soon.html", "most-wanted.html") and len(covers) < 4:
+        return photo("1603048588665-791ca8aea617")
+    if path in ("out-soon.html", "most-wanted.html"):
+        list_ = (covers * 4)[:16]
+        return ('<section class="page-title pb pb-wall"><div class="pbg" aria-hidden="true">' +
+                "".join(f'<span style="background-image:url(&quot;{e(u)}&quot;)"></span>' for u in list_) + '</div>', "")
+    if path == "news/index.html" and photos:
+        u = photos[0]
+        return (f'<section class="page-title pb pb-blur"><div class="pbg" aria-hidden="true" style="background-image:url(&quot;{e(u)}&quot;)"></div>'
+                f'<img class="pbsharp" src="{e(u)}" alt="" aria-hidden="true">', "")
+    if path in ("tours.html", "on-sale.html", "this-weekend.html", "artists/index.html") or path.startswith("genres/") or path.endswith("-this-weekend.html"):
+        if len(photos) >= 4: return row(photos)
+        return row(row_default()) if len(row_default()) >= 4 else photo(CROWDS[0], "", "center 40%")
+    if path == "gigs/index.html":
+        return row(row_default()) if len(row_default()) >= 4 else photo(CROWDS[0], "", "center 40%")
+    if path == "news/index.html":
+        return photo(CROWDS[1], "", "center 40%")
+    if path.startswith("news/") or path.startswith("artists/") or path.startswith("gig/") or path.startswith("festivals/") or path.startswith("stories/"):
+        return None  # these have their own heroes
+    return photo(CROWDS[hue(path) % len(CROWDS)], "", "center 40%")
+
 def page(path, title, desc, body, active=None, extra_head="", image=""):
+    global PLACE
+    if '<section class="page-title">' in body:
+        b_ = banner(path, body)
+        if b_:
+            open_, tag_ = b_
+            body = body.replace('<section class="page-title"><div class="wrap">', open_ + '<div class="wrap">' + tag_, 1)
+    PLACE = None
     r = "../" * path.count("/")
     group = NAV_GROUP.get(active, active)
     nav = "".join(f'<a href="{r}{h}"{" aria-current=page" if h == group else ""}>{e(n)}</a>' for n, h in NAV)
@@ -810,15 +921,11 @@ for c in MAIN_CITIES:
     more_link = f'<p class="note">Showing the next 400. <a href="/gigs/index.html?city={quote_plus(c)}">See them all in the gig guide</a>.</p>' if len(cs) > 400 else ""
     body = f"""<section class="page-title"><div class="wrap"><h1>Gigs in {e(c)}</h1><p>{len(cs):,} upcoming shows in and around {e(c)}, soonest first.</p></div></section>
 <section class="band"><div class="wrap"><p><a class="btn" href="/gigs/{slug(c)}-this-weekend.html">What\'s on in {e(c)} this weekend →</a></p>{chips(c)}{vchips}<div style="height:10px"></div>{gig_list(cs[:400], show_city=False)}{more_link}<p class="note">Playing in {e(c)}? <a href="/submit-a-gig.html">Add your gig →</a></p></div></section>"""
+    PLACE = (CITY_CENTRE.get(c), CITY_STATE.get(c, ""))
     page(f"gigs/{slug(c)}.html", f"Gigs in {c}: concerts and live music | Live Louder",
          f"Upcoming gigs and concerts in {c}, updated daily: dates, venues and tickets.", body, "gigs/index.html")
 
 # ---------------------------------------------------------------- regional towns: a page for every town with gigs
-def _km(a, b):
-    import math
-    la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
-    h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
-    return 12742 * math.asin(math.sqrt(h))
 towns = {}
 for s_ in shows:
     if s_["city"] in MAIN_CITIES: continue
@@ -849,6 +956,7 @@ for tn, t in towns.items():
 <section class="band"><div class="wrap split"><div>{gig_list(t["shows"], show_city=False)}{near_list}</div>
 <aside class="side">{venue_form(tn, st, f"Missing a venue in {tn}?", f"Tell us where the bands play in and around {tn} and we'll add their gigs.")}
 <div class="card"><h3>Playing in {e(tn)}?</h3><p>Add your show to the guide. It's free.</p><a class="btn" href="/submit-a-gig.html">Submit a gig</a></div></aside></div></section>"""
+    PLACE = (t.get("centre"), t.get("state", ""))
     page(f"gigs/{t['slug']}.html", f"Gigs in {tn}{', ' + st if st else ''}: live music and concerts | Live Louder",
          f"Upcoming gigs and live music in {tn}{', ' + st if st else ''} and nearby, updated daily: dates, venues and tickets.", body, "gigs/index.html")
 # Regional index: every town with gigs, by state.
@@ -898,6 +1006,7 @@ for c in MAIN_CITIES:
     body = (f'<section class="page-title"><div class="wrap"><h1>This weekend in {e(c)}</h1><p>{len(ws)} {"gig" if len(ws) == 1 else "gigs"} on {e(wk_label)}.{pick_txt}</p></div></section>'
             f'<section class="band"><div class="wrap">{days_html}'
             f'<p class="note" style="margin-top:28px"><a href="/gigs/{slug(c)}.html">All upcoming gigs in {e(c)} →</a><br>Other cities this weekend: {others}</p></div></section>')
+    PLACE = (CITY_CENTRE.get(c), CITY_STATE.get(c, ""))
     page(f"gigs/{slug(c)}-this-weekend.html", f"Gigs in {c} this weekend ({wk_label}) | Live Louder",
          f"What's on in {c} this weekend, {wk_label}: every gig and concert by day, with venues and tickets.", body, "this-weekend.html")
 wk_cards = "".join(f'<a class="fcard" href="/gigs/{slug(c)}-this-weekend.html"><span class="ntag">This weekend</span><h3>{e(c)}</h3>'
@@ -947,6 +1056,8 @@ for k, v in venues.items():
 <section class="band"><div class="wrap">{venue_map(v)}
 <p><a href="/gigs/{slug(v['city'])}.html">More gigs in {e(v['city'])}</a>{f' · <a href="/gigs/{slug(v["city"])}-this-weekend.html">This weekend in {e(v["city"])}</a>' if v['city'] in MAIN_CITIES else ' · <a href="/gigs/regional.html">More regional gigs</a>'} · <a href="/venues/index.html">All venues</a></p>
 {guide}<h2>Upcoming gigs</h2>{gig_list(v['shows'], show_city=False)}</div></section>"""
+    _g = next((gig_geo(x) for x in v["shows"] if len(gig_geo(x)) >= 2), [])
+    PLACE = ((_g[0], _g[1]) if _g else CITY_CENTRE.get(v["suburb"]) or CITY_CENTRE.get(v["city"]), v.get("state") or CITY_STATE.get(v["city"], ""))
     page(f"venues/{k}.html", vtitle + " | Live Louder", vdesc, body, "gigs/index.html")
 (OUT / "data").mkdir(parents=True, exist_ok=True)
 (OUT / "data" / "venues.json").write_text(json.dumps(sorted(
