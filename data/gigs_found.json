@@ -24635,7 +24635,8 @@
   "url": "https://www.songkick.com/concerts/43494907-smith-street-band-at-eureka-bandroom",
   "genre": "Punk",
   "source": "https://www.songkick.com/venues/4543353-eureka-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Corrella",
@@ -24646,10 +24647,12 @@
   "city": "Geelong",
   "state": "VIC",
   "suburb": "Geelong",
-  "url": "https://www.songkick.com/concerts/43479621-corrella-at-wool-exchange",
+  "url": "https://www.livenation.com.au/show/1702761/corrella/geelong/2027-01-24/en",
   "genre": "",
   "source": "https://www.songkick.com/metro-areas/26784-australia-geelong",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.songkick.com/concerts/43479621-corrella-at-wool-exchange"
  },
  {
   "artist": "Brad Cox",
@@ -24663,7 +24666,8 @@
   "url": "https://www.songkick.com/concerts/43471053-brad-cox-at-strand-hotel",
   "genre": "Country",
   "source": "https://www.songkick.com/venues/1858353-strand-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hermitude",
@@ -24677,7 +24681,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/03/hermitude-leichhardt-hotel-rockh",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/leichhardt-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Redgum",
@@ -24721,7 +24726,8 @@
   "url": "https://tixel.com/au/tickets/magnums-hotel",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/magnums-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Best of Bublé Christmas Experience",
@@ -25001,7 +25007,8 @@
   "url": "https://www.songkick.com/concerts/43353590-king-parrot-at-pub-rock-diner",
   "genre": "Metal",
   "source": "https://www.songkick.com/venues/4230584-pub-rock-diner",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jet",
@@ -25197,7 +25204,8 @@
   "url": "https://allevents.in/gawler/barossa-arts-centre-sa/200030667963629",
   "genre": "Pop",
   "source": "https://allevents.in/gawler/barossa-arts-centre-sa/200030667963629",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Barking Ants",
@@ -25649,7 +25657,8 @@
   "url": "https://allevents.in/mildura/queen-rocks-mildura-arts-centre-2027-vic/200030839525548",
   "genre": "Rock",
   "source": "https://allevents.in/mildura",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Billy Joel Experience",
@@ -25752,7 +25761,8 @@
   "url": "https://tixel.com/au/tickets/mapleton-public-house",
   "genre": "",
   "source": "https://tixel.com/au/tickets/mapleton-public-house",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Nicole Nighthawk",
@@ -26051,7 +26061,8 @@
   "url": "https://www.songkick.com/concerts/43496145-steve-kilbey-at-queenscliff-town-hall",
   "genre": "Rock",
   "source": "https://www.songkick.com/metro-areas/26784-australia-geelong",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Widowspeak",
@@ -26182,7 +26193,8 @@
   "url": "https://tixel.com/au/tickets/sandstone-point-hotel",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/sandstone-point-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Atomic Blonde",
@@ -26875,7 +26887,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/08/karnivool-the-bridgeway-hotel-ad",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-bridgeway-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ultra Nate",
@@ -26903,7 +26916,8 @@
   "url": "https://songkick.com/concerts/43419847-fab-four-at-canberra-southern-cross-club",
   "genre": "",
   "source": "https://songkick.com/venues/2700883-canberra-southern-cross-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Live",
@@ -26917,7 +26931,8 @@
   "url": "https://www.songkick.com/concerts/43385329-live-at-ais-arena",
   "genre": "Rock",
   "source": "https://beta.songkick.com/venues/92406-ais-arena",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "California Gold - The Ultimate West Coast Yacht Rock Experience",
@@ -27085,7 +27100,8 @@
   "url": "https://musick.com.au/gig/one-of-these-nights-the-eagles-experience-at-gosford-rsl-2026-12-18/",
   "genre": "Rock",
   "source": "https://musick.com.au/venue/gosford-rsl/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Australian Beach Boys Show",
@@ -27099,7 +27115,8 @@
   "url": "https://musick.com.au/gig/the-australian-beach-boys-show-at-doyalson-rsl-2027-03-20/",
   "genre": "Pop",
   "source": "https://musick.com.au/venue/doyalson-rsl/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hermitude",
@@ -27113,7 +27130,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/19/hermitude-shoal-bay-country-club",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/shoal-bay-country-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Anna Weatherup",
@@ -27595,7 +27613,8 @@
   "url": "https://songkick.com/concerts/43375458-dandy-warhols-at-metropolis-fremantle",
   "genre": "Rock",
   "source": "https://songkick.com/venues/43990-metropolis-fremantle",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Pharcyde",
@@ -27832,7 +27851,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/23/hermitude-monsoons-darwin",
   "genre": "Electronic",
   "source": "https://musick.com.au/darwin/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Burton Brothers",
@@ -28182,7 +28202,8 @@
   "url": "https://tixel.com/au/tickets/cleveland-sands-hotel",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/cleveland-sands-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Dusty Springfield & the 60's Chix",
@@ -28903,7 +28924,8 @@
   "url": "https://www.songkick.com/concerts/43507849-hands-like-houses-at-vault",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4670709-vault",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Felipe Baldomir",
@@ -29630,7 +29652,8 @@
   "url": "https://songkick.com/concerts/43467441-damien-rice-at-hamer-hall",
   "genre": "Folk",
   "source": "https://songkick.com/venues/3445614-hamer-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Vienna Boys Choir",
@@ -30332,7 +30355,8 @@
   "url": "https://allevents.in/tamworth/20-good-regions-tour-west-tamworth-league-club-tamworth-nsw/200030552202041",
   "genre": "Rock",
   "source": "https://allevents.in/tamworth-ns/concerts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Hype Boys",
@@ -30448,10 +30472,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Mansfield",
-  "url": "https://tixel.com/au/music-tickets/2026/11/29/cascada-2026-australian-headline",
+  "url": "https://tickets.avclive.com.au/outlet/event/dbd76247-8157-468a-841c-bfd5f29463d5",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/mansfield-tavern",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/11/29/cascada-2026-australian-headline"
  },
  {
   "artist": "Brent Honey",
