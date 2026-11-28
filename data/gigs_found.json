@@ -24544,7 +24544,8 @@
   "url": "https://www.songkick.com/concerts/43537832-widowspeak-at-bridge-hotel",
   "genre": "Indie",
   "source": "https://www.songkick.com/venues/1932879-bridge-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Tones and I",
@@ -26076,7 +26077,8 @@
   "url": "https://www.songkick.com/concerts/43537836-widowspeak-at-sound-doctor",
   "genre": "Indie",
   "source": "https://www.songkick.com/metro-areas/26784-australia-geelong",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Brooke McClymont & Adam Eckersley",
@@ -30902,7 +30904,8 @@
   "url": "https://www.songkick.com/concerts/43515022-black-sorrows-at-charles-hotel",
   "genre": "Blues",
   "source": "https://www.songkick.com/concerts/43515022-black-sorrows-at-charles-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Miss Tee Music",
@@ -31022,10 +31025,12 @@
   "city": "Ballarat",
   "state": "VIC",
   "suburb": "Ballarat",
-  "url": "https://songkick.com/concerts/43242579-jet-at-ballarat-civic-hall",
+  "url": "https://ballarat.sales.ticketsearch.com/sales/salesevent?ev=165493&evs=305072&pl=188152,188153&tt=45184,45185",
   "genre": "Rock",
   "source": "https://songkick.com/venues/4479527-ballarat-civic-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43242579-jet-at-ballarat-civic-hall"
  },
  {
   "artist": "Ian Moss & Troy Cassar-Daley",
@@ -31053,7 +31058,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/12/winterbourne-the-evelyn-hotel-me",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-evelyn-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Haru Nemuri",
@@ -31824,10 +31830,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Ringwood East",
-  "url": "https://developer.songkick.com/concerts/43353534-ross-wilson-at-karralyka-centre",
+  "url": "https://www.karralyka.com.au/Whats-On/Touring-and-Community/Ross-Wilson-“Now-Listen-We’re-Steppin’-Out-–-50-Years-of-Hits-Tour”",
   "genre": "Rock",
   "source": "https://developer.songkick.com/venues/2005064-karralyka-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://developer.songkick.com/concerts/43353534-ross-wilson-at-karralyka-centre"
  },
  {
   "artist": "Michael Charles",
@@ -32699,10 +32707,13 @@
   "city": "Pokolbin",
   "state": "NSW",
   "suburb": "Pokolbin",
-  "url": "https://songkick.com/concerts/43314516-boyz-ii-men-at-bimbadgen",
+  "url": "https://www.adayonthegreen.com.au/currenttours/boyziimen/huntervalley",
   "genre": "Soul",
   "source": "https://songkick.com/metro-areas/26791-australia-newcastle/2026",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43314516-boyz-ii-men-at-bimbadgen",
+  "soldout": true
  },
  {
   "artist": "Karnivool",
@@ -33752,10 +33763,12 @@
   "city": "Launceston",
   "state": "TAS",
   "suburb": "Launceston",
-  "url": "https://developer.songkick.com/concerts/43395694-gillian-welch-at-albert-hall",
+  "url": "https://theatrenorth.com.au/gillian-welch-david-rawlings-27",
   "genre": "Folk",
   "source": "https://developer.songkick.com/venues/44955-albert-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://developer.songkick.com/concerts/43395694-gillian-welch-at-albert-hall"
  },
  {
   "artist": "The Vandastruts",
@@ -33942,10 +33955,12 @@
   "city": "Kyneton",
   "state": "VIC",
   "suburb": "Kyneton",
-  "url": "https://songkick.com/concerts/43362081-ross-wilson-at-kyneton-town-hall",
+  "url": "https://mrarts.sales.ticketsearch.com/sales/salesevent/166959",
   "genre": "Rock",
   "source": "https://songkick.com/venues/1628303-kyneton-town-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43362081-ross-wilson-at-kyneton-town-hall"
  },
  {
   "artist": "The Black Sorrows",
@@ -34095,10 +34110,12 @@
   "city": "Nowra",
   "state": "NSW",
   "suburb": "Nowra",
-  "url": "https://www.songkick.com/concerts/43463472-echoes-of-pink-floyd-at-shoalhaven-entertainment-centre",
+  "url": "https://sec1.sales.ticketsearch.com/sales/salesevent/166071",
   "genre": "Rock",
   "source": "https://app.songkick.com/venues/1152306-shoalhaven-entertainment-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.songkick.com/concerts/43463472-echoes-of-pink-floyd-at-shoalhaven-entertainment-centre"
  },
  {
   "artist": "Mac Tango and The Salty Tenders",
@@ -34823,7 +34840,8 @@
   "url": "https://songkick.com/concerts/43385354-live-at-brisbane-entertainment-centre",
   "genre": "Rock",
   "source": "https://songkick.com/venues/33435-brisbane-entertainment-centre/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ann Wilson",
@@ -35171,10 +35189,12 @@
   "city": "Launceston",
   "state": "TAS",
   "suburb": "Prospect Vale",
-  "url": "https://www.songkick.com/concerts/43289618-wiggles-at-silverdome",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=HPCSMB26",
   "genre": "Pop",
   "source": "https://www.songkick.com/venues/89203-silverdome",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.songkick.com/concerts/43289618-wiggles-at-silverdome"
  },
  {
   "artist": "Clinton Hutton",
@@ -35322,7 +35342,8 @@
   "url": "https://www.songkick.com/concerts/43363080-brett-newski-at-ararat-town-hall",
   "genre": "",
   "source": "https://www.songkick.com/venues/4446516-ararat-town-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ross Wilson & The Peaceniks",
@@ -35522,10 +35543,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Red Hill",
-  "url": "https://tixel.com/au/tickets/red-hill-auditorium",
+  "url": "https://www.axs.com/events/1617072/lizzy-mcalpine-perth-tickets",
   "genre": "",
   "source": "https://tixel.com/au/tickets/red-hill-auditorium",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/red-hill-auditorium"
  },
  {
   "artist": "The Black Sorrows",
@@ -36163,7 +36186,8 @@
   "url": "https://musick.com.au/gig/dreams-presents-fleetwood-mac-rumours-50th-anniversary-tour-at-hamilton-hotel-2027-02-05/",
   "genre": "Rock",
   "source": "https://musick.com.au/venue/hamilton-hotel/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Russell Family Jazz Show",
@@ -36617,7 +36641,8 @@
   "url": "https://www.songkick.com/de/concerts/43433439-superjesus-at-newcastle-harness-racing-club",
   "genre": "Rock",
   "source": "https://www.songkick.com/de/metro-areas/26791-australia-newcastle",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Harry Manx",
@@ -37612,10 +37637,12 @@
   "city": "Perth",
   "state": "WA",
   "suburb": "Perth",
-  "url": "https://tixel.com/au/music-tickets/2026/12/19/the-ten-tenors-his-majestys-thea",
+  "url": "https://tickets.artsculturetrust.wa.gov.au/overview/the-ten-tenors-act-hmt",
   "genre": "",
   "source": "https://tixel.com/au/tickets/his-majestys-theatre-19bc",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/19/the-ten-tenors-his-majestys-thea"
  },
  {
   "artist": "Don't Change",
@@ -37629,7 +37656,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/30/dont-change-gosnells-hotel-perth",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/gosnells-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Simple Minds",
@@ -37793,7 +37821,8 @@
   "url": "https://tixel.com/au/tickets/east-perth-power-station",
   "genre": "",
   "source": "https://tixel.com/au/tickets/east-perth-power-station",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ólafur Arnalds",
@@ -37913,7 +37942,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/03/pachyman-flying-colours-brisbane",
   "genre": "",
   "source": "https://tixel.com/au/tickets/flying-colours",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "VTSS",
@@ -38717,7 +38747,8 @@
   "url": "https://tixel.com/au/tickets/north-wollongong-hotel",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/north-wollongong-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sax Blue",
@@ -39282,10 +39313,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Southbank",
-  "url": "https://www.songkick.com/concerts/43436766-jon-cleary-and-the-absolute-monster-gentlemen-at-melbourne-recital-centre",
+  "url": "https://www.melbournerecital.com.au/whats-on/current-productions/jon-cleary",
   "genre": "",
   "source": "https://www.songkick.com/venues/500506-melbourne-recital-centre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.songkick.com/concerts/43436766-jon-cleary-and-the-absolute-monster-gentlemen-at-melbourne-recital-centre"
  },
  {
   "artist": "J. Cole",
@@ -39386,10 +39419,12 @@
   "city": "Townsville",
   "state": "QLD",
   "suburb": "Townsville",
-  "url": "https://www.songkick.com/concerts/43085543-guns-n-roses-at-queensland-country-bank-stadium",
+  "url": "https://www.ticketmaster.com.au/guns-n-roses-world-tour-2026-townsville-02-12-2026/event/250065036F1C0E53",
   "genre": "Rock",
   "source": "https://www.songkick.com/venues/4368718-queensland-country-bank-stadium",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.songkick.com/concerts/43085543-guns-n-roses-at-queensland-country-bank-stadium"
  },
  {
   "artist": "Dave Ritter",
@@ -40526,7 +40561,8 @@
   "url": "https://musick.com.au/gig/ruby-fields-regional-tour-at-edge-hill-tavern-2027-02-11/",
   "genre": "Indie",
   "source": "https://musick.com.au/venue/edge-hill-tavern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Funhouse",
