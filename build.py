@@ -48,7 +48,12 @@ def d(s): return dt.date.fromisoformat(s)
 def fmt(s, wd=True, yr=True):
     x = d(s)
     return (x.strftime("%a ") if wd else "") + f"{x.day} {x.strftime('%b')}" + (x.strftime(" %Y") if yr else "")
-def hue(name): return int(hashlib.md5(name.encode()).hexdigest()[:4], 16) % 360
+def hue(name):
+    """A colour (0-359) for a name. Same sum as the browser's hueOf() in app.js, so a band looks the same everywhere."""
+    h = 0
+    for ch in name:
+        h = (h * 31 + ord(ch)) % 360
+    return h
 def plain(h): return re.sub(r"\s+", " ", re.sub("<[^>]+>", " ", h)).strip()
 
 # ---------------------------------------------------------------- data
@@ -144,13 +149,17 @@ for a in artists.values():
     a["genre"] = a["genre"] or (a["tour"] or {}).get("genre", "")
 
 # Deezer players and photos: hand-picked artists first, then the busiest touring artists.
+# Every artist with a gig gets looked up (touring acts first, then busiest first); each build checks up to 300 new
+# names and the results are kept between builds, so it works through everyone within days.
 ranked = [a["name"] for a in artists.values() if a["tour"]] + \
-         [a["name"] for a in sorted(artists.values(), key=lambda a: -len(a["shows"])) if not a["tour"]][:150]
-dz = feed.deezer_lookup(ranked, ROOT)
+         [a["name"] for a in sorted(artists.values(), key=lambda a: -len(a["shows"])) if not a["tour"]]
+dz = feed.deezer_lookup(ranked, ROOT, limit=300)
+REAL_PIC = re.compile(r"/images/artist/[0-9a-f]{20,}/")  # Deezer's blank placeholder has no picture id
 for a in artists.values():
     hit = dz.get(a["name"])
     a["deezer"] = hit["id"] if hit else None
-    a["photo"] = a["image"] or (hit or {}).get("picture", "")
+    pic_ = (hit or {}).get("picture", "")
+    a["photo"] = a["image"] or (pic_ if REAL_PIC.search(pic_ or "") else "")
 
 # setlist.fm and Discogs extras (only when their keys are set in Netlify)
 extra_names = ranked[:80]
@@ -452,13 +461,23 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(doc)
 
+# Gig-poster artwork for acts with no photo: the band's name in big type, styled by genre
+# (rough for rock/punk/metal, paper for folk/country/blues/jazz, neon for electronic/hip hop, bright for pop/indie).
+POSTER_STYLE = {"Rock": "grit", "Metal & heavy": "grit", "Punk": "grit", "Country & folk": "paper", "Soul, blues & jazz": "paper",
+                "Electronic & dance": "neon", "Hip hop & R&B": "neon", "Pop": "pop", "Indie & alternative": "pop"}
+def poster_style(name, genre=""):
+    return POSTER_STYLE.get(genre) or ("grit", "paper", "pop", "neon")[hue(name) % 4]
+def poster(name, genre="", cls="gcpic", tag="span"):
+    n = len(name)
+    size = "s" if n <= 9 else "m" if n <= 18 else "l" if n <= 30 else "xl"
+    return (f'<{tag} class="{cls} poster ps ps-{poster_style(name, genre)} pl-{size}" style="--h:{hue(name)}" aria-hidden="true">'
+            f'<span class="pn">{e(name)}</span><span class="plive">Live</span></{tag}>')
+
 def art(a, cls="art"):
     """Artist picture, or a coloured poster-style card when there's no photo."""
     if a.get("photo"):
         return f'<div class="{cls}"><img src="{e(a["photo"])}" alt="{e(a["name"])}" loading="lazy"></div>'
-    h = hue(a["name"])
-    initials = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", a["name"])[:2]).upper()
-    return f'<div class="{cls} poster" style="--h:{h}" aria-hidden="true"><span>{e(initials)}</span></div>'
+    return poster(a["name"], a.get("gb", ""), cls, "div")
 
 def stub(s):
     x = d(s["date"])
@@ -481,8 +500,7 @@ def gcard(s, extra=""):
     if u_:
         face = f'<span class="gcpic" style="background-image:url(&quot;{e(u_)}&quot;)"></span>'
     else:
-        ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", s["artist"])[:2]).upper()
-        face = f'<span class="gcpic poster" style="--h:{hue(s["artist"])}"><span>{e(ini)}</span></span>'
+        face = poster(s["artist"], a_.get("gb", ""))
     return (f'<a class="gcard{extra}" data-date="{s["date"]}" href="{gig_path(s)}">{face}<span class="gcd"><b>{x.day}</b><small>{x.strftime("%b")}</small></span>'
             f'<span class="gcin"><strong>{e(s["artist"])}</strong><span>{x.strftime("%a")} · {e(s["venue"])}, {e(s["city"])}</span></span></a>')
 
@@ -493,7 +511,8 @@ def gthumb(s):
     if u_:
         return f'<a class="gth" href="{gig_path(s)}" tabindex="-1" aria-hidden="true"><img src="{e(u_)}" alt="" loading="lazy" width="58" height="58"></a>'
     ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", s["artist"])[:2]).upper()
-    return f'<a class="gth poster" href="{gig_path(s)}" tabindex="-1" aria-hidden="true" style="--h:{hue(s["artist"])}"><span>{e(ini)}</span></a>'
+    return (f'<a class="gth poster ps ps-{poster_style(s["artist"], a_.get("gb", ""))}" href="{gig_path(s)}" tabindex="-1" aria-hidden="true" '
+            f'style="--h:{hue(s["artist"])}"><span class="pn">{e(ini)}</span></a>')
 
 def gig_row(s, show_artist=True, show_city=True):
     who = f'<a class="gname" href="{gig_path(s)}">{e(s["artist"])}</a>' if show_artist else ""
@@ -650,8 +669,7 @@ def tour_stub(a_name, ss):
     if u_:
         face = f'<span class="gcpic" style="background-image:url(&quot;{e(u_)}&quot;)"></span>'
     else:
-        ini = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", a_name)[:2]).upper()
-        face = f'<span class="gcpic poster" style="--h:{hue(a_name)}"><span>{e(ini)}</span></span>'
+        face = poster(a_name, a_.get("gb", ""))
     if len(ss) == 1:
         when = f'{first.strftime("%a")} {first.day} {first.strftime("%b")}'
         where = f'{e(ss[0]["venue"])}, {e(ss[0]["city"])}'

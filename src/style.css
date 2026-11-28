@@ -922,3 +922,52 @@ body:has(#msgs) .signup{display:none}@media(max-width:760px){body:has(.msgs.mope
 .article figure.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:560px}
 .article figcaption{font-size:13px;color:var(--muted);margin-top:6px;grid-column:1/-1}
 .article blockquote.pull{margin:28px 0;padding:6px 0 6px 18px;border-left:4px solid var(--red);font:400 clamp(22px,2.6vw,28px)/1.25 "Anton",Impact,sans-serif;text-transform:uppercase}
+/* ---------------------------------------------------------------- gig-poster artwork for acts with no photo (Nov 2026)
+   Four looks picked by genre: grit (rock/punk/metal), paper (folk/country/blues/jazz), neon (electronic/hip hop), pop (pop/indie). */
+.ps.poster{position:relative;overflow:hidden;display:flex!important;flex-direction:column;justify-content:center;align-items:flex-start;
+ container-type:inline-size;padding:0 9% !important;text-align:left;isolation:isolate}
+
+.ps.poster::before,.ps.poster::after{width:auto;height:auto;aspect-ratio:auto;border-radius:0;opacity:1;inset:auto;transform:none;background:none;border:0}
+.ps.poster span{position:static}
+.ps.poster::before,.ps.poster::after{content:"";position:absolute;pointer-events:none;z-index:-1}
+.ps.poster .pn{display:block;font:400 1em/0.92 "Anton",Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere;max-width:100%}
+.ps.poster.pl-s .pn{font-size:19cqw}.ps.poster.pl-m .pn{font-size:13.5cqw}.ps.poster.pl-l .pn{font-size:10.5cqw}.ps.poster.pl-xl .pn{font-size:8.5cqw}
+.ps.poster .plive{margin-top:6%;font:700 clamp(9px,4.4cqw,13px)/1 "Archivo",sans-serif;letter-spacing:.25em;text-transform:uppercase;padding:.45em .8em;border-radius:2px}
+/* grit: black, torn colour wash, scratchy lines, slightly tilted type */
+.ps.poster.ps-grit{background:#121212!important;color:hsl(var(--h) 85% 62%)}
+.ps.poster.ps-grit::before{inset:-10%;background:radial-gradient(ellipse at 78% 18%,hsl(var(--h) 85% 45% / .55),transparent 55%),
+ repeating-linear-gradient(112deg,rgba(255,255,255,.05) 0 1px,transparent 1px 5px)}
+.ps.poster.ps-grit::after{left:-5%;right:-5%;top:14%;height:7%;background:hsl(var(--h) 85% 55% / .85);transform:rotate(-4deg)}
+.ps.poster.ps-grit .pn{transform:rotate(-3deg);text-shadow:3px 3px 0 #000}
+.ps.poster.ps-grit .plive{background:#f1ece4;color:#121212;transform:rotate(-3deg)}
+/* paper: cream card, inked type, a sun disc and double border like a letterpress poster */
+.ps.poster.ps-paper{background:#efe6d2!important;color:#2b2118}
+.ps.poster.ps-paper::before{width:70%;aspect-ratio:1;right:-18%;top:-22%;border-radius:50%;background:hsl(var(--h) 55% 52% / .75)}
+.ps.poster.ps-paper::after{inset:5%;border:3px double rgba(43,33,24,.55)}
+.ps.poster.ps-paper .plive{background:#2b2118;color:#efe6d2}
+/* neon: night-time gradient, glowing type, a perspective grid at the bottom */
+.ps.poster.ps-neon{background:linear-gradient(160deg,#0b0420 0,hsl(var(--h) 75% 16%) 100%)!important;color:#fff}
+.ps.poster.ps-neon::before{left:-20%;right:-20%;bottom:-6%;height:42%;transform:perspective(120px) rotateX(55deg);
+ background:repeating-linear-gradient(90deg,hsl(var(--h) 100% 65% / .55) 0 1px,transparent 1px 22px),repeating-linear-gradient(0deg,hsl(var(--h) 100% 65% / .55) 0 1px,transparent 1px 16px)}
+.ps.poster.ps-neon .pn{font-style:italic;text-shadow:0 0 6px hsl(var(--h) 100% 65%),0 0 18px hsl(var(--h) 100% 55%)}
+.ps.poster.ps-neon .plive{border:1px solid hsl(var(--h) 100% 70%);color:hsl(var(--h) 100% 80%)}
+/* pop: bright two-tone split, black type on a white strip */
+.ps.poster.ps-pop{background:linear-gradient(118deg,hsl(var(--h) 88% 62%) 0 55%,hsl(calc(var(--h) + 45) 85% 55%) 55% 100%)!important;color:#141414}
+.ps.poster.ps-pop::before{width:48%;aspect-ratio:1;left:-12%;bottom:-20%;border-radius:50%;background:repeating-radial-gradient(circle,rgba(0,0,0,.16) 0 2px,transparent 2px 6px)}
+.ps.poster.ps-pop .pn{background:#fff;padding:.08em .18em;box-shadow:4px 4px 0 #141414}
+.ps.poster.ps-pop .plive{background:#141414;color:#fff}
+/* tiny row thumbnails: initials only, same looks */
+.gth.ps.poster{padding:0!important;justify-content:center;align-items:center}
+.gth.ps.poster.poster .pn{font-size:22px;transform:none;text-align:center;box-shadow:none;padding:0;background:none}
+.gth.ps.poster::after{display:none}
+.gth.ps.poster.poster.ps-paper::after{display:block;inset:4px;border-width:2px}
+/* artist page picture and other art boxes */
+.art.ps.poster{aspect-ratio:1}
+.art.ps.poster.poster .pn{font-size:12cqw}
+.ps.poster .pn,.ps.poster .plive{color:inherit}
+.ps.poster.ps-grit .plive,.ps.poster.ps-paper .plive,.ps.poster.ps-pop .plive{color:revert-layer}
+.ps.poster.ps-grit .plive{color:#121212}.ps.poster.ps-paper .plive{color:#efe6d2}.ps.poster.ps-pop .plive{color:#fff}.ps.poster.ps-neon .plive{color:hsl(var(--h) 100% 80%)}
+.gcpic.ps.poster{justify-content:flex-end;padding-bottom:7%!important}
+.stubs .gcpic.ps.poster,.art.ps.poster{justify-content:center;padding-bottom:0!important}
+@media(max-width:600px){.nearlist .ps.poster .plive{display:none}.nearlist .gcpic.ps.poster{padding-bottom:6%!important}
+ .nearlist .ps.poster.pl-s .pn{font-size:16cqw}.nearlist .ps.poster.pl-m .pn{font-size:11.5cqw}.nearlist .ps.poster.pl-l .pn{font-size:9.5cqw}.nearlist .ps.poster.pl-xl .pn{font-size:8cqw}}

@@ -1,3 +1,17 @@
+// Gig-poster artwork for acts with no photo, styled by genre (same rules as build.py's poster()).
+window.LLPOSTER = (() => {
+  const byGenre = {'rock': 'grit', 'metal-and-heavy': 'grit', 'punk': 'grit', 'country-and-folk': 'paper', 'soul-blues-and-jazz': 'paper',
+    'electronic-and-dance': 'neon', 'hip-hop-and-randb': 'neon', 'pop': 'pop', 'indie-and-alternative': 'pop'};
+  const hue = n => { let h = 0; for (const ch of n) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const style = (name, g) => byGenre[g] || ['grit', 'paper', 'pop', 'neon'][hue(name) % 4];
+  const big = (name, g) => { const n = name.length, sz = n <= 9 ? 's' : n <= 18 ? 'm' : n <= 30 ? 'l' : 'xl';
+    return `<span class="gcpic poster ps ps-${style(name, g)} pl-${sz}" style="--h:${hue(name)}" aria-hidden="true"><span class="pn">${esc(name)}</span><span class="plive">Live</span></span>`; };
+  const small = (name, g, href) => { const ini = (name.match(/[A-Za-z0-9]+/g) || ['?']).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    return `<a class="gth poster ps ps-${style(name, g)}" href="${href}" tabindex="-1" aria-hidden="true" style="--h:${hue(name)}"><span class="pn">${esc(ini)}</span></a>`; };
+  return {big, small};
+})();
+
 // Remembers the visitor's city (on this device only) so the site shows their gigs first.
 window.LL = (function () {
   const zones = {'Australia/Perth': 'Perth', 'Australia/Adelaide': 'Adelaide', 'Australia/Darwin': 'Darwin', 'Australia/Brisbane': 'Brisbane',
@@ -85,7 +99,7 @@ window.LL = (function () {
         const day = new Date(y, m - 1, dd).toLocaleDateString('en-AU', {weekday: 'short'});
         const u = pic(pics.a[s[3]] || pics.v[s[11]]), gp = esc(s[14] || (root + 'artists/' + s[3] + '.html'));
         const th = u ? `<a class="gth" href="${gp}" tabindex="-1" aria-hidden="true"><img src="${esc(u)}" alt="" loading="lazy" width="58" height="58"></a>`
-          : `<a class="gth poster" href="${gp}" tabindex="-1" aria-hidden="true" style="--h:${hueOf(s[2])}"><span>${esc((s[2].match(/[A-Za-z0-9]+/g) || ['?']).slice(0, 2).map(w => w[0]).join('').toUpperCase())}</span></a>`;
+          : LLPOSTER.small(s[2], s[12], gp);
         html += `<li class="gig th"><div class="gd"><b>${dd}</b><small>${months[m - 1]}</small></div>${th}<div class="gi"><a class="gname" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${esc(s[2])}</a>` +
           (s[8] ? `<span class="gsup">with ${esc(s[8])}</span>` : '') + `<span class="gw"><a class="vlink" href="${root}venues/${esc(s[11])}.html">${esc(s[4])}</a>, ${esc(s[6])} · ${day}${s[1] ? ' ' + esc(s[1]) : ''}</span></div>` +
           `<div class="ga"><a href="${esc(s[7])}" rel="noopener">${['ticketmaster', 'submitted', 'found'].includes(s[9]) ? 'Tickets' : 'Details'} ↗</a><span class="ga2"><a class="cal" href="${esc(s[10])}" rel="noopener">+ Calendar</a>` +
@@ -171,9 +185,7 @@ document.addEventListener("click", function (ev) {
       const far = d == null ? '' : `<em class="km">${approx ? 'about ' : ''}${d < 1 ? 'under 1' : d < 10 ? d.toFixed(0) : Math.round(d / 5) * 5} km</em>`;
       const town = s[5] && s[5] !== s[6] ? s[5] : s[6];
       const u = pic(pics.a[s[3]] || pics.v[s[11]]);
-      const ini = (s[2].match(/[A-Za-z0-9]+/g) || ['?']).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-      const face = u ? `<span class="gcpic" style="background-image:url(&quot;${esc(u)}&quot;)"></span>`
-                     : `<span class="gcpic poster" style="--h:${hueOf(s[2])}"><span>${esc(ini)}</span></span>`;
+      const face = u ? `<span class="gcpic" style="background-image:url(&quot;${esc(u)}&quot;)"></span>` : LLPOSTER.big(s[2], s[12]);
       return `<a class="gcard" href="${esc(s[14] || (root + 'artists/' + s[3] + '.html'))}">${face}<span class="gcd"><b>${dd}</b><small>${months[m - 1]}</small></span>` +
         `<span class="gcin"><strong>${esc(s[2])}</strong><span>${day} · ${esc(s[4])}${loc ? ', ' + esc(town) : ''}</span>${far}</span></a>`;
     }
