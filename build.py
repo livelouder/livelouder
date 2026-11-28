@@ -508,6 +508,10 @@ def poster(name, genre="", cls="gcpic", tag="span"):
     return (f'<{tag} class="{cls} poster ps ps-{poster_style(name, genre)} pl-{size}" style="--h:{hue(name)}" aria-hidden="true">'
             f'<span class="pn">{e(name)}</span><span class="plive">Live</span></{tag}>')
 
+def small_photo(u, size="500x500"):
+    """Smaller Deezer photo (the build stores the 1000px one)."""
+    return re.sub(r"/1000x1000-", f"/{size}-", u or "")
+
 def art(a, cls="art"):
     """Artist picture, or a coloured poster-style card when there's no photo."""
     if a.get("photo"):
@@ -1417,12 +1421,30 @@ for a in sorted(artists.values(), key=lambda a: re.sub(r"^the\s+", "", a["name"]
     ch = re.sub(r"^the\s+", "", a["name"].lower())[:1].upper()
     _letters.setdefault(ch if ch.isalpha() else "#", []).append(a)
 _order = sorted(_letters, key=lambda x: (x == "#", x))
-_arows = "".join(f'<h2 id="l-{slug(L) or "num"}">{e(L)}</h2><nav class="chips">' + "".join(
-    f'<a href="/artists/{a["slug"]}.html">{e(a["name"])}' + (f' <small>{len(a["shows"])}</small>' if a["shows"] else "") + "</a>" for a in _letters[L]) + "</nav>" for L in _order)
+_soon = (dt.date.fromisoformat(TODAY_S) + dt.timedelta(days=30)).isoformat()
+def aztile(a):
+    sh = a["shows"]
+    nx = sh[0] if sh else None
+    ph = small_photo(a.get("photo", ""), "250x250")
+    pic = (f'<span class="azp"><img src="{e(ph)}" alt="" loading="lazy"></span>' if ph
+           else f'<span class="azp azn{" azlong" if len(a["name"]) > 22 else ""}" style="--h:{hue(a["name"])}"><span>{e(a["name"])}</span></span>')
+    badge = f'<em>{len(sh)} shows</em>' if len(sh) > 2 else ""
+    nxt = f'<small>Next: {d(nx["date"]).strftime("%-d %b")} · {e(nx["city"])}</small>' if nx else '<small>No dates yet</small>'
+    cities = "|".join(dict.fromkeys(s_["city"] for s_ in sh))
+    return (f'<a class="azt" href="/artists/{a["slug"]}.html" data-n="{e(a["name"].lower())}" data-g="{e(a.get("gb", ""))}" '
+            f'data-next="{nx["date"] if nx else ""}" data-c="{e(cities)}" data-tour="{1 if a.get("tour") else 0}">'
+            f'<span class="azw">{pic}{badge}</span><b>{e(a["name"])}</b>{nxt}</a>')
+_azgen = [g for g, _ in GENRES if any(a.get("gb") == g for a in artists.values())]
+_azsecs = "".join(f'<section class="azsec" id="l-{slug(L) or "num"}" data-l="{e(L)}"><h2>{e(L)}</h2><div class="azg">{"".join(aztile(a) for a in _letters[L])}</div></section>' for L in _order)
 page("artists/index.html", "Artists A–Z: tour dates and upcoming gigs in Australia | Live Louder",
      f"{len(artists):,} artists with Australian tour dates and gigs, from A to Z.",
-     f"""<section class="page-title"><div class="wrap"><h1>Artists A–Z</h1><p>{' · '.join(f'<a style="color:#fff" href="#l-{slug(L) or "num"}">{e(L)}</a>' for L in _order)}</p></div></section>
-<section class="band"><div class="wrap">{_arows}</div></section>""", "artists/index.html")
+     f"""<section class="page-title"><div class="wrap"><h1>Artists A–Z</h1><p>Every artist with a gig or tour coming up in Australia.</p></div></section>
+<div class="bbar" id="azbar" data-soon="{_soon}"><div class="wrap brow"><input id="azq" class="bsearch" type="search" placeholder="Search {len(artists):,} artists" aria-label="Search artists">
+<div class="bchips" id="azf" role="group" aria-label="Show"><button type="button" class="on" data-f="">Everyone</button><button type="button" data-f="soon">Playing soon</button><button type="button" data-f="tour">Touring now</button><button type="button" data-f="near">📍 Near me</button>{"".join(f'<button type="button" data-g="{e(g)}">{e(g)}</button>' for g in _azgen)}</div></div>
+<div class="wrap brow"><nav class="azl" aria-label="Jump to letter">{"".join(f'<a href="#l-{slug(L) or "num"}">{e(L)}</a>' for L in _order)}</nav></div></div>
+<section class="band tband"><div class="wrap"><p class="bcount" id="azcount" aria-live="polite">{len(artists):,} artists</p>{_azsecs}
+<p class="note" id="aznone" hidden>No artists match. Try a different search or filter.</p></div></section>""", "artists/index.html",
+     extra_head='<script src="/browse.js" defer></script>')
 
 # ---------------------------------------------------------------- tours
 def tour_block(t):
@@ -1453,12 +1475,54 @@ if have_feed:
         lis = "".join(f'<li><a href="/artists/{a["slug"]}.html">{e(a["name"])}</a> <span>{len(a["shows"])} · {e(", ".join(a["cities"][:3]))}</span></li>' for a in v)
         blocks += f'<h3 class="month" id="az-{k}">{k}</h3><ul class="az">{lis}</ul>'
     az_html = f'<section class="band" style="padding-top:0"><div class="wrap"><h2>Every artist touring</h2><nav class="chips">{jump}</nav>{blocks}</div></section>'
-tbtns = "".join(f'<button data-city="{e(c)}" aria-pressed="false">{e(c)}</button>' for c in ["Sydney", "Melbourne", "Brisbane", "Adelaide", "Perth"])
-tp = f"""<section class="page-title"><div class="wrap"><h1>Tours</h1><p>The big tours coming to Australia, plus every artist with shows booked.</p></div></section>
-<section class="band"><div class="wrap"><h2>The big ones</h2><div class="filters" role="group" aria-label="Filter by city"><button data-city="all" aria-pressed="true">All cities</button>{tbtns}</div>
-{''.join(tour_block(t) for t in big)}</div></section>{az_html}"""
+# Tours page: photo cards grouped by month; browse.js adds the city picker (remembered), search, genre and month filters.
+tour_data = []
+for t in big:
+    a_ = artists[slug(t["artist"])]
+    ds_ = []
+    for s_ in a_["shows"]:
+        u_ = s_.get("url") or ""
+        ds_.append([s_["date"], s_["city"], s_["venue"], add_utm(u_, "tour") if u_ and link_kind(u_) != "info" else ""])
+    tour_data.append({"s": a_["slug"], "n": t["artist"], "t": t.get("tour", ""), "g": a_.get("gb", ""), "p": small_photo(a_.get("photo", "")),
+                      "h": hue(t["artist"]), "so": 1 if t.get("soldout") else 0, "d": ds_})
+def _dshort(x):
+    return d(x).strftime("%-d %b")
+def tcard(x):
+    img = (f'<a class="tc2i" href="/artists/{x["s"]}.html" style="background-image:url(&quot;{e(x["p"])}&quot;)" aria-hidden="true" tabindex="-1"></a>' if x["p"]
+           else f'<a class="tc2i tc2n" href="/artists/{x["s"]}.html" style="--h:{x["h"]}" aria-hidden="true" tabindex="-1"><span>{e(x["n"])}</span></a>')
+    cs = list(dict.fromkeys(r[1] for r in x["d"]))
+    if x["d"]:
+        when = _dshort(x["d"][0][0]) + (f' – {_dshort(x["d"][-1][0])}' if x["d"][-1][0] != x["d"][0][0] else "")
+        more = f'{len(cs)} {"city" if len(cs) == 1 else "cities"}: ' + ", ".join(cs[:3]) + (f" +{len(cs) - 3}" if len(cs) > 3 else "")
+    else:
+        when, more = "Dates to be announced", ""
+    so = '<span class="tc2so">Sold out</span>' if x["so"] else ""
+    return (f'<article class="tc2" data-s="{x["s"]}">{img}<div class="tc2b"><h3><a href="/artists/{x["s"]}.html">{e(x["n"])}</a></h3>'
+            f'<p class="tc2t">{e(x["t"])}</p><p class="tc2d"><b>{e(when)}</b>{so}</p><p class="tc2m">{e(more)}</p>'
+            f'<a class="tc2btn" href="/artists/{x["s"]}.html">Dates &amp; tickets</a></div></article>')
+_tmonths = {}
+for x in tour_data:
+    k_ = x["d"][0][0][:7] if x["d"] else "9999-99"
+    _tmonths.setdefault(k_, []).append(x)
+def _mlabel(k_):
+    if k_ == "9999-99":
+        return "Dates to be announced"
+    return dt.date(int(k_[:4]), int(k_[5:]), 1).strftime("%B %Y")
+_tsecs = "".join(f'<section class="tmon" data-m="{k_}"><h2>{_mlabel(k_)}</h2><div class="tgrid">{"".join(tcard(x) for x in v)}</div></section>'
+                 for k_, v in sorted(_tmonths.items()))
+_tcities = sorted({r[1] for x in tour_data for r in x["d"]}, key=lambda c: (c not in MAIN_CITIES, MAIN_CITIES.index(c) if c in MAIN_CITIES else 0, c))
+_tgen = [g for g, _ in GENRES if any(x["g"] == g for x in tour_data)]
+_tjson = json.dumps(tour_data, ensure_ascii=False).replace("</", "<\\/")
+tp = f"""<section class="page-title"><div class="wrap"><h1>Tours</h1><p>The big tours coming to Australia. Pick your city to see your dates.</p></div></section>
+<div class="bbar" id="tbar"><div class="wrap brow"><label class="bcity"><span aria-hidden="true">📍</span><select id="tcity" aria-label="Your city"><option value="">All cities</option>{"".join(f'<option>{e(c)}</option>' for c in _tcities)}</select></label>
+<input id="tq" class="bsearch" type="search" placeholder="Search artists or venues" aria-label="Search tours"><div class="bchips" id="tgen" role="group" aria-label="Genre"><button type="button" class="on" data-g="">All genres</button>{"".join(f'<button type="button" data-g="{e(g)}">{e(g)}</button>' for g in _tgen)}</div></div>
+<div class="wrap brow"><div class="bchips" id="tmonths" role="group" aria-label="Jump to month"></div></div></div>
+<section class="band tband"><div class="wrap"><p class="bcount" id="tcount" aria-live="polite">{len(tour_data)} tours</p><div id="tlist">{_tsecs}</div>
+<p class="note">Looking for a smaller act? Every artist with a gig booked is in the <a href="/artists/index.html">Artists A–Z</a>.</p></div></section>
+<script id="tourdata" type="application/json">{_tjson}</script>"""
 page("tours.html", "Australian tours: every artist touring Australia | Live Louder",
-     "The biggest tours coming to Australia, with dates, venues and tickets, plus every artist with Australian shows booked.", tp, "tours.html")
+     "The biggest tours coming to Australia, with dates, venues and tickets for your city.", tp, "tours.html",
+     extra_head='<script src="/browse.js" defer></script>')
 
 # ---------------------------------------------------------------- releases
 def rel_card(a, b, c, fm):
@@ -1712,6 +1776,7 @@ page("404.html", "Page not found | Live Louder", "Page not found.",
 shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
 shutil.copy(ROOT / "src/festmap.js", OUT / "festmap.js")
+shutil.copy(ROOT / "src/browse.js", OUT / "browse.js")
 shutil.copytree(ROOT / "src/vendor", OUT / "vendor", dirs_exist_ok=True)
 shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
