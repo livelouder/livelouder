@@ -12374,7 +12374,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/06/onefour-woodport-hotel-central-c",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/woodport-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Story of the Year",
@@ -15161,7 +15162,8 @@
   "url": "https://musick.com.au/gig/the-smyths-uk-the-smiths-tribute-at-the-rosemount-hotel-2027-02-28/",
   "genre": "Indie",
   "source": "https://musick.com.au/venue/the-rosemount-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Chapterhouse",
@@ -15967,7 +15969,8 @@
   "url": "https://songkick.com/concerts/43452365-joe-geia-at-street-theatre",
   "genre": "",
   "source": "https://songkick.com/venues/904226-street-theatre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ziggy Alberts",
@@ -16055,7 +16058,8 @@
   "url": "https://allevents.in/springwood/the-exploding-universe-of-ed-kuepper-at-the-blue-mountains-theatre/200031097687859",
   "genre": "Rock",
   "source": "https://allevents.in/springwood-ns/performances",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "C.O.F.F.I.N",
@@ -16596,7 +16600,8 @@
   "url": "https://songkick.com/concerts/43418994-brett-newski-at-smiths-alternative",
   "genre": "",
   "source": "https://songkick.com/venues/3967579-smiths-alternative",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The British Invasion",
@@ -17031,7 +17036,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/12/ian-moss-coliseum-theatre-sydney",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/sydney-coliseum-theatre",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Skerryvore",
@@ -17191,7 +17197,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/13/fever-pitch",
   "genre": "",
   "source": "https://tixel.com/au/tickets/la-la-la-s",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Periphery",
@@ -18025,7 +18032,8 @@
   "url": "https://songkick.com/concerts/43471235-hussy-hicks-at-harmonie-german-club",
   "genre": "",
   "source": "https://songkick.com/venues/1857983-harmonie-german-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "El Plan de la Mariposa",
@@ -18474,10 +18482,12 @@
   "city": "Newcastle",
   "state": "NSW",
   "suburb": "Wickham",
-  "url": "https://www.jambase.com/show/mark-farina-the-lass-ogowrie-20270321",
+  "url": "https://de.ra.co/events/2577901",
   "genre": "Electronic",
   "source": "https://www.jambase.com/venue/the-lass-ogowrie",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://www.jambase.com/show/mark-farina-the-lass-ogowrie-20270321"
  },
  {
   "artist": "Babes in Canyon",
@@ -18798,10 +18808,12 @@
   "city": "Tweed Heads",
   "state": "NSW",
   "suburb": "Tweed Heads",
-  "url": "https://tixel.com/au/music-tickets/2026/11/28/the-doors-alive-uk-2026-tour",
+  "url": "https://TwinTownsSales1.sales.ticketsearch.com/sales/salesevent/163408",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/twin-towns-services-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/11/28/the-doors-alive-uk-2026-tour"
  },
  {
   "artist": "Hermitude",
@@ -18815,7 +18827,8 @@
   "url": "https://tixel.com/au/tickets/finnians-irish-tavern",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/finnians-irish-tavern",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sara Berki",
@@ -18829,7 +18842,8 @@
   "url": "https://www.songkick.com/concerts/43309361-sara-berki-at-wests-diggers-club",
   "genre": "Country",
   "source": "https://www.songkick.com/venues/748001-wests-diggers-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Rubens",
@@ -18843,7 +18857,8 @@
   "url": "https://tixel.com/au/tickets/romanos-hotel",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/romanos-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hermitude",
@@ -19047,7 +19062,8 @@
   "url": "https://songkick.com/concerts/43458101-caleb-jackson-at-club-sapphire-merimbula",
   "genre": "Country",
   "source": "https://songkick.com/venues/878751-club-sapphire-merimbula",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Queen Rocks - The Definitive Tribute",
@@ -19648,7 +19664,8 @@
   "url": "https://tixel.com/au/tickets/the-whalers-hotel",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-whalers-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Pierce Brothers",
@@ -19737,7 +19754,8 @@
   "url": "https://musick.com.au/gig/x-genz-high-octane-live-rock-pop-2026-12-05/",
   "genre": "Rock",
   "source": "https://musick.com.au/regional/shepparton/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Example",
@@ -19931,7 +19949,8 @@
   "url": "https://www.songkick.com/concerts/43484808-amin-and-lachlan-at-semaphore-workers-club",
   "genre": "",
   "source": "https://www.songkick.com/venues/4648158-semaphore-workers-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Empty Threats",
@@ -20020,7 +20039,8 @@
   "url": "https://songkick.com/concerts/43540702-amin-and-lachlan-at-norwood-live-norwood-hotel",
   "genre": "",
   "source": "https://songkick.com/venues/684026-norwood-live-norwood-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "RocKwiz Rocks Christmas",
@@ -20903,7 +20923,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/25/the-rubens-the-mona-vale-hotel-s",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-mona-vale-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Grandparents Club",
@@ -21545,7 +21566,8 @@
   "url": "https://tixel.com/au/tickets/mos-desert-clubhouse",
   "genre": "",
   "source": "https://tixel.com/au/tickets/mos-desert-clubhouse",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Cat Empire",
@@ -23026,7 +23048,8 @@
   "url": "https://www.songkick.com/concerts/43494877-ian-asher-at-ice-cream-factory",
   "genre": "Electronic",
   "source": "https://www.songkick.com/venues/3746349-ice-cream-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Gia Margaret",
@@ -23124,7 +23147,8 @@
   "url": "https://tixel.com/au/tickets/koala-tavern",
   "genre": "",
   "source": "https://tixel.com/au/tickets/koala-tavern",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Flook",
@@ -23491,10 +23515,12 @@
   "city": "Adelaide",
   "state": "SA",
   "suburb": "Adelaide",
-  "url": "https://tixel.com/au/music-tickets/2027/02/19/ben-folds-her-majestys-theatre-a",
+  "url": "https://2027.aso.com.au/?p=46102",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/her-majestys-theatre-i5l5",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/19/ben-folds-her-majestys-theatre-a"
  },
  {
   "artist": "Psychedelic Sea Goats",
@@ -23508,7 +23534,8 @@
   "url": "https://musick.com.au/gig/psychedelic-sea-goats-at-the-exeter-with-doms-garage-2027-01-15/",
   "genre": "",
   "source": "https://musick.com.au/venue/exeter-hotel/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Music of Huey Lewis (Rohan Watts)",
