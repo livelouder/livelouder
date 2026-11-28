@@ -495,9 +495,47 @@
   "support": "",
   "note": "April and May 2027: Thirroul, Sydney, Melbourne, Adelaide and Perth. Exact dates on the tour page.",
   "source": "https://www.broadwayworld.com/article/Tash-Sultana-to-Launch-Australia-New-Zealand-Tour-20260922",
-  "dates": [],
+  "dates": [
+   [
+    "2027-05-01",
+    "Thirroul",
+    "Anita's Theatre",
+    "https://frntr.co/TashSultana27Thrr"
+   ],
+   [
+    "2027-05-04",
+    "Sydney",
+    "Enmore Theatre",
+    "https://frntr.co/TashSultana27Syd"
+   ],
+   [
+    "2027-05-07",
+    "Melbourne",
+    "The Forum",
+    "https://frntr.co/TashSultana27Mel"
+   ],
+   [
+    "2027-05-10",
+    "Adelaide",
+    "Hindley Street Music Hall",
+    "https://frntr.co/TashSultana27Adl"
+   ],
+   [
+    "2027-05-12",
+    "Perth",
+    "Astor Theatre",
+    "https://frntr.co/TashSultana27Per"
+   ],
+   [
+    "2027-05-13",
+    "Perth",
+    "Astor Theatre",
+    "https://frntr.co/TashSultana27Per"
+   ]
+  ],
   "added": "2026-09-22",
-  "genre": "Indie"
+  "genre": "Indie",
+  "tickets": "https://www.frontiertouring.com/tashsultana"
  },
  {
   "artist": "Powderfinger",
