@@ -879,3 +879,55 @@ grant execute on function public.post_replies_list(bigint), public.profile_activ
 -- A starter list of hateful slurs that can't be posted (everyday swearing is fine at a gig site). Add more any time.
 insert into public.blocked_words (word) values ('nigger'), ('nigga'), ('faggot'), ('fag'), ('coon'), ('chink'), ('gook'), ('spic'), ('kike'),
   ('wetback'), ('tranny'), ('retard'), ('abo'), ('boong'), ('sandnigger'), ('raghead'), ('towelhead'), ('paki') on conflict do nothing;
+
+-- ============================================================================================
+-- Vinyl round 2 (added 28 Nov 2026): "Now spinning" posts (a post can carry a record), play counts,
+-- and an email setting for "something on your wantlist is in stock at Heathen Records".
+alter table public.posts add column if not exists record jsonb;
+alter table public.posts drop constraint if exists posts_body_check;
+alter table public.posts drop constraint if exists posts_body_ok;
+alter table public.posts add constraint posts_body_ok check (char_length(btrim(body)) <= 500 and (char_length(btrim(body)) >= 1 or record is not null));
+alter table public.profiles add column if not exists remind_wants boolean not null default true;
+
+create or replace function public.post_json(pid bigint) returns jsonb language sql stable security definer set search_path = '' as $$
+  select jsonb_build_object('id', x.id, 'body', x.body, 'gig', x.gig, 'artist', x.artist, 'record', x.record, 'at', x.created_at,
+    'mine', x.user_id = auth.uid(), 'hidden', x.status = 'hidden',
+    'likes', (select count(*) from public.post_likes l where l.post_id = x.id),
+    'liked', exists (select 1 from public.post_likes l where l.post_id = x.id and l.user_id = auth.uid()),
+    'replies', (select count(*) from public.post_replies r where r.post_id = x.id and (r.status in ('ok', 'approved') or r.user_id = auth.uid())))
+  from public.posts x where x.id = pid
+$$;
+revoke all on function public.post_json(bigint) from public, anon, authenticated;
+
+drop function if exists public.create_post(text, jsonb, jsonb);
+create or replace function public.create_post(body text, gig jsonb default null, artist jsonb default null, record jsonb default null) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare me uuid := auth.uid(); b text := btrim(coalesce(body, '')); g jsonb; a jsonb; r jsonb; nid bigint;
+begin
+  if me is null then raise exception 'Sign in first'; end if;
+  if exists (select 1 from public.post_bans where user_id = me) then raise exception 'Posting is switched off for your account'; end if;
+  if record is not null and record ? 'rid' then
+    r := jsonb_strip_nulls(jsonb_build_object('rid', left(record->>'rid', 30), 'a', left(record->>'a', 120), 't', left(record->>'t', 160), 'y', left(record->>'y', 4),
+      'img', left(record->>'img', 400), 'c', left(record->>'c', 40), 'l', left(record->>'l', 80), 'col', left(record->>'col', 80)));
+  end if;
+  if char_length(b) > 500 or (char_length(b) < 1 and r is null) then raise exception 'Posts can be up to 500 characters'; end if;
+  if public.has_blocked_word(b) then raise exception 'Your post has a word we don''t allow. Please change it and try again.'; end if;
+  if (select count(*) from public.posts where user_id = me and created_at > now() - interval '1 hour') >= 20 then raise exception 'That''s a lot of posts. Try again in a little while.'; end if;
+  if gig is not null and gig ? 'id' then
+    g := jsonb_strip_nulls(jsonb_build_object('id', left(gig->>'id', 120), 'd', left(gig->>'d', 10), 'tm', left(gig->>'tm', 10), 'a', left(gig->>'a', 120),
+      's', left(gig->>'s', 120), 'v', left(gig->>'v', 120), 'c', left(gig->>'c', 60), 'u', left(gig->>'u', 400), 'p', left(gig->>'p', 200)));
+  end if;
+  if artist is not null and artist ? 'slug' then a := jsonb_build_object('slug', left(artist->>'slug', 120), 'name', left(artist->>'name', 120)); end if;
+  insert into public.posts (user_id, body, gig, artist, record) values (me, b, g, a, r) returning id into nid;
+  return public.post_json(nid);
+end $$;
+revoke all on function public.create_post(text, jsonb, jsonb, jsonb) from public, anon;
+grant execute on function public.create_post(text, jsonb, jsonb, jsonb) to authenticated;
+
+-- How many times you've spun each record ("Now spinning" posts), and when you last did.
+create or replace function public.my_plays() returns jsonb language sql stable security definer set search_path = '' as $$
+  select coalesce(jsonb_object_agg(x.rid, jsonb_build_array(x.n, x.last)), '{}'::jsonb) from (
+    select p.record->>'rid' rid, count(*) n, max(p.created_at) last from public.posts p
+    where p.user_id = auth.uid() and p.record is not null and p.status <> 'removed' group by 1) x
+$$;
+revoke all on function public.my_plays() from public, anon;
+grant execute on function public.my_plays() to authenticated;
