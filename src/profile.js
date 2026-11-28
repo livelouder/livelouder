@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('llpost', () => { loadActivity(true); });
   function feedItems() {
     const mine = act.mine || [], myName = prof().username;
-    if (act.mode === 'me') return mine;
+    if ((act.mode || 'all') === 'me') return mine;
     const seen = new Set(mine.filter(x => x.t === 'post').map(x => x.post && x.post.id));
     const fr = (act.friends || []).filter(x => !(x.t === 'post' && x.post && seen.has(x.post.id)) && !(myName && x.who && x.who.username === myName && x.t !== 'post'));
     return [...mine, ...fr].sort((a, b) => String(b.at).localeCompare(String(a.at)));
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (me()) {
       main += window.FRIENDS ? FRIENDS.composer() : '';
       const following = people && people.following.length;
-      if (!act.mode) act.mode = following ? 'all' : 'me';
+      if (!act.mode && people) act.mode = following ? 'all' : 'me';
       main += `<div class="shead fhead"><h2>${act.mode === 'me' ? 'Your activity' : 'Your feed'}</h2><div class="bchips fmodes"><button type="button" data-amode="all" class="${act.mode === 'all' ? 'on' : ''}">You &amp; friends</button><button type="button" data-amode="me" class="${act.mode === 'me' ? 'on' : ''}">Just you</button></div></div>`;
       if (!act.mine) main += '<p class="note">Loading…</p>';
       else {
