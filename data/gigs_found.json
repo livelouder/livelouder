@@ -26,7 +26,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/11/28/frenzee-black-bear-lodge-brisban",
   "genre": "",
   "source": "https://tixel.com/au/tickets/black-bear-lodge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Northern Horizon Fest",
@@ -155,7 +156,8 @@
   "url": "https://www.songkick.com/concerts/43393834-urthboy-at-king-street-bandroom",
   "genre": "Hip hop",
   "source": "https://www.songkick.com/venues/4519744-king-street-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Smacked Youth",
@@ -211,7 +213,8 @@
   "url": "https://songkick.com/concerts/43016470-fischerz-at-max-watts-melbourne",
   "genre": "",
   "source": "https://songkick.com/venues/2953383-max-watts-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Tekno",
@@ -294,10 +297,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/tickets/northcote-social-club",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/24a267d6-5362-45e7-8d12-35b81bacc59d",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/northcote-social-club"
  },
  {
   "artist": "Patrick Watson",
@@ -924,10 +929,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/11/29/repakol-siakol-australia-tour",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=249659",
   "genre": "",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/11/29/repakol-siakol-australia-tour"
  },
  {
   "artist": "Beatles Legacy",
@@ -1067,10 +1074,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tickets.songkick.com/festivals/3813344-loud-women-fest-brisbane/id/43508890-loud-women-fest-brisbane-2026",
+  "url": "https://tickets.oztix.com.au/outlet/event/7be6f05e-8639-43ce-aff2-bcbf93989a19",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/2602538-brightside/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tickets.songkick.com/festivals/3813344-loud-women-fest-brisbane/id/43508890-loud-women-fest-brisbane-2026"
  },
  {
   "artist": "Tumbao Social",
@@ -1435,7 +1444,8 @@
   "url": "https://tickets.songkick.com/concerts/43418910-home-team-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Lolita Emmanuel",
@@ -1550,7 +1560,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/02/joost-klein-forum-melbourne-melb",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Sisters of Mercy",
@@ -1796,10 +1807,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Brunswick",
-  "url": "https://tixel.com/au/music-tickets/2026/12/03/elle-murphy-bergy-bandroom-melbo",
+  "url": "https://bergybandroom.oztix.com.au/Default.aspx?Event=249461",
   "genre": "",
   "source": "https://tixel.com/au/tickets/bergy-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/03/elle-murphy-bergy-bandroom-melbo"
  },
  {
   "artist": "Uncle Acid and the Deadbeats",
@@ -1913,10 +1926,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/tickets/northcote-social-club",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/7fd6d38b-436b-4b7e-9f11-3856b9250ee2",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/northcote-social-club"
  },
  {
   "artist": "Charley Castle & the Boys in the Well",
@@ -1941,10 +1956,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2026/12/03/the-reytons-the-brightside-brisb",
+  "url": "https://tickets.oztix.com.au/outlet/event/0c8cf107-0ff6-4db3-8c39-9418090c4bc7",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/the-brightside",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/03/the-reytons-the-brightside-brisb"
  },
  {
   "artist": "ivri",
@@ -1987,7 +2004,8 @@
   "url": "https://developer.songkick.com/concerts/43478008-ricky-albeck-and-the-belair-line-band-at-junk-bar",
   "genre": "",
   "source": "https://developer.songkick.com/venues/4604288-junk-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Sisters of Mercy",
@@ -2214,10 +2232,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Thornbury",
-  "url": "https://tixel.com/au/music-tickets/2026/12/04/uncle-acid-and-the-deadbeats",
+  "url": "https://thecroxton.oztix.com.au/outlet/event/b8d193fb-d75f-4774-94fb-1ae0bf070e43",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/04/uncle-acid-and-the-deadbeats"
  },
  {
   "artist": "Liva K",
@@ -2706,7 +2726,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/05/clamm-black-bear-lodge-brisbane",
   "genre": "",
   "source": "https://tixel.com/au/tickets/black-bear-lodge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Wes Carr",
@@ -2777,7 +2798,8 @@
   "url": "https://songkick.com/concerts/43430716-cash-savage-and-the-last-drinks-at-croxton-bandroom",
   "genre": "Rock",
   "source": "https://songkick.com/venues/3083664-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Profannity",
@@ -2875,10 +2897,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/theatre-tickets/2026/12/05/rob-mills-max-watts-melbourne",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=244705",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/theatre-tickets/2026/12/05/rob-mills-max-watts-melbourne"
  },
  {
   "artist": "Babba",
@@ -3528,7 +3552,8 @@
   "url": "https://tickets.songkick.com/concerts/43330045-evening-elephants-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Repakol Band",
@@ -3860,7 +3885,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/09/jackzebra-zhuang-zhuang-tour",
   "genre": "",
   "source": "https://tixel.com/au/tickets/black-bear-lodge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Suki Waterhouse",
@@ -3944,10 +3970,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/tickets/northcote-social-club",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/3bba0d57-372e-418d-b493-1dd79f9dbd5b",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/northcote-social-club"
  },
  {
   "artist": "Jordan Rakei",
@@ -4033,7 +4061,8 @@
   "url": "https://musick.com.au/gig/free-entry-ben-carr-quartet-front-bar-at-bar-open-fitzroy-2026-12-10/",
   "genre": "Jazz",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Grant Street Orchestra",
@@ -4132,10 +4161,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/music-tickets/2026/12/10/jonathan-bufalino",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/cf7fc7ac-05f1-40a6-be7e-098aafb4608f",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/10/jonathan-bufalino"
  },
  {
   "artist": "Steve Hogarth",
@@ -4149,7 +4180,8 @@
   "url": "https://tickets.songkick.com/concerts/43311594-steve-hogarth-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Wattleseed Ensemble",
@@ -4219,7 +4251,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/10/jamey-foxton-the-brightside-bris",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-brightside",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Culture Wars",
@@ -4409,7 +4442,8 @@
   "url": "https://musick.com.au/gig/free-entry-the-four-scoops-front-bar-at-bar-open-fitzroy-2026-12-11/",
   "genre": "",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Firefly Horns",
@@ -4449,10 +4483,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Brunswick",
-  "url": "https://songkick.com/concerts/43487175-fangz-at-bergy-bandroom",
+  "url": "https://bergybandroom.oztix.com.au/Default.aspx?Event=251367",
   "genre": "",
   "source": "https://songkick.com/venues/4485200-bergy-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43487175-fangz-at-bergy-bandroom"
  },
  {
   "artist": "Chasing Abbey",
@@ -4637,10 +4673,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/12/11/beherit",
+  "url": "https://maxwattstickets.oztix.com.au/outlet/event/0f38d3ac-e733-4f85-8ea0-604a03f35de3",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/11/beherit"
  },
  {
   "artist": "Mick Thomas' Roving Commission",
@@ -4713,7 +4751,8 @@
   "url": "https://tickets.songkick.com/concerts/43473799-laura-king-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "underscores",
@@ -5189,10 +5228,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2026/12/12/jamie-webster-max-watts-melbourn",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=240550",
   "genre": "",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/12/jamie-webster-max-watts-melbourn"
  },
  {
   "artist": "Culture Wars",
@@ -5277,7 +5318,8 @@
   "url": "https://tickets.songkick.com/concerts/43381661-sophia-stel-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Cotto",
@@ -5591,7 +5633,8 @@
   "url": "https://musick.com.au/gig/free-entry-for-swings-sake-front-bar-at-bar-open-fitzroy-2026-12-13/",
   "genre": "Jazz",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Bigfoot Sighting",
@@ -5789,10 +5832,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/tickets/northcote-social-club",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/585a992e-9aa1-497f-9bd9-8c6796456cd4",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/northcote-social-club"
  },
  {
   "artist": "Twisted Teens",
@@ -5803,10 +5848,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/music-tickets/2026/12/13/twisted-teens-usa",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/1101694f-b8f8-4e5a-b4e1-be21b4cba2e5",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/13/twisted-teens-usa"
  },
  {
   "artist": "Beherit",
@@ -5980,7 +6027,8 @@
   "url": "https://tickets.songkick.com/concerts/43453823-samara-cyn-at-oxford-art-factory",
   "genre": "Hip hop",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Twisted Teens",
@@ -6152,7 +6200,8 @@
   "url": "https://tickets.songkick.com/concerts/43380664-twisted-teens-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Steve Hogarth",
@@ -6181,7 +6230,8 @@
   "url": "https://developer.songkick.com/concerts/43454596-gnomes-au-at-junk-bar",
   "genre": "",
   "source": "https://developer.songkick.com/venues/4604288-junk-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "f3miii",
@@ -6210,7 +6260,8 @@
   "url": "https://musick.com.au/gig/free-entry-skabhangers-front-bar-at-bar-open-fitzroy-2026-12-17/",
   "genre": "",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Homewrecker",
@@ -6457,7 +6508,8 @@
   "url": "https://musick.com.au/gig/free-entry-the-jude-quintet-front-bar-at-bar-open-fitzroy-2026-12-18/",
   "genre": "Jazz",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Anglerr",
@@ -6483,10 +6535,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Brunswick",
-  "url": "https://songkick.com/concerts/43494437-seven-ups-at-bergy-bandroom",
+  "url": "https://bergybandroom.oztix.com.au/Default.aspx?Event=252350",
   "genre": "",
   "source": "https://songkick.com/venues/4485200-bergy-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43494437-seven-ups-at-bergy-bandroom"
  },
  {
   "artist": "Yacht Rock Revival",
@@ -6674,7 +6728,8 @@
   "url": "https://tickets.songkick.com/concerts/43516027-sex-mask-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Diger Rokwell",
@@ -6919,7 +6974,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/19/the-gnomes-the-croxton-melbourne",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Gosika",
@@ -7077,7 +7133,8 @@
   "url": "https://tixel.com/au/tickets/northcote-social-club",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Phuture Noize",
@@ -7220,7 +7277,8 @@
   "url": "https://musick.com.au/gig/free-entry-edward-york-front-bar-at-bar-open-fitzroy-2026-12-20/",
   "genre": "",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Wilbur Wilde's Rock Royalty Review",
@@ -7306,7 +7364,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/12/20/blk-the-fortitude-music-hall-bri",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Comunidade do Samba",
@@ -7374,10 +7433,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Northcote",
-  "url": "https://tixel.com/au/music-tickets/2026/12/20/dan-al-xmas-show",
+  "url": "https://tickets.northcotesocialclub.com/outlet/event/693eae71-2ffe-4784-bf83-9729dfc144f7",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2026/12/20/dan-al-xmas-show"
  },
  {
   "artist": "Sazón",
@@ -7677,7 +7738,8 @@
   "url": "https://tickets.songkick.com/concerts/43537638-bensley-at-brightside",
   "genre": "Electronic",
   "source": "https://tickets.songkick.com/venues/2602538-brightside/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "YO Fest 3.0 (Young Offenders & Friends)",
@@ -7963,10 +8025,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/02/after-max-watts-melbourne",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=247171",
   "genre": "",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/01/02/after-max-watts-melbourne"
  },
  {
   "artist": "Nu Aspect",
@@ -8009,7 +8073,8 @@
   "url": "https://musick.com.au/gig/free-entry-escent-front-bar-at-bar-open-fitzroy-2027-01-03/",
   "genre": "",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Oskar Med K",
@@ -8037,7 +8102,8 @@
   "url": "https://tickets.songkick.com/concerts/43371876-after-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The East Pointers",
@@ -8065,7 +8131,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/05/after-the-brightside-brisbane",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-brightside",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Vince Staples",
@@ -8342,7 +8409,8 @@
   "url": "https://tickets.songkick.com/concerts/43413123-4am-kru-at-oxford-art-factory",
   "genre": "Electronic",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Pinky Beecroft",
@@ -8695,7 +8763,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/13/rodrigo-y-gabriela-the-fortitude",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Lucca Mae",
@@ -8809,7 +8878,8 @@
   "url": "https://tickets.songkick.com/concerts/43516031-preatures-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "William Crighton",
@@ -9260,7 +9330,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/16/swimming-paul-forum-melbourne-me",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Benji and the Saltwater Sound System",
@@ -9361,7 +9432,8 @@
   "url": "https://tickets.songkick.com/concerts/43503252-sycco-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Duo Ruut",
@@ -9403,7 +9475,8 @@
   "url": "https://developer.songkick.com/concerts/43534960-luluc-at-junk-bar",
   "genre": "Folk",
   "source": "https://developer.songkick.com/venues/3786724-junk-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Daniel Allan",
@@ -9562,7 +9635,8 @@
   "url": "https://tickets.songkick.com/concerts/43519181-lowertown-at-brightside",
   "genre": "Indie",
   "source": "https://tickets.songkick.com/venues/2602538-brightside/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ted Mulry Gang",
@@ -9603,10 +9677,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/18/honestav-forum-melbourne-melbour",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=STAVHON27&eg=FORUMWEB&ep=FORUMWEB&v=FRM&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=STAVHON27",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/01/18/honestav-forum-melbourne-melbour"
  },
  {
   "artist": "Medium Build",
@@ -9753,7 +9829,8 @@
   "url": "https://musick.com.au/gig/free-entry-vardos-front-bar-at-bar-open-fitzroy-2027-01-21/",
   "genre": "Folk",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ian Asher",
@@ -9767,7 +9844,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/21/ian-asher-the-fortitude-music-ha",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "TSO Live Sessions",
@@ -9854,7 +9932,8 @@
   "url": "https://musick.com.au/gig/free-entry-the-four-scoops-front-bar-at-bar-open-fitzroy-2027-01-22/",
   "genre": "",
   "source": "https://musick.com.au/venue/bar-open",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "G-String Nicotine",
@@ -9923,10 +10002,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/22/ian-asher-forum-melbourne-melbou",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=IANASHER27&v=FRM&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=IANASHER27",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/01/22/ian-asher-forum-melbourne-melbou"
  },
  {
   "artist": "William Crighton & Beans On Toast",
@@ -10027,7 +10108,8 @@
   "url": "https://tickets.songkick.com/concerts/43531801-allday-at-oxford-art-factory",
   "genre": "Hip hop",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Start Making Sense (Talking Heads Tribute)",
@@ -10230,7 +10312,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/23/peter-jefferies-nz",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "Waylon Wyatt",
@@ -10405,7 +10489,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/24/public-image-ltd-forum-melbourne",
   "genre": "Punk",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "Free Throw",
@@ -10522,7 +10608,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/25/sienna-spiro-my-house-tour",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ian Asher",
@@ -10755,7 +10842,8 @@
   "url": "https://tickets.songkick.com/concerts/43440983-willowake-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Carpenter Brut",
@@ -11016,7 +11104,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/29/clutch",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "Free Throw",
@@ -11217,7 +11307,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/01/30/rops1-king-street-band-room-newc",
   "genre": "",
   "source": "https://tixel.com/au/tickets/king-street-band-room",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Crime & the City Solution",
@@ -11358,10 +11449,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/01/31/paleface-swiss",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=SWISSPFE27&eg=FORUMWEB&ep=FORUMWEB&v=FRM&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=SWISSPFE27",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/01/31/paleface-swiss"
  },
  {
   "artist": "The Black Sorrows",
@@ -11712,7 +11805,8 @@
   "url": "https://tickets.songkick.com/concerts/43516040-zion-garcia-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Drama",
@@ -11813,7 +11907,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/05/ed-kuepper-the-croxton-melbourne",
   "genre": "Punk",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Bachman-Turner Overdrive",
@@ -11853,10 +11948,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/05/story-of-the-year-forum-melbourn",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=STORYSIL27&eg=FRMWEB&ep=FRMWEB&v=FRM&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=STORYSIL27",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/05/story-of-the-year-forum-melbourn"
  },
  {
   "artist": "Thrown",
@@ -12085,10 +12182,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/06/kylesa-max-watts-melbourne",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=249374",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/06/kylesa-max-watts-melbourne"
  },
  {
   "artist": "Grub",
@@ -12102,7 +12201,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/06/grub-album-tour",
   "genre": "",
   "source": "https://tixel.com/au/tickets/northcote-social-club",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Starjunk 95",
@@ -12116,7 +12216,8 @@
   "url": "https://tickets.songkick.com/concerts/43516019-starjunk-95-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Rops1",
@@ -12246,7 +12347,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/07/thrown-forum-melbourne-melbourne",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "Sarah Kinsley",
@@ -12375,7 +12478,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/09/the-human-league-the-fortitude-m",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Dayseeker",
@@ -12649,7 +12753,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/11/buena-vista-all-stars",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Thrown",
@@ -12791,7 +12896,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/12/thrown-king-street-band-room-new",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/king-street-band-room",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Grub",
@@ -12906,7 +13012,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/13/buena-vista-all-stars",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Bob Marley Outernational Reggae Fest",
@@ -12947,10 +13054,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/13/vnv-nation-max-watts-melbourne",
+  "url": "https://maxwattstickets.oztix.com.au/outlet/event/2422d1e7-59bd-4313-b547-e894ed6a4c62",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/13/vnv-nation-max-watts-melbourne"
  },
  {
   "artist": "Sleep Theory",
@@ -13154,7 +13263,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/14/waterparks-forum-melbourne-melbo",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Rico Nasty",
@@ -13165,10 +13275,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://songkick.com/concerts/43500427-rico-nasty-at-max-watts-melbourne",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=252641",
   "genre": "Hip hop",
   "source": "https://songkick.com/venues/2953383-max-watts-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://songkick.com/concerts/43500427-rico-nasty-at-max-watts-melbourne"
  },
  {
   "artist": "Jane Remover",
@@ -13254,7 +13366,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/15/kaleo-the-fortitude-music-hall-b",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Muna",
@@ -13368,10 +13481,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/16/adela-forum-melbourne-melbourne",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=DTHBDVOT27&eg=FORUMWEB&ep=FORUMWEB&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=DTHBDVOT27",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/16/adela-forum-melbourne-melbourne"
  },
  {
   "artist": "Danny L Harle",
@@ -13399,7 +13514,8 @@
   "url": "https://tickets.songkick.com/concerts/43498141-bleech-93-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Teenage Bottlerocket",
@@ -13439,10 +13555,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/17/will-varley-black-bear-lodge-bri",
+  "url": "https://tickets.oztix.com.au/outlet/event/9db2cb43-4650-48cf-b39e-41c057292339",
   "genre": "",
   "source": "https://tixel.com/au/tickets/black-bear-lodge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/17/will-varley-black-bear-lodge-bri"
  },
  {
   "artist": "Hayley Williams",
@@ -13453,10 +13571,13 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/tickets/forum-melbourne",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=THAYWILS27&v=FRM&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=THAYWILS27",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/forum-melbourne",
+  "soldout": true
  },
  {
   "artist": "Violet Grohl",
@@ -13557,7 +13678,8 @@
   "url": "https://songkick.com/concerts/43498005-danny-l-harle-at-croxton-bandroom",
   "genre": "Electronic",
   "source": "https://songkick.com/venues/3083664-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sevendust",
@@ -13831,7 +13953,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/20/john-splithoff-the-croxton-melbo",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Waterparks",
@@ -13889,7 +14012,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/20/sevendust-forum-melbourne-melbou",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Teenage Bottlerocket",
@@ -14165,7 +14289,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/23/president-forum-melbourne-melbou",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "José González",
@@ -14354,10 +14480,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Brunswick",
-  "url": "https://tixel.com/au/music-tickets/2027/02/26/rageflower-bergy-bandroom-melbou",
+  "url": "https://bergybandroom.oztix.com.au/Default.aspx?Event=252710",
   "genre": "",
   "source": "https://tixel.com/au/tickets/bergy-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/26/rageflower-bergy-bandroom-melbou"
  },
  {
   "artist": "Winterbourne",
@@ -14371,7 +14499,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/02/26/winterbourne-black-bear-lodge-br",
   "genre": "",
   "source": "https://tixel.com/au/tickets/black-bear-lodge",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Filthy Animals",
@@ -14441,10 +14570,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/02/26/coffin-max-watts-melbourne",
+  "url": "https://maxwattstickets.oztix.com.au/Default.aspx?Event=246983",
   "genre": "Punk",
   "source": "https://tixel.com/au/tickets/max-watts",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/26/coffin-max-watts-melbourne"
  },
  {
   "artist": "Drain",
@@ -14500,7 +14631,8 @@
   "url": "https://tickets.songkick.com/concerts/43473829-survive-said-the-prophet-at-oxford-art-factory",
   "genre": "Rock",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Osees",
@@ -14525,10 +14657,12 @@
   "city": "Brisbane",
   "state": "QLD",
   "suburb": "Fortitude Valley",
-  "url": "https://tixel.com/au/music-tickets/2027/02/26/chapterhouse-the-brightside-bris",
+  "url": "https://tickets.oztix.com.au/outlet/event/701e277b-c5cd-49fa-b829-a989cb536a0e",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/the-brightside",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/26/chapterhouse-the-brightside-bris"
  },
  {
   "artist": "Felipe Baldomir",
@@ -14542,7 +14676,8 @@
   "url": "https://tickets.songkick.com/concerts/43474976-felipe-baldomir-at-brightside",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/2602538-brightside/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hockey Dad",
@@ -14671,10 +14806,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Thornbury",
-  "url": "https://tixel.com/au/music-tickets/2027/02/27/the-supersuckers-the-croxton-mel",
+  "url": "https://tickets.oztix.com.au/outlet/event/03a876eb-a4af-42c3-9ca9-7ee20361de5e",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/02/27/the-supersuckers-the-croxton-mel"
  },
  {
   "artist": "Marilyn Manson",
@@ -15124,10 +15261,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/03/03/isaiah-rashad-forum-melbourne-me",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=RASISAI27&v=FRM&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=RASISAI27",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/03/03/isaiah-rashad-forum-melbourne-me"
  },
  {
   "artist": "Tim Hecker",
@@ -15358,7 +15497,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/04/angine-de-poitrine-forum-melbour",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "The Avalanches",
@@ -15416,7 +15557,8 @@
   "url": "https://tickets.songkick.com/concerts/43512835-cloud-control-at-oxford-art-factory",
   "genre": "Indie",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Citizen",
@@ -15572,7 +15714,9 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/05/angine-de-poitrine-forum-melbour",
   "genre": "",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "soldout": true
  },
  {
   "artist": "Bridge What Remains",
@@ -15903,7 +16047,8 @@
   "url": "https://www.songkick.com/concerts/43494906-smith-street-band-at-king-street-bandroom",
   "genre": "Punk",
   "source": "https://www.songkick.com/venues/4519744-king-street-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jet",
@@ -16003,7 +16148,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/07/bloodbath-the-croxton-melbourne",
   "genre": "Metal",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ben Ottewell & Ian Ball",
@@ -16091,7 +16237,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/08/westside-cowboy-the-croxton-melb",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Westside Cowboy",
@@ -16105,7 +16252,8 @@
   "url": "https://tixel.com/au/tickets/forum-melbourne",
   "genre": "Indie",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The HU",
@@ -16740,7 +16888,8 @@
   "url": "https://tickets.songkick.com/concerts/43531799-rules-uk-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ben Ottewell & Ian Ball",
@@ -16926,7 +17075,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/13/abc-the-lexicon-of-life-tour-202",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Josh Pyke",
@@ -17042,7 +17192,8 @@
   "url": "https://tickets.songkick.com/concerts/43485304-sola-rosa-at-brightside",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/2602538-brightside/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The 70s80s90s Show",
@@ -17694,7 +17845,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/19/the-hellacopters-gluecifer-respe",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-croxton-bandroom",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Original Wailers",
@@ -17749,10 +17901,12 @@
   "city": "Melbourne",
   "state": "VIC",
   "suburb": "Melbourne",
-  "url": "https://tixel.com/au/music-tickets/2027/03/19/beth-orton-forum-melbourne-melbo",
+  "url": "https://premier.ticketek.com.au/shows/show.aspx?sh=ORTONBET27&eg=FORUMWEB&ep=FORUMWEB&utm_source=forummelbourne.com.au&utm_medium=referral&utm_campaign=ORTONBET27",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/forum-melbourne",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/music-tickets/2027/03/19/beth-orton-forum-melbourne-melbo"
  },
  {
   "artist": "L7",
@@ -18197,7 +18351,8 @@
   "url": "https://tixel.com/au/music-tickets/2027/03/21/jpegmafia-the-fortitude-music-ha",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/the-fortitude-music-hall",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Smith Street Band",
@@ -18239,7 +18394,8 @@
   "url": "https://tickets.songkick.com/concerts/43454108-babes-in-canyon-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ocean Sleeper",
@@ -18399,7 +18555,8 @@
   "url": "https://tickets.songkick.com/concerts/43467521-bess-atwell-at-oxford-art-factory",
   "genre": "",
   "source": "https://tickets.songkick.com/venues/87566-oxford-art-factory/calendar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ruby Gill",
@@ -18515,7 +18672,8 @@
   "url": "https://developer.songkick.com/concerts/43537861-widowspeak-at-junk-bar",
   "genre": "Indie",
   "source": "https://developer.songkick.com/venues/4604288-junk-bar",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Cam Cole",
@@ -21270,7 +21428,8 @@
   "url": "https://tixel.com/au/tickets/burleigh-town-hotel",
   "genre": "Pop",
   "source": "https://tixel.com/au/tickets/burleigh-town-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Hermitude",
@@ -21281,10 +21440,12 @@
   "city": "Gold Coast",
   "state": "QLD",
   "suburb": "Burleigh Heads",
-  "url": "https://tixel.com/au/tickets/burleigh-town-hotel",
+  "url": "https://tickets.oztix.com.au/outlet/event/1f88f12c-1ded-4164-a1ca-32a5d50389a5",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/burleigh-town-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/burleigh-town-hotel"
  },
  {
   "artist": "Horrorshow & Grieves",
@@ -21298,7 +21459,8 @@
   "url": "https://tixel.com/au/tickets/burleigh-town-hotel",
   "genre": "Hip hop",
   "source": "https://tixel.com/au/tickets/burleigh-town-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Chicane",
@@ -21309,10 +21471,12 @@
   "city": "Gold Coast",
   "state": "QLD",
   "suburb": "Burleigh Heads",
-  "url": "https://tixel.com/au/tickets/burleigh-town-hotel",
+  "url": "https://tickets.oztix.com.au/outlet/event/2180a369-2834-46c4-a1eb-276b6293077a",
   "genre": "Electronic",
   "source": "https://tixel.com/au/tickets/burleigh-town-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28",
+  "info": "https://tixel.com/au/tickets/burleigh-town-hotel"
  },
  {
   "artist": "Corrella",
@@ -21326,7 +21490,8 @@
   "url": "https://tixel.com/au/tickets/burleigh-town-hotel",
   "genre": "",
   "source": "https://tixel.com/au/tickets/burleigh-town-hotel",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Come Alive",
@@ -25589,7 +25754,8 @@
   "url": "https://tixel.com/au/music-tickets/2026/11/29/above-all-else-ft-tantum",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-river",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Rubens",
@@ -25603,7 +25769,8 @@
   "url": "https://beta.songkick.com/concerts/43360488-rubens-at-river",
   "genre": "Rock",
   "source": "https://tixel.com/au/tickets/the-river",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Felipe Baldomir",
@@ -25617,7 +25784,8 @@
   "url": "https://beta.songkick.com/concerts/43474925-felipe-baldomir-at-river",
   "genre": "",
   "source": "https://beta.songkick.com/venues/3741009-river",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Corrella",
@@ -25631,7 +25799,8 @@
   "url": "https://beta.songkick.com/concerts/43479626-corrella-at-river",
   "genre": "",
   "source": "https://tixel.com/au/tickets/the-river",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Newton Faulkner",
@@ -25645,7 +25814,8 @@
   "url": "https://tixel.com/au/tickets/the-river",
   "genre": "Folk",
   "source": "https://tixel.com/au/tickets/the-river",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Steve Kilbey",
@@ -38736,7 +38906,8 @@
   "url": "https://tasguide.com.au/event/chaskii-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Party Animals",
@@ -38750,7 +38921,8 @@
   "url": "https://tasguide.com.au/event/party-animals/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Montage",
@@ -38764,7 +38936,8 @@
   "url": "https://tasguide.com.au/event/montage-4/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Joe & Olivia Wilson",
@@ -38778,7 +38951,8 @@
   "url": "https://tasguide.com.au/event/joe-olivia-wilson/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Bernie Bruce Band",
@@ -38792,7 +38966,8 @@
   "url": "https://tasguide.com.au/event/bernie-bruce-band-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Steel Rose",
@@ -38806,7 +38981,8 @@
   "url": "https://tasguide.com.au/event/steel-rose-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Girl Friday Band",
@@ -38820,7 +38996,8 @@
   "url": "https://tasguide.com.au/event/girl-friday-band/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Kick Ons",
@@ -38834,7 +39011,8 @@
   "url": "https://tasguide.com.au/event/kick-ons/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sam & Tori",
@@ -38848,7 +39026,8 @@
   "url": "https://tasguide.com.au/event/sam-tori/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Banned",
@@ -38862,7 +39041,8 @@
   "url": "https://tasguide.com.au/event/the-banned/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "The Loudmouths",
@@ -38876,7 +39056,8 @@
   "url": "https://tasguide.com.au/event/the-loudmouths/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Jess & Sean",
@@ -38890,7 +39071,8 @@
   "url": "https://tasguide.com.au/event/jess-sean/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sam & the 78s",
@@ -38904,7 +39086,8 @@
   "url": "https://tasguide.com.au/event/sam-the-78s/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Blake Evans Band",
@@ -38918,7 +39101,8 @@
   "url": "https://tasguide.com.au/event/blake-evans-band-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Bianca Clennett",
@@ -38932,7 +39116,8 @@
   "url": "https://tasguide.com.au/event/bianca-clennett-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Detour",
@@ -38946,7 +39131,8 @@
   "url": "https://tasguide.com.au/event/detour-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Ebeneza Good",
@@ -38960,7 +39146,8 @@
   "url": "https://tasguide.com.au/event/ebeneza-good/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Dusky Robins",
@@ -38974,7 +39161,8 @@
   "url": "https://tasguide.com.au/event/dusky-robins/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Fuse",
@@ -38988,7 +39176,8 @@
   "url": "https://tasguide.com.au/event/fuse/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Tokyo Sun",
@@ -39002,7 +39191,8 @@
   "url": "https://tasguide.com.au/event/tokyo-sun/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Matt Edmunds",
@@ -39016,7 +39206,8 @@
   "url": "https://tasguide.com.au/event/matt-edmunds-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Vixxin",
@@ -39030,7 +39221,8 @@
   "url": "https://tasguide.com.au/event/vixxin/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Sam & the 78s",
@@ -39044,7 +39236,8 @@
   "url": "https://tasguide.com.au/event/sam-the-78s-2/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Duncan Warburton",
@@ -39058,7 +39251,8 @@
   "url": "https://tasguide.com.au/event/duncan-warburton/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Steel Rose",
@@ -39072,7 +39266,8 @@
   "url": "https://tasguide.com.au/event/steel-rose-3/",
   "genre": "",
   "source": "https://tasguide.com.au/venues/hotel-valern/",
-  "added": "2026-11-27"
+  "added": "2026-11-27",
+  "linkfix": "2026-11-28"
  },
  {
   "artist": "Greg Souter",
