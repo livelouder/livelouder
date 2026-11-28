@@ -97,6 +97,15 @@ def link_kind(u):
     if any(h == x or h.endswith("." + x) for x in RESALE_HOSTS): return "resale"
     if any(h == x or h.endswith("." + x) for x in INFO_HOSTS): return "info"
     return "tickets"
+def add_utm(u, campaign="gig"):
+    """Tag outbound ticket links so sellers' and venues' own dashboards show the sale came from Live Louder."""
+    if not u or "utm_source=" in u or link_kind(u) == "info":
+        return u
+    base, frag = (u.split("#", 1) + [""])[:2]
+    tagged = f'{base}{"&" if "?" in base else "?"}utm_source=livelouder&utm_medium=referral&utm_campaign={campaign}'
+    return tagged + (f"#{frag}" if frag else "")
+_vs = json.loads((ROOT / "data/venue_sources.json").read_text()) if (ROOT / "data/venue_sources.json").exists() else []
+VENUE_SITES = {(re.sub(r"[^a-z0-9]", "", x.get("venue", "").lower()), x.get("city", "")): x.get("url", "") for x in _vs if x.get("url")}
 
 # Gigs sent in through the "Submit a gig" form (pulled from Netlify Blobs by the keep-cache plugin).
 # They go live automatically when the ticket link is on a real ticketing site and the details check out;
@@ -322,7 +331,7 @@ GA_HEAD = ("" if not GA_ID else
     f"gtag('config','{GA_ID}');"
     "document.addEventListener('click',function(ev){try{var t=ev.target.closest('a,button');if(!t)return;"
     "var g=t.closest('.gig,.gp,main');var art=(g&&g.querySelector('.gname,h1')||{}).textContent||document.title;"
-    "if(t.tagName==='A'&&t.dataset.tk){gtag('event',t.dataset.tk==='info'?'gig_info_click':'ticket_click',{link_type:t.dataset.tk,seller:t.dataset.seller||t.host,artist:(t.dataset.artist||art).trim().slice(0,100),venue:(t.dataset.venue||'').slice(0,100),city:t.dataset.city||'',page_type:location.pathname.split('/')[1]||'home',link_url:t.href});}"
+    "if(t.tagName==='A'&&t.dataset.tk){var k=t.dataset.tk,en={tickets:'ticket_click',resale:'ticket_click',festival_tickets:'ticket_click',info:'gig_info_click',directions:'directions_click',venue_site:'venue_site_click'}[k]||(k+'_click');gtag('event',en,{link_type:k,seller:t.dataset.seller||t.host,artist:(t.dataset.artist||art).trim().slice(0,100),venue:(t.dataset.venue||'').slice(0,100),city:t.dataset.city||'',page_type:location.pathname.split('/')[1]||'home',link_url:t.href});}"
     "else if(t.tagName==='A'&&t.host&&t.host!==location.host&&/ticket/i.test(t.textContent)){gtag('event','ticket_click',{link_type:'other',seller:t.host,artist:art.trim().slice(0,100),link_url:t.href});}"
     "else if(t.matches('button.save')){gtag('event','save_gig',{artist:art.trim().slice(0,100)});}"
     "else if(t.matches('button.saveartist')){gtag('event','follow_artist',{artist:(t.dataset.name||'').slice(0,100)});}"
@@ -551,12 +560,13 @@ def gig_row(s, show_artist=True, show_city=True):
     kind_ = link_kind(s["url"])
     track_ = (f' data-tk="{kind_}" data-seller="{e(link_host(s["url"]))}" data-artist="{e(s["artist"])}" data-venue="{e(s["venue"])}" '
               f'data-city="{e(s["city"])}"')
+    tu_ = add_utm(s["url"])
     if s.get("status") == "sold out":
-        buy_ = f'<span class="tag soldout">Sold out</span><a href="{e(s["url"])}" rel="noopener"{track_}>{"Resale" if kind_ == "resale" else "Waitlist / resale"} ↗</a>'
+        buy_ = f'<span class="tag soldout">Sold out</span><a href="{e(tu_)}" rel="noopener"{track_}>{"Resale" if kind_ == "resale" else "Waitlist / resale"} ↗</a>'
     elif kind_ == "tickets":
-        buy_ = f'<a href="{e(s["url"])}" rel="noopener"{track_}>Tickets ↗</a>'
+        buy_ = f'<a href="{e(tu_)}" rel="noopener"{track_}>Tickets ↗</a>'
     elif kind_ == "resale":
-        buy_ = f'<a class="resale" href="{e(s["url"])}" rel="noopener"{track_}>Resale tickets ↗</a>'
+        buy_ = f'<a class="resale" href="{e(tu_)}" rel="noopener"{track_}>Resale tickets ↗</a>'
     else:
         buy_ = f'<a href="{gig_path(s)}">Details →</a>'
     snap = json.dumps({"id": s["id"], "d": s["date"], "tm": s["time"], "a": s["artist"], "s": slug(s["artist"]), "v": s["venue"],
@@ -676,10 +686,10 @@ for t in tours:
     cities = sorted({x[1] for x in t["dates"]})
     if t.get("onsale"):
         for c in cities:
-            add_sale(t["artist"], "General sale", "", sale_time(t["onsale"]), c, t.get("tickets") or t["source"], al)
+            add_sale(t["artist"], "General sale", "", sale_time(t["onsale"]), c, add_utm(t.get("tickets") or t["source"], "on-sale"), al)
     for pr in t.get("presales", []):
         for c in cities:
-            add_sale(t["artist"], "Presale", pr.get("name", "Presale"), sale_time(pr.get("start", "")), c, t.get("tickets") or t["source"], al)
+            add_sale(t["artist"], "Presale", pr.get("name", "Presale"), sale_time(pr.get("start", "")), c, add_utm(t.get("tickets") or t["source"], "on-sale"), al)
 upcoming_sales = sorted([x for x in sales.values() if x["when"] >= now_syd], key=lambda x: x["when"])
 just_sales = sorted([x for x in sales.values() if x["when"] < now_syd and x["kind"] == "General sale"], key=lambda x: x["when"], reverse=True)
 
@@ -1074,6 +1084,14 @@ page("this-weekend.html", f"Gigs this weekend in Australia ({wk_label}) | Live L
      f"Every gig on this weekend ({wk_label}) in Sydney, Melbourne, Brisbane, Perth, Adelaide and more.", twp, "this-weekend.html")
 
 # ---------------------------------------------------------------- venues
+def fest_btn(f):
+    """'Tickets & info' button to the festival's own site or ticket page (tracked as festival_tickets)."""
+    u = f.get("tickets") or f.get("source", "")
+    if link_kind(u) == "info":
+        return ""
+    return (f'<p><a class="btn big" href="{e(add_utm(u, "festival"))}" rel="noopener" data-tk="festival_tickets" '
+            f'data-seller="{e(link_host(u))}" data-artist="{e(f["name"])}">Tickets &amp; info ↗</a></p>')
+
 def venue_map(v, small=False):
     """Map, directions and a "how far is it?" button for a venue."""
     q = quote_plus(f"{v['name']}, {v['suburb']}, {v['city']}, Australia")
@@ -1085,8 +1103,16 @@ def venue_map(v, small=False):
     vg = vguides.get(slug(v["name"] + "-" + v["city"])) or {}
     photo = (f'<figure class="vphoto"><img src="{e(vg["photo"])}" alt="{e(v["name"])}" loading="lazy"><figcaption>{e(vg.get("photo_credit", ""))}</figcaption></figure>'
              if vg.get("photo") else "")
+    site_ = VENUE_SITES.get((re.sub(r"[^a-z0-9]", "", v["name"].lower()), v["city"]), "")
+    trk_ = f'data-venue="{e(v["name"])}" data-city="{e(v["city"])}"'
+    site_btn = ""
+    if site_ and link_kind(site_) == "tickets":
+        words_ = [w for w in re.findall(r"[a-z0-9]+", v["name"].lower()) if len(w) > 3 and w not in ("hotel", "theatre", "club", "centre", "music", "live", "the")]
+        own_ = any(w in link_host(site_).replace("-", "") for w in words_)
+        lab_ = "Venue website ↗" if own_ else "Gig listing ↗"
+        site_btn = f'<a class="btn ghost" href="{e(add_utm(site_, "venue-page"))}" rel="noopener" data-tk="venue_site" data-seller="{e(link_host(site_))}" {trk_}>{lab_}</a>'
     return (f'<div class="vmap{" small" if small else ""}">{photo}<iframe title="Map of {e(v["name"])}" src="{embed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-            f'<div class="vmapbar"><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={dest}" rel="noopener">Directions ↗</a>{near}</div></div>')
+            f'<div class="vmapbar"><a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination={dest}" rel="noopener" data-tk="directions" {trk_}>Directions ↗</a>{site_btn}{near}</div></div>')
 
 for k, v in venues.items():
     loc = e(v["city"]) if v["suburb"] == v["city"] else f'{e(v["suburb"])}, {e(v["city"])}'
@@ -1201,17 +1227,18 @@ for s in shows:
     seller_ = link_host(s["url"])
     track_ = (f' data-tk="{kind_}" data-seller="{e(seller_)}" data-artist="{e(s["artist"])}" data-venue="{e(s["venue"])}" data-city="{e(s["city"])}"')
     info_ = s.get("info") or ""
+    tu_ = add_utm(s["url"], "gig-page")
     more_ = (f' <a class="moreinfo" href="{e(info_)}" rel="noopener" data-tk="info" data-seller="{e(link_host(info_))}" data-artist="{e(s["artist"])}">'
              f'More info ↗</a>') if info_ and info_ != s["url"] else ""
     if s.get("status") == "sold out":
         buy_btn = (f'<span class="btn big soldout" aria-disabled="true">Sold out</span>'
-                   f'<a class="btn ghost" href="{e(s["url"])}" rel="noopener"{track_}>Waitlist / resale ↗</a>')
+                   f'<a class="btn ghost" href="{e(tu_)}" rel="noopener"{track_}>Waitlist / resale ↗</a>')
         src_note = f'Sold out at {e(seller_)}.{more_}'
     elif kind_ == "tickets":
-        buy_btn = f'<a class="btn big" href="{e(s["url"])}" rel="noopener"{track_}>Get tickets ↗</a>'
+        buy_btn = f'<a class="btn big" href="{e(tu_)}" rel="noopener"{track_}>Get tickets ↗</a>'
         src_note = f'Tickets through {e(seller_)}. Always buy from the official seller.{more_}'
     elif kind_ == "resale":
-        buy_btn = f'<a class="btn big resale" href="{e(s["url"])}" rel="noopener"{track_}>Resale tickets ↗</a>'
+        buy_btn = f'<a class="btn big resale" href="{e(tu_)}" rel="noopener"{track_}>Resale tickets ↗</a>'
         src_note = f'{e(seller_)} is a fan-to-fan resale site. Check the venue for official tickets first.{more_}'
     else:
         buy_btn = ""
@@ -1255,7 +1282,7 @@ for f in fests:
 <h2>Dates and venues</h2><table class="ftable"><tbody>{rows}</tbody></table>
 <h2>Line-up</h2><p class="headliners">{heads}</p><p class="lineup">{lineup}</p>
 <h2>Good to know</h2><ul class="tips">{tips}</ul>
-<p class="note">Line-up and dates from the festival announcement (<a href="{e(f['source'])}" rel="noopener">source ↗</a>). Always check the official festival site before you go.</p></div>
+{fest_btn(f)}<p class="note">Line-up and dates from the festival announcement (<a href="{e(f['source'])}" rel="noopener" data-tk="info" data-artist="{e(f['name'])}">source ↗</a>). Always check the official festival site before you go.</p></div>
 <aside class="side">{countdown(first[0], first[1])}{tour_map([x[1] for x in f['dates']])}</aside></div></section>"""
     page(f"festivals/{f['slug']}.html", f"{f['name']}: line-up, dates and guide | Live Louder",
          f"{f['name']} guide: full line-up, dates, venues and tips. {f['when']}.", body, "festivals/index.html")
@@ -1267,7 +1294,12 @@ for a in artists.values():
     title_tour = (t["tour"] if t and t["tour"] not in ("Australian tour",) else "Australian tour") + (f" {d(sh[0]['date']).year}" if sh else "")
     head = f'<p class="sup">With {e(t["support"])}</p>' if t and t.get("support") else ""
     note = f'<p class="tnote">{e(t["note"])}</p>' if t and t.get("note") else ""
-    src = f'<p><a href="{e(t["source"])}" rel="noopener">Tour announcement ↗</a></p>' if t else ""
+    src = ""
+    if t:
+        tk_ = t.get("tickets", "")
+        src = ((f'<p><a class="btn" href="{e(add_utm(tk_, "tour"))}" rel="noopener" data-tk="{link_kind(tk_)}" data-seller="{e(link_host(tk_))}" '
+                f'data-artist="{e(a["name"])}">Tour tickets ↗</a></p>') if tk_ and link_kind(tk_) != "info" else "") + \
+              f'<p><a href="{e(t["source"])}" rel="noopener" data-tk="info" data-artist="{e(a["name"])}">Tour announcement ↗</a></p>'
     q = quote_plus(a["name"])
     player = ""
     if a.get("deezer"):

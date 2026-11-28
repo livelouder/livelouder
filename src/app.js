@@ -9,7 +9,10 @@ window.LLLINK = (() => {
   const host = u => { const m = /^https?:\/\/([^/]+)/i.exec(u || ''); return m ? m[1].toLowerCase().replace(/^www\./, '') : ''; };
   const is = (h, list) => list.some(x => h === x || h.endsWith('.' + x));
   const kind = u => { const h = host(u); return !h ? 'info' : is(h, RESALE) ? 'resale' : is(h, INFO) ? 'info' : 'tickets'; };
-  return {host, kind};
+  // Tag ticket links so sellers' and venues' own dashboards show the sale came from Live Louder (same as add_utm in build.py).
+  const utm = (u, c = 'gig') => { if (!u || /utm_source=/.test(u) || kind(u) === 'info') return u;
+    const [b, f] = u.split('#'); return `${b}${b.includes('?') ? '&' : '?'}utm_source=livelouder&utm_medium=referral&utm_campaign=${c}` + (f ? '#' + f : ''); };
+  return {host, kind, utm};
 })();
 
 // Gig-poster artwork for acts with no photo, styled by genre (same rules as build.py's poster()).
@@ -100,9 +103,10 @@ window.LL = (function () {
     const longM = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const buy = (s, gp) => {
       const k = LLLINK.kind(s[7]), tk = `data-tk="${k}" data-seller="${esc(LLLINK.host(s[7]))}" data-artist="${esc(s[2])}" data-venue="${esc(s[4])}" data-city="${esc(s[6])}"`;
-      if (s[18] === 'sold out') return `<span class="tag soldout">Sold out</span><a href="${esc(s[7])}" rel="noopener" ${tk}>${k === 'resale' ? 'Resale' : 'Waitlist / resale'} ↗</a>`;
-      if (k === 'tickets') return `<a href="${esc(s[7])}" rel="noopener" ${tk}>Tickets ↗</a>`;
-      if (k === 'resale') return `<a class="resale" href="${esc(s[7])}" rel="noopener" ${tk}>Resale tickets ↗</a>`;
+      const tu = LLLINK.utm(s[7]);
+      if (s[18] === 'sold out') return `<span class="tag soldout">Sold out</span><a href="${esc(tu)}" rel="noopener" ${tk}>${k === 'resale' ? 'Resale' : 'Waitlist / resale'} ↗</a>`;
+      if (k === 'tickets') return `<a href="${esc(tu)}" rel="noopener" ${tk}>Tickets ↗</a>`;
+      if (k === 'resale') return `<a class="resale" href="${esc(tu)}" rel="noopener" ${tk}>Resale tickets ↗</a>`;
       return `<a href="${gp}">Details →</a>`;
     };
     function render() {
