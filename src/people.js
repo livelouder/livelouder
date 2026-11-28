@@ -122,13 +122,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const myBeen = new Set(Object.values(st.gigs || {}).filter(g => g.going && g.d < today).map(g => norm(g.a)));
     const seenBoth = [...new Set(P.been.map(g => norm(g.a)))].filter(a => myBeen.has(a));
     const theirWant = new Set(P.wants.map(key)), wantBoth = Object.values(st.wants || {}).filter(r => theirWant.has(key(r)));
-    if (mineA.size < 5 || theirA.size < 5) {
+    if (mineA.size < 5 || theirA.size < 5 || both.length < 3) {
       const bits = [];
       if (c.gigs.length) bits.push(`You're both into <b>${c.gigs.length} ${c.gigs.length === 1 ? 'gig' : 'gigs'}</b>: ${c.gigs.slice(0, 3).map(g => esc(g.a)).join(', ')}`);
       if (c.both.length) bits.push(`You both own <b>${c.both.length} ${c.both.length === 1 ? 'record' : 'records'}</b>`);
       return bits.length ? `<div class="incommon"><span class="ntag">In common</span><ul>${bits.map(b => `<li>${b}</li>`).join('')}</ul></div>` : '';
     }
-    const pct = Math.max(1, Math.min(99, Math.round(100 * Math.sqrt(both.length / Math.min(mineA.size, theirA.size)))));
+    const pct = Math.max(1, Math.min(99, Math.round(100 * Math.sqrt(both.length / (Math.min(mineA.size, theirA.size) + 3)))));
     const nameOf = k => { const r = P.collection.find(x => norm(x.a) === k) || P.gigs.find(x => norm(x.a) === k) || P.been.find(x => norm(x.a) === k); return r ? r.a : k; };
     const stat = (n, l) => n ? `<li><b>${n}</b> ${l}</li>` : '';
     const covers = c.both.filter(r => r.img).slice(0, 8);
