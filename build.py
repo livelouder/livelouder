@@ -1747,6 +1747,8 @@ def heathen_stock():
             for x in ps:
                 if not any(v.get("available") for v in x.get("variants") or []):
                     continue
+                if not re.search(r'LP|EP|Vinyl|Single|Box|7"|10"|12"', x.get("product_type", "") or "", re.I):
+                    continue   # records only (no shirts, sleeves or gift cards)
                 parts = re.split(r"\s+[–-]\s+", x.get("title", ""), 1)
                 if len(parts) < 2:
                     continue
