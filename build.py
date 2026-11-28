@@ -65,6 +65,7 @@ fests = json.loads((ROOT / "data/festivals.json").read_text())
 picks_all = json.loads((ROOT / "data/picks.json").read_text()) if (ROOT / "data/picks.json").exists() else []
 picks_all.sort(key=lambda x: x["date"], reverse=True)
 pick = picks_all[0] if picks_all and picks_all[0]["date"] >= (TODAY.date() - dt.timedelta(days=14)).isoformat() else None
+VENUE_WEB = json.loads((ROOT / "data/venue_websites.json").read_text()) if (ROOT / "data/venue_websites.json").exists() else {}
 vguides = json.loads((ROOT / "data/venue_guides.json").read_text()) if (ROOT / "data/venue_guides.json").exists() else {}
 tm = feed.fetch(ROOT)
 
@@ -1106,7 +1107,10 @@ def venue_map(v, small=False):
     site_ = VENUE_SITES.get((re.sub(r"[^a-z0-9]", "", v["name"].lower()), v["city"]), "")
     trk_ = f'data-venue="{e(v["name"])}" data-city="{e(v["city"])}"'
     site_btn = ""
-    if site_ and link_kind(site_) == "tickets":
+    web_ = VENUE_WEB.get(slug(v["name"] + "-" + v["city"]), "")
+    if web_:
+        site_btn = f'<a class="btn ghost" href="{e(add_utm(web_, "venue-page"))}" rel="noopener" data-tk="venue_site" data-seller="{e(link_host(web_))}" {trk_}>Venue website ↗</a>'
+    elif site_ and link_kind(site_) == "tickets":
         words_ = [w for w in re.findall(r"[a-z0-9]+", v["name"].lower()) if len(w) > 3 and w not in ("hotel", "theatre", "club", "centre", "music", "live", "the")]
         own_ = any(w in link_host(site_).replace("-", "") for w in words_)
         lab_ = "Venue website ↗" if own_ else "Gig listing ↗"
