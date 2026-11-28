@@ -1269,9 +1269,54 @@ for s in shows:
          f'{s["artist"]} live at {s["venue"]}, {s["city"]} on {fmt(s["date"])}. Tickets, times, prices and venue info.', body, "gigs/index.html")
 
 # ---------------------------------------------------------------- festivals
-fl = f"""<section class="page-title"><div class="wrap"><h1>Festivals</h1><p>Line-ups, dates, venues and tips for Australia's music festivals.</p></div></section>
-<section class="band"><div class="wrap"><div class="grid">{fest_html}</div></div></section>"""
-page("festivals/index.html", "Australian music festivals: line-ups and guides | Live Louder", "Guides to Australia's music festivals: line-ups, dates, venues and tips.", fl, "festivals/index.html")
+# Festival map: every festival site gets a pin. Positions: data/places.json (hand-checked towns), the metro
+# centres, a venue we already know, else an OpenStreetMap lookup on the live build (cached in data/geo.json).
+_places = json.loads((ROOT / "data/places.json").read_text()) if (ROOT / "data/places.json").exists() else {}
+_vgeo = {(v["name"].lower(), v["city"]): v["geo"] for v in venues.values() if v.get("geo")}
+def _fest_geo(town, site):
+    g_ = _places.get(town) or CITY_GEO.get(town) or _vgeo.get((site.lower(), town))
+    return list(g_[:2]) if g_ else None
+_fq = {}
+for f in fests:
+    for d_ in f["dates"]:
+        if not _fest_geo(d_[1], d_[2]):
+            _fq["fest:" + slug(d_[1])] = (d_[2], d_[1], d_[1], "")
+_fgeo = extras.geocode(_fq, ROOT, limit=0 if os.environ.get("NO_GEOCODE") else 30) if _fq else {}
+fest_pts = []
+for f in sorted(fests, key=lambda f: min(x[0] for x in f["dates"])):
+    pl, seen_ = [], set()
+    for d_ in sorted(f["dates"]):
+        if d_[1] in seen_:
+            continue
+        seen_.add(d_[1])
+        g_ = _fest_geo(d_[1], d_[2]) or (_fgeo.get("fest:" + slug(d_[1])) or [None, None])[:2]
+        pl.append({"town": d_[1], "site": d_[2], "date": d_[0], "ll": g_ if g_ and g_[0] is not None else None})
+    first_ = min(x[0] for x in f["dates"])
+    fest_pts.append({"slug": f["slug"], "name": f["name"], "when": f["when"], "first": first_, "last": max(x[0] for x in f["dates"]),
+                     "places": pl, "head": f.get("headliners", [])[:4]})
+def fest_item(f):
+    d0 = d(f["first"])
+    towns = ", ".join(dict.fromkeys(p_["town"] for p_ in f["places"]))
+    hl = (f'<span class="fxh">{e(", ".join(f["head"]))}</span>') if f["head"] else '<span class="fxh">Line-up to be announced</span>'
+    return (f'<li class="fxi" data-slug="{f["slug"]}" data-m="{f["first"][:7]}"><a href="/festivals/{f["slug"]}.html">'
+            f'<span class="fxd"><b>{d0.day}</b>{d0.strftime("%b")}</span><span class="fxt"><strong>{e(f["name"])}</strong>'
+            f'<span class="fxw">{e(f["when"])} · {e(towns)}</span>{hl}</span></a>'
+            f'<button type="button" class="fxpin" aria-label="Show {e(f["name"])} on the map" title="Show on map">📍</button></li>')
+_fjson = json.dumps(fest_pts, ensure_ascii=False).replace("</", "<\\/")
+_months = sorted({f["first"][:7] for f in fest_pts})
+_mchips = '<button type="button" class="chip on" data-m="">All</button>' + "".join(
+    f'<button type="button" class="chip" data-m="{m_}">{dt.date(int(m_[:4]), int(m_[5:]), 1).strftime("%b")}</button>' for m_ in _months)
+_states = "".join(f'<button type="button" class="chip" data-z="{z_}">{z_}</button>' for z_ in ("NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"))
+fl = f"""<section class="page-title"><div class="wrap"><h1>Festivals</h1><p>Line-ups, dates, venues and tips for Australia's music festivals, from the big ones to small-town weekenders.</p></div></section>
+<section class="fmapsec"><div class="fmw">
+<aside class="fside"><div class="fctl"><div class="chips" aria-label="Month">{_mchips}</div><div class="chips" aria-label="Zoom to a state">{_states}<button type="button" class="chip" data-z="AU">All of Australia</button></div>
+<p class="fcount" aria-live="polite">{len(fest_pts)} festivals</p></div>
+<ol class="flist">{"".join(fest_item(f) for f in fest_pts)}</ol></aside>
+<div class="fmapbox"><div id="fmap" role="region" aria-label="Map of festivals"></div></div>
+</div></section>
+<script id="festdata" type="application/json">{_fjson}</script>"""
+page("festivals/index.html", "Australian music festivals: map, line-ups and guides | Live Louder", "Map of Australia's music festivals with line-ups, dates, venues and tips, from the big ones to small regional weekenders.", fl, "festivals/index.html",
+     extra_head='<link rel="stylesheet" href="/vendor/leaflet/leaflet.css"><script src="/vendor/leaflet/leaflet.js" defer></script><script src="/festmap.js" defer></script>')
 def ln(n):
     a = artists.get(slug(n))
     return f'<a href="/artists/{a["slug"]}.html">{e(n)}</a>' if a else e(n)
@@ -1666,6 +1711,8 @@ page("404.html", "Page not found | Live Louder", "Page not found.",
      '<section class="page-title"><div class="wrap"><h1>Wrong stage</h1><p>That page isn\'t here. Try the <a style="color:#fff" href="/gigs/index.html">gig guide</a>, <a style="color:#fff" href="/news/index.html">news</a> or <a style="color:#fff" href="/tours.html">tours</a>.</p></div></section>')
 shutil.copy(ROOT / "src/style.css", OUT / "style.css")
 shutil.copy(ROOT / "src/app.js", OUT / "app.js")
+shutil.copy(ROOT / "src/festmap.js", OUT / "festmap.js")
+shutil.copytree(ROOT / "src/vendor", OUT / "vendor", dirs_exist_ok=True)
 shutil.copy(ROOT / "src/account.js", OUT / "account.js")
 shutil.copy(ROOT / "src/profile.js", OUT / "profile.js")
 shutil.copy(ROOT / "src/people.js", OUT / "people.js")
