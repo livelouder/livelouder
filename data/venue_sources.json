@@ -915,7 +915,7 @@
   "venue": "The Workers Club Geelong",
   "city": "Geelong",
   "state": "VIC",
-  "url": "https://songkick.com/venues/2887138-workers-club",
+  "url": "https://www.theworkersclubgeelong.com.au/",
   "checked": "",
   "status": "unchecked"
  },
@@ -963,7 +963,7 @@
   "venue": "Solbar",
   "city": "Sunshine Coast",
   "state": "QLD",
-  "url": "https://www.songkick.com/venues/1132356-solbar",
+  "url": "https://www.solbar.com.au/",
   "checked": "",
   "status": "unchecked"
  },
@@ -979,7 +979,7 @@
   "venue": "The Jack Cairns",
   "city": "Cairns",
   "state": "QLD",
-  "url": "https://musick.com.au/cairns",
+  "url": "https://www.thejack.com.au/events/",
   "checked": "",
   "status": "unchecked"
  },
@@ -1608,7 +1608,7 @@
   "venue": "The Irish Club Hotel",
   "city": "Toowoomba",
   "state": "QLD",
-  "url": "",
+  "url": "https://irishclubhotel.com.au/whats-on/",
   "checked": "",
   "status": "unchecked",
   "region": "Toowoomba"
@@ -1734,7 +1734,7 @@
   "venue": "Thornbury Theatre",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "https://tixel.com/au/tickets/the-thornbury-theatre",
+  "url": "https://thethornburytheatre.com/whats-on",
   "checked": "",
   "status": "unchecked",
   "region": "Melbourne"
@@ -2049,7 +2049,7 @@
   "venue": "Wagga RSL Club",
   "city": "Wagga Wagga",
   "state": "NSW",
-  "url": "",
+  "url": "https://waggarsl.com.au/live-gigs/",
   "checked": "",
   "status": "unchecked",
   "region": "Riverina & Murray"
@@ -4011,7 +4011,7 @@
   "venue": "Metropolitan Hotel",
   "city": "Mackay",
   "state": "QLD",
-  "url": "https://musick.com.au/venue/metropolitan-hotel/",
+  "url": "https://musick.com.au/venue/the-metropolitan-hotel/",
   "checked": "",
   "status": "unchecked",
   "region": "Mackay & Airlie Beach"
@@ -4029,7 +4029,7 @@
   "venue": "Mackay Entertainment & Convention Centre (MECC)",
   "city": "Mackay",
   "state": "QLD",
-  "url": "https://app.songkick.com/venues/89769-mackay-entertainment-and-convention-centre",
+  "url": "https://www.themecc.com.au/Whats-on",
   "checked": "",
   "status": "unchecked",
   "region": "Mackay & Airlie Beach"
@@ -4452,7 +4452,7 @@
   "venue": "Palomino Lounge",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/4628164-palomino-lounge",
+  "url": "https://www.palominolounge.com.au",
   "checked": "",
   "status": "unchecked",
   "region": "Sydney"
@@ -7089,7 +7089,7 @@
   "venue": "Dubbo Regional Theatre and Convention Centre",
   "city": "Dubbo",
   "state": "NSW",
-  "url": "https://DRTCC.sales.ticketsearch.com/sales/salesevent/167790",
+  "url": "https://www.drtcc.com.au/whats-on/whats-on",
   "checked": "",
   "status": "unchecked",
   "region": "Central West"
