@@ -51,9 +51,19 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   const TIERS = [['Common', 'c'], ['Uncommon', 'u'], ['Rare', 'r'], ['Very rare', 'vr']];
   const tierOf = h => h < 250 ? 3 : h < 1000 ? 2 : h < 5000 ? 1 : 0;
-  const rareBadges = (h, w) => `<span class="vb vb-${TIERS[tierOf(h)][1]}">${TIERS[tierOf(h)][0]}</span>${w > h && h > 0 ? '<span class="vb vb-hot">🔥 In demand</span>' : ''}`;
+  // Pressings from this year haven't had time to find their level, so they're "New" rather than rare.
+  const THISY = new Date().getFullYear();
+  const isNew = (h, y) => +y >= THISY && h < 1000;
+  const tierName = (h, y) => isNew(h, y) ? 'New pressing' : TIERS[tierOf(h)][0];
+  const rareBadges = (h, w, y) => `<span class="vb vb-${isNew(h, y) ? 'c' : TIERS[tierOf(h)][1]}">${tierName(h, y)}</span>${w > h && h > 0 ? '<span class="vb vb-hot">🔥 In demand</span>' : ''}`;
+  // Where a pressing sits on the Common → Very rare bar (each tier gets a quarter).
+  const meterPos = h => { const L = Math.log10, x = Math.max(1, h);
+    if (x < 250) return 75 + 25 * (1 - L(x) / L(250));
+    if (x < 1000) return 50 + 25 * (1 - (L(x) - L(250)) / (L(1000) - L(250)));
+    if (x < 5000) return 25 + 25 * (1 - (L(x) - L(1000)) / (L(5000) - L(1000)));
+    return 25 * (1 - Math.min(1, (L(x) - L(5000)) / (L(500000) - L(5000)))); };
   const FLAG = {Australia: '🇦🇺', Japan: '🇯🇵', US: '🇺🇸', UK: '🇬🇧', Europe: '🇪🇺', Germany: '🇩🇪', Canada: '🇨🇦', 'New Zealand': '🇳🇿', France: '🇫🇷', Netherlands: '🇳🇱'};
-  const flag = c => FLAG[c] ? FLAG[c] + ' ' : '';
+  const flag = c => '';  // flag emoji show as letters on Windows, so country names only
   const n0 = x => Number(x || 0).toLocaleString('en-AU');
   const discogsNote = rid => `<p class="dgnote">Data provided by <a href="https://www.discogs.com/${rid && rid[0] === 'm' ? 'master' : 'release'}/${rid ? esc(rid.slice(1)) : ''}" rel="noopener">Discogs</a>. Live Louder uses Discogs' API but isn't affiliated with, sponsored or endorsed by Discogs.</p>`;
   // Background queue: checks records' rarity a few at a time (Discogs allows about 25 lookups a minute).
@@ -142,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const rows = list.map(v => { const i = fresh('r' + v.id) || {}, rec = pressRec(v), mine = st.records['r' + v.id] ? 'In your collection' : st.wants['r' + v.id] ? 'On your wantlist' : '';
       return `<li><img src="${esc(i.im || v.thumb || b.img)}" alt="" loading="lazy"><div class="vi"><b>${i.col ? esc(i.col) : esc(v.fmt.replace(/^LP, Album,? ?/, '') || 'Standard black vinyl')}</b>
         <small>${flag(v.c)}${esc(v.c)} · ${esc(v.label)}${v.cat ? ' · ' + esc(v.cat) : ''}${v.y ? ' · ' + esc(v.y) : ''}${/Limited/i.test(v.fmt) ? ' · Limited' : ''}${/Reissue|Repress/i.test(v.fmt) ? ' · Repress' : ''}</small>
-        ${rareBadges(v.h, v.w)}<small class="hw">${n0(v.h)} have · ${n0(v.w)} want</small>${mine ? `<small class="mine">✓ ${mine}</small>` : ''}</div><div class="vbt">${addBtns(rec)}</div></li>`; }).join('');
+        ${rareBadges(v.h, v.w, v.y)}<small class="hw">${n0(v.h)} have · ${n0(v.w)} want</small>${mine ? `<small class="mine">✓ ${mine}</small>` : ''}</div><div class="vbt">${addBtns(rec)}</div></li>`; }).join('');
     d.innerHTML = `<form method="dialog" class="sclose"><button aria-label="Close">×</button></form>
       <div class="vsh">${b.img ? `<img src="${esc(b.img)}" alt="">` : ''}<div><h2>${esc(b.t)}</h2><p>${esc(b.a)}${b.y ? ' · ' + b.y : ''}${pk.versions ? ` · <b>${pk.versions.length} ${pk.versions.length === 1 ? 'version' : 'versions'}</b> on Discogs` : ''}</p>
         <p class="note" style="margin-top:4px">${pk.swap ? 'Which pressing do you have?' : 'Pick the exact pressing you have or want.'}</p></div></div>
@@ -182,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function recCard(r, list) {
     const t = r.a.split(' & ').map(tour).find(Boolean), i = fresh(r.rid), seen = seenBy(r.a);
     return `<button class="rcard" type="button" data-rec="${esc(r.rid)}" data-from="${list}"><span class="rcv">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}
-      <span class="rtags">${i ? rareBadges(i.h, i.w) : ''}</span><span class="rtl">${seen ? `<span class="vpill r">Seen live${seen > 1 ? ' ×' + seen : ''}</span>` : ''}${t ? '<span class="vpill">🎟 Touring</span>' : ''}</span></span>
+      <span class="rtags">${i ? rareBadges(i.h, i.w, i.y || r.y) : ''}</span><span class="rtl">${seen ? `<span class="vpill r">Seen live${seen > 1 ? ' ×' + seen : ''}</span>` : ''}${t ? '<span class="vpill">🎟 Touring</span>' : ''}</span></span>
       <strong>${esc(r.t)}</strong><span>${esc(r.a)}</span><span class="rsub">${i && i.c ? flag(i.c) + esc(i.c) + ' · ' : r.c ? flag(r.c) + esc(r.c) + ' · ' : ''}${r.y ? r.y : ''}${r.rid[0] === 'm' && list !== 'search' ? '<em class="rpick">Pick pressing</em>' : ''}</span></button>`;
   }
   // How many times you've been to see this artist (from your gig history).
@@ -450,9 +460,9 @@ document.addEventListener('DOMContentLoaded', function () {
       isCol ? 'Search above, choose your pressing and tap <b>+ Collection</b>. Or import your records from Discogs in one go.' : 'Search above and tap <b>+ Wantlist</b> on the records you\'re after.', '');
     // Your rarest records (once we know enough of them)
     const known = rareKnown(items0);
-    if (isCol && known.length >= 3 && !recQ) {
-      const top = known.sort((a, b) => a[1].h - b[1].h).slice(0, 3);
-      h += head('Your rarest records', '<button type="button" class="linkish" data-rsortset="rare">See all by rarity →</button>') + `<div class="vrare">${top.map(([r, i], k) => `<button type="button" class="vrc" data-rec="${esc(r.rid)}" data-from="records"><span class="vrank">${k + 1}</span>${r.img ? `<img src="${esc(r.img)}" alt="">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}<span><b>${esc(r.t)}</b><small>${esc(r.a)} · ${flag(i.c)}${esc(i.c)} ${i.y || ''} pressing</small>${rareBadges(i.h, i.w)}<small>${n0(i.h)} collectors own this pressing · ${n0(i.w)} want it</small></span></button>`).join('')}</div>`;
+    if (isCol && known.filter(([, i]) => !isNew(i.h, i.y)).length >= 3 && !recQ) {
+      const top = known.filter(([, i]) => !isNew(i.h, i.y)).sort((a, b) => a[1].h - b[1].h).slice(0, 3);
+      h += head('Your rarest records', '<button type="button" class="linkish" data-rsortset="rare">See all by rarity →</button>') + `<div class="vrare">${top.map(([r, i], k) => `<button type="button" class="vrc" data-rec="${esc(r.rid)}" data-from="records"><span class="vrank">${k + 1}</span>${r.img ? `<img src="${esc(r.img)}" alt="">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}<span><b>${esc(r.t)}</b><small>${esc(r.a)} · ${flag(i.c)}${esc(i.c)} ${i.y || ''} pressing</small>${rareBadges(i.h, i.w, i.y)}<small>${n0(i.h)} collectors own this pressing · ${n0(i.w)} want it</small></span></button>`).join('')}</div>`;
     }
     let items = items0.slice();
     if (recQ) { const q = recQ.toLowerCase(); items = items.filter(r => (r.a + ' ' + r.t + ' ' + (r.l || '') + ' ' + (r.g || '')).toLowerCase().includes(q)); }
@@ -480,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let h = switches('recstats');
     if (!col.length) return h + empty('📊', 'Nothing to count yet', 'Add some records to your collection and this page fills up: decades, genres, your rarest pressings and more.', '<a class="btn" href="#records">Add records</a>');
     const known = rareKnown(col), artists = new Set(col.map(r => norm(r.a))), labels = new Set(col.map(r => (fresh(r.rid) || {}).l || r.l).filter(Boolean));
-    const aus = known.filter(([, i]) => i.c === 'Australia').length, rare = known.filter(([, i]) => tierOf(i.h) >= 2).length;
+    const aus = known.filter(([, i]) => i.c === 'Australia').length, rare = known.filter(([, i]) => tierOf(i.h) >= 2 && !isNew(i.h, i.y)).length;
     const seenArtists = [...new Set(lists().been.map(x => norm(x.a)))].filter(a => artists.has(a));
     const box = (v, l) => `<div><b>${v}</b><span>${l}</span></div>`;
     h += head('Your crate in numbers') + `<div class="vst">${box(col.length.toLocaleString(), col.length === 1 ? 'record' : 'records')}${box(artists.size, 'artists')}${box(labels.size || '–', 'labels')}${box(known.length ? aus : '–', '🇦🇺 Aussie pressings')}${box(known.length ? rare : '–', 'rare or very rare')}${box(seenArtists.length, 'artists seen live')}</div>`;
@@ -490,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctry = {}; known.forEach(([, i]) => { if (i.c) ctry[i.c] = (ctry[i.c] || 0) + 1; });
     const topArt = Object.entries(col.reduce((o, r) => (o[r.a] = (o[r.a] || 0) + 1, o), {})).sort((a, b) => b[1] - a[1]).slice(0, 6);
     const hi = [];
-    const rarest = known.slice().sort((a, b) => a[1].h - b[1].h)[0];
+    const rarest = known.filter(([, i]) => !isNew(i.h, i.y)).sort((a, b) => a[1].h - b[1].h)[0];
     if (rarest) hi.push(`🏆 <span>Rarest: <b>${esc(rarest[0].t)}</b> by ${esc(rarest[0].a)}, ${flag(rarest[1].c)}${esc(rarest[1].c)} ${rarest[1].y || ''} pressing. Only ${n0(rarest[1].h)} Discogs collectors have it.</span>`);
     const wanted = known.filter(([, i]) => i.w > i.h).sort((a, b) => b[1].w / Math.max(1, b[1].h) - a[1].w / Math.max(1, a[1].h))[0];
     if (wanted) hi.push(`🔥 <span>Most in demand: <b>${esc(wanted[0].t)}</b>. ${n0(wanted[1].w)} people want that pressing, ${n0(wanted[1].h)} have it.</span>`);
@@ -677,8 +687,8 @@ document.addEventListener('DOMContentLoaded', function () {
       let i = fresh(rid);
       if (!i) { try { const x = await dg('/releases/' + rid.slice(1)); if (x) { RC[rid] = i = relInfo(x); saveRC(); } } catch (e) {} }
       const box2 = document.getElementById('recRare');
-      if (box2) box2.innerHTML = !i ? '' : `<div class="vmeter"><div class="row"><b>${TIERS[tierOf(i.h)][0]}${i.w > i.h && i.h ? ' · 🔥 In demand' : ''}</b><span>${n0(i.h)} Discogs collectors have this pressing · ${n0(i.w)} want it</span></div>
-          <div class="vtrack"><i style="left:calc(${Math.max(2, Math.min(97, 100 - Math.log10(Math.max(10, i.h)) / 5.5 * 100))}% - 9px)"></i></div><div class="row vlabels"><span>Common</span><span>Uncommon</span><span>Rare</span><span>Very rare</span></div></div>
+      if (box2) box2.innerHTML = !i ? '' : `<div class="vmeter"><div class="row"><b>${tierName(i.h, i.y)}${i.w > i.h && i.h ? ' · 🔥 In demand' : ''}</b><span>${n0(i.h)} Discogs collectors have this pressing · ${n0(i.w)} want it</span></div>
+          <div class="vtrack"><i style="left:calc(${Math.max(1, Math.min(99, meterPos(i.h)))}% - 9px)"></i></div><div class="row vlabels"><span>Common</span><span>Uncommon</span><span>Rare</span><span>Very rare</span></div></div>
         <p class="rpress">${flag(i.c)}${esc(i.c || '')}${i.l ? ' · ' + esc(i.l) : ''}${i.cat ? ' · ' + esc(i.cat) : ''}${i.y ? ' · ' + i.y : ''}${i.col ? ' · <b>' + esc(i.col) + '</b>' : ''}${i.d ? ' · ' + esc(i.d) : ''}</p>
         ${i.m && (st.records[rid] || st.wants[rid]) ? `<button type="button" class="linkish small" data-changepress="${esc(rid)}" data-mid="${i.m}">Not your pressing? Change it</button>` : ''}`;
     }
