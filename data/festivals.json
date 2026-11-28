@@ -823,5 +823,388 @@
    "Early bird tickets are on sale through the festival website."
   ],
   "source": "https://www.folkfestival.org.au/artists2027"
+ },
+ {
+  "slug": "rolling-sets-2026",
+  "name": "Rolling Sets 2026",
+  "when": "28 November & 5 December 2026",
+  "intro": "Rolling Sets pairs a beachside skate program with a big indie and rock bill, returning to Duranbah Beach at Tweed Heads and adding Newcastle's Nobbys Beach. Ocean Alley, G Flip and Violent Soho top the line-up.",
+  "dates": [
+   [
+    "2026-11-28",
+    "Tweed Heads",
+    "Ebenezer Park, Duranbah Beach",
+    ""
+   ],
+   [
+    "2026-12-05",
+    "Newcastle",
+    "Foreshore Park, Nobbys Beach",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Ocean Alley",
+   "G Flip",
+   "Violent Soho"
+  ],
+  "lineup": [
+   "Royel Otis",
+   "The Rions",
+   "Old Mervs",
+   "Teen Jesus & the Jean Teasers",
+   "The Belair Lip Bombs",
+   "Evening Elephants",
+   "Mid Drift",
+   "Radium Dolls",
+   "Trials",
+   "Cheeky Leash",
+   "Headsend",
+   "Selve",
+   "The Cheaks (Newcastle)",
+   "Blush",
+   "Polly (Tweed Heads)",
+   "Bushbaby",
+   "Fritter & Wongo",
+   "Anika",
+   "Elijah Something",
+   "Ryan Maloney",
+   "DJ Macaroni"
+  ],
+  "tips": [
+   "Ocean Alley's sets are exclusive to these two shows.",
+   "The Need2Freak stage runs DJs alongside the main stage.",
+   "The Newcastle site is grassed, so some areas can be tricky for wheelchairs."
+  ],
+  "source": "https://au.rollingstone.com/music/music-news/rolling-sets-festival-2026-lineup-dates-tickets-96716/"
+ },
+ {
+  "slug": "good-things-2026",
+  "name": "Good Things 2026",
+  "when": "4–6 December 2026",
+  "intro": "The heavy music festival hits Melbourne, Sydney and Brisbane on consecutive days, with Limp Bizkit, Simple Plan and Spiritbox leading a bill that also has Alexisonfire playing 'Crisis' and Millencolin playing 'Pennybridge Pioneers' in full.",
+  "dates": [
+   [
+    "2026-12-04",
+    "Melbourne",
+    "Flemington Racecourse",
+    "16+"
+   ],
+   [
+    "2026-12-05",
+    "Sydney",
+    "Sydney Showground",
+    "16+"
+   ],
+   [
+    "2026-12-06",
+    "Brisbane",
+    "Brisbane Showgrounds",
+    "16+"
+   ]
+  ],
+  "headliners": [
+   "Limp Bizkit",
+   "Simple Plan",
+   "Spiritbox"
+  ],
+  "lineup": [
+   "Polaris",
+   "The All-American Rejects",
+   "Bad Religion",
+   "Alexisonfire",
+   "Grinspoon",
+   "Millencolin",
+   "Bilmuri",
+   "Ministry",
+   "Chad Gray",
+   "MxPx",
+   "Neck Deep",
+   "Speed",
+   "Slowly Slowly",
+   "P.O.D.",
+   "The Devil Wears Prada",
+   "Choirboys",
+   "All Them Witches",
+   "The Black Queen",
+   "Future Palace",
+   "Headwreck",
+   "The Home Team",
+   "House Of Protection",
+   "ivri",
+   "Kami Kehoe",
+   "Locked Shut",
+   "LØLØ",
+   "vianova",
+   "Voice Of Baceprot"
+  ],
+  "tips": [
+   "It's a 16+ event in every city.",
+   "Ministry are billed as playing their farewell Australian shows.",
+   "Chad Gray's set covers both Mudvayne and Hellyeah songs."
+  ],
+  "source": "https://www.destroyalllines.com/blog/good-things-2026-lineup-revealed"
+ },
+ {
+  "slug": "meredith-2026",
+  "name": "Meredith Music Festival 2026",
+  "when": "11–13 December 2026",
+  "intro": "The 34th Meredith returns to the Supernatural Amphitheatre on the Nolan farm, with Dijon, Eddy Current Suppression Ring and The Dandy Warhols among the names on its single stage. It's independent, unsponsored and puts its proceeds back into the Meredith community.",
+  "dates": [
+   [
+    "2026-12-11",
+    "Meredith",
+    "Meredith Supernatural Amphitheatre",
+    "3 days, camping"
+   ],
+   [
+    "2026-12-13",
+    "Meredith",
+    "Meredith Supernatural Amphitheatre",
+    "3 days, camping"
+   ]
+  ],
+  "headliners": [
+   "Dijon",
+   "Eddy Current Suppression Ring",
+   "The Dandy Warhols",
+   "Hiatus Kaiyote",
+   "Fcukers"
+  ],
+  "lineup": [
+   "underscores",
+   "DJ Seinfeld",
+   "D Train & Mondo Freaks",
+   "Fat Dog",
+   "Suzanne Ciani",
+   "Show Me The Body",
+   "Sophia Stel",
+   "Twisted Teens",
+   "Killing Heidi",
+   "Marcellus Pittman",
+   "Yikes",
+   "Spike Fuck",
+   "Ella Thompson",
+   "Docker River Band",
+   "Tara Clerkin Trio",
+   "DJ Love",
+   "Jorg Kuning",
+   "Hana Stretton",
+   "Miles Nautu",
+   "Blue Communications",
+   "media puzzle",
+   "City Of Ballarat Municipal Brass Band"
+  ],
+  "tips": [
+   "Tickets go out by ballot, and a ticket covers camping and parking.",
+   "There's one stage, so no clashes.",
+   "The No Dickhead Policy applies."
+  ],
+  "source": "https://mmf.com.au/"
+ },
+ {
+  "slug": "field-day-2027",
+  "name": "Field Day 2027",
+  "when": "1 January 2027",
+  "intro": "Field Day turns 25 with an all-dance New Year's Day party in The Domain, led by Major Lazer on their first Australian visit in 11 years, plus Sub Focus and a secret headliner still to be revealed.",
+  "dates": [
+   [
+    "2027-01-01",
+    "Sydney",
+    "The Domain",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Major Lazer",
+   "Sub Focus"
+  ],
+  "lineup": [
+   "Andy C",
+   "Boys Noize",
+   "2charm",
+   "Cassette",
+   "Club Angel",
+   "Disco Dora",
+   "Elderbrook",
+   "Fried Pork Chop",
+   "Funk Tribu",
+   "Hannah Laing",
+   "Joe Hunt",
+   "Julian Fijma",
+   "Łaszewo",
+   "Latifa Tee",
+   "Loosie Grind",
+   "Mad.day",
+   "MPH",
+   "Nimino",
+   "Oppidan",
+   "Southstar",
+   "Stacie Fields",
+   "Tanzer",
+   "Tiddalicious",
+   "TIFF Cornish",
+   "Wolters"
+  ],
+  "tips": [
+   "It's a one-day event in the city, not a camping festival.",
+   "There are three stages, including the Casamigos Camp Ground curated by the LGBTQIA+ community."
+  ],
+  "source": "https://themusic.com.au/news/field-day-2027-line-up-major-lazer-sub-focus/lx0li4qNjI8/01-09-26"
+ },
+ {
+  "slug": "illawarra-folk-festival-2027",
+  "name": "Illawarra Folk Festival 2027",
+  "when": "15–17 January 2027",
+  "intro": "The Illawarra Folk Festival marks its 40th anniversary at Bulli Showground, with more than 100 acts across eight venues on site over three days. Line-up to be announced.",
+  "dates": [
+   [
+    "2027-01-15",
+    "Wollongong",
+    "Bulli Showground",
+    ""
+   ],
+   [
+    "2027-01-17",
+    "Wollongong",
+    "Bulli Showground",
+    ""
+   ]
+  ],
+  "headliners": [],
+  "lineup": [],
+  "tips": [
+   "You can camp on site.",
+   "Bulli station is a short walk from the showground, and there's parking on site."
+  ],
+  "source": "https://www.visitwollongong.com.au/event/illawarra-folk-festival/"
+ },
+ {
+  "slug": "cobargo-folk-festival-2027",
+  "name": "Cobargo Folk Festival 2027",
+  "when": "26–28 February 2027",
+  "intro": "The volunteer-run Cobargo Folk Festival celebrates its 30th year at the town's showground on the NSW far south coast, with England's Kate Rusby, Ireland's Eleanor McEvoy and The Spooky Men's Chorale among close to 70 acts.",
+  "dates": [
+   [
+    "2027-02-26",
+    "Cobargo",
+    "Cobargo Showground",
+    ""
+   ],
+   [
+    "2027-02-28",
+    "Cobargo",
+    "Cobargo Showground",
+    ""
+   ]
+  ],
+  "headliners": [
+   "Kate Rusby",
+   "Eleanor McEvoy",
+   "Damien O’Kane and Ron Block",
+   "The Spooky Men’s Chorale",
+   "Kutcha Edwards"
+  ],
+  "lineup": [
+   "Daoirí Farrell",
+   "Kristina Olsen",
+   "Fred Smith",
+   "Lyn Bowtell and Luke O’Shea",
+   "Dlù",
+   "Rum Ragged",
+   "Melanie Horsnell",
+   "Abby May",
+   "Chloe and Jason Roweth",
+   "Shortis and Simpson",
+   "Mal Webb and Kylie Morrigan",
+   "Fiona Ross and Davy Stuart",
+   "Detta Kenzie and Sam Kelly",
+   "Dezi Donnelly",
+   "Den Hanrahan and the Rum Runners",
+   "Pepper & Davies",
+   "Prodikal-1",
+   "Robyn Martin and The Wires",
+   "Shohrat Tursun Trio",
+   "Silvertop String Band",
+   "Song Brother",
+   "Stringfiddle",
+   "Suzanne Petersen and Big John Ling",
+   "Tamika Townsend",
+   "The Butter Trackers",
+   "The Water Runners",
+   "Totally Gourdgeous",
+   "Trouble in the Kitchen",
+   "Turnip Sundae",
+   "We Mavericks",
+   "Wicker Suite",
+   "Kameruka Bush Orchestra",
+   "Djinama Yilaga",
+   "Gulaga Dancers"
+  ],
+  "tips": [
+   "Camping on the showground is for weekend ticket holders only and must be booked online with your ticket; under-12s camp free.",
+   "Shuttle buses run from Narooma, Tilba, Wallaga Lake and Bermagui ($10 a trip or $50 for the weekend).",
+   "No glass and no pets."
+  ],
+  "source": "https://cobargofolkfestival.com/"
+ },
+ {
+  "slug": "blue-mountains-music-festival-2027",
+  "name": "Blue Mountains Music Festival 2027",
+  "when": "12–14 March 2027",
+  "intro": "The Blue Mountains Music Festival brings three days of folk, roots and blues concerts and workshops to seven undercover stages a short walk apart in Katoomba. The Milk Carton Kids, Kate Rusby and Newton Faulkner lead the bill so far.",
+  "dates": [
+   [
+    "2027-03-12",
+    "Katoomba",
+    "Venues around Katoomba",
+    ""
+   ],
+   [
+    "2027-03-14",
+    "Katoomba",
+    "Venues around Katoomba",
+    ""
+   ]
+  ],
+  "headliners": [
+   "The Milk Carton Kids",
+   "Kate Rusby",
+   "Newton Faulkner",
+   "Luka Bloom",
+   "Nadia Reid"
+  ],
+  "lineup": [
+   "Grace Petrie",
+   "Skerryvore",
+   "Eleanor McEvoy",
+   "Damien O'Kane & Ron Block",
+   "Brett Newski",
+   "Alice Howe & Freebo",
+   "Kristina Olsen",
+   "Dom Turner & Jeff Lang",
+   "Stiff Gins",
+   "Microwave Jenny",
+   "Gusto Gusto",
+   "Afro Moses",
+   "Andie & Isobel",
+   "CJ Stranger",
+   "Dlù",
+   "Fred Smith & Band",
+   "Joe H Henry",
+   "Joshua Burnside",
+   "Lloyd Spiegel Trio",
+   "Lorraine Nash",
+   "The Maes",
+   "Magpie Diaries",
+   "Pirritu",
+   "Lizzie Flynn & The Runaway Trains"
+  ],
+  "tips": [
+   "Full-weekend, day and night tickets are available.",
+   "All seven stages are undercover and within a few minutes' walk of each other.",
+   "The full program comes out closer to the festival."
+  ],
+  "source": "https://www.bmff.org.au/"
  }
 ]
