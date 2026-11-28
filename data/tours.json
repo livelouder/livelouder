@@ -105,12 +105,14 @@
    [
     "2027-02-10",
     "Sydney",
-    "Enmore Theatre"
+    "Enmore Theatre",
+    "https://premier.ticketek.com.au/shows/show.aspx?sh=THAYWILS27"
    ],
    [
     "2027-02-17",
     "Melbourne",
-    "Forum Melbourne"
+    "Forum Melbourne",
+    "https://premier.ticketek.com.au/shows/show.aspx?sh=THAYWILS27"
    ]
   ],
   "added": "2026-11-26",
@@ -338,7 +340,8 @@
    [
     "2027-03-05",
     "Adelaide",
-    "WOMADelaide"
+    "WOMADelaide",
+    "https://my.womadelaide.com.au/womadelaide-2027/friday-night"
    ],
    [
     "2027-03-06",
@@ -942,27 +945,32 @@
    [
     "2027-02-24",
     "Perth",
-    "Rosemount Hotel"
+    "Rosemount Hotel",
+    "https://rosemounthotel.oztix.com.au/outlet/event/ab865219-6c28-47b3-aada-7547174d53e7"
    ],
    [
     "2027-02-25",
     "Adelaide",
-    "Lion Arts Factory"
+    "Lion Arts Factory",
+    "https://moshtix.com.au/v2/event/faster-pussycat-gilby-clarke-sunset-strip-oz-rock-tour/202899?skin=LAF20"
    ],
    [
     "2027-02-26",
     "Melbourne",
-    "The Croxton"
+    "The Croxton",
+    "https://tickets.oztix.com.au/outlet/event/eb6c38fd-c965-4294-a035-f79de14ce74c"
    ],
    [
     "2027-02-27",
     "Sydney",
-    "Metro Social"
+    "Metro Social",
+    "https://moshtix.com.au/v2/event/faster-pussycat-gilby-clarke-sunset-strip-oz-rock-tour/203026"
    ],
    [
     "2027-02-28",
     "Brisbane",
-    "Soapbox Beer"
+    "Soapbox Beer",
+    "https://moshtix.com.au/v2/event/faster-pussycat-gilby-clarke-sunset-strip-oz-rock-tour/202946"
    ]
   ],
   "onsale": "2026-11-26T11:00",
@@ -981,17 +989,20 @@
    [
     "2027-02-25",
     "Melbourne",
-    "Corner Hotel"
+    "Corner Hotel",
+    "https://tickets.cornerhotel.com/outlet/event/3a911159-11d6-4a3c-8969-5d046ec295eb"
    ],
    [
     "2027-02-26",
     "Sydney",
-    "Oxford Art Factory"
+    "Oxford Art Factory",
+    "https://moshtix.com.au/v2/event/survive-said-the-prophet-jpn-debut-australian-tour-2027/200616?skin=OAF"
    ],
    [
     "2027-02-27",
     "Brisbane",
-    "Crowbar"
+    "Crowbar",
+    "https://tickets.oztix.com.au/outlet/event/4f6c7611-a723-4b78-8b76-0ca4ba58b1d1"
    ]
   ],
   "tickets": "https://www.destroyalllines.com"
