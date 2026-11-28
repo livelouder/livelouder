@@ -1429,8 +1429,8 @@
   "city": "Cessnock",
   "state": "NSW",
   "url": "https://www.paccessnock.com.au/Whats-on",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Hunter"
  },
  {
@@ -1681,8 +1681,8 @@
   "city": "Bendigo",
   "state": "VIC",
   "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Bendigo & Castlemaine"
  },
  {
@@ -1743,9 +1743,9 @@
   "venue": "Musicland",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "https://www.trybooking.com/eventlist?aid=58165",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.trybooking.com/au/event/eventlist/musiclandevents",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -2166,9 +2166,9 @@
   "venue": "West Gippsland Arts Centre",
   "city": "Warragul",
   "state": "VIC",
-  "url": "https://wgac.com.au/events",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://wgac.com.au/events/",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -2859,16 +2859,16 @@
   "venue": "Bustard Town",
   "city": "Darwin",
   "state": "NT",
-  "url": "https://bustardtown.com",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://bustardtown.com/events/",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Darwin"
  },
  {
   "venue": "The Cavenagh Hotel",
   "city": "Darwin",
   "state": "NT",
-  "url": "",
+  "url": "http://www.thecavenagh.com.au/",
   "checked": "",
   "status": "unchecked",
   "region": "Darwin"
@@ -2931,9 +2931,9 @@
   "venue": "Redcliffe Entertainment Centre",
   "city": "Brisbane",
   "state": "QLD",
-  "url": "https://www.redcliffeentertainmentcentre.com.au/Events/Elton-John-Experience",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.redcliffeentertainmentcentre.com.au/Events",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Brisbane"
  },
  {
@@ -3021,9 +3021,9 @@
   "venue": "Sandalford Estate",
   "city": "Perth",
   "state": "WA",
-  "url": "",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.sandalford.com",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Perth"
  },
  {
@@ -3084,7 +3084,7 @@
   "venue": "The Salisbury Hotel",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
+  "url": "https://www.thesalisburyhotel.com.au/whats-on/carols-by-candlelight-at-the-pub-2026",
   "checked": "",
   "status": "unchecked",
   "region": "Adelaide"
@@ -3390,9 +3390,9 @@
   "venue": "Ipswich Civic Centre",
   "city": "Ipswich",
   "state": "QLD",
-  "url": "https://www.ipswichciviccentre.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.ipswichciviccentre.com.au/whats-on/",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Ipswich"
  },
  {
@@ -3544,8 +3544,8 @@
   "city": "Bunbury",
   "state": "WA",
   "url": "https://www.bunburyentertainment.com/whats-on/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "South West"
  },
  {
@@ -3984,9 +3984,9 @@
   "venue": "Goulburn Performing Arts Centre (GPAC)",
   "city": "Goulburn",
   "state": "NSW",
-  "url": "https://www.goulburnpac.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.goulburnpac.com.au/Whats-On/All-Events",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Southern Highlands & Goulburn"
  },
  {
@@ -4093,8 +4093,8 @@
   "city": "Tarwin Lower",
   "state": "VIC",
   "url": "https://riverviewhotel.au/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Gippsland"
  },
  {
@@ -4102,8 +4102,8 @@
   "city": "Inverloch",
   "state": "VIC",
   "url": "https://www.thesandbarinverloch.com.au/live-music",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Gippsland"
  },
  {
@@ -4794,9 +4794,9 @@
   "venue": "The Drunken Poet",
   "city": "Melbourne",
   "state": "VIC",
-  "url": "https://www.thedrunkenpoet.com.au",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.thedrunkenpoet.com.au/events/",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Melbourne"
  },
  {
@@ -5163,9 +5163,9 @@
   "venue": "Brothers Leagues Club Ipswich",
   "city": "Ipswich",
   "state": "QLD",
-  "url": "https://brothersipswich.com.au/whats-on/entertainment/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://brothersipswich.com.au/whats-on-category/entertainment/",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Ipswich"
  },
  {
@@ -7746,9 +7746,9 @@
   "venue": "Hotel Etico",
   "city": "Mount Victoria",
   "state": "NSW",
-  "url": "https://hoteletico.com.au/events",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://hoteletico.com.au/events/",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Blue Mountains & Lithgow"
  },
  {
@@ -7782,9 +7782,9 @@
   "venue": "The Goulburn Club",
   "city": "Goulburn",
   "state": "NSW",
-  "url": "https://www.goulburnclub.com.au/",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://goulburnclub.com.au/music-program/",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Southern Highlands & Goulburn"
  },
  {
@@ -7810,8 +7810,8 @@
   "city": "Ballarat",
   "state": "VIC",
   "url": "https://hoptemple.com.au/events/live-music-at-hop/",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Ballarat"
  },
  {
@@ -7831,5 +7831,104 @@
   "checked": "",
   "status": "unchecked",
   "region": "Ballarat"
+ },
+ {
+  "venue": "Hotel Gearin",
+  "city": "Katoomba",
+  "state": "NSW",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Blue Mountains & Lithgow"
+ },
+ {
+  "venue": "Dormie House",
+  "city": "Moss Vale",
+  "state": "NSW",
+  "url": "https://www.dormiehouse.com.au",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Southern Highlands & Goulburn"
+ },
+ {
+  "venue": "Goulburn Workers Club",
+  "city": "Goulburn",
+  "state": "NSW",
+  "url": "https://www.goulburnworkers.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Southern Highlands & Goulburn"
+ },
+ {
+  "venue": "The Dart & Marlin",
+  "city": "Warrnambool",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Warrnambool & Port Fairy"
+ },
+ {
+  "venue": "Hotel Warrnambool",
+  "city": "Warrnambool",
+  "state": "VIC",
+  "url": "",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Warrnambool & Port Fairy"
+ },
+ {
+  "venue": "The Setts",
+  "city": "Mildura",
+  "state": "VIC",
+  "url": "https://tixel.com/au/tickets/setts-business-centre",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mildura"
+ },
+ {
+  "venue": "The Corporate Moose",
+  "city": "Mildura",
+  "state": "VIC",
+  "url": "https://www.thecorpmoose.com.au/",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Mildura"
+ },
+ {
+  "venue": "Mouse Proof Brewery",
+  "city": "Toowoomba",
+  "state": "QLD",
+  "url": "https://events.humanitix.com/host/mouse-proof-brewing",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Toowoomba"
+ },
+ {
+  "venue": "Blue Mountain Hotel",
+  "city": "Toowoomba",
+  "state": "QLD",
+  "url": "https://moshtix.com.au/v2/venues/blue-mountain-hotel/5478",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Toowoomba"
+ },
+ {
+  "venue": "Princess Theatre (Theatre North)",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "https://www.theatrenorth.com.au",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
+ },
+ {
+  "venue": "Tonic Bar",
+  "city": "Launceston",
+  "state": "TAS",
+  "url": "https://songkick.com/venues/2279429-tonic-bar",
+  "checked": "",
+  "status": "unchecked",
+  "region": "Launceston & Tamar"
  }
 ]
