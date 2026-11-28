@@ -144,24 +144,49 @@ def fetch(root):
 
 def deezer_lookup(names, root, limit=120):
     """Finds Deezer artist ids and photos for the given artist names (for the
-    'Hear them before you go' player). Results are cached in data/deezer.json.
+    'Hear them before you go' player and artist photos). Results are cached in data/deezer.json.
+    Several names are looked up at once, kept under Deezer's limit (50 requests per 5 seconds).
     Missing or failed lookups just mean no player for that artist."""
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
     cache_p = Path(root) / "data" / "deezer.json"
     cache = json.loads(cache_p.read_text()) if cache_p.exists() else {}
-    todo = [n for n in names if n not in cache][:limit]
-    for n in todo:
-        try:
-            url = "https://api.deezer.com/search/artist?" + urllib.parse.urlencode({"q": n, "limit": 3})
-            req = urllib.request.Request(url, headers={"User-Agent": "livelouder.com.au build"})
-            with urllib.request.urlopen(req, timeout=15) as r:
-                data = json.loads(r.read().decode()).get("data", [])
-            norm = lambda s: "".join(c for c in s.lower() if c.isalnum())
-            hit = next((a for a in data if norm(a.get("name", "")) == norm(n)), None)
-            cache[n] = {"id": hit["id"], "picture": hit.get("picture_xl") or hit.get("picture_big", ""), "fans": hit.get("nb_fan", 0)} if hit else None
-            time.sleep(0.12)
-        except Exception as e:
-            print("deezer: lookup failed for", n, e)
-            break  # probably no network; try again next build
+    todo = [n for n in names if n not in cache]
+    if limit:
+        todo = todo[:limit]
+    norm = lambda s: "".join(c for c in s.lower() if c.isalnum())
+    gate, stop = threading.Lock(), threading.Event()
+    last = [0.0]
+
+    def one(n):
+        if stop.is_set():
+            return
+        for attempt in range(3):
+            with gate:  # at most ~8 requests a second overall
+                wait = last[0] + 0.125 - time.time()
+                if wait > 0:
+                    time.sleep(wait)
+                last[0] = time.time()
+            try:
+                url = "https://api.deezer.com/search/artist?" + urllib.parse.urlencode({"q": n, "limit": 3})
+                req = urllib.request.Request(url, headers={"User-Agent": "livelouder.com.au build"})
+                with urllib.request.urlopen(req, timeout=15) as r:
+                    body = json.loads(r.read().decode())
+                if "error" in body:  # quota hit: back off and try again
+                    time.sleep(5)
+                    continue
+                data = body.get("data", [])
+                hit = next((a for a in data if norm(a.get("name", "")) == norm(n)), None)
+                cache[n] = {"id": hit["id"], "picture": hit.get("picture_xl") or hit.get("picture_big", ""), "fans": hit.get("nb_fan", 0)} if hit else None
+                return
+            except Exception as e:
+                print("deezer: lookup failed for", n, e)
+                stop.set()  # probably no network; try again next build
+                return
+
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        list(pool.map(one, todo))
+    print(f"deezer: looked up {sum(1 for n in todo if n in cache)} of {len(todo)} new names")
     try:
         cache_p.write_text(json.dumps(cache))
     except OSError:

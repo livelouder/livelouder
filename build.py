@@ -149,11 +149,11 @@ for a in artists.values():
     a["genre"] = a["genre"] or (a["tour"] or {}).get("genre", "")
 
 # Deezer players and photos: hand-picked artists first, then the busiest touring artists.
-# Every artist with a gig gets looked up (touring acts first, then busiest first); each build checks up to 300 new
-# names and the results are kept between builds, so it works through everyone within days.
+# Every artist with a gig gets looked up (touring acts first, then busiest first). Only new names are looked up,
+# and the results are kept between builds (netlify/plugins/keep-cache), so each artist is checked once.
 ranked = [a["name"] for a in artists.values() if a["tour"]] + \
          [a["name"] for a in sorted(artists.values(), key=lambda a: -len(a["shows"])) if not a["tour"]]
-dz = feed.deezer_lookup(ranked, ROOT, limit=300)
+dz = feed.deezer_lookup(ranked, ROOT, limit=None)
 REAL_PIC = re.compile(r"/images/artist/[0-9a-f]{20,}/")  # Deezer's blank placeholder has no picture id
 for a in artists.values():
     hit = dz.get(a["name"])
