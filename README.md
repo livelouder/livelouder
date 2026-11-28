@@ -89,3 +89,4 @@ Every push to `main` publishes automatically.
 - Emails: `netlify/functions/message-emails.mjs` runs every 20 minutes and emails people about messages unread for 10+ minutes, at most once every 3 hours, saying who it's from but never what it says. Switch off in Settings (`profiles.remind_messages`).
 
 <!-- Ticket links cleaned 28 Nov 2026 -->
+<!-- Deploy 28 Nov 4:20pm: festivals map, tours and A–Z redesign, ticket links, venue websites -->
