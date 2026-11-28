@@ -24,6 +24,136 @@ document.addEventListener('DOMContentLoaded', function () {
   let startOpen = false, lfm = {loading: false, msg: '', found: null}, dia = null, diaLoading = false, gigUp = '', gigMsg = {}, feed = null, uploading = '', photoMsg = '', people = null, peopleLoading = false, find = {q: '', results: null, loading: false}, shareMsg = '', copied = false;
   const tour = name => touring[norm(name)];
 
+  // ------------------------------------------------ Discogs: pressings and rarity
+  // Have/want counts come live from Discogs (straight from the visitor's browser) and are kept for at most
+  // 6 hours, as Discogs asks, so badges are always current. Rarity is worked out from how many Discogs
+  // collectors own that exact pressing; "in demand" means more people want it than own it.
+  const DG = 'https://api.discogs.com', SIX = 6 * 3600 * 1000, sleep = ms => new Promise(r => setTimeout(r, ms));
+  let RC = {}; try { RC = JSON.parse(localStorage.getItem('llRare') || '{}'); } catch (e) {}
+  const saveRC = () => { try { const now = Date.now(); for (const k in RC) if (now - RC[k].t > SIX) delete RC[k]; localStorage.setItem('llRare', JSON.stringify(RC)); } catch (e) {} };
+  const fresh = rid => RC[rid] && Date.now() - RC[rid].t < SIX ? RC[rid] : null;
+  async function dg(path) {
+    let r;
+    try { r = await fetch(DG + path); } catch (e) { r = null; }
+    if (r && r.status === 429) throw new Error('slow');
+    if (r && r.ok) return r.json();
+    // Fallback through our own function (it has a Discogs key) for single releases.
+    const m = path.match(/^\/releases\/(\d+)$/);
+    if (m) { try { const x = await (await fetch('/.netlify/functions/discogs-user?release=' + m[1])).json(); if (!x.error) return {_lite: x}; } catch (e) {} }
+    return null;
+  }
+  const colourOf = t => { const b = (String(t).match(/\[([^\]]+)\]/) || [])[1]; return (b || String(t).split(',')[0] || '').trim(); };
+  function relInfo(j) {
+    if (j._lite) { const x = j._lite; return {t: Date.now(), h: x.have, w: x.want, c: x.country, col: '', d: (x.formats || [])[0] || '', l: String((x.labels || [])[0] || '').split(' · ')[0], cat: String((x.labels || [])[0] || '').split(' · ')[1] || '', m: x.master || 0, y: x.year, im: x.image}; }
+    const f = (j.formats || []).find(x => x.name === 'Vinyl') || (j.formats || [])[0] || {}, lab = (j.labels || [])[0] || {};
+    return {t: Date.now(), h: (j.community || {}).have || 0, w: (j.community || {}).want || 0, c: j.country || '', col: colourOf(f.text || ''), d: (f.descriptions || []).join(', '),
+      l: lab.name || '', cat: lab.catno && lab.catno !== 'none' ? lab.catno : '', m: j.master_id || 0, y: j.year || 0, im: ((j.images || [])[0] || {}).uri || ''};
+  }
+  const TIERS = [['Common', 'c'], ['Uncommon', 'u'], ['Rare', 'r'], ['Very rare', 'vr']];
+  const tierOf = h => h < 250 ? 3 : h < 1000 ? 2 : h < 5000 ? 1 : 0;
+  const rareBadges = (h, w) => `<span class="vb vb-${TIERS[tierOf(h)][1]}">${TIERS[tierOf(h)][0]}</span>${w > h && h > 0 ? '<span class="vb vb-hot">🔥 In demand</span>' : ''}`;
+  const FLAG = {Australia: '🇦🇺', Japan: '🇯🇵', US: '🇺🇸', UK: '🇬🇧', Europe: '🇪🇺', Germany: '🇩🇪', Canada: '🇨🇦', 'New Zealand': '🇳🇿', France: '🇫🇷', Netherlands: '🇳🇱'};
+  const flag = c => FLAG[c] ? FLAG[c] + ' ' : '';
+  const n0 = x => Number(x || 0).toLocaleString('en-AU');
+  const discogsNote = rid => `<p class="dgnote">Data provided by <a href="https://www.discogs.com/${rid && rid[0] === 'm' ? 'master' : 'release'}/${rid ? esc(rid.slice(1)) : ''}" rel="noopener">Discogs</a>. Live Louder uses Discogs' API but isn't affiliated with, sponsored or endorsed by Discogs.</p>`;
+  // Background queue: checks records' rarity a few at a time (Discogs allows about 25 lookups a minute).
+  let rq = [], running = false, qTotal = 0;
+  function needRarity(list) {
+    let added = 0;
+    list.forEach(r => { if (r.rid && r.rid[0] === 'r' && !fresh(r.rid) && !rq.includes(r.rid)) { rq.push(r.rid); added++; } });
+    if (added) { qTotal = Math.max(qTotal, rq.length); runQ(); }
+  }
+  async function runQ() {
+    if (running) return; running = true;
+    while (rq.length) {
+      const rid = rq[0];
+      try { const j = await dg('/releases/' + rid.slice(1)); if (j) { RC[rid] = relInfo(j); saveRC(); } rq.shift(); bump(); }
+      catch (e) { await sleep(65000); continue; }
+      await sleep(2500);
+    }
+    running = false; qTotal = 0; bump();
+  }
+  let bt;
+  function bump() {
+    clearTimeout(bt);
+    bt = setTimeout(() => {
+      const a = document.activeElement;
+      if (a && (a.matches('input,textarea,select'))) return;
+      if (document.querySelector('dialog[open]')) return;
+      if (['records', 'wantlist', 'recstats'].includes(tab)) { const y = scrollY; render(); scrollTo(0, y); }
+    }, 900);
+  }
+  const rareKnown = list => list.map(r => [r, fresh(r.rid)]).filter(x => x[1]);
+
+  // ------------------------------------------------ choose your pressing (all the vinyl versions of an album)
+  let pk = null;
+  function pickerDlg() {
+    let d = document.getElementById('pickDlg');
+    if (!d) { d = document.createElement('dialog'); d.id = 'pickDlg'; d.className = 'pickdlg'; box.appendChild(d); d.addEventListener('close', () => { pk = null; render(); }); }
+    return d;
+  }
+  async function openPicker(base, opts) {
+    pk = Object.assign({base, versions: null, f: 'all', sort: 'rare', err: '', swap: '', list: 'records', loadingCol: false}, opts || {});
+    const d = pickerDlg(); paintPicker(); d.showModal ? d.showModal() : d.setAttribute('open', '');
+    const mid = String(base.rid).slice(1);
+    try {
+      let j = await dg(`/masters/${mid}/versions?per_page=100&format=Vinyl&sort=released`);
+      if (j && !(j.versions || []).length) j = await dg(`/masters/${mid}/versions?per_page=100&sort=released`);
+      pk.versions = ((j && j.versions) || []).map(v => ({id: v.id, title: v.title, fmt: v.format || '', label: v.label || '', c: v.country || '', y: String(v.released || '').slice(0, 4),
+        cat: String(v.catno || '').split(',')[0].trim(), thumb: v.thumb || '', h: ((v.stats || {}).community || {}).in_collection || 0, w: ((v.stats || {}).community || {}).in_wantlist || 0}));
+      if (!pk.versions.length) pk.err = "Discogs doesn't list separate pressings for this one. Add the album instead.";
+    } catch (e) { pk.err = 'Discogs is busy. Give it a minute and try again.'; pk.versions = []; }
+    paintPicker(); colours();
+  }
+  function pkList() {
+    if (!pk || !pk.versions) return [];
+    let v = pk.versions.slice();
+    if (pk.f === 'ltd') v = v.filter(x => /Limited/i.test(x.fmt));
+    else if (pk.f === 'orig') v = v.filter(x => !/Reissue|Repress/i.test(x.fmt));
+    else if (pk.f.startsWith('c:')) v = v.filter(x => x.c === pk.f.slice(2));
+    const by = {rare: (a, b) => a.h - b.h, old: (a, b) => (a.y || '9999').localeCompare(b.y || '9999'), new: (a, b) => (b.y || '').localeCompare(a.y || ''), pop: (a, b) => b.h - a.h};
+    return v.sort(by[pk.sort]);
+  }
+  async function colours() {
+    // Colour names (e.g. "Portofino Orange Glitter") are on each pressing's own page: look up the first dozen.
+    if (!pk || pk.loadingCol) return; pk.loadingCol = true;
+    const me0 = pk;
+    for (const v of pkList().slice(0, 12)) {
+      if (pk !== me0) return;
+      const rid = 'r' + v.id;
+      if (fresh(rid)) continue;
+      try { const j = await dg('/releases/' + v.id); if (j) { RC[rid] = relInfo(j); saveRC(); paintPicker(); } } catch (e) { break; }
+      await sleep(2500);
+    }
+    if (pk === me0) pk.loadingCol = false;
+  }
+  function pressRec(v) {
+    const b = pk.base, i = fresh('r' + v.id) || {};
+    return {rid: 'r' + v.id, a: b.a, t: b.t, y: +v.y || b.y || 0, img: i.im || v.thumb || b.img, g: b.g || '', f: v.fmt, l: v.label, c: v.c, cat: v.cat, col: i.col || ''};
+  }
+  function paintPicker() {
+    const d = document.getElementById('pickDlg'); if (!d || !pk) return;
+    const b = pk.base, st = MY.get(), list = pkList();
+    const countries = pk.versions ? Object.entries(pk.versions.reduce((o, v) => (o[v.c] = (o[v.c] || 0) + 1, o), {})).sort((a, c) => c[1] - a[1]).slice(0, 5) : [];
+    const chip = (k, label) => `<button type="button" class="${pk.f === k ? 'on' : ''}" data-pkf="${esc(k)}">${label}</button>`;
+    const addBtns = (rec, primary) => pk.swap ? `<button type="button" class="vbtn sm red" data-pkswap='${esc(JSON.stringify(rec))}'>Use this one</button>`
+      : `<button type="button" class="addbtn" data-addrec="${esc(JSON.stringify(rec))}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${esc(JSON.stringify(rec))}" data-list="wants">+ Wantlist</button>`;
+    const albumRec = {rid: b.rid, a: b.a, t: b.t, y: b.y, img: b.img, g: b.g || '', f: b.f || ''};
+    const rows = list.map(v => { const i = fresh('r' + v.id) || {}, rec = pressRec(v), mine = st.records['r' + v.id] ? 'In your collection' : st.wants['r' + v.id] ? 'On your wantlist' : '';
+      return `<li><img src="${esc(i.im || v.thumb || b.img)}" alt="" loading="lazy"><div class="vi"><b>${i.col ? esc(i.col) : esc(v.fmt.replace(/^LP, Album,? ?/, '') || 'Standard black vinyl')}</b>
+        <small>${flag(v.c)}${esc(v.c)} · ${esc(v.label)}${v.cat ? ' · ' + esc(v.cat) : ''}${v.y ? ' · ' + esc(v.y) : ''}${/Limited/i.test(v.fmt) ? ' · Limited' : ''}${/Reissue|Repress/i.test(v.fmt) ? ' · Repress' : ''}</small>
+        ${rareBadges(v.h, v.w)}<small class="hw">${n0(v.h)} have · ${n0(v.w)} want</small>${mine ? `<small class="mine">✓ ${mine}</small>` : ''}</div><div class="vbt">${addBtns(rec)}</div></li>`; }).join('');
+    d.innerHTML = `<form method="dialog" class="sclose"><button aria-label="Close">×</button></form>
+      <div class="vsh">${b.img ? `<img src="${esc(b.img)}" alt="">` : ''}<div><h2>${esc(b.t)}</h2><p>${esc(b.a)}${b.y ? ' · ' + b.y : ''}${pk.versions ? ` · <b>${pk.versions.length} ${pk.versions.length === 1 ? 'version' : 'versions'}</b> on Discogs` : ''}</p>
+        <p class="note" style="margin-top:4px">${pk.swap ? 'Which pressing do you have?' : 'Pick the exact pressing you have or want.'}</p></div></div>
+      ${pk.versions && pk.versions.length > 1 ? `<div class="vfil">${chip('all', 'All ' + pk.versions.length)}${pk.versions.some(v => /Limited/i.test(v.fmt)) ? chip('ltd', 'Limited') : ''}${chip('orig', 'Original pressings')}${countries.length > 1 ? countries.map(([c]) => chip('c:' + c, flag(c) + esc(c))).join('') : ''}
+        <select data-pksort aria-label="Sort"><option value="rare"${pk.sort === 'rare' ? ' selected' : ''}>Rarest first</option><option value="pop"${pk.sort === 'pop' ? ' selected' : ''}>Most common first</option><option value="old"${pk.sort === 'old' ? ' selected' : ''}>Oldest first</option><option value="new"${pk.sort === 'new' ? ' selected' : ''}>Newest first</option></select></div>` : ''}
+      <ul class="vlist">${pk.swap ? '' : `<li class="any"><img src="${esc(b.img)}" alt=""><div class="vi"><b>Not sure which one? Just add the album</b><small>You can pick the exact pressing later. We'll still show their tours and new vinyl.</small></div><div class="vbt">${addBtns(albumRec)}</div></li>`}
+        ${pk.versions === null ? '<li><p class="note">Loading the pressings from Discogs…</p></li>' : rows}${pk.err ? `<li><p class="note">${esc(pk.err)}</p></li>` : ''}</ul>
+      ${discogsNote(b.rid)}`;
+    MY.paint();
+  }
+
   // ------------------------------------------------ pieces
   const photo = (slug, name) => { const a = arts[slug]; return a && a[1] ? a[1] : ''; };
   function art(slug, name, cls) {
@@ -50,14 +180,13 @@ document.addEventListener('DOMContentLoaded', function () {
       <button class="saveartist" type="button" data-artist="${esc(slug)}" data-name="${esc(name)}" aria-pressed="${following}">${following ? '♥ Following' : '♡ Follow'}</button></div>`;
   }
   function recCard(r, list) {
-    const t = r.a.split(' & ').map(tour).find(Boolean);
-    return `<button class="rcard" type="button" data-rec="${esc(r.rid)}" data-from="${list}">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}
-      ${t ? '<span class="rtour">Touring</span>' : ''}<strong>${esc(r.t)}</strong><span>${esc(r.a)}${r.y ? ' · ' + r.y : ''}</span></button>`;
+    const t = r.a.split(' & ').map(tour).find(Boolean), i = fresh(r.rid), seen = seenBy(r.a);
+    return `<button class="rcard" type="button" data-rec="${esc(r.rid)}" data-from="${list}"><span class="rcv">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}
+      <span class="rtags">${i ? rareBadges(i.h, i.w) : ''}</span><span class="rtl">${seen ? `<span class="vpill r">Seen live${seen > 1 ? ' ×' + seen : ''}</span>` : ''}${t ? '<span class="vpill">🎟 Touring</span>' : ''}</span></span>
+      <strong>${esc(r.t)}</strong><span>${esc(r.a)}</span><span class="rsub">${i && i.c ? flag(i.c) + esc(i.c) + ' · ' : r.c ? flag(r.c) + esc(r.c) + ' · ' : ''}${r.y ? r.y : ''}${r.rid[0] === 'm' && list !== 'search' ? '<em class="rpick">Pick pressing</em>' : ''}</span></button>`;
   }
-  const empty = (icon, title, text, btn) => `<div class="empty"><div class="eicon" aria-hidden="true">${icon}</div><h3>${title}</h3><p>${text}</p>${btn || ''}</div>`;
-  const head = (h, more) => `<div class="shead"><h2>${h}</h2>${more || ''}</div>`;
-  const linkForm = big => `<form class="dgform${big ? ' big' : ''}" data-dgform><input name="u" placeholder="Your Discogs username" aria-label="Discogs username" autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(MY.get().discogs || '')}"><button class="btn ghost">${imp.loading ? 'Importing…' : 'Import from Discogs'}</button></form>${imp.msg ? `<p class="note impmsg">${imp.msg}</p>` : ''}`;
-  const searchForm = (ph) => `<form class="recsearch" data-recsearch role="search"><input name="q" type="search" placeholder="${ph || 'Search any album or artist to add it'}" aria-label="Search records" value="${esc(srch.q)}" autocomplete="off"><button class="btn">Search</button></form>`;
+  // How many times you've been to see this artist (from your gig history).
+  function seenBy(a) { const k = norm(a); return lists().been.filter(x => norm(x.a) === k).length; }
   function results() {
     if (srch.loading) return `<div class="loading"><span></span><span></span><span></span><span></span><p>Searching…</p></div>`;
     if (srch.error) return `<p class="err">${esc(srch.error)}</p>`;
@@ -67,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
       srch.results.map(r => { const j = esc(JSON.stringify({rid: r.rid, a: r.a, t: r.t, y: r.y, img: r.img, g: r.g, f: r.f}));
         return `<div class="rres"><button class="rcard" type="button" data-rec="${esc(r.rid)}" data-from="search">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}
           ${r.a.split(' & ').map(tour).find(Boolean) ? '<span class="rtour">Touring</span>' : ''}<strong>${esc(r.t)}</strong><span>${esc(r.a)}${r.y ? ' · ' + r.y : ''}</span></button>
-          <div class="radd"><button type="button" class="addbtn" data-addrec="${j}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${j}" data-list="wants">+ Wantlist</button></div></div>`; }).join('') + '</div></div>';
+          <div class="radd">${r.rid[0] === 'm' ? `<button type="button" class="addbtn on" data-pickfor="${j}">+ Add · choose pressing</button>` : `<button type="button" class="addbtn" data-addrec="${j}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${j}" data-list="wants">+ Wantlist</button>`}</div></div>`; }).join('') + '</div></div>';
   }
 
   // ------------------------------------------------ sections
@@ -306,28 +435,71 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (!recs('records').length) h += `<p class="note" style="margin-top:28px">Add your records on the <a href="#records">Records</a> tab and we'll show which artists you own are touring.</p>`;
     return h;
   }
+  const switches = on => `<div class="bchips subt"><a class="bchip${on === 'records' ? ' on' : ''}" href="#records">Collection <span class="bn">${recs('records').length.toLocaleString()}</span></a><a class="bchip${on === 'wantlist' ? ' on' : ''}" href="#wantlist">Wantlist <span class="bn">${recs('wants').length.toLocaleString()}</span></a><a class="bchip${on === 'recstats' ? ' on' : ''}" href="#recstats">Stats</a></div>`;
   function shelf(list) {
     const items0 = recs(list), isCol = list === 'records';
-    let h = `<div class="bchips subt"><a class="bchip${isCol ? ' on' : ''}" href="#records">Collection <span class="bn">${recs('records').length.toLocaleString()}</span></a><a class="bchip${isCol ? '' : ' on'}" href="#wantlist">Wantlist <span class="bn">${recs('wants').length.toLocaleString()}</span></a></div><div class="addbar">${searchForm(isCol ? 'Add to your collection: search any album or artist' : 'Add to your wantlist: search any album or artist')}
+    needRarity(items0);
+    let h = switches(isCol ? 'records' : 'wantlist') + `<div class="addbar">${searchForm(isCol ? 'Add to your collection: search any album or artist' : 'Add to your wantlist: search any album or artist')}
       <details class="impbox"${imp.loading || imp.msg ? ' open' : ''}><summary>Import from Discogs</summary><p class="note" style="margin-top:6px">Brings in your Discogs collection and wantlist (they need to be public). Records you already have here are kept.</p>${linkForm(false)}</details></div>`;
     h += results();
     if (!items0.length) return h + empty(isCol ? '💿' : '🔎', isCol ? 'Your collection is empty' : 'Your wantlist is empty',
-      isCol ? 'Search above and tap <b>+ Collection</b> on the records you own. Or import them from Discogs in one go.' : 'Search above and tap <b>+ Wantlist</b> on the records you\'re after. We\'ll link you straight to them on vinyl.', '');
+      isCol ? 'Search above, choose your pressing and tap <b>+ Collection</b>. Or import your records from Discogs in one go.' : 'Search above and tap <b>+ Wantlist</b> on the records you\'re after.', '');
+    // Your rarest records (once we know enough of them)
+    const known = rareKnown(items0);
+    if (isCol && known.length >= 3 && !recQ) {
+      const top = known.sort((a, b) => a[1].h - b[1].h).slice(0, 3);
+      h += head('Your rarest records', '<button type="button" class="linkish" data-rsortset="rare">See all by rarity →</button>') + `<div class="vrare">${top.map(([r, i], k) => `<button type="button" class="vrc" data-rec="${esc(r.rid)}" data-from="records"><span class="vrank">${k + 1}</span>${r.img ? `<img src="${esc(r.img)}" alt="">` : `<span class="rblank" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}<span><b>${esc(r.t)}</b><small>${esc(r.a)} · ${flag(i.c)}${esc(i.c)} ${i.y || ''} pressing</small>${rareBadges(i.h, i.w)}<small>${n0(i.h)} collectors own this pressing · ${n0(i.w)} want it</small></span></button>`).join('')}</div>`;
+    }
     let items = items0.slice();
     if (recQ) { const q = recQ.toLowerCase(); items = items.filter(r => (r.a + ' ' + r.t + ' ' + (r.l || '') + ' ' + (r.g || '')).toLowerCase().includes(q)); }
     if (recTouring) items = items.filter(r => r.a.split(' & ').some(tour));
+    const rh = r => { const i = fresh(r.rid); return i ? i.h : 1e12; };
     const by = {added: (a, b) => (b.add || '').localeCompare(a.add || ''), artist: (a, b) => norm(a.a).localeCompare(norm(b.a)) || a.y - b.y,
-                newest: (a, b) => b.y - a.y, oldest: (a, b) => (a.y || 9999) - (b.y || 9999)};
+                newest: (a, b) => b.y - a.y, oldest: (a, b) => (a.y || 9999) - (b.y || 9999), rare: (a, b) => rh(a) - rh(b)};
     items.sort(by[recSort] || by.added);
     const shown = isCol ? recShown : wantShown;
     const tourN = items0.filter(r => r.a.split(' & ').some(tour)).length;
-    h += `<div class="shead"><h2>${isCol ? 'Your collection' : 'Your wantlist'}</h2><span class="note">${items0.length.toLocaleString()} ${items0.length === 1 ? 'record' : 'records'}</span></div>
+    const left = rq.filter(x => items0.some(r => r.rid === x)).length;
+    h += `<div class="shead"><h2>${isCol ? 'Your collection' : 'Your wantlist'}</h2><span class="note">${items0.length.toLocaleString()} ${items0.length === 1 ? 'record' : 'records'}${left ? ` · checking rarity on Discogs, ${left} to go` : ''}</span></div>
       <div class="rtools"><input type="search" data-rq placeholder="Filter ${isCol ? 'your records' : 'your wantlist'}" value="${esc(recQ)}" aria-label="Filter">
-      <select data-rsort aria-label="Sort"><option value="added">Recently added</option><option value="artist">Artist A–Z</option><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
+      <select data-rsort aria-label="Sort"><option value="added">Recently added</option><option value="rare">Rarest first</option><option value="artist">Artist A–Z</option><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select>
       ${tourN ? `<button type="button" class="chipbtn" data-rtour aria-pressed="${recTouring}">Touring now <small>${tourN}</small></button>` : ''}</div>
       <div class="rgrid">${items.slice(0, shown).map(r => recCard(r, list)).join('')}</div>
       ${items.length > shown ? `<button class="morebtn" type="button" data-rmore="${list}">Show more</button>` : ''}
-      ${!items.length ? '<p class="note">Nothing matches that filter.</p>' : ''}`;
+      ${!items.length ? '<p class="note">Nothing matches that filter.</p>' : ''}${discogsNote('')}`;
+    return h;
+  }
+  // ------------------------------------------------ stats: your crate in numbers
+  function recStats() {
+    const col = recs('records');
+    needRarity(col);
+    let h = switches('recstats');
+    if (!col.length) return h + empty('📊', 'Nothing to count yet', 'Add some records to your collection and this page fills up: decades, genres, your rarest pressings and more.', '<a class="btn" href="#records">Add records</a>');
+    const known = rareKnown(col), artists = new Set(col.map(r => norm(r.a))), labels = new Set(col.map(r => (fresh(r.rid) || {}).l || r.l).filter(Boolean));
+    const aus = known.filter(([, i]) => i.c === 'Australia').length, rare = known.filter(([, i]) => tierOf(i.h) >= 2).length;
+    const seenArtists = [...new Set(lists().been.map(x => norm(x.a)))].filter(a => artists.has(a));
+    const box = (v, l) => `<div><b>${v}</b><span>${l}</span></div>`;
+    h += head('Your crate in numbers') + `<div class="vst">${box(col.length.toLocaleString(), col.length === 1 ? 'record' : 'records')}${box(artists.size, 'artists')}${box(labels.size || '–', 'labels')}${box(known.length ? aus : '–', '🇦🇺 Aussie pressings')}${box(known.length ? rare : '–', 'rare or very rare')}${box(seenArtists.length, 'artists seen live')}</div>`;
+    const bars = (rows, colr) => { const mx = Math.max(1, ...rows.map(x => x[1])); return rows.map(([k, v]) => `<div class="vbar"><span>${esc(k)}</span><i style="width:${v / mx * 100}%${colr ? ';background:' + colr : ''}"></i><em>${v}</em></div>`).join(''); };
+    const dec = {}; col.forEach(r => { if (r.y > 1900) { const d = Math.floor(r.y / 10) * 10 + 's'; dec[d] = (dec[d] || 0) + 1; } });
+    const gen = {}; col.forEach(r => { const g = String(r.g || '').split(',')[0].trim(); if (g) gen[g] = (gen[g] || 0) + 1; });
+    const ctry = {}; known.forEach(([, i]) => { if (i.c) ctry[i.c] = (ctry[i.c] || 0) + 1; });
+    const topArt = Object.entries(col.reduce((o, r) => (o[r.a] = (o[r.a] || 0) + 1, o), {})).sort((a, b) => b[1] - a[1]).slice(0, 6);
+    const hi = [];
+    const rarest = known.slice().sort((a, b) => a[1].h - b[1].h)[0];
+    if (rarest) hi.push(`🏆 <span>Rarest: <b>${esc(rarest[0].t)}</b> by ${esc(rarest[0].a)}, ${flag(rarest[1].c)}${esc(rarest[1].c)} ${rarest[1].y || ''} pressing. Only ${n0(rarest[1].h)} Discogs collectors have it.</span>`);
+    const wanted = known.filter(([, i]) => i.w > i.h).sort((a, b) => b[1].w / Math.max(1, b[1].h) - a[1].w / Math.max(1, a[1].h))[0];
+    if (wanted) hi.push(`🔥 <span>Most in demand: <b>${esc(wanted[0].t)}</b>. ${n0(wanted[1].w)} people want that pressing, ${n0(wanted[1].h)} have it.</span>`);
+    const oldest = col.filter(r => r.y > 1900).sort((a, b) => a.y - b.y)[0];
+    if (oldest) hi.push(`📼 <span>Oldest: <b>${esc(oldest.t)}</b> by ${esc(oldest.a)} (${oldest.y}).</span>`);
+    if (seenArtists.length) hi.push(`🎤 <span>Seen live and on your shelf: <b>${seenArtists.slice(0, 4).map(k => esc((col.find(r => norm(r.a) === k) || {}).a || k)).join(', ')}</b>.</span>`);
+    const tr = touringFromRecords();
+    if (tr.length) hi.push(`🎟 <span>${tr.length} ${tr.length === 1 ? 'artist' : 'artists'} from your crate ${tr.length === 1 ? 'is' : 'are'} touring: <b>${tr.slice(0, 4).map(x => esc(x.name)).join(', ')}</b>. <a href="#artists">See dates →</a></span>`);
+    h += `<div class="vtwo"><div class="vpanel"><h3>By decade</h3>${bars(Object.entries(dec).sort())}${Object.keys(gen).length ? `<h3 style="margin-top:20px">By style</h3>${bars(Object.entries(gen).sort((a, b) => b[1] - a[1]).slice(0, 8), '#7fb0e8')}` : ''}</div>
+      <div class="vpanel"><h3>Highlights</h3>${hi.map(x => `<div class="vlink">${x}</div>`).join('') || '<p class="note">Checking your records on Discogs…</p>'}
+        ${Object.keys(ctry).length ? `<h3 style="margin-top:20px">Where they were pressed</h3>${bars(Object.entries(ctry).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([k, v]) => [flag(k) + k, v]), '#d7b5ff')}` : ''}
+        <h3 style="margin-top:20px">Most collected artists</h3><div class="topart">${topArt.map(([a, v]) => `<span>${esc(a)} <b>${v}</b></span>`).join('')}</div></div></div>
+      ${known.length < col.length ? `<p class="note">Rarity and pressing countries are checked live on Discogs. ${col.length - known.length} still to check.</p>` : ''}${discogsNote('')}`;
     return h;
   }
 
@@ -444,15 +616,15 @@ document.addEventListener('DOMContentLoaded', function () {
   // ------------------------------------------------ render
   function render() {
     hero();
-    document.querySelectorAll('.ptabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === (tab === 'wantlist' ? 'records' : tab) ? 'page' : 'false'));
+    document.querySelectorAll('.ptabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === (tab === 'wantlist' || tab === 'recstats' ? 'records' : tab) ? 'page' : 'false'));
     const body = document.getElementById('pBody');
-    body.innerHTML = tab === 'gigs' ? gigsTab() : tab === 'artists' ? artistsTab() : tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wants') : tab === 'settings' ? settings() : tab === 'friends' ? friendsTab() : tab === 'seen' ? seenTab() : overview();
+    body.innerHTML = tab === 'gigs' ? gigsTab() : tab === 'artists' ? artistsTab() : tab === 'records' ? shelf('records') : tab === 'wantlist' ? shelf('wants') : tab === 'settings' ? settings() : tab === 'friends' ? friendsTab() : tab === 'seen' ? seenTab() : tab === 'recstats' ? recStats() : overview();
     const sel = body.querySelector('[data-rsort]'); if (sel) sel.value = recSort;
     MY.paint();
   }
   window.MYPAGE = render;
   document.addEventListener('acc', render);
-  function setTab() { const t0 = (location.hash || '#overview').slice(1); if (t0 === 'start') startOpen = true; const t = t0 === 'start' ? 'overview' : t0; tab = ['overview', 'gigs', 'seen', 'artists', 'records', 'wantlist', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
+  function setTab() { const t0 = (location.hash || '#overview').slice(1); if (t0 === 'start') startOpen = true; const t = t0 === 'start' ? 'overview' : t0; tab = ['overview', 'gigs', 'seen', 'artists', 'records', 'wantlist', 'recstats', 'friends', 'settings'].includes(t) ? t : 'overview'; recQ = ''; recTouring = false; imp.msg = ''; render(); }
   window.addEventListener('hashchange', () => { setTab(); document.querySelector('.ptabs').scrollIntoView({block: 'nearest'}); });
 
   // ------------------------------------------------ search, import, record view
@@ -489,12 +661,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const tourHtml = t ? `<div class="rtourbox"><b>${esc(t.name)} is touring Australia</b><span>${t.shows} ${t.shows === 1 ? 'show' : 'shows'}, next in ${esc(t.city)}</span><a class="btn" href="${root}artists/${esc(t.slug)}.html">Dates &amp; tickets</a></div>` : '';
     b.innerHTML = `<div class="rview"><div class="rcover">${r.img ? `<img src="${esc(r.img)}" alt="${esc(r.a)} – ${esc(r.t)} cover">` : `<span class="rblank big" style="--h:${hue(r.t)}">${esc(r.t.slice(0, 2).toUpperCase())}</span>`}</div>
       <div class="rinfo"><span class="ntag">${where}</span><h2>${esc(r.t)}</h2><p class="rart">${esc(r.a)}</p>
+      <div id="recRare">${rid[0] === 'm' ? `<div class="vlink">💿 <span>This is the album, not a particular pressing. <button type="button" class="linkish" data-pickfor="${j}"${st.records[rid] || st.wants[rid] ? ` data-swapfrom="${esc(rid)}"` : ''}>Choose your pressing</button> to see how rare yours is.</span></div>` : '<p class="note">Checking rarity on Discogs…</p>'}</div>
+      ${seenBy(r.a) ? `<div class="vlink">🎤 <span><b>You've seen ${esc(r.a)} live${seenBy(r.a) > 1 ? ' ' + seenBy(r.a) + ' times' : ''}.</b> <a href="#seen">Your Seen live wall →</a></span></div>` : ''}
       <div class="radd big"><button type="button" class="addbtn" data-addrec="${j}" data-list="records">+ Collection</button><button type="button" class="addbtn" data-addrec="${j}" data-list="wants">+ Wantlist</button></div>
       <dl class="rmeta">${r.y ? `<dt>Year</dt><dd>${r.y}</dd>` : ''}${r.l ? `<dt>Label</dt><dd>${esc(r.l)}</dd>` : ''}${r.f ? `<dt>Format</dt><dd>${esc(r.f)}</dd>` : ''}${r.g ? `<dt>Style</dt><dd>${esc(r.g)}</dd>` : ''}${r.add && st.records[rid] ? `<dt>Added</dt><dd>${esc(dparts(r.add).dt.toLocaleDateString('en-AU', {day: 'numeric', month: 'short', year: 'numeric'}))}</dd>` : ''}</dl>
       ${tourHtml}<div id="recMore"><p class="note">Loading tracklist…</p></div>
-      <p class="ractions"><a class="btn" href="${heathen(r.a + ' ' + r.t)}" rel="noopener">Find it on vinyl at Heathen Records</a> <a class="btn ghost" href="https://www.discogs.com/${rid[0] === 'm' ? 'master' : 'release'}/${esc(rid.slice(1))}" rel="noopener">See on Discogs</a></p></div></div>`;
+      <p class="ractions"><a class="btn" href="${heathen(r.a + ' ' + r.t)}" rel="noopener">Find it on vinyl at Heathen Records</a> <a class="btn ghost" href="https://www.discogs.com/${rid[0] === 'm' ? 'master' : 'release'}/${esc(rid.slice(1))}" rel="noopener">See on Discogs ↗</a></p>${discogsNote(rid)}</div></div>`;
     MY.paint();
     d.showModal ? d.showModal() : d.setAttribute('open', '');
+    if (rid[0] === 'r') {
+      let i = fresh(rid);
+      if (!i) { try { const x = await dg('/releases/' + rid.slice(1)); if (x) { RC[rid] = i = relInfo(x); saveRC(); } } catch (e) {} }
+      const box2 = document.getElementById('recRare');
+      if (box2) box2.innerHTML = !i ? '' : `<div class="vmeter"><div class="row"><b>${TIERS[tierOf(i.h)][0]}${i.w > i.h && i.h ? ' · 🔥 In demand' : ''}</b><span>${n0(i.h)} Discogs collectors have this pressing · ${n0(i.w)} want it</span></div>
+          <div class="vtrack"><i style="left:calc(${Math.max(2, Math.min(97, 100 - Math.log10(Math.max(10, i.h)) / 5.5 * 100))}% - 9px)"></i></div><div class="row vlabels"><span>Common</span><span>Uncommon</span><span>Rare</span><span>Very rare</span></div></div>
+        <p class="rpress">${flag(i.c)}${esc(i.c || '')}${i.l ? ' · ' + esc(i.l) : ''}${i.cat ? ' · ' + esc(i.cat) : ''}${i.y ? ' · ' + i.y : ''}${i.col ? ' · <b>' + esc(i.col) + '</b>' : ''}${i.d ? ' · ' + esc(i.d) : ''}</p>
+        ${i.m && (st.records[rid] || st.wants[rid]) ? `<button type="button" class="linkish small" data-changepress="${esc(rid)}" data-mid="${i.m}">Not your pressing? Change it</button>` : ''}`;
+    }
     try {
       const k = rid[0] === 'm' ? 'master' : 'release';
       const x = await (await fetch(`/.netlify/functions/discogs-user?${k}=${encodeURIComponent(rid.slice(1))}`)).json();
@@ -503,13 +686,27 @@ document.addEventListener('DOMContentLoaded', function () {
       if (x.image) { const im = b.querySelector('.rcover img'); if (im) im.src = x.image; }
       more.innerHTML = (x.labels && x.labels.length ? `<p class="note" style="margin-top:0">${esc(x.labels.join(' / '))}${x.country ? ' · ' + esc(x.country) : ''}${x.released ? ' · ' + esc(x.released) : ''}</p>` : '')
         + (x.tracks && x.tracks.length ? `<h4>Tracklist</h4><ol class="tracks">${x.tracks.map(t => `<li><span>${esc(t[0])}</span>${esc(t[1])}<em>${esc(t[2])}</em></li>`).join('')}</ol>` : '')
-        + (x.have ? `<p class="note">${x.have.toLocaleString()} Discogs collectors own this pressing, ${x.want.toLocaleString()} want it.</p>` : '');
+        + '';
     } catch (e) { const more = document.getElementById('recMore'); if (more) more.innerHTML = ''; }
   }
   document.getElementById('recDlg').addEventListener('close', () => render());
 
   // ------------------------------------------------ events
   box.addEventListener('click', ev => {
+    const pf = ev.target.closest('[data-pickfor]');
+    if (pf) { const rd = document.getElementById('recDlg'); if (rd.open) rd.close(); const sf = pf.dataset.swapfrom, st0 = MY.get();
+      openPicker(JSON.parse(pf.dataset.pickfor), sf ? {swap: sf, list: st0.records[sf] ? 'records' : 'wants'} : {}); return; }
+    const pkf = ev.target.closest('[data-pkf]');
+    if (pkf && pk) { pk.f = pkf.dataset.pkf; paintPicker(); colours(); return; }
+    const psw = ev.target.closest('[data-pkswap]');
+    if (psw && pk) { const nr = JSON.parse(psw.dataset.pkswap), list = pk.list, old = MY.get()[list][pk.swap];
+      if (old) { nr.add = old.add; MY.toggleRec(list, nr, true); MY.toggleRec(list, old, false); }
+      document.getElementById('pickDlg').close(); return; }
+    const rss = ev.target.closest('[data-rsortset]');
+    if (rss) { recSort = rss.dataset.rsortset; render(); return; }
+    const chp = ev.target.closest('[data-changepress]');
+    if (chp) { const st = MY.get(), list = st.records[chp.dataset.changepress] ? 'records' : 'wants', r = st[list][chp.dataset.changepress]; const mid = chp.dataset.mid;
+      document.getElementById('recDlg').close(); if (r && mid) openPicker({rid: 'm' + mid, a: r.a, t: r.t, y: r.y, img: r.img, g: r.g}, {swap: r.rid, list}); return; }
     const sw = ev.target.closest('[data-seen]');
     if (sw) { openSeen = openSeen === sw.dataset.seen ? '' : sw.dataset.seen; render(); const pnl = document.getElementById('seenpanel'); if (pnl) pnl.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
     const am = ev.target.closest('[data-amode]');
@@ -590,6 +787,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   box.addEventListener('change', ev => {
     if (ev.target.matches('[data-rsort]')) { recSort = ev.target.value; render(); }
+    if (ev.target.matches('[data-pksort]') && pk) { pk.sort = ev.target.value; paintPicker(); colours(); }
     if (ev.target.matches('[data-pref]') && window.ACC) ACC.setPref(ev.target.dataset.pref, ev.target.checked);
   });
 
