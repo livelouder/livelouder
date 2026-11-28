@@ -1028,8 +1028,8 @@
   "city": "Darwin",
   "state": "NT",
   "url": "https://tixel.com/au/tickets/discovery-darwin",
-  "checked": "",
-  "status": "unchecked"
+  "checked": "2026-11-28",
+  "status": "no-listings"
  },
  {
   "venue": "Royal Oak Hotel Launceston",
@@ -1771,15 +1771,15 @@
   "city": "Darwin",
   "state": "NT",
   "url": "https://www.songkick.com/venues/4666075-sweetheart",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Darwin"
  },
  {
   "venue": "Darwin Entertainment Centre",
   "city": "Darwin",
   "state": "NT",
-  "url": "",
+  "url": "https://www.yourcentre.com.au/",
   "checked": "",
   "status": "unchecked",
   "region": "Darwin"
@@ -1914,9 +1914,9 @@
   "venue": "Glasshouse",
   "city": "Port Macquarie",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/4653611-glasshouse",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.glasshouse.org.au/Whats-on/Category-Nav-Music",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Mid North Coast"
  },
  {
@@ -3102,7 +3102,7 @@
   "venue": "Prancing Pony Brewery",
   "city": "Adelaide",
   "state": "SA",
-  "url": "",
+  "url": "https://prancingponybrewery.com.au/event/live-music-at-the-brewshed/",
   "checked": "",
   "status": "unchecked",
   "region": "Adelaide"
@@ -3238,8 +3238,8 @@
   "city": "Melbourne",
   "state": "VIC",
   "url": "https://www.songkick.com/venues/103150-punters-club",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "closed",
   "region": "Melbourne"
  },
  {
@@ -3435,9 +3435,9 @@
   "venue": "Sir Robert Helpmann Theatre",
   "city": "Mount Gambier",
   "state": "SA",
-  "url": "https://www.countryarts.org.au/venues/sir-robert-helpmann-theatre/#events-shows",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://helpmann.countryarts.org.au/events/",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Mount Gambier"
  },
  {
@@ -4677,9 +4677,9 @@
   "venue": "The Grand Electric",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/4613769-grand-electric",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://tickets.strutnfret.com",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Sydney"
  },
  {
@@ -4704,9 +4704,9 @@
   "venue": "Butchers Brew Bar",
   "city": "Sydney",
   "state": "NSW",
-  "url": "https://www.songkick.com/venues/4404697-butchers-brew-bar",
-  "checked": "",
-  "status": "unchecked",
+  "url": "https://www.stickytickets.com.au/butchersbrewbar/events",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Sydney"
  },
  {
@@ -4975,8 +4975,8 @@
   "city": "Canberra",
   "state": "ACT",
   "url": "https://www.songkick.com/venues/851371-uc-refectory",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "Canberra"
  },
  {
@@ -5011,8 +5011,8 @@
   "city": "Perth (TAS)",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/4665634-queens-head-inn",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "active",
   "region": "Launceston & Tamar"
  },
  {
@@ -5047,8 +5047,8 @@
   "city": "Latrobe",
   "state": "TAS",
   "url": "https://www.songkick.com/venues/3096854-mackeys-royal-hotel",
-  "checked": "",
-  "status": "unchecked",
+  "checked": "2026-11-28",
+  "status": "no-listings",
   "region": "North West"
  },
  {
