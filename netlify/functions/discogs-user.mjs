@@ -56,6 +56,22 @@ export default async (req) => {
       .sort((a, b) => b.have - a.have);
     return json({ results }, 200, "public, max-age=3600");
   }
+  // Barcode scan: the pressings that carry this barcode (vinyl first).
+  const bc = (q.get("barcode") || "").replace(/[^0-9]/g, "").slice(0, 20);
+  if (bc) {
+    if (bc.length < 8) return json({ error: "That barcode looks too short." }, 400, "no-store");
+    const params = new URLSearchParams({ barcode: bc, type: "release", per_page: "25" });
+    const r = await fetch(`https://api.discogs.com/database/search?${params}`, { headers: headers() });
+    if (!r.ok) return json({ error: "Barcode lookup isn't working right now. Try again in a minute." }, 502, "no-store");
+    const j = await r.json();
+    const results = (j.results || []).map((x) => {
+      const [artist, ...rest] = (x.title || "").split(" - ");
+      return { rid: "r" + x.id, mid: x.master_id || 0, a: clean(artist), t: rest.join(" - ") || x.title, y: +x.year || 0, img: x.cover_image || x.thumb || "",
+               g: [...(x.style || []), ...(x.genre || [])].slice(0, 2).join(", "), f: (x.format || []).join(", "), c: x.country || "",
+               l: (x.label || [])[0] || "", cat: x.catno || "", have: x.community?.have || 0, want: x.community?.want || 0 };
+    }).sort((a, b) => (/Vinyl/.test(b.f) - /Vinyl/.test(a.f)) || b.have - a.have);
+    return json({ results }, 200, "public, max-age=21600");
+  }
   const mid = (q.get("master") || "").trim();
   if (mid) {
     if (!/^\d{1,12}$/.test(mid)) return json({ error: "Bad master" }, 400, "no-store");
