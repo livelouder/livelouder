@@ -193,26 +193,54 @@ document.addEventListener('DOMContentLoaded', function () {
     d.showModal ? d.showModal() : d.setAttribute('open', '');
     const vid = document.getElementById('scanVid');
     try {
-      scan.stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment', width: {ideal: 1280}}, audio: false});
+      scan.stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: {ideal: 'environment'}, width: {ideal: 1920}, height: {ideal: 1080}}, audio: false});
       vid.srcObject = scan.stream; await vid.play();
+      try { const tr = scan.stream.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if ((cap.focusMode || []).includes('continuous')) await tr.applyConstraints({advanced: [{focusMode: 'continuous'}]}); } catch (e) {}
     } catch (e) { d.querySelector('.scanview').innerHTML = '<p class="note scanno">We couldn\'t open your camera. Check the browser has permission, or type the barcode numbers below.</p>'; return; }
+    startDecode(vid, d);
+  }
+  // Reads the middle of the camera picture a few times a second. Uses the phone's built-in barcode reader
+  // when it has one that knows record barcodes (EAN/UPC); otherwise a small reader loaded on the spot.
+  async function startDecode(vid, d) {
+    const FORMATS = ['ean_13', 'upc_a', 'ean_8', 'upc_e'];
+    let det = null, zx = null;
     if ('BarcodeDetector' in window) {
-      const det = new BarcodeDetector({formats: ['ean_13', 'upc_a', 'ean_8', 'upc_e']});
-      const tick = async () => { if (!scan || scan.done) return; try { const c = await det.detect(vid); if (c.length) return found(c[0].rawValue); } catch (e) {} scan.timer = setTimeout(tick, 250); };
-      tick();
-    } else {
-      // iPhone and some other browsers: a small barcode reader, loaded only when someone scans.
+      try { const f = await BarcodeDetector.getSupportedFormats(); const use = FORMATS.filter(x => f.includes(x)); if (use.length) det = new BarcodeDetector({formats: use}); } catch (e) {}
+    }
+    if (!det) {
       try {
         if (!window.ZXing) await new Promise((ok, no) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js'; sc.onload = ok; sc.onerror = no; document.head.appendChild(sc); });
-        const hints = new Map(); hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.UPC_A, ZXing.BarcodeFormat.EAN_8, ZXing.BarcodeFormat.UPC_E]);
-        scan.reader = new ZXing.BrowserMultiFormatReader(hints);
-        scan.reader.decodeFromVideoElementContinuously(vid, res => { if (res && scan && !scan.done) found(res.getText()); });
-      } catch (e) { const h = d.querySelector('.scanhint'); if (h) h.textContent = 'Scanning isn\'t available in this browser. Type the barcode numbers below instead.'; }
+        const hints = new Map();
+        hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.UPC_A, ZXing.BarcodeFormat.EAN_8, ZXing.BarcodeFormat.UPC_E]);
+        hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+        zx = new ZXing.MultiFormatReader(); zx.setHints(hints);
+      } catch (e) { const h = d.querySelector('.scanhint'); if (h) h.textContent = 'Scanning isn\'t available in this browser. Type the barcode numbers below instead.'; return; }
     }
+    const cv = document.createElement('canvas'), cx = cv.getContext('2d', {willReadFrequently: true});
+    let n = 0;
+    const tick = async () => {
+      if (!scan || scan.done) return;
+      if (vid.readyState >= 2 && vid.videoWidth) {
+        const w = vid.videoWidth, h = vid.videoHeight;
+        // Alternate between the framed middle and the whole picture, in case the barcode isn't lined up.
+        const full = n++ % 3 === 2, cw = full ? w : Math.round(w * .84), ch = full ? h : Math.round(h * .5);
+        const sc = Math.min(1, 1280 / cw);
+        cv.width = Math.round(cw * sc); cv.height = Math.round(ch * sc);
+        cx.drawImage(vid, (w - cw) / 2, (h - ch) / 2 - (full ? 0 : h * .04), cw, ch, 0, 0, cv.width, cv.height);
+        try {
+          if (det) { const c = await det.detect(cv); if (c.length && c[0].rawValue) return found(c[0].rawValue); }
+          else {
+            const bmp = new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(new ZXing.HTMLCanvasElementLuminanceSource(cv)));
+            const r = zx.decode(bmp); if (r && r.getText()) return found(r.getText());
+          }
+        } catch (e) {}
+      }
+      if (scan) scan.timer = setTimeout(tick, 180);
+    };
+    tick();
   }
   function stopScan() {
     if (!scan) return; scan.done = true; clearTimeout(scan.timer);
-    try { if (scan.reader) scan.reader.reset(); } catch (e) {}
     if (scan.stream) scan.stream.getTracks().forEach(t => t.stop());
     scan = null;
   }

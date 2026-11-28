@@ -1348,3 +1348,4 @@ h3.gday{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(-
 .wfi{font-size:30px}.wfeat b{font:400 22px/1.1 "Anton",Impact,sans-serif;text-transform:uppercase}.wfeat span:last-child{color:var(--muted);font-size:14.5px;line-height:1.45}
 @media(max-width:900px){.wgrid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.wgrid{grid-template-columns:1fr}.wcta .btn{flex:1}}
 #signin h2{margin-top:0}
+.btn.resale,a.btn.resale,.btn.big.resale{background:#b26b00;border-color:#b26b00;color:#fff}
