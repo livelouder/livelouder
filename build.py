@@ -507,7 +507,7 @@ def page(path, title, desc, body, active=None, extra_head="", image=""):
 <link rel="apple-touch-icon" href="{r}apple-touch-icon.png"><link rel="manifest" href="{r}site.webmanifest"><meta name="theme-color" content="#141414">
 <link rel="stylesheet" href="{r}style.css">{extra_head}</head><body data-root="{r}">
 <header class="top"><div class="wrap"><a class="wm" href="{r}index.html">LIVE <span>LOUDER</span></a>
-<a class="mylink" href="{r}my-gigs.html"><span aria-hidden="true">♥</span> My gigs<span class="mycount" hidden></span></a>
+<a class="mylink" href="{r}my-gigs.html" data-signin><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Sign in</span></a>
 <a class="msglink" href="{r}messages.html" hidden aria-label="Messages" title="Messages"><span aria-hidden="true">💬</span><span class="msgcount" hidden></span></a>
 <div class="meav" hidden><button type="button" class="meavbtn" aria-haspopup="true" aria-expanded="false" aria-label="Your account"><span class="meimg"></span><span class="mecaret" aria-hidden="true">▾</span></button>
 <div class="memenu" hidden><a class="memh" href="{r}my-gigs.html"><span class="meimg"></span><span><strong class="mename">You</strong><small>View your profile</small></span></a>

@@ -744,7 +744,30 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ------------------------------------------------ render
+  // Signed out: a welcome page with one clear "create your free account" (no empty profile).
+  let sessionKnown = false;
+  function welcome() {
+    const st = MY.get(), nG = Object.values(st.gigs || {}).filter(g => g.d >= today).length, nA = Object.keys(st.artists || {}).length, nR = Object.keys(st.records || {}).length + Object.keys(st.wants || {}).length;
+    const local = [nG && `${nG} ${nG === 1 ? 'gig' : 'gigs'}`, nA && `${nA} ${nA === 1 ? 'artist' : 'artists'}`, nR && `${nR} ${nR === 1 ? 'record' : 'records'}`].filter(Boolean);
+    const card = (icon, t, d) => `<div class="wfeat"><span class="wfi" aria-hidden="true">${icon}</span><b>${t}</b><span>${d}</span></div>`;
+    return `<div class="welcome"><div class="wtop"><span class="ntag">Free account</span><h1>Your gigs. Your records. Your crew.</h1>
+      <p>Save the gigs you're going to, keep your record collection, and see what your mates are into. Sign up in seconds with Google or your email. No password needed.</p>
+      ${local.length ? `<div class="wlocal">💾 You've got <b>${local.join(', ')}</b> saved on this device. Sign in and we'll keep them in your account.</div>` : ''}
+      <div class="wcta"><button type="button" class="btn big" data-signin>Create your free account</button><button type="button" class="btn ghost big" data-signin>Sign in</button></div></div>
+      <div class="wgrid">${card('🎟', 'Never miss a gig', 'Save gigs, mark the ones you\'re going to, and get a reminder before the show and when presales start.')}
+        ${card('💿', 'Your record collection', 'Add your records (or import from Discogs), pick your exact pressing and see how rare it is.')}
+        ${card('📸', 'Your Seen live wall', 'Every gig you go to lands on your wall. Rate it, add your photos, and share it.')}
+        ${card('👋', 'Your friends', 'Follow your mates, see what they\'re going to and spinning, and find your taste match.')}</div></div>`;
+  }
   function render() {
+    if (!me()) {
+      box.classList.add('signedout');
+      const body0 = document.getElementById('pBody');
+      if (!sessionKnown && window.ACC) { body0.innerHTML = '<p class="note">Loading…</p>'; ACC.session().then(() => { sessionKnown = true; render(); }); return; }
+      body0.innerHTML = welcome();
+      return;
+    }
+    box.classList.remove('signedout');
     hero();
     document.querySelectorAll('.ptabs a').forEach(a => a.setAttribute('aria-current', a.dataset.tab === (tab === 'wantlist' || tab === 'recstats' ? 'records' : tab) ? 'page' : 'false'));
     const body = document.getElementById('pBody');

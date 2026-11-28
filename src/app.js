@@ -369,8 +369,35 @@ window.MY = (function () {
       b.setAttribute('aria-pressed', on); b.innerHTML = on ? '<span aria-hidden="true">♥</span> Following' : '<span aria-hidden="true">♡</span> Follow';
     });
   }
+  // Saving needs an account. Signed out: open the sign-in box, remember what they tapped, and save it
+  // for them as soon as they're signed in (see "pending" below).
+  function gate(el, pending, title) {
+    if (!window.ACC || ACC.user()) return false;
+    let was = null; try { was = localStorage.getItem('llSignedIn'); } catch (e) {}
+    if (was && !el.dataset.gated) { el.dataset.gated = '1'; ACC.session().then(u => { if (u) el.click(); else gate(el, pending, title); delete el.dataset.gated; }); return true; }
+    try { localStorage.setItem('llPending', JSON.stringify(pending)); } catch (e) {}
+    ACC.open({title, text: 'Create a free account (or sign in) and we\'ll save it for you. Your gigs and records stay on all your devices, and you get a reminder before the show.'});
+    return true;
+  }
+  function toast(html) {
+    const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = html; document.body.appendChild(t);
+    setTimeout(() => t.classList.add('on'), 20); setTimeout(() => { t.classList.remove('on'); setTimeout(() => t.remove(), 400); }, 5000);
+  }
+  function runPending() {
+    if (!window.ACC || !ACC.user()) return;
+    let p = null; try { p = JSON.parse(localStorage.getItem('llPending') || 'null'); localStorage.removeItem('llPending'); } catch (e) {}
+    if (!p) return;
+    const root = document.body.dataset.root || '';
+    if (p.k === 'gig' && p.x && !st.gigs[p.x.id]) { st.gigs[p.x.id] = Object.assign(p.x, {going: false}); save(); push('gig', 'add', st.gigs[p.x.id]); toast(`♥ Saved <b>${String(p.x.a).replace(/</g, '&lt;')}</b> to <a href="${root}my-gigs.html#gigs">your gigs</a>.`); }
+    if (p.k === 'artist' && p.slug && !st.artists[p.slug]) { st.artists[p.slug] = p.name; save(); push('artist', 'add', {slug: p.slug, name: p.name}); toast(`♥ You're following <b>${String(p.name).replace(/</g, '&lt;')}</b>.`); }
+    if (p.k === 'rec' && p.rec) { toggleRec(p.list, p.rec, true); toast(`✓ Added <b>${String(p.rec.t).replace(/</g, '&lt;')}</b> to your <a href="${root}my-gigs.html#${p.list === 'records' ? 'records' : 'wantlist'}">${p.list === 'records' ? 'collection' : 'wantlist'}</a>.`); }
+    paint(); paintRecs(); if (window.MYPAGE) MYPAGE();
+  }
+  document.addEventListener('acc', () => setTimeout(runPending, 50));
   document.addEventListener('click', ev => {
     const g = ev.target.closest('button.save[data-gig]'), a = ev.target.closest('button.saveartist');
+    if (g) { let x0 = {}; try { x0 = JSON.parse(g.dataset.gig); } catch (e) {} if (gate(g, {k: 'gig', x: x0}, `Save ${x0.a || 'this gig'} to your gigs`)) return; }
+    if (a && gate(a, {k: 'artist', slug: a.dataset.artist, name: a.dataset.name}, `Follow ${a.dataset.name}`)) return;
     if (g) {
       const x = JSON.parse(g.dataset.gig), had = !!st.gigs[x.id];
       if (had) delete st.gigs[x.id]; else st.gigs[x.id] = Object.assign(x, {going: false});
@@ -407,6 +434,8 @@ window.MY = (function () {
   document.addEventListener('click', ev => {
     const b = ev.target.closest('[data-addrec]'); if (!b) return;
     ev.preventDefault(); ev.stopPropagation();
+    if (window.ACC && !ACC.user()) { let r0 = {}; try { r0 = JSON.parse(b.dataset.addrec); } catch (e) {}
+      if (gate(b, {k: 'rec', list: b.dataset.list, rec: r0}, b.dataset.list === 'records' ? `Add ${r0.t || 'this record'} to your collection` : `Add ${r0.t || 'this record'} to your wantlist`)) return; }
     toggleRec(b.dataset.list, JSON.parse(b.dataset.addrec)); paintRecs(); if (window.MYPAGE) MYPAGE();
   }, true);
   badge(); paint(); paintRecs();

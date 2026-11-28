@@ -96,33 +96,36 @@
   }
 
   // Sign-in box.
-  function openSignIn() {
+  function openSignIn(opts) {
+    opts = opts && opts.title ? opts : {};
     let d = document.getElementById('signin');
     if (!d) {
       d = document.createElement('dialog');
       d.id = 'signin';
       d.innerHTML = `<form method="dialog" class="sclose"><button aria-label="Close">×</button></form>
-        <h2>Sign in to Live Louder</h2><p>Keep your gigs and artists on all your devices, and get a reminder before the show and when presales start.</p>
+        <h2 id="siTitle">Join Live Louder</h2><p id="siText"></p>
         <button type="button" class="gbtn" id="siGoogle"><svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg> Continue with Google</button>
         <div class="or"><span>or</span></div>
         <form id="siEmail"><label>Your email <input type="email" required autocomplete="email" id="siAddr"></label><button class="btn">Email me a sign-in link</button></form>
-        <p class="note" id="siMsg">No password needed. We'll email you a link that signs you in.</p>
+        <p class="note" id="siMsg">Free. No password needed: we'll email you a link that signs you in. Already have an account? Same buttons.</p>
         <p class="note">New accounts get a public profile that friends can follow, showing your gigs and records (never your email). You can make it private any time in Settings. By signing in you agree to our <a href="${root}privacy.html">privacy policy</a>.</p>`;
       document.body.appendChild(d);
       d.querySelector('#siGoogle').addEventListener('click', async () => {
         const c = await ready(); if (!c) return;
-        await c.auth.signInWithOAuth({provider: 'google', options: {redirectTo: document.getElementById('pub') ? location.href.split('#')[0] : location.origin + '/my-gigs.html'}});
+        await c.auth.signInWithOAuth({provider: 'google', options: {redirectTo: location.href.split('#')[0]}});
       });
       d.querySelector('#siEmail').addEventListener('submit', async ev => {
         ev.preventDefault();
         const msg = d.querySelector('#siMsg'), email = d.querySelector('#siAddr').value.trim();
         msg.textContent = 'Sending…';
         const c = await ready(); if (!c) { msg.textContent = "Couldn't connect. Try again in a minute."; return; }
-        const {error} = await c.auth.signInWithOtp({email, options: {emailRedirectTo: document.getElementById('pub') ? location.href.split('#')[0] : location.origin + '/my-gigs.html'}});
+        const {error} = await c.auth.signInWithOtp({email, options: {emailRedirectTo: location.href.split('#')[0]}});
         msg.innerHTML = error ? esc(error.message.includes('rate') ? 'Too many tries. Wait a few minutes and try again.' : error.message)
                               : `<b>Check your email.</b> We've sent a sign-in link to ${esc(email)}. It can take a minute to arrive, and might land in spam.`;
       });
     }
+    d.querySelector('#siTitle').textContent = opts.title || 'Join Live Louder';
+    d.querySelector('#siText').textContent = opts.text || 'Save gigs and records, follow your artists, get a reminder before the show and when presales start, and see what your mates are going to.';
     ready();
     d.showModal ? d.showModal() : d.setAttribute('open', '');
   }
